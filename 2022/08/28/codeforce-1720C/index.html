@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
-        <title>Archives | Moyao の小屋</title>
+        <title>codeforce:1720C | Moyao の小屋</title>
         <meta name="author" content="Moyao">
         <meta name="description" content="Write down something interesting I met">
         <meta name="keywords" content="">
@@ -120,118 +120,52 @@
                     </div>
                     <div id="main">
                         
-<div id="archives">
-    
-    <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2022/8/28</div>
-            <a href="/2022/08/28/codeforce-1720C/">
-                <h3>codeforce:1720C</h3>
-            </a>
-            <div class="info">
-                
-                
-                <span class="tags">
-                    <span class="icon">
-                        <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-                    </span>
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/codeforces/" style="color: #03a9f4">
-                            codeforces
-                        </a>
-                    </span>
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/c/" style="color: #00bcd4">
-                            c++
-                        </a>
-                    </span>
-                    
-                </span>
-                
-            </div>
-        </div>
+<div class="article">
+    <div>
+        <h1>codeforce:1720C </h1>
     </div>
-    
-    <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2022/8/27</div>
-            <a href="/2022/08/27/arknights-recruit-calculator/">
-                <h3>arknights recruit calculator(1)</h3>
-            </a>
-            <div class="info">
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
+            </span>
+            2022/8/28
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
+            </span>
+            
+            <span class="tag">
                 
+                <a href="/tags/codeforces/" style="color: #00bcd4">
+                    codeforces
+                </a>
+            </span>
+            
+            <span class="tag">
                 
-                <span class="tags">
-                    <span class="icon">
-                        <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-                    </span>
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/tools/" style="color: #03a9f4">
-                            tools
-                        </a>
-                    </span>
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/php/" style="color: #03a9f4">
-                            php
-                        </a>
-                    </span>
-                    
-                </span>
-                
-            </div>
-        </div>
+                <a href="/tags/c/" style="color: #ffa2c4">
+                    c++
+                </a>
+            </span>
+            
+        </span>
+        
     </div>
-    
-    <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2022/8/26</div>
-            <a href="/2022/08/26/基于hexo框架的博客搭建/">
-                <h3>to build your blog on github</h3>
-            </a>
-            <div class="info">
-                
-                
-                <span class="tags">
-                    <span class="icon">
-                        <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-                    </span>
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/tools/" style="color: #03a9f4">
-                            tools
-                        </a>
-                    </span>
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/hexo/" style="color: #03a9f4">
-                            hexo
-                        </a>
-                    </span>
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/node-js/" style="color: #ff7d73">
-                            node.js
-                        </a>
-                    </span>
-                    
-                </span>
-                
-            </div>
-        </div>
+    <div class="content" v-pre>
+        <h1 id="codeforces-1720C"><a href="#codeforces-1720C" class="headerlink" title="codeforces 1720C"></a>codeforces 1720C</h1><h3 id="The-problem"><a href="#The-problem" class="headerlink" title="The problem"></a>The problem</h3><blockquote>
+<p>C. Corners<br>time limit per test1 second<br>memory limit per test256 megabytes<br>inputstandard input<br>outputstandard output<br>You are given a matrix consisting of n rows and m columns. Each cell of this matrix contains 0 or 1.<br>Let’s call a square of size 2×2 without one corner cell an L-shape figure. In one operation you can take one L-shape figure, with at least one cell containing 1 and replace all numbers in it with zeroes.<br>Find the maximum number of operations that you can do with the given matrix.</p>
+<blockquote>
+<p>Input<br>The first line contains one integer t (1≤t≤500) — the number of test cases. Then follow the descriptions of each test case.<br>The first line of each test case contains two integers n and m (2≤n,m≤500) — the size of the matrix.<br>Each of the following n lines contains a binary string of length m — the description of the matrix.<br>It is guaranteed that the sum of n and the sum of m over all test cases does not exceed 1000.<br>Output<br>For each test case output the maximum number of operations you can do with the given matrix.</p>
+</blockquote>
+</blockquote>
+<h5 id="At-first-I-didn’t-have-a-clue-So-I-tried-to-do-a-brute-force-Didn’t-work-out-of-course-The-data-volume-is-too-large-So-I-was-wondering-whether-it-could-be-solved-by-dynamic-programing-I-tried-this"><a href="#At-first-I-didn’t-have-a-clue-So-I-tried-to-do-a-brute-force-Didn’t-work-out-of-course-The-data-volume-is-too-large-So-I-was-wondering-whether-it-could-be-solved-by-dynamic-programing-I-tried-this" class="headerlink" title="At first, I didn’t have a clue. So I tried to do a brute force. Didn’t work out of course.The data volume is too large. So I was wondering whether it could be solved by dynamic programing. I tried this:"></a>At first, I didn’t have a clue. So I tried to do a brute force. Didn’t work out of course.The data volume is too large. So I was wondering whether it could be solved by dynamic programing. I tried this:</h5><blockquote>
+</blockquote>
+<p><code>sum[x][y]=max(sum[x-1][y-1]+b[x][y]-b[x-1][y-1],sum[x-2][y-2]+b[x][y]-b[x-2][y-2])</code></p>
+<h6 id="sum-stands-for-the-maximum-number-we-need-to-solve-and-b-x-y-stands-for-the-sum-of-a-1-x-1-y"><a href="#sum-stands-for-the-maximum-number-we-need-to-solve-and-b-x-y-stands-for-the-sum-of-a-1-x-1-y" class="headerlink" title="sum[][] stands for the maximum number we need to solve, and b[x][y] stands for the sum of a[1~x][1~y]."></a>sum[][] stands for the maximum number we need to solve, and b[x][y] stands for the sum of a[1~x][1~y].</h6><h5 id="It-seemed-closed-but-got-a-WA-Well-the-initial-square-was-harder-to-define-then-I-thought-After-a-few-tried-I-decided-to-abandon-this-dp-method"><a href="#It-seemed-closed-but-got-a-WA-Well-the-initial-square-was-harder-to-define-then-I-thought-After-a-few-tried-I-decided-to-abandon-this-dp-method" class="headerlink" title="It seemed closed, but got a WA. Well, the initial square was harder to define then I thought. After a few tried, I decided to abandon this dp method."></a>It seemed closed, but got a WA. Well, the initial square was harder to define then I thought. After a few tried, I decided to abandon this dp method.</h5><h5 id="It-was-some-time-before-the-right-answer-occur-to-me-It’s-actually-pretty-easy"><a href="#It-was-some-time-before-the-right-answer-occur-to-me-It’s-actually-pretty-easy" class="headerlink" title="It was some time before the right answer occur to me. It’s actually pretty easy."></a>It was some time before the right answer occur to me. It’s actually pretty easy.</h5><h5 id="Search-every-square-of-size-2-2-if-exists-one-square-contains-at-least-two-‘0’-then-the-maximum-number-is-the-number-of-‘1’-else-the-maximun-number-is-the-number-of-‘1’-1-if-there-contains-‘0’-or-the-maximun-number-is-the-number-of-‘1’-2-if-the-whole-square-is-‘1’"><a href="#Search-every-square-of-size-2-2-if-exists-one-square-contains-at-least-two-‘0’-then-the-maximum-number-is-the-number-of-‘1’-else-the-maximun-number-is-the-number-of-‘1’-1-if-there-contains-‘0’-or-the-maximun-number-is-the-number-of-‘1’-2-if-the-whole-square-is-‘1’" class="headerlink" title="Search every square of size 2*2, if exists one square contains at least two ‘0’,then the maximum number is the number of ‘1’, else the maximun number is the number of ‘1’- 1(if there contains ‘0’) or the maximun number is the number of ‘1’- 2(if the whole square is ‘1’)"></a>Search every square of size 2*2, if exists one square contains at least two ‘0’,then the maximum number is the number of ‘1’, else the maximun number is the number of ‘1’- 1(if there contains ‘0’) or the maximun number is the number of ‘1’- 2(if the whole square is ‘1’)</h5>
     </div>
     
 </div>
