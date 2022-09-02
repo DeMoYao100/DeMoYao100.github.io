@@ -144,6 +144,64 @@
             
 
 <div class="post">
+    <a href="/2022/09/02/codeforce-817E/">
+        <h2>
+            Codeforce-817E
+        </h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
+            </span>
+            2022/9/2
+        </span>
+    </div>
+    <div class="excerpt">
+        <div class="content" v-pre>
+            
+            <h1 id="codeforces-817E"><a href="#codeforces-817E" class="headerlink" title="codeforces 817E"></a>codeforces 817E</h1><h3 id="The-problem"><a href="#The-problem" class="headerlink" title="The problem"></a>The problem</h3><blockquote>
+<p>E. Counting Rectangles<br>time limit per test6 seconds<br>memory limit per test256 megabytes<br>inputstandard input<br>outputstandard output<br>You have n rectangles, the i-th rectangle has height hi and width wi.<br>You are asked q queries of the form hs ws hb wb.<br>For each query output, the total area of rectangles you own that can fit a rectangle of height hs and width ws while also fitting in a rectangle of height hb and width wb. In other words, print ∑hi⋅wi for i such that hs&lt;hi&lt;hb and ws&lt;wi&lt;wb.<br>Please note, that if two rectangles have the same height or the same width, then they cannot fit inside each other. Also note that you cannot rotate rectangles.<br>Please note that the answer for some test cases won’t fit into 32-bit integer type, so you should use at least 64-bit integer type in your programming language (like long long for C++).</p>
+<blockquote>
+<p>Input<br>The first line of the input contains an integer t (1≤t≤100) — the number of test cases.<br>The first line of each test case two integers n,q (1≤n≤105; 1≤q≤105) — the number of rectangles you own and the number of queries.<br>Then n lines follow, each containing two integers hi,wi (1≤hi,wi≤1000) — the height and width of the i-th rectangle.<br>Then q lines follow, each containing four integers hs,ws,hb,wb (1≤hs&lt;hb, ws&lt;wb≤1000) — the description of each query.<br>The sum of q over all test cases does not exceed 105, and the sum of n over all test cases does not exceed 105.<br>Output<br>For each test case, output q lines, the i-th line containing the answer to the i-th query.</p>
+<blockquote>
+<p>Example<br>inputCopy<br>3<br>2 1<br>2 3<br>3 2<br>1 1 3 4<br>5 5<br>1 1<br>2 2<br>3 3<br>4 4<br>5 5<br>3 3 6 6<br>2 1 4 5<br>1 1 2 10<br>1 1 100 100<br>1 1 3 3<br>3 1<br>999 999<br>999 999<br>999 998<br>1 1 1000 1000<br>outputCopy<br>6<br>41<br>9<br>0<br>54<br>4<br>2993004</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<h5 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h5><h5 id="In-the-first-test-case-there-is-only-one-query-We-need-to-find-the-sum-of-areas-of-all-rectangles-that-can-fit-a-1×1-rectangle-inside-of-it-and-fit-into-a-3×4-rectangle"><a href="#In-the-first-test-case-there-is-only-one-query-We-need-to-find-the-sum-of-areas-of-all-rectangles-that-can-fit-a-1×1-rectangle-inside-of-it-and-fit-into-a-3×4-rectangle" class="headerlink" title="In the first test case, there is only one query. We need to find the sum of areas of all rectangles that can fit a 1×1 rectangle inside of it and fit into a 3×4 rectangle."></a>In the first test case, there is only one query. We need to find the sum of areas of all rectangles that can fit a 1×1 rectangle inside of it and fit into a 3×4 rectangle.</h5><h5 id="Only-the-2×3-rectangle-works-because-1-lt-2-comparing-heights-and-1-lt-3-comparing-widths-so-the-1×1-rectangle-fits-inside-and-2-lt-3-comparing-heights-and-3-lt-4-comparing-widths-so-it-fits-inside-the-3×4-rectangle-color"><a href="#Only-the-2×3-rectangle-works-because-1-lt-2-comparing-heights-and-1-lt-3-comparing-widths-so-the-1×1-rectangle-fits-inside-and-2-lt-3-comparing-heights-and-3-lt-4-comparing-widths-so-it-fits-inside-the-3×4-rectangle-color" class="headerlink" title="Only the 2×3 rectangle works, because 1&lt;2 (comparing heights) and 1&lt;3 (comparing widths), so the 1×1 rectangle fits inside, and 2&lt;3 (comparing heights) and 3&lt;4 (comparing widths), so it fits inside the 3×4 rectangle. $\color"></a>Only the 2×3 rectangle works, because 1&lt;2 (comparing heights) and 1&lt;3 (comparing widths), so the 1×1 rectangle fits inside, and 2&lt;3 (comparing heights) and 3&lt;4 (comparing widths), so it fits inside the 3×4 rectangle. $\color</h5>
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/codeforces/" style="color: #00a596">
+                codeforces
+            </a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/c/" style="color: #ff7d73">
+                c++
+            </a>
+        </span>
+        
+    </div>
+    <a href="/2022/09/02/codeforce-817E/" class="go-post">
+        阅读全文
+    </a>
+</div>
+
+<div class="post">
     <a href="/2022/08/29/codeforce-1719C/">
         <h2>
             Codeforce-1719C
@@ -179,7 +237,7 @@
         
         <span class="tag">
             
-            <a href="/tags/codeforces/" style="color: #00bcd4">
+            <a href="/tags/codeforces/" style="color: #ff7d73">
                 codeforces
             </a>
         </span>
@@ -229,21 +287,21 @@
         
         <span class="tag">
             
-            <a href="/tags/reminder/" style="color: #ffa2c4">
+            <a href="/tags/reminder/" style="color: #00bcd4">
                 reminder
             </a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/python/" style="color: #ffa2c4">
+            <a href="/tags/python/" style="color: #00bcd4">
                 python
             </a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/leetcode/" style="color: #ff7d73">
+            <a href="/tags/leetcode/" style="color: #ffa2c4">
                 leetcode
             </a>
         </span>
@@ -297,7 +355,7 @@
         
         <span class="tag">
             
-            <a href="/tags/c/" style="color: #00a596">
+            <a href="/tags/c/" style="color: #00bcd4">
                 c++
             </a>
         </span>
@@ -342,14 +400,14 @@
         
         <span class="tag">
             
-            <a href="/tags/tools/" style="color: #00a596">
+            <a href="/tags/tools/" style="color: #ff7d73">
                 tools
             </a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/php/" style="color: #ff7d73">
+            <a href="/tags/php/" style="color: #00a596">
                 php
             </a>
         </span>
@@ -391,21 +449,21 @@
         
         <span class="tag">
             
-            <a href="/tags/tools/" style="color: #00a596">
+            <a href="/tags/tools/" style="color: #03a9f4">
                 tools
             </a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/hexo/" style="color: #00bcd4">
+            <a href="/tags/hexo/" style="color: #03a9f4">
                 hexo
             </a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/node-js/" style="color: #ffa2c4">
+            <a href="/tags/node-js/" style="color: #03a9f4">
                 node.js
             </a>
         </span>
