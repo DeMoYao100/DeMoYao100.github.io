@@ -144,6 +144,68 @@
             
 
 <div class="post">
+    <a href="/2022/09/26/babymips/">
+        <h2>
+            Babymips
+        </h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
+            </span>
+            2022/9/26
+        </span>
+    </div>
+    <div class="excerpt">
+        <div class="content" v-pre>
+            
+            <h1 id="babymips"><a href="#babymips" class="headerlink" title="babymips"></a>babymips</h1><h5 id="Published-2022-x2F-09-x2F-26"><a href="#Published-2022-x2F-09-x2F-26" class="headerlink" title="Published: 2022&#x2F;09&#x2F;26"></a>Published: 2022&#x2F;09&#x2F;26</h5><h5 id="Updated-2022-x2F-09-x2F-26"><a href="#Updated-2022-x2F-09-x2F-26" class="headerlink" title="Updated: 2022&#x2F;09&#x2F;26"></a>Updated: 2022&#x2F;09&#x2F;26</h5><h4 id="The-first-five-letter-of-flag-is-easy-to-find-out-But-when-it-comes-to-this-code"><a href="#The-first-five-letter-of-flag-is-easy-to-find-out-But-when-it-comes-to-this-code" class="headerlink" title="The first five letter of flag is easy to find out. But when it comes to this code:"></a>The first five letter of flag is easy to find out. But when it comes to this code:</h4><blockquote>
+<p><code>  for ( i = 5; i &lt; strlen(flag); ++i )</code><br>  <code>&#123;</code><br>    <code>if ( (i &amp; 1) != 0 )</code><br>      <code>v1 = (flag[i] &gt;&gt; 2) | (flag[i] &lt;&lt; 6);</code><br>    <code>else</code><br>      <code>v1 = (4 * flag[i]) | (flag[i] &gt;&gt; 6);</code><br>    <code>flag[i] = v1;</code><br>  <code>&#125;</code></p>
+</blockquote>
+<h4 id="Searching-for-it-we-can-find-out-it-is-actually-a-right-cyclic-shift-So-we-can-write-our-script"><a href="#Searching-for-it-we-can-find-out-it-is-actually-a-right-cyclic-shift-So-we-can-write-our-script" class="headerlink" title="Searching for it, we can find out it is actually a right cyclic shift.So we can write our script."></a>Searching for it, we can find out it is actually a right cyclic shift.So we can write our script.</h4><blockquote>
+<p><code>key1=&quot;Q|j&#123;g&quot;</code><br><code>flag=list(map(ord,key1))</code><br><code>flag+=[82, 253, 22, 164, 137, 189, 146, 128, 19, 65, 84, 160, 141, 69, 24, 129, 222, 252, 149, 240, 22, 121, 26, 21, 91, 117, 31]</code><br><code>print(flag)</code><br><code>for a in range(5,32,1):</code><br><code>	if (a&amp;1)!=0:</code><br><code>		flag[a]=((flag[a]&lt;&lt;2)|(flag[a]&gt;&gt;6))&amp;0xFF</code><br><code>	else:</code><br><code>		flag[a]=((flag[a]&gt;&gt;2)|(flag[a]&lt;&lt;6))&amp;0xFF</code><br><code>for i in range(32,):</code><br><code>	flag[i]=chr(flag[i]^(32-i))</code><br><code>print(&#39;&#39;.join(flag))</code></p>
+</blockquote>
+<h5 id="The-blog-the-I-refered-to"><a href="#The-blog-the-I-refered-to" class="headerlink" title="The blog the I refered to"></a><a target="_blank" rel="noopener" href="https://blog.csdn.net/xiao__1bai/article/details/120150925">The blog the I refered to</a></h5>
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/ctf/" style="color: #ff7d73">
+                ctf
+            </a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/reverse/" style="color: #ff7d73">
+                reverse
+            </a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/memo/" style="color: #ff7d73">
+                memo
+            </a>
+        </span>
+        
+    </div>
+    <a href="/2022/09/26/babymips/" class="go-post">
+        阅读全文
+    </a>
+</div>
+
+<div class="post">
     <a href="/2022/09/25/Changes-of-Python-API-in-IDA/">
         <h2>
             Changes of Python API in IDA
@@ -174,15 +236,22 @@
         
         <span class="tag">
             
-            <a href="/tags/ctf/" style="color: #ff7d73">
+            <a href="/tags/ctf/" style="color: #00a596">
                 ctf
             </a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/reverse/" style="color: #00bcd4">
+            <a href="/tags/reverse/" style="color: #ffa2c4">
                 reverse
+            </a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/tools/" style="color: #00a596">
+                tools
             </a>
         </span>
         
@@ -224,7 +293,7 @@
         
         <span class="tag">
             
-            <a href="/tags/ctf/" style="color: #ffa2c4">
+            <a href="/tags/ctf/" style="color: #00bcd4">
                 ctf
             </a>
         </span>
@@ -238,7 +307,7 @@
         
         <span class="tag">
             
-            <a href="/tags/buuctf/" style="color: #ffa2c4">
+            <a href="/tags/buuctf/" style="color: #ff7d73">
                 buuctf
             </a>
         </span>
@@ -289,14 +358,14 @@
         
         <span class="tag">
             
-            <a href="/tags/codeforces/" style="color: #ffa2c4">
+            <a href="/tags/codeforces/" style="color: #00bcd4">
                 codeforces
             </a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/c/" style="color: #ffa2c4">
+            <a href="/tags/c/" style="color: #00bcd4">
                 c++
             </a>
         </span>
@@ -343,14 +412,14 @@
         
         <span class="tag">
             
-            <a href="/tags/codeforces/" style="color: #00a596">
+            <a href="/tags/codeforces/" style="color: #00bcd4">
                 codeforces
             </a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/c/" style="color: #00bcd4">
+            <a href="/tags/c/" style="color: #ffa2c4">
                 c++
             </a>
         </span>
@@ -393,21 +462,21 @@
         
         <span class="tag">
             
-            <a href="/tags/reminder/" style="color: #00a596">
+            <a href="/tags/reminder/" style="color: #00bcd4">
                 reminder
             </a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/python/" style="color: #ffa2c4">
+            <a href="/tags/python/" style="color: #03a9f4">
                 python
             </a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/leetcode/" style="color: #00a596">
+            <a href="/tags/leetcode/" style="color: #00bcd4">
                 leetcode
             </a>
         </span>
@@ -506,7 +575,7 @@
         
         <span class="tag">
             
-            <a href="/tags/tools/" style="color: #03a9f4">
+            <a href="/tags/tools/" style="color: #00bcd4">
                 tools
             </a>
         </span>
@@ -555,21 +624,21 @@
         
         <span class="tag">
             
-            <a href="/tags/tools/" style="color: #03a9f4">
+            <a href="/tags/tools/" style="color: #00a596">
                 tools
             </a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/hexo/" style="color: #ff7d73">
+            <a href="/tags/hexo/" style="color: #ffa2c4">
                 hexo
             </a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/node-js/" style="color: #ff7d73">
+            <a href="/tags/node-js/" style="color: #00a596">
                 node.js
             </a>
         </span>
