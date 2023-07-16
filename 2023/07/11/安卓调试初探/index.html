@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
-        <title>Vnctf2023 | Moyao の小屋</title>
+        <title>安卓调试初探 | Moyao の小屋</title>
         <meta name="author" content="Moyao">
         <meta name="description" content="Write down something interesting I met">
         <meta name="keywords" content="">
@@ -94,25 +94,20 @@
                         
 <div class="article">
     <div>
-        <h1>Vnctf2023 </h1>
+        <h1>安卓调试初探 </h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
             </span>
-            2023/2/27
+            2023/7/11
         </span>
         
         
     </div>
     <div class="content" v-pre>
-        <h3 id="vnctf2023-re"><a href="#vnctf2023-re" class="headerlink" title="vnctf2023 re"></a>vnctf2023 re</h3><ul>
-<li><a href="#1.1">BabyAnti</a></li>
-</ul>
-<h4 id="BabyAnti"><a href="#BabyAnti" class="headerlink" title="BabyAnti"></a><div id="1.1">BabyAnti<div></div></div></h4><h5 id="An-android-reverse-problem-The-official-solution-is-to-patch-and-bypass-the-anticheat-module-and-use-CE-to-pass-the-game"><a href="#An-android-reverse-problem-The-official-solution-is-to-patch-and-bypass-the-anticheat-module-and-use-CE-to-pass-the-game" class="headerlink" title="An android reverse problem. The official solution is to patch and bypass the anticheat module and use CE to pass the game."></a>An android reverse problem. The official solution is to patch and bypass the anticheat module and use CE to pass the game.</h5><h5 id="Unpacked-the-apk-and-check-it-in-the-ida-When-the-dynamic-library-been-loaded-it-shall-call-the-function-JNI-OnLoad-We-can-see-four-function-after-it"><a href="#Unpacked-the-apk-and-check-it-in-the-ida-When-the-dynamic-library-been-loaded-it-shall-call-the-function-JNI-OnLoad-We-can-see-four-function-after-it" class="headerlink" title="Unpacked the apk and check it in the ida. When the dynamic library been loaded, it shall call the function JNI_OnLoad. We can see four function after it."></a>Unpacked the apk and check it in the ida. When the dynamic library been loaded, it shall call the function JNI_OnLoad. We can see four function after it.</h5><p><code>ret of four func, to be continue</code></p>
-<h5 id="A-antiCheat-class-in-Smali-pack"><a href="#A-antiCheat-class-in-Smali-pack" class="headerlink" title="A antiCheat class in Smali pack"></a>A antiCheat class in Smali pack</h5><p><code>to be continue</code></p>
-
+        <h6 id="preface：说是初探，也不是很初探吧其实，前面多多少少弄过完整的流程了，但是由于hyperV这玄学东西后面搞的环境一团糟，打算还是重新弄一个完整的调试方案出来，顺便记录一些基础知识"><a href="#preface：说是初探，也不是很初探吧其实，前面多多少少弄过完整的流程了，但是由于hyperV这玄学东西后面搞的环境一团糟，打算还是重新弄一个完整的调试方案出来，顺便记录一些基础知识" class="headerlink" title="preface：说是初探，也不是很初探吧其实，前面多多少少弄过完整的流程了，但是由于hyperV这玄学东西后面搞的环境一团糟，打算还是重新弄一个完整的调试方案出来，顺便记录一些基础知识"></a>preface：说是初探，也不是很初探吧其实，前面多多少少弄过完整的流程了，但是由于hyperV这玄学东西后面搞的环境一团糟，打算还是重新弄一个完整的调试方案出来，顺便记录一些基础知识</h6>
     </div>
     
 </div>
