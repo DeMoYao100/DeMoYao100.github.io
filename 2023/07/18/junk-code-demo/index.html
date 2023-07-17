@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+        <title>Junk Code Demo | Moyao の小屋</title>
+        <meta name="author" content="Moyao">
+        <meta name="description" content="Write down something interesting I met">
+        <meta name="keywords" content="">
+        <link rel="icon" href="/images/head.jpg">
+        <script src="https://cdn.staticfile.org/instant.page/5.1.0/instantpage.min.js" type="module"></script>
+        <script src="https://cdn.staticfile.org/font-awesome/6.1.1/js/all.min.js"></script>
+        
+        <link rel="stylesheet" href="/css/fonts.min.css">
+        <link rel="stylesheet" href="/css/particlex.css">
+        
+        <script src="https://cdn.staticfile.org/vue/3.2.33/vue.global.prod.min.js"></script>
+    <meta name="generator" content="Hexo 6.2.0"></head>
+    <body>
+        <div id="loading" style="height:100vh;width:100vw;position:fixed;display:flex;z-index:200;justify-content:space-between;background:#fff;transition:opacity 0.3s ease-out"><div style="position:fixed;height:100vh;width:100vw;display:flex;justify-content:center;align-items:center"><div id="loadcontent" style="width:50vmin;height:50vmin;padding:50px;border-radius:50%;display:flex;justify-content:center;align-items:center;border:solid 10px #a3ddfb;text-align:center"><div><h2>LOADING...</h2><p style="word-break:keep-all">加载过慢请开启缓存(浏览器默认开启)</p><div><img alt="loading" src="/loading.gif"></div></div></div></div></div>
+        <div id="layout">
+            <i data-fa-symbol="calendar-solid" class="fa-solid fa-calendar fa-fw"></i>
+            <i data-fa-symbol="bookmark-solid" class="fa-solid fa-bookmark fa-fw"></i>
+            <i data-fa-symbol="tags-solid" class="fa-solid fa-tags fa-fw"></i>
+            <transition name="into">
+                <div v-show="show_page" style="display: -not-none">
+                    <div id="menu_show">
+                         
+<nav id="menu">
+    <div class="desktop-menu">
+        <a href="/">
+            <span class="title">Moyao の小屋</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;home</span>
+        </a>
+        
+        <a href="/https://github.com/DeMoYao100">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;about</span>
+        </a>
+        
+        <a href="/\tags.md">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;tags</span>
+        </a>
+        
+    </div>
+    <div :class="'phone-menu ' + menu_show" id="phone-menu">
+        <div class="curtain" @click="menu_show = !menu_show" v-show="menu_show"></div>
+        <div :class="'title'" @click="menu_show = !menu_show">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;Moyao の小屋</span>
+        </div>
+        <transition name="slide">
+        <div class="items" v-show="menu_show">
+            
+            <a href="">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-house fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">home</div>
+                </div>
+            </a>
+            
+            <a target="_blank" rel="noopener" href="https://github.com/DeMoYao100">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-id-card fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">about</div>
+                </div>
+            </a>
+            
+            <a href="\tags.md">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-tags fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">tags</div>
+                </div>
+            </a>
+            
+        </div>
+        </transition>
+    </div>
+</nav>
+                    </div>
+                    <div id="main">
+                        
+<div class="article">
+    <div>
+        <h1>Junk Code Demo </h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
+            </span>
+            2023/7/18
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/re/" style="color: #03a9f4">
+                    re
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    <div class="content" v-pre>
+        <h6 id="大概是二三月份遇到了一个题出了一个有点意思的花，想着可以看看，对应这种花写了个简单的源码随机加花器。不是什么高深的技术，但是也顺便把IDA这类线性扫描反汇编和递归下降反汇编弄清楚点，以后IDA抽风的时候也更清楚点为啥"><a href="#大概是二三月份遇到了一个题出了一个有点意思的花，想着可以看看，对应这种花写了个简单的源码随机加花器。不是什么高深的技术，但是也顺便把IDA这类线性扫描反汇编和递归下降反汇编弄清楚点，以后IDA抽风的时候也更清楚点为啥" class="headerlink" title="大概是二三月份遇到了一个题出了一个有点意思的花，想着可以看看，对应这种花写了个简单的源码随机加花器。不是什么高深的技术，但是也顺便把IDA这类线性扫描反汇编和递归下降反汇编弄清楚点，以后IDA抽风的时候也更清楚点为啥"></a>大概是二三月份遇到了一个题出了一个有点意思的花，想着可以看看，对应这种花写了个简单的源码随机加花器。不是什么高深的技术，但是也顺便把IDA这类线性扫描反汇编和递归下降反汇编弄清楚点，<del>以后IDA抽风的时候也更清楚点为啥</del></h6><span id="more"></span>
+
+<h4 id="原理："><a href="#原理：" class="headerlink" title="原理："></a>原理：</h4><h6 id="来源于-IDAPro权威指南"><a href="#来源于-IDAPro权威指南" class="headerlink" title="来源于 IDAPro权威指南"></a>来源于 IDAPro权威指南</h6><h5>
+<details> <summary>线性扫描反汇编</summary>
+
+<p><img src="/2023/07/18/junk-code-demo/image-20230718011401924.png" alt="image-20230718011401924"></p>
+</details>
+</h5>
+
+<h5>
+<details> <summary>递归下降反汇编</summary>
+
+<p><img src="/2023/07/18/junk-code-demo/image-20230718011457626.png" alt="image-20230718011457626"></p>
+<p><img src="/2023/07/18/junk-code-demo/image-20230718011531171.png" alt="image-20230718011531171"></p>
+<p><img src="/2023/07/18/junk-code-demo/image-20230718011544013.png" alt="image-20230718011544013"></p>
+</details>
+</h5>
+
+<h5 id="这里主要看递归下降反汇编方式"><a href="#这里主要看递归下降反汇编方式" class="headerlink" title="这里主要看递归下降反汇编方式"></a>这里主要看递归下降反汇编方式</h5><h5 id="首先明确IDAPro的反汇编均为静态进行。根据条件分支指令可以构造入门的junk-instructions如-jz-jnz-或者永真-x2F-假条件-jz-x2F-jnz类型（注意：后者在构造时需要考虑编译器优化问题）"><a href="#首先明确IDAPro的反汇编均为静态进行。根据条件分支指令可以构造入门的junk-instructions如-jz-jnz-或者永真-x2F-假条件-jz-x2F-jnz类型（注意：后者在构造时需要考虑编译器优化问题）" class="headerlink" title="首先明确IDAPro的反汇编均为静态进行。根据条件分支指令可以构造入门的junk instructions如(jz+jnz)或者永真&#x2F;假条件+jz&#x2F;jnz类型（注意：后者在构造时需要考虑编译器优化问题）"></a>首先明确IDAPro的反汇编均为静态进行。根据条件分支指令可以构造入门的junk instructions如(jz+jnz)或者永真&#x2F;假条件+jz&#x2F;jnz类型（注意：后者在构造时需要考虑编译器优化问题）</h5><h5 id="实际上，根据上面这个跳转问题，就可以构造一种花，在虚假的控制流中间加入诸如破坏栈帧的junk-code，导致反编译失败。不过实践应该是没什么用的，毕竟去虚假控制流的最常见思路就是模拟动态执行，顺带就把花拿下了：）"><a href="#实际上，根据上面这个跳转问题，就可以构造一种花，在虚假的控制流中间加入诸如破坏栈帧的junk-code，导致反编译失败。不过实践应该是没什么用的，毕竟去虚假控制流的最常见思路就是模拟动态执行，顺带就把花拿下了：）" class="headerlink" title="实际上，根据上面这个跳转问题，就可以构造一种花，在虚假的控制流中间加入诸如破坏栈帧的junk code，导致反编译失败。不过实践应该是没什么用的，毕竟去虚假控制流的最常见思路就是模拟动态执行，顺带就把花拿下了：）"></a>实际上，根据上面这个跳转问题，就可以构造一种花，在虚假的控制流中间加入诸如破坏栈帧的junk code，导致反编译失败。不过实践应该是没什么用的，毕竟去虚假控制流的最常见思路就是模拟动态执行，顺带就把花拿下了：）</h5><h5 id="如果能理解这个最基本的例子原理，大概可以找到一种构造反汇编的通式：用构造永真条件跳转逻辑，在产生的虚假的控制流中塞入junk-code，使得反汇编失效"><a href="#如果能理解这个最基本的例子原理，大概可以找到一种构造反汇编的通式：用构造永真条件跳转逻辑，在产生的虚假的控制流中塞入junk-code，使得反汇编失效" class="headerlink" title="如果能理解这个最基本的例子原理，大概可以找到一种构造反汇编的通式：用构造永真条件跳转逻辑，在产生的虚假的控制流中塞入junk code，使得反汇编失效"></a>如果能理解这个最基本的例子原理，大概可以找到一种构造反汇编的通式：<code>用构造永真条件跳转逻辑，在产生的虚假的控制流中塞入junk code，使得反汇编失效</code></h5><h5 id="然后，配合一些小小的汇编知识，就可以产生奇妙的效果"><a href="#然后，配合一些小小的汇编知识，就可以产生奇妙的效果" class="headerlink" title="然后，配合一些小小的汇编知识，就可以产生奇妙的效果"></a>然后，配合一些小小的汇编知识，就可以产生奇妙的效果</h5><h5 id="例如，call指令正常情况下不会指向其他call-retn间的地址，但通过asm汇编内联，可以让call指向一个最近的相对地址，同时-不维护条件寄存器-，通过该条件寄存器控制永真逻辑。当调用retn的时候返回call，下面的条件寄存器会重复修改。中间的代码在IDA优化过程中是假逻辑，但构造运行两次后变为永真。（-可能有点抽象，这里写了个小demo-junkCode-x2F-README-md-at-main-·-DeMoYao100-x2F-junkCode-github-com"><a href="#例如，call指令正常情况下不会指向其他call-retn间的地址，但通过asm汇编内联，可以让call指向一个最近的相对地址，同时-不维护条件寄存器-，通过该条件寄存器控制永真逻辑。当调用retn的时候返回call，下面的条件寄存器会重复修改。中间的代码在IDA优化过程中是假逻辑，但构造运行两次后变为永真。（-可能有点抽象，这里写了个小demo-junkCode-x2F-README-md-at-main-·-DeMoYao100-x2F-junkCode-github-com" class="headerlink" title="例如，call指令正常情况下不会指向其他call retn间的地址，但通过asm汇编内联，可以让call指向一个最近的相对地址，同时__不维护条件寄存器__，通过该条件寄存器控制永真逻辑。当调用retn的时候返回call，下面的条件寄存器会重复修改。中间的代码在IDA优化过程中是假逻辑，但构造运行两次后变为永真。（[可能有点抽象，这里写了个小demo](junkCode&#x2F;README.md at main · DeMoYao100&#x2F;junkCode (github.com))"></a>例如，call指令正常情况下不会指向其他call retn间的地址，但通过asm汇编内联，可以让call指向一个最近的相对地址，同时__不维护条件寄存器__，通过该条件寄存器控制永真逻辑。当调用retn的时候返回call，下面的条件寄存器会重复修改。中间的代码在IDA优化过程中是假逻辑，但构造运行两次后变为永真。（[可能有点抽象，这里写了个小demo](<a target="_blank" rel="noopener" href="https://github.com/DeMoYao100/junkCode">junkCode&#x2F;README.md at main · DeMoYao100&#x2F;junkCode (github.com)</a>)</h5><h5 id="其实基本上看懂这个demo，就能搞明白上面这个通式了，这里修改寄存器、或者其它构造虚假控制流的方法可就多种多样了（疑似是之前看过构造rop链劫持控制流的题，无心之举导致的反编译失效）也没必要深究，遇到之后再分析就行"><a href="#其实基本上看懂这个demo，就能搞明白上面这个通式了，这里修改寄存器、或者其它构造虚假控制流的方法可就多种多样了（疑似是之前看过构造rop链劫持控制流的题，无心之举导致的反编译失效）也没必要深究，遇到之后再分析就行" class="headerlink" title="其实基本上看懂这个demo，就能搞明白上面这个通式了，这里修改寄存器、或者其它构造虚假控制流的方法可就多种多样了（疑似是之前看过构造rop链劫持控制流的题，无心之举导致的反编译失效）也没必要深究，遇到之后再分析就行"></a>其实基本上看懂这个demo，就能搞明白上面这个通式了，这里修改寄存器、或者其它构造虚假控制流的方法可就多种多样了（疑似是之前看过构造rop链劫持控制流的题，无心之举导致的反编译失效）也没必要深究，遇到之后再分析就行</h5><h5 id="然后是函数指针篡改，感觉一出现ida很容易抽风，基本上就是动调的时候修就行（除非恶意构造）"><a href="#然后是函数指针篡改，感觉一出现ida很容易抽风，基本上就是动调的时候修就行（除非恶意构造）" class="headerlink" title="然后是函数指针篡改，感觉一出现ida很容易抽风，基本上就是动调的时候修就行（除非恶意构造）"></a>然后是函数指针篡改，感觉一出现ida很容易抽风，基本上就是动调的时候修就行（除非恶意构造）</h5><h6 id="最后立个flag，有空把IDA反编译也写一篇ida反编译是真喜欢抽风啊。虽然这俩并不是啥必要学的东西，也不难，但是搞清楚一点确确实实在分析很多垃圾二进制汇编的时候有帮助"><a href="#最后立个flag，有空把IDA反编译也写一篇ida反编译是真喜欢抽风啊。虽然这俩并不是啥必要学的东西，也不难，但是搞清楚一点确确实实在分析很多垃圾二进制汇编的时候有帮助" class="headerlink" title="最后立个flag，有空把IDA反编译也写一篇ida反编译是真喜欢抽风啊。虽然这俩并不是啥必要学的东西，也不难，但是搞清楚一点确确实实在分析很多垃圾二进制汇编的时候有帮助"></a>最后立个flag，有空把IDA反编译也写一篇<del>ida反编译是真喜欢抽风啊</del>。虽然这俩并不是啥必要学的东西，也不难，但是搞清楚一点确确实实在分析很多垃圾二进制汇编的时候有帮助</h6>
+    </div>
+    
+</div>
+                         
+<footer id="footer">
+    <div class="footer-wrap">
+        <div>
+            © 20xx - 2023 Moyao の小屋
+            <span class="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            @Moyao
+        </div>
+        <div></div>
+        <div>Based on the <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo Engine</a> & <a
+                target="_blank" rel="noopener" href="https://github.com/argvchs/hexo-theme-particlex">ParticleX Theme</a></div>
+        
+    </div>
+</footer>
+                    </div>
+                </div>
+            </transition>
+            <div id="img_show">
+                <img id="img_content" alt="img_show">
+            </div>
+        </div>
+        <script src="https://cdn.staticfile.org/highlight.js/11.5.1/highlight.min.js"></script>
+        <script src="/js/particlex.js"></script>
+        <script src="/js/showimg.js"></script>
+        
+
+    </body>
+</html>
