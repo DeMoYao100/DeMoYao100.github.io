@@ -128,13 +128,14 @@
         
     </div>
     <div class="content" v-pre>
-        <h1 id="codeforces-1720C"><a href="#codeforces-1720C" class="headerlink" title="codeforces 1720C"></a>codeforces 1720C</h1><h3 id="The-problem"><a href="#The-problem" class="headerlink" title="The problem"></a>The problem</h3><blockquote>
+        <h1 id="codeforces-1720C"><a href="#codeforces-1720C" class="headerlink" title="codeforces 1720C"></a>codeforces 1720C</h1><span id="more"></span>
+<h3 id="The-problem"><a href="#The-problem" class="headerlink" title="The problem"></a>The problem</h3><blockquote>
 <p>C. Corners<br>time limit per test1 second<br>memory limit per test256 megabytes<br>inputstandard input<br>outputstandard output<br>You are given a matrix consisting of n rows and m columns. Each cell of this matrix contains 0 or 1.<br>Let’s call a square of size 2×2 without one corner cell an L-shape figure. In one operation you can take one L-shape figure, with at least one cell containing 1 and replace all numbers in it with zeroes.<br>Find the maximum number of operations that you can do with the given matrix.</p>
 <blockquote>
 <p>Input<br>The first line contains one integer t (1≤t≤500) — the number of test cases. Then follow the descriptions of each test case.<br>The first line of each test case contains two integers n and m (2≤n,m≤500) — the size of the matrix.<br>Each of the following n lines contains a binary string of length m — the description of the matrix.<br>It is guaranteed that the sum of n and the sum of m over all test cases does not exceed 1000.<br>Output<br>For each test case output the maximum number of operations you can do with the given matrix.</p>
 </blockquote>
 </blockquote>
-<span id="more"></span>
+<!--more-->
 <h5 id="At-first-I-didn’t-have-a-clue-So-I-tried-to-do-a-brute-force-Didn’t-work-out-of-course-The-data-volume-is-too-large-So-I-was-wondering-whether-it-could-be-solved-by-dynamic-programing-I-tried-this"><a href="#At-first-I-didn’t-have-a-clue-So-I-tried-to-do-a-brute-force-Didn’t-work-out-of-course-The-data-volume-is-too-large-So-I-was-wondering-whether-it-could-be-solved-by-dynamic-programing-I-tried-this" class="headerlink" title="At first, I didn’t have a clue. So I tried to do a brute force. Didn’t work out of course.The data volume is too large. So I was wondering whether it could be solved by dynamic programing. I tried this:"></a>At first, I didn’t have a clue. So I tried to do a brute force. Didn’t work out of course.The data volume is too large. So I was wondering whether it could be solved by dynamic programing. I tried this:</h5><blockquote>
 </blockquote>
 <p><code>sum[x][y]=max(sum[x-1][y-1]+b[x][y]-b[x-1][y-1],sum[x-2][y-2]+b[x][y]-b[x-2][y-2])</code></p>

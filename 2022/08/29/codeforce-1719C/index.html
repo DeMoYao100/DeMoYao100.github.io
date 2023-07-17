@@ -112,14 +112,14 @@
             
             <span class="tag">
                 
-                <a href="/tags/codeforces/" style="color: #ffa2c4">
+                <a href="/tags/codeforces/" style="color: #03a9f4">
                     codeforces
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/c/" style="color: #03a9f4">
+                <a href="/tags/c/" style="color: #00a596">
                     c++
                 </a>
             </span>
@@ -128,13 +128,14 @@
         
     </div>
     <div class="content" v-pre>
-        <h1 id="codeforces-1719C"><a href="#codeforces-1719C" class="headerlink" title="codeforces 1719C"></a>codeforces 1719C</h1><h3 id="The-problem"><a href="#The-problem" class="headerlink" title="The problem"></a>The problem</h3><blockquote>
+        <h1 id="codeforces-1719C"><a href="#codeforces-1719C" class="headerlink" title="codeforces 1719C"></a>codeforces 1719C</h1><span id="more"></span>
+<h3 id="The-problem"><a href="#The-problem" class="headerlink" title="The problem"></a>The problem</h3><blockquote>
 <p>C. Fighting Tournament<br>time limit per test2 seconds<br>memory limit per test256 megabytes<br>inputstandard input<br>outputstandard output<br>Burenka is about to watch the most interesting sporting event of the year — a fighting tournament organized by her friend Tonya.<br>n athletes participate in the tournament, numbered from 1 to n. Burenka determined the strength of the i-th athlete as an integer ai, where 1≤ai≤n. All the strength values are different, that is, the array a is a permutation of length n. We know that in a fight, if ai&gt;aj, then the i-th participant always wins the j-th.<br>The tournament goes like this: initially, all n athletes line up in ascending order of their ids, and then there are infinitely many fighting rounds. In each round there is exactly one fight: the first two people in line come out and fight. The winner goes back to the front of the line, and the loser goes to the back.<br>Burenka decided to ask Tonya q questions. In each question, Burenka asks how many victories the i-th participant gets in the first k rounds of the competition for some given numbers i and k. Tonya is not very good at analytics, so he asks you to help him answer all the questions.</p>
 <blockquote>
 <p>Input<br>The first line contains one integer t (1≤t≤104) — the number of test cases. Description of the test cases follows.<br>The first line of each test case contains two integers n and q (2≤n≤105, 1≤q≤105) — the number of tournament participants and the number of questions.<br>The second line of each test case contains n integers a1,a2,…,an (1≤ai≤n) — the array a, which is a permutation.<br>The next q lines of a test case contain questions. Each line contains two integers i and k (1≤i≤n, 1≤k≤109) — the number of the participant and the number of rounds.<br>It is guaranteed that the sum of n and the sum of q over all test cases do not exceed 105.<br>Output<br>For each Burenka’s question, print a single line containing one integer — the answer to the question.</p>
 </blockquote>
 </blockquote>
-<span id="more"></span>
+<!--more-->
 <h4 id="Preface"><a href="#Preface" class="headerlink" title="Preface"></a>Preface</h4><h5 id="It’s-not-a-very-hard-problem-but-contains-many-details-This-is-the-record-when-I-tried"><a href="#It’s-not-a-very-hard-problem-but-contains-many-details-This-is-the-record-when-I-tried" class="headerlink" title="It’s not a very hard problem, but contains many details. This is the record when I tried:"></a>It’s not a very hard problem, but contains many details. This is the record when I tried:</h5><p><img src="/2022/08/29/codeforce-1719C/1719C.png"></p>
 <hr>
 <h5 id="The-basic-solution-for-this-problem-is-to-find-out-if-there-are-numbers-bigger-then-a-i-if-so-the-guy-with-the-number-i-CAN-NOT-WIN-ANYBODY-else-tried-to-find-the-number-of-the-guys-AFTER-HIM-with-smaller-a-This-number-is-the-BIGGEST-number-of-his-victories-You-might-notices-if-the-guy-is-the-best-in-the-whole-queue-then-he-can-win-any-guys-he-met-depend-how-big-the-k-is-others-can-not-because-they-may-met-this-guy-and-his-game-can-be-called-“over”"><a href="#The-basic-solution-for-this-problem-is-to-find-out-if-there-are-numbers-bigger-then-a-i-if-so-the-guy-with-the-number-i-CAN-NOT-WIN-ANYBODY-else-tried-to-find-the-number-of-the-guys-AFTER-HIM-with-smaller-a-This-number-is-the-BIGGEST-number-of-his-victories-You-might-notices-if-the-guy-is-the-best-in-the-whole-queue-then-he-can-win-any-guys-he-met-depend-how-big-the-k-is-others-can-not-because-they-may-met-this-guy-and-his-game-can-be-called-“over”" class="headerlink" title="The basic solution for this problem is to find out if there are numbers bigger then a[i], if so, the guy with the number i CAN NOT WIN ANYBODY, else, tried to find the number of the guys AFTER HIM with smaller a[]. This number is the BIGGEST number of his victories. You might notices, if the guy is the best in the whole queue, then he can win any guys he met(depend how big the k is), others can not because they may met this guy and his game can be called “over”."></a>The basic solution for this problem is to find out if there are numbers bigger then a[i], if so, the guy with the number i CAN NOT WIN ANYBODY, else, tried to find the number of the guys AFTER HIM with smaller a[]. This number is the BIGGEST number of his victories. You might notices, if the guy is the best in the whole queue, then he can win any guys he met(depend how big the k is), others can not because they may met this guy and his game can be called “over”.</h5><h4 id="DETAILS"><a href="#DETAILS" class="headerlink" title="DETAILS"></a>DETAILS</h4><ul>
