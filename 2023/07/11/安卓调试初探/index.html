@@ -109,6 +109,24 @@
     <div class="content" v-pre>
         <h6 id="preface：说是初探，也不是很初探吧其实，前面多多少少弄过完整的流程了，但是由于hyperV这玄学东西后面搞的环境一团糟，打算还是重新弄一个完整的调试方案出来，顺便记录一些基础知识"><a href="#preface：说是初探，也不是很初探吧其实，前面多多少少弄过完整的流程了，但是由于hyperV这玄学东西后面搞的环境一团糟，打算还是重新弄一个完整的调试方案出来，顺便记录一些基础知识" class="headerlink" title="preface：说是初探，也不是很初探吧其实，前面多多少少弄过完整的流程了，但是由于hyperV这玄学东西后面搞的环境一团糟，打算还是重新弄一个完整的调试方案出来，顺便记录一些基础知识"></a>preface：说是初探，也不是很初探吧其实，前面多多少少弄过完整的流程了，但是由于hyperV这玄学东西后面搞的环境一团糟，打算还是重新弄一个完整的调试方案出来，顺便记录一些基础知识</h6><span id="more"></span>
 
+<h6 id="初学配安卓环境挺痛苦的，有几大原因：还没准备可以root的真机；在x86架构下跑arm的方案很少，流畅的更少；能比较流畅运行的大多是商业模拟器，但是我的本地linux环境大多放在wsl2上，商业模拟器很多与wsl2的hyperV冲突"><a href="#初学配安卓环境挺痛苦的，有几大原因：还没准备可以root的真机；在x86架构下跑arm的方案很少，流畅的更少；能比较流畅运行的大多是商业模拟器，但是我的本地linux环境大多放在wsl2上，商业模拟器很多与wsl2的hyperV冲突" class="headerlink" title="初学配安卓环境挺痛苦的，有几大原因：还没准备可以root的真机；在x86架构下跑arm的方案很少，流畅的更少；能比较流畅运行的大多是商业模拟器，但是我的本地linux环境大多放在wsl2上，商业模拟器很多与wsl2的hyperV冲突"></a>初学配安卓环境挺痛苦的，有几大原因：还没准备可以root的真机；在x86架构下跑arm的方案很少，流畅的更少；能比较流畅运行的大多是商业模拟器，但是我的本地linux环境大多放在wsl2上，商业模拟器很多与wsl2的hyperV冲突</h6><h5 id="几个尝试过或可以考虑的方案："><a href="#几个尝试过或可以考虑的方案：" class="headerlink" title="几个尝试过或可以考虑的方案："></a>几个尝试过或可以考虑的方案：</h5><table>
+<thead>
+<tr>
+<th align="center">Android Studio</th>
+<th align="center">mumu12</th>
+<th align="center">qemu</th>
+<th align="center">真机</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">选择多</td>
+<td align="center">使用方便</td>
+<td align="center">配置麻烦</td>
+<td align="center">准备尝试</td>
+</tr>
+</tbody></table>
+<h5 id="1、Android-Studio"><a href="#1、Android-Studio" class="headerlink" title="1、Android Studio"></a>1、Android Studio</h5><h5 id="在so有x86支持时为比较优解，可以随意选择安卓版本来使用。仅支持arm时本机能成功运行的镜像仅有：armeabi-v7a的Nougat，但很多新的apk都是arm64-v8a，这里本机跑会报很多错，而且很慢很慢"><a href="#在so有x86支持时为比较优解，可以随意选择安卓版本来使用。仅支持arm时本机能成功运行的镜像仅有：armeabi-v7a的Nougat，但很多新的apk都是arm64-v8a，这里本机跑会报很多错，而且很慢很慢" class="headerlink" title="在so有x86支持时为比较优解，可以随意选择安卓版本来使用。仅支持arm时本机能成功运行的镜像仅有：armeabi-v7a的Nougat，但很多新的apk都是arm64-v8a，这里本机跑会报很多错，而且很慢很慢"></a>在so有x86支持时为比较优解，可以随意选择安卓版本来使用。仅支持arm时本机能成功运行的镜像仅有：<img src="/2023/07/11/%E5%AE%89%E5%8D%93%E8%B0%83%E8%AF%95%E5%88%9D%E6%8E%A2/image-20230811134825647.png" alt="image-20230811134825647">armeabi-v7a的Nougat，但很多新的apk都是arm64-v8a，这里本机跑会报很多错，而且很慢很慢</h5><h5 id="2、正常情况下可以用nox或者雷电模拟器，稳定性还行，但是有wsl2的情况下会出奇怪问题（雷电号称是有兼容的，但是实测用起来会卡死，懒得修了直接换个）之前一直用的mumux，但是这两天连adb会触发强制更新，换成mumu12居然还可以用，属于比较惊喜的，在真机拿到前可以先用这个方案"><a href="#2、正常情况下可以用nox或者雷电模拟器，稳定性还行，但是有wsl2的情况下会出奇怪问题（雷电号称是有兼容的，但是实测用起来会卡死，懒得修了直接换个）之前一直用的mumux，但是这两天连adb会触发强制更新，换成mumu12居然还可以用，属于比较惊喜的，在真机拿到前可以先用这个方案" class="headerlink" title="2、正常情况下可以用nox或者雷电模拟器，稳定性还行，但是有wsl2的情况下会出奇怪问题（雷电号称是有兼容的，但是实测用起来会卡死，懒得修了直接换个）之前一直用的mumux，但是这两天连adb会触发强制更新，换成mumu12居然还可以用，属于比较惊喜的，在真机拿到前可以先用这个方案"></a>2、正常情况下可以用nox或者雷电模拟器，稳定性还行，但是有wsl2的情况下会出奇怪问题（雷电号称是有兼容的，但是实测用起来会卡死，懒得修了直接换个）之前一直用的mumux，但是这两天连adb会触发强制更新，换成mumu12居然还可以用，属于比较惊喜的，在真机拿到前可以先用这个方案</h5><h5 id="mumu12用的x86的架构，但是实测是可以跑arm64-v8a的，具体原理不太懂，但是确实挺好用的，可以按照这篇操作，调试so层"><a href="#mumu12用的x86的架构，但是实测是可以跑arm64-v8a的，具体原理不太懂，但是确实挺好用的，可以按照这篇操作，调试so层" class="headerlink" title="mumu12用的x86的架构，但是实测是可以跑arm64-v8a的，具体原理不太懂，但是确实挺好用的，可以按照这篇操作，调试so层"></a>mumu12用的x86的架构，但是实测是可以跑arm64-v8a的，具体原理不太懂，但是确实挺好用的，可以按照这篇操作，调试so层</h5><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/ddms/p/8820044.html">IDA远程调试Android中so文件 - jKing777 - 博客园 (cnblogs.com)</a></p>
+<h5 id="3、qemu"><a href="#3、qemu" class="headerlink" title="3、qemu"></a>3、qemu</h5><h5 id="搭建很麻烦，实际也不好用（AS也是基于qemu的）"><a href="#搭建很麻烦，实际也不好用（AS也是基于qemu的）" class="headerlink" title="搭建很麻烦，实际也不好用（AS也是基于qemu的）"></a>搭建很麻烦，实际也不好用（AS也是基于qemu的）</h5><h5 id="4、真机"><a href="#4、真机" class="headerlink" title="4、真机"></a>4、真机</h5><h5 id="理论上的最优解，但是不知道比起商业模拟器优多少呢"><a href="#理论上的最优解，但是不知道比起商业模拟器优多少呢" class="headerlink" title="理论上的最优解，但是不知道比起商业模拟器优多少呢"></a>理论上的最优解，但是不知道比起商业模拟器优多少呢</h5>
     </div>
     
 </div>
