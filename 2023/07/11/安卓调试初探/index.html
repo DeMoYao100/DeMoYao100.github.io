@@ -109,7 +109,7 @@
     <div class="content" v-pre>
         <h6 id="preface：说是初探，也不是很初探吧其实，前面多多少少弄过完整的流程了，但是由于hyperV这玄学东西后面搞的环境一团糟，打算还是重新弄一个完整的调试方案出来，顺便记录一些基础知识"><a href="#preface：说是初探，也不是很初探吧其实，前面多多少少弄过完整的流程了，但是由于hyperV这玄学东西后面搞的环境一团糟，打算还是重新弄一个完整的调试方案出来，顺便记录一些基础知识" class="headerlink" title="preface：说是初探，也不是很初探吧其实，前面多多少少弄过完整的流程了，但是由于hyperV这玄学东西后面搞的环境一团糟，打算还是重新弄一个完整的调试方案出来，顺便记录一些基础知识"></a>preface：说是初探，也不是很初探吧其实，前面多多少少弄过完整的流程了，但是由于hyperV这玄学东西后面搞的环境一团糟，打算还是重新弄一个完整的调试方案出来，顺便记录一些基础知识</h6><span id="more"></span>
 
-<h6 id="初学配安卓环境挺痛苦的，有几大原因：还没准备可以root的真机；在x86架构下跑arm的方案很少，流畅的更少；能比较流畅运行的大多是商业模拟器，但是我的本地linux环境大多放在wsl2上，商业模拟器很多与wsl2的hyperV冲突"><a href="#初学配安卓环境挺痛苦的，有几大原因：还没准备可以root的真机；在x86架构下跑arm的方案很少，流畅的更少；能比较流畅运行的大多是商业模拟器，但是我的本地linux环境大多放在wsl2上，商业模拟器很多与wsl2的hyperV冲突" class="headerlink" title="初学配安卓环境挺痛苦的，有几大原因：还没准备可以root的真机；在x86架构下跑arm的方案很少，流畅的更少；能比较流畅运行的大多是商业模拟器，但是我的本地linux环境大多放在wsl2上，商业模拟器很多与wsl2的hyperV冲突"></a>初学配安卓环境挺痛苦的，有几大原因：还没准备可以root的真机；在x86架构下跑arm的方案很少，流畅的更少；能比较流畅运行的大多是商业模拟器，但是我的本地linux环境大多放在wsl2上，商业模拟器很多与wsl2的hyperV冲突</h6><h5 id="几个尝试过或可以考虑的方案："><a href="#几个尝试过或可以考虑的方案：" class="headerlink" title="几个尝试过或可以考虑的方案："></a>几个尝试过或可以考虑的方案：</h5><table>
+<h6 id="初学配安卓环境挺痛苦的，有几大原因：还没准备可以root的真机；在x86架构下跑arm的方案很少，流畅的更少；能比较流畅运行的大多是商业模拟器，但是我的本地linux环境大多放在wsl2上，商业模拟器很多与wsl2的hyperV冲突"><a href="#初学配安卓环境挺痛苦的，有几大原因：还没准备可以root的真机；在x86架构下跑arm的方案很少，流畅的更少；能比较流畅运行的大多是商业模拟器，但是我的本地linux环境大多放在wsl2上，商业模拟器很多与wsl2的hyperV冲突" class="headerlink" title="初学配安卓环境挺痛苦的，有几大原因：还没准备可以root的真机；在x86架构下跑arm的方案很少，流畅的更少；能比较流畅运行的大多是商业模拟器，但是我的本地linux环境大多放在wsl2上，商业模拟器很多与wsl2的hyperV冲突"></a>初学配安卓环境挺痛苦的，有几大原因：还没准备可以root的真机；在x86架构下跑arm的方案很少，流畅的更少；能比较流畅运行的大多是商业模拟器，但是我的本地linux环境大多放在wsl2上，商业模拟器很多与wsl2的hyperV冲突</h6><h5 id="几个尝试过或可以考虑的方案："><a href="#几个尝试过或可以考虑的方案：" class="headerlink" title="几个尝试过或可以考虑的方案："></a>几个尝试过<del>或可以考虑</del>的方案：</h5><table>
 <thead>
 <tr>
 <th align="center">Android Studio</th>
@@ -122,7 +122,7 @@
 <td align="center">选择多</td>
 <td align="center">使用方便</td>
 <td align="center">配置麻烦</td>
-<td align="center">准备尝试</td>
+<td align="center"><del>准备尝试</del>已配置，需要root，略麻烦</td>
 </tr>
 </tbody></table>
 <h5 id="1、Android-Studio"><a href="#1、Android-Studio" class="headerlink" title="1、Android Studio"></a>1、Android Studio</h5><p>在so有x86支持时为比较优解，可以随意选择安卓版本来使用。仅支持arm时本机能成功运行的镜像仅有：<img src="/2023/07/11/%E5%AE%89%E5%8D%93%E8%B0%83%E8%AF%95%E5%88%9D%E6%8E%A2/image-20230811134825647.png" alt="image-20230811134825647">armeabi-v7a的Nougat，但很多新的apk都是arm64-v8a，这里本机跑会报很多错，而且很慢很慢</p>
