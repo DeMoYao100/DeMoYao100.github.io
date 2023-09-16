@@ -893,12 +893,36 @@ pre {
 <p>寻找<code>SVC</code>指令出现的地址：<code>aarch64-linux-gnu-objdump -D libapp.so | grep -B2 -A2 --color=always &quot;svc&quot;</code></p>
 <hr>
 <h6 id="leaves大哥带着在看这个babyanti2，比赛的时候被他高速非预期了，但是现在复盘感觉预期解难度有点离谱的"><a href="#leaves大哥带着在看这个babyanti2，比赛的时候被他高速非预期了，但是现在复盘感觉预期解难度有点离谱的" class="headerlink" title="leaves大哥带着在看这个babyanti2，比赛的时候被他高速非预期了，但是现在复盘感觉预期解难度有点离谱的"></a>leaves大哥带着在看这个babyanti2，比赛的时候被他高速非预期了，但是现在复盘感觉预期解难度有点离谱的</h6><h5 id="目前还没有完整复现，但是大概记录一下："><a href="#目前还没有完整复现，但是大概记录一下：" class="headerlink" title="目前还没有完整复现，但是大概记录一下："></a>目前还没有完整复现，但是大概记录一下：</h5><ul>
-<li>最简单的先把anti里面的环境检测hook掉</li>
-<li>然后合理就去gg修改分数，但是发现有疑似内存检查</li>
-<li>flutter的libapp.so恢复符号表（基本上就是我上面说的方法）发现有对内存进行的操作，进行hook</li>
-<li>然后不够，libapp.so里面有一个<code>generateShellcodes</code>，非常复杂；可以hook <code>mprotect</code>，发现有一个传入0x7（可读、写、执行）的调用，比较异常，对其操作的0x1000长度的地址dump下来分析，发现好几十个SVC调用</li>
-<li>后续： 结论是两层shellcode 调用 mincore，检查是否有内存缺页更改的操作，确实难</li>
+<li><p>最简单的先把anti里面的环境检测hook掉</p>
+</li>
+<li><p>然后合理就去gg修改分数，但是发现有疑似内存检查</p>
+</li>
+<li><p>flutter的libapp.so恢复符号表（基本上就是我上面说的方法）发现有对内存进行的操作，进行hook</p>
+</li>
+<li><p>然后不够，libapp.so里面有一个<code>generateShellcodes</code>，非常复杂；可以hook <code>mprotect</code>，发现有一个传入0x7（可读、写、执行）的调用，比较异常，对其操作的0x1000长度的地址dump下来分析，发现好几十个SVC调用</p>
+</li>
+<li><p>后续： 结论是两层shellcode 调用 mincore，检查是否有内存缺页更改的操作，确实难</p>
+</li>
 </ul>
+<hr>
+<h6 id="9-14-BabyAnti2完整复现："><a href="#9-14-BabyAnti2完整复现：" class="headerlink" title="9.14: BabyAnti2完整复现："></a>9.14: BabyAnti2完整复现：</h6><p>AntiCheatPlugin的Java层几乎看不到东西，只能判断使用flutter，那么必须继续看下去，找dart层和native层的逻辑</p>
+<p><img src="/2023/08/23/%E5%88%9D%E6%8E%A2flutter/image-20230914083329468.png" alt="image-20230914083329468"></p>
+<p>直接看native：</p>
+<p><img src="/2023/08/23/%E5%88%9D%E6%8E%A2flutter/image-20230914083721077.png" alt="image-20230914083721077"></p>
+<p><code>libflutter.so</code>：flutter预编译的组件库（不会因为开发者的Dart而改变），flutter引擎的主要组成部分，包含了flutter运行所需要的核心代码，负责渲染Flutter widgets、处理事件、与Dart VM进行交互以及其他核心功能</p>
+<p><code>libapp.so</code>：Dart代码编译后的产物，包含所有Dart层的native逻辑、UI、Flutter plugins，当应用启动时，<code>libflutter.so</code>会加载<code>libapp.so</code>并开始执行Dart代码</p>
+<p><code>libanticheat.so（其他）</code>：通过Android NDK编写的native代码编译产物</p>
+<p>尝试通过<a href="https://github.com/rscloura/Doldrums">rscloura&#x2F;Doldrums: A Flutter&#x2F;Dart reverse engineering tool (github.com)</a>工具提取libapp.so，失败，DartSDK版本对不上</p>
+<p><img src="/2023/08/23/%E5%88%9D%E6%8E%A2flutter/image-20230914094329393.png" alt="image-20230914094329393"></p>
+<p>寻找版本相关信息，可以得到这段，获取版本号3.1.0（这里可以猜测这个是dart的版本）对应到<a href="https://docs.flutter.dev/release/archive?tab=windows">Flutter SDK archive | Flutter</a>可以查找flutter的版本号beta版本的3.13.0-0.4.pre（根据发布时间和Dart version，不过hash号没有找到，还得看看）</p>
+<p><img src="/2023/08/23/%E5%88%9D%E6%8E%A2flutter/image-20230914103350070.png" alt="image-20230914103350070"></p>
+<p>题目出的时候<code>reflutter</code>还没有更新到这个版本，可以认为，在比赛环境下这让做这道题的预期解难度陡然升高</p>
+<p>那也只能开始漫长学习，先看看这篇的原理：<a href="https://swarm.ptsecurity.com/fork-bomb-for-flutter/">Fork Bomb for Flutter – PT SWARM (ptsecurity.com)</a></p>
+<p>安装应用：<code>adb push .apk /data/local/tmp </code></p>
+<p><code>pm install -r .apk</code></p>
+<p>签名工具：<a href="https://github.com/patrickfav/uber-apk-signer/releases/tag/v1.2.1">Release v1.2.1 · patrickfav&#x2F;uber-apk-signer (github.com)</a></p>
+<p><code>java -jar uber-apk-signer.jar --allowResign -**a** release.RE.apk</code></p>
+<p><code> adb logcat -e reflutter | ForEach-Object &#123; $_ -replace &#39;.*DartVM&#39;, &#39;&#39; &#125; &gt;&gt; reflutter.txt</code></p>
 ]]></content>
   </entry>
   <entry>
