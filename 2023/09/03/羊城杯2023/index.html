@@ -110,15 +110,443 @@
         <h6 id="preface-尽力了吧，re这边剩下俩题都是一解，赛中肯定没时间做了，最近忙完来复现"><a href="#preface-尽力了吧，re这边剩下俩题都是一解，赛中肯定没时间做了，最近忙完来复现" class="headerlink" title="preface: 尽力了吧，re这边剩下俩题都是一解，赛中肯定没时间做了，最近忙完来复现"></a>preface: 尽力了吧，re这边剩下俩题都是一解，赛中肯定没时间做了，最近忙完来复现</h6><span id="more"></span>
 
 <h3 id="Ez加密器"><a href="#Ez加密器" class="headerlink" title="Ez加密器"></a>Ez加密器</h3><p>调一下发现输入六位秘钥（注意是全数字），base64变表成八位做DES秘钥<br>爆破六位即可</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> DES</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"><span class="keyword">import</span> itertools</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">des_decrypt</span>(<span class="params">key, ciphertext</span>):</span><br><span class="line">    cipher = DES.new(key, DES.MODE_ECB)</span><br><span class="line">    <span class="keyword">return</span> cipher.decrypt(ciphertext)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">custom_base64_encode</span>(<span class="params">s, custom_table</span>):</span><br><span class="line">    std_base64_table = <span class="string">&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/&quot;</span></span><br><span class="line">    encoded = base64.b64encode(s).decode()</span><br><span class="line">    custom_encoded = <span class="string">&quot;&quot;</span>.join([custom_table[std_base64_table.index(c)] <span class="keyword">for</span> c <span class="keyword">in</span> encoded])</span><br><span class="line">    <span class="keyword">return</span> custom_encoded[:<span class="number">8</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>():</span><br><span class="line">    ciphertext = <span class="built_in">bytes</span>.fromhex(<span class="string">&quot;0723105D5C12217DCDC3601F5ECB54DA9CCEC2279F1684A13A0D716D17217F4C9EA85FF1A42795731CA3C55D3A4D7BEA&quot;</span>)</span><br><span class="line">    charset = string.digits + <span class="string">&quot; &quot;</span></span><br><span class="line">    <span class="built_in">print</span>()</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;output.txt&#x27;</span>, <span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        <span class="keyword">for</span> combo <span class="keyword">in</span> itertools.product(charset, repeat=<span class="number">6</span>):</span><br><span class="line">            plaintext = <span class="string">&#x27;&#x27;</span>.join(combo)</span><br><span class="line">            key = custom_base64_encode(plaintext.encode(), <span class="string">&quot;abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ+/&quot;</span>)</span><br><span class="line"></span><br><span class="line">            decrypted = des_decrypt(key.encode(), ciphertext)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">all</span>(<span class="number">32</span> &lt;= b &lt; <span class="number">127</span> <span class="keyword">for</span> b <span class="keyword">in</span> decrypted):</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">f&quot;Possible match: <span class="subst">&#123;decrypted.decode(<span class="string">&#x27;ascii&#x27;</span>)&#125;</span>&quot;</span>)</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">f&quot;Key: <span class="subst">&#123;key&#125;</span>&quot;</span>)</span><br><span class="line">            f.write(<span class="built_in">str</span>(decrypted) + <span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">            f.write(<span class="built_in">str</span>(key)) <span class="comment">#file中搜字符串即可</span></span><br><span class="line">    <span class="comment"># if decrypted.startswith(b&quot;flag&quot;) or decrypted.startswith(&quot;DASC&quot;):</span></span><br><span class="line">    <span class="comment">#     print(f&quot;Possible match: &#123;decrypted_text&#125;&quot;)</span></span><br><span class="line">        <span class="comment"># print(f&quot;Key: &#123;key&#125;&quot;)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    main()</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code class="python">from Crypto.Cipher import DES
+import string
+import itertools
+import base64
 
+def des_decrypt(key, ciphertext):
+    cipher = DES.new(key, DES.MODE_ECB)
+    return cipher.decrypt(ciphertext)
+
+def custom_base64_encode(s, custom_table):
+    std_base64_table = &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/&quot;
+    encoded = base64.b64encode(s).decode()
+    custom_encoded = &quot;&quot;.join([custom_table[std_base64_table.index(c)] for c in encoded])
+    return custom_encoded[:8]
+
+def main():
+    ciphertext = bytes.fromhex(&quot;0723105D5C12217DCDC3601F5ECB54DA9CCEC2279F1684A13A0D716D17217F4C9EA85FF1A42795731CA3C55D3A4D7BEA&quot;)
+    charset = string.digits + &quot; &quot;
+    print()
+    with open(&#39;output.txt&#39;, &#39;w&#39;) as f:
+        for combo in itertools.product(charset, repeat=6):
+            plaintext = &#39;&#39;.join(combo)
+            key = custom_base64_encode(plaintext.encode(), &quot;abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ+/&quot;)
+
+            decrypted = des_decrypt(key.encode(), ciphertext)
+
+            if all(32 &lt;= b &lt; 127 for b in decrypted):
+                print(f&quot;Possible match: &#123;decrypted.decode(&#39;ascii&#39;)&#125;&quot;)
+                print(f&quot;Key: &#123;key&#125;&quot;)
+            f.write(str(decrypted) + &#39;\n&#39;)
+            f.write(str(key)) #file中搜字符串即可
+    # if decrypted.startswith(b&quot;flag&quot;) or decrypted.startswith(&quot;DASC&quot;):
+    #     print(f&quot;Possible match: &#123;decrypted_text&#125;&quot;)
+        # print(f&quot;Key: &#123;key&#125;&quot;)
+
+if __name__ == &quot;__main__&quot;:
+    main()
+
+</code></pre>
 <h3 id="Blast"><a href="#Blast" class="headerlink" title="Blast"></a>Blast</h3><p>比较像Bogus Control Flow，网上脚本去不太干净，把jump $5给nop掉之类的手动修修可以angr脚本恢复main，程序有md5的特征，动调发现比对的地方是flag输入的每一位的md5(md5())，写脚本map一下就行</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">generate_md5</span>(<span class="params">text</span>):</span><br><span class="line">    m = hashlib.md5()</span><br><span class="line">    m.update(text.encode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br><span class="line">    <span class="keyword">return</span> m.hexdigest()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">generate_table</span>():</span><br><span class="line">    char_to_md5 = &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">32</span>, <span class="number">127</span>):</span><br><span class="line">        char = <span class="built_in">chr</span>(i)</span><br><span class="line">        md5_hash = generate_md5(generate_md5(char))</span><br><span class="line">        char_to_md5[char] = md5_hash</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> char_to_md5</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>():</span><br><span class="line">    char_to_md5 = generate_table()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># print(&quot;Character | Double MD5 Hash&quot;)</span></span><br><span class="line">    <span class="comment"># print(&quot;---------------------------&quot;)</span></span><br><span class="line">    <span class="comment"># for char, md5_hash in char_to_md5.items():</span></span><br><span class="line">    <span class="comment">#     print(f&quot;&#123;repr(char)&#125;      | &#123;md5_hash&#125;&quot;)</span></span><br><span class="line"></span><br><span class="line">    a = [<span class="string">&#x27;14d89c38cd0fb23a14be2798d449c182&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;a94837b18f8f43f29448b40a6e7386ba&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;af85d512594fc84a5c65ec9970956ea5&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;af85d512594fc84a5c65ec9970956ea5&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;10e21da237a4a1491e769df6f4c3b419&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;a705e8280082f93f07e3486636f3827a&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;297e7ca127d2eef674c119331fe30dff&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;b5d2099e49bdb07b8176dff5e23b3c14&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;83be264eb452fcf0a1c322f2c7cbf987&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;a94837b18f8f43f29448b40a6e7386ba&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;71b0438bf46aa26928c7f5a371d619e1&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;a705e8280082f93f07e3486636f3827a&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;ac49073a7165f41c57eb2c1806a7092e&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;a94837b18f8f43f29448b40a6e7386ba&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;af85d512594fc84a5c65ec9970956ea5&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;ed108f6919ebadc8e809f8b86ef40b05&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;10e21da237a4a1491e769df6f4c3b419&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;3cfd436919bc3107d68b912ee647f341&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;a705e8280082f93f07e3486636f3827a&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;65c162f7c43612ba1bdf4d0f2912bbc0&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;10e21da237a4a1491e769df6f4c3b419&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;a705e8280082f93f07e3486636f3827a&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;3cfd436919bc3107d68b912ee647f341&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;557460d317ae874c924e9be336a83cbe&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;a705e8280082f93f07e3486636f3827a&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;9203d8a26e241e63e4b35b3527440998&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;10e21da237a4a1491e769df6f4c3b419&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;f91b2663febba8a884487f7de5e1d249&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;a705e8280082f93f07e3486636f3827a&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;d7afde3e7059cd0a0fe09eec4b0008cd&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;488c428cd4a8d916deee7c1613c8b2fd&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;39abe4bca904bca5a11121955a2996bf&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;a705e8280082f93f07e3486636f3827a&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;3cfd436919bc3107d68b912ee647f341&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;39abe4bca904bca5a11121955a2996bf&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;4e44f1ac85cd60e3caa56bfd4afb675e&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;45cf8ddfae1d78741d8f1c622689e4af&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;3cfd436919bc3107d68b912ee647f341&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;39abe4bca904bca5a11121955a2996bf&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;4e44f1ac85cd60e3caa56bfd4afb675e&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;37327bb06c83cb29cefde1963ea588aa&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;a705e8280082f93f07e3486636f3827a&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;23e65a679105b85c5dc7034fded4fb5f&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;10e21da237a4a1491e769df6f4c3b419&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;71b0438bf46aa26928c7f5a371d619e1&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;af85d512594fc84a5c65ec9970956ea5&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;39abe4bca904bca5a11121955a2996bf&#x27;</span>,]</span><br><span class="line">    <span class="keyword">for</span> query_hash <span class="keyword">in</span> a:</span><br><span class="line">        found_char = [char <span class="keyword">for</span> char, md5_hash <span class="keyword">in</span> char_to_md5.items() <span class="keyword">if</span> md5_hash == query_hash]</span><br><span class="line"></span><br><span class="line">        <span class="built_in">print</span>(found_char[<span class="number">0</span>],end=<span class="string">&quot;&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    main()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code class="python">import hashlib
 
+
+def generate_md5(text):
+    m = hashlib.md5()
+    m.update(text.encode(&#39;utf-8&#39;))
+    return m.hexdigest()
+
+
+def generate_table():
+    char_to_md5 = &#123;&#125;
+
+    for i in range(32, 127):
+        char = chr(i)
+        md5_hash = generate_md5(generate_md5(char))
+        char_to_md5[char] = md5_hash
+
+    return char_to_md5
+
+
+def main():
+    char_to_md5 = generate_table()
+
+    # print(&quot;Character | Double MD5 Hash&quot;)
+    # print(&quot;---------------------------&quot;)
+    # for char, md5_hash in char_to_md5.items():
+    #     print(f&quot;&#123;repr(char)&#125;      | &#123;md5_hash&#125;&quot;)
+
+    a = [&#39;14d89c38cd0fb23a14be2798d449c182&#39;,
+        &#39;a94837b18f8f43f29448b40a6e7386ba&#39;,
+        &#39;af85d512594fc84a5c65ec9970956ea5&#39;,
+        &#39;af85d512594fc84a5c65ec9970956ea5&#39;,
+        &#39;10e21da237a4a1491e769df6f4c3b419&#39;,
+        &#39;a705e8280082f93f07e3486636f3827a&#39;,
+        &#39;297e7ca127d2eef674c119331fe30dff&#39;,
+        &#39;b5d2099e49bdb07b8176dff5e23b3c14&#39;,
+        &#39;83be264eb452fcf0a1c322f2c7cbf987&#39;,
+        &#39;a94837b18f8f43f29448b40a6e7386ba&#39;,
+        &#39;71b0438bf46aa26928c7f5a371d619e1&#39;,
+        &#39;a705e8280082f93f07e3486636f3827a&#39;,
+        &#39;ac49073a7165f41c57eb2c1806a7092e&#39;,
+        &#39;a94837b18f8f43f29448b40a6e7386ba&#39;,
+        &#39;af85d512594fc84a5c65ec9970956ea5&#39;,
+        &#39;ed108f6919ebadc8e809f8b86ef40b05&#39;,
+        &#39;10e21da237a4a1491e769df6f4c3b419&#39;,
+        &#39;3cfd436919bc3107d68b912ee647f341&#39;,
+        &#39;a705e8280082f93f07e3486636f3827a&#39;,
+        &#39;65c162f7c43612ba1bdf4d0f2912bbc0&#39;,
+        &#39;10e21da237a4a1491e769df6f4c3b419&#39;,
+        &#39;a705e8280082f93f07e3486636f3827a&#39;,
+        &#39;3cfd436919bc3107d68b912ee647f341&#39;,
+        &#39;557460d317ae874c924e9be336a83cbe&#39;,
+        &#39;a705e8280082f93f07e3486636f3827a&#39;,
+        &#39;9203d8a26e241e63e4b35b3527440998&#39;,
+        &#39;10e21da237a4a1491e769df6f4c3b419&#39;,
+        &#39;f91b2663febba8a884487f7de5e1d249&#39;,
+        &#39;a705e8280082f93f07e3486636f3827a&#39;,
+        &#39;d7afde3e7059cd0a0fe09eec4b0008cd&#39;,
+        &#39;488c428cd4a8d916deee7c1613c8b2fd&#39;,
+        &#39;39abe4bca904bca5a11121955a2996bf&#39;,
+        &#39;a705e8280082f93f07e3486636f3827a&#39;,
+        &#39;3cfd436919bc3107d68b912ee647f341&#39;,
+        &#39;39abe4bca904bca5a11121955a2996bf&#39;,
+        &#39;4e44f1ac85cd60e3caa56bfd4afb675e&#39;,
+        &#39;45cf8ddfae1d78741d8f1c622689e4af&#39;,
+        &#39;3cfd436919bc3107d68b912ee647f341&#39;,
+        &#39;39abe4bca904bca5a11121955a2996bf&#39;,
+        &#39;4e44f1ac85cd60e3caa56bfd4afb675e&#39;,
+        &#39;37327bb06c83cb29cefde1963ea588aa&#39;,
+        &#39;a705e8280082f93f07e3486636f3827a&#39;,
+        &#39;23e65a679105b85c5dc7034fded4fb5f&#39;,
+        &#39;10e21da237a4a1491e769df6f4c3b419&#39;,
+        &#39;71b0438bf46aa26928c7f5a371d619e1&#39;,
+        &#39;af85d512594fc84a5c65ec9970956ea5&#39;,
+        &#39;39abe4bca904bca5a11121955a2996bf&#39;,]
+    for query_hash in a:
+        found_char = [char for char, md5_hash in char_to_md5.items() if md5_hash == query_hash]
+
+        print(found_char[0],end=&quot;&quot;)
+
+
+if __name__ == &quot;__main__&quot;:
+    main()
+</code></pre>
 <h3 id="vm-wo"><a href="#vm-wo" class="headerlink" title="vm_wo"></a>vm_wo</h3><p>转化提取一下opcode，模拟流程，单字节加密直接映射回去就行</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">unsigned</span> <span class="type">char</span> opcode[<span class="number">4</span>][<span class="number">15</span>] = </span><br><span class="line">&#123;</span><br><span class="line">  &#123;<span class="number">0x1A</span>, <span class="number">0x00</span>, <span class="number">0x03</span>, <span class="number">0x19</span>, <span class="number">0x01</span>, <span class="number">0x01</span>, <span class="number">0x0D</span>, <span class="number">0x02</span>, <span class="number">0x07</span>, <span class="number">0x18</span>, <span class="number">0x01</span>, <span class="number">0x02</span>, <span class="number">0x01</span>, <span class="number">0x00</span>, <span class="number">0x03</span>&#125;, </span><br><span class="line">  &#123;<span class="number">0x1A</span>, <span class="number">0x00</span>, <span class="number">0x03</span>, <span class="number">0x19</span>, <span class="number">0x01</span>, <span class="number">0x02</span>, <span class="number">0x0D</span>, <span class="number">0x02</span>, <span class="number">0x06</span>, <span class="number">0x18</span>, <span class="number">0x01</span>, <span class="number">0x02</span>, <span class="number">0x01</span>, <span class="number">0x00</span>, <span class="number">0x04</span>&#125;,</span><br><span class="line">  &#123;<span class="number">0x1A</span>, <span class="number">0x00</span>, <span class="number">0x03</span>, <span class="number">0x19</span>, <span class="number">0x01</span>, <span class="number">0x03</span>, <span class="number">0x0D</span>, <span class="number">0x02</span>, <span class="number">0x05</span>, <span class="number">0x18</span>, <span class="number">0x01</span>, <span class="number">0x02</span>, <span class="number">0x01</span>, <span class="number">0x00</span>, <span class="number">0x05</span>&#125;,</span><br><span class="line">  &#123;<span class="number">0x1A</span>, <span class="number">0x00</span>, <span class="number">0x03</span>, <span class="number">0x19</span>, <span class="number">0x01</span>, <span class="number">0x04</span>, <span class="number">0x0D</span>, <span class="number">0x02</span>, <span class="number">0x04</span>, <span class="number">0x18</span>, <span class="number">0x01</span>, <span class="number">0x02</span>, <span class="number">0x01</span>, <span class="number">0x00</span>, <span class="number">0x06</span>&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="type">unsigned</span> <span class="type">char</span> tmp[<span class="number">4</span>][<span class="number">15</span>];</span><br><span class="line"></span><br><span class="line"><span class="type">unsigned</span> <span class="type">char</span> vm_body[<span class="number">6</span>];</span><br><span class="line"><span class="type">unsigned</span> <span class="type">char</span> *reg;</span><br><span class="line"><span class="type">unsigned</span> <span class="type">int</span> algn[<span class="number">2</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">vm</span><span class="params">(<span class="type">unsigned</span> <span class="type">char</span> *op)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  algn[<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">  algn[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">  <span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">if</span>(i &lt; <span class="number">15</span>)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">      reg = op + i;</span><br><span class="line">      <span class="type">unsigned</span> <span class="type">char</span> eax = reg[<span class="number">1</span>];</span><br><span class="line">      <span class="type">unsigned</span> <span class="type">char</span> ebx = reg[<span class="number">1</span>];</span><br><span class="line">      <span class="type">unsigned</span> <span class="type">char</span> ecx = reg[<span class="number">2</span>];</span><br><span class="line">      <span class="type">unsigned</span> <span class="type">char</span> edx = reg[<span class="number">2</span>];</span><br><span class="line">      <span class="type">unsigned</span> <span class="type">char</span> v11, v12, v13, v14, v15, v16;</span><br><span class="line">      <span class="comment">//for(int j = 0; j &lt; 15; j++)printf(&quot;%d &quot;, op[j]);</span></span><br><span class="line">      <span class="comment">//printf(&quot;i = %d reg[0] = %d\n&quot;, i, reg[0]);</span></span><br><span class="line">      <span class="comment">//printf(&quot;ebx = %d, ecx = %d\n&quot;, ebx, ecx);</span></span><br><span class="line">      <span class="keyword">switch</span>(reg[<span class="number">0</span>])</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">          v11 = vm_body[ebx];</span><br><span class="line">                vm_body[ebx] = vm_body[edx];</span><br><span class="line">                vm_body[edx] = v11;</span><br><span class="line">                algn[<span class="number">1</span>] += <span class="number">3</span>;</span><br><span class="line">                i = algn[<span class="number">1</span>];</span><br><span class="line">                <span class="keyword">if</span> ( algn[<span class="number">1</span>] &gt;= <span class="number">15</span> )</span><br><span class="line">                  <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">              	vm_body[ebx] ^= vm_body[ecx];<span class="comment">//printf(&quot;vm_body[ebx] ^= vm_body[ecx];\n&quot;);</span></span><br><span class="line">              	algn[<span class="number">1</span>] += <span class="number">3</span>;</span><br><span class="line">              	i = algn[<span class="number">1</span>];</span><br><span class="line">                <span class="keyword">if</span> ( algn[<span class="number">1</span>] &gt;= <span class="number">15</span> )</span><br><span class="line">                  <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">              	vm_body[ebx] += ecx;</span><br><span class="line">              	algn[<span class="number">1</span>] += <span class="number">3</span>;</span><br><span class="line">              	i = algn[<span class="number">1</span>];</span><br><span class="line">                <span class="keyword">if</span> ( algn[<span class="number">1</span>] &gt;= <span class="number">15</span> )</span><br><span class="line">                  <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">              	vm_body[ebx] += vm_body[ecx];</span><br><span class="line">              	algn[<span class="number">1</span>] += <span class="number">3</span>;</span><br><span class="line">              	i = algn[<span class="number">1</span>];</span><br><span class="line">                <span class="keyword">if</span> ( algn[<span class="number">1</span>] &gt;= <span class="number">15</span> )</span><br><span class="line">                  <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">              	vm_body[ebx] -= ecx;</span><br><span class="line">              	algn[<span class="number">1</span>] += <span class="number">3</span>;</span><br><span class="line">              	i = algn[<span class="number">1</span>];</span><br><span class="line">                <span class="keyword">if</span> ( algn[<span class="number">1</span>] &gt;= <span class="number">15</span> )</span><br><span class="line">                  <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">5</span>:</span><br><span class="line">              	vm_body[ebx] -= vm_body[ecx];</span><br><span class="line">              	algn[<span class="number">1</span>] += <span class="number">3</span>;</span><br><span class="line">              	i = algn[<span class="number">1</span>];</span><br><span class="line">                <span class="keyword">if</span> ( algn[<span class="number">1</span>] &gt;= <span class="number">15</span> )</span><br><span class="line">                  <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">6</span>:</span><br><span class="line">              	vm_body[ebx] *= ecx;</span><br><span class="line">              	algn[<span class="number">1</span>] += <span class="number">3</span>;</span><br><span class="line">              	i = algn[<span class="number">1</span>];</span><br><span class="line">                <span class="keyword">if</span> ( algn[<span class="number">1</span>] &gt;= <span class="number">15</span> )</span><br><span class="line">                  <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">7</span>:</span><br><span class="line">              	vm_body[ebx] *= vm_body[ecx];</span><br><span class="line">              	algn[<span class="number">1</span>] += <span class="number">3</span>;</span><br><span class="line">              	i = algn[<span class="number">1</span>];</span><br><span class="line">                <span class="keyword">if</span> ( algn[<span class="number">1</span>] &gt;= <span class="number">15</span> )</span><br><span class="line">                  <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">8</span>:</span><br><span class="line">              	vm_body[ebx] = (<span class="type">unsigned</span> <span class="type">char</span>)vm_body[ebx] / ecx;</span><br><span class="line">              	algn[<span class="number">1</span>] += <span class="number">3</span>;</span><br><span class="line">              	i = algn[<span class="number">1</span>];</span><br><span class="line">                <span class="keyword">if</span> ( algn[<span class="number">1</span>] &gt;= <span class="number">15</span> )</span><br><span class="line">                  <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">9</span>:</span><br><span class="line">              	vm_body[ebx] = (<span class="type">unsigned</span> <span class="type">char</span>)vm_body[ebx] / (<span class="type">unsigned</span> <span class="type">char</span>)vm_body[ecx];</span><br><span class="line">              	algn[<span class="number">1</span>] += <span class="number">3</span>;</span><br><span class="line">              	i = algn[<span class="number">1</span>];</span><br><span class="line">                <span class="keyword">if</span> ( algn[<span class="number">1</span>] &gt;= <span class="number">15</span> )</span><br><span class="line">                  <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">10</span>:</span><br><span class="line">              	vm_body[ebx] = (<span class="type">unsigned</span> <span class="type">char</span>)vm_body[ebx] % ecx;</span><br><span class="line">              	algn[<span class="number">1</span>] += <span class="number">3</span>;</span><br><span class="line">              	i = algn[<span class="number">1</span>];</span><br><span class="line">                <span class="keyword">if</span> ( algn[<span class="number">1</span>] &gt;= <span class="number">15</span> )</span><br><span class="line">                  <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">11</span>:</span><br><span class="line">              	vm_body[ebx] = (<span class="type">unsigned</span> <span class="type">char</span>)vm_body[ebx] % (<span class="type">unsigned</span> <span class="type">char</span>)vm_body[ecx];</span><br><span class="line">              	algn[<span class="number">1</span>] += <span class="number">3</span>;</span><br><span class="line">              	i = algn[<span class="number">1</span>];</span><br><span class="line">                <span class="keyword">if</span> ( algn[<span class="number">1</span>] &gt;= <span class="number">15</span> )</span><br><span class="line">                  <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">12</span>:</span><br><span class="line">              	v12 = (<span class="type">unsigned</span> <span class="type">char</span>)vm_body[ebx];</span><br><span class="line">              	vm_body[ebx] = v12 &lt;&lt; ecx;</span><br><span class="line">              	algn[<span class="number">1</span>] += <span class="number">3</span>;</span><br><span class="line">              	i = algn[<span class="number">1</span>];</span><br><span class="line">                <span class="keyword">if</span> ( algn[<span class="number">1</span>] &gt;= <span class="number">15</span> )</span><br><span class="line">                  <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">13</span>:</span><br><span class="line">              	v12 = (<span class="type">unsigned</span> <span class="type">char</span>)vm_body[<span class="number">0</span>];</span><br><span class="line">              	vm_body[ebx] = v12 &lt;&lt; ecx;<span class="comment">//printf(&quot;vm_body[ebx] = (unsigned char)vm_body[0] &lt;&lt; ecx;\n&quot;);</span></span><br><span class="line">              	algn[<span class="number">1</span>] += <span class="number">3</span>;</span><br><span class="line">              	i = algn[<span class="number">1</span>];</span><br><span class="line">                <span class="keyword">if</span> ( algn[<span class="number">1</span>] &gt;= <span class="number">15</span> )</span><br><span class="line">                  <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">14</span>:</span><br><span class="line">              	v15 = vm_body[ebx];</span><br><span class="line">          vm_body[algn[<span class="number">0</span>] + <span class="number">16</span>] = v15;</span><br><span class="line">              	algn[<span class="number">0</span>] = algn[<span class="number">0</span>] + <span class="number">1</span>;</span><br><span class="line">              	algn[<span class="number">1</span>] += <span class="number">3</span>;</span><br><span class="line">              	i = algn[<span class="number">1</span>];</span><br><span class="line">                <span class="keyword">if</span> ( algn[<span class="number">1</span>] &gt;= <span class="number">15</span> )</span><br><span class="line">                  <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">15</span>:</span><br><span class="line">              	v13 = (<span class="type">unsigned</span> <span class="type">char</span>)vm_body[ebx];</span><br><span class="line">              	<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, v13);</span><br><span class="line">              	algn[<span class="number">1</span>] += <span class="number">3</span>;</span><br><span class="line">              	i = algn[<span class="number">1</span>];</span><br><span class="line">                <span class="keyword">if</span> ( algn[<span class="number">1</span>] &gt;= <span class="number">15</span> )</span><br><span class="line">                  <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">16</span>:</span><br><span class="line">              	v14 = algn[<span class="number">0</span>] - <span class="number">1</span>;</span><br><span class="line">              	algn[<span class="number">0</span>] = algn[<span class="number">0</span>] - <span class="number">1</span>;</span><br><span class="line">              	v13 = vm_body[v14 + <span class="number">16</span>];</span><br><span class="line">              	<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, v13);</span><br><span class="line">              	algn[<span class="number">1</span>] += <span class="number">3</span>;</span><br><span class="line">              	i = algn[<span class="number">1</span>];</span><br><span class="line">                <span class="keyword">if</span> ( algn[<span class="number">1</span>] &gt;= <span class="number">15</span> )</span><br><span class="line">                  <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">17</span>:</span><br><span class="line">              	<span class="keyword">if</span> ( !vm_body[ebx] )</span><br><span class="line">                &#123;</span><br><span class="line">                	algn[<span class="number">1</span>] = ecx;</span><br><span class="line">              		algn[<span class="number">1</span>] += <span class="number">3</span>;</span><br><span class="line">              		i = algn[<span class="number">1</span>];</span><br><span class="line">                  <span class="keyword">if</span> ( algn[<span class="number">1</span>] &gt;= <span class="number">15</span> )</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                  <span class="keyword">continue</span>;</span><br><span class="line">              	&#125;</span><br><span class="line">              	<span class="keyword">else</span> algn[<span class="number">1</span>] += <span class="number">3</span>;</span><br><span class="line">              	i = algn[<span class="number">1</span>];</span><br><span class="line">                <span class="keyword">if</span> ( algn[<span class="number">1</span>] &gt;= <span class="number">15</span> )</span><br><span class="line">                  <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">18</span>:</span><br><span class="line">              	<span class="keyword">if</span> ( vm_body[ebx] )</span><br><span class="line">                algn[<span class="number">1</span>] = ecx;</span><br><span class="line">              	algn[<span class="number">1</span>] += <span class="number">3</span>;</span><br><span class="line">              	i = algn[<span class="number">1</span>];</span><br><span class="line">                <span class="keyword">if</span> ( algn[<span class="number">1</span>] &gt;= <span class="number">15</span> )</span><br><span class="line">                  <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">19</span>:</span><br><span class="line">              	algn[<span class="number">1</span>] = eax;</span><br><span class="line">              	algn[<span class="number">1</span>] += <span class="number">3</span>;</span><br><span class="line">              	i = algn[<span class="number">1</span>];</span><br><span class="line">                <span class="keyword">if</span> ( algn[<span class="number">1</span>] &gt;= <span class="number">15</span> )</span><br><span class="line">                  <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">20</span>:</span><br><span class="line">              	ebx = (<span class="type">unsigned</span> <span class="type">char</span>)vm_body[ebx];</span><br><span class="line">              	v15 = vm_body[ebx];</span><br><span class="line">          vm_body[algn[<span class="number">0</span>] + <span class="number">16</span>] = v15;</span><br><span class="line">              	algn[<span class="number">0</span>] = algn[<span class="number">0</span>] + <span class="number">1</span>;</span><br><span class="line">              	algn[<span class="number">1</span>] += <span class="number">3</span>;</span><br><span class="line">              	i = algn[<span class="number">1</span>];</span><br><span class="line">                <span class="keyword">if</span> ( algn[<span class="number">1</span>] &gt;= <span class="number">15</span> )</span><br><span class="line">                  <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">21</span>:</span><br><span class="line">              	v16 = algn[<span class="number">0</span>] - <span class="number">1</span>;</span><br><span class="line">              	algn[<span class="number">0</span>] = algn[<span class="number">0</span>] - <span class="number">1</span>;</span><br><span class="line">              	vm_body[<span class="number">0</span>] = vm_body[v16 + <span class="number">16</span>];</span><br><span class="line">              	algn[<span class="number">1</span>] += <span class="number">3</span>;</span><br><span class="line">              	i = algn[<span class="number">1</span>];</span><br><span class="line">                <span class="keyword">if</span> ( algn[<span class="number">1</span>] &gt;= <span class="number">15</span> )</span><br><span class="line">                  <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">22</span>:</span><br><span class="line">              	v15 = eax;</span><br><span class="line">              	vm_body[algn[<span class="number">0</span>] + <span class="number">16</span>] = v15;</span><br><span class="line">              	algn[<span class="number">0</span>] = algn[<span class="number">0</span>] + <span class="number">1</span>;</span><br><span class="line">              	algn[<span class="number">1</span>] += <span class="number">3</span>;</span><br><span class="line">              	i = algn[<span class="number">1</span>];</span><br><span class="line">              	<span class="keyword">if</span> ( algn[<span class="number">1</span>] &gt;= <span class="number">15</span> )</span><br><span class="line">                	<span class="keyword">break</span>;</span><br><span class="line">              	<span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">23</span>:</span><br><span class="line">            	i = algn[<span class="number">1</span>];</span><br><span class="line">                <span class="keyword">if</span> ( algn[<span class="number">1</span>] &gt;= <span class="number">15</span> )</span><br><span class="line">                  <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">24</span>:</span><br><span class="line">              	vm_body[<span class="number">0</span>] = vm_body[<span class="number">2</span>] | vm_body[<span class="number">1</span>];<span class="comment">//printf(&quot;vm_body[0] = vm_body[2] | vm_body[1];\n&quot;);</span></span><br><span class="line">              	algn[<span class="number">1</span>] += <span class="number">3</span>;</span><br><span class="line">              	i = algn[<span class="number">1</span>];</span><br><span class="line">                <span class="keyword">if</span> ( algn[<span class="number">1</span>] &gt;= <span class="number">15</span> )</span><br><span class="line">                  <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">25</span>:</span><br><span class="line">            	vm_body[ebx] = (<span class="type">unsigned</span> <span class="type">char</span>)vm_body[<span class="number">0</span>] &gt;&gt; ecx;<span class="comment">//printf(&quot;vm_body[ebx] = (unsigned char)vm_body[0] &gt;&gt; ecx;\n&quot;);</span></span><br><span class="line">              	algn[<span class="number">1</span>] += <span class="number">3</span>;</span><br><span class="line">              	i = algn[<span class="number">1</span>];</span><br><span class="line">                <span class="keyword">if</span> ( algn[<span class="number">1</span>] &gt;= <span class="number">15</span> )</span><br><span class="line">                  <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">26</span>:</span><br><span class="line">              	vm_body[ebx] = ecx;<span class="comment">//printf(&quot;vm_body[ebx] = ecx;\n&quot;);</span></span><br><span class="line">              	algn[<span class="number">1</span>] += <span class="number">3</span>;</span><br><span class="line">              	i = algn[<span class="number">1</span>];</span><br><span class="line">                <span class="keyword">if</span> ( algn[<span class="number">1</span>] &gt;= <span class="number">15</span> )</span><br><span class="line">                  <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">continue</span>;   </span><br><span class="line">            <span class="keyword">default</span>:    </span><br><span class="line">              	algn[<span class="number">1</span>] += <span class="number">3</span>;</span><br><span class="line">              	i = algn[<span class="number">1</span>];</span><br><span class="line">              	<span class="keyword">if</span> ( algn[<span class="number">1</span>] &gt;= <span class="number">15</span> )</span><br><span class="line">                	<span class="keyword">break</span>;</span><br><span class="line">              	<span class="keyword">continue</span>;</span><br><span class="line">      &#125;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">init</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>; j &lt; <span class="number">15</span>; j++)</span><br><span class="line">    &#123;</span><br><span class="line">      tmp[i][j] = opcode[i][j];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="type">int</span> len = <span class="number">29</span>;</span><br><span class="line">  <span class="type">unsigned</span> <span class="type">char</span> flag[<span class="number">233</span>] = <span class="string">&quot;1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ&#123;&#125;_&quot;</span>;</span><br><span class="line">  *(<span class="type">unsigned</span> <span class="type">int</span> *)&amp;vm_body[<span class="number">3</span>] = <span class="number">0xBEEDBEEF</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">65</span>; i++)</span><br><span class="line">  &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">init</span>();</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> a = flag[i];</span><br><span class="line">    tmp[<span class="number">0</span>][<span class="number">2</span>] = flag[i];</span><br><span class="line">    <span class="built_in">vm</span>(tmp[<span class="number">0</span>]);</span><br><span class="line">    tmp[<span class="number">1</span>][<span class="number">2</span>] = vm_body[<span class="number">0</span>];</span><br><span class="line">    <span class="built_in">vm</span>(tmp[<span class="number">1</span>]);</span><br><span class="line">    tmp[<span class="number">2</span>][<span class="number">2</span>] = vm_body[<span class="number">0</span>];</span><br><span class="line">    <span class="built_in">vm</span>(tmp[<span class="number">2</span>]);</span><br><span class="line">    tmp[<span class="number">3</span>][<span class="number">2</span>] = vm_body[<span class="number">0</span>];</span><br><span class="line">    <span class="built_in">vm</span>(tmp[<span class="number">3</span>]);</span><br><span class="line">    <span class="comment">//printf(&quot;vm_body[0] = %d\n&quot;, vm_body[0]);</span></span><br><span class="line">    </span><br><span class="line">    flag[i] = ((<span class="type">unsigned</span> <span class="type">char</span>)vm_body[<span class="number">0</span>] &gt;&gt; <span class="number">5</span>) | (<span class="number">8</span> * vm_body[<span class="number">0</span>]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;0x%x : \&quot;%c\&quot;, &quot;</span>, flag[i], a);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">enc = [<span class="number">0xDF</span>, <span class="number">0xD5</span>, <span class="number">0xF1</span>, <span class="number">0xD1</span>, <span class="number">0xFF</span>, <span class="number">0xDB</span>, <span class="number">0xA1</span>, <span class="number">0xA5</span>, <span class="number">0x89</span>, <span class="number">0xBD</span>,</span><br><span class="line">  <span class="number">0xE9</span>, <span class="number">0x95</span>, <span class="number">0xB3</span>, <span class="number">0x9D</span>, <span class="number">0xE9</span>, <span class="number">0xB3</span>, <span class="number">0x85</span>, <span class="number">0x99</span>, <span class="number">0x87</span>, <span class="number">0xBF</span>,</span><br><span class="line">  <span class="number">0xE9</span>, <span class="number">0xB1</span>, <span class="number">0x89</span>, <span class="number">0xE9</span>, <span class="number">0x91</span>, <span class="number">0x89</span>, <span class="number">0x89</span>, <span class="number">0x8F</span>, <span class="number">0xAD</span>]</span><br><span class="line"></span><br><span class="line">mp = &#123;<span class="number">0x35</span> : <span class="string">&quot;1&quot;</span>, <span class="number">0x33</span> : <span class="string">&quot;2&quot;</span>, <span class="number">0x31</span> : <span class="string">&quot;3&quot;</span>, <span class="number">0x3f</span> : <span class="string">&quot;4&quot;</span>, <span class="number">0x3d</span> : <span class="string">&quot;5&quot;</span>, <span class="number">0x3b</span> : <span class="string">&quot;6&quot;</span>, <span class="number">0x39</span> : <span class="string">&quot;7&quot;</span>, <span class="number">0x27</span> : <span class="string">&quot;8&quot;</span>, <span class="number">0x25</span> : <span class="string">&quot;9&quot;</span>, <span class="number">0x37</span> : <span class="string">&quot;0&quot;</span>, <span class="number">0x95</span> : <span class="string">&quot;a&quot;</span>, <span class="number">0x93</span> : <span class="string">&quot;b&quot;</span>, <span class="number">0x91</span> : <span class="string">&quot;c&quot;</span>, <span class="number">0x9f</span> : <span class="string">&quot;d&quot;</span>, <span class="number">0x9d</span> : <span class="string">&quot;e&quot;</span>, <span class="number">0x9b</span> : <span class="string">&quot;f&quot;</span>, <span class="number">0x99</span> : <span class="string">&quot;g&quot;</span>, <span class="number">0x87</span> : <span class="string">&quot;h&quot;</span>, <span class="number">0x85</span> : <span class="string">&quot;i&quot;</span>, <span class="number">0x83</span> : <span class="string">&quot;j&quot;</span>, <span class="number">0x81</span> : <span class="string">&quot;k&quot;</span>, <span class="number">0x8f</span> : <span class="string">&quot;l&quot;</span>, <span class="number">0x8d</span> : <span class="string">&quot;m&quot;</span>, <span class="number">0x8b</span> : <span class="string">&quot;n&quot;</span>, <span class="number">0x89</span> : <span class="string">&quot;o&quot;</span>, <span class="number">0xb7</span> : <span class="string">&quot;p&quot;</span>, <span class="number">0xb5</span> : <span class="string">&quot;q&quot;</span>, <span class="number">0xb3</span> : <span class="string">&quot;r&quot;</span>, <span class="number">0xb1</span> : <span class="string">&quot;s&quot;</span>, <span class="number">0xbf</span> : <span class="string">&quot;t&quot;</span>, <span class="number">0xbd</span> : <span class="string">&quot;u&quot;</span>, <span class="number">0xbb</span> : <span class="string">&quot;v&quot;</span>, <span class="number">0xb9</span> : <span class="string">&quot;w&quot;</span>, <span class="number">0xa7</span> : <span class="string">&quot;x&quot;</span>, <span class="number">0xa5</span> : <span class="string">&quot;y&quot;</span>, <span class="number">0xa3</span> : <span class="string">&quot;z&quot;</span>, <span class="number">0xd5</span> : <span class="string">&quot;A&quot;</span>, <span class="number">0xd3</span> : <span class="string">&quot;B&quot;</span>, <span class="number">0xd1</span> : <span class="string">&quot;C&quot;</span>, <span class="number">0xdf</span> : <span class="string">&quot;D&quot;</span>, <span class="number">0xdd</span> : <span class="string">&quot;E&quot;</span>, <span class="number">0xdb</span> : <span class="string">&quot;F&quot;</span>, <span class="number">0xd9</span> : <span class="string">&quot;G&quot;</span>, <span class="number">0xc7</span> : <span class="string">&quot;H&quot;</span>, <span class="number">0xc5</span> : <span class="string">&quot;I&quot;</span>, <span class="number">0xc3</span> : <span class="string">&quot;J&quot;</span>, <span class="number">0xc1</span> : <span class="string">&quot;K&quot;</span>, <span class="number">0xcf</span> : <span class="string">&quot;L&quot;</span>, <span class="number">0xcd</span> : <span class="string">&quot;M&quot;</span>, <span class="number">0xcb</span> : <span class="string">&quot;N&quot;</span>, <span class="number">0xc9</span> : <span class="string">&quot;O&quot;</span>, <span class="number">0xf7</span> : <span class="string">&quot;P&quot;</span>, <span class="number">0xf5</span> : <span class="string">&quot;Q&quot;</span>, <span class="number">0xf3</span> : <span class="string">&quot;R&quot;</span>, <span class="number">0xf1</span> : <span class="string">&quot;S&quot;</span>, <span class="number">0xff</span> : <span class="string">&quot;T&quot;</span>, <span class="number">0xfd</span> : <span class="string">&quot;U&quot;</span>, <span class="number">0xfb</span> : <span class="string">&quot;V&quot;</span>, <span class="number">0xf9</span> : <span class="string">&quot;W&quot;</span>, <span class="number">0xe7</span> : <span class="string">&quot;X&quot;</span>, <span class="number">0xe5</span> : <span class="string">&quot;Y&quot;</span>, <span class="number">0xe3</span> : <span class="string">&quot;Z&quot;</span>, <span class="number">0xa1</span> : <span class="string">&quot;&#123;&quot;</span>, <span class="number">0xad</span> : <span class="string">&quot;&#125;&quot;</span>, <span class="number">0xe9</span> : <span class="string">&quot;_&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> enc:</span><br><span class="line">    <span class="built_in">print</span>(mp[i],end=<span class="string">&quot;&quot;</span>)</span><br></pre></td></tr></table></figure>
+<pre><code class="cpp">#include&lt;stdio.h&gt;
+using namespace std;
 
+unsigned char opcode[4][15] = 
+&#123;
+    &#123;0x1A, 0x00, 0x03, 0x19, 0x01, 0x01, 0x0D, 0x02, 0x07, 0x18, 0x01, 0x02, 0x01, 0x00, 0x03&#125;, 
+    &#123;0x1A, 0x00, 0x03, 0x19, 0x01, 0x02, 0x0D, 0x02, 0x06, 0x18, 0x01, 0x02, 0x01, 0x00, 0x04&#125;,
+    &#123;0x1A, 0x00, 0x03, 0x19, 0x01, 0x03, 0x0D, 0x02, 0x05, 0x18, 0x01, 0x02, 0x01, 0x00, 0x05&#125;,
+    &#123;0x1A, 0x00, 0x03, 0x19, 0x01, 0x04, 0x0D, 0x02, 0x04, 0x18, 0x01, 0x02, 0x01, 0x00, 0x06&#125;
+&#125;;
+unsigned char tmp[4][15];
+
+unsigned char vm_body[6];
+unsigned char *reg;
+unsigned int algn[2];
+
+void vm(unsigned char *op)
+&#123;
+    algn[1] = 0;
+    algn[0] = 0;
+    int i = 0;
+    if(i &lt; 15)
+    &#123;
+        while(1)
+        &#123;
+            reg = op + i;
+            unsigned char eax = reg[1];
+            unsigned char ebx = reg[1];
+            unsigned char ecx = reg[2];
+            unsigned char edx = reg[2];
+            unsigned char v11, v12, v13, v14, v15, v16;
+            //for(int j = 0; j &lt; 15; j++)printf(&quot;%d &quot;, op[j]);
+            //printf(&quot;i = %d reg[0] = %d\n&quot;, i, reg[0]);
+            //printf(&quot;ebx = %d, ecx = %d\n&quot;, ebx, ecx);
+            switch(reg[0])
+            &#123;
+                case 0:
+                    v11 = vm_body[ebx];
+                      vm_body[ebx] = vm_body[edx];
+                      vm_body[edx] = v11;
+                      algn[1] += 3;
+                      i = algn[1];
+                      if ( algn[1] &gt;= 15 )
+                        break;
+                    continue;
+                case 1:
+                  	vm_body[ebx] ^= vm_body[ecx];//printf(&quot;vm_body[ebx] ^= vm_body[ecx];\n&quot;);
+                  	algn[1] += 3;
+                  	i = algn[1];
+                      if ( algn[1] &gt;= 15 )
+                        break;
+                    continue;
+                case 2:
+                  	vm_body[ebx] += ecx;
+                  	algn[1] += 3;
+                  	i = algn[1];
+                      if ( algn[1] &gt;= 15 )
+                        break;
+                    continue;
+                case 3:
+                  	vm_body[ebx] += vm_body[ecx];
+                  	algn[1] += 3;
+                  	i = algn[1];
+                      if ( algn[1] &gt;= 15 )
+                        break;
+                    continue;
+                case 4:
+                  	vm_body[ebx] -= ecx;
+                  	algn[1] += 3;
+                  	i = algn[1];
+                      if ( algn[1] &gt;= 15 )
+                        break;
+                    continue;
+                case 5:
+                  	vm_body[ebx] -= vm_body[ecx];
+                  	algn[1] += 3;
+                  	i = algn[1];
+                      if ( algn[1] &gt;= 15 )
+                        break;
+                    continue;
+                case 6:
+                  	vm_body[ebx] *= ecx;
+                  	algn[1] += 3;
+                  	i = algn[1];
+                      if ( algn[1] &gt;= 15 )
+                        break;
+                    continue;
+                case 7:
+                  	vm_body[ebx] *= vm_body[ecx];
+                  	algn[1] += 3;
+                  	i = algn[1];
+                      if ( algn[1] &gt;= 15 )
+                        break;
+                case 8:
+                  	vm_body[ebx] = (unsigned char)vm_body[ebx] / ecx;
+                  	algn[1] += 3;
+                  	i = algn[1];
+                      if ( algn[1] &gt;= 15 )
+                        break;
+                    continue;
+                case 9:
+                  	vm_body[ebx] = (unsigned char)vm_body[ebx] / (unsigned char)vm_body[ecx];
+                  	algn[1] += 3;
+                  	i = algn[1];
+                      if ( algn[1] &gt;= 15 )
+                        break;
+                    continue;
+                case 10:
+                  	vm_body[ebx] = (unsigned char)vm_body[ebx] % ecx;
+                  	algn[1] += 3;
+                  	i = algn[1];
+                      if ( algn[1] &gt;= 15 )
+                        break;
+                    continue;
+                case 11:
+                  	vm_body[ebx] = (unsigned char)vm_body[ebx] % (unsigned char)vm_body[ecx];
+                  	algn[1] += 3;
+                  	i = algn[1];
+                      if ( algn[1] &gt;= 15 )
+                        break;
+                    continue;
+                case 12:
+                  	v12 = (unsigned char)vm_body[ebx];
+                  	vm_body[ebx] = v12 &lt;&lt; ecx;
+                  	algn[1] += 3;
+                  	i = algn[1];
+                      if ( algn[1] &gt;= 15 )
+                        break;
+                    continue;
+                case 13:
+                  	v12 = (unsigned char)vm_body[0];
+                  	vm_body[ebx] = v12 &lt;&lt; ecx;//printf(&quot;vm_body[ebx] = (unsigned char)vm_body[0] &lt;&lt; ecx;\n&quot;);
+                  	algn[1] += 3;
+                  	i = algn[1];
+                      if ( algn[1] &gt;= 15 )
+                        break;
+                    continue;
+                case 14:
+                  	v15 = vm_body[ebx];
+                    vm_body[algn[0] + 16] = v15;
+                  	algn[0] = algn[0] + 1;
+                  	algn[1] += 3;
+                  	i = algn[1];
+                      if ( algn[1] &gt;= 15 )
+                        break;
+                    continue;
+                case 15:
+                  	v13 = (unsigned char)vm_body[ebx];
+                  	printf(&quot;%d\n&quot;, v13);
+                  	algn[1] += 3;
+                  	i = algn[1];
+                      if ( algn[1] &gt;= 15 )
+                        break;
+                    continue;
+                case 16:
+                  	v14 = algn[0] - 1;
+                  	algn[0] = algn[0] - 1;
+                  	v13 = vm_body[v14 + 16];
+                  	printf(&quot;%d\n&quot;, v13);
+                  	algn[1] += 3;
+                  	i = algn[1];
+                      if ( algn[1] &gt;= 15 )
+                        break;
+                    continue;
+                case 17:
+                  	if ( !vm_body[ebx] )
+                    &#123;
+                    	algn[1] = ecx;
+                  		algn[1] += 3;
+                  		i = algn[1];
+                          if ( algn[1] &gt;= 15 )
+                            break;
+                        continue;
+                  	&#125;
+                  	else algn[1] += 3;
+                  	i = algn[1];
+                      if ( algn[1] &gt;= 15 )
+                        break;
+                    continue;
+                case 18:
+                  	if ( vm_body[ebx] )
+                    algn[1] = ecx;
+                  	algn[1] += 3;
+                  	i = algn[1];
+                      if ( algn[1] &gt;= 15 )
+                        break;
+                    continue;
+                case 19:
+                  	algn[1] = eax;
+                  	algn[1] += 3;
+                  	i = algn[1];
+                      if ( algn[1] &gt;= 15 )
+                        break;
+                    continue;
+                case 20:
+                  	ebx = (unsigned char)vm_body[ebx];
+                  	v15 = vm_body[ebx];
+                    vm_body[algn[0] + 16] = v15;
+                  	algn[0] = algn[0] + 1;
+                  	algn[1] += 3;
+                  	i = algn[1];
+                      if ( algn[1] &gt;= 15 )
+                        break;
+                    continue;
+                case 21:
+                  	v16 = algn[0] - 1;
+                  	algn[0] = algn[0] - 1;
+                  	vm_body[0] = vm_body[v16 + 16];
+                  	algn[1] += 3;
+                  	i = algn[1];
+                      if ( algn[1] &gt;= 15 )
+                        break;
+                    continue;
+                case 22:
+                  	v15 = eax;
+                  	vm_body[algn[0] + 16] = v15;
+                  	algn[0] = algn[0] + 1;
+                  	algn[1] += 3;
+                  	i = algn[1];
+                  	if ( algn[1] &gt;= 15 )
+                    	break;
+                  	continue;
+                case 23:
+                	i = algn[1];
+                      if ( algn[1] &gt;= 15 )
+                        break;
+                    continue;
+                case 24:
+                  	vm_body[0] = vm_body[2] | vm_body[1];//printf(&quot;vm_body[0] = vm_body[2] | vm_body[1];\n&quot;);
+                  	algn[1] += 3;
+                  	i = algn[1];
+                      if ( algn[1] &gt;= 15 )
+                        break;
+                    continue;
+                case 25:
+                	vm_body[ebx] = (unsigned char)vm_body[0] &gt;&gt; ecx;//printf(&quot;vm_body[ebx] = (unsigned char)vm_body[0] &gt;&gt; ecx;\n&quot;);
+                  	algn[1] += 3;
+                  	i = algn[1];
+                      if ( algn[1] &gt;= 15 )
+                        break;
+                    continue;
+                case 26:
+                  	vm_body[ebx] = ecx;//printf(&quot;vm_body[ebx] = ecx;\n&quot;);
+                  	algn[1] += 3;
+                  	i = algn[1];
+                      if ( algn[1] &gt;= 15 )
+                        break;
+                      continue;   
+                default:    
+                  	algn[1] += 3;
+                  	i = algn[1];
+                  	if ( algn[1] &gt;= 15 )
+                    	break;
+                  	continue;
+            &#125;
+            break;
+        &#125;
+    &#125;
+&#125;
+
+void init()
+&#123;
+    for(int i = 0; i &lt; 4; i++)
+    &#123;
+        for(int j = 0; j &lt; 15; j++)
+        &#123;
+            tmp[i][j] = opcode[i][j];
+        &#125;
+    &#125;
+&#125;
+
+int main()
+&#123;
+    int len = 29;
+    unsigned char flag[233] = &quot;1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ&#123;&#125;_&quot;;
+    *(unsigned int *)&amp;vm_body[3] = 0xBEEDBEEF;
+    
+    for(int i = 0; i &lt; 65; i++)
+    &#123;
+        
+        init();
+        unsigned char a = flag[i];
+        tmp[0][2] = flag[i];
+        vm(tmp[0]);
+        tmp[1][2] = vm_body[0];
+        vm(tmp[1]);
+        tmp[2][2] = vm_body[0];
+        vm(tmp[2]);
+        tmp[3][2] = vm_body[0];
+        vm(tmp[3]);
+        //printf(&quot;vm_body[0] = %d\n&quot;, vm_body[0]);
+        
+        flag[i] = ((unsigned char)vm_body[0] &gt;&gt; 5) | (8 * vm_body[0]);
+        printf(&quot;0x%x : \&quot;%c\&quot;, &quot;, flag[i], a);
+    &#125;
+&#125;
+
+        
+    
+    
+    
+
+</code></pre>
+<pre><code class="python">enc = [0xDF, 0xD5, 0xF1, 0xD1, 0xFF, 0xDB, 0xA1, 0xA5, 0x89, 0xBD,
+  0xE9, 0x95, 0xB3, 0x9D, 0xE9, 0xB3, 0x85, 0x99, 0x87, 0xBF,
+  0xE9, 0xB1, 0x89, 0xE9, 0x91, 0x89, 0x89, 0x8F, 0xAD]
+
+mp = &#123;0x35 : &quot;1&quot;, 0x33 : &quot;2&quot;, 0x31 : &quot;3&quot;, 0x3f : &quot;4&quot;, 0x3d : &quot;5&quot;, 0x3b : &quot;6&quot;, 0x39 : &quot;7&quot;, 0x27 : &quot;8&quot;, 0x25 : &quot;9&quot;, 0x37 : &quot;0&quot;, 0x95 : &quot;a&quot;, 0x93 : &quot;b&quot;, 0x91 : &quot;c&quot;, 0x9f : &quot;d&quot;, 0x9d : &quot;e&quot;, 0x9b : &quot;f&quot;, 0x99 : &quot;g&quot;, 0x87 : &quot;h&quot;, 0x85 : &quot;i&quot;, 0x83 : &quot;j&quot;, 0x81 : &quot;k&quot;, 0x8f : &quot;l&quot;, 0x8d : &quot;m&quot;, 0x8b : &quot;n&quot;, 0x89 : &quot;o&quot;, 0xb7 : &quot;p&quot;, 0xb5 : &quot;q&quot;, 0xb3 : &quot;r&quot;, 0xb1 : &quot;s&quot;, 0xbf : &quot;t&quot;, 0xbd : &quot;u&quot;, 0xbb : &quot;v&quot;, 0xb9 : &quot;w&quot;, 0xa7 : &quot;x&quot;, 0xa5 : &quot;y&quot;, 0xa3 : &quot;z&quot;, 0xd5 : &quot;A&quot;, 0xd3 : &quot;B&quot;, 0xd1 : &quot;C&quot;, 0xdf : &quot;D&quot;, 0xdd : &quot;E&quot;, 0xdb : &quot;F&quot;, 0xd9 : &quot;G&quot;, 0xc7 : &quot;H&quot;, 0xc5 : &quot;I&quot;, 0xc3 : &quot;J&quot;, 0xc1 : &quot;K&quot;, 0xcf : &quot;L&quot;, 0xcd : &quot;M&quot;, 0xcb : &quot;N&quot;, 0xc9 : &quot;O&quot;, 0xf7 : &quot;P&quot;, 0xf5 : &quot;Q&quot;, 0xf3 : &quot;R&quot;, 0xf1 : &quot;S&quot;, 0xff : &quot;T&quot;, 0xfd : &quot;U&quot;, 0xfb : &quot;V&quot;, 0xf9 : &quot;W&quot;, 0xe7 : &quot;X&quot;, 0xe5 : &quot;Y&quot;, 0xe3 : &quot;Z&quot;, 0xa1 : &quot;&#123;&quot;, 0xad : &quot;&#125;&quot;, 0xe9 : &quot;_&quot;&#125;
+
+for i in enc:
+    print(mp[i],end=&quot;&quot;)
+</code></pre>
 <h3 id="CSGO"><a href="#CSGO" class="headerlink" title="CSGO"></a>CSGO</h3><p>patch反调试，动调获取base变表直接在线解即可<br>表：LMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+&#x2F;ABCDEFGHIJK</p>
 
     </div>
