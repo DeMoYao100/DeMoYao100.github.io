@@ -112,14 +112,14 @@
             
             <span class="tag">
                 
-                <a href="/tags/ctf/" style="color: #ffa2c4">
+                <a href="/tags/ctf/" style="color: #00a596">
                     ctf
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/reverse/" style="color: #00bcd4">
+                <a href="/tags/reverse/" style="color: #ffa2c4">
                     reverse
                 </a>
             </span>
@@ -248,10 +248,15 @@ int main()
     return 0;
 &#125;
 </code></pre>
-<h5 id="A-0-1-bag-problem-And-notice-that-you-should-ADD-v12-not-MULTIPLY-like-in-the-ida……"><a href="#A-0-1-bag-problem-And-notice-that-you-should-ADD-v12-not-MULTIPLY-like-in-the-ida……" class="headerlink" title="A 0-1 bag problem. And notice that you should ADD v12, not MULTIPLY, like in the ida……"></a>A 0-1 bag problem. And notice that you should <c style="color: #FF0000;">ADD</c> v12, not MULTIPLY, like in the ida……</h5><h3 id="CM2"><a href="#CM2" class="headerlink" title="CM2"></a>CM2</h3><h6 id="Don’t-understand-how-to-debug-to-find-the-place…-Though-by-guessing-I-work-it-out-anyway"><a href="#Don’t-understand-how-to-debug-to-find-the-place…-Though-by-guessing-I-work-it-out-anyway" class="headerlink" title="Don’t understand how to debug to find the place… Though by guessing I work it out anyway."></a>Don’t understand how to debug to find the place… Though by guessing I work it out anyway.</h6><h5 id="Officail-wp"><a href="#Officail-wp" class="headerlink" title="Officail wp:"></a>Officail wp:</h5><p><img src="/2022/11/02/hnctfRe/cm2.png" alt="cm2"></p>
-<h3 id="Try2debugPlusPlus"><a href="#Try2debugPlusPlus" class="headerlink" title="Try2debugPlusPlus"></a>Try2debugPlusPlus</h3><h5 id="Nop-the-IsDebuggerPresent-noticed-that-there-are-two-of-them-and-get-the-key-remember-to-set-breakpoint-after-printf"><a href="#Nop-the-IsDebuggerPresent-noticed-that-there-are-two-of-them-and-get-the-key-remember-to-set-breakpoint-after-printf" class="headerlink" title="Nop the IsDebuggerPresent()(noticed that there are two of them) and get the key(remember to set breakpoint after printf()):"></a>Nop the <code>IsDebuggerPresent()</code>(noticed that there are two of them) and get the key(remember to set breakpoint after <code>printf()</code>):</h5><p><img src="/2022/11/02/hnctfRe/debug2_1.png" alt="debug2_1"></p>
-<h5 id="Though-is-easy-for-us-to-decrypt-the-tea-encrypt-question-setter-seems-to-have-forgotten-something…"><a href="#Though-is-easy-for-us-to-decrypt-the-tea-encrypt-question-setter-seems-to-have-forgotten-something…" class="headerlink" title="Though is easy for us to decrypt the tea_encrypt, question setter seems to have forgotten something…"></a>Though is easy for us to decrypt the tea_encrypt, question setter seems to have forgotten something…</h5><p><img src="/2022/11/02/hnctfRe/debug2_2.png" alt="debug2_2"></p>
-<h3 id="What-1in-D11"><a href="#What-1in-D11" class="headerlink" title="What_1in_D11"></a>What_1in_D11</h3><h5 id="Repair-the-upx’s-features-easy-in-this-problem-to-study-more-you-can-refer-to-this-blog"><a href="#Repair-the-upx’s-features-easy-in-this-problem-to-study-more-you-can-refer-to-this-blog" class="headerlink" title="Repair the upx’s features(easy in this problem, to study more you can refer to this blog)"></a>Repair the upx’s features(easy in this problem, to study more you can refer to <a target="_blank" rel="noopener" href="https://www.52pojie.cn/thread-326995-1-1.html">this blog</a>)</h5><h5 id="And-upx-d-to-unpacked-the-dll-check-it-in-ida-we-got"><a href="#And-upx-d-to-unpacked-the-dll-check-it-in-ida-we-got" class="headerlink" title="And upx -d to unpacked the .dll, check it in ida, we got:"></a>And <code>upx -d</code> to unpacked the .dll, check it in ida, we got:</h5><p><img src="/2022/11/02/hnctfRe/dll_1.png" alt="dll"></p>
+<p>A 0-1 bag problem. And notice that you should <c style="color: #FF0000;">ADD</c> v12, not MULTIPLY, like in the ida……</p>
+<h3 id="CM2"><a href="#CM2" class="headerlink" title="CM2"></a>CM2</h3><h6 id="Don’t-understand-how-to-debug-to-find-the-place…-Though-by-guessing-I-work-it-out-anyway"><a href="#Don’t-understand-how-to-debug-to-find-the-place…-Though-by-guessing-I-work-it-out-anyway" class="headerlink" title="Don’t understand how to debug to find the place… Though by guessing I work it out anyway."></a>Don’t understand how to debug to find the place… Though by guessing I work it out anyway.</h6><h5 id="Officail-wp"><a href="#Officail-wp" class="headerlink" title="Officail wp:"></a>Officail wp:</h5><p><img src="/2022/11/02/hnctfRe/cm2.png" alt="cm2"></p>
+<h3 id="Try2debugPlusPlus"><a href="#Try2debugPlusPlus" class="headerlink" title="Try2debugPlusPlus"></a>Try2debugPlusPlus</h3><p>Nop the <code>IsDebuggerPresent()</code>(noticed that there are two of them) and get the key(remember to set breakpoint after <code>printf()</code>):</p>
+<p><img src="/2022/11/02/hnctfRe/debug2_1.png" alt="debug2_1"></p>
+<p>Though is easy for us to decrypt the tea_encrypt, question setter seems to have forgotten something…</p>
+<p><img src="/2022/11/02/hnctfRe/debug2_2.png" alt="debug2_2"></p>
+<h3 id="What-1in-D11"><a href="#What-1in-D11" class="headerlink" title="What_1in_D11"></a>What_1in_D11</h3><p>Repair the upx’s features(easy in this problem, to study more you can refer to <a target="_blank" rel="noopener" href="https://www.52pojie.cn/thread-326995-1-1.html">this blog</a>)</p>
+<p>And <code>upx -d</code> to unpacked the .dll, check it in ida, we got:</p>
+<p><img src="/2022/11/02/hnctfRe/dll_1.png" alt="dll"></p>
 <h5 id="Official-writeup"><a href="#Official-writeup" class="headerlink" title="Official writeup:"></a>Official writeup:</h5><h6 id="A-btea-encrypt-which-I-am-not-fimilar-with-yet-Shall-get-more-study-about-encryption-and-decryption-later"><a href="#A-btea-encrypt-which-I-am-not-fimilar-with-yet-Shall-get-more-study-about-encryption-and-decryption-later" class="headerlink" title="(A btea encrypt, which I am not fimilar with yet. Shall get more study about encryption and decryption later.)"></a>(A btea encrypt, which I am not fimilar with yet. Shall get more study about encryption and decryption later.)</h6><pre><code>#include &lt;stdio.h&gt;  
 #include &lt;stdint.h&gt;  
 #define DELTA 0x9e3779b9  
@@ -315,12 +320,18 @@ int main()
     return 0;  
 &#125;  
 </code></pre>
-<h3 id="Mazes"><a href="#Mazes" class="headerlink" title="Mazes"></a>Mazes</h3><h6 id="A-bit-complex-wait-until-later…"><a href="#A-bit-complex-wait-until-later…" class="headerlink" title="A bit complex, wait until later…"></a>A bit complex, wait until later…</h6><h3 id="stub"><a href="#stub" class="headerlink" title="stub"></a>stub</h3><h6 id="Never-seen-before-later…"><a href="#Never-seen-before-later…" class="headerlink" title="Never seen before, later…"></a>Never seen before, later…</h6><h3 id="ez-maze"><a href="#ez-maze" class="headerlink" title="ez_maze"></a>ez_maze</h3><h5 id="We-get-a-exe-file-from-its’-icon-we-know-that-we-should-uncompile-it-to-pyc-with-pyinstxtractor"><a href="#We-get-a-exe-file-from-its’-icon-we-know-that-we-should-uncompile-it-to-pyc-with-pyinstxtractor" class="headerlink" title="We get a .exe file, from its’ icon we know that we should uncompile it to .pyc with pyinstxtractor"></a>We get a .exe file, from its’ icon we know that we should uncompile it to .pyc with <code>pyinstxtractor</code></h5><p><img src="/2022/11/02/hnctfRe/ez_maze_1.png" alt="ez_maze"></p>
-<h5 id="Then-we-got-a-package-extracted"><a href="#Then-we-got-a-package-extracted" class="headerlink" title="Then, we got a package _extracted:"></a>Then, we got a package <code>_extracted</code>:</h5><h6 id="complex-it-is…"><a href="#complex-it-is…" class="headerlink" title="complex it is…"></a>complex it is…</h6><p><img src="/2022/11/02/hnctfRe/extracted.png" alt="extracted"></p>
-<h5 id="Find-a-file-named-maze-without-a-suffix-one-Change-its-suffix-into-pyc-and-Try-compyle6-o-maze-py-maze-pyc-it-went-wrong"><a href="#Find-a-file-named-maze-without-a-suffix-one-Change-its-suffix-into-pyc-and-Try-compyle6-o-maze-py-maze-pyc-it-went-wrong" class="headerlink" title="Find a file named maze (without a suffix one!) Change its suffix into .pyc and Try compyle6 -o maze.py maze.pyc, it went wrong:"></a>Find a file named <code>maze</code> (without a suffix one!) Change its suffix into <code>.pyc</code> and Try <code>compyle6 -o maze.py maze.pyc</code>, it went wrong:</h5><p><img src="/2022/11/02/hnctfRe/uncompyle6.png" alt="compyle6"></p>
-<h5 id="That’s-when-you-find-out-that-pyinstxtractor-didn’t-fix-your-pyc-file’s-magic-number"><a href="#That’s-when-you-find-out-that-pyinstxtractor-didn’t-fix-your-pyc-file’s-magic-number" class="headerlink" title="That’s when you find out that pyinstxtractor didn’t fix your .pyc file’s magic number."></a>That’s when you find out that pyinstxtractor didn’t fix your .pyc file’s magic number.</h5><p><img src="/2022/11/02/hnctfRe/cmakeInstall.png" alt="cmake"></p>
-<h5 id="The-link-problem-setter-gives-you-which-does-no-help-at-all…The-magic-number-of-the-file-struct-is-destroy-as-well…"><a href="#The-link-problem-setter-gives-you-which-does-no-help-at-all…The-magic-number-of-the-file-struct-is-destroy-as-well…" class="headerlink" title="The link problem setter gives you, which does no help at all…The magic number of the file struct is destroy as well…"></a><a target="_blank" rel="noopener" href="https://www.jb51.net/article/231188.htm">The link problem setter gives you</a>, which does no help at all…The <code>magic number</code> of the file <code>struct</code> is destroy as well…</h5><p><img src="/2022/11/02/hnctfRe/magicNumber_1.jpg" alt="magicNumber_1"></p>
-<h5 id="I-been-trying-tools-like-uncompyle6-which-does-not-support-python-3-10-and-install-python-3-9-does-not-help-at-all-Later-I-should-look-into-this-problem-and-try-to-solved-it…-and-pycdc-which-is-said-to-support-high-edition-but-can-not-identify-the-magic-number-as-well-However-when-I-tried-to-add-some-magic-number-from-other-python-edition-Python-3-8b2-if-I-remember-it-right-and-put-it-in-an-online-uncompiler-It-just-worked…"><a href="#I-been-trying-tools-like-uncompyle6-which-does-not-support-python-3-10-and-install-python-3-9-does-not-help-at-all-Later-I-should-look-into-this-problem-and-try-to-solved-it…-and-pycdc-which-is-said-to-support-high-edition-but-can-not-identify-the-magic-number-as-well-However-when-I-tried-to-add-some-magic-number-from-other-python-edition-Python-3-8b2-if-I-remember-it-right-and-put-it-in-an-online-uncompiler-It-just-worked…" class="headerlink" title="I been trying tools like uncompyle6(which does not support python 3.10, and install python 3.9 does not help at all. Later I should look into this problem and try to solved it…)  and pycdc(which is said to support high edition, but can not identify the magic number as well) However, when I tried to add some magic number from other python edition(Python 3.8b2, if I remember it right), and put it in an online uncompiler. It just worked…"></a>I been trying tools like <code>uncompyle6</code>(which does not support python 3.10, and install python 3.9 does not help at all. Later I should look into this problem and try to solved it…)  and <code>pycdc</code>(which is said to support high edition, but can not identify the magic number as well) However, when I tried to add some magic number from other python edition(Python 3.8b2, if I remember it right), and put it in an <a target="_blank" rel="noopener" href="https://tool.lu/pyc/">online uncompiler</a>. It just worked…</h5><blockquote>
+<h3 id="Mazes"><a href="#Mazes" class="headerlink" title="Mazes"></a>Mazes</h3><h6 id="A-bit-complex-wait-until-later…"><a href="#A-bit-complex-wait-until-later…" class="headerlink" title="A bit complex, wait until later…"></a>A bit complex, wait until later…</h6><h3 id="stub"><a href="#stub" class="headerlink" title="stub"></a>stub</h3><h6 id="Never-seen-before-later…"><a href="#Never-seen-before-later…" class="headerlink" title="Never seen before, later…"></a>Never seen before, later…</h6><h3 id="ez-maze"><a href="#ez-maze" class="headerlink" title="ez_maze"></a>ez_maze</h3><p>We get a .exe file, from its’ icon we know that we should uncompile it to .pyc with <code>pyinstxtractor</code></p>
+<p><img src="/2022/11/02/hnctfRe/ez_maze_1.png" alt="ez_maze"></p>
+<p>Then, we got a package <code>_extracted</code>:</p>
+<h6 id="complex-it-is…"><a href="#complex-it-is…" class="headerlink" title="complex it is…"></a>complex it is…</h6><p><img src="/2022/11/02/hnctfRe/extracted.png" alt="extracted"></p>
+<p>Find a file named <code>maze</code> (without a suffix one!) Change its suffix into <code>.pyc</code> and Try <code>compyle6 -o maze.py maze.pyc</code>, it went wrong:</p>
+<p><img src="/2022/11/02/hnctfRe/uncompyle6.png" alt="compyle6"></p>
+<p>That’s when you find out that pyinstxtractor didn’t fix your .pyc file’s magic number.</p>
+<p><img src="/2022/11/02/hnctfRe/cmakeInstall.png" alt="cmake"></p>
+<p><a target="_blank" rel="noopener" href="https://www.jb51.net/article/231188.htm">The link problem setter gives you</a>, which does no help at all…The <code>magic number</code> of the file <code>struct</code> is destroy as well…</p>
+<p><img src="/2022/11/02/hnctfRe/magicNumber_1.jpg" alt="magicNumber_1"></p>
+<p>I been trying tools like <code>uncompyle6</code>(which does not support python 3.10, and install python 3.9 does not help at all. Later I should look into this problem and try to solved it…)  and <code>pycdc</code>(which is said to support high edition, but can not identify the magic number as well) However, when I tried to add some magic number from other python edition(Python 3.8b2, if I remember it right), and put it in an <a target="_blank" rel="noopener" href="https://tool.lu/pyc/">online uncompiler</a>. It just worked…</p>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/Here-is-SG/p/15885799.html">a blog from my classmate that may help(though I do not really think so…)</a></p>
 </blockquote>
 <h5 id="some-magic-number"><a href="#some-magic-number" class="headerlink" title="some magic number:"></a>some magic number:</h5><pre><code>enum PycMagic &#123;
@@ -353,8 +364,10 @@ int main()
     MAGIC_3_9 = 0x0A0D0D61,
 &#125;;
 </code></pre>
-<h5 id="uncompyle-to-long-the-maze-is-I-didn’t-put-it-here"><a href="#uncompyle-to-long-the-maze-is-I-didn’t-put-it-here" class="headerlink" title="uncompyle:(to long the maze is, I didn’t put it here)"></a>uncompyle:(to long the maze is, I didn’t put it here)</h5><p><img src="/2022/11/02/hnctfRe/uncompyle.jpg" alt="uncompyle"></p>
-<h5 id="Dfs-script-From-official-wp"><a href="#Dfs-script-From-official-wp" class="headerlink" title="Dfs script(From official wp):"></a>Dfs script(From official wp):</h5><pre><code>map1=[...]
+<p>uncompyle:(to long the maze is, I didn’t put it here)</p>
+<p><img src="/2022/11/02/hnctfRe/uncompyle.jpg" alt="uncompyle"></p>
+<p>Dfs script(From official wp):</p>
+<pre><code>map1=[...]
 map2 =  [[0 for i in range(len(map1))] for i in range(len(map1)) ]
 flag=&quot;&quot;
 def DFS(x,y):
@@ -389,9 +402,11 @@ y=1
 x=1
 DFS(x,y)
 </code></pre>
-<h3 id="findit"><a href="#findit" class="headerlink" title="findit"></a>findit</h3><h5 id="Gets-a-exe-file-check-whether-shell-exists"><a href="#Gets-a-exe-file-check-whether-shell-exists" class="headerlink" title="Gets a .exe file, check whether shell exists."></a>Gets a .exe file, check whether shell exists.</h5><p><img src="/2022/11/02/hnctfRe/findItShell.png" alt="shell"></p>
+<h3 id="findit"><a href="#findit" class="headerlink" title="findit"></a>findit</h3><p>Gets a .exe file, check whether shell exists.</p>
+<p><img src="/2022/11/02/hnctfRe/findItShell.png" alt="shell"></p>
 <h5 id="Open-it-with-ida"><a href="#Open-it-with-ida" class="headerlink" title="Open it with ida."></a>Open it with ida.</h5><p><img src="/2022/11/02/hnctfRe/finditIda_1.png" alt="ida1"><br><img src="/2022/11/02/hnctfRe/finditIda_2.png" alt="ida2"><br><img src="/2022/11/02/hnctfRe/finditIda_3.png" alt="ida3"></p>
-<h5 id="A-complex-encryption-The-key-and-the-flag-both-needs-to-be-brute-forces-out-I-shall-do-a-emersion-later…"><a href="#A-complex-encryption-The-key-and-the-flag-both-needs-to-be-brute-forces-out-I-shall-do-a-emersion-later…" class="headerlink" title="A complex encryption. The key and the flag both needs to be brute forces out. I shall do a emersion later…"></a>A complex encryption. The key and the flag both needs to be brute forces out. I shall do a emersion later…</h5><h5 id="Official-wp"><a href="#Official-wp" class="headerlink" title="Official wp:"></a>Official wp:</h5><pre><code>mid=[32,59,121,60,125,45,32,17,38,0,43,45,48,48,28,42,11,20,49,100,63,119,103,53,173,46,136,158,49,78,78,176]
+<p>A complex encryption. The key and the flag both needs to be brute forces out. I shall do a emersion later…</p>
+<h5 id="Official-wp"><a href="#Official-wp" class="headerlink" title="Official wp:"></a>Official wp:</h5><pre><code>mid=[32,59,121,60,125,45,32,17,38,0,43,45,48,48,28,42,11,20,49,100,63,119,103,53,173,46,136,158,49,78,78,176]
 enc=[29,70,92,84,87,19,61,43,62,60,29,9,18,63,6,6,42,14,124,110,109,60,105,191,7,162,64,104,92,61,223,179]
 flag=[0]*32
 flag[31]=179
@@ -421,7 +436,8 @@ def dfs(deep):
                 dfs(deep-1)
 dfs(31)
 </code></pre>
-<h3 id="flower"><a href="#flower" class="headerlink" title="flower"></a>flower</h3><h5 id="From-ida-there-are-a-lot-of-junkcodes-inside-and-we-have-to-patch-them-before-I-can-analyze-the-code"><a href="#From-ida-there-are-a-lot-of-junkcodes-inside-and-we-have-to-patch-them-before-I-can-analyze-the-code" class="headerlink" title="From ida, there are a lot of junkcodes inside, and we have to patch them before I can analyze the code."></a>From ida, there are a lot of junkcodes inside, and we have to patch them before I can analyze the code.</h5><p><a target="_blank" rel="noopener" href="https://www.52pojie.cn/thread-1512089-1-1.html">junkcode</a></p>
+<h3 id="flower"><a href="#flower" class="headerlink" title="flower"></a>flower</h3><p>From ida, there are a lot of junkcodes inside, and we have to patch them before I can analyze the code.</p>
+<p><a target="_blank" rel="noopener" href="https://www.52pojie.cn/thread-1512089-1-1.html">junkcode</a></p>
 <h5 id="Some-script-to-nop-the-junkcodes"><a href="#Some-script-to-nop-the-junkcodes" class="headerlink" title="Some script to nop the junkcodes:"></a>Some script to nop the junkcodes:</h5><p><img src="/2022/11/02/hnctfRe/flower_junkcode_1.png" alt="junkcode1"></p>
 <h5 id="scripts1"><a href="#scripts1" class="headerlink" title="scripts1:"></a>scripts1:</h5><pre><code>import idc
 import idautils
@@ -519,13 +535,16 @@ int main()
         &#125;
 &#125;
 </code></pre>
-<h5 id="It-base-on-static-crack-here-but-a-bro-told-me-that-since-there-is-only-ONE-XOR-that-really-do-something-to-your-flag-you-can-dynamic-debug-to-get-the-array-v4-in-the-upper-encryption-photograth-Which-is-really-genius-because-whether-you-know-how-to-decrypt-rc4-or-not-you-can-solve-this-problem-and-it-do-save-you-tons-of-work"><a href="#It-base-on-static-crack-here-but-a-bro-told-me-that-since-there-is-only-ONE-XOR-that-really-do-something-to-your-flag-you-can-dynamic-debug-to-get-the-array-v4-in-the-upper-encryption-photograth-Which-is-really-genius-because-whether-you-know-how-to-decrypt-rc4-or-not-you-can-solve-this-problem-and-it-do-save-you-tons-of-work" class="headerlink" title="It base on static crack here, but a bro told me that since there is only ONE XOR that really do something to your flag, you can dynamic debug to get the array v4. (in the upper encryption photograth) Which is really genius because whether you know how to decrypt rc4 or not you can solve this problem and it do save you tons of work!"></a>It base on static crack here, but a bro told me that since there is only <c style="color: #FF0000;">ONE</c> <code>XOR</code> that really do something to your flag, you can dynamic debug to get the array <code>v4</code>. (in the upper encryption photograth) Which is really genius because whether you know how to decrypt rc4 or not you can solve this problem and it do save you tons of work!</h5><h6 id="Just-input-a-series-of-‘1’-and-look-into-the-ECX-register"><a href="#Just-input-a-series-of-‘1’-and-look-into-the-ECX-register" class="headerlink" title="Just input a series of ‘1’ and look into the ECX register!"></a>Just input a series of ‘1’ and look into the <code>ECX</code> register!</h6><p><img src="/2022/11/02/hnctfRe/dynamic_1.png" alt="dynamic_1"><br><img src="/2022/11/02/hnctfRe/dynamic_2.png" alt="dynamic_2"><br><img src="/2022/11/02/hnctfRe/dynamic_3.png" alt="dynamic_3"><br><img src="/2022/11/02/hnctfRe/dynamic_4.png" alt="dynamic_4"><br><img src="/2022/11/02/hnctfRe/dynamic_5.png" alt="dynamic_5"></p>
+<p>It base on static crack here, but a bro told me that since there is only <c style="color: #FF0000;">ONE</c> <code>XOR</code> that really do something to your flag, you can dynamic debug to get the array <code>v4</code>. (in the upper encryption photograth) Which is really genius because whether you know how to decrypt rc4 or not you can solve this problem and it do save you tons of work!</p>
+<h6 id="Just-input-a-series-of-‘1’-and-look-into-the-ECX-register"><a href="#Just-input-a-series-of-‘1’-and-look-into-the-ECX-register" class="headerlink" title="Just input a series of ‘1’ and look into the ECX register!"></a>Just input a series of ‘1’ and look into the <code>ECX</code> register!</h6><p><img src="/2022/11/02/hnctfRe/dynamic_1.png" alt="dynamic_1"><br><img src="/2022/11/02/hnctfRe/dynamic_2.png" alt="dynamic_2"><br><img src="/2022/11/02/hnctfRe/dynamic_3.png" alt="dynamic_3"><br><img src="/2022/11/02/hnctfRe/dynamic_4.png" alt="dynamic_4"><br><img src="/2022/11/02/hnctfRe/dynamic_5.png" alt="dynamic_5"></p>
 <h5 id="And-so-on…"><a href="#And-so-on…" class="headerlink" title="And so on…"></a>And so on…</h5><pre><code>###### Two thinkings(should be tried out later):
 ###### Can `angr` solve `rc4` immediately?
 ###### Can I add a `hook` so it prints the `ECX` rightaway and I don&#39;t need to check it once and once again?
 ######                                                                                          --2022.11.4
 </code></pre>
-<h4 id="From-here-the-last-few-problems-are-quite-hard…"><a href="#From-here-the-last-few-problems-are-quite-hard…" class="headerlink" title="From here, the last few problems are quite hard…"></a>From here, the last few problems are quite hard…</h4><h3 id="MAZE"><a href="#MAZE" class="headerlink" title="MAZE"></a>MAZE</h3><h5 id="We-found-thounds-of-junkcodes-here-and-we-nop-them"><a href="#We-found-thounds-of-junkcodes-here-and-we-nop-them" class="headerlink" title="We found thounds of junkcodes here, and we nop them:"></a>We found thounds of junkcodes here, and we nop them:</h5><pre><code>import idc
+<p>From here, the last few problems are quite hard…</p>
+<h3 id="MAZE"><a href="#MAZE" class="headerlink" title="MAZE"></a>MAZE</h3><p>We found thounds of junkcodes here, and we nop them:</p>
+<pre><code>import idc
 import idautils
 start =0x00140001000
 end = 0x00140CEF1F0

@@ -112,14 +112,14 @@
             
             <span class="tag">
                 
-                <a href="/tags/ctf/" style="color: #03a9f4">
+                <a href="/tags/ctf/" style="color: #ffa2c4">
                     ctf
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/reverse/" style="color: #ff7d73">
+                <a href="/tags/reverse/" style="color: #00a596">
                     reverse
                 </a>
             </span>
@@ -128,11 +128,14 @@
         
     </div>
     <div class="content" v-pre>
-        <h4 id="preface"><a href="#preface" class="headerlink" title="preface"></a>preface</h4><h5 id="It’s-quite-a-while-since-last-been-working-out-a-reverse-problems-When-came-into-a-VM-golang-problem-in-VNCTF-I-spent-much-time-but-done-nothing-So-here-I-collect-some-VM-problems-and-tried-to-get-better-understand-of-the-thing"><a href="#It’s-quite-a-while-since-last-been-working-out-a-reverse-problems-When-came-into-a-VM-golang-problem-in-VNCTF-I-spent-much-time-but-done-nothing-So-here-I-collect-some-VM-problems-and-tried-to-get-better-understand-of-the-thing" class="headerlink" title="It’s quite a while since last been working out a reverse problems. When came into a VM(golang) problem in VNCTF, I spent much time but done nothing. So here I collect some VM problems and tried to get better understand of the thing."></a>It’s quite a while since last been working out a reverse problems. When came into a VM(golang) problem in VNCTF, I spent much time but done nothing. So here I collect some VM problems and tried to get better understand of the thing.</h5><span id="more"></span>
+        <h4 id="preface"><a href="#preface" class="headerlink" title="preface"></a>preface</h4><h6 id="It’s-quite-a-while-since-last-been-working-out-a-reverse-problems-When-came-into-a-VM-golang-problem-in-VNCTF-I-spent-much-time-but-done-nothing-So-here-I-collect-some-VM-problems-and-tried-to-get-better-understand-of-the-thing"><a href="#It’s-quite-a-while-since-last-been-working-out-a-reverse-problems-When-came-into-a-VM-golang-problem-in-VNCTF-I-spent-much-time-but-done-nothing-So-here-I-collect-some-VM-problems-and-tried-to-get-better-understand-of-the-thing" class="headerlink" title="It’s quite a while since last been working out a reverse problems. When came into a VM(golang) problem in VNCTF, I spent much time but done nothing. So here I collect some VM problems and tried to get better understand of the thing."></a>It’s quite a while since last been working out a reverse problems. When came into a VM(golang) problem in VNCTF, I spent much time but done nothing. So here I collect some VM problems and tried to get better understand of the thing.</h6><span id="more"></span>
 <h3 id="RCTF-2018-Simple-vm"><a href="#RCTF-2018-Simple-vm" class="headerlink" title="RCTF 2018 Simple vm"></a>RCTF 2018 Simple vm</h3><p><img src="/2023/03/03/VM/VM%5Cmain.png" alt="main"></p>
-<h5 id="From-the-main-function-we-see-that-v3-read-the-p-bin-file-By-searching-I-marked-the-main-function-like-this"><a href="#From-the-main-function-we-see-that-v3-read-the-p-bin-file-By-searching-I-marked-the-main-function-like-this" class="headerlink" title="From the main function, we see that v3 read the p.bin file. By searching, I marked the main function like this:"></a>From the main function, we see that v3 read the <code>p.bin</code> file. By <a target="_blank" rel="noopener" href="https://cplusplus.com/reference/cstdio/fseek/">searching</a>, I marked the main function like this:</h5><p><img src="/2023/03/03/VM/VM%5Cmain_0.png" alt="main_0"></p>
-<h5 id="And-we-know-that-sub-400896-is-where-VM-runs-So-we-can-add-breakpoint-then-step-in-and-dynamic-debug-the-function"><a href="#And-we-know-that-sub-400896-is-where-VM-runs-So-we-can-add-breakpoint-then-step-in-and-dynamic-debug-the-function" class="headerlink" title="And we know that sub_400896 is where VM runs. So we can add breakpoint then step in and dynamic debug the function."></a>And we know that <code>sub_400896</code> is where VM runs. So we can add breakpoint then step in and dynamic debug the function.</h5><p><img src="/2023/03/03/VM/VM%5Csub_400896.png" alt="sub_400896"></p>
-<h5 id="We-can-see-that-ptr-is-a-address-and-v1-seems-like-our-opcode-Well-if-it’s-the-first-time-you-do-a-vm-problem-you-might-still-confuse-about-what-happen-here-Howerver-we-can-stimulate-the-program-our-self"><a href="#We-can-see-that-ptr-is-a-address-and-v1-seems-like-our-opcode-Well-if-it’s-the-first-time-you-do-a-vm-problem-you-might-still-confuse-about-what-happen-here-Howerver-we-can-stimulate-the-program-our-self" class="headerlink" title="We can see that ptr is a address and v1[] seems like our opcode. Well, if it’s the first time you do a vm problem, you might still confuse about what happen here. Howerver, we can stimulate the program our self:"></a>We can see that <code>ptr</code> is a address and <code>v1[]</code> seems like our opcode. Well, if it’s the first time you do a vm problem, you might still confuse about what happen here. Howerver, we can stimulate the program our self:</h5><style>
+<p>From the main function, we see that v3 read the <code>p.bin</code> file. By <a target="_blank" rel="noopener" href="https://cplusplus.com/reference/cstdio/fseek/">searching</a>, I marked the main function like this:</p>
+<p><img src="/2023/03/03/VM/VM%5Cmain_0.png" alt="main_0"></p>
+<p>And we know that <code>sub_400896</code> is where VM runs. So we can add breakpoint then step in and dynamic debug the function.</p>
+<p><img src="/2023/03/03/VM/VM%5Csub_400896.png" alt="sub_400896"></p>
+<p>We can see that <code>ptr</code> is a address and <code>v1[]</code> seems like our opcode. Well, if it’s the first time you do a vm problem, you might still confuse about what happen here. Howerver, we can stimulate the program our self:</p>
+<style>
 pre {
   overflow-y: auto;
   max-height: 300px;
@@ -336,7 +339,8 @@ pre {
         &#125;
     &#125;
 </code></pre>
-<h5 id="and-we-can-add-some-outputs-so-as-to-understand-this-program"><a href="#and-we-can-add-some-outputs-so-as-to-understand-this-program" class="headerlink" title="and we can add some outputs, so as to understand this program:"></a>and we can add some outputs, so as to understand this program:</h5><pre><code class="cpp">    #include&lt;bits/stdc++.h&gt;
+<p>and we can add some outputs, so as to understand this program:</p>
+<pre><code class="cpp">    #include&lt;bits/stdc++.h&gt;
     #include&lt;windows.h&gt;
     #include&lt;stdlib.h&gt;
     #define _BYTE unsigned char
@@ -589,7 +593,8 @@ pre {
         &#125;
     &#125;
 </code></pre>
-<h5 id="outputs"><a href="#outputs" class="headerlink" title="outputs:"></a>outputs:</h5><pre><code>v10 =v1[49] (256)
+<p>outputs:</p>
+<pre><code>v10 =v1[49] (256)
 dword_6010A4 = v10
 dword_6010A4++
 v14 = v1[257] (I)
@@ -3151,10 +3156,12 @@ v15 = &amp;v1[336] (0)
 return
 0
 </code></pre>
-<h5 id="To-analyze-what-it-did-we-can-start-from-how-it-print-and-read-From-testing-it-read-32-characters-which-is-the-length-of-flag-And-we-know-that-the-input-is-store-in-v1-273-v1-304-It’s-basicly-a-NAND-machine-From-what-we-got-after-stimulate-the-program-we-can-see-32-‘blocks’-and-each-blocks-got-four-NAND"><a href="#To-analyze-what-it-did-we-can-start-from-how-it-print-and-read-From-testing-it-read-32-characters-which-is-the-length-of-flag-And-we-know-that-the-input-is-store-in-v1-273-v1-304-It’s-basicly-a-NAND-machine-From-what-we-got-after-stimulate-the-program-we-can-see-32-‘blocks’-and-each-blocks-got-four-NAND" class="headerlink" title="To analyze what it did, we can start from how it print and read. From testing, it read 32 characters(which is the length of flag). And we know that the input is store in v1[273] ~ v1[304]. It’s basicly a NAND machine. From what we got after stimulate the program, we can see 32 ‘blocks’ and each blocks got four NAND."></a>To analyze what it did, we can start from how it print and read. From testing, it read 32 characters(which is the length of flag). And we know that the input is store in v1[273] ~ v1[304]. It’s basicly a NAND machine. From what we got after stimulate the program, we can see 32 ‘blocks’ and each blocks got four <code>NAND</code>.</h5><p><img src="/2023/03/03/VM/blocks.png" alt="VM"></p>
+<p>To analyze what it did, we can start from how it print and read. From testing, it read 32 characters(which is the length of flag). And we know that the input is store in v1[273] ~ v1[304]. It’s basicly a NAND machine. From what we got after stimulate the program, we can see 32 ‘blocks’ and each blocks got four <code>NAND</code>.</p>
+<p><img src="/2023/03/03/VM/blocks.png" alt="VM"></p>
 <h5 id="That’s-what-we-got"><a href="#That’s-what-we-got" class="headerlink" title="That’s what we got:"></a>That’s what we got:</h5><pre><code>d_1 = ((a nand b) nand b) nand ((a nand b) nand b) 
 </code></pre>
-<h5 id="All-of-them-make-xor-Go-back-to-the-main-vm-run-function-here’s-what-the-rest-of-the-case-do"><a href="#All-of-them-make-xor-Go-back-to-the-main-vm-run-function-here’s-what-the-rest-of-the-case-do" class="headerlink" title="All of them make xor. Go back to the main vm_run function, here’s what the rest of the case do:"></a>All of them make <code>xor</code>. Go back to the main vm_run function, here’s what the rest of the case do:</h5><p><img src="/2023/03/03/VM/1.png" alt="VM"><br><img src="/2023/03/03/VM/2.png" alt="VM"></p>
+<p>All of them make <code>xor</code>. Go back to the main vm_run function, here’s what the rest of the case do:</p>
+<p><img src="/2023/03/03/VM/1.png" alt="VM"><br><img src="/2023/03/03/VM/2.png" alt="VM"></p>
 <h5 id="So-dynamic-debugger-to-dump-the-array-v1-and-the-script"><a href="#So-dynamic-debugger-to-dump-the-array-v1-and-the-script" class="headerlink" title="So dynamic debugger to dump the array v1 and the script:"></a>So dynamic debugger to dump the array <code>v1</code> and the script:</h5><pre><code class="cpp">#include&lt;bits/stdc++.h&gt;
 using namespace std;
 int main()&#123;
