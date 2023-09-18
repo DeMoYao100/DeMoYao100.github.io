@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
-        <title>Changes of Python API in IDA | Moyao の小屋</title>
+        <title>Seccon 2023 | Moyao の小屋</title>
         <meta name="author" content="Moyao">
         <meta name="description" content="Write down something interesting I met">
         <meta name="keywords" content="">
@@ -94,14 +94,14 @@
                         
 <div class="article">
     <div>
-        <h1>Changes of Python API in IDA </h1>
+        <h1>Seccon 2023 </h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
             </span>
-            2022/9/25
+            2023/9/18
         </span>
         
         
@@ -112,22 +112,8 @@
             
             <span class="tag">
                 
-                <a href="/tags/ctf/" style="color: #ffa2c4">
-                    ctf
-                </a>
-            </span>
-            
-            <span class="tag">
-                
-                <a href="/tags/reverse/" style="color: #03a9f4">
-                    reverse
-                </a>
-            </span>
-            
-            <span class="tag">
-                
-                <a href="/tags/tools/" style="color: #ff7d73">
-                    tools
+                <a href="/tags/re/" style="color: #00bcd4">
+                    re
                 </a>
             </span>
             
@@ -135,8 +121,60 @@
         
     </div>
     <div class="content" v-pre>
-        <h1 id="Changes-of-Python-API-in-IDA-7-x"><a href="#Changes-of-Python-API-in-IDA-7-x" class="headerlink" title="Changes of Python API in IDA 7.x"></a>Changes of Python API in IDA 7.x</h1><span id="more"></span>
-<h4 id="From-IDA-6-x-to-IDA-7-x-there-has-been-lots-of-changes-And-as-a-green-hands-when-I-look-up-at-some-writes-up-some-method-just-didn’t-work-out-That’s-when-I-knew-that-many-python-API-has-change-from-IDA-6-x-to-IDA-7-x"><a href="#From-IDA-6-x-to-IDA-7-x-there-has-been-lots-of-changes-And-as-a-green-hands-when-I-look-up-at-some-writes-up-some-method-just-didn’t-work-out-That’s-when-I-knew-that-many-python-API-has-change-from-IDA-6-x-to-IDA-7-x" class="headerlink" title="From IDA 6.x to IDA 7.x, there has been lots of changes. And as a green hands, when I look up at some writes up, some method just didn’t work out. That’s when I knew that many python API has change from IDA 6.x to IDA 7.x."></a>From IDA 6.x to IDA 7.x, there has been lots of changes. And as a green hands, when I look up at some writes up, some method just didn’t work out. That’s when I knew that many python API has change from IDA 6.x to IDA 7.x.</h4><h4 id="Website-that-may-help-you"><a href="#Website-that-may-help-you" class="headerlink" title="Website that may help you:"></a>Website that may help you:</h4><h4 id="blog-in-chinese"><a href="#blog-in-chinese" class="headerlink" title="blog in chinese"></a><a target="_blank" rel="noopener" href="https://ybrc.github.io/zh-cn/14-2/">blog in chinese</a></h4><h4 id="IDAPython-documentation"><a href="#IDAPython-documentation" class="headerlink" title="IDAPython documentation"></a><a target="_blank" rel="noopener" href="https://hex-rays.com/products/ida/support/idapython_docs/">IDAPython documentation</a></h4><h4 id="hex-rays"><a href="#hex-rays" class="headerlink" title="hex-rays"></a><a target="_blank" rel="noopener" href="https://hex-rays.com/products/ida/support/ida74_idapython_no_bc695_porting_guide.shtml">hex-rays</a></h4>
+        <h6 id="PREFACE-本来人说和一块看，结果周末事情太多了只能自己做，赛中做了俩，后面只能再慢慢补题qaq"><a href="#PREFACE-本来人说和一块看，结果周末事情太多了只能自己做，赛中做了俩，后面只能再慢慢补题qaq" class="headerlink" title="PREFACE: 本来人说和一块看，结果周末事情太多了只能自己做，赛中做了俩，后面只能再慢慢补题qaq."></a>PREFACE: 本来人说和一块看，结果周末事情太多了只能自己做，赛中做了俩，后面只能再慢慢补题qaq.</h6><h6 id="基本上算是比较少看国外赛，看了一下seccon感觉确实和平时做的差距挺大的，比如这个re很有些misc的感觉，难度还行不算很恶心，但是确实新，希望最近几天能把它复现出来"><a href="#基本上算是比较少看国外赛，看了一下seccon感觉确实和平时做的差距挺大的，比如这个re很有些misc的感觉，难度还行不算很恶心，但是确实新，希望最近几天能把它复现出来" class="headerlink" title="基本上算是比较少看国外赛，看了一下seccon感觉确实和平时做的差距挺大的，比如这个re很有些misc的感觉，难度还行不算很恶心，但是确实新，希望最近几天能把它复现出来"></a>基本上算是比较少看国外赛，看了一下seccon感觉确实和平时做的差距挺大的，比如这个re很有些misc的感觉，难度还行不算很恶心，但是确实新，希望最近几天能把它复现出来</h6><span id="more"></span>
+
+<h4 id="jumpout"><a href="#jumpout" class="headerlink" title="jumpout"></a>jumpout</h4><p>签到题，写了个小混淆反静态看，大概意思是将所有的<code>jmp addr</code>改成类似<code>mov rax, addr; jmp rax</code>的操作，应该是写了个<code>llvm</code>小工具之类的</p>
+<p>动调仔细看汇编即可，理论上可以自己修，但是没啥必要（而且也不太会，近期还得学学angr，qaq），这里只是做了三次异或</p>
+<p>需要对栈上和寄存器的数据跟的比较清晰，这里的i其实没跟明白但是可以简单猜一下，实在不行就每轮都跟完也能出（~~异或么反正，每轮都拿一个最后值就行其实~~~）</p>
+<p>exp:</p>
+<pre><code class="python">a = [  0xF6, 0xF5, 0x31, 0xC8, 0x81, 0x15, 0x14, 0x68, 0xF6, 0x35,
+  0xE5, 0x3E, 0x82, 0x09, 0xCA, 0xF1, 0x8A, 0xA9, 0xDF, 0xDF,
+  0x33, 0x2A, 0x6D, 0x81, 0xF5, 0xA6, 0x85, 0xDF, 0x17]
+
+
+enc = [  0xF0, 0xE4, 0x25, 0xDD, 0x9F, 0x0B, 0x3C, 0x50, 0xDE, 0x04,
+  0xCA, 0x3F, 0xAF, 0x30, 0xF3, 0xC7, 0xAA, 0xB2, 0xFD, 0xEF,
+  0x17, 0x18, 0x57, 0xB4, 0xD0, 0x8F, 0xB8, 0xF4, 0x23]
+
+for i in range(len(enc)):
+    print(chr(i ^ 0x55 ^ enc[i] ^ a[i]),end=&#39;&#39;)
+
+# SECCON&#123;jump_table_everywhere&#125;
+</code></pre>
+<h4 id="Sickle"><a href="#Sickle" class="headerlink" title="Sickle"></a>Sickle</h4><p>第一次见这个pickle加载payload反序列化调用shellcode的操作，具体其实还是不太会搞，这题<code>pickletools.dis(payload)</code>得到的结果感觉用处不大，知道有个<code>xor</code>的信息，不知道怎么提取其实（等wp出来再复现复现）但是re么真不能太纠结过程吧，反正fuzz一下，嗯看一下bytes，猜测是一个<code>rsa + xor + 倒序</code>的组合，参数很奇怪n是一个素数（开始以为要打，问了一下密码爷说不用直接可以解）解了第一段发现第二段参数不对，遂注意到<code>xor</code>参数换了，然后么就出了…</p>
+<p>看这个flag内容感觉或许确实不太有动调工具，但是应该有方法起码把完整字节码反序列化拿到吧…但是确实没搞出来，晚点看看wp…</p>
+<p>exp:</p>
+<pre><code class="python">check_values = [
+    8215359690687096682,
+    1862662588367509514,
+    8350772864914849965,
+    11616510986494699232,
+    3711648467207374797,
+    9722127090168848805,
+    16780197523811627561,
+    18138828537077112905,
+]
+import gmpy2
+from Crypto.Util.number import long_to_bytes
+
+xor = 1244422970072434993
+
+for c in check_values:
+    e = 65537
+    n = 18446744073709551557
+    phi = (18446744073709551557 - 1)
+    d = gmpy2.invert(e, phi)
+    m = pow(c,d,n)
+    print(long_to_bytes(m ^ xor).decode()[::-1],end=&#39;&#39;)
+    xor = c
+# SECCON&#123;Can_someone_please_make_a_debugger_for_Pickle_bytecode??&#125;
+</code></pre>
+<h4 id="prefect-flu"><a href="#prefect-flu" class="headerlink" title="prefect-flu"></a>prefect-flu</h4><h6 id="9-17-没出还，很急，感觉确实有点点misc来的"><a href="#9-17-没出还，很急，感觉确实有点点misc来的" class="headerlink" title="9-17,没出还，很急，感觉确实有点点misc来的"></a>9-17,没出还，很急，感觉确实有点点misc来的</h6><p>也是第一次见，dvd iso，没搞清楚怎么提取逻辑</p>
+<p>感觉可以参考是这篇：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/46518832">蓝光文件解析 - 知乎 (zhihu.com)</a>，但是里面的工具编译不出来，它的文件路径感觉是乱的，还没解决…</p>
+<p>用vlc可以运行，点击很多button，会触发check逻辑一段一段播放视频，作为回显，逻辑应该是在<code>BDMV/MovieObject.bdmv</code>里面的（JAR里面明明确实没找到东西……）</p>
+<p><code>BDedit</code>可以打开这个bdmv，里面有一定的运行逻辑，但是里面是缺少check flag的逻辑的，目前是还没找到check到底在哪，急急急…</p>
+<p><img src="/2023/09/18/seccon-2023/image-20230918105138109.png" alt="image-20230918105138109"></p>
+
     </div>
     
 </div>
