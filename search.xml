@@ -5180,7 +5180,7 @@ for i in range(len(enc)):
 </code></pre>
 <h4 id="Sickle"><a href="#Sickle" class="headerlink" title="Sickle"></a>Sickle</h4><p>第一次见这个pickle加载payload反序列化调用shellcode的操作，具体其实还是不太会搞，这题<code>pickletools.dis(payload)</code>得到的结果感觉用处不大，知道有个<code>xor</code>的信息，不知道怎么提取其实（等wp出来再复现复现）但是re么真不能太纠结过程吧，反正fuzz一下，嗯看一下bytes，猜测是一个<code>rsa + xor + 倒序</code>的组合，参数很奇怪n是一个素数（开始以为要打，问了一下密码爷说不用直接可以解）解了第一段发现第二段参数不对，遂注意到<code>xor</code>参数换了，然后么就出了…</p>
 <p>看这个flag内容感觉或许确实不太有动调工具，但是应该有方法起码把完整字节码反序列化拿到吧…但是确实没搞出来，晚点看看wp…</p>
-<p>exp:</p>
+<h6 id="9-19-原来可以直接改源码，增加print，这样直接就有完整流程了，orz"><a href="#9-19-原来可以直接改源码，增加print，这样直接就有完整流程了，orz" class="headerlink" title="9-19: 原来可以直接改源码，增加print，这样直接就有完整流程了，orz"></a>9-19: 原来可以直接改源码，增加print，这样直接就有完整流程了，orz</h6><p>exp:</p>
 <pre><code class="python">check_values = [
     8215359690687096682,
     1862662588367509514,
