@@ -107,7 +107,7 @@
         
     </div>
     <div class="content" v-pre>
-        <h6 id="preface-尽力了吧，re这边剩下俩题都是一解，赛中肯定没时间做了，最近忙完来复现"><a href="#preface-尽力了吧，re这边剩下俩题都是一解，赛中肯定没时间做了，最近忙完来复现" class="headerlink" title="preface: 尽力了吧，re这边剩下俩题都是一解，赛中肯定没时间做了，最近忙完来复现"></a>preface: 尽力了吧，re这边剩下俩题都是一解，赛中肯定没时间做了，最近忙完来复现</h6><span id="more"></span>
+        <h6 id="preface-尽力了吧，re这边剩下俩题都是一解，赛中肯定没时间做了，最近忙完来复现"><a href="#preface-尽力了吧，re这边剩下俩题都是一解，赛中肯定没时间做了，最近忙完来复现" class="headerlink" title="preface: 尽力了吧，re这边剩下俩题都是一解，赛中肯定没时间做了，最近忙完来复现"></a>preface: 尽力了吧，re这边剩下俩题都是一解，赛中肯定没时间做了，最近忙完来复现</h6><h6 id="9-22：babyobfu混淆去掉了，加密不太能搞懂，主要是不想调了，调着patch一次真有点精神污染"><a href="#9-22：babyobfu混淆去掉了，加密不太能搞懂，主要是不想调了，调着patch一次真有点精神污染" class="headerlink" title="9-22：babyobfu混淆去掉了，加密不太能搞懂，主要是不想调了，调着patch一次真有点精神污染"></a>9-22：babyobfu混淆去掉了，加密不太能搞懂，主要是不想调了，调着patch一次真有点精神污染</h6><span id="more"></span>
 
 <h3 id="Ez加密器"><a href="#Ez加密器" class="headerlink" title="Ez加密器"></a>Ez加密器</h3><p>调一下发现输入六位秘钥（注意是全数字），base64变表成八位做DES秘钥<br>爆破六位即可</p>
 <pre><code class="python">from Crypto.Cipher import DES
@@ -548,6 +548,21 @@ for i in enc:
     print(mp[i],end=&quot;&quot;)
 </code></pre>
 <h3 id="CSGO"><a href="#CSGO" class="headerlink" title="CSGO"></a>CSGO</h3><p>patch反调试，动调获取base变表直接在线解即可<br>表：LMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+&#x2F;ABCDEFGHIJK</p>
+<h3 id="babyobfu"><a href="#babyobfu" class="headerlink" title="babyobfu"></a>babyobfu</h3><p>赛中的零解题，结果回来看真的不那么难……</p>
+<p>​	比较明显的有两种smc，一种解密后续代码，一种加密前面的代码；后续询问了出题人，这里的smc粒度是基本块，量较大</p>
+<p>​	有一个很直观的思路，就是把解密后续代码的<code>smc1</code>执行后nop掉，全局nop掉加密前面代码的<code>smc2</code>，初始化smc数据的函数可以不处理</p>
+<p>其实只需要这一句即可：</p>
+<pre><code class="python">import idautils
+for i in range(5):
+   idc.patch_byte(idc.get_wide_dword(get_reg_value(&quot;rsp&quot;)) - 5 + i, 0x90)
+   print(hex(get_reg_value(&quot;rdi&quot;)) , end = &#39;,&#39;)
+</code></pre>
+<p>​	先跑一次观察最后的位置，然后在那个位置下断点，然后就可以得到几乎所有代码</p>
+<p>​	中间存在特判，可以看出来是<code>0-9a-e</code>的类似uuid的格式，这里没有执行这些地方的代码，但是smc会影响反编译，所以可以手动找到<code>jnz</code> <code>jmp</code>之类的位置手动patch一下，然后可以得到main函数和一些加解密、check操作</p>
+<p>​	密文：</p>
+<p>​	<img src="/2023/09/03/%E7%BE%8A%E5%9F%8E%E6%9D%AF2023/image-20230922211748973.png" alt="image-20230922211748973"></p>
+<p>加密：（这里有个AES的sbox，明显是用来干扰插件的，必须去干净才能看到实际用途）<img src="/2023/09/03/%E7%BE%8A%E5%9F%8E%E6%9D%AF2023/image-20230922211809507.png" alt="image-20230922211809507"></p>
+<p>其实基本上就没啥东西了，这就是ycb的零解题……</p>
 
     </div>
     
