@@ -112,7 +112,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/re/" style="color: #ffa2c4">
+                <a href="/tags/re/" style="color: #00a596">
                     re
                 </a>
             </span>
@@ -181,7 +181,8 @@ for i in range(len(b)):
 
 # vsctf&#123;fUnC710N4L_0p_w_Competitive_Prog_TEMPLATES?&#125;
 </code></pre>
-<h4 id="teenage-wasm"><a href="#teenage-wasm" class="headerlink" title="teenage-wasm"></a>teenage-wasm</h4><h6 id="说实话第一次做wasm…"><a href="#说实话第一次做wasm…" class="headerlink" title="说实话第一次做wasm…"></a>说实话第一次做wasm…</h6><p>选择的是<code>Ghidra + wasm</code>插件的反编译方案，还是比较清晰的</p>
+<h4 id="teenage-wasm"><a href="#teenage-wasm" class="headerlink" title="teenage-wasm"></a>teenage-wasm</h4><h6 id="说实话第一次做wasm…"><a href="#说实话第一次做wasm…" class="headerlink" title="说实话第一次做wasm…"></a>说实话第一次做wasm…</h6><p>插件： <a target="_blank" rel="noopener" href="https://github.com/nneonneo/ghidra-wasm-plugin/releases/tag/v2.1.0">Release Version 2.1.0 · nneonneo&#x2F;ghidra-wasm-plugin (github.com)</a></p>
+<p>选择的是<code>Ghidra + wasm</code>插件的反编译方案，还是比较清晰的</p>
 <p><img src="/2023/09/25/vsCTF/image-20230925111041089.png" alt="image-20230925111041089"></p>
 <p>可以拿到一个js代码，和一个wasm代码，这里找不到button的处理handle，纠结了很久，然后友web手说可能是wasm里面注册了监听，orz真该学学web了…</p>
 <p>js代码中大概是 <code>wasm-bindgen</code>编译的与wasm交互的产物，只负责中间件，将字符串共享给wasm，并接收共享字符串</p>
