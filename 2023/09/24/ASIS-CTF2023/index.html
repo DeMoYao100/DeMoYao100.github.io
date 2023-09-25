@@ -112,7 +112,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/re/" style="color: #ffa2c4">
+                <a href="/tags/re/" style="color: #00bcd4">
                     re
                 </a>
             </span>
@@ -121,7 +121,7 @@
         
     </div>
     <div class="content" v-pre>
-        <h6 id="PREFACE：赛中做了算三个吧，sid有点小变态，爆出来了，但是没找到flag，经别的师傅点醒才知道没有格式，反正么只是来看看题而已，作业好多还要上学…"><a href="#PREFACE：赛中做了算三个吧，sid有点小变态，爆出来了，但是没找到flag，经别的师傅点醒才知道没有格式，反正么只是来看看题而已，作业好多还要上学…" class="headerlink" title="PREFACE：赛中做了算三个吧，sid有点小变态，爆出来了，但是没找到flag，经别的师傅点醒才知道没有格式，反正么只是来看看题而已，作业好多还要上学…"></a>PREFACE：赛中做了算三个吧，sid有点小变态，爆出来了，但是没找到flag，经别的师傅点醒才知道没有格式，反正么只是来看看题而已，作业好多还要上学…</h6><span id="more"></span>
+        <h6 id="PREFACE：赛中做了算三个吧，sid有点小变态，爆出来了，但是没找到flag，经别的师傅点醒才知道没有格式，反正么只是来看看题而已，作业好多还要上学…"><a href="#PREFACE：赛中做了算三个吧，sid有点小变态，爆出来了，但是没找到flag，经别的师傅点醒才知道没有格式，反正么只是来看看题而已，作业好多还要上学…" class="headerlink" title="PREFACE：赛中做了算三个吧，sid有点小变态，爆出来了，但是没找到flag，经别的师傅点醒才知道没有格式，反正么只是来看看题而已，作业好多还要上学…"></a>PREFACE：赛中做了算三个吧，sid有点小变态，爆出来了，但是没找到flag，经别的师傅点醒才知道没有格式，反正么只是来看看题而已，作业好多还要上学…</h6><h6 id="9-25-小补一个题，解数毕竟比sid多，虽然说题越做越多，能做的题确实越来越少了，高手题几乎完全没法碰…"><a href="#9-25-小补一个题，解数毕竟比sid多，虽然说题越做越多，能做的题确实越来越少了，高手题几乎完全没法碰…" class="headerlink" title="9-25: 小补一个题，解数毕竟比sid多，虽然说题越做越多，能做的题确实越来越少了，高手题几乎完全没法碰…"></a>9-25: 小补一个题，解数毕竟比sid多，虽然说题越做越多，能做的题确实越来越少了，高手题几乎完全没法碰…</h6><span id="more"></span>
 
 <h3 id="grid"><a href="#grid" class="headerlink" title="grid"></a>grid</h3><p>warmup题，加密逻辑很简单，就是对着box反映射一下</p>
 <pre><code class="python">box = [1, 118,   2,  44,   3,  59,   4,  69,   5, 189,
@@ -456,6 +456,54 @@ print(flag_list)
 <p>这里最后的版本需要肉眼在六百多条里面找真flag，应该算目前我能想的最优的爆破了，大概效果如下（还是相当精神污染的，可能是自己题做少了也说不准…）：</p>
 <p><img src="/2023/09/24/ASIS-CTF2023/image-20230924092335126.png" alt="image-20230924092335126"></p>
 <p>（后话：结果是python本身Crypto库的瓶颈，导致需要这样优化，其他师傅自己cpp写的满0xff ^ 4空间的爆破也就十几分钟左右，同样空间下python就得十几个小时了…）</p>
+<h3 id="scrat"><a href="#scrat" class="headerlink" title="scrat"></a>scrat</h3><p>这个题其实和sid差不多，也是麻烦的加密和爆破（解数比sid多的原因完全可能是很多师傅和我一开始一样sid爆出来了但是没看见flag）</p>
+<p>yysy，算是练习调试、<code>cpp string</code>导致的一些奇怪的汇编代码、猜测能力吧，新东西确实没有啥了</p>
+<p>几处加密：</p>
+<p><img src="/2023/09/24/ASIS-CTF2023/image-20230925191134745.png" alt="image-20230925191134745"></p>
+<p><img src="/2023/09/24/ASIS-CTF2023/image-20230925191920010.png" alt="image-20230925191920010"></p>
+<p><img src="/2023/09/24/ASIS-CTF2023/image-20230925191831529.png" alt="image-20230925191831529"></p>
+<p>流程：</p>
+<pre><code class="python">tmp = flag[i] * (39 + 1 - i)
+s = sum(flag)
+s = (s + (-1) ^ (i) * tmp) % 0x4141a15b
+s = s * 39 % 0x4141a15b
+seed = 1
+v33 = 2
+
+while s != 0:
+    if s &amp; 1 != 0:
+        seed = v33 * seed % 0x4141A15B
+    v33 = v33 * v33 % 0x4141A15B
+    s &gt;&gt;= 1
+
+for i in range(39):
+    seed = seed * 166013 + 4148159
+    flag[i] ^= (seed // 0x10000) &amp; 0xff
+</code></pre>
+<p>exp.py (比赛结束了抄个JANlittle师傅的，感觉基本功确实还缺点qaq)</p>
+<pre><code class="python">enc = bytes.fromhex(&#39;3a392465ffefc6b485193c32cefdb99df95cb6d6566478a17873b92b2df5dea31e5c0edbb1cc9b&#39;)
+
+for s in range(5000000):
+    seed = 1
+    v33 = 2
+    while s != 0:
+        if s &amp; 1 != 0:
+            seed = v33 * seed % 0x4141A15B
+        v33 = v33 * v33 % 0x4141A15B
+        s &gt;&gt;= 1
+
+    t = list(enc)
+    for i in range(39):
+        seed = seed * 166013 + 4148159
+        t[i] ^= (seed // 0x10000) &amp; 0xff
+        if i == 3 and not bytes(t).startswith(b&#39;ASIS&#39;):
+            break
+
+    if bytes(t).startswith(b&#39;ASIS&#39;):
+        print(bytes(t))
+
+# ASIS&#123;___A_9!Rl_w1Th_Dr4G0N_7AtTO5___!!&#125;
+</code></pre>
 
     </div>
     
