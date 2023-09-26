@@ -112,7 +112,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/re/" style="color: #00a596">
+                <a href="/tags/re/" style="color: #ff7d73">
                     re
                 </a>
             </span>
@@ -220,6 +220,27 @@ print(flag[::-1])
 
 # vsctf&#123;w4sm_is_n0t_aw3some_pWuTMXJmq2KwNN&#125;
 </code></pre>
+<h6 id="9-26-感觉本来wasm就见得不多，会做的更是少，还是不要草草结束了这个题，把他给逆完整一点"><a href="#9-26-感觉本来wasm就见得不多，会做的更是少，还是不要草草结束了这个题，把他给逆完整一点" class="headerlink" title="9-26: 感觉本来wasm就见得不多，会做的更是少，还是不要草草结束了这个题，把他给逆完整一点"></a>9-26: 感觉本来wasm就见得不多，会做的更是少，还是不要草草结束了这个题，把他给逆完整一点</h6><p>直觉上<code>flesh_message</code>既然找不到<code>x-ref</code>，应该还是有更多处理逻辑的，首先是这里的比对</p>
+<p><img src="/2023/09/25/vsCTF/image-20230926204837431.png" alt="image-20230926204837431"></p>
+<p>local_18拿到了param2（即用户的一个输入），与<code>admin</code>字符串进行了比对，如果不是admin会返回Login fail的提示</p>
+<p><img src="/2023/09/25/vsCTF/image-20230926205045674.png" alt="image-20230926205045674"></p>
+<p><img src="/2023/09/25/vsCTF/image-20230926205146253.png" alt="image-20230926205146253"></p>
+<h6 id="（可以右键更换数据类型）"><a href="#（可以右键更换数据类型）" class="headerlink" title="（可以右键更换数据类型）"></a>（可以右键更换数据类型）</h6><p>这个地方感觉有机会，看看下面，找到了类似的结构：</p>
+<p><img src="/2023/09/25/vsCTF/image-20230926205948905.png" alt="image-20230926205948905"></p>
+<p>但是这里没那么明显，先试试我怎么出的：</p>
+<p>这里除去<code>admin</code>已经没有明显的全局变量了，能包含有字符信息的内容不多，然后突然意识到这里全都是可见字符：<img src="/2023/09/25/vsCTF/image-20230926210857339.png" alt="image-20230926210857339"></p>
+<p>那其实很蹊跷了，打印一下看看</p>
+<p><img src="/2023/09/25/vsCTF/image-20230926210952849.png" alt="image-20230926210952849"></p>
+<p>感觉就很明显了，有明显的英文语法痕迹（？）</p>
+<p>逆转过来：</p>
+<p><img src="/2023/09/25/vsCTF/image-20230926211040498.png" alt="image-20230926211040498"></p>
+<p>这个就是密码…</p>
+<p><img src="/2023/09/25/vsCTF/image-20230926211059432.png" alt="image-20230926211059432"></p>
+<p>回来看看逻辑，到底放在哪里</p>
+<p>前面没注意，但是这里有个很明显的把参数提取成utf-8的操作：</p>
+<p><img src="/2023/09/25/vsCTF/image-20230926211238954.png" alt="image-20230926211238954"></p>
+<p>然后存储<code>local_18</code> -&gt; <code>local_68</code>在下面进行比较</p>
+<p>还是对这些符号不够敏感…</p>
 
     </div>
     
