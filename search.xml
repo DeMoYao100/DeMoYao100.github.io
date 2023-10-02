@@ -6208,4 +6208,358 @@ printf(&quot;%$\n&quot;, 12345, 12346);
 <p>不过这个玩意在藏东西上其实有点意思，可以来出个小题玩一下，刚好又差不多准备搞个出虚拟机的玩，那就试试</p>
 <h6 id="9-29-不对，想了想应该还是ida抽风，估计看看汇编调用的话这些参数问题不大"><a href="#9-29-不对，想了想应该还是ida抽风，估计看看汇编调用的话这些参数问题不大" class="headerlink" title="9-29: 不对，想了想应该还是ida抽风，估计看看汇编调用的话这些参数问题不大"></a>9-29: 不对，想了想应该还是ida抽风，估计看看汇编调用的话这些参数问题不大</h6><h6 id="不过出题已经放在list上了，先把题出了看看，再看有没有时间把这个题给做了，最近确实会比较忙"><a href="#不过出题已经放在list上了，先把题出了看看，再看有没有时间把这个题给做了，最近确实会比较忙" class="headerlink" title="不过出题已经放在list上了，先把题出了看看，再看有没有时间把这个题给做了，最近确实会比较忙"></a>不过出题已经放在list上了，先把题出了看看，再看有没有时间把这个题给做了，最近确实会比较忙</h6>]]></content>
   </entry>
+  <entry>
+    <title>BuckeyeCTF2023</title>
+    <url>/2023/10/02/BuckeyeCTF2023/</url>
+    <content><![CDATA[<h6 id="PREFACE-和maple一个时间段的比赛，似乎是大学新生赛…感觉-比maple难呢…"><a href="#PREFACE-和maple一个时间段的比赛，似乎是大学新生赛…感觉-比maple难呢…" class="headerlink" title="PREFACE: 和maple一个时间段的比赛，似乎是大学新生赛…感觉 比maple难呢…"></a>PREFACE: 和maple一个时间段的比赛，似乎是大学新生赛…感觉 比maple难呢…</h6><h6 id="或者换一种说法…怎么大学新生赛都喜欢搞抽象呢…"><a href="#或者换一种说法…怎么大学新生赛都喜欢搞抽象呢…" class="headerlink" title="或者换一种说法…怎么大学新生赛都喜欢搞抽象呢…"></a>或者换一种说法…怎么大学新生赛都喜欢搞抽象呢…</h6><span id="more"></span>
+
+<h3 id="8ball"><a href="#8ball" class="headerlink" title="8ball"></a>8ball</h3><p>直接动调把前面全nop掉拿就行：<code>bctf&#123;Aw_$hucK$_Y0ur3_m@k1Ng_m3_bLu$h&#125;</code></p>
+<h3 id="Converter"><a href="#Converter" class="headerlink" title="Converter"></a>Converter</h3><p>就在里面：<code>bctf&#123;o0ps_y0u_fOuNd_mE&#125;</code></p>
+<h3 id="Emotional-Damage"><a href="#Emotional-Damage" class="headerlink" title="Emotional_Damage"></a>Emotional_Damage</h3><p>确实给我damage了，总归就是猜emoji代表的符号然后恢复流程逆flag，大部分可以gpt一把梭</p>
+<h3 id="Skribl"><a href="#Skribl" class="headerlink" title="Skribl"></a>Skribl</h3><p>需要配置docker环境把python313环境搞出来，拿到backend字节码</p>
+<pre><code class="python"># backend.pyc
+
+ 0           0 RESUME                   0
+
+  1           2 LOAD_CONST               0 (0)
+              4 LOAD_CONST               1 (None)
+              6 IMPORT_NAME              0 (string)
+              8 STORE_NAME               0 (string)
+
+  2          10 LOAD_CONST               0 (0)
+             12 LOAD_CONST               1 (None)
+             14 IMPORT_NAME              1 (random)
+             16 STORE_NAME               1 (random)
+
+  3          18 LOAD_CONST               0 (0)
+             20 LOAD_CONST               1 (None)
+             22 IMPORT_NAME              2 (time)
+             24 STORE_NAME               2 (time)
+
+  4          26 LOAD_CONST               0 (0)
+             28 LOAD_CONST               1 (None)
+             30 IMPORT_NAME              3 (math)
+             32 STORE_NAME               3 (math)
+
+  5          34 LOAD_CONST               0 (0)
+             36 LOAD_CONST               1 (None)
+             38 IMPORT_NAME              4 (os)
+             40 STORE_NAME               4 (os)
+
+  8          42 LOAD_CONST               2 (&#39;return&#39;)
+             44 LOAD_NAME                5 (str)
+             46 BUILD_TUPLE              2
+             48 LOAD_CONST               3 (&lt;code object create_skribl at 0x7f763b846970, file &quot;/home/rene/Documents/Java/OSUCyberSecurityClub/buckeyectf23/buckeyectf-challenges/chals/rev-pycache/dist/chal/backend.py&quot;, line 8&gt;)
+             50 MAKE_FUNCTION
+             52 SET_FUNCTION_ATTRIBUTE   4 (annotations)
+             54 STORE_NAME               6 (create_skribl)
+
+ 18          56 LOAD_CONST               4 (&lt;code object init_backend at 0x7f763b734670, file &quot;/home/rene/Documents/Java/OSUCyberSecurityClub/buckeyectf23/buckeyectf-challenges/chals/rev-pycache/dist/chal/backend.py&quot;, line 18&gt;)
+             58 MAKE_FUNCTION
+             60 STORE_NAME               7 (init_backend)
+             62 RETURN_CONST             1 (None)
+
+Disassembly of &lt;code object create_skribl at 0x7f763b846970, file &quot;/home/rene/Documents/Java/OSUCyberSecurityClub/buckeyectf23/buckeyectf-challenges/chals/rev-pycache/dist/chal/backend.py&quot;, line 8&gt;:
+   8           0 RESUME                   0
+
+   9           2 LOAD_GLOBAL              1 (print + NULL)
+              12 LOAD_CONST               1 (&#39;Creating skribl &#39;)
+              14 LOAD_FAST                1 (message)
+              16 FORMAT_SIMPLE
+              18 BUILD_STRING             2
+              20 CALL                     1
+              28 POP_TOP
+
+  11          30 LOAD_GLOBAL              2 (string)
+              40 LOAD_ATTR                4 (ascii_lowercase)
+              60 LOAD_GLOBAL              2 (string)
+              70 LOAD_ATTR                6 (ascii_uppercase)
+              90 BINARY_OP                0 (+)
+              94 LOAD_GLOBAL              2 (string)
+             104 LOAD_ATTR                8 (digits)
+             124 BINARY_OP                0 (+)
+             128 STORE_FAST               3 (alphabet)
+
+  12         130 LOAD_GLOBAL             11 (range + NULL)
+             140 LOAD_CONST               2 (40)
+             142 CALL                     1
+             150 GET_ITER
+             152 LOAD_FAST_AND_CLEAR      4 (i)
+             154 SWAP                     2
+             156 BUILD_LIST               0
+             158 SWAP                     2
+         &gt;&gt;  160 FOR_ITER                25 (to 214)
+             164 STORE_FAST               4 (i)
+             166 LOAD_GLOBAL             12 (random)
+             176 LOAD_ATTR               14 (choice)
+             196 PUSH_NULL
+             198 LOAD_FAST                3 (alphabet)
+             200 CALL                     1
+             208 LIST_APPEND              2
+             210 JUMP_BACKWARD           27 (to 160)
+         &gt;&gt;  214 END_FOR
+             216 STORE_FAST               5 (key_list)
+             218 STORE_FAST               4 (i)
+
+  14         220 LOAD_CONST               3 (&#39;&#39;)
+             222 LOAD_ATTR               17 (join + NULL|self)
+             242 LOAD_FAST                5 (key_list)
+             244 CALL                     1
+             252 STORE_FAST               6 (key)
+
+  15         254 LOAD_FAST_LOAD_FAST     18 (message, author)
+             256 BUILD_TUPLE              2
+             258 LOAD_FAST_LOAD_FAST      6 (skribls, key)
+             260 STORE_SUBSCR
+
+  16         264 LOAD_FAST                6 (key)
+             266 RETURN_VALUE
+
+None     &gt;&gt;  268 SWAP                     2
+             270 POP_TOP
+
+  12         272 SWAP                     2
+             274 STORE_FAST               4 (i)
+             276 RERAISE                  0
+ExceptionTable:
+  156 to 214 -&gt; 268 [2]
+
+Disassembly of &lt;code object init_backend at 0x7f763b734670, file &quot;/home/rene/Documents/Java/OSUCyberSecurityClub/buckeyectf23/buckeyectf-challenges/chals/rev-pycache/dist/chal/backend.py&quot;, line 18&gt;:
+ 18           0 RESUME                   0
+
+ 19           2 LOAD_GLOBAL              0 (random)
+             12 LOAD_ATTR                2 (seed)
+             32 PUSH_NULL
+             34 LOAD_GLOBAL              4 (math)
+             44 LOAD_ATTR                6 (floor)
+             64 PUSH_NULL
+             66 LOAD_GLOBAL              8 (time)
+             76 LOAD_ATTR                8 (time)
+             96 PUSH_NULL
+             98 CALL                     0
+            106 CALL                     1
+            114 CALL                     1
+            122 POP_TOP
+
+ 21         124 LOAD_GLOBAL             11 (create_skribl + NULL)
+            134 LOAD_FAST                0 (skribls)
+            136 LOAD_GLOBAL             12 (os)
+            146 LOAD_ATTR               14 (environ)
+            166 LOAD_CONST               1 (&#39;FLAG&#39;)
+            168 BINARY_SUBSCR
+            172 LOAD_CONST               2 (&#39;rene&#39;)
+            174 CALL                     3
+            182 POP_TOP
+            184 RETURN_CONST             0 (None)
+</code></pre>
+<p>这里的字节码简单手动反编译一下</p>
+<pre><code class="python">import string
+import random
+import time
+import math
+import os
+
+def create_skribl(skribls, message, author) -&gt; str:
+    print (f&#39;Creating skribl &#123;message&#125;&#39;)
+    alphabet = string.ascii_lowercase + string.ascii_uppercase + string.digits
+    key_list = [random.choice(alphabet) for i in range(40)]
+    key = &#39;&#39;.join(key_list)
+    skribls[key] = (message, author)
+    return key
+
+def init_backend(skribls):
+    random.seed(math.floor(time.time()))
+    create_skribl(skribls, os.environ[&#39;FLAG&#39;], &#39;rene&#39;)
+</code></pre>
+<p>结合前面的代码，可以看到生成的四十个随机串有一个seed，是可以获取的（当前时间 - 网页持续时间，可以拿到这个环境的创建时间，flag是环境创建后立刻从环境变量中提取并写入的，所以可以直接获得key）</p>
+<p>使用key访问view api即可</p>
+<pre><code class="python">import string
+import random
+import time
+import math
+import os
+import re
+import requests
+a = re.findall(&quot;duration\((\d+)&quot;,requests.get(&quot;https://skribl.chall.pwnoh.io/&quot;).text)
+b = math.floor(time.time())
+random.seed(math.floor(int(a[0]) - b))
+alphabet = string.ascii_lowercase + string.ascii_uppercase + string.digits
+key_list = [random.choice(alphabet) for i in range(40)]
+key = &#39;&#39;.join(key_list)
+url = &#39;https://skribl.chall.pwnoh.io/view/&#39; + key
+response = requests.get(url)
+lines = response.text.split(&#39;\n&#39;)
+for line in lines:
+        if &#39;bctf&#123;&#39; in line:
+            print(line)
+            break
+
+#         &lt;p&gt;bctf&#123;wHy_d0_w3_Ne3d_s0_m@ny_N0T3$_aNyW@y&#125;&lt;/p&gt;
+</code></pre>
+]]></content>
+  </entry>
+  <entry>
+    <title>mapleCTF2023</title>
+    <url>/2023/10/01/mapleCTF2023/</url>
+    <content><![CDATA[<h6 id="PREFACE-maple前四个题做的挺快的还，看题的队甚至小冲分了一下（什）"><a href="#PREFACE-maple前四个题做的挺快的还，看题的队甚至小冲分了一下（什）" class="headerlink" title="PREFACE: maple前四个题做的挺快的还，看题的队甚至小冲分了一下（什）"></a>PREFACE: maple前四个题做的挺快的还，看题的队甚至小冲分了一下（什）</h6><h6 id="最后那个安卓确实出的有点问题，怎么都搜不出来，总的来说算是还好的比赛吧"><a href="#最后那个安卓确实出的有点问题，怎么都搜不出来，总的来说算是还好的比赛吧" class="headerlink" title="最后那个安卓确实出的有点问题，怎么都搜不出来，总的来说算是还好的比赛吧"></a>最后那个安卓确实出的有点问题，怎么都搜不出来，总的来说算是还好的比赛吧</h6><h6 id="10-2-算是出了，不过确实看着别的师傅有点算法高手的"><a href="#10-2-算是出了，不过确实看着别的师傅有点算法高手的" class="headerlink" title="10.2: 算是出了，不过确实看着别的师傅有点算法高手的"></a>10.2: 算是出了，不过确实看着别的师傅有点算法高手的</h6><span id="more"></span>
+
+<h3 id="baby-rev"><a href="#baby-rev" class="headerlink" title="baby_rev"></a>baby_rev</h3><p>就是一些check，比较容易，后面注意分两段输入，否则可能有问题</p>
+<pre><code class="python">from z3 import *
+
+# 创建Solver实例
+solver = Solver()
+a = Int(&#39;a&#39;)
+b = Int(&#39;b&#39;)
+# solver.add(a * 4 + b * 5 == 127)
+# solver.add(a &gt; 0)
+# solver.add(b &gt; 0)
+# solver.add(a + b &lt; 30)
+# solutions = []
+# while solver.check() == sat:
+#     model = solver.model()
+#     a_val = model[a].as_long()
+#     b_val = model[b].as_long()
+#     solutions.append((a_val, b_val))
+#     solver.add(Or(a != a_val, b != b_val))
+# for sol in solutions:
+#     print(sol)
+
+# ---
+solver.add((a * 6 + b * 13) % 3 == 1)
+solver.add((a * 6 + b * 13) % 4 == 3)
+solver.add((a * 6 + b * 13) % 5 == 1)
+solver.add(a + b &lt;= 6)
+if solver.check() == sat:
+    print(solver.model())
+
+# ---
+</code></pre>
+<p>exp.py</p>
+<pre><code class="python">for _ in range(18):
+    print(9,end=&#39;&#39;)
+for _ in range(11):
+    print(5,end=&#39;&#39;)
+
+for _ in range(3):
+    print(4,end=&#39;&#39;)
+print(2,end=&#39;&#39;)
+print()
+print(80673,end=&#39;&#39;)
+
+# 999999999999999999555555555554442
+# 80673
+</code></pre>
+<h3 id="JavieScript"><a href="#JavieScript" class="headerlink" title="JavieScript"></a>JavieScript</h3><p>源程序看起来就有各种问题…</p>
+<p>不过按照字符数量直接爆破即可</p>
+<pre><code class="python">import hashlib
+import string
+def hash_string(s):
+    return hashlib.sha256(s.encode()).hexdigest()
+
+possible_values_for_one = &#39;1234567890abcdef&#39;
+
+possible_values_for_two = &#39;abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&amp;*()-_=+[]&#123;&#125;|;:,.&lt;&gt;?/\\\&#39;&quot;&#39;
+# possible_values_for_two = string.printable[:-5]  # -5 to exclude whitespace and control characters
+
+
+base_fleg = &quot;maple&#123;&quot;
+for i in possible_values_for_two:
+    for val_one in possible_values_for_two:
+        for char_two in possible_values_for_two:
+            temp_fleg = base_fleg + val_one  + &#39;a&#39; + i + &#39;a&#39; + char_two * 4 + &#39;as&#39; + &quot;_are_a_mId_FruiT&#125;&quot;
+            # print(temp_fleg)
+            if hash_string(temp_fleg) == &quot;bfe06d1e92942a0eca51881a879a0a9aef3fe75acaece04877eb0a26ceb8710d&quot;:
+                print(&quot;Found fleg:&quot;, temp_fleg)
+                break
+                
+# maple&#123;baNannnnas_are_a_mId_FruiT&#125;
+</code></pre>
+<h3 id="tarpit"><a href="#tarpit" class="headerlink" title="tarpit"></a>tarpit</h3><p>没见过的虚拟机，可以调着看他大概的行为（这里的注释不一定完全准确）</p>
+<p><img src="/2023/10/01/mapleCTF2023/reverse/challange/MapleCTF2023/mapleCTF/image-20231001202626013.png" alt="image-20231001202626013"></p>
+<p>其本身的opcode非常有规律，每五个数字会反复出现，而且有明显的指令0 4 8，简单调试猜测可以发现它会统计该数字的出现次数，直接转化成ascii，脚本提取即可（这样提取会把中间的一些指令段识别进来，加了个count &gt;&#x3D; 40的判断就刚好可以筛掉）</p>
+<p>exp.py</p>
+<pre><code class="python">opcode = [...]
+count = 0
+h = 0
+d = 0x71
+flag = &#39;&#39;
+for i in range(1, len(opcode), 5):
+    h = opcode[i]
+    if (d == h):
+        count += 1
+    elif (d != h):
+        if (count &gt;= 40):
+            flag += chr(count + 1)
+        d = h
+        count = 0
+
+print(flag)
+
+# maple&#123;m1n5ky_m4ch1n35_4r3_c00l&#125;
+</code></pre>
+<h3 id="most-harmless"><a href="#most-harmless" class="headerlink" title="most_harmless"></a>most_harmless</h3><p>挺奇妙的，也算虚拟机吧？但是跑不起来，远程也跑不动，应该确实效率不好说…</p>
+<p>app.py好理解，就是拿flag去拼接成一个语法，放在out.py里面跑类型，但是这玩意初见以为是lambda算子那种图灵完备可以做很多事情的东西，这里只是做了一个映射，距离说明就是这里实际上就是串联了一串字符而已</p>
+<p><img src="/2023/10/01/mapleCTF2023/reverse/challange/MapleCTF2023/mapleCTF/image-20231001204403663.png" alt="image-20231001204403663"></p>
+<p>然后有一个指示，从29开始（一开始没看见，搜了一下它的头尾，发现确实是29，然后映射出来就行楽）</p>
+<p>exp.py</p>
+<pre><code class="python">data = &#123;&#39;01&#39;:&#39;12&#39;,&#39;01&#39;:&#39;12&#39;,&#39;12&#39;:&#39;08&#39;,&#39;12&#39;:&#39;08&#39;,&#39;02&#39;:&#39;30&#39;,&#39;02&#39;:&#39;30&#39;,&#39;30&#39;:&#39;06&#39;,&#39;30&#39;:&#39;06&#39;,&#39;03&#39;:&#39;05&#39;,&#39;03&#39;:&#39;05&#39;,&#39;04&#39;:&#39;16&#39;,&#39;04&#39;:&#39;16&#39;,&#39;05&#39;:&#39;45&#39;,&#39;05&#39;:&#39;45&#39;,&#39;06&#39;:&#39;46&#39;,&#39;06&#39;:&#39;46&#39;,&#39;07&#39;:&#39;24&#39;,&#39;07&#39;:&#39;24&#39;,&#39;08&#39;:&#39;61&#39;,&#39;08&#39;:&#39;61&#39;,&#39;09&#39;:&#39;58&#39;,&#39;09&#39;:&#39;58&#39;,&#39;10&#39;:&#39;68&#39;,&#39;10&#39;:&#39;68&#39;,&#39;11&#39;:&#39;19&#39;,&#39;11&#39;:&#39;19&#39;,&#39;13&#39;:&#39;40&#39;,&#39;13&#39;:&#39;40&#39;,&#39;14&#39;:&#39;38&#39;,&#39;14&#39;:&#39;38&#39;,&#39;15&#39;:&#39;65&#39;,&#39;15&#39;:&#39;65&#39;,&#39;16&#39;:&#39;67&#39;,&#39;16&#39;:&#39;67&#39;,&#39;17&#39;:&#39;11&#39;,&#39;17&#39;:&#39;11&#39;,&#39;18&#39;:&#39;02&#39;,&#39;18&#39;:&#39;02&#39;,&#39;19&#39;:&#39;39&#39;,&#39;19&#39;:&#39;39&#39;,&#39;20&#39;:&#39;27&#39;,&#39;20&#39;:&#39;27&#39;,&#39;21&#39;:&#39;43&#39;,&#39;21&#39;:&#39;43&#39;,&#39;22&#39;:&#39;51&#39;,&#39;22&#39;:&#39;51&#39;,&#39;23&#39;:&#39;63&#39;,&#39;23&#39;:&#39;63&#39;,&#39;24&#39;:&#39;59&#39;,&#39;24&#39;:&#39;59&#39;,&#39;25&#39;:&#39;62&#39;,&#39;25&#39;:&#39;62&#39;,&#39;26&#39;:&#39;53&#39;,&#39;26&#39;:&#39;53&#39;,&#39;27&#39;:&#39;10&#39;,&#39;27&#39;:&#39;10&#39;,&#39;28&#39;:&#39;69&#39;,&#39;28&#39;:&#39;69&#39;,&#39;29&#39;:&#39;31&#39;,&#39;29&#39;:&#39;31&#39;,&#39;31&#39;:&#39;57&#39;,&#39;31&#39;:&#39;57&#39;,&#39;32&#39;:&#39;25&#39;,&#39;32&#39;:&#39;25&#39;,&#39;33&#39;:&#39;34&#39;,&#39;33&#39;:&#39;34&#39;,&#39;34&#39;:&#39;66&#39;,&#39;34&#39;:&#39;66&#39;,&#39;35&#39;:&#39;28&#39;,&#39;35&#39;:&#39;28&#39;,&#39;36&#39;:&#39;09&#39;,&#39;36&#39;:&#39;09&#39;,&#39;37&#39;:&#39;23&#39;,&#39;37&#39;:&#39;23&#39;,&#39;38&#39;:&#39;03&#39;,&#39;38&#39;:&#39;03&#39;,&#39;39&#39;:&#39;70&#39;,&#39;39&#39;:&#39;70&#39;,&#39;40&#39;:&#39;32&#39;,&#39;40&#39;:&#39;32&#39;,&#39;41&#39;:&#39;55&#39;,&#39;41&#39;:&#39;55&#39;,&#39;42&#39;:&#39;52&#39;,&#39;42&#39;:&#39;52&#39;,&#39;43&#39;:&#39;60&#39;,&#39;43&#39;:&#39;60&#39;,&#39;44&#39;:&#39;01&#39;,&#39;44&#39;:&#39;01&#39;,&#39;45&#39;:&#39;64&#39;,&#39;45&#39;:&#39;64&#39;,&#39;46&#39;:&#39;71&#39;,&#39;46&#39;:&#39;71&#39;,&#39;47&#39;:&#39;20&#39;,&#39;47&#39;:&#39;20&#39;,&#39;48&#39;:&#39;17&#39;,&#39;48&#39;:&#39;17&#39;,&#39;49&#39;:&#39;56&#39;,&#39;49&#39;:&#39;56&#39;,&#39;50&#39;:&#39;33&#39;,&#39;50&#39;:&#39;33&#39;,&#39;51&#39;:&#39;15&#39;,&#39;51&#39;:&#39;15&#39;,&#39;52&#39;:&#39;07&#39;,&#39;52&#39;:&#39;07&#39;,&#39;53&#39;:&#39;04&#39;,&#39;53&#39;:&#39;04&#39;,&#39;54&#39;:&#39;22&#39;,&#39;54&#39;:&#39;22&#39;,&#39;55&#39;:&#39;42&#39;,&#39;55&#39;:&#39;42&#39;,&#39;56&#39;:&#39;36&#39;,&#39;56&#39;:&#39;36&#39;,&#39;57&#39;:&#39;49&#39;,&#39;57&#39;:&#39;49&#39;,&#39;58&#39;:&#39;41&#39;,&#39;58&#39;:&#39;41&#39;,&#39;59&#39;:&#39;21&#39;,&#39;59&#39;:&#39;21&#39;,&#39;60&#39;:&#39;44&#39;,&#39;60&#39;:&#39;44&#39;,&#39;61&#39;:&#39;13&#39;,&#39;61&#39;:&#39;13&#39;,&#39;62&#39;:&#39;37&#39;,&#39;62&#39;:&#39;37&#39;,&#39;63&#39;:&#39;14&#39;,&#39;63&#39;:&#39;14&#39;,&#39;64&#39;:&#39;54&#39;,&#39;64&#39;:&#39;54&#39;,&#39;65&#39;:&#39;50&#39;,&#39;66&#39;:&#39;26&#39;,&#39;66&#39;:&#39;26&#39;,&#39;65&#39;:&#39;50&#39;,&#39;67&#39;:&#39;47&#39;,&#39;67&#39;:&#39;47&#39;,&#39;68&#39;:&#39;35&#39;,&#39;68&#39;:&#39;35&#39;,&#39;69&#39;:&#39;48&#39;,&#39;69&#39;:&#39;48&#39;,&#39;70&#39;:&#39;18&#39;,&#39;70&#39;:&#39;18&#39;&#125;
+a = &#39;29&#39;
+b = &#39;&#39;
+count = 0
+list = []
+while(b != &#39;71&#39;):
+    # print(a,end=&#39; -&gt; &#39;)
+    list.append(a)
+    b = data[a]
+    a = b
+    count += 1
+
+data_chr = &#123;&#39;01&#39; : &#39;a&#39;,&#39;01&#39; : &#39;a&#39;,&#39;12&#39; : &#39;f&#39;,&#39;12&#39; : &#39;f&#39;,&#39;02&#39; : &#39;a&#39;,&#39;02&#39; : &#39;a&#39;,&#39;30&#39; : &#39;n&#39;,&#39;30&#39; : &#39;n&#39;,&#39;03&#39; : &#39;a&#39;,&#39;03&#39; : &#39;a&#39;,&#39;04&#39; : &#39;c&#39;,&#39;04&#39; : &#39;c&#39;,&#39;05&#39; : &#39;d&#39;,&#39;05&#39; : &#39;d&#39;,&#39;06&#39; : &#39;d&#39;,&#39;06&#39; : &#39;d&#39;,&#39;07&#39; : &#39;e&#39;,&#39;07&#39; : &#39;e&#39;,&#39;08&#39; : &#39;e&#39;,&#39;08&#39; : &#39;e&#39;,&#39;09&#39; : &#39;e&#39;,&#39;09&#39; : &#39;e&#39;,&#39;10&#39; : &#39;e&#39;,&#39;10&#39; : &#39;e&#39;,&#39;11&#39; : &#39;e&#39;,&#39;11&#39; : &#39;e&#39;,&#39;13&#39; : &#39;f&#39;,&#39;13&#39; : &#39;f&#39;,&#39;14&#39; : &#39;g&#39;,&#39;14&#39; : &#39;g&#39;,&#39;15&#39; : &#39;h&#39;,&#39;15&#39; : &#39;h&#39;,&#39;16&#39; : &#39;h&#39;,&#39;16&#39; : &#39;h&#39;,&#39;17&#39; : &#39;h&#39;,&#39;17&#39; : &#39;h&#39;,&#39;18&#39; : &#39;h&#39;,&#39;18&#39; : &#39;h&#39;,&#39;19&#39; : &#39;i&#39;,&#39;19&#39; : &#39;i&#39;,&#39;20&#39; : &#39;i&#39;,&#39;20&#39; : &#39;i&#39;,&#39;21&#39; : &#39;i&#39;,&#39;21&#39; : &#39;i&#39;,&#39;22&#39; : &#39;i&#39;,&#39;22&#39; : &#39;i&#39;,&#39;23&#39; : &#39;l&#39;,&#39;23&#39; : &#39;l&#39;,&#39;24&#39; : &#39;m&#39;,&#39;24&#39; : &#39;m&#39;,&#39;25&#39; : &#39;m&#39;,&#39;25&#39; : &#39;m&#39;,&#39;26&#39; : &#39;m&#39;,&#39;26&#39; : &#39;m&#39;,&#39;27&#39; : &#39;m&#39;,&#39;27&#39; : &#39;m&#39;,&#39;28&#39; : &#39;n&#39;,&#39;28&#39; : &#39;n&#39;,&#39;29&#39; : &#39;n&#39;,&#39;29&#39; : &#39;n&#39;,&#39;31&#39; : &#39;o&#39;,&#39;31&#39; : &#39;o&#39;,&#39;32&#39; : &#39;o&#39;,&#39;32&#39; : &#39;o&#39;,&#39;33&#39; : &#39;o&#39;,&#39;33&#39; : &#39;o&#39;,&#39;34&#39; : &#39;o&#39;,&#39;34&#39; : &#39;o&#39;,&#39;35&#39; : &#39;o&#39;,&#39;35&#39; : &#39;o&#39;,&#39;36&#39; : &#39;p&#39;,&#39;36&#39; : &#39;p&#39;,&#39;37&#39; : &#39;p&#39;,&#39;37&#39; : &#39;p&#39;,&#39;38&#39; : &#39;r&#39;,&#39;38&#39; : &#39;r&#39;,&#39;39&#39; : &#39;r&#39;,&#39;39&#39; : &#39;r&#39;,&#39;40&#39; : &#39;r&#39;,&#39;40&#39; : &#39;r&#39;,&#39;41&#39; : &#39;s&#39;,&#39;41&#39; : &#39;s&#39;,&#39;42&#39; : &#39;s&#39;,&#39;42&#39; : &#39;s&#39;,&#39;43&#39; : &#39;s&#39;,&#39;43&#39; : &#39;s&#39;,&#39;44&#39; : &#39;s&#39;,&#39;44&#39; : &#39;s&#39;,&#39;45&#39; : &#39;s&#39;,&#39;45&#39; : &#39;s&#39;,&#39;46&#39; : &#39;s&#39;,&#39;46&#39; : &#39;s&#39;,&#39;47&#39; : &#39;t&#39;,&#39;47&#39; : &#39;t&#39;,&#39;48&#39; : &#39;t&#39;,&#39;48&#39; : &#39;t&#39;,&#39;49&#39; : &#39;t&#39;,&#39;49&#39; : &#39;t&#39;,&#39;50&#39; : &#39;t&#39;,&#39;50&#39; : &#39;t&#39;,&#39;51&#39; : &#39;t&#39;,&#39;51&#39; : &#39;t&#39;,&#39;52&#39; : &#39;t&#39;,&#39;52&#39; : &#39;t&#39;,&#39;53&#39; : &#39;u&#39;,&#39;53&#39; : &#39;u&#39;,&#39;54&#39; : &#39;w&#39;,&#39;54&#39; : &#39;w&#39;,&#39;55&#39; : &#39;y&#39;,&#39;55&#39; : &#39;y&#39;,&#39;56&#39; : &#39;y&#39;,&#39;56&#39; : &#39;y&#39;,&#39;57&#39; : &#39;_&#39;,&#39;57&#39; : &#39;_&#39;,&#39;58&#39; : &#39;_&#39;,&#39;58&#39; : &#39;_&#39;,&#39;59&#39; : &#39;_&#39;,&#39;59&#39; : &#39;_&#39;,&#39;60&#39; : &#39;_&#39;,&#39;60&#39; : &#39;_&#39;,&#39;61&#39; : &#39;_&#39;,&#39;61&#39; : &#39;_&#39;,&#39;62&#39; : &#39;_&#39;,&#39;62&#39; : &#39;_&#39;,&#39;63&#39; : &#39;_&#39;,&#39;63&#39; : &#39;_&#39;,&#39;64&#39; : &#39;_&#39;,&#39;64&#39; : &#39;_&#39;,&#39;65&#39; : &#39;_&#39;,&#39;66&#39; : &#39;_&#39;,&#39;66&#39; : &#39;_&#39;,&#39;65&#39; : &#39;_&#39;,&#39;67&#39; : &#39;_&#39;,&#39;67&#39; : &#39;_&#39;,&#39;68&#39; : &#39;_&#39;,&#39;68&#39; : &#39;_&#39;,&#39;69&#39; : &#39;_&#39;,&#39;69&#39; : &#39;_&#39;,&#39;70&#39; : &#39;_&#39;,&#39;70&#39; : &#39;_&#39;&#125;
+print(&#39;maple&#123;&#39;,end=&#39;&#39;)
+for i in list:
+    print(data_chr[i],end=&#39;&#39;)
+print(&#39;&#125;&#39;)
+
+# maple&#123;no_type_system_is_safe_from_pl_grads_with_too_much_time_on_their_hands&#125;
+</code></pre>
+<h3 id="Artificial"><a href="#Artificial" class="headerlink" title="Artificial"></a>Artificial</h3><p>jadx逆不了，然后学长那里知道GDA这东西（确实好用）</p>
+<p>逻辑还算简单，给了张表[(x,y), value]，求出所有value和为0x11dbe28的x,y，将x,y从小到大连起来，然后整个做sha256，然后取前16位做aes的key解密获得flag</p>
+<p>但是数据规模是3000 * 1e7, 目前说是题目有点问题？</p>
+<h6 id="10-1-21-09-增加了长度判断999"><a href="#10-1-21-09-增加了长度判断999" class="headerlink" title="10.1 21:09 增加了长度判断999"></a>10.1 21:09 增加了长度判断999</h6><p><img src="/2023/10/01/mapleCTF2023/reverse/challange/MapleCTF2023/mapleCTF/image-20231001212212857.png" alt="image-20231001212212857"></p>
+<p>…</p>
+<p>感觉…不好说…</p>
+<h6 id="10-2：结论：这里是个最小生成树，what？"><a href="#10-2：结论：这里是个最小生成树，what？" class="headerlink" title="10.2：结论：这里是个最小生成树，what？"></a>10.2：结论：这里是个最小生成树，what？</h6><h6 id="先上脚本，和前面分析的一样，出来的东西排序-sha256-取前16位解密AES即可"><a href="#先上脚本，和前面分析的一样，出来的东西排序-sha256-取前16位解密AES即可" class="headerlink" title="先上脚本，和前面分析的一样，出来的东西排序+sha256+取前16位解密AES即可"></a>先上脚本，和前面分析的一样，出来的东西排序+sha256+取前16位解密AES即可</h6><h6 id="但是为啥是最小生成树，还得研究一下…"><a href="#但是为啥是最小生成树，还得研究一下…" class="headerlink" title="但是为啥是最小生成树，还得研究一下…"></a>但是为啥是最小生成树，还得研究一下…</h6><pre><code class="python">with open(&quot;map.txt&quot;, &quot;r&quot;) as f:
+    exec(f.read())
+
+mp = list(map(lambda x : list(map(int, x.split(&#39;,&#39;))), mp))
+mp.sort(key = lambda x : x[2])
+fa = []
+for i in range(1001):
+    fa.append(i)
+
+def find(x):
+    if fa[x] == x:
+        return x
+    ret = find(fa[x])
+    fa[x] = ret
+    return ret
+
+ans = 0
+cnt = 0
+_a = []
+for a, b, res in mp:
+    ffa = find(a)
+    ffb = find(b)
+    if (ffa == ffb):
+        continue
+    fa[ffa] = ffb
+    ans += res
+    cnt += 1
+    _a.append(str(a) + &#39;,&#39; + str(b) + &#39;,&#39; + str(res))
+
+with open(&quot;ans.txt&quot;, &quot;w&quot;) as f:
+    f.write(str(_a))
+</code></pre>
+]]></content>
+  </entry>
 </search>
