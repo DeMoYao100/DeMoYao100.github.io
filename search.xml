@@ -6565,7 +6565,7 @@ with open(&quot;ans.txt&quot;, &quot;w&quot;) as f:
   <entry>
     <title>docker操作记录</title>
     <url>/2023/10/03/docker%E6%93%8D%E4%BD%9C%E8%AE%B0%E5%BD%95/</url>
-    <content><![CDATA[<span id="more"></span>
+    <content><![CDATA[<h6 id="PREFACE：记录"><a href="#PREFACE：记录" class="headerlink" title="PREFACE：记录"></a>PREFACE：记录</h6><span id="more"></span>
 
 <p>以命令行模式进入docker：</p>
 <pre><code>docker run -it ubuntu /bin/bash

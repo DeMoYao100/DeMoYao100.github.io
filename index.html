@@ -133,54 +133,7 @@
     <div class="excerpt">
         <div class="content" v-pre>
             
-            <span id="more"></span>
-
-<p>以命令行模式进入docker：</p>
-<pre><code>docker run -it ubuntu /bin/bash
-</code></pre>
-<p>退出docker：</p>
-<pre><code>exit
-</code></pre>
-<p>查看所有docker：</p>
-<pre><code>docker ps -a
-</code></pre>
-<p>启动已经停止的docker：</p>
-<pre><code>docker start &lt;容器 ID&gt;
-</code></pre>
-<p>指定docker运行模式（-d不进入docker）：</p>
-<pre><code>docker run -itd --name ubuntu-test ubuntu /bin/bash
-</code></pre>
-<p>sleep休眠状态，保持容器运行：</p>
-<pre><code>docker run -d python313 sleep infinity
-</code></pre>
-<p>停止容器：</p>
-<pre><code>docker stop &lt;容器 ID&gt;
-</code></pre>
-<p>进入正在后台的容器：</p>
-<pre><code>docker attach
-</code></pre>
-<p>退出容器终端但不停止：</p>
-<pre><code>docker exec
-</code></pre>
-<p>重新进入容器交互界面</p>
-<pre><code>docker exec -it &lt;容器 ID&gt; /bin/bash
-</code></pre>
-<p>导出容器快照：</p>
-<pre><code>docker export 1e560fca3906 &gt; ubuntu.tar
-</code></pre>
-<p>重将容器快照导入为镜像：</p>
-<pre><code>cat docker/ubuntu.tar | docker import - test/ubuntu:v1
-</code></pre>
-<p>或</p>
-<pre><code>docker import http://example.com/exampleimage.tgz example/imagerepo
-</code></pre>
-<p>删除容器：</p>
-<pre><code>docker rm -f 1e560fca3906
-</code></pre>
-<p>传入文件：</p>
-<pre><code>docker cp file &lt;容器 ID&gt;:/app/file
-</code></pre>
-
+            <h6 id="PREFACE：记录"><a href="#PREFACE：记录" class="headerlink" title="PREFACE：记录"></a>PREFACE：记录</h6>
             
         </div>
     </div>
