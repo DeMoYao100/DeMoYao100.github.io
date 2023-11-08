@@ -109,11 +109,23 @@
     <div class="content" v-pre>
         <h6 id="PREFACE：记录"><a href="#PREFACE：记录" class="headerlink" title="PREFACE：记录"></a>PREFACE：记录</h6><span id="more"></span>
 
+<p>构建docker镜像：</p>
+<pre><code>docker-compose build
+</code></pre>
+<p>启动docker至后台：</p>
+<pre><code>docker-compose up -d
+</code></pre>
+<p>进入docker进行交互：</p>
+<pre><code>docker exec -it compiler /bin/bash
+</code></pre>
 <p>以命令行模式进入docker：</p>
 <pre><code>docker run -it ubuntu /bin/bash
 </code></pre>
 <p>退出docker：</p>
 <pre><code>exit
+</code></pre>
+<p>停止与删除容器：</p>
+<pre><code> docker-compose down
 </code></pre>
 <p>查看所有docker：</p>
 <pre><code>docker ps -a

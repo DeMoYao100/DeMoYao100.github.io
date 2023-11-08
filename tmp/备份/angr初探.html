@@ -1,0 +1,2279 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+        <title>Angr初探 | Moyao の小屋</title>
+        <meta name="author" content="Moyao">
+        <meta name="description" content="Write down something interesting I met">
+        <meta name="keywords" content="">
+        <link rel="icon" href="/images/head.jpg">
+        <script src="https://cdn.staticfile.org/instant.page/5.1.0/instantpage.min.js" type="module"></script>
+        <script src="https://cdn.staticfile.org/font-awesome/6.1.1/js/all.min.js"></script>
+        
+        <link rel="stylesheet" href="/css/fonts.min.css">
+        <link rel="stylesheet" href="/css/particlex.css">
+        
+        <script src="https://cdn.staticfile.org/vue/3.2.33/vue.global.prod.min.js"></script>
+    <meta name="generator" content="Hexo 6.2.0"></head>
+    <body>
+        <div id="loading" style="height:100vh;width:100vw;position:fixed;display:flex;z-index:200;justify-content:space-between;background:#fff;transition:opacity 0.3s ease-out"><div style="position:fixed;height:100vh;width:100vw;display:flex;justify-content:center;align-items:center"><div id="loadcontent" style="width:50vmin;height:50vmin;padding:50px;border-radius:50%;display:flex;justify-content:center;align-items:center;border:solid 10px #a3ddfb;text-align:center"><div><h2>LOADING...</h2><p style="word-break:keep-all">加载过慢请开启缓存(浏览器默认开启)</p><div><img alt="loading" src="/loading.gif"></div></div></div></div></div>
+        <div id="layout">
+            <i data-fa-symbol="calendar-solid" class="fa-solid fa-calendar fa-fw"></i>
+            <i data-fa-symbol="bookmark-solid" class="fa-solid fa-bookmark fa-fw"></i>
+            <i data-fa-symbol="tags-solid" class="fa-solid fa-tags fa-fw"></i>
+            <transition name="into">
+                <div v-show="show_page" style="display: -not-none">
+                    <div id="menu_show">
+                         
+<nav id="menu">
+    <div class="desktop-menu">
+        <a href="/">
+            <span class="title">Moyao の小屋</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;home</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;about</span>
+        </a>
+        
+        <a target="_blank" rel="noopener" href="//tags/re/">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;tags</span>
+        </a>
+        
+    </div>
+    <div :class="'phone-menu ' + menu_show" id="phone-menu">
+        <div class="curtain" @click="menu_show = !menu_show" v-show="menu_show"></div>
+        <div :class="'title'" @click="menu_show = !menu_show">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;Moyao の小屋</span>
+        </div>
+        <transition name="slide">
+        <div class="items" v-show="menu_show">
+            
+            <a href="">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-house fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">home</div>
+                </div>
+            </a>
+            
+            <a href="">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-id-card fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">about</div>
+                </div>
+            </a>
+            
+            <a href="/tags/re/">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-tags fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">tags</div>
+                </div>
+            </a>
+            
+        </div>
+        </transition>
+    </div>
+</nav>
+                    </div>
+                    <div id="main">
+                        
+<div class="article">
+    <div>
+        <h1>Angr初探 </h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
+            </span>
+            2023/10/24
+        </span>
+        
+        
+    </div>
+    <div class="content" v-pre>
+        <h6 id="PREFACE：最近遇到需要动态模拟的题比较多，这里还是系统学一下angr"><a href="#PREFACE：最近遇到需要动态模拟的题比较多，这里还是系统学一下angr" class="headerlink" title="PREFACE：最近遇到需要动态模拟的题比较多，这里还是系统学一下angr"></a>PREFACE：最近遇到需要动态模拟的题比较多，这里还是系统学一下angr</h6><h6 id="ps-angr的文档还是写的比较有意思而且详细的，适合当睡前读物，点名批评某二进制分析工具的文档……"><a href="#ps-angr的文档还是写的比较有意思而且详细的，适合当睡前读物，点名批评某二进制分析工具的文档……" class="headerlink" title="ps. angr的文档还是写的比较有意思而且详细的，适合当睡前读物，点名批评某二进制分析工具的文档……"></a>ps. angr的文档还是写的比较有意思而且详细的，适合当睡前读物，点名批评某二进制分析工具的文档……</h6><span id="more"></span>
+
+<h4 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h4><p><a target="_blank" rel="noopener" href="https://docs.angr.io/en/latest/">angr documentation</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/jakespringer/angr_ctf">jakespringer&#x2F;angr_ctf (github.com)</a></p>
+<h4 id="虚拟环境"><a href="#虚拟环境" class="headerlink" title="虚拟环境"></a>虚拟环境</h4><p><code>angr</code>官方推荐在虚拟环境中运行，防止与外部包冲突（例如<code>keystone</code>和<code>keystone-engine</code>冲突，这里用的是<code>keystone-engine</code>）</p>
+<pre><code>pip install virtualenv
+
+# 在当前目录下创建名为 angr-venv的新目录，包含干净的python环境
+virtualenv angr-venv
+
+Windows：
+angr-venv\Scripts\activate
+
+Linux/Mac：
+source angr-venv/bin/activate
+
+pip install angr
+
+退出虚拟环境：
+deactivate
+</code></pre>
+<h3 id="使用样例"><a href="#使用样例" class="headerlink" title="使用样例"></a>使用样例</h3><h4 id="导入模块"><a href="#导入模块" class="headerlink" title="导入模块"></a>导入模块</h4><pre><code class="python">import angr
+proj = angr.Project(&#39;./file&#39;)
+</code></pre>
+<h4 id="命令行使用时可以导入monkeyhex转化为十六进制输出"><a href="#命令行使用时可以导入monkeyhex转化为十六进制输出" class="headerlink" title="命令行使用时可以导入monkeyhex转化为十六进制输出"></a>命令行使用时可以导入<code>monkeyhex</code>转化为十六进制输出</h4><pre><code class="python">import monkeyhex # this will format numerical results in hexadecimal
+</code></pre>
+<h4 id="project的基础属性"><a href="#project的基础属性" class="headerlink" title="project的基础属性"></a>project的基础属性</h4><pre><code class="python">proj.entry # 文件的入口点
+
+proj.filename # 文件名
+
+proj.arch # 文件的架构
+- proj.arch.name # x86/x86-64/ARM
+- proj.arch.bits # 32/64
+- proj.arch.bytes # bytes per instruction, eg : 4/8
+- proj.arch.memory_endness # 字节序，例如 Iend_LE代表小端序
+</code></pre>
+<pre><code class="python">proj.loader # 显示已加载对象，内存映射的地址范围
+# &lt;Loaded [file_name], maps [0x400000:0x5004000]&gt;
+
+proj.loader.shared_objects # 已加载的所有共享对象，共享库或动态链接库及其内存映射
+# OrderedDict([(&#39;angr&#39;, &lt;ELF Object angr, maps [0x8048000:0x804c033]&gt;), (&#39;libc.so.6&#39;, &lt;ELF Object libc.so.6, maps [0x8100000:0x83347bb]&gt;), (&#39;ld-linux.so.2&#39;, &lt;ELF Object ld-linux.so.2, maps [0x8400000:0x8437a37]&gt;), (&#39;extern-address space&#39;, &lt;ExternObject Object cle##externs, maps [0x8500000:0x8507fff]&gt;), (&#39;cle##tls&#39;, &lt;ELFTLSObjectV2 Object cle##tls, maps [0x8600000:0x8614807]&gt;)])
+
+proj.loader.min_addr # 加载的二进制文件占用的内存空间的界限
+# 0x8048000
+proj.loader.max_addr
+# 0x8707fff
+
+proj.loader.main_object # 返回代表主要加载的二进制文件的对象
+# &lt;ELF Object angr, maps [0x8048000:0x804c033]&gt;
+
+proj.loader.main_object.execstack # 返回bool，代表主二进制文件是否具有可执行堆栈
+# False
+
+proj.loader.main_object.pic # 二进制文件是否为位置独立代码,若返回True，则说明开启了ASLR
+# False
+</code></pre>
+<h4 id="对基本块的操作"><a href="#对基本块的操作" class="headerlink" title="对基本块的操作"></a>对基本块的操作</h4><pre><code class="python">block = proj.factory.block(proj.entry) # 打印入口的基本块的汇编
+block.pp()
+&quot;&quot;&quot;
+80490b0  endbr32 
+80490b4  xor     ebp, ebp
+80490b6  pop     esi
+80490b7  mov     ecx, esp
+80490b9  and     esp, 0xfffffff0
+80490bc  push    eax
+80490bd  push    esp
+80490be  push    edx
+80490bf  call    0x80490dd
+&quot;&quot;&quot;
+
+block.instructions                  # 该基本块的指令数量
+# 9
+block.instruction_addrs             # 该基本块指令地址
+# (134516912, 134516916, 134516918, 134516919, 134516921, 134516924, 134516925, 134516926, 134516927)
+
+block.capstone # 打印人类可读汇编形式（与.pp()类同）
+block.vex # 打印IR代码形式
+&quot;&quot;&quot;
+IRSB &#123;
+   t0:Ity_I32 t1:Ity_I32 t2:Ity_I32 t3:Ity_I32 t4:Ity_I32 t5:Ity_I32 t6:Ity_I32 t7:Ity_I32 t8:Ity_I32 t9:Ity_I32 t10:Ity_I32 t11:Ity_I32 t12:Ity_I32 t13:Ity_I32 t14:Ity_I32 t15:Ity_I32 t16:Ity_I32 t17:Ity_I32 t18:Ity_I32 t19:Ity_I32 t20:Ity_I32 t21:Ity_I32 t22:Ity_I32 t23:Ity_I32 t24:Ity_I32 t25:Ity_I32
+
+   00 | ------ IMark(0x80490b0, 4, 0) ------
+   01 | ------ IMark(0x80490b4, 2, 0) ------
+   02 | PUT(ebp) = 0x00000000
+   03 | PUT(eip) = 0x080490b6
+   04 | ------ IMark(0x80490b6, 1, 0) ------
+   05 | t4 = GET:I32(esp)
+   06 | t3 = LDle:I32(t4)
+   07 | t15 = Add32(t4,0x00000004)
+   08 | PUT(esi) = t3
+   09 | ------ IMark(0x80490b7, 2, 0) ------
+   10 | PUT(ecx) = t15
+   11 | ------ IMark(0x80490b9, 3, 0) ------
+   12 | t5 = And32(t15,0xfffffff0)
+   13 | PUT(cc_op) = 0x0000000f
+   14 | PUT(cc_dep1) = t5
+   15 | PUT(cc_dep2) = 0x00000000
+   16 | PUT(cc_ndep) = 0x00000000
+   17 | PUT(eip) = 0x080490bc
+   18 | ------ IMark(0x80490bc, 1, 0) ------
+   19 | t8 = GET:I32(eax)
+   20 | t17 = Sub32(t5,0x00000004)
+   21 | PUT(esp) = t17
+   22 | STle(t17) = t8
+   23 | PUT(eip) = 0x080490bd
+   24 | ------ IMark(0x80490bd, 1, 0) ------
+   25 | t19 = Sub32(t17,0x00000004)
+   26 | PUT(esp) = t19
+   27 | STle(t19) = t17
+   28 | PUT(eip) = 0x080490be
+   29 | ------ IMark(0x80490be, 1, 0) ------
+   30 | t12 = GET:I32(edx)
+   31 | t21 = Sub32(t19,0x00000004)
+   32 | PUT(esp) = t21
+   33 | STle(t21) = t12
+   34 | PUT(eip) = 0x080490bf
+   35 | ------ IMark(0x80490bf, 5, 0) ------
+   36 | t23 = Sub32(t21,0x00000004)
+   37 | PUT(esp) = t23
+   38 | STle(t23) = 0x080490c4
+   NEXT: PUT(eip) = 0x080490dd; Ijk_Call
+&#125;
+&quot;&quot;&quot;
+</code></pre>
+<h4 id="模拟状态-SimState"><a href="#模拟状态-SimState" class="headerlink" title="模拟状态 SimState"></a>模拟状态 <code>SimState</code></h4><pre><code class="python">state = proj.factory.entry_state() 
+# &lt;SimState @ 0x80490b0&gt;
+print(state)
+print(state.regs.eip)
+print(state.regs.eax)
+print(state.mem[proj.entry].int.resolved)
+&quot;&quot;&quot;
+&lt;BV32 0x80490b0&gt;
+&lt;BV32 0x1c&gt;
+&lt;BV32 0xfb1e0ff3&gt;
+&quot;&quot;&quot;
+# 注意这里的描述，给出官方解释：
+# - Those aren’t Python ints! Those are bitvectors. Python integers don’t have the same semantics as words on a CPU, e.g. wrapping on overflow, so we work with bitvectors, which you can think of as an integer as represented by a series of bits, to represent CPU data in angr. Note that each bitvector has a .length property describing how wide it is in bits.
+
+state.solver.eval(state.regs.eax) # 转化为python int
+bv = state.solver.BVV(0x1234, 32)       # 反过来创建，create a 32-bit-wide bitvector with value 0x1234
+
+bv = state.solver.BVV(0x1111, 32) # 修改寄存器值
+state.regs.eax = bv
+
+state.mem[0x1000].long = 4 # 修改内存中的值
+print(state.mem[0x1000].long.resolved)
+# &lt;BV32 0x4&gt;
+&quot;&quot;&quot;
+mem的官方描述：
+The mem interface is a little confusing at first, since it’s using some pretty hefty Python magic. The short version of how to use it is:
+
+Use array[index] notation to specify an address
+
+Use .&lt;type&gt; to specify that the memory should be interpreted as type (common values: char, short, int, long, size_t, uint8_t, uint16_t…)
+
+From there, you can either:
+
+Store a value to it, either a bitvector or a Python int
+
+Use .resolved to get the value as a bitvector
+
+Use .concrete to get the value as a Python int
+&quot;&quot;&quot;
+</code></pre>
+<h4 id="模拟管理器-Simulation-Managers"><a href="#模拟管理器-Simulation-Managers" class="headerlink" title="模拟管理器 Simulation Managers"></a>模拟管理器 <code>Simulation Managers</code></h4><pre><code class="python">simgr = proj.factory.simulation_manager(state) # 创建一个新的SimulationManager实例，它将负责管理程序的所有可能的执行路径，包括路径的分叉、合并和死亡
+
+simgr.active 
+&quot;&quot;&quot;
+拟管理器维护了几个不同的状态列表，这些列表代表了程序执行的不同阶段。这些列表包括：active、unconstrained、deadended、errored等。
+simgr.active是一个包含所有“活动”路径的列表。所谓“活动”路径，指的是那些还在进行中、未遇到任何终止条件的路径。这些是可以继续推进执行的路径。
+通过查看simgr.active列表，您可以了解当前有多少执行路径正在被模拟管理器管理，并且可以对这些路径进行进一步的查询或操作。
+&quot;&quot;&quot;
+</code></pre>
+<pre><code class="python">import angr
+proj = angr.Project(&#39;./angr&#39;)
+state = proj.factory.entry_state()
+simgr = proj.factory.simulation_manager(state)
+print(simgr)
+print(simgr.active)
+print(simgr.active[0].regs.eip)
+print(&#39;---&#39;)
+simgr.step()
+print(simgr.active)
+print(simgr.active[0].regs.eip)
+
+&quot;&quot;&quot; 这里执行了一整个基本块（注意：smigr不会改变state的信息）
+&lt;SimulationManager with 1 active&gt;
+[&lt;SimState @ 0x80490b0&gt;]
+&lt;BV32 0x80490b0&gt;
+---
+[&lt;SimState @ 0x80490dd&gt;]
+&lt;BV32 0x80490dd&gt;
+&quot;&quot;&quot;
+</code></pre>
+<h4 id="Analyses"><a href="#Analyses" class="headerlink" title="Analyses"></a>Analyses</h4><pre><code class="python">&gt;&gt;&gt; proj.analyses.            # Press TAB here in ipython to get an autocomplete-listing of everything:
+ proj.analyses.BackwardSlice        proj.analyses.CongruencyCheck      
+ proj.analyses.reload_analyses		proj.analyses.BinaryOptimizer      
+ proj.analyses.DDG                  proj.analyses.StaticHooker
+ proj.analyses.BinDiff              proj.analyses.DFG                  
+ proj.analyses.VariableRecovery		proj.analyses.BoyScout             
+ proj.analyses.Disassembly          proj.analyses.VariableRecoveryFast
+ proj.analyses.CDG                  proj.analyses.GirlScout            
+ proj.analyses.Veritesting			proj.analyses.CFG                  
+ proj.analyses.Identifier           proj.analyses.VFG
+ proj.analyses.CFGEmulated          proj.analyses.LoopFinder           
+ proj.analyses.VSA_DDG				proj.analyses.CFGFast              
+ proj.analyses.Reassembler
+</code></pre>
+<p>（未必准确的解释，后续慢慢验证）</p>
+<p><img src="/tmp/%E5%A4%87%E4%BB%BD/angr%E5%88%9D%E6%8E%A2.htm/image-20231024094301794-16981317832354.png" alt="image-20231024094301794"></p>
+<pre><code class="python">import angr
+proj = angr.Project(&#39;./angr&#39;, auto_load_libs=False) # 不加载所有依赖的外部动态链接库，防止出现额外开销以及库不兼容的报错等等问题
+cfg = proj.analyses.CFGFast()
+print(cfg)
+print(&#39;----&#39;)
+print(cfg.graph.nodes())
+entry_node = cfg.get_any_node(proj.entry)
+print(&#39;----&#39;)
+print(entry_node)
+</code></pre>
+<p><img src="/tmp/%E5%A4%87%E4%BB%BD/angr%E5%88%9D%E6%8E%A2.htm/image-20231024095601415-16981317771273.png" alt="image-20231024095601415"></p>
+<h4 id="The-Loader"><a href="#The-Loader" class="headerlink" title="The Loader"></a>The Loader</h4><pre><code class="python"># All loaded objects
+&gt;&gt;&gt; proj.loader.all_objects
+[&lt;ELF Object fauxware, maps [0x400000:0x60105f]&gt;,
+ &lt;ELF Object libc-2.23.so, maps [0x1000000:0x13c999f]&gt;,
+ &lt;ELF Object ld-2.23.so, maps [0x2000000:0x2227167]&gt;,
+ &lt;ELFTLSObject Object cle##tls, maps [0x3000000:0x3015010]&gt;,
+ &lt;ExternObject Object cle##externs, maps [0x4000000:0x4008000]&gt;,
+ &lt;KernelObject Object cle##kernel, maps [0x5000000:0x5008000]&gt;]
+
+# This is the &quot;main&quot; object, the one that you directly specified when loading the project
+&gt;&gt;&gt; proj.loader.main_object
+&lt;ELF Object fauxware, maps [0x400000:0x60105f]&gt;
+
+# This is a dictionary mapping from shared object name to object
+&gt;&gt;&gt; proj.loader.shared_objects
+&#123; &#39;fauxware&#39;: &lt;ELF Object fauxware, maps [0x400000:0x60105f]&gt;,
+  &#39;libc.so.6&#39;: &lt;ELF Object libc-2.23.so, maps [0x1000000:0x13c999f]&gt;,
+  &#39;ld-linux-x86-64.so.2&#39;: &lt;ELF Object ld-2.23.so, maps [0x2000000:0x2227167]&gt; &#125;
+
+# Here&#39;s all the objects that were loaded from ELF files
+# If this were a windows program we&#39;d use all_pe_objects!
+&gt;&gt;&gt; proj.loader.all_elf_objects
+[&lt;ELF Object fauxware, maps [0x400000:0x60105f]&gt;,
+ &lt;ELF Object libc-2.23.so, maps [0x1000000:0x13c999f]&gt;,
+ &lt;ELF Object ld-2.23.so, maps [0x2000000:0x2227167]&gt;]
+
+# Here&#39;s the &quot;externs object&quot;, which we use to provide addresses for unresolved imports and angr internals
+&gt;&gt;&gt; proj.loader.extern_object
+&lt;ExternObject Object cle##externs, maps [0x4000000:0x4008000]&gt;
+
+# This object is used to provide addresses for emulated syscalls
+&gt;&gt;&gt; proj.loader.kernel_object
+&lt;KernelObject Object cle##kernel, maps [0x5000000:0x5008000]&gt;
+
+# Finally, you can to get a reference to an object given an address in it
+&gt;&gt;&gt; proj.loader.find_object_containing(0x400000)
+&lt;ELF Object fauxware, maps [0x400000:0x60105f]&gt;
+</code></pre>
+<pre><code class="python">&gt;&gt;&gt; obj = proj.loader.main_object
+
+# The entry point of the object
+&gt;&gt;&gt; obj.entry
+0x400580
+
+&gt;&gt;&gt; obj.min_addr, obj.max_addr
+(0x400000, 0x60105f)
+
+# Retrieve this ELF&#39;s segments and sections
+&gt;&gt;&gt; obj.segments
+&lt;Regions: [&lt;ELFSegment memsize=0xa74, filesize=0xa74, vaddr=0x400000, flags=0x5, offset=0x0&gt;,
+           &lt;ELFSegment memsize=0x238, filesize=0x228, vaddr=0x600e28, flags=0x6, offset=0xe28&gt;]&gt;
+&gt;&gt;&gt; obj.sections
+&lt;Regions: [&lt;Unnamed | offset 0x0, vaddr 0x0, size 0x0&gt;,
+           &lt;.interp | offset 0x238, vaddr 0x400238, size 0x1c&gt;,
+           &lt;.note.ABI-tag | offset 0x254, vaddr 0x400254, size 0x20&gt;,
+            ...etc
+
+# You can get an individual segment or section by an address it contains:
+&gt;&gt;&gt; obj.find_segment_containing(obj.entry)
+&lt;ELFSegment memsize=0xa74, filesize=0xa74, vaddr=0x400000, flags=0x5, offset=0x0&gt;
+&gt;&gt;&gt; obj.find_section_containing(obj.entry)
+&lt;.text | offset 0x580, vaddr 0x400580, size 0x338&gt;
+
+# Get the address of the PLT stub for a symbol
+&gt;&gt;&gt; addr = obj.plt[&#39;strcmp&#39;]
+&gt;&gt;&gt; addr
+0x400550
+&gt;&gt;&gt; obj.reverse_plt[addr]
+&#39;strcmp&#39;
+
+# Show the prelinked base of the object and the location it was actually mapped into memory by CLE
+&gt;&gt;&gt; obj.linked_base
+0x400000
+&gt;&gt;&gt; obj.mapped_base
+0x400000
+</code></pre>
+<h4 id="Symbols-and-Relocations"><a href="#Symbols-and-Relocations" class="headerlink" title="Symbols and Relocations"></a>Symbols and Relocations</h4><p>CLE寻找符号地址</p>
+<pre><code class="python">&gt;&gt;&gt; strcmp = proj.loader.find_symbol(&#39;strcmp&#39;)
+&gt;&gt;&gt; strcmp
+&lt;Symbol &quot;strcmp&quot; in libc.so.6 at 0x1089cd0&gt;
+</code></pre>
+<p>The Symbol object has three ways of reporting its address:</p>
+<ul>
+<li><code>.rebased_addr</code> is its address in the global address space. This is what is shown in the print output.</li>
+<li><code>.linked_addr</code> is its address relative to the prelinked base of the binary. This is the address reported in, for example, <code>readelf(1)</code>.</li>
+<li><code>.relative_addr</code> is its address relative to the object base. This is known in the literature (particularly the Windows literature) as an RVA (relative virtual address).</li>
+</ul>
+<pre><code class="python">&gt;&gt;&gt; strcmp.name
+&#39;strcmp&#39;
+
+&gt;&gt;&gt; strcmp.owner
+&lt;ELF Object libc-2.23.so, maps [0x1000000:0x13c999f]&gt;
+
+&gt;&gt;&gt; strcmp.rebased_addr # 进程虚拟内存中的地址
+0x1089cd0
+&gt;&gt;&gt; strcmp.linked_addr #链接时分配的地址
+0x89cd0
+&gt;&gt;&gt; strcmp.relative_addr # 被加载到的预定基地址
+0x89cd0
+</code></pre>
+<pre><code class="python">&gt;&gt;&gt; strcmp.is_export
+True
+&gt;&gt;&gt; strcmp.is_import
+False
+
+# On Loader, the method is find_symbol because it performs a search operation to find the symbol.
+# On an individual object, the method is get_symbol because there can only be one symbol with a given name.
+&gt;&gt;&gt; main_strcmp = proj.loader.main_object.get_symbol(&#39;strcmp&#39;)
+&gt;&gt;&gt; main_strcmp
+&lt;Symbol &quot;strcmp&quot; in fauxware (import)&gt;
+&gt;&gt;&gt; main_strcmp.is_export
+False
+&gt;&gt;&gt; main_strcmp.is_import
+True
+&gt;&gt;&gt; main_strcmp.resolvedby
+&lt;Symbol &quot;strcmp&quot; in libc.so.6 at 0x1089cd0&gt;
+</code></pre>
+<pre><code class="python"># Relocations don&#39;t have a good pretty-printing, so those addresses are Python-internal, unrelated to our program
+&gt;&gt;&gt; proj.loader.shared_objects[&#39;libc.so.6&#39;].imports
+&#123;&#39;__libc_enable_secure&#39;: &lt;cle.backends.elf.relocation.amd64.R_X86_64_GLOB_DAT at 0x7ff5c5fce780&gt;,
+ &#39;__tls_get_addr&#39;: &lt;cle.backends.elf.relocation.amd64.R_X86_64_JUMP_SLOT at 0x7ff5c6018358&gt;,
+ &#39;_dl_argv&#39;: &lt;cle.backends.elf.relocation.amd64.R_X86_64_GLOB_DAT at 0x7ff5c5fd2e48&gt;,
+ &#39;_dl_find_dso_for_object&#39;: &lt;cle.backends.elf.relocation.amd64.R_X86_64_JUMP_SLOT at 0x7ff5c6018588&gt;,
+ &#39;_dl_starting_up&#39;: &lt;cle.backends.elf.relocation.amd64.R_X86_64_GLOB_DAT at 0x7ff5c5fd2550&gt;,
+ &#39;_rtld_global&#39;: &lt;cle.backends.elf.relocation.amd64.R_X86_64_GLOB_DAT at 0x7ff5c5fce4e0&gt;,
+ &#39;_rtld_global_ro&#39;: &lt;cle.backends.elf.relocation.amd64.R_X86_64_GLOB_DAT at 0x7ff5c5fcea20&gt;&#125;
+</code></pre>
+<h4 id="Loading-Options"><a href="#Loading-Options" class="headerlink" title="Loading Options"></a>Loading Options</h4><p>If you are loading something with <code>angr.Project</code> and you want to pass an option to the <code>cle.Loader</code> instance that Project implicitly creates, you can just pass the keyword argument directly to the Project constructor, and it will be passed on to CLE. You should look at the <a target="_blank" rel="noopener" href="https://docs.angr.io/projects/cle/en/latest/api.html">CLE API docs.</a> if you want to know everything that could possibly be passed in as an option, but we will go over some important and frequently used options here.</p>
+<p>We’ve discussed <code>auto_load_libs</code> already - it enables or disables CLE’s attempt to automatically resolve shared library dependencies, and is on by default. Additionally, there is the opposite, <code>except_missing_libs</code>, which, if set to true, will cause an exception to be thrown whenever a binary has a shared library dependency that cannot be resolved.</p>
+<p>You can pass a list of strings to <code>force_load_libs</code> and anything listed will be treated as an unresolved shared library dependency right out of the gate, or you can pass a list of strings to <code>skip_libs</code> to prevent any library of that name from being resolved as a dependency. Additionally, you can pass a list of strings (or a single string) to <code>ld_path</code>, which will be used as an additional search path for shared libraries, before any of the defaults: the same directory as the loaded program, the current working directory, and your system libraries.</p>
+<p>If you want to specify some options that only apply to a specific binary object, CLE will let you do that too. The parameters <code>main_opts</code> and <code>lib_opts</code> do this by taking dictionaries of options. <code>main_opts</code> is a mapping from option names to option values, while <code>lib_opts</code> is a mapping from library name to dictionaries mapping option names to option values.</p>
+<p>The options that you can use vary from backend to backend, but some common ones are:</p>
+<ul>
+<li><code>backend</code> - which backend to use, as either a class or a name</li>
+<li><code>base_addr</code> - a base address to use</li>
+<li><code>entry_point</code> - an entry point to use</li>
+<li><code>arch</code> - the name of an architecture to use</li>
+</ul>
+<p>Example:</p>
+<pre><code class="python">&gt;&gt;&gt; angr.Project(&#39;examples/fauxware/fauxware&#39;, main_opts=&#123;&#39;backend&#39;: &#39;blob&#39;, &#39;arch&#39;: &#39;i386&#39;&#125;, lib_opts=&#123;&#39;libc.so.6&#39;: &#123;&#39;backend&#39;: &#39;elf&#39;&#125;&#125;)
+&lt;Project examples/fauxware/fauxware&gt;
+</code></pre>
+<h4 id="Symbolic-Function-Summaries"><a href="#Symbolic-Function-Summaries" class="headerlink" title="Symbolic Function Summaries"></a>Symbolic Function Summaries</h4><p><a target="_blank" rel="noopener" href="https://github.com/angr/angr/tree/master/angr/procedures">angr&#x2F;angr&#x2F;procedures at master · angr&#x2F;angr (github.com)</a></p>
+<h4 id="hook"><a href="#hook" class="headerlink" title="hook"></a>hook</h4><pre><code class="wiki">The mechanism by which angr replaces library code with a Python summary is called hooking, and you can do it too! When performing simulation, at every step angr checks if the current address has been hooked, and if so, runs the hook instead of the binary code at that address. The API to let you do this is proj.hook(addr, hook), where hook is a SimProcedure instance. You can manage your project’s hooks with .is_hooked, .unhook, and .hooked_by, which should hopefully not require explanation.
+
+There is an alternate API for hooking an address that lets you specify your own off-the-cuff function to use as a hook, by using proj.hook(addr) as a function decorator. If you do this, you can also optionally specify a length keyword argument to make execution jump some number of bytes forward after your hook finishes.
+</code></pre>
+<pre><code class="python">stub_func = angr.SIM_PROCEDURES[&#39;stubs&#39;][&#39;ReturnUnconstrained&#39;] # this is a CLASS
+&gt;&gt;&gt; proj.hook(0x10000, stub_func())  # hook with an instance of the class
+
+&gt;&gt;&gt; proj.is_hooked(0x10000)            # these functions should be pretty self-explanitory
+True
+&gt;&gt;&gt; proj.hooked_by(0x10000)
+&lt;ReturnUnconstrained&gt;
+&gt;&gt;&gt; proj.unhook(0x10000)
+
+&gt;&gt;&gt; @proj.hook(0x20000, length=5)
+... def my_hook(state):
+...     state.regs.rax = 1
+
+&gt;&gt;&gt; proj.is_hooked(0x20000)
+True
+</code></pre>
+<p>可以尝试</p>
+<pre><code class="python">import angr
+proj = angr.Project(&#39;./angr&#39;, auto_load_libs=False)
+state = proj.factory.entry_state()
+
+
+@proj.hook(proj.entry)
+def my_hook(state):
+    print(&#39;startttttttt!!!!!!!!&#39;)
+
+simgr = proj.factory.simulation_manager(state)
+simgr.run()
+
+# startttttttt!!!!!!!!
+</code></pre>
+<p>然后可以进行hook修改寄存器等操作</p>
+<pre><code class="python">import angr
+proj = angr.Project(&#39;./angr&#39;, auto_load_libs=False)
+state = proj.factory.entry_state()
+simgr = proj.factory.simulation_manager(state)
+print(simgr.active[0].regs.eax)
+
+@proj.hook(proj.entry)
+def my_hook(state):
+    print(&#39;startttttttt!!!!!!!!&#39;)
+    simgr.active[0].regs.eax = state.solver.BVV(0x1111, 32)
+    print(simgr.active[0].regs.eax)
+    
+simgr.run()
+
+&quot;&quot;&quot;
+&lt;BV32 0x1c&gt;
+startttttttt!!!!!!!!
+&lt;BV32 0x1111&gt;
+&quot;&quot;&quot;
+</code></pre>
+<h3 id="符号样例"><a href="#符号样例" class="headerlink" title="符号样例"></a>符号样例</h3><h4 id="Bitvectors"><a href="#Bitvectors" class="headerlink" title="Bitvectors"></a>Bitvectors</h4><pre><code class="python">&gt;&gt;&gt; one = state.solver.BVV(1, 64)
+&gt;&gt;&gt; one
+ &lt;BV64 0x1&gt;
+# Create a bitvector symbol named &quot;x&quot; of length 64 bits
+&gt;&gt;&gt; x = state.solver.BVS(&quot;x&quot;, 64)
+&gt;&gt;&gt; x
+&lt;BV64 x_9_64&gt;
+&gt;&gt;&gt; y = state.solver.BVS(&quot;y&quot;, 64)
+&gt;&gt;&gt; y
+&lt;BV64 y_10_64&gt;
+
+&gt;&gt;&gt; x + one
+&lt;BV64 x_9_64 + 0x1&gt;
+&gt;&gt;&gt; (x + one) / 2
+&lt;BV64 (x_9_64 + 0x1) / 0x2&gt;
+&gt;&gt;&gt; x - y
+&lt;BV64 x_9_64 - y_10_64&gt;
+</code></pre>
+<p>可以通过ASTs分析</p>
+<pre><code class="python">&gt;&gt;&gt; tree = (x + 1) / (y + 2)
+&gt;&gt;&gt; tree
+&lt;BV64 (x_9_64 + 0x1) / (y_10_64 + 0x2)&gt;
+&gt;&gt;&gt; tree.op
+&#39;__floordiv__&#39;
+&gt;&gt;&gt; tree.args
+(&lt;BV64 x_9_64 + 0x1&gt;, &lt;BV64 y_10_64 + 0x2&gt;)
+&gt;&gt;&gt; tree.args[0].op
+&#39;__add__&#39;
+&gt;&gt;&gt; tree.args[0].args
+(&lt;BV64 x_9_64&gt;, &lt;BV64 0x1&gt;)
+&gt;&gt;&gt; tree.args[0].args[1].op
+&#39;BVV&#39;
+&gt;&gt;&gt; tree.args[0].args[1].args
+(1, 64)
+</code></pre>
+<h4 id="Symbolic-Constraints"><a href="#Symbolic-Constraints" class="headerlink" title="Symbolic Constraints"></a>Symbolic Constraints</h4><p>Performing comparison operations between any two similarly-typed ASTs will yield another AST - not a bitvector, but now a symbolic boolean.</p>
+<pre><code class="python">&gt;&gt;&gt; x == 1
+&lt;Bool x_9_64 == 0x1&gt;
+&gt;&gt;&gt; x == one
+&lt;Bool x_9_64 == 0x1&gt;
+&gt;&gt;&gt; x &gt; 2
+&lt;Bool x_9_64 &gt; 0x2&gt;
+&gt;&gt;&gt; x + y == one_hundred + 5
+&lt;Bool (x_9_64 + y_10_64) == 0x69&gt;
+&gt;&gt;&gt; one_hundred &gt; 5
+&lt;Bool True&gt;
+&gt;&gt;&gt; one_hundred &gt; -5 # One tidbit you can see from this is that the comparisons are unsigned by default. The -5 in the last example is coerced to &lt;BV64 0xfffffffffffffffb&gt;, which is definitely not less than one hundred. 
+# signed : one_hundred.SGT(-5)
+&lt;Bool False&gt;
+</code></pre>
+<p>判断</p>
+<pre><code class="python">yes = one == 1
+no = one == 2
+maybe = x == y
+state.solver.is_true(yes)
+True
+state.solver.is_false(yes)
+False
+state.solver.is_true(no)
+False
+state.solver.is_false(no)
+True
+state.solver.is_true(maybe)
+False
+state.solver.is_false(maybe)
+False
+</code></pre>
+<h4 id="Constraint-Solving"><a href="#Constraint-Solving" class="headerlink" title="Constraint Solving"></a>Constraint Solving</h4><pre><code class="python">&gt;&gt;&gt; state.solver.add(x &gt; y)
+&gt;&gt;&gt; state.solver.add(y &gt; 2)
+&gt;&gt;&gt; state.solver.add(10 &gt; x)
+&gt;&gt;&gt; state.solver.eval(x)
+4 # result might vary
+</code></pre>
+<pre><code class="python"># get a fresh state without constraints
+&gt;&gt;&gt; state = proj.factory.entry_state()
+&gt;&gt;&gt; input = state.solver.BVS(&#39;input&#39;, 64)
+&gt;&gt;&gt; operation = (((input + 4) * 3) &gt;&gt; 1) + input
+&gt;&gt;&gt; output = 200
+&gt;&gt;&gt; state.solver.add(operation == output)
+&gt;&gt;&gt; state.solver.eval(input)
+0x3333333333333381
+
+&gt;&gt;&gt; state.solver.add(input &lt; 2**32)
+&gt;&gt;&gt; state.satisfiable()
+False
+</code></pre>
+<pre><code class="python"># fresh state
+&gt;&gt;&gt; state = proj.factory.entry_state()
+&gt;&gt;&gt; state.solver.add(x - y &gt;= 4)
+&gt;&gt;&gt; state.solver.add(y &gt; 0)
+&gt;&gt;&gt; state.solver.eval(x)
+5
+&gt;&gt;&gt; state.solver.eval(y)
+1
+&gt;&gt;&gt; state.solver.eval(x + y)
+6
+</code></pre>
+<h4 id="Floating-point-numbers"><a href="#Floating-point-numbers" class="headerlink" title="Floating point numbers"></a>Floating point numbers</h4><pre><code class="python"># fresh state
+&gt;&gt;&gt; state = proj.factory.entry_state()
+&gt;&gt;&gt; a = state.solver.FPV(3.2, state.solver.fp.FSORT_DOUBLE)
+&gt;&gt;&gt; a
+&lt;FP64 FPV(3.2, DOUBLE)&gt;
+
+&gt;&gt;&gt; b = state.solver.FPS(&#39;b&#39;, state.solver.fp.FSORT_DOUBLE)
+&gt;&gt;&gt; b
+&lt;FP64 FPS(&#39;FP_b_0_64&#39;, DOUBLE)&gt;
+
+&gt;&gt;&gt; a + b
+&lt;FP64 fpAdd(&#39;RNE&#39;, FPV(3.2, DOUBLE), FPS(&#39;FP_b_0_64&#39;, DOUBLE))&gt;
+
+&gt;&gt;&gt; a + 4.4
+&lt;FP64 FPV(7.6000000000000005, DOUBLE)&gt;
+
+&gt;&gt;&gt; b + 2 &lt; 0
+&lt;Bool fpLT(fpAdd(&#39;RNE&#39;, FPS(&#39;FP_b_0_64&#39;, DOUBLE), FPV(2.0, DOUBLE)), FPV(0.0, DOUBLE))&gt;
+</code></pre>
+<p>This is nice, but sometimes we need to be able to work directly with the representation of the float as a bitvector. You can interpret bitvectors as floats and vice versa, with the methods <code>raw_to_bv</code> and <code>raw_to_fp</code>:</p>
+<pre><code class="python">&gt;&gt;&gt; a.raw_to_bv()
+&lt;BV64 0x400999999999999a&gt;
+&gt;&gt;&gt; b.raw_to_bv()
+&lt;BV64 fpToIEEEBV(FPS(&#39;FP_b_0_64&#39;, DOUBLE))&gt;
+
+&gt;&gt;&gt; state.solver.BVV(0, 64).raw_to_fp()
+&lt;FP64 FPV(0.0, DOUBLE)&gt;
+&gt;&gt;&gt; state.solver.BVS(&#39;x&#39;, 64).raw_to_fp()
+&lt;FP64 fpToFP(x_1_64, DOUBLE)&gt;
+</code></pre>
+<pre><code class="python">&gt;&gt;&gt; a
+&lt;FP64 FPV(3.2, DOUBLE)&gt;
+&gt;&gt;&gt; a.val_to_bv(12)
+&lt;BV12 0x3&gt;
+&gt;&gt;&gt; a.val_to_bv(12).val_to_fp(state.solver.fp.FSORT_FLOAT)
+&lt;FP32 FPV(3.0, FLOAT)&gt;
+</code></pre>
+<h4 id="More-Solving-Methods"><a href="#More-Solving-Methods" class="headerlink" title="More Solving Methods"></a>More Solving Methods</h4><p><code>eval</code> will give you one possible solution to an expression, but what if you want several? What if you want to ensure that the solution is unique? The solver provides you with several methods for common solving patterns:</p>
+<ul>
+<li><code>solver.eval(expression)</code> will give you one possible solution to the given expression.</li>
+<li><code>solver.eval_one(expression)</code> will give you the solution to the given expression, or throw an error if more than one solution is possible.</li>
+<li><code>solver.eval_upto(expression, n)</code> will give you up to n solutions to the given expression, returning fewer than n if fewer than n are possible.</li>
+<li><code>solver.eval_atleast(expression, n)</code> will give you n solutions to the given expression, throwing an error if fewer than n are possible.</li>
+<li><code>solver.eval_exact(expression, n)</code> will give you n solutions to the given expression, throwing an error if fewer or more than are possible.</li>
+<li><code>solver.min(expression)</code> will give you the minimum possible solution to the given expression.</li>
+<li><code>solver.max(expression)</code> will give you the maximum possible solution to the given expression.</li>
+</ul>
+<p>Additionally, all of these methods can take the following keyword arguments:</p>
+<ul>
+<li><code>extra_constraints</code> can be passed as a tuple of constraints. These constraints will be taken into account for this evaluation, but will not be added to the state.</li>
+<li><code>cast_to</code> can be passed a data type to cast the result to. Currently, this can only be <code>int</code> and <code>bytes</code>, which will cause the method to return the corresponding representation of the underlying data. For example, <code>state.solver.eval(state.solver.BVV(0x41424344, 32), cast_to=bytes)</code> will return <code>b&#39;ABCD&#39;</code>.</li>
+</ul>
+<h3 id="Machine-State-memory-registers-and-so-on"><a href="#Machine-State-memory-registers-and-so-on" class="headerlink" title="Machine State - memory, registers, and so on"></a>Machine State - memory, registers, and so on</h3><p>quick examples:</p>
+<pre><code class="python">&gt;&gt;&gt; import angr, claripy
+&gt;&gt;&gt; proj = angr.Project(&#39;/bin/true&#39;)
+&gt;&gt;&gt; state = proj.factory.entry_state()
+
+# copy rsp to rbp
+&gt;&gt;&gt; state.regs.rbp = state.regs.rsp
+
+# store rdx to memory at 0x1000
+&gt;&gt;&gt; state.mem[0x1000].uint64_t = state.regs.rdx
+
+# dereference rbp
+&gt;&gt;&gt; state.regs.rbp = state.mem[state.regs.rbp].uint64_t.resolved
+
+# add rax, qword ptr [rsp + 8]
+&gt;&gt;&gt; state.regs.rax += state.mem[state.regs.rsp + 8].uint64_t.resolved
+</code></pre>
+<p>这里开始使用更简单的执行方法：<code>state.step()</code>，其会进行一步符号执行并且返回名为<a target="_blank" rel="noopener" href="https://docs.angr.io/en/latest/api.html#angr.engines.successors.SimSuccessors"><code>angr.engines.successors.SimSuccessors</code></a>的对象，并且会提供若干可以被分类成不同执行路径的继承状态，关注该对象的 <code>.successors</code> 属性，其是一个包含所有“normal” successors of a given step的list。</p>
+<p>该list会包含所有constraint的正误状态作为新的constraint</p>
+<p>(这里的example应该是用一个strcmp作为constraint)</p>
+<pre><code class="python">&gt;&gt;&gt; proj = angr.Project(&#39;examples/fauxware/fauxware&#39;)
+&gt;&gt;&gt; state = proj.factory.entry_state(stdin=angr.SimFile)  # ignore that argument for now - we&#39;re disabling a more complicated default setup for the sake of education
+&gt;&gt;&gt; while True:
+...     succ = state.step()
+...     if len(succ.successors) == 2:
+...         break
+...     state = succ.successors[0]
+
+&gt;&gt;&gt; state1, state2 = succ.successors
+&gt;&gt;&gt; state1
+&lt;SimState @ 0x400629&gt;
+&gt;&gt;&gt; state2
+&lt;SimState @ 0x400699&gt;
+</code></pre>
+<p>可以use <code>state.posix.stdin.load(0, state.posix.stdin.size)</code> to retrieve a bitvector representing all the content read from stdin so far</p>
+<pre><code class="python">&gt;&gt;&gt; input_data = state1.posix.stdin.load(0, state1.posix.stdin.size)
+
+&gt;&gt;&gt; state1.solver.eval(input_data, cast_to=bytes)
+b&#39;\x00\x00\x00\x00\x00\x00\x00\x00\x00SOSNEAKY\x00\x00\x00&#39;
+
+&gt;&gt;&gt; state2.solver.eval(input_data, cast_to=bytes)
+b&#39;\x00\x00\x00\x00\x00\x00\x00\x00\x00S\x00\x80N\x00\x00 \x00\x00\x00\x00&#39;
+</code></pre>
+<h4 id="State-Presets"><a href="#State-Presets" class="headerlink" title="State Presets"></a>State Presets</h4><p><code>project.factory.</code></p>
+<ul>
+<li><code>.blank_state()</code> constructs a “blank slate” blank state, with most of its data left uninitialized. When accessing uninitialized data, an unconstrained symbolic value will be returned.</li>
+<li><code>.entry_state()</code> constructs a state ready to execute at the main binary’s entry point.</li>
+<li><code>.full_init_state()</code> constructs a state that is ready to execute through any initializers that need to be run before the main binary’s entry point, for example, shared library constructors or preinitializers. When it is finished with these it will jump to the entry point.</li>
+<li><code>.call_state()</code> constructs a state ready to execute a given function.</li>
+</ul>
+<p>使用方法：</p>
+<ul>
+<li>传入起始地址：</li>
+</ul>
+<p>​	All of these constructors can take an <code>addr</code> argument to specify the exact address to start.</p>
+<ul>
+<li>传入参数：</li>
+</ul>
+<p>​	If you’re executing in an environment that can take command line arguments or an environment, you can pass a list of arguments through <code>args</code> and a dictionary of environment variables through <code>env</code> into <code>entry_state</code> and <code>full_init_state</code>. The values in these structures can be strings or bitvectors, and will be serialized into the state as the arguments and environment to the simulated execution. The default <code>args</code> is an empty list, so if the program you’re analyzing expects to find at least an <code>argv[0]</code>, you should always provide that!</p>
+<ul>
+<li>可以传入符号</li>
+</ul>
+<p>​	If you’d like to have <code>argc</code> be symbolic, you can pass a symbolic bitvector as <code>argc</code> to the <code>entry_state</code> and <code>full_init_state</code> constructors. Be careful, though: if you do this, you should also add a constraint to the resulting state that your value for argc cannot be larger than the number of args you passed into <code>args</code>.</p>
+<ul>
+<li>传入函数参数</li>
+</ul>
+<p>​	To use the call state, you should call it with <code>.call_state(addr, arg1, arg2, ...)</code>, where <code>addr</code> is the address of the function you want to call and <code>argN</code> is the Nth argument to that function, either as a Python integer, string, or array, or a bitvector. If you want to have memory allocated and actually pass in a pointer to an object, you should wrap it in an PointerWrapper, i.e. <code>angr.PointerWrapper(&quot;point to me!&quot;)</code>. The results of this API can be a little unpredictable, but we’re working on it.</p>
+<p>  ​	To specify the calling convention used for a function with <code>call_state</code>, you can pass a <a target="_blank" rel="noopener" href="https://docs.angr.io/en/latest/api.html#angr.calling_conventions.SimCC"><code>SimCC</code></a> instance as the <code>cc</code> argument.:raw-html-m2r: We try to pick a sane default, but for special cases you will need to help angr out.</p>
+<h4 id="对内存操作"><a href="#对内存操作" class="headerlink" title="对内存操作"></a>对内存操作</h4><p>对内存地址批量操作</p>
+<pre><code class="python">&gt;&gt;&gt; s = proj.factory.blank_state()
+&gt;&gt;&gt; s.memory.store(0x4000, s.solver.BVV(0x0123456789abcdef0123456789abcdef, 128))
+&gt;&gt;&gt; s.memory.load(0x4004, 6) # load-size is in bytes
+&lt;BV48 0x89abcdef0123&gt;
+
+&gt;&gt;&gt; import archinfo
+&gt;&gt;&gt; s.memory.load(0x4000, 4, endness=archinfo.Endness.LE) # 小端序存储
+&lt;BV32 0x67452301&gt;
+</code></pre>
+<h4 id="对寄存器操作"><a href="#对寄存器操作" class="headerlink" title="对寄存器操作"></a>对寄存器操作</h4><p><code>state.registers</code> ： <a target="_blank" rel="noopener" href="https://docs.angr.io/en/latest/advanced-topics/ir.html#intermediate-representation">Intermediate Representation - angr documentation</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/angr/archinfo">angr&#x2F;archinfo: Classes with architecture-specific information useful to other projects. (github.com)</a></p>
+<h4 id="State-Options"><a href="#State-Options" class="headerlink" title="State Options"></a>State Options</h4><p><a target="_blank" rel="noopener" href="https://docs.angr.io/en/latest/appendix/options.html#list-of-state-options">https://docs.angr.io/en/latest/appendix/options.html#list-of-state-options</a></p>
+<pre><code class="python"># Example: enable lazy solves, an option that causes state satisfiability to be checked as infrequently as possible.
+# This change to the settings will be propagated to all successor states created from this state after this line.
+&gt;&gt;&gt; s.options.add(angr.options.LAZY_SOLVES)
+
+# Create a new state with lazy solves enabled
+&gt;&gt;&gt; s = proj.factory.entry_state(add_options=&#123;angr.options.LAZY_SOLVES&#125;)
+
+# Create a new state without simplification options enabled
+&gt;&gt;&gt; s = proj.factory.entry_state(remove_options=angr.options.simplification)
+</code></pre>
+<h3 id="Plugins"><a href="#Plugins" class="headerlink" title="Plugins"></a>Plugins</h3><h4 id="State-Plugins"><a href="#State-Plugins" class="headerlink" title="State Plugins"></a>State Plugins</h4><p><a target="_blank" rel="noopener" href="https://docs.angr.io/en/latest/extending-angr/state_plugins.html#state-plugins">implement new kinds of data storage</a></p>
+<p>For example, the normal <code>memory</code> plugin simulates a flat memory space, but analyses can choose to enable the “abstract memory” plugin, which uses alternate data types for addresses to simulate free-floating memory mappings independent of address, to provide <code>state.memory</code>. Conversely, plugins can reduce code complexity: <code>state.memory</code> and <code>state.registers</code> are actually two different instances of the same plugin, since the registers are emulated with an address space as well.</p>
+<h4 id="The-globals-plugin"><a href="#The-globals-plugin" class="headerlink" title="The globals plugin"></a>The globals plugin</h4><p><code>state.globals</code> is an extremely simple plugin: it implements the interface of a standard Python dict, allowing you to store arbitrary data on a state.</p>
+<h4 id="The-history-plugin"><a href="#The-history-plugin" class="headerlink" title="The history plugin"></a>The history plugin</h4><p><code>state.history</code> is a very important plugin storing historical data about the path a state has taken during execution. It is actually a linked list of several history nodes, each one representing a single round of execution—you can traverse this list with <code>state.history.parent.parent</code> etc.</p>
+<p>To make it more convenient to work with this structure, the history also provides several efficient iterators over the history of certain values. In general, these values are stored as <code>history.recent_NAME</code> and the iterator over them is just <code>history.NAME</code>. For example, <code>for addr in state.history.bbl_addrs: print hex(addr)</code> will print out a basic block address trace for the binary, while <code>state.history.recent_bbl_addrs</code> is the list of basic blocks executed in the most recent step, <code>state.history.parent.recent_bbl_addrs</code> is the list of basic blocks executed in the previous step, etc. If you ever need to quickly obtain a flat list of these values, you can access <code>.hardcopy</code>, e.g. <code>state.history.bbl_addrs.hardcopy</code>. Keep in mind though, index-based accessing is implemented on the iterators.</p>
+<p>Here is a brief listing of some of the values stored in the history:</p>
+<ul>
+<li><code>history.descriptions</code> is a listing of string descriptions of each of the rounds of execution performed on the state.</li>
+<li><code>history.bbl_addrs</code> is a listing of the basic block addresses executed by the state. There may be more than one per round of execution, and not all addresses may correspond to binary code - some may be addresses at which SimProcedures are hooked.</li>
+<li><code>history.jumpkinds</code> is a listing of the disposition of each of the control flow transitions in the state’s history, as VEX enum strings.</li>
+<li><code>history.jump_guards</code> is a listing of the conditions guarding each of the branches that the state has encountered.</li>
+<li><code>history.events</code> is a semantic listing of “interesting events” which happened during execution, such as the presence of a symbolic jump condition, the program popping up a message box, or execution terminating with an exit code.</li>
+<li><code>history.actions</code> is usually empty, but if you add the <code>angr.options.refs</code> options to the state, it will be populated with a log of all the memory, register, and temporary value accesses performed by the program.</li>
+</ul>
+<h4 id="The-callstack-plugin"><a href="#The-callstack-plugin" class="headerlink" title="The callstack plugin"></a>The callstack plugin</h4><p>angr will track the call stack for the emulated program. On every call instruction, a frame will be added to the top of the tracked callstack, and whenever the stack pointer drops below the point where the topmost frame was called, a frame is popped. This allows angr to robustly store data local to the current emulated function.</p>
+<p>Similar to the history, the callstack is also a linked list of nodes, but there are no provided iterators over the contents of the nodes - instead you can directly iterate over <code>state.callstack</code> to get the callstack frames for each of the active frames, in order from most recent to oldest. If you just want the topmost frame, this is <code>state.callstack</code>.</p>
+<ul>
+<li><code>callstack.func_addr</code> is the address of the function currently being executed</li>
+<li><code>callstack.call_site_addr</code> is the address of the basic block which called the current function</li>
+<li><code>callstack.stack_ptr</code> is the value of the stack pointer from the beginning of the current function</li>
+<li><code>callstack.ret_addr</code> is the location that the current function will return to if it returns</li>
+</ul>
+<h4 id="I-x2F-O"><a href="#I-x2F-O" class="headerlink" title="I&#x2F;O"></a>I&#x2F;O</h4><p><a target="_blank" rel="noopener" href="https://docs.angr.io/en/latest/advanced-topics/file_system.html#working-with-file-system-sockets-and-pipes">Working with File System, Sockets, and Pipes</a></p>
+<h4 id="Copying-and-Merging"><a href="#Copying-and-Merging" class="headerlink" title="Copying and Merging"></a>Copying and Merging</h4><p>A state supports very fast copies, so that you can explore different possibilities:</p>
+<pre><code class="python">&gt;&gt;&gt; proj = angr.Project(&#39;/bin/true&#39;)
+&gt;&gt;&gt; s = proj.factory.blank_state()
+&gt;&gt;&gt; s1 = s.copy()
+&gt;&gt;&gt; s2 = s.copy()
+
+&gt;&gt;&gt; s1.mem[0x1000].uint32_t = 0x41414141
+&gt;&gt;&gt; s2.mem[0x1000].uint32_t = 0x42424242
+</code></pre>
+<p>States can also be merged together.</p>
+<pre><code class="python"># merge will return a tuple. the first element is the merged state
+# the second element is a symbolic variable describing a state flag
+# the third element is a boolean describing whether any merging was done
+&gt;&gt;&gt; (s_merged, m, anything_merged) = s1.merge(s2)
+
+# this is now an expression that can resolve to &quot;AAAA&quot; *or* &quot;BBBB&quot;
+&gt;&gt;&gt; aaaa_or_bbbb = s_merged.mem[0x1000].uint32_t
+print(aaaa_or_bbbb)
+# 打印该地址可能的数值集合
+# &lt;uint32_t &lt;BV32 (if state_merge_0_0_16 == 0x1 then 66 else (if state_merge_0_0_16 == 0x0 then 65 else 0)) .. (if state_merge_0_0_16 == 0x1 then 66 else (if state_merge_0_0_16 == 0x0 then 65 else 0)) .. (if state_merge_0_0_16 == 0x1 then 66 else (if state_merge_0_0_16 == 0x0 then 65 else 0)) .. (if state_merge_0_0_16 == 0x1 then 66 else (if state_merge_0_0_16 == 0x0 then 65 else 0))&gt; at 0x1000&gt;
+</code></pre>
+<h3 id="Simulation-Managers"><a href="#Simulation-Managers" class="headerlink" title="Simulation Managers"></a>Simulation Managers</h3><p>描述：</p>
+<pre><code>Simulation managers let you wrangle multiple states in a slick way. States are organized into “stashes”, which you can step forward, filter, merge, and move around as you wish.
+</code></pre>
+<h4 id="Stepping"><a href="#Stepping" class="headerlink" title="Stepping"></a>Stepping</h4><p><code>.step()</code>： 前进一个basic block</p>
+<p><code>.run()</code>：执行到所有deadended，并且获得所有deadended states（例如到达exit syscall，此时该state会被从<code>active stash</code>中移除并放入<code>deadended states</code>）</p>
+<h4 id="Stash-Management"><a href="#Stash-Management" class="headerlink" title="Stash Management"></a>Stash Management</h4><p><code>.move()</code>：<code>from_stash</code> <code>to_stash</code> <code>filter_func (optional, default:everything)</code></p>
+<pre><code class="python"># eg.检查所有执行路径已终止（deadended）的状态，查找其中在程序的标准输出中打印了&#39;Welcome&#39;的状态，并将这些状态移动到一个名为&#39;authenticated&#39;的新stash，以便进一步分析或单独处理。
+simgr.move(from_stash=&#39;deadended&#39;, to_stash=&#39;authenticated&#39;, filter_func=lambda s: b&#39;Welcome&#39; in s.posix.dumps(1))
+&gt;&gt;&gt; simgr
+&lt;SimulationManager with 2 authenticated, 1 deadended&gt;
+</code></pre>
+<p>stash的类型为list，可以通过如下方式访问：</p>
+<pre><code class="python">for s in simgr.deadended + simgr.authenticated:
+...     print(hex(s.addr))
+0x1000030
+0x1000078
+0x1000078
+
+&gt;&gt;&gt; simgr.one_deadended
+&lt;SimState @ 0x1000030&gt;
+&gt;&gt;&gt; simgr.mp_authenticated
+MP([&lt;SimState @ 0x1000078&gt;, &lt;SimState @ 0x1000078&gt;])
+&gt;&gt;&gt; simgr.mp_authenticated.posix.dumps(0)
+MP([&#39;\x00\x00\x00\x00\x00\x00\x00\x00\x00SOSNEAKY\x00&#39;,
+    &#39;\x00\x00\x00\x00\x00\x00\x00\x00\x00S\x80\x80\x80\x80@\x80@\x00&#39;])
+</code></pre>
+<p>所以link呢</p>
+<p><img src="/tmp/%E5%A4%87%E4%BB%BD/angr%E5%88%9D%E6%8E%A2.htm/image-20231024140622184-16981317543812.png" alt="image-20231024140622184"></p>
+<h4 id="Stash-types"><a href="#Stash-types" class="headerlink" title="Stash types"></a>Stash types</h4><table>
+<thead>
+<tr>
+<th>Stash</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>active</td>
+<td>This stash contains the states that will be stepped by default, unless an alternate stash is specified.</td>
+</tr>
+<tr>
+<td>deadended</td>
+<td>A state goes to the deadended stash when it cannot continue the execution for some reason, including no more valid instructions, unsat state of all of its successors, or an invalid instruction pointer.</td>
+</tr>
+<tr>
+<td>pruned</td>
+<td>When using <code>LAZY_SOLVES</code>, states are not checked for satisfiability unless absolutely necessary. When a state is found to be unsat in the presence of <code>LAZY_SOLVES</code>, the state hierarchy is traversed to identify when, in its history, it initially became unsat. All states that are descendants of that point (which will also be unsat, since a state cannot become un-unsat) are pruned and put in this stash.</td>
+</tr>
+<tr>
+<td>unconstrained</td>
+<td>If the <code>save_unconstrained</code> option is provided to the SimulationManager constructor, states that are determined to be unconstrained (i.e., with the instruction pointer controlled by user data or some other source of symbolic data) are placed here.</td>
+</tr>
+<tr>
+<td>unsat</td>
+<td>If the <code>save_unsat</code> option is provided to the SimulationManager constructor, states that are determined to be unsatisfiable (i.e., they have constraints that are contradictory, like the input having to be both “AAAA” and “BBBB” at the same time) are placed here.</td>
+</tr>
+<tr>
+<td>errored</td>
+<td>If, during execution, an error is raised, then the state will be wrapped in an <code>ErrorRecord</code> object, which contains the state and the error it raised, and then the record will be inserted into <code>errored</code>.                launch a debug shell at the site of the error with <code>record.debug()</code>.</td>
+</tr>
+</tbody></table>
+<h3 id="Exploration"><a href="#Exploration" class="headerlink" title="Exploration"></a>Exploration</h3><p><code>.explore()</code>：<code>find</code> argument(指令的结束地址或结束地址列表,或函数根据某种标准的返回状态)</p>
+<p>当满足后，放入<code>found</code> stash，然后结束符号执行，可以同样声明<code>avoid</code> condition（格式与<code>find</code>相同）</p>
+<p><code>num_find</code>指定return前找到多少数量的<code>find</code>（default &#x3D; 1，如果所有active stash的state被全部执行则同样return）</p>
+<p>eg.</p>
+<pre><code class="python">proj = angr.Project(&#39;examples/CSCI-4968-MBE/challenges/crackme0x00a/crackme0x00a&#39;)
+simgr = proj.factory.simgr()
+simgr.explore(find=lambda s: b&quot;Congrats&quot; in s.posix.dumps(1))
+s = simgr.found[0]
+print(s.posix.dumps(1))
+# Enter password: Congrats!
+flag = s.posix.dumps(0)
+print(flag)
+# g00dJ0B!
+</code></pre>
+<p>其他样例：<a target="_blank" rel="noopener" href="https://docs.angr.io/en/latest/examples.html#angr-examples">angr examples - angr documentation</a></p>
+<h3 id="Exploration-Techniques"><a href="#Exploration-Techniques" class="headerlink" title="Exploration Techniques"></a>Exploration Techniques</h3><p>angr ships with several pieces of canned functionality that let you customize the behavior of a simulation manager, called <em>exploration techniques</em>. The archetypical example of why you would want an exploration technique is to modify the pattern in which the state space of the program is explored - the default “step everything at once” strategy is effectively breadth-first search, but with an exploration technique you could implement, for example, depth-first search. However, the instrumentation power of these techniques is much more flexible than that - you can totally alter the behavior of angr’s stepping process. Writing your own exploration techniques will be covered in a later chapter.</p>
+<p>To use an exploration technique, call <code>simgr.use_technique(tech)</code>, where tech is an instance of an ExplorationTechnique subclass. angr’s built-in exploration techniques can be found under <code>angr.exploration_techniques</code>.</p>
+<p>Here’s a quick overview of some of the built-in ones:</p>
+<ul>
+<li><em>DFS</em>: Depth first search, as mentioned earlier. Keeps only one state active at once, putting the rest in the <code>deferred</code> stash until it deadends or errors.</li>
+<li><em>Explorer</em>: This technique implements the <code>.explore()</code> functionality, allowing you to search for and avoid addresses.</li>
+<li><em>LengthLimiter</em>: Puts a cap on the maximum length of the path a state goes through.</li>
+<li><em>LoopSeer</em>: Uses a reasonable approximation of loop counting to discard states that appear to be going through a loop too many times, putting them in a <code>spinning</code> stash and pulling them out again if we run out of otherwise viable states.</li>
+<li><em>ManualMergepoint</em>: Marks an address in the program as a merge point, so states that reach that address will be briefly held, and any other states that reach that same point within a timeout will be merged together.</li>
+<li><em>MemoryWatcher</em>: Monitors how much memory is free&#x2F;available on the system between simgr steps and stops exploration if it gets too low.</li>
+<li><em>Oppologist</em>: The “operation apologist” is an especially fun gadget - if this technique is enabled and angr encounters an unsupported instruction, for example a bizzare and foreign floating point SIMD op, it will concretize all the inputs to that instruction and emulate the single instruction using the unicorn engine, allowing execution to continue.</li>
+<li><em>Spiller</em>: When there are too many states active, this technique can dump some of them to disk in order to keep memory consumption low.</li>
+<li><em>Threading</em>: Adds thread-level parallelism to the stepping process. This doesn’t help much because of Python’s global interpreter locks, but if you have a program whose analysis spends a lot of time in angr’s native-code dependencies (unicorn, z3, libvex) you can seem some gains.</li>
+<li><em>Tracer</em>: An exploration technique that causes execution to follow a dynamic trace recorded from some other source. The <a target="_blank" rel="noopener" href="https://github.com/angr/tracer">dynamic tracer repository</a> has some tools to generate those traces.</li>
+<li><em>Veritesting</em>: An implementation of a [CMU paper](<a target="_blank" rel="noopener" href="https://users.ece.cmu.edu/~dbrumley/pdf/Avgerinos">https://users.ece.cmu.edu/~dbrumley/pdf/Avgerinos</a> et al._2014_Enhancing Symbolic Execution with Veritesting.pdf) on automatically identifying useful merge points. This is so useful, you can enable it automatically with <code>veritesting=True</code> in the SimulationManager constructor! Note that it frequenly doesn’t play nice with other techniques due to the invasive way it implements static symbolic execution.</li>
+</ul>
+<p>Look at the API documentation for the <a target="_blank" rel="noopener" href="https://docs.angr.io/en/latest/api.html#angr.sim_manager.SimulationManager"><code>SimulationManager</code></a> and <a target="_blank" rel="noopener" href="https://docs.angr.io/en/latest/api.html#angr.exploration_techniques.ExplorationTechnique"><code>ExplorationTechnique</code></a> classes for more information.</p>
+<h3 id="Simulation-and-Instrumentation"><a href="#Simulation-and-Instrumentation" class="headerlink" title="Simulation and Instrumentation"></a>Simulation and Instrumentation</h3><table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Guard Condition</th>
+<th>Instruction Pointer</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>successors</code></td>
+<td>True (can be symbolic, but constrained to True)</td>
+<td>Can be symbolic (but 256 solutions or less; see <code>unconstrained_successors</code>).</td>
+<td>A normal, satisfiable successor state to the state processed by the engine. The instruction pointer of this state may be symbolic (i.e., a computed jump based on user input), so the state might actually represent <em>several</em> potential continuations of execution going forward.</td>
+</tr>
+<tr>
+<td><code>unsat_successors</code></td>
+<td>False (can be symbolic, but constrained to False).</td>
+<td>Can be symbolic.</td>
+<td>Unsatisfiable successors. These are successors whose guard conditions can only be false (i.e., jumps that cannot be taken, or the default branch of jumps that <em>must</em> be taken).</td>
+</tr>
+<tr>
+<td><code>flat_successors</code></td>
+<td>True (can be symbolic, but constrained to True).</td>
+<td>Concrete value.</td>
+<td>As noted above, states in the <code>successors</code> list can have symbolic instruction pointers. This is rather confusing, as elsewhere in the code (i.e., in <code>SimEngineVEX.process</code>, when it’s time to step that state forward), we make assumptions that a single program state only represents the execution of a single spot in the code. To alleviate this, when we encounter states in <code>successors</code> with symbolic instruction pointers, we compute all possible concrete solutions (up to an arbitrary threshold of 256) for them, and make a copy of the state for each such solution. We call this process “flattening”. These <code>flat_successors</code> are states, each of which has a different, concrete instruction pointer. For example, if the instruction pointer of a state in <code>successors</code> was <code>X+5</code>, where <code>X</code> had constraints of <code>X &gt; 0x800000</code> and <code>X &lt;= 0x800010</code>, we would flatten it into 16 different <code>flat_successors</code> states, one with an instruction pointer of <code>0x800006</code>, one with <code>0x800007</code>, and so on until <code>0x800015</code>.</td>
+</tr>
+<tr>
+<td><code>unconstrained_successors</code></td>
+<td>True (can be symbolic, but constrained to True).</td>
+<td>Symbolic (with more than 256 solutions).</td>
+<td>During the flattening procedure described above, if it turns out that there are more than 256 possible solutions for the instruction pointer, we assume that the instruction pointer has been overwritten with unconstrained data (i.e., a stack overflow with user data). <em>This assumption is not sound in general</em>. Such states are placed in <code>unconstrained_successors</code> and not in <code>successors</code>.</td>
+</tr>
+<tr>
+<td><code>all_successors</code></td>
+<td>Anything</td>
+<td>Can be symbolic.</td>
+<td>This is <code>successors + unsat_successors + unconstrained_successors</code>.</td>
+</tr>
+</tbody></table>
+<h4 id="Breakpoints"><a href="#Breakpoints" class="headerlink" title="Breakpoints"></a>Breakpoints</h4><pre><code class="python">&gt;&gt;&gt; import angr
+&gt;&gt;&gt; b = angr.Project(&#39;examples/fauxware/fauxware&#39;)
+
+# get our state
+&gt;&gt;&gt; s = b.factory.entry_state()
+
+# add a breakpoint. This breakpoint will drop into ipdb right before a memory write happens.
+&gt;&gt;&gt; s.inspect.b(&#39;mem_write&#39;)
+
+# on the other hand, we can have a breakpoint trigger right *after* a memory write happens.
+# we can also have a callback function run instead of opening ipdb.
+&gt;&gt;&gt; def debug_func(state):
+...     print(&quot;State %s is about to do a memory write!&quot;)
+
+&gt;&gt;&gt; s.inspect.b(&#39;mem_write&#39;, when=angr.BP_AFTER, action=debug_func)
+
+# or, you can have it drop you in an embedded IPython!
+&gt;&gt;&gt; s.inspect.b(&#39;mem_write&#39;, when=angr.BP_AFTER, action=angr.BP_IPYTHON)
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Event type</th>
+<th>Event meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>mem_read</td>
+<td>Memory is being read.</td>
+</tr>
+<tr>
+<td>mem_write</td>
+<td>Memory is being written.</td>
+</tr>
+<tr>
+<td>address_concretization</td>
+<td>A symbolic memory access is being resolved.</td>
+</tr>
+<tr>
+<td>reg_read</td>
+<td>A register is being read.</td>
+</tr>
+<tr>
+<td>reg_write</td>
+<td>A register is being written.</td>
+</tr>
+<tr>
+<td>tmp_read</td>
+<td>A temp is being read.</td>
+</tr>
+<tr>
+<td>tmp_write</td>
+<td>A temp is being written.</td>
+</tr>
+<tr>
+<td>expr</td>
+<td>An expression is being created (i.e., a result of an arithmetic operation or a constant in the IR).</td>
+</tr>
+<tr>
+<td>statement</td>
+<td>An IR statement is being translated.</td>
+</tr>
+<tr>
+<td>instruction</td>
+<td>A new (native) instruction is being translated.</td>
+</tr>
+<tr>
+<td>irsb</td>
+<td>A new basic block is being translated.</td>
+</tr>
+<tr>
+<td>constraints</td>
+<td>New constraints are being added to the state.</td>
+</tr>
+<tr>
+<td>exit</td>
+<td>A successor is being generated from execution.</td>
+</tr>
+<tr>
+<td>fork</td>
+<td>A symbolic execution state has forked into multiple states.</td>
+</tr>
+<tr>
+<td>symbolic_variable</td>
+<td>A new symbolic variable is being created.</td>
+</tr>
+<tr>
+<td>call</td>
+<td>A call instruction is hit.</td>
+</tr>
+<tr>
+<td>return</td>
+<td>A ret instruction is hit.</td>
+</tr>
+<tr>
+<td>simprocedure</td>
+<td>A simprocedure (or syscall) is executed.</td>
+</tr>
+<tr>
+<td>dirty</td>
+<td>A dirty IR callback is executed.</td>
+</tr>
+<tr>
+<td>syscall</td>
+<td>A syscall is executed (called in addition to the simprocedure event).</td>
+</tr>
+<tr>
+<td>engine_process</td>
+<td>A SimEngine is about to process some code.</td>
+</tr>
+</tbody></table>
+<p>These events expose different attributes:</p>
+<table>
+<thead>
+<tr>
+<th>Event type</th>
+<th>Attribute name</th>
+<th>Attribute availability</th>
+<th>Attribute meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>mem_read</td>
+<td>mem_read_address</td>
+<td>BP_BEFORE or BP_AFTER</td>
+<td>The address at which memory is being read.</td>
+</tr>
+<tr>
+<td>mem_read</td>
+<td>mem_read_expr</td>
+<td>BP_AFTER</td>
+<td>The expression at that address.</td>
+</tr>
+<tr>
+<td>mem_read</td>
+<td>mem_read_length</td>
+<td>BP_BEFORE or BP_AFTER</td>
+<td>The length of the memory read.</td>
+</tr>
+<tr>
+<td>mem_read</td>
+<td>mem_read_condition</td>
+<td>BP_BEFORE or BP_AFTER</td>
+<td>The condition of the memory read.</td>
+</tr>
+<tr>
+<td>mem_write</td>
+<td>mem_write_address</td>
+<td>BP_BEFORE or BP_AFTER</td>
+<td>The address at which memory is being written.</td>
+</tr>
+<tr>
+<td>mem_write</td>
+<td>mem_write_length</td>
+<td>BP_BEFORE or BP_AFTER</td>
+<td>The length of the memory write.</td>
+</tr>
+<tr>
+<td>mem_write</td>
+<td>mem_write_expr</td>
+<td>BP_BEFORE or BP_AFTER</td>
+<td>The expression that is being written.</td>
+</tr>
+<tr>
+<td>mem_write</td>
+<td>mem_write_condition</td>
+<td>BP_BEFORE or BP_AFTER</td>
+<td>The condition of the memory write.</td>
+</tr>
+<tr>
+<td>reg_read</td>
+<td>reg_read_offset</td>
+<td>BP_BEFORE or BP_AFTER</td>
+<td>The offset of the register being read.</td>
+</tr>
+<tr>
+<td>reg_read</td>
+<td>reg_read_length</td>
+<td>BP_BEFORE or BP_AFTER</td>
+<td>The length of the register read.</td>
+</tr>
+<tr>
+<td>reg_read</td>
+<td>reg_read_expr</td>
+<td>BP_AFTER</td>
+<td>The expression in the register.</td>
+</tr>
+<tr>
+<td>reg_read</td>
+<td>reg_read_condition</td>
+<td>BP_BEFORE or BP_AFTER</td>
+<td>The condition of the register read.</td>
+</tr>
+<tr>
+<td>reg_write</td>
+<td>reg_write_offset</td>
+<td>BP_BEFORE or BP_AFTER</td>
+<td>The offset of the register being written.</td>
+</tr>
+<tr>
+<td>reg_write</td>
+<td>reg_write_length</td>
+<td>BP_BEFORE or BP_AFTER</td>
+<td>The length of the register write.</td>
+</tr>
+<tr>
+<td>reg_write</td>
+<td>reg_write_expr</td>
+<td>BP_BEFORE or BP_AFTER</td>
+<td>The expression that is being written.</td>
+</tr>
+<tr>
+<td>reg_write</td>
+<td>reg_write_condition</td>
+<td>BP_BEFORE or BP_AFTER</td>
+<td>The condition of the register write.</td>
+</tr>
+<tr>
+<td>tmp_read</td>
+<td>tmp_read_num</td>
+<td>BP_BEFORE or BP_AFTER</td>
+<td>The number of the temp being read.</td>
+</tr>
+<tr>
+<td>tmp_read</td>
+<td>tmp_read_expr</td>
+<td>BP_AFTER</td>
+<td>The expression of the temp.</td>
+</tr>
+<tr>
+<td>tmp_write</td>
+<td>tmp_write_num</td>
+<td>BP_BEFORE or BP_AFTER</td>
+<td>The number of the temp written.</td>
+</tr>
+<tr>
+<td>tmp_write</td>
+<td>tmp_write_expr</td>
+<td>BP_AFTER</td>
+<td>The expression written to the temp.</td>
+</tr>
+<tr>
+<td>expr</td>
+<td>expr</td>
+<td>BP_BEFORE or BP_AFTER</td>
+<td>The IR expression.</td>
+</tr>
+<tr>
+<td>expr</td>
+<td>expr_result</td>
+<td>BP_AFTER</td>
+<td>The value (e.g. AST) which the expression was evaluated to.</td>
+</tr>
+<tr>
+<td>statement</td>
+<td>statement</td>
+<td>BP_BEFORE or BP_AFTER</td>
+<td>The index of the IR statement (in the IR basic block).</td>
+</tr>
+<tr>
+<td>instruction</td>
+<td>instruction</td>
+<td>BP_BEFORE or BP_AFTER</td>
+<td>The address of the native instruction.</td>
+</tr>
+<tr>
+<td>irsb</td>
+<td>address</td>
+<td>BP_BEFORE or BP_AFTER</td>
+<td>The address of the basic block.</td>
+</tr>
+<tr>
+<td>constraints</td>
+<td>added_constraints</td>
+<td>BP_BEFORE or BP_AFTER</td>
+<td>The list of constraint expressions being added.</td>
+</tr>
+<tr>
+<td>call</td>
+<td>function_address</td>
+<td>BP_BEFORE or BP_AFTER</td>
+<td>The name of the function being called.</td>
+</tr>
+<tr>
+<td>exit</td>
+<td>exit_target</td>
+<td>BP_BEFORE or BP_AFTER</td>
+<td>The expression representing the target of a SimExit.</td>
+</tr>
+<tr>
+<td>exit</td>
+<td>exit_guard</td>
+<td>BP_BEFORE or BP_AFTER</td>
+<td>The expression representing the guard of a SimExit.</td>
+</tr>
+<tr>
+<td>exit</td>
+<td>exit_jumpkind</td>
+<td>BP_BEFORE or BP_AFTER</td>
+<td>The expression representing the kind of SimExit.</td>
+</tr>
+<tr>
+<td>symbolic_variable</td>
+<td>symbolic_name</td>
+<td>BP_AFTER</td>
+<td>The name of the symbolic variable being created. The solver engine might modify this name (by appending a unique ID and length). Check the symbolic_expr for the final symbolic expression.</td>
+</tr>
+<tr>
+<td>symbolic_variable</td>
+<td>symbolic_size</td>
+<td>BP_AFTER</td>
+<td>The size of the symbolic variable being created.</td>
+</tr>
+<tr>
+<td>symbolic_variable</td>
+<td>symbolic_expr</td>
+<td>BP_AFTER</td>
+<td>The expression representing the new symbolic variable.</td>
+</tr>
+<tr>
+<td>address_concretization</td>
+<td>address_concretization_strategy</td>
+<td>BP_BEFORE or BP_AFTER</td>
+<td>The SimConcretizationStrategy being used to resolve the address. This can be modified by the breakpoint handler to change the strategy that will be applied. If your breakpoint handler sets this to None, this strategy will be skipped.</td>
+</tr>
+<tr>
+<td>address_concretization</td>
+<td>address_concretization_action</td>
+<td>BP_BEFORE or BP_AFTER</td>
+<td>The SimAction object being used to record the memory action.</td>
+</tr>
+<tr>
+<td>address_concretization</td>
+<td>address_concretization_memory</td>
+<td>BP_BEFORE or BP_AFTER</td>
+<td>The SimMemory object on which the action was taken.</td>
+</tr>
+<tr>
+<td>address_concretization</td>
+<td>address_concretization_expr</td>
+<td>BP_BEFORE or BP_AFTER</td>
+<td>The AST representing the memory index being resolved. The breakpoint handler can modify this to affect the address being resolved.</td>
+</tr>
+<tr>
+<td>address_concretization</td>
+<td>address_concretization_add_constraints</td>
+<td>BP_BEFORE or BP_AFTER</td>
+<td>Whether or not constraints should&#x2F;will be added for this read.</td>
+</tr>
+<tr>
+<td>address_concretization</td>
+<td>address_concretization_result</td>
+<td>BP_AFTER</td>
+<td>The list of resolved memory addresses (integers). The breakpoint handler can overwrite these to effect a different resolution result.</td>
+</tr>
+<tr>
+<td>syscall</td>
+<td>syscall_name</td>
+<td>BP_BEFORE or BP_AFTER</td>
+<td>The name of the system call.</td>
+</tr>
+<tr>
+<td>simprocedure</td>
+<td>simprocedure_name</td>
+<td>BP_BEFORE or BP_AFTER</td>
+<td>The name of the simprocedure.</td>
+</tr>
+<tr>
+<td>simprocedure</td>
+<td>simprocedure_addr</td>
+<td>BP_BEFORE or BP_AFTER</td>
+<td>The address of the simprocedure.</td>
+</tr>
+<tr>
+<td>simprocedure</td>
+<td>simprocedure_result</td>
+<td>BP_AFTER</td>
+<td>The return value of the simprocedure. You can also <em>override</em> it in BP_BEFORE, which will cause the actual simprocedure to be skipped and for your return value to be used instead.</td>
+</tr>
+<tr>
+<td>simprocedure</td>
+<td>simprocedure</td>
+<td>BP_BEFORE or BP_AFTER</td>
+<td>The actual SimProcedure object.</td>
+</tr>
+<tr>
+<td>dirty</td>
+<td>dirty_name</td>
+<td>BP_BEFORE or BP_AFTER</td>
+<td>The name of the dirty call.</td>
+</tr>
+<tr>
+<td>dirty</td>
+<td>dirty_handler</td>
+<td>BP_BEFORE</td>
+<td>The function that will be run to handle the dirty call. You can override this.</td>
+</tr>
+<tr>
+<td>dirty</td>
+<td>dirty_args</td>
+<td>BP_BEFORE or BP_AFTER</td>
+<td>The address of the dirty.</td>
+</tr>
+<tr>
+<td>dirty</td>
+<td>dirty_result</td>
+<td>BP_AFTER</td>
+<td>The return value of the dirty call. You can also <em>override</em> it in BP_BEFORE, which will cause the actual dirty call to be skipped and for your return value to be used instead.</td>
+</tr>
+<tr>
+<td>engine_process</td>
+<td>sim_engine</td>
+<td>BP_BEFORE or BP_AFTER</td>
+<td>The SimEngine that is processing.</td>
+</tr>
+<tr>
+<td>engine_process</td>
+<td>successors</td>
+<td>BP_BEFORE or BP_AFTER</td>
+<td>The SimSuccessors object defining the result of the engine.</td>
+</tr>
+</tbody></table>
+<p>eg. 每当程序状态<code>s</code>执行内存读取时，<code>angr</code>都会在读取完成后立即调用<code>track_reads</code>，打印出读取的值和发生读取的内存地址。</p>
+<pre><code class="python">&gt;&gt;&gt; def track_reads(state):
+...     print(&#39;Read&#39;, state.inspect.mem_read_expr, &#39;from&#39;, state.inspect.mem_read_address)
+...
+&gt;&gt;&gt; s.inspect.b(&#39;mem_read&#39;, when=angr.BP_AFTER, action=track_reads)
+</code></pre>
+<pre><code class="python"># This will break before a memory write if 0x1000 is a possible value of its target expression
+&gt;&gt;&gt; s.inspect.b(&#39;mem_write&#39;, mem_write_address=0x1000)
+
+# This will break before a memory write if 0x1000 is the *only* value of its target expression
+&gt;&gt;&gt; s.inspect.b(&#39;mem_write&#39;, mem_write_address=0x1000, mem_write_address_unique=True)
+
+# This will break after instruction 0x8000, but only 0x1000 is a possible value of the last expression that was read from memory
+&gt;&gt;&gt; s.inspect.b(&#39;instruction&#39;, when=angr.BP_AFTER, instruction=0x8000, mem_read_expr=0x1000)
+</code></pre>
+<p>声明函数作为condition</p>
+<pre><code class="python"># this is a complex condition that could do anything! In this case, it makes sure that RAX is 0x41414141 and
+# that the basic block starting at 0x8004 was executed sometime in this path&#39;s history
+&gt;&gt;&gt; def cond(state):
+...     return state.eval(state.regs.rax, cast_to=str) == &#39;AAAA&#39; and 0x8004 in state.inspect.backtrace
+
+&gt;&gt;&gt; s.inspect.b(&#39;mem_write&#39;, condition=cond)
+</code></pre>
+<h5 id="Caution-about-mem-read-breakpoint"><a href="#Caution-about-mem-read-breakpoint" class="headerlink" title="Caution about mem_read breakpoint"></a>Caution about <code>mem_read</code> breakpoint</h5><p>The <code>mem_read</code> breakpoint gets triggered anytime there are memory reads by either the executing program or the binary analysis. If you are using breakpoint on <code>mem_read</code> and also using <code>state.mem</code> to load data from memory addresses, then know that the breakpoint will be fired as you are technically reading memory.</p>
+<p>So if you want to load data from memory and not trigger any <code>mem_read</code> breakpoint you have had set up, then use <code>state.memory.load</code> with the keyword arguments <code>disable_actions=True</code> and <code>inspect=False</code>.</p>
+<p>This is also true for <code>state.find</code> and you can use the same keyword arguments to prevent <code>mem_read</code> breakpoints from firing.</p>
+<h3 id="Analyses-1"><a href="#Analyses-1" class="headerlink" title="Analyses"></a>Analyses</h3><p><a target="_blank" rel="noopener" href="https://docs.angr.io/en/latest/extending-angr/analysis_writing.html#writing-analyses">Writing Analyses - angr documentation</a></p>
+<p>the idea is that all the analyses appear under <code>project.analyses</code> (for example, <code>project.analyses.CFGFast()</code>) and can be called as functions, returning analysis result instances.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CFGFast</td>
+<td>Constructs a fast <em>Control Flow Graph</em> of the program</td>
+</tr>
+<tr>
+<td>CFGEmulated</td>
+<td>Constructs an accurate <em>Control Flow Graph</em> of the program</td>
+</tr>
+<tr>
+<td>VFG</td>
+<td>Performs VSA on every function of the program, creating a <em>Value Flow Graph</em> and detecting stack variables</td>
+</tr>
+<tr>
+<td>DDG</td>
+<td>Calculates a <em>Data Dependency Graph</em>, allowing one to determine what statements a given value depends on</td>
+</tr>
+<tr>
+<td>BackwardSlice</td>
+<td>Computes a <em>Backward Slice</em> of a program with respect to a certain target</td>
+</tr>
+<tr>
+<td>Identifier</td>
+<td>Identifies common library functions in CGC binaries</td>
+</tr>
+<tr>
+<td>More!</td>
+<td>angr has quite a few analyses, most of which work! If you’d like to know how to use one, please submit an issue requesting documentation.</td>
+</tr>
+</tbody></table>
+<h4 id="Resilience"><a href="#Resilience" class="headerlink" title="Resilience"></a>Resilience</h4><p>Analyses can be written to be resilient, and catch and log basically any error. These errors, depending on how they’re caught, are logged to the <code>errors</code> or <code>named_errors</code> attribute of the analysis. However, you might want to run an analysis in “fail fast” mode, so that errors are not handled. To do this, the argument <code>fail_fast=True</code> can be passed into the analysis constructor.</p>
+<h3 id="Symbolic-Execution"><a href="#Symbolic-Execution" class="headerlink" title="Symbolic Execution"></a>Symbolic Execution</h3><h6 id="为什么这里是todo…"><a href="#为什么这里是todo…" class="headerlink" title="为什么这里是todo…"></a>为什么这里是todo…</h6><p><a target="_blank" rel="noopener" href="https://docs.angr.io/en/latest/core-concepts/symbolic.html">Symbolic Execution - angr documentation</a></p>
+<h3 id="angr-ctf"><a href="#angr-ctf" class="headerlink" title="angr_ctf"></a>angr_ctf</h3><h6 id="官方给的样例，文档里还有很多真实ctf比赛的例题orz，初探就做到这里吧"><a href="#官方给的样例，文档里还有很多真实ctf比赛的例题orz，初探就做到这里吧" class="headerlink" title="官方给的样例，文档里还有很多真实ctf比赛的例题orz，初探就做到这里吧"></a>官方给的样例，文档里还有很多真实ctf比赛的例题orz，初探就做到这里吧</h6><h4 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h4><p>添加环境变量：</p>
+<pre><code>export C_INCLUDE_PATH=/usr/include/x86_64-linux-gnu
+</code></pre>
+<p>支持编译32位程序包：</p>
+<pre><code>sudo apt-get install libc6-dev-i386
+</code></pre>
+<p>生成可执行程序</p>
+<pre><code>python3 generate.py [seed] [output_file]
+</code></pre>
+<h4 id="00-angr-find"><a href="#00-angr-find" class="headerlink" title="00_angr_find"></a>00_angr_find</h4><p>直接找对应标准输出的输入即可</p>
+<pre><code class="python">import angr
+proj = angr.Project(&#39;./angr&#39;, auto_load_libs=False)
+simgr = proj.factory.simgr()
+simgr.explore(find=lambda s: b&quot;Good Job.&quot; in s.posix.dumps(1))
+s = simgr.found[0]
+flag = s.posix.dumps(0)
+print(flag)
+</code></pre>
+<h4 id="01-angr-avoid"><a href="#01-angr-avoid" class="headerlink" title="01_angr_avoid"></a>01_angr_avoid</h4><p>main函数的节点过多</p>
+<p><img src="/tmp/%E5%A4%87%E4%BB%BD/angr%E5%88%9D%E6%8E%A2.htm/image-20231024151111618-16981317398901.png" alt="image-20231024151111618"></p>
+<p>可以看到<code>avoid_me</code>函数被大量调用</p>
+<p>这里需要让angr走到<code>avoid_me</code>函数后就剪枝</p>
+<p>可以使用函数传入所有需要avoid的状态</p>
+<pre><code class="python">import angr
+proj = angr.Project(&#39;./angr&#39;, auto_load_libs=False)
+simgr = proj.factory.simgr()
+def should_avoid(state):
+    # 检查输出是否包含&quot;Try again&quot;
+    if b&quot;Try again&quot; in state.posix.dumps(1):
+        return True
+    # 检查当前地址是否是我们想要避免的地址
+    if state.addr == 0x8049243:
+        return True
+    # 如果以上条件都不满足，那么我们不避免这个状态
+    return False
+    
+simgr.explore(find = lambda s1: b&quot;Good Job.&quot; in s1.posix.dumps(1), avoid = should_avoid)
+
+s = simgr.found[0]
+flag = s.posix.dumps(0)
+print(flag)
+</code></pre>
+<h4 id="02-angr-find-condition"><a href="#02-angr-find-condition" class="headerlink" title="02_angr_find_condition"></a>02_angr_find_condition</h4><p>和上面一样</p>
+<pre><code class="python">import angr
+proj = angr.Project(&#39;./angr&#39;, auto_load_libs=False)
+simgr = proj.factory.simgr()
+def should_avoid(state):
+    if b&quot;Try again.&quot; in state.posix.dumps(1):
+        return True
+    return False
+    
+simgr.explore(find = lambda s1: b&quot;Good Job.&quot; in s1.posix.dumps(1), avoid = should_avoid)
+
+s = simgr.found[0]
+flag = s.posix.dumps(0)
+print(flag)
+</code></pre>
+<h4 id="03-angr-symbolic-registers"><a href="#03-angr-symbolic-registers" class="headerlink" title="03_angr_symbolic_registers"></a>03_angr_symbolic_registers</h4><p>和上面一样可以打通</p>
+<pre><code class="python">import angr
+proj = angr.Project(&#39;./angr&#39;, auto_load_libs=False)
+simgr = proj.factory.simgr()
+def should_avoid(state):
+    # 检查输出是否包含&quot;Try again&quot;
+    if b&quot;Try again&quot; in state.posix.dumps(1):
+        return True
+    return False
+    
+simgr.explore(find = lambda s1: b&quot;Good Job.&quot; in s1.posix.dumps(1), avoid = should_avoid)
+
+s = simgr.found[0]
+flag = s.posix.dumps(0)
+print(flag)
+</code></pre>
+<p>不过官方exp是打算让分段打（yysy，看起来没啥用，也就是省去了初始化的一些时间，不会优化太多）：</p>
+<pre><code class="python"># Angr doesn&#39;t currently support reading multiple things with scanf (Ex: 
+# scanf(&quot;%u %u).) You will have to tell the simulation engine to begin the
+# program after scanf is called and manually inject the symbols into registers.
+
+import angr
+import claripy
+import sys
+
+def main(argv):
+  path_to_binary = argv[1]
+  project = angr.Project(path_to_binary)
+
+  # Sometimes, you want to specify where the program should start. The variable
+  # start_address will specify where the symbolic execution engine should begin.
+  # Note that we are using blank_state, not entry_state.
+  # (!)
+  start_address = 0x80488c7  # :integer (probably hexadecimal)
+  initial_state = project.factory.blank_state(
+    addr=start_address,
+    add_options = &#123; angr.options.SYMBOL_FILL_UNCONSTRAINED_MEMORY,
+                    angr.options.SYMBOL_FILL_UNCONSTRAINED_REGISTERS&#125;
+  )
+
+  # Create a symbolic bitvector (the datatype Angr uses to inject symbolic
+  # values into the binary.) The first parameter is just a name Angr uses
+  # to reference it. 
+  # You will have to construct multiple bitvectors. Copy the two lines below
+  # and change the variable names. To figure out how many (and of what size)
+  # you need, dissassemble the binary and determine the format parameter passed
+  # to scanf.
+  # (!)
+  password0_size_in_bits = 32  # :integer
+  password0 = claripy.BVS(&#39;password0&#39;, password0_size_in_bits)
+
+  password1_size_in_bits = 32  # :integer
+  password1 = claripy.BVS(&#39;password1&#39;, password1_size_in_bits)
+
+  password2_size_in_bits = 32  # :integer
+  password2 = claripy.BVS(&#39;password2&#39;, password2_size_in_bits)
+
+  # Set a register to a symbolic value. This is one way to inject symbols into
+  # the program.
+  # initial_state.regs stores a number of convenient attributes that reference
+  # registers by name. For example, to set eax to password0, use:
+  #
+  # initial_state.regs.eax = password0
+  #
+  # You will have to set multiple registers to distinct bitvectors. Copy and
+  # paste the line below and change the register. To determine which registers
+  # to inject which symbol, dissassemble the binary and look at the instructions
+  # immediately following the call to scanf.
+  # (!)
+  initial_state.regs.eax = password0
+  initial_state.regs.ebx = password1
+  initial_state.regs.edx = password2
+
+  simulation = project.factory.simgr(initial_state)
+
+  def is_successful(state):
+    stdout_output = state.posix.dumps(sys.stdout.fileno())
+    return &#39;Good Job.&#39;.encode() in stdout_output
+
+  def should_abort(state):
+    stdout_output = state.posix.dumps(sys.stdout.fileno())
+    return &#39;Try again.&#39;.encode() in stdout_output
+
+  simulation.explore(find=is_successful, avoid=should_abort)
+
+  if simulation.found:
+    solution_state = simulation.found[0]
+
+    # Solve for the symbolic values. If there are multiple solutions, we only
+    # care about one, so we can use eval, which returns any (but only one)
+    # solution. Pass eval the bitvector you want to solve for.
+    # (!)
+    solution0 = solution_state.solver.eval(password0)
+    solution1 = solution_state.solver.eval(password1)
+    solution2 = solution_state.solver.eval(password2)
+
+    # Aggregate and format the solutions you computed above, and then print
+    # the full string. Pay attention to the order of the integers, and the
+    # expected base (decimal, octal, hexadecimal, etc).
+    solution = &#39; &#39;.join(map(&#39;&#123;:x&#125;&#39;.format, [ solution0, solution1, solution2 ]))  # :string
+    print(solution)
+  else:
+    raise Exception(&#39;Could not find the solution&#39;)
+
+if __name__ == &#39;__main__&#39;:
+  main(sys.argv)
+</code></pre>
+<h4 id="04-angr-symbolic-stack"><a href="#04-angr-symbolic-stack" class="headerlink" title="04_angr_symbolic_stack"></a>04_angr_symbolic_stack</h4><p>老exp还是可以打通…..不过官方exp是要求把栈模拟一下的，贴一下先</p>
+<pre><code class="python"># This challenge will be more challenging than the previous challenges that you
+# have encountered thus far. Since the goal of this CTF is to teach symbolic
+# execution and not how to construct stack frames, these comments will work you
+# through understanding what is on the stack.
+#   ! ! !
+# IMPORTANT: Any addresses in this script aren&#39;t necessarily right! Dissassemble
+#            the binary yourself to determine the correct addresses!
+#   ! ! !
+
+import angr
+import claripy
+import sys
+
+def main(argv):
+  path_to_binary = argv[1]
+  project = angr.Project(path_to_binary)
+
+  # For this challenge, we want to begin after the call to scanf. Note that this
+  # is in the middle of a function.
+  #
+  # This challenge requires dealing with the stack, so you have to pay extra
+  # careful attention to where you start, otherwise you will enter a condition
+  # where the stack is set up incorrectly. In order to determine where after
+  # scanf to start, we need to look at the dissassembly of the call and the
+  # instruction immediately following it:
+  #   sub    $0x4,%esp
+  #   lea    -0x10(%ebp),%eax
+  #   push   %eax
+  #   lea    -0xc(%ebp),%eax
+  #   push   %eax
+  #   push   $0x80489c3
+  #   call   8048370 &lt;__isoc99_scanf@plt&gt;
+  #   add    $0x10,%esp
+  # Now, the question is: do we start on the instruction immediately following
+  # scanf (add $0x10,%esp), or the instruction following that (not shown)?
+  # Consider what the &#39;add $0x10,%esp&#39; is doing. Hint: it has to do with the
+  # scanf parameters that are pushed to the stack before calling the function.
+  # Given that we are not calling scanf in our Angr simulation, where should we
+  # start?
+  # (!)
+  start_address = 0x80486ae
+  initial_state = project.factory.blank_state(
+    addr=start_address,
+    add_options = &#123; angr.options.SYMBOL_FILL_UNCONSTRAINED_MEMORY,
+                    angr.options.SYMBOL_FILL_UNCONSTRAINED_REGISTERS&#125;
+  )
+
+  # We are jumping into the middle of a function! Therefore, we need to account
+  # for how the function constructs the stack. The second instruction of the
+  # function is:
+  #   mov    %esp,%ebp
+  # At which point it allocates the part of the stack frame we plan to target:
+  #   sub    $0x18,%esp
+  # Note the value of esp relative to ebp. The space between them is (usually)
+  # the stack space. Since esp was decreased by 0x18
+  #
+  #        /-------- The stack --------\
+  # ebp -&gt; |                           |
+  #        |---------------------------|
+  #        |                           |
+  #        |---------------------------|
+  #         . . . (total of 0x18 bytes)
+  #         . . . Somewhere in here is
+  #         . . . the data that stores
+  #         . . . the result of scanf.
+  # esp -&gt; |                           |
+  #        \---------------------------/
+  #
+  # Since we are starting after scanf, we are skipping this stack construction
+  # step. To make up for this, we need to construct the stack ourselves. Let us
+  # start by initializing ebp in the exact same way the program does.
+  initial_state.regs.ebp = initial_state.regs.esp
+
+  # scanf(&quot;%u %u&quot;) needs to be replaced by injecting two bitvectors. The
+  # reason for this is that Angr does not (currently) automatically inject
+  # symbols if scanf has more than one input parameter. This means Angr can
+  # handle &#39;scanf(&quot;%u&quot;)&#39;, but not &#39;scanf(&quot;%u %u&quot;)&#39;.
+  # You can either copy and paste the line below or use a Python list.
+  # (!)
+  password0 = claripy.BVS(&#39;password0&#39;, 32)
+  password1 = claripy.BVS(&#39;password1&#39;, 32)
+
+  # Here is the hard part. We need to figure out what the stack looks like, at
+  # least well enough to inject our symbols where we want them. In order to do
+  # that, let&#39;s figure out what the parameters of scanf are:
+  #   sub    $0x4,%esp
+  #   lea    -0x10(%ebp),%eax
+  #   push   %eax
+  #   lea    -0xc(%ebp),%eax
+  #   push   %eax
+  #   push   $0x80489c3
+  #   call   8048370 &lt;__isoc99_scanf@plt&gt;
+  #   add    $0x10,%esp 
+  # As you can see, the call to scanf looks like this:
+  # scanf(  0x80489c3,   ebp - 0xc,   ebp - 0x10  )
+  #      format_string    password0    password1
+  #  From this, we can construct our new, more accurate stack diagram:
+  #
+  #            /-------- The stack --------\
+  # ebp -&gt;     |          padding          |
+  #            |---------------------------|
+  # ebp - 0x01 |       more padding        |
+  #            |---------------------------|
+  # ebp - 0x02 |     even more padding     |
+  #            |---------------------------|
+  #                        . . .               &lt;- How much padding? Hint: how
+  #            |---------------------------|      many bytes is password0?
+  # ebp - 0x0b |   password0, second byte  |
+  #            |---------------------------|
+  # ebp - 0x0c |   password0, first byte   |
+  #            |---------------------------|
+  # ebp - 0x0d |   password1, last byte    |
+  #            |---------------------------|
+  #                        . . .
+  #            |---------------------------|
+  # ebp - 0x10 |   password1, first byte   |
+  #            |---------------------------|
+  #                        . . .
+  #            |---------------------------|
+  # esp -&gt;     |                           |
+  #            \---------------------------/
+  #
+  # Figure out how much space there is and allocate the necessary padding to
+  # the stack by decrementing esp before you push the password bitvectors.
+  padding_length_in_bytes = 8  # :integer
+  initial_state.regs.esp -= padding_length_in_bytes
+
+  # Push the variables to the stack. Make sure to push them in the right order!
+  # The syntax for the following function is:
+  #
+  # initial_state.stack_push(bitvector)
+  #
+  # This will push the bitvector on the stack, and increment esp the correct
+  # amount. You will need to push multiple bitvectors on the stack.
+  # (!)
+  initial_state.stack_push(password0)  # :bitvector (claripy.BVS, claripy.BVV, claripy.BV)
+  initial_state.stack_push(password1)
+
+  simulation = project.factory.simgr(initial_state)
+
+  def is_successful(state):
+    stdout_output = state.posix.dumps(sys.stdout.fileno())
+    return &#39;Good Job.&#39;.encode() in stdout_output
+
+  def should_abort(state):
+    stdout_output = state.posix.dumps(sys.stdout.fileno())
+    return &#39;Try again.&#39;.encode() in stdout_output
+
+  simulation.explore(find=is_successful, avoid=should_abort)
+
+  if simulation.found:
+    solution_state = simulation.found[0]
+
+    solution0 = solution_state.solver.eval(password0)
+    solution1 = solution_state.solver.eval(password1)
+
+    solution = &#39; &#39;.join(map(str, [ solution0, solution1 ]))
+    print(solution)
+  else:
+    raise Exception(&#39;Could not find the solution&#39;)
+
+if __name__ == &#39;__main__&#39;:
+  main(sys.argv)
+</code></pre>
+<p>分析一下：</p>
+<p>主要是这里：</p>
+<p><img src="/tmp/%E5%A4%87%E4%BB%BD/angr%E5%88%9D%E6%8E%A2.htm/image-20231024162621516.png" alt="image-20231024162621516"></p>
+<p>实际上就是找到栈上的参数，用于做初始化状态，再进行符号执行</p>
+<h4 id="05-angr-symbolic-memory"><a href="#05-angr-symbolic-memory" class="headerlink" title="05_angr_symbolic_memory"></a>05_angr_symbolic_memory</h4><p>对应到全局变量的方法</p>
+<pre><code class="python">import angr
+import claripy
+import sys
+proj = angr.Project(&#39;./angr&#39;, auto_load_libs=False)
+start_address = 0x8049299
+initial_state = proj.factory.blank_state(
+  addr=start_address,
+  add_options = &#123; angr.options.SYMBOL_FILL_UNCONSTRAINED_MEMORY,
+                  angr.options.SYMBOL_FILL_UNCONSTRAINED_REGISTERS&#125;
+)
+
+password0 = claripy.BVS(&#39;password0&#39;, 8*8)
+password1 = claripy.BVS(&#39;password1&#39;, 8*8)
+password2 = claripy.BVS(&#39;password2&#39;, 8*8)
+password3 = claripy.BVS(&#39;password3&#39;, 8*8)
+password0_address = 0xBFA1EE0
+initial_state.memory.store(password0_address, password0)
+password1_address = 0xBFA1EE0 + 8
+initial_state.memory.store(password1_address, password1)
+password2_address = 0xBFA1EE0 + 16
+initial_state.memory.store(password2_address, password2)
+password3_address = 0xBFA1EE0 + 24
+initial_state.memory.store(password3_address, password3)
+
+simgr = proj.factory.simgr(initial_state)
+
+def is_successful(state):
+    stdout_output = state.posix.dumps(sys.stdout.fileno())
+    return &#39;Good Job.&#39;.encode() in stdout_output
+      
+def should_abort(state):
+    stdout_output = state.posix.dumps(sys.stdout.fileno())
+    return &#39;Try again.&#39;.encode() in stdout_output
+    
+simgr.explore(find = is_successful, avoid = should_abort)
+solution_state = simgr.found[0]
+solution0 = solution_state.solver.eval(password0,cast_to=bytes).decode()
+solution1 = solution_state.solver.eval(password1,cast_to=bytes).decode()
+solution2 = solution_state.solver.eval(password2,cast_to=bytes).decode()
+solution3 = solution_state.solver.eval(password3,cast_to=bytes).decode()
+solution = &#39; &#39;.join([ solution0, solution1, solution2, solution3 ])
+print(solution)
+</code></pre>
+<h4 id="06-angr-symbolic-dynamic-memory"><a href="#06-angr-symbolic-dynamic-memory" class="headerlink" title="06_angr_symbolic_dynamic_memory"></a>06_angr_symbolic_dynamic_memory</h4><p><del>最早的仍旧能打通</del></p>
+<p>不过这题主要还是教你把堆模拟（分配未分配过的内存即可）</p>
+<pre><code class="python">fake_heap_address0 = 0x4444444
+pointer_to_malloc_memory_address0 = 0xa2def74
+initial_state.memory.store(pointer_to_malloc_memory_address0, fake_heap_address0, endness=project.arch.memory_endness, size=4)
+fake_heap_address1 = 0x4444454
+pointer_to_malloc_memory_address1 = 0xa2def7c
+initial_state.memory.store(pointer_to_malloc_memory_address1, fake_heap_address1, endness=project.arch.memory_endness, size=4)
+
+# Store our symbolic values at our fake_heap_address. Look at the binary to
+# determine the offsets from the fake_heap_address where scanf writes.
+# (!)
+initial_state.memory.store(fake_heap_address0, password0)
+initial_state.memory.store(fake_heap_address1, password1)
+</code></pre>
+<h4 id="07-angr-symbolic-file"><a href="#07-angr-symbolic-file" class="headerlink" title="07_angr_symbolic_file"></a>07_angr_symbolic_file</h4><p><del>最早的仍旧能打通，而且官方的反而打不通ee</del></p>
+<p>还是贴一个官方的吧，其实就是教怎么模拟文件</p>
+<pre><code class="python"># This challenge could, in theory, be solved in multiple ways. However, for the
+# sake of learning how to simulate an alternate filesystem, please solve this
+# challenge according to structure provided below. As a challenge, once you have
+# an initial solution, try solving this in an alternate way.
+#
+# Problem description and general solution strategy:
+# The binary loads the password from a file using the fread function. If the
+# password is correct, it prints &quot;Good Job.&quot; In order to keep consistency with
+# the other challenges, the input from the console is written to a file in the 
+# ignore_me function. As the name suggests, ignore it, as it only exists to
+# maintain consistency with other challenges.
+# We want to:
+# 1. Determine the file from which fread reads.
+# 2. Use Angr to simulate a filesystem where that file is replaced with our own
+#    simulated file.
+# 3. Initialize the file with a symbolic value, which will be read with fread
+#    and propogated through the program.
+# 4. Solve for the symbolic input to determine the password.
+
+import angr
+import claripy
+import sys
+
+def main(argv):
+  path_to_binary = argv[1]
+  project = angr.Project(path_to_binary)
+
+  start_address = 0x80488bc
+  initial_state = project.factory.blank_state(
+    addr=start_address,
+    add_options = &#123; angr.options.SYMBOL_FILL_UNCONSTRAINED_MEMORY,
+                    angr.options.SYMBOL_FILL_UNCONSTRAINED_REGISTERS&#125;
+  )
+
+  # Specify some information needed to construct a simulated file. For this
+  # challenge, the filename is hardcoded, but in theory, it could be symbolic. 
+  # Note: to read from the file, the binary calls
+  # &#39;fread(buffer, sizeof(char), 64, file)&#39;.
+  # (!)
+  filename = &#39;FOQVSBZB.txt&#39;  # :string
+  symbolic_file_size_bytes = 8
+
+  # Construct a bitvector for the password and then store it in the file&#39;s
+  # backing memory. For example, imagine a simple file, &#39;hello.txt&#39;:
+  #
+  # Hello world, my name is John.
+  # ^                       ^
+  # ^ address 0             ^ address 24 (count the number of characters)
+  # In order to represent this in memory, we would want to write the string to
+  # the beginning of the file:
+  #
+  # hello_txt_contents = claripy.BVV(&#39;Hello world, my name is John.&#39;, 30*8)
+  #
+  # Perhaps, then, we would want to replace John with a
+  # symbolic variable. We would call:
+  #
+  # name_bitvector = claripy.BVS(&#39;symbolic_name&#39;, 4*8)
+  #
+  # Then, after the program calls fopen(&#39;hello.txt&#39;, &#39;r&#39;) and then
+  # fread(buffer, sizeof(char), 30, hello_txt_file), the buffer would contain
+  # the string from the file, except four symbolic bytes where the name would be
+  # stored.
+  # (!)
+  password = claripy.BVS(&#39;password&#39;, symbolic_file_size_bytes * 8)
+
+  # Construct the symbolic file. The file_options parameter specifies the Linux
+  # file permissions (read, read/write, execute etc.) The content parameter
+  # specifies from where the stream of data should be supplied. If content is
+  # an instance of SimSymbolicMemory (we constructed one above), the stream will
+  # contain the contents (including any symbolic contents) of the memory,
+  # beginning from address zero.
+  # Set the content parameter to our BVS instance that holds the symbolic data.
+  # (!)
+  password_file = angr.storage.SimFile(filename, content=password)
+  
+  # Add the symbolic file we created to the symbolic filesystem.
+  initial_state.fs.insert(filename, password_file)
+
+  simulation = project.factory.simgr(initial_state)
+
+  def is_successful(state):
+    stdout_output = state.posix.dumps(sys.stdout.fileno())
+    return &#39;Good Job.&#39;.encode() in stdout_output
+
+  def should_abort(state):
+    stdout_output = state.posix.dumps(sys.stdout.fileno())
+    return &#39;Try again.&#39;.encode() in stdout_output
+
+  simulation.explore(find=is_successful, avoid=should_abort)
+
+  if simulation.found:
+    solution_state = simulation.found[0]
+
+    solution = solution_state.solver.eval(password,cast_to=bytes).decode()
+
+    print(solution)
+  else:
+    raise Exception(&#39;Could not find the solution&#39;)
+
+if __name__ == &#39;__main__&#39;:
+  main(sys.argv)
+</code></pre>
+<p>ps. 找到issue了：</p>
+<p>Scaffold and solution challenge 07 are not working with latest angr, because SimFile class changed.</p>
+<p>This is working code with latest version of angr for the filesystem part:</p>
+<pre><code>  filename = &quot;OJKSQYDP.txt&quot;  # :string
+  symbolic_file_size_bytes = 64
+
+  password = claripy.BVS(&#39;password&#39;, symbolic_file_size_bytes * 8)
+  password_file = angr.storage.SimFile(filename, content=password, size=symbolic_file_size_bytes)
+
+  initial_state.fs.insert(filename, password_file)
+  simulation = project.factory.simgr(initial_state)
+</code></pre>
+<p>TODO：改了issue仍旧打不通</p>
+<h4 id="08-angr-constraints"><a href="#08-angr-constraints" class="headerlink" title="08_angr_constraints"></a>08_angr_constraints</h4><p><del>老exp打不通了，好耶（什）</del></p>
+<p>原理：</p>
+<pre><code># While you, as a human, can easily determine that this function is equivalent
+# to simply comparing the strings, the computer cannot. Instead the computer 
+# would need to branch every time the if statement in the loop was called (16 
+# times), resulting in 2^16 = 65,536 branches, which will take too long of a 
+# time to evaluate for our needs.
+</code></pre>
+<p>TODO：这里尝试过在check的jnz地址处对zf寄存器状态做剪枝，也跑不出来，后续看看为啥</p>
+<p>官方给的解法是手动获取模拟比较（设置终止状态在真正的check之前，然后手动设置比较），将其转化为constraint，约束求解得到最终结果，贴一个吧先：</p>
+<pre><code class="python">import angr
+import claripy
+import sys
+
+def main(argv):
+  path_to_binary = argv[1]
+  project = angr.Project(path_to_binary)
+
+  start_address = 0x80492ED
+  initial_state = project.factory.blank_state(
+    addr=start_address,
+    add_options = &#123; angr.options.SYMBOL_FILL_UNCONSTRAINED_MEMORY,
+                    angr.options.SYMBOL_FILL_UNCONSTRAINED_REGISTERS&#125;
+  )
+  password = claripy.BVS(&#39;password&#39;, 8*16)
+
+  password_address = 0x804C034
+  initial_state.memory.store(password_address, password)
+
+  simulation = project.factory.simgr(initial_state)
+
+  address_to_check_constraint = 0x804933E
+  simulation.explore(find=address_to_check_constraint)
+
+  if simulation.found:
+    solution_state = simulation.found[0]
+    
+    constrained_parameter_address = 0x804C034
+    constrained_parameter_size_bytes = 16
+    constrained_parameter_bitvector = solution_state.memory.load(
+      constrained_parameter_address,
+      constrained_parameter_size_bytes
+    )
+
+    constrained_parameter_desired_value = &#39;PPBVDNMJABAQHZQQ&#39;.encode()
+
+    solution_state.add_constraints(constrained_parameter_bitvector == constrained_parameter_desired_value)
+
+    solution = solution_state.solver.eval(password,cast_to=bytes).decode()
+
+    print(solution)
+  else:
+    raise Exception(&#39;Could not find the solution&#39;)
+
+if __name__ == &#39;__main__&#39;:
+  main(sys.argv)
+</code></pre>
+<h4 id="09-angr-hooks"><a href="#09-angr-hooks" class="headerlink" title="09_angr_hooks"></a>09_angr_hooks</h4><p><del>他说要hook，但是我强行给他分段打通楽（什）</del></p>
+<p>一开始写的exp（注意给password初始值写上，开始的时候忘了）可以打通</p>
+<pre><code class="python">import angr
+import claripy
+import sys
+
+def main(argv):
+  path_to_binary = argv[1]
+  project = angr.Project(path_to_binary)
+
+  start_address = 0x80492FD
+  initial_state = project.factory.blank_state(
+    addr=start_address,
+    add_options = &#123; angr.options.SYMBOL_FILL_UNCONSTRAINED_MEMORY,
+                    angr.options.SYMBOL_FILL_UNCONSTRAINED_REGISTERS&#125;
+  )
+  password = claripy.BVS(&#39;password&#39;, 8*16)
+
+  password_address = 0x804C038
+  initial_state.memory.store(password_address, password)
+
+  simulation = project.factory.simgr(initial_state)
+
+  address_to_check_constraint = 0x804934E
+  simulation.explore(find=address_to_check_constraint)
+
+  if simulation.found:
+    solution_state = simulation.found[0]
+    
+    constrained_parameter_address = 0x804C038
+    constrained_parameter_size_bytes = 16
+    constrained_parameter_bitvector = solution_state.memory.load(
+      constrained_parameter_address,
+      constrained_parameter_size_bytes
+    )
+
+    constrained_parameter_desired_value = &#39;PPBVDNMJABAQHZQQ&#39;.encode()
+
+    solution_state.add_constraints(constrained_parameter_bitvector == constrained_parameter_desired_value)
+
+    solution = solution_state.solver.eval(password,cast_to=bytes).decode()
+
+    print(solution)
+  else:
+    raise Exception(&#39;Could not find the solution&#39;)
+
+
+#################################################
+  path_to_binary = argv[1]
+  project = angr.Project(path_to_binary)
+  start_address = 0x804935B
+  initial_state = project.factory.blank_state(
+    addr=start_address,
+    add_options = &#123; angr.options.SYMBOL_FILL_UNCONSTRAINED_MEMORY,
+                    angr.options.SYMBOL_FILL_UNCONSTRAINED_REGISTERS&#125;
+  )
+  password = claripy.BVS(&#39;password&#39;, 8*16)
+
+  password_address = 0x804C038
+  initial_state.memory.store(password_address, password)
+
+# 这里记得把password初始值写入
+  pwd_addr = 0x804C04C
+  pwd = b&#39;PPBVDNMJABAQHZQQ&#39;
+  initial_state.memory.store(pwd_addr, pwd)
+
+  simulation = project.factory.simgr(initial_state)
+
+  address_to_check_constraint = 0x80493A3
+  simulation.explore(find=address_to_check_constraint)
+
+  if simulation.found:
+    solution_state = simulation.found[0]
+    
+    constrained_parameter_address = 0x804C038
+    constrained_parameter_size_bytes = 16
+    constrained_parameter_bitvector = solution_state.memory.load(
+      constrained_parameter_address,
+      constrained_parameter_size_bytes
+    )
+
+    check = solution_state.memory.load(
+      pwd_addr,
+      constrained_parameter_size_bytes
+    )
+    constrained_parameter_desired_value = check
+
+    solution_state.add_constraints(constrained_parameter_bitvector == constrained_parameter_desired_value)
+
+    solution = solution_state.solver.eval(password,cast_to=bytes).decode()
+
+    print(solution)
+  else:
+    raise Exception(&#39;Could not find the solution???&#39;)
+
+if __name__ == &#39;__main__&#39;:
+  main(sys.argv)
+</code></pre>
+<p>然后看看官方怎么hook的</p>
+<p>结论是这么写将中间那个过不去的函数转化为手动的check，那比上一个的做法还简洁点点</p>
+<p>主要就是这里：</p>
+<p><img src="/tmp/%E5%A4%87%E4%BB%BD/angr%E5%88%9D%E6%8E%A2.htm/image-20231024213817285.png" alt="image-20231024213817285"></p>
+<p>直接贴一个：</p>
+<pre><code class="python"># This level performs the following computations:
+#
+# 1. Get 16 bytes of user input and encrypt it.
+# 2. Save the result of check_equals_AABBCCDDEEFFGGHH (or similar)
+# 3. Get another 16 bytes from the user and encrypt it.
+# 4. Check that it&#39;s equal to a predefined password.
+#
+# The ONLY part of this program that we have to worry about is #2. We will be
+# replacing the call to check_equals_ with our own version, using a hook, since
+# check_equals_ will run too slowly otherwise.
+
+import angr
+import claripy
+import sys
+
+def main(argv):
+  path_to_binary = argv[1]
+  project = angr.Project(path_to_binary)
+
+  # Since Angr can handle the initial call to scanf, we can start from the
+  # beginning.
+  initial_state = project.factory.entry_state(
+    add_options = &#123; angr.options.SYMBOL_FILL_UNCONSTRAINED_MEMORY,
+                    angr.options.SYMBOL_FILL_UNCONSTRAINED_REGISTERS&#125;
+  )
+
+  # Hook the address of where check_equals_ is called.
+  # (!)
+  check_equals_called_address = 0x80486ca
+
+  # The length parameter in angr.Hook specifies how many bytes the execution
+  # engine should skip after completing the hook. This will allow hooks to
+  # replace certain instructions (or groups of instructions). Determine the
+  # instructions involved in calling check_equals_, and then determine how many
+  # bytes are used to represent them in memory. This will be the skip length.
+  # (!)
+  instruction_to_skip_length = 5
+  @project.hook(check_equals_called_address, length=instruction_to_skip_length)
+  def skip_check_equals_(state):
+    # Determine the address where user input is stored. It is passed as a
+    # parameter ot the check_equals_ function. Then, load the string. Reminder:
+    # int check_equals_(char* to_check, int length) &#123; ...
+    user_input_buffer_address = 0x804a044 # :integer, probably hexadecimal
+    user_input_buffer_length = 16
+
+    # Reminder: state.memory.load will read the stored value at the address
+    # user_input_buffer_address of byte length user_input_buffer_length.
+    # It will return a bitvector holding the value. This value can either be
+    # symbolic or concrete, depending on what was stored there in the program.
+    user_input_string = state.memory.load(
+      user_input_buffer_address,
+      user_input_buffer_length
+    )
+    
+    # Determine the string this function is checking the user input against.
+    # It&#39;s encoded in the name of this function; decompile the program to find
+    # it.
+    check_against_string = &#39;OSIWHBXIFOQVSBZB&#39;.encode() # :string
+
+    # gcc uses eax to store the return value, if it is an integer. We need to
+    # set eax to 1 if check_against_string == user_input_string and 0 otherwise.
+    # However, since we are describing an equation to be used by z3 (not to be
+    # evaluated immediately), we cannot use Python if else syntax. Instead, we 
+    # have to use claripy&#39;s built in function that deals with if statements.
+    # claripy.If(expression, ret_if_true, ret_if_false) will output an
+    # expression that evaluates to ret_if_true if expression is true and
+    # ret_if_false otherwise.
+    # Think of it like the Python &quot;value0 if expression else value1&quot;.
+    state.regs.eax = claripy.If(
+      user_input_string == check_against_string, 
+      claripy.BVV(1, 32), 
+      claripy.BVV(0, 32)
+    )
+
+  simulation = project.factory.simgr(initial_state)
+
+  def is_successful(state):
+    stdout_output = state.posix.dumps(sys.stdout.fileno())
+    return &#39;Good Job.&#39;.encode() in stdout_output
+
+  def should_abort(state):
+    stdout_output = state.posix.dumps(sys.stdout.fileno())
+    return &#39;Try again.&#39;.encode() in stdout_output
+
+  simulation.explore(find=is_successful, avoid=should_abort)
+
+  if simulation.found:
+    solution_state = simulation.found[0]
+
+    # Since we are allowing Angr to handle the input, retrieve it by printing
+    # the contents of stdin. Use one of the early levels as a reference.
+    solution = solution_state.posix.dumps(sys.stdin.fileno()).decode()
+    print(solution)
+  else:
+    raise Exception(&#39;Could not find the solution&#39;)
+
+if __name__ == &#39;__main__&#39;:
+  main(sys.argv)
+</code></pre>
+<h4 id="10-angr-simprocedures"><a href="#10-angr-simprocedures" class="headerlink" title="10_angr_simprocedures"></a>10_angr_simprocedures</h4><p><img src="/tmp/%E5%A4%87%E4%BB%BD/angr%E5%88%9D%E6%8E%A2.htm/image-20231025094815541.png" alt="image-20231025094815541"></p>
+<p>将check部分的basic block拆了很多很多，看源码是加了不透明谓词和分发块：</p>
+<p><img src="/tmp/%E5%A4%87%E4%BB%BD/angr%E5%88%9D%E6%8E%A2.htm/image-20231025094941057.png" alt="image-20231025094941057"></p>
+<p>ida做了代码优化，看起来其实和前面两个题差不多</p>
+<p>但是下面这种写法不行，不知道是为啥不能这样hook，这样hook的话约束不出来解：</p>
+<p>（先hook找输入的地址，然后手写check，但是约束不出来，跑出来空解）</p>
+<pre><code class="python">import angr
+import claripy
+import sys
+user_input_buffer_address = 0
+def main(argv):
+    path_to_binary = argv[1]
+    project = angr.Project(path_to_binary)
+    
+    password = claripy.BVS(&#39;password&#39;, 8*16)
+
+    @project.hook(0x8049310)
+    def skip_check_equals_(state):
+        global user_input_buffer_address
+        user_input_buffer_address = state.solver.eval(state.regs.eax)
+        state.memory.store(user_input_buffer_address, password)
+
+    check_equals_called_address = 0x8049362
+    simulation = project.factory.simgr()
+    simulation.explore(find=check_equals_called_address)
+
+    if simulation.found:
+        check_against_string = b&#39;PPBVDNMJABAQHZQQ&#39;
+        solution_state = simulation.found[0]
+        user_input_string = solution_state.memory.load(
+            user_input_buffer_address,
+            16
+        )
+        solution_state.add_constraints(user_input_string == check_against_string)
+
+        print(solution_state.solver.eval(password,cast_to=bytes).decode())
+    else:
+        raise Exception(&#39;Could not find the solution&#39;)
+
+
+if __name__ == &#39;__main__&#39;:
+    main(sys.argv)
+</code></pre>
+<p>看看官方的吧</p>
+
+    </div>
+    
+</div>
+                         
+<footer id="footer">
+    <div class="footer-wrap">
+        <div>
+            © 20xx - 2023 Moyao の小屋
+            <span class="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            @Moyao
+        </div>
+        <div></div>
+        <div>Based on the <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo Engine</a> & <a
+                target="_blank" rel="noopener" href="https://github.com/argvchs/hexo-theme-particlex">ParticleX Theme</a></div>
+        
+    </div>
+</footer>
+                    </div>
+                </div>
+            </transition>
+            <div id="img_show">
+                <img id="img_content" alt="img_show">
+            </div>
+        </div>
+        <script src="https://cdn.staticfile.org/highlight.js/11.5.1/highlight.min.js"></script>
+        <script src="/js/particlex.js"></script>
+        <script src="/js/showimg.js"></script>
+        
+
+    </body>
+</html>

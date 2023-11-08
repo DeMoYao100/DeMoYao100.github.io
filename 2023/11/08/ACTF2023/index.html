@@ -1,0 +1,289 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+        <title>ACTF2023 | Moyao の小屋</title>
+        <meta name="author" content="Moyao">
+        <meta name="description" content="Write down something interesting I met">
+        <meta name="keywords" content="">
+        <link rel="icon" href="/images/head.jpg">
+        <script src="https://cdn.staticfile.org/instant.page/5.1.0/instantpage.min.js" type="module"></script>
+        <script src="https://cdn.staticfile.org/font-awesome/6.1.1/js/all.min.js"></script>
+        
+        <link rel="stylesheet" href="/css/fonts.min.css">
+        <link rel="stylesheet" href="/css/particlex.css">
+        
+        <script src="https://cdn.staticfile.org/vue/3.2.33/vue.global.prod.min.js"></script>
+    <meta name="generator" content="Hexo 6.2.0"></head>
+    <body>
+        <div id="loading" style="height:100vh;width:100vw;position:fixed;display:flex;z-index:200;justify-content:space-between;background:#fff;transition:opacity 0.3s ease-out"><div style="position:fixed;height:100vh;width:100vw;display:flex;justify-content:center;align-items:center"><div id="loadcontent" style="width:50vmin;height:50vmin;padding:50px;border-radius:50%;display:flex;justify-content:center;align-items:center;border:solid 10px #a3ddfb;text-align:center"><div><h2>LOADING...</h2><p style="word-break:keep-all">加载过慢请开启缓存(浏览器默认开启)</p><div><img alt="loading" src="/loading.gif"></div></div></div></div></div>
+        <div id="layout">
+            <i data-fa-symbol="calendar-solid" class="fa-solid fa-calendar fa-fw"></i>
+            <i data-fa-symbol="bookmark-solid" class="fa-solid fa-bookmark fa-fw"></i>
+            <i data-fa-symbol="tags-solid" class="fa-solid fa-tags fa-fw"></i>
+            <transition name="into">
+                <div v-show="show_page" style="display: -not-none">
+                    <div id="menu_show">
+                         
+<nav id="menu">
+    <div class="desktop-menu">
+        <a href="/">
+            <span class="title">Moyao の小屋</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;home</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;about</span>
+        </a>
+        
+        <a target="_blank" rel="noopener" href="//tags/re/">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;tags</span>
+        </a>
+        
+    </div>
+    <div :class="'phone-menu ' + menu_show" id="phone-menu">
+        <div class="curtain" @click="menu_show = !menu_show" v-show="menu_show"></div>
+        <div :class="'title'" @click="menu_show = !menu_show">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;Moyao の小屋</span>
+        </div>
+        <transition name="slide">
+        <div class="items" v-show="menu_show">
+            
+            <a href="">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-house fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">home</div>
+                </div>
+            </a>
+            
+            <a href="">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-id-card fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">about</div>
+                </div>
+            </a>
+            
+            <a href="/tags/re/">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-tags fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">tags</div>
+                </div>
+            </a>
+            
+        </div>
+        </transition>
+    </div>
+</nav>
+                    </div>
+                    <div id="main">
+                        
+<div class="article">
+    <div>
+        <h1>ACTF2023 </h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
+            </span>
+            2023/11/8
+        </span>
+        
+        
+    </div>
+    <div class="content" v-pre>
+        <h6 id="PREFACE：强度巨高在打，但是赛中算没出题hhhh5555555，复盘以及复现一下"><a href="#PREFACE：强度巨高在打，但是赛中算没出题hhhh5555555，复盘以及复现一下" class="headerlink" title="PREFACE：强度巨高在打，但是赛中算没出题hhhh5555555，复盘以及复现一下"></a>PREFACE：强度巨高在打，但是赛中算没出题hhhh5555555，复盘以及复现一下</h6><span id="more"></span>
+
+<h3 id="tree"><a href="#tree" class="headerlink" title="tree"></a>tree</h3><h6 id="赛中最接近出的题"><a href="#赛中最接近出的题" class="headerlink" title="赛中最接近出的题"></a>赛中最接近出的题</h6><p>直接打开看行为可以发现它不解析<code>#include</code>头文件，会给你编译一个cpp代码</p>
+<p>初步观察可以看到三个check，全过可以从server返回flag</p>
+<p><img src="/2023/11/08/ACTF2023/../../hexo1/source/_posts/ACTF2023/image-20231031083726042.png" alt="image-20231031083726042"></p>
+<p>查找字符串，一开始以为是模仿的gcc编译器，但是问学长说不像（这里就缺乏经验了已经，问的时候学长就说先看是啥的编译器，自己调了很久也没有去想）字符串发现是clang</p>
+<p><img src="/2023/11/08/ACTF2023/../../hexo1/source/_posts/ACTF2023/image-20231031083617728.png" alt="image-20231031083617728"></p>
+<p>源码非常复杂，而且有很多handler的结构，导致函数调用往往是跳转表，这里一定得恢复符号（后面check3不恢复符号几乎没办法分析，相反能恢复符号就好做）</p>
+<p>check1有一个 <code>== 25</code>，这里其实很容易测试，这里会计算符号的优先级，直接从最高等级的<code>* /</code>视到低等级的比较条件运算符，等级越低数字越大，然后就测到 <code>+= 1</code>可以让check1 + 1，其它会减一，所以最后的结构里面 <code>+= 1</code>比其它的多一即可</p>
+<p><img src="/2023/11/08/ACTF2023/../../hexo1/source/_posts/ACTF2023/image-20231031083839468.png" alt="image-20231031083839468"></p>
+<p>其实是这个</p>
+<p><img src="/2023/11/08/ACTF2023/../../hexo1/source/_posts/ACTF2023/image-20231031084453947.png" alt="image-20231031084453947"></p>
+<p>然后有这个函数（这里已经恢复了符号表）：</p>
+<p><img src="/2023/11/08/ACTF2023/../../hexo1/source/_posts/ACTF2023/image-20231031084427849.png" alt="image-20231031084427849"></p>
+<p>这里会捕捉一个名为<code>AAA</code>的class</p>
+<p><img src="/2023/11/08/ACTF2023/../../hexo1/source/_posts/ACTF2023/image-20231031084514268.png" alt="image-20231031084514268"></p>
+<p>我们要让我们的结构通过这里的check：</p>
+<p><img src="/2023/11/08/ACTF2023/../../hexo1/source/_posts/ACTF2023/image-20231031084749639.png" alt="image-20231031084749639"></p>
+<p>（这部分都是当时猜的，然后也没有去恢复符号表了）</p>
+<p><img src="/2023/11/08/ACTF2023/../../hexo1/source/_posts/ACTF2023/image-20231031085122412.png" alt="image-20231031085122412"></p>
+<p>然后多虚函数继承就过了这里的check2</p>
+<p>下午四点就过了check2，本以为形势一片大好，结果游戏才刚刚开始，check3做到早上四点，没救</p>
+<p>小折腾了一下，直接搞了个clang15.0.4给bindiff进去，但这里当时是看不到的，而且直观上会往这里面看</p>
+<p><img src="/2023/11/08/ACTF2023/../../hexo1/source/_posts/ACTF2023/image-20231031085452353.png" alt="image-20231031085452353"></p>
+<p>总之这里一直边调边猜（现在看看这个凌晨两点的记录有些消愁了，但是确实调了几个小时没进展，各种玩意也在反复试）</p>
+<p><img src="/2023/11/08/ACTF2023/../../hexo1/source/_posts/ACTF2023/image-20231031085542600.png" alt="image-20231031085542600"></p>
+<p><img src="/2023/11/08/ACTF2023/../../hexo1/source/_posts/ACTF2023/image-20231031085710771.png" alt="image-20231031085710771"></p>
+<p><img src="/2023/11/08/ACTF2023/../../hexo1/source/_posts/ACTF2023/image-20231031085647733.png" alt="image-20231031085647733"></p>
+<p><img src="/2023/11/08/ACTF2023/../../hexo1/source/_posts/ACTF2023/image-20231031085814563.png" alt="image-20231031085814563"></p>
+<p>晚上的时候放出hint：需要看一下<code>ast_matcher</code>相关，然后我们一直在找已有的符号以及字符串</p>
+<p>不料其实不是这样，应该自己搞一个<code>ast_matcher</code>的api调用，再bindiff进去，就好看了</p>
+<p>这部分已经是赛后做的了（小问了一下出题人）</p>
+<p>自己把clang安了，然后编译一个这个（这个会匹配<code>for(int i=1;i&lt;2;i++)&#123;&#125;</code>）</p>
+<pre><code class="cpp">#include &quot;clang/ASTMatchers/ASTMatchers.h&quot;
+#include &quot;clang/ASTMatchers/ASTMatchFinder.h&quot;
+#include &quot;clang/Tooling/Tooling.h&quot;
+#include &quot;clang/Tooling/CommonOptionsParser.h&quot;
+
+using namespace clang;
+using namespace clang::ast_matchers;
+using namespace clang::tooling;
+static llvm::cl::OptionCategory MyToolCategory(&quot;my-tool options&quot;);
+
+class LoopPrinter : public MatchFinder::MatchCallback &#123;
+public:
+    virtual void run(const MatchFinder::MatchResult &amp;Result) &#123;
+        if (const ForStmt *FS = Result.Nodes.getNodeAs&lt;clang::ForStmt&gt;(&quot;forLoop&quot;)) &#123;
+            FS-&gt;dump();
+        &#125;
+    &#125;
+&#125;;
+
+int main(int argc, const char **argv) &#123;
+    auto ExpectedParser = CommonOptionsParser::create(argc, argv, MyToolCategory);
+    if (!ExpectedParser) &#123;
+        llvm::errs() &lt;&lt; ExpectedParser.takeError(); // Print any errors.
+        return 1;
+    &#125;
+    CommonOptionsParser&amp; OptionsParser = ExpectedParser.get();
+
+    if (argc &lt; 2) &#123;
+        llvm::errs() &lt;&lt; &quot;Usage: &quot; &lt;&lt; argv[0] &lt;&lt; &quot; &lt;C++ source file&gt;\n&quot;;
+        return 1;
+    &#125;
+    auto Matcher =
+        forStmt(
+            hasLoopInit(declStmt(
+                hasSingleDecl(varDecl(
+                    hasInitializer(integerLiteral(equals(1)))
+                ))
+            )),
+            hasCondition(binaryOperator(
+                hasOperatorName(&quot;&lt;&quot;),
+                hasLHS(ignoringParenImpCasts(declRefExpr(
+                    to(varDecl(hasType(isInteger())))
+                ))),
+                hasRHS(integerLiteral(equals(2)))
+            )),
+            hasIncrement(unaryOperator(
+                hasOperatorName(&quot;++&quot;),
+                hasUnaryOperand(ignoringParenImpCasts(declRefExpr(
+                    to(varDecl(hasType(isInteger())))
+                )))
+            ))
+        ).bind(&quot;forloop&quot;);
+
+    LoopPrinter Printer;
+    MatchFinder Finder;
+    Finder.addMatcher(Matcher, &amp;Printer);
+    ClangTool Tool(OptionsParser.getCompilations(), OptionsParser.getSourcePathList());
+    return Tool.run(newFrontendActionFactory(&amp;Finder).get());
+&#125;
+
+
+// clang++ -g test_tree.cpp -o loop_printer -I/usr/lib/llvm-14/include -L/usr/lib/llvm-14/lib -lclangTooling -lclangASTMatchers -lclangFrontend -lclangSerialization -lclangDriver -lclangParse -lclangSema -lclangAnalysis -lclangEdit -lclangAST -lclangLex -lclangBasic -lLLVM-14 -std=c++14 -pthread -ldl
+</code></pre>
+<p>然后bindiff进去，结果：</p>
+<p><img src="/2023/11/08/ACTF2023/../../hexo1/source/_posts/ACTF2023/image-20231031090305967.png" alt="image-20231031090305967"></p>
+<p>对照自己编译出来的loop_printer，就好搞多了</p>
+<p><code>&lt;</code>和<code>++</code>的匹配点比较明显</p>
+<p>这里一开始一直找不到比较的数字，然后发现会写在栈上：</p>
+<p><img src="/2023/11/08/ACTF2023/../../hexo1/source/_posts/ACTF2023/image-20231031090457603.png" alt="image-20231031090457603"></p>
+<p>前面的<code>++</code>和<code>&lt;</code>比较容易识别，就是这里的数字有点难找，然后注意这里的”1”和”2”和”f”是一样的，只是一个符号，相当于</p>
+<p><img src="/2023/11/08/ACTF2023/../../hexo1/source/_posts/ACTF2023/image-20231031090609600.png" alt="image-20231031090609600">没有实际意义</p>
+<p>匹配上check3以后，把check3&#x3D;5构造一下，把check1抵消一下，得到最后的payload：</p>
+<pre><code class="cpp">class d&#123;
+    public:
+    int AAA()&#123;
+
+    &#125;
+&#125;;
+
+class c : virtual public d&#123;
+&#125;;
+
+class b : virtual public d&#123;
+&#125;;
+namespace AAA&#123;
+    namespace AAA&#123;
+        struct AAA: virtual public b, virtual public c&#123;
+        public:
+            AAA() &#123;
+            for (int a = 1 ;a &lt; 10; a++)&#123;
+                a += 1;
+                a += 1;
+            &#125;
+            for (int a = 2 ;a &lt; 10; a++)&#123;
+                a += 1;
+            &#125;
+            for (int a = 0 ;a &lt; 10; a++)&#123;
+                a += 1;
+            &#125;
+            for (int a = 0 ;a &lt; 10; a++)&#123;
+                a += 1;
+            &#125;
+            for (int a = 0 ;a &lt; 10; a++)&#123;
+                a += 1;
+            &#125;
+            &#125;
+        &#125;;
+    &#125;
+&#125;
+</code></pre>
+<p><img src="/2023/11/08/ACTF2023/../../hexo1/source/_posts/ACTF2023/image-20231031090731200.png" alt="image-20231031090731200"></p>
+<p>发给服务器远程也是可以通的（没截图），没问题了</p>
+<p>这题有一个很麻烦的点，第三个check必须恢复符号表，否则<strong>根本看不出来它是匹配的符号还是自定义的符号名</strong>，前两个check中间过程比较清晰，好猜些，第三个的中间比对过程相当难看与抽象，甚至最后一个数字我还找了好一会</p>
+<h3 id="Obfuse"><a href="#Obfuse" class="headerlink" title="Obfuse"></a>Obfuse</h3>
+    </div>
+    
+</div>
+                         
+<footer id="footer">
+    <div class="footer-wrap">
+        <div>
+            © 20xx - 2023 Moyao の小屋
+            <span class="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            @Moyao
+        </div>
+        <div></div>
+        <div>Based on the <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo Engine</a> & <a
+                target="_blank" rel="noopener" href="https://github.com/argvchs/hexo-theme-particlex">ParticleX Theme</a></div>
+        
+    </div>
+</footer>
+                    </div>
+                </div>
+            </transition>
+            <div id="img_show">
+                <img id="img_content" alt="img_show">
+            </div>
+        </div>
+        <script src="https://cdn.staticfile.org/highlight.js/11.5.1/highlight.min.js"></script>
+        <script src="/js/particlex.js"></script>
+        <script src="/js/showimg.js"></script>
+        
+
+    </body>
+</html>
