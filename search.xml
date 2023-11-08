@@ -10380,7 +10380,9 @@ ida_dbg.run_requests()
   <entry>
     <title>常见逆向加解密整合</title>
     <url>/2023/11/08/%E5%B8%B8%E8%A7%81%E9%80%86%E5%90%91%E5%8A%A0%E8%A7%A3%E5%AF%86%E6%95%B4%E5%90%88/</url>
-    <content><![CDATA[<h1 id="常见加解密收集"><a href="#常见加解密收集" class="headerlink" title="常见加解密收集"></a>常见加解密收集</h1><h6 id="preface：小做一点整理"><a href="#preface：小做一点整理" class="headerlink" title="preface：小做一点整理"></a>preface：小做一点整理</h6><h2 id="流密码"><a href="#流密码" class="headerlink" title="流密码"></a>流密码</h2><h4 id="RC4"><a href="#RC4" class="headerlink" title="RC4"></a>RC4</h4><p>魔改的点一般就是在里面加别的操作吧，异或之类的</p>
+    <content><![CDATA[<h1 id="常见加解密收集"><a href="#常见加解密收集" class="headerlink" title="常见加解密收集"></a>常见加解密收集</h1><h6 id="preface：小做一点整理"><a href="#preface：小做一点整理" class="headerlink" title="preface：小做一点整理"></a>preface：小做一点整理</h6><span id="more"></span>
+
+<h2 id="流密码"><a href="#流密码" class="headerlink" title="流密码"></a>流密码</h2><h4 id="RC4"><a href="#RC4" class="headerlink" title="RC4"></a>RC4</h4><p>魔改的点一般就是在里面加别的操作吧，异或之类的</p>
 <pre><code class="python">class RC4:
     def __init__(self, key) -&gt; None:
         self.key = key
