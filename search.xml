@@ -10380,7 +10380,7 @@ ida_dbg.run_requests()
   <entry>
     <title>常见逆向加解密整合</title>
     <url>/2023/11/08/%E5%B8%B8%E8%A7%81%E9%80%86%E5%90%91%E5%8A%A0%E8%A7%A3%E5%AF%86%E6%95%B4%E5%90%88/</url>
-    <content><![CDATA[<h1 id="常见加解密收集"><a href="#常见加解密收集" class="headerlink" title="常见加解密收集"></a>常见加解密收集</h1><h6 id="preface：小做一点整理"><a href="#preface：小做一点整理" class="headerlink" title="preface：小做一点整理"></a>preface：小做一点整理</h6><span id="more"></span>
+    <content><![CDATA[<h6 id="preface：小做一点整理"><a href="#preface：小做一点整理" class="headerlink" title="preface：小做一点整理"></a>preface：小做一点整理</h6><span id="more"></span>
 
 <h2 id="流密码"><a href="#流密码" class="headerlink" title="流密码"></a>流密码</h2><h4 id="RC4"><a href="#RC4" class="headerlink" title="RC4"></a>RC4</h4><p>魔改的点一般就是在里面加别的操作吧，异或之类的</p>
 <pre><code class="python">class RC4:
@@ -13022,6 +13022,89 @@ print(chr( 0xe1^ 0x87 ),end=&#39;&#39;)
 print(chr(0x8d^ 0xe8),end=&#39;&#39;)
 print(&#39;&#125;&#39;)
 </code></pre>
+]]></content>
+  </entry>
+  <entry>
+    <title>gdb_python初探</title>
+    <url>/2023/11/09/gdb-python%E5%88%9D%E6%8E%A2/</url>
+    <content><![CDATA[<h6 id="PREFACE：感觉有时候用得到（其实是看到了别人的脚本不会用）"><a href="#PREFACE：感觉有时候用得到（其实是看到了别人的脚本不会用）" class="headerlink" title="PREFACE：感觉有时候用得到（其实是看到了别人的脚本不会用）"></a>PREFACE：感觉有时候用得到（<del>其实是看到了别人的脚本不会用</del>）</h6><span id="more"></span>
+
+<p>发现一个好的远调新方法（可以很好解决ida_server地址和gdb不同的问题）：</p>
+<pre><code># https://www.hex-rays.com/products/ida/support/idadoc/1343.shtml
+gdbserver --multi localhost:23947
+</code></pre>
+<p>然后可以在gdb里面使用gdb脚本</p>
+<p>使用方法：</p>
+<pre><code>(gdb) source path/to/your/script.py
+</code></pre>
+<p>几个api使用：</p>
+<ul>
+<li>使用gdb内部的指令：</li>
+</ul>
+<pre><code class="python">gdb.execute(&#39;指令&#39;)
+# eg.
+gdb.execute(&#39;c&#39;)  
+gdb.execute(&#39;b *0x55555559C078&#39;)
+</code></pre>
+<ul>
+<li>获取寄存器：</li>
+</ul>
+<pre><code class="python">frame = gdb.selected_frame()
+rip = frame.read_register(&quot;rip&quot;)
+</code></pre>
+<p>其实感觉只需要<code>gdb.execute</code>，配合gdb原生的指令，就可以愉快开始hook了，甚至可以轻松把调试过程都记录下来，确实好东西</p>
+<p>比如这样：</p>
+<pre><code class="python">while 1:
+    frame = gdb.selected_frame()
+    rip = frame.read_register(&quot;rip&quot;)
+    if rip == 0x55555559C078 :	# 这里是断点
+        rdx = frame.read_register(&quot;rdx&quot;)
+    gdb.execute(&#39;c&#39;)
+</code></pre>
+]]></content>
+  </entry>
+  <entry>
+    <title>goAst初探</title>
+    <url>/2023/11/09/goAst%E5%88%9D%E6%8E%A2/</url>
+    <content><![CDATA[<h6 id="占坑，晚点来学学goastpy啥的"><a href="#占坑，晚点来学学goastpy啥的" class="headerlink" title="占坑，晚点来学学goastpy啥的"></a>占坑，晚点来学学goastpy啥的</h6><span id="more"></span>
+]]></content>
+  </entry>
+  <entry>
+    <title>lua初探</title>
+    <url>/2023/11/08/lua%E5%88%9D%E6%8E%A2/</url>
+    <content><![CDATA[<h6 id="PREFACE：一直不会搞lua题，稍微整理和学习一下"><a href="#PREFACE：一直不会搞lua题，稍微整理和学习一下" class="headerlink" title="PREFACE：一直不会搞lua题，稍微整理和学习一下"></a>PREFACE：一直不会搞lua题，稍微整理和学习一下</h6><span id="more"></span>
+
+<p>偷了一些<a href="https://www.cnblogs.com/lordtianqiyi/articles/17000585.html">这篇博客</a>来学习学习</p>
+<h5 id="lua编译："><a href="#lua编译：" class="headerlink" title="lua编译："></a>lua编译：</h5><ul>
+<li>Luac</li>
+<li>Luajit</li>
+</ul>
+<h5 id="反编译："><a href="#反编译：" class="headerlink" title="反编译："></a>反编译：</h5><p>unluac：<a href="https://sourceforge.net/projects/unluac/">https://sourceforge.net/projects/unluac/</a></p>
+<p>处理lua5.0 - lua5.4</p>
+<pre><code>java -jar unluac.jar luac.out &gt; 3.lua
+java -jar unluac.jar --rawstring luac.out &gt; 3.lua
+</code></pre>
+<h4 id="2、LuaDec"><a href="#2、LuaDec" class="headerlink" title="2、LuaDec"></a>2、LuaDec</h4><p><a href="https://github.com/viruscamp/luadec">https://github.com/viruscamp/luadec</a></p>
+<p>主要针对lua5.1，对lua5.2和lua5.3是实验性的 ， 依赖lua源码</p>
+<pre><code>sudo apt-get install libreadline-dev 
+
+git clone https://github.com/viruscamp/luadec
+cd luadec
+git submodule update --init lua-5.3   # lua5.2 就替换成 lua-5.2 下面也是一样
+cd lua-5.3
+make linux
+cd ../luadec
+make LUAVER=5.3
+</code></pre>
+<p>参数介绍</p>
+<pre><code>-pn  : 打印函数嵌套结构
+-dis : 反汇编luac.out或lua源码  # 这里的反汇编指的是生成字节码
+luadec abc.lua 或 luadec  luac.out :  反编译lua源码或luac二进制文件  #这里的反编译指的是生成lua源码
+</code></pre>
+<hr>
+<h6 id="工具先放上面，找一个实战的题来看看，这个是RCTF2022-的-picStore"><a href="#工具先放上面，找一个实战的题来看看，这个是RCTF2022-的-picStore" class="headerlink" title="工具先放上面，找一个实战的题来看看，这个是RCTF2022 的 picStore"></a>工具先放上面，找一个实战的题来看看，这个是RCTF2022 的 picStore</h6><p>题目给出的picStore.bin是一个lua二进制块，原理可以参考这篇：<a href="https://zhuanlan.zhihu.com/p/429597744">Lua源码分析（一）二进制块的加载 - 知乎 (zhihu.com)</a></p>
+<p><img src="/2023/11/08/lua%E5%88%9D%E6%8E%A2/image-20231109152335694.png" alt="image-20231109152335694"></p>
+<p><del>接着上面blog的做了一遍…懒得写了…</del></p>
 ]]></content>
   </entry>
 </search>

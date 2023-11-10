@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
-        <title>Arknights Recruit Calculator(1) | Moyao の小屋</title>
+        <title>Moyao の小屋</title>
         <meta name="author" content="Moyao">
         <meta name="description" content="Write down something interesting I met">
         <meta name="keywords" content="">
@@ -94,58 +94,23 @@
                         
 <div class="article">
     <div>
-        <h1>Arknights Recruit Calculator(1) </h1>
+        <h1> </h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
             </span>
-            2022/8/27
+            2023/11/9
         </span>
         
-        
-        <span class="tags">
-            <span class="icon">
-                <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-            </span>
-            
-            <span class="tag">
-                
-                <a href="/tags/tools/" style="color: #ffa2c4">
-                    tools
-                </a>
-            </span>
-            
-            <span class="tag">
-                
-                <a href="/tags/php/" style="color: #00bcd4">
-                    php
-                </a>
-            </span>
-            
-        </span>
         
     </div>
     <div class="content" v-pre>
-        <h1 id="arknights-recruit-calculator-1"><a href="#arknights-recruit-calculator-1" class="headerlink" title="arknights recruit calculator(1)"></a>arknights recruit calculator(1)</h1><h5 id="Published-2022-x2F-08-x2F-27"><a href="#Published-2022-x2F-08-x2F-27" class="headerlink" title="Published: 2022&#x2F;08&#x2F;27"></a>Published: 2022&#x2F;08&#x2F;27</h5><h5 id="Updated-2022-x2F-08-x2F-27"><a href="#Updated-2022-x2F-08-x2F-27" class="headerlink" title="Updated: 2022&#x2F;08&#x2F;27"></a>Updated: 2022&#x2F;08&#x2F;27</h5><h3 id="PREFACE"><a href="#PREFACE" class="headerlink" title="PREFACE"></a>PREFACE</h3><ul>
-<li>I’m pretty addicted to this game named Arknights these days, and there is this module named “公招”(“recruit” in English or whatever). So there is this calculator tools use to help you recruit what you want on website. One day it the website&#x2F;procedure were been maintained. And I been studying php for couples of days. That’s when I decided to build my own recruit calculator.</li>
-<li>It’s still in testing phase, when it’s complete, I may put it on a website.</li>
-<li>The php function mention below can be consulted on <a target="_blank" rel="noopener" href="https://www.php.net/">php.net</a><span id="more"></span></li>
-</ul>
-<hr>
-<p>I use html, css to create the User Interface. User can input their tags(5 at most in one post), and program will output the cadres that fits(It will print all combination of the tags that are input).</p>
-<p>The UI designed was easy(not to pursue a perfect, that is), just use a POST method and let the php program receive it. The backend devided the STRING into array, and search in the mysql.</p>
-<p>There is this problem that HOW TO ESTABLISH THE SQL? There isn’t a sql you can find so easily that is ready made. The closest thing I found was a python dictionary. I wasn’t going to wrote the program in python. So I need to transform it into a PHP ARRAY. At first, I tried to use C to read the py dictionary. Obviously it’s too complicate and I should have better choose–<code>json.dumps()</code>,a function in python that can transform a dictionary into a json file. Like this:</p>
-<blockquote>
-<p><code>a=json.dumps(list)</code><br>However, it outputted errors. There I knew json.dumps cann’t dail with Chinese. So I searched for solutions and code down whese:</p>
-</blockquote>
-<blockquote>
-<p><code>import json</code><br><code>import numpy as np</code><br><code>class Encoder(json.JSONEncoder):</code><br><code>    def default(self, obj):</code><br><code>        if isinstance(obj, np.ndarray):</code><br><code>            return obj.tolist()</code><br><code>        elif isinstance(obj, bytes):</code><br><code>            return str(obj, encoding=&#39;utf-8&#39;)</code><br><code>        return json.JSONEncoder.default(self, obj)</code><br><code>a=json.dumps(top_operators_list,cls=Encoder)</code><br><code>with open(&#39;tags.txt&#39;,&#39;a&#39;) as file0:</code><br><code>    print(a,file=file0)</code><br>It actually still output error. After few hours, I found the dictionary’s array used “{}” instead of “[]”. Correct all of that, it works and I got a json file containing the data I need.</p>
-</blockquote>
-<p>Now, I need to put the data in json file into a php array. Luckly, there is this function <code>json_decode</code> that can do the trick. So now the array was prepared.</p>
-<p>To search the cadres, you can combine the array into a string in full permutation.(USING DFS) (TIPS:sort your string each time you search will make the work much easier.)</p>
-<p>Designed the output UI, and it’s all done!</p>
+        <pre><code>git config --global http.proxy 10.21.218.206:7881
+</code></pre>
+<pre><code>git submodule update --init lua-5.3--config &quot;https.proxy=https://10.21.218.206:7881&quot; --config &quot;http.proxy=http://10.21.218.206:7881&quot;
+</code></pre>
 
     </div>
     
