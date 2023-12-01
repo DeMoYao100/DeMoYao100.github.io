@@ -13219,4 +13219,388 @@ print(flag)
 <p><a href="https://www.nytimes.com/interactive/2018/05/16/upshot/audio-clip-yanny-laurel-debate.html">We Made a Tool So You Can Hear Both Yanny and Laurel - The New York Times (nytimes.com)</a></p>
 ]]></content>
   </entry>
+  <entry>
+    <title>Ghidra初探</title>
+    <url>/2023/11/27/Ghidra%E5%88%9D%E6%8E%A2/</url>
+    <content><![CDATA[<h6 id="PREFACE：之前是能不用就不用，现在遇到第二次不用不行了，xdm，和Ghidra爆了！"><a href="#PREFACE：之前是能不用就不用，现在遇到第二次不用不行了，xdm，和Ghidra爆了！" class="headerlink" title="PREFACE：之前是能不用就不用，现在遇到第二次不用不行了，xdm，和Ghidra爆了！"></a>PREFACE：之前是能不用就不用，现在遇到第二次不用不行了，xdm，和Ghidra爆了！</h6><h6 id="这一篇仅介绍Ghidra一些操作，开发等等暂时没这个水平5555555555"><a href="#这一篇仅介绍Ghidra一些操作，开发等等暂时没这个水平5555555555" class="headerlink" title="这一篇仅介绍Ghidra一些操作，开发等等暂时没这个水平5555555555"></a>这一篇仅介绍Ghidra一些操作，开发等等暂时没这个水平5555555555</h6><span id="more"></span>
+
+<p>先偷一个队里爷的<a href="https://blog.gaoyucan.site/posts/ghidra-%E4%BD%BF%E7%94%A8%E5%8F%8A%E9%85%8D%E7%BD%AE/">Ghidra 使用及配置 (gaoyucan.site)</a></p>
+<h6 id="（刚想写他就发了，那就先偷-反正TODO还多）"><a href="#（刚想写他就发了，那就先偷-反正TODO还多）" class="headerlink" title="（刚想写他就发了，那就先偷 反正TODO还多）"></a>（刚想写他就发了，那就先偷 <del>反正TODO还多</del>）</h6>]]></content>
+  </entry>
+  <entry>
+    <title>arm初探</title>
+    <url>/2023/11/29/arm%E5%88%9D%E6%8E%A2/</url>
+    <content><![CDATA[<h6 id="PREFACE：之前猜猜查查的，感觉不彳亍了，这下不得不和arm爆了！"><a href="#PREFACE：之前猜猜查查的，感觉不彳亍了，这下不得不和arm爆了！" class="headerlink" title="PREFACE：之前猜猜查查的，感觉不彳亍了，这下不得不和arm爆了！"></a>PREFACE：之前猜猜查查的，感觉不彳亍了，这下不得不和arm爆了！</h6><span id="more"></span>
+
+<h3 id="架构介绍"><a href="#架构介绍" class="headerlink" title="架构介绍"></a>架构介绍</h3><p><img src="/2023/11/29/arm%E5%88%9D%E6%8E%A2/V5_to_V8_Architecture.jpg" alt="img"></p>
+<p><img src="/2023/11/29/arm%E5%88%9D%E6%8E%A2/evolution_arm_arch.png" alt="img"></p>
+<h5 id="架构层级"><a href="#架构层级" class="headerlink" title="架构层级"></a>架构层级</h5><ul>
+<li>EL0: 无特权模式(unprivileged)</li>
+<li>EL1: 作业系統核心模式(OS kernel mode)</li>
+<li>EL2: 虚拟机器监视器模式(Hypervisor mode)</li>
+<li>EL3: TrustZone(monitor mode)</li>
+</ul>
+<p>要提升到较高层级需要透过exceptions(如: 中断、page faults等)。</p>
+<ul>
+<li>EL0 &#x3D;&gt; EL1: SVC (system call)</li>
+<li>EL1 &#x3D;&gt; EL2: HVC (hypervisor call)</li>
+<li>EL2 &#x3D;&gt; EL3: SMC (secure monitor call)</li>
+</ul>
+<p>在转换时会将返回地址(return address)记录在例外连结寄存器ELR(Exception-Link-Register)。</p>
+<p>每个EL会有个别的SP(stack pointer)</p>
+<p>根据目前架构，由下层系統的Execution State決定上层系统所在模式</p>
+<p>若下层系統为32bits則上层只能为32bits，反之若为64bits則上层可为32bits or 64bits</p>
+<h5 id="安全性状态-Security-state"><a href="#安全性状态-Security-state" class="headerlink" title="安全性状态 (Security state)"></a>安全性状态 (Security state)</h5><p>ARMv8-A架构提供两种安全性状态，他们有个别的实体记忆体定址空间(Secure physical address space)。</p>
+<p>安全状态(Secure state): PE可以存取安全及不安全的实体定址空间，有EL0.EL1.EL3</p>
+<p>不安全状态(Non-Secure state): 只能存取不安全的实体定址空间，有EL0.EL1.EL2</p>
+<h5 id="虚拟化-Virtualization"><a href="#虚拟化-Virtualization" class="headerlink" title="虚拟化 (Virtualization)"></a>虚拟化 (Virtualization)</h5><p> 这边提到的虚拟化为有实现EL2架构的系统。以下为其基础模型: (manual D1.5 Virtualization)</p>
+<p>一个跑在EL2的Hypervisor负责切换跑在EL1、EL0的virtual machines 一些跑在virtual machines上(在EL1中)的Guest OS 每个Guest OS上跑在EL0的应用程序 每个VM会被Hypervisor指定一个VMID。</p>
+<p>EL2只会实现在 Non-secure state，并负责:</p>
+<p>提供虚拟值给少数特定的暂存器(1)。Guest OS 或其上的应用程序读取这些暂存器时会得到虚拟的值。 Trapping: 当在做记忆体管理及存取其他大多数的暂存器((1)之外的)时会产生exception并由EL2处理。 Routing interrupt: 将中断分配给 现在的Guest OS 现在没在执行的Guest OS hypervisor (以上会在各别的章节特别探讨) 实现EL2包含以下实作:</p>
+<p>Hypervisor Call (HVC) exception Traps to EL2 虚拟中断: 包括: Virtual SError Virtual IRQ Virtual FIQ 所有虚拟中断会由EL1处理 每个虚拟中断可由EL2各别启用 每个虚拟中断都会有其对应的实体中断 当一个虚拟中断被启用时，其对应的实体中断会由EL2处理(除非EL3指定他要处理)</p>
+<p>偷了个，基本上简单入门够了</p>
+<h6 id="【ARM】内核寄存器以及常用汇编指令分析-知乎-zhihu-com"><a href="#【ARM】内核寄存器以及常用汇编指令分析-知乎-zhihu-com" class="headerlink" title="【ARM】内核寄存器以及常用汇编指令分析 - 知乎 (zhihu.com)"></a><a href="https://zhuanlan.zhihu.com/p/102395838">【ARM】内核寄存器以及常用汇编指令分析 - 知乎 (zhihu.com)</a></h6><p><a href="https://azeria-labs.com/arm-data-types-and-registers-part-2/">ARM Data Types and Registers (Part 2) | Azeria Labs (azeria-labs.com)</a></p>
+<p><a href="http://wiki.csie.ncku.edu.tw/embedded/ARMv8">Wiki - ARMv8 (ncku.edu.tw)</a> ： 这个讲的挺底层的</p>
+<p><a href="https://hackmd.io/@owlfox/Bkcen7LeL/https%3A%2F%2Fhackmd.io%2Fs%2FBkGRdKmsg">ARM 指令 - HackMD</a>：这个主要偏移动设备</p>
+<h3 id="常见寄存器"><a href="#常见寄存器" class="headerlink" title="常见寄存器"></a>常见寄存器</h3><h5 id="基本寄存器结构"><a href="#基本寄存器结构" class="headerlink" title="基本寄存器结构"></a>基本寄存器结构</h5><p><img src="/2023/11/29/arm%E5%88%9D%E6%8E%A2/v2-eea3bf670b65918c3ff16d0d8c9fa552_1440w.webp" alt="img"></p>
+<h5 id="R13，堆栈指针-Stack-Pointer"><a href="#R13，堆栈指针-Stack-Pointer" class="headerlink" title="R13，堆栈指针(Stack Pointer)"></a>R13，堆栈指针(Stack Pointer)</h5><p>R13寄存器中存放的是堆栈的栈顶指针，CM3中有两个堆栈指针，也就支持两个堆栈。分别是：主堆栈指针(Main Stack Pointer)，进程堆栈指针(Process Stack Pointer)。</p>
+<p>堆栈主要是通过POP，PUSH指令来进行操作。在执行 PUSH 和 POP 操作时，那个通常被称为 SP 的地址寄存器，会自动被调整，以避免后续的操作破坏先前的数据。</p>
+<h5 id="R14-，连接寄存器-Link-Register"><a href="#R14-，连接寄存器-Link-Register" class="headerlink" title="R14 ，连接寄存器(Link Register)"></a>R14 ，连接寄存器(Link Register)</h5><p>在一个汇编程序中， LR 用于在调用子程序时存储返回地址。例如，在使用 BL(分支并连接， Branch and Link)指令时，就自动填充 LR 的值(执行函数调用的下一指令)，进而在函数退出时，正确返回并执行下一指令。</p>
+<p>如果函数中又调用了其他函数，那么LR将会被覆盖，所以需要先将LR寄存器入栈PUSH，保护起来。</p>
+<h5 id="R15，程序计数器-Program-Count"><a href="#R15，程序计数器-Program-Count" class="headerlink" title="R15，程序计数器(Program Count)"></a>R15，程序计数器(Program Count)</h5><p>因为 CM3 内部使用了指令流水线，读 PC 时返回的值是当前指令的地址+4</p>
+<h5 id="特殊功能寄存器组"><a href="#特殊功能寄存器组" class="headerlink" title="特殊功能寄存器组"></a>特殊功能寄存器组</h5><p>Cortex‐M3 中的特殊功能寄存器包括：</p>
+<p>程序状态寄存器组（ xPSR），存放当前CPU的状态</p>
+<p>中断屏蔽寄存器组（ PRIMASK, FAULTMASK,以及 BASEPRI），用于控制异常的使能和除能</p>
+<p>控制寄存器（ CONTROL），用于定义特权级别，以及选择当前使用堆栈指针(PSP&#x2F;MSP?)。</p>
+<h5 id="CM3的操作模式"><a href="#CM3的操作模式" class="headerlink" title="CM3的操作模式"></a>CM3的操作模式</h5><p>为了架构的安全性和健壮性，CM3支持2个模式(线程模式，handler模式)，以及2个特权等级(特权级，用户级)。<strong>handler模式下只能是特权级。</strong></p>
+<p><img src="/2023/11/29/arm%E5%88%9D%E6%8E%A2/v2-a2b2ab0c1ca1dd2ccdd63d31086c51bd_1440w.webp" alt="img"></p>
+<h5 id="复位序列"><a href="#复位序列" class="headerlink" title="复位序列"></a>复位序列</h5><p>在进入复位状态后， CM3 做的第一件事就是读取下列两个 32 位整数的值：</p>
+<p>从地址 0x0000,0000 处取出 MSP 的初始值。(<strong>初始化MSP，为后续的代码执行创造环境</strong>)</p>
+<p>从地址 0x0000,0004 处取出 PC 的初始值—这个值是复位向量。(<strong>启动引导代码</strong>)</p>
+<p><img src="https://pic2.zhimg.com/80/v2-75518ed58d8fc3d6b0689f0dc0f30e59_1440w.webp" alt="img"></p>
+<p><img src="/2023/11/29/arm%E5%88%9D%E6%8E%A2/v2-b05eeba8cc7c4cbded074a0aee4ebcdb_1440w.webp" alt="img"></p>
+<h3 id="ARM汇编指令集"><a href="#ARM汇编指令集" class="headerlink" title="ARM汇编指令集"></a>ARM汇编指令集</h3><p><strong>ARM指令集可以分为跳转指令、数据处理指令、程序状态寄存器(PSR)处理指令、加载&#x2F;存储指令、协处理器指令和异常产生指令六大类</strong>。</p>
+<p>跳转指令：B,BL,BX,BXL(<em>用于函数调用时的跳转，分为带&#x2F;不带 返回地址&#x2F;状态 的跳转</em>)</p>
+<p>数据处理指令：MOV,ADD,SUB,DIV,MUL,AND,ORR,CMP…(<em>赋值，加减乘除，与或逻辑，比较</em>)</p>
+<p>程序状态寄存器(PSR)处理指令：MSR,MRS(<em>用于查询或设置状态寄存器&#x2F;特殊寄存器的数据</em>)</p>
+<p>加载&#x2F;存储指令: LDR,STR…(<em>用于寄存器与内存之间的数据交换，*<em>一般为间接寻址</em></em>)</p>
+<p>异常产生指令：SWI(<em>用于产生软件中断</em>)</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>mac环境配置</title>
+    <url>/2023/11/29/mac%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</url>
+    <content><![CDATA[<h6 id="PREFACE："><a href="#PREFACE：" class="headerlink" title="PREFACE："></a>PREFACE：</h6><h6 id="Q：ios调试环境怎么搞？"><a href="#Q：ios调试环境怎么搞？" class="headerlink" title="Q：ios调试环境怎么搞？"></a>Q：ios调试环境怎么搞？</h6><h6 id="A：买台mac"><a href="#A：买台mac" class="headerlink" title="A：买台mac"></a>A：买台mac</h6><span id="more"></span>
+
+<p><a href="https://brew.sh/">Homebrew — The Missing Package Manager for macOS (or Linux)</a>安装命令行</p>
+<blockquote>
+<p>&#x2F;bin&#x2F;bash -c “$(curl -fsSL <a href="https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)&quot;">https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)&quot;</a></p>
+</blockquote>
+<p>环境变量：</p>
+<blockquote>
+<p>echo “export PATH&#x3D;&#x2F;opt&#x2F;homebrew&#x2F;bin:$PATH” &gt;&gt; ~&#x2F;.zshrc</p>
+</blockquote>
+<p>安装</p>
+<blockquote>
+<p>brew install</p>
+</blockquote>
+<p>传输文件</p>
+<blockquote>
+<p>python -m http.server</p>
+</blockquote>
+<p>远程ida</p>
+<blockquote>
+<p>把权限开了运行macos那个arm server局域网远程就行</p>
+</blockquote>
+]]></content>
+  </entry>
+  <entry>
+    <title>das202311月赛</title>
+    <url>/2023/11/26/das202311%E6%9C%88%E8%B5%9B/</url>
+    <content><![CDATA[<h6 id="PREFACE：说实话一直打不明白这个das，这今年最后一次算是比较认真打的一次，最后是稳稳第一拿下了但是好像和我关系不大…不能说没有贡献吧但是光自己做肯定是差很多的…还是tcl5555555"><a href="#PREFACE：说实话一直打不明白这个das，这今年最后一次算是比较认真打的一次，最后是稳稳第一拿下了但是好像和我关系不大…不能说没有贡献吧但是光自己做肯定是差很多的…还是tcl5555555" class="headerlink" title="PREFACE：说实话一直打不明白这个das，这今年最后一次算是比较认真打的一次，最后是稳稳第一拿下了但是好像和我关系不大…不能说没有贡献吧但是光自己做肯定是差很多的…还是tcl5555555"></a>PREFACE：说实话一直打不明白这个das，这今年最后一次算是比较认真打的一次，最后是稳稳第一拿下了但是好像和我关系不大…不能说没有贡献吧但是光自己做肯定是差很多的…还是tcl5555555</h6><span id="more"></span>
+
+<h2 id="misc"><a href="#misc" class="headerlink" title="misc"></a>misc</h2><p>帮着看了一眼，有一道题提出来的是一个upx打包的elf，简单分析发现用的<code>upx-4.2.1-amd64_linux</code>版本，直接官网找了再upx -d即可，里面base64变表，解出来即可</p>
+<h2 id="re"><a href="#re" class="headerlink" title="re"></a>re</h2><h3 id="letsgo"><a href="#letsgo" class="headerlink" title="letsgo"></a>letsgo</h3><p>dll里面upx 3.94，自己<code>upx file</code>加一个dll壳，发现了三四个被修改了的标志位，修复即可<code>upx -d</code></p>
+<p>主程序没东西，有两个地方加载了dll，断点查看，这里是抽卡用的逻辑</p>
+<p><img src="/2023/11/26/das202311%E6%9C%88%E8%B5%9B/image-20231127102107311.png" alt="image-20231127102107311"></p>
+<p>里面有解压图片的操作：</p>
+<p><img src="/2023/11/26/das202311%E6%9C%88%E8%B5%9B/image-20231127102211939.png" alt="image-20231127102211939"></p>
+<pre><code class="python">def split_and_process_file(input_file_path):
+    # 读取原始文件
+    with open(input_file_path, &#39;rb&#39;) as file:
+        data = file.read()
+
+    bytes_array = bytearray(data)
+    for i in range(len(bytes_array) - 1, -1, -1):
+        if i + 2 &lt; len(bytes_array):
+            bytes_array[i] ^= bytes_array[i + 2]
+            bytes_array[i] ^= 0xf
+        bytes_array[i] ^= 0xf
+
+    with open(f&#39;output_&#123;1&#125;.jpg&#39;, &#39;wb&#39;) as output_file:
+        output_file.write(bytes_array)
+
+split_and_process_file(&#39;D:\\reverse\\challange\\das11\\re\\DAS10letsgo\\letsgo\\res\\wwww&#39;)
+
+def split_and_process_file(input_file_path):
+    with open(input_file_path, &#39;rb&#39;) as file:
+        data = file.read()
+
+    split_pattern = b&#39;\xff\xd8\xff\xe0&#39;
+
+    parts = data.split(split_pattern)
+
+    for part_index, part in enumerate(parts):
+        bytes_array = bytearray(b&#39;\xFF\xD8\xFF\xE0&#39;) + bytearray(part)
+        with open(f&#39;flag_&#123;part_index&#125;.jpg&#39;, &#39;wb&#39;) as output_file:
+            output_file.write(bytes_array)
+
+split_and_process_file(&#39;output_1.jpg&#39;)
+</code></pre>
+<p>你们二次元差不多得了</p>
+<p><img src="/2023/11/26/das202311%E6%9C%88%E8%B5%9B/image-20231127102432655.png" alt="image-20231127102432655"></p>
+<p>于是你发现前面做的没有意义</p>
+<p><img src="/2023/11/26/das202311%E6%9C%88%E8%B5%9B/image-20231127102447196.png" alt="image-20231127102447196"></p>
+<p>那就只有这里了：</p>
+<p><img src="/2023/11/26/das202311%E6%9C%88%E8%B5%9B/image-20231127102819995.png" alt="image-20231127102819995"></p>
+<p>这里拿到key：</p>
+<p><img src="/2023/11/26/das202311%E6%9C%88%E8%B5%9B/image-20231127102859858.png" alt="image-20231127102859858"></p>
+<p>这里是啥呢：</p>
+<p><img src="/2023/11/26/das202311%E6%9C%88%E8%B5%9B/image-20231127103327070.png" alt="image-20231127103327070"></p>
+<p>画一下图发现是蒙特卡罗模拟π，下面<code>COERCE_UNSIGNED_INT64</code>强制将π解释为整数，然后作为seed生成一组xor用的随机数</p>
+<p>下面就是一个aes192，这里ida反编译不出来，看看汇编即可找到key和密文</p>
+<p><img src="/2023/11/26/das202311%E6%9C%88%E8%B5%9B/image-20231127103525934.png" alt="image-20231127103525934"></p>
+<p><img src="/2023/11/26/das202311%E6%9C%88%E8%B5%9B/image-20231127103542503.png" alt="image-20231127103542503"></p>
+<p>最搞心态的一点是，这里的蒙特卡罗模拟是跑不出来的（而且本身模拟golang也是一个相当麻烦的操作），首先你得猜这里就是π，以及四舍五入的情况，进行一定量的爆破操作，结果这地方魔改源码在rand里面多加了一个异或！</p>
+<p><img src="/2023/11/26/das202311%E6%9C%88%E8%B5%9B/image-20231127103758800.png" alt="image-20231127103758800"></p>
+<p>给你逆天逆完了</p>
+<p>脚本：</p>
+<pre><code class="go">package main
+
+import (
+    &quot;fmt&quot;
+    &quot;math&quot;
+    &quot;math/rand&quot;
+)
+
+func main() &#123;
+    bits := math.Float64bits(math.Pi)
+    val := bits % 0x5F5E100
+    rand.Seed(int64(val))
+    key := make([]int, 0)
+    for i := 0; i &lt; 24; i++ &#123;
+        key = append(key, (rand.Int()^0xa)%100)
+    &#125;
+    fmt.Println(key)
+&#125;
+</code></pre>
+<pre><code class="python">import struct
+from Crypto.Cipher import AES
+
+arr = [37, 49, 98, 48, 14, 17, 9, 47, 56, 91, 37, 69, 17, 3, 82, 64, 54, 76, 80, 88, 54, 97, 0, 53]
+rawkey = struct.pack(&quot;&lt;3Q&quot;, 0x5B566461493D5E41, 0x293A774E2E4B3250, 0x4C650A692B391345)
+print(rawkey)
+for i in range(len(arr)):
+    arr[i] ^= rawkey[i]
+
+key = bytes(arr)
+aes = AES.new(key, AES.MODE_ECB)
+m1 = aes.decrypt(bytes.fromhex(&quot;ff44ac7700732a16589f7ff8bdbaa923&quot;))
+m2 = aes.decrypt(bytes.fromhex(&quot;57c29c367a781ead5fb143469d75f319&quot;))
+print(m1 + m2)
+</code></pre>
+<h3 id="ezpython"><a href="#ezpython" class="headerlink" title="ezpython"></a>ezpython</h3><p>…</p>
+<p><img src="/2023/11/26/das202311%E6%9C%88%E8%B5%9B/image-20231127104104569.png" alt="image-20231127104104569"></p>
+<p>反编译拿到：</p>
+<pre><code class="python">#!/usr/bin/env python
+# visit https://tool.lu/pyc/ for more information
+# Version: Python 3.11
+
+import pyDes
+
+def adjust_length(str):
+    if len(str) &lt; 8:
+        str = str.ljust(8, &#39;0&#39;)
+    elif len(str) &gt; 8:
+        str = str[:8]
+    return str
+
+
+def yuanshen(array, start, end):
+    num = len(array)
+    dis = [
+        float(&#39;inf&#39;)] * num
+    tree = [
+        False] * num
+    parent = [
+        -1] * num
+    dis[start] = 0
+# WARNING: Decompyle incomplete
+
+
+def qidong(input, key, IV):
+    cipher = pyDes.des(key, pyDes.CBC, IV, pad = None, padmode = pyDes.PAD_PKCS5)
+    encrypted_data = cipher.encrypt(input)
+    encrypted_hex_list = encrypted_data()
+    return encrypted_hex_list
+
+
+def main():
+    data = [
+        159,
+        41,
+        201,
+        125,
+        67,
+        60,
+        44,
+        34,
+        203,
+        56,
+        116,
+        186,
+        13,
+        71,
+        125,
+        30,
+        84,
+        123,
+        109,
+        54,
+        106,
+        56,
+        17,
+        124,
+        87,
+        236,
+        25,
+        12,
+        80,
+        178,
+        165,
+        123]
+    key = input(&#39;请输入key: &#39;)
+    if len(key) != 8:
+        print(&#39;wrong key lenth!&#39;)
+        exit()
+    flag = input(&#39;请输入flag: &#39;)
+    array = [
+        [
+            0,
+            float(&#39;inf&#39;),
+            float(&#39;inf&#39;),
+            1,
+            3,
+            4,
+            float(&#39;inf&#39;),
+            float(&#39;inf&#39;),
+            float(&#39;inf&#39;)],
+        [
+            float(&#39;inf&#39;),
+            0,
+            float(&#39;inf&#39;),
+            float(&#39;inf&#39;),
+            float(&#39;inf&#39;),
+            2,
+            float(&#39;inf&#39;),
+            4,
+            float(&#39;inf&#39;)],
+        [
+            float(&#39;inf&#39;),
+            float(&#39;inf&#39;),
+            0,
+            8,
+            1,
+            float(&#39;inf&#39;),
+            float(&#39;inf&#39;),
+            float(&#39;inf&#39;),
+            1],
+        [
+            1,
+            float(&#39;inf&#39;),
+            8,
+            0,
+            3,
+            5,
+            1,
+            2,
+            float(&#39;inf&#39;)],
+        [
+            3,
+            float(&#39;inf&#39;),
+            1,
+            3,
+            0,
+            float(&#39;inf&#39;),
+            1,
+            5,
+            3],
+        [
+            4,
+            2,
+            float(&#39;inf&#39;),
+            5,
+            float(&#39;inf&#39;),
+            0,
+            float(&#39;inf&#39;),
+            1,
+            float(&#39;inf&#39;)],
+        [
+            float(&#39;inf&#39;),
+            float(&#39;inf&#39;),
+            float(&#39;inf&#39;),
+            1,
+            1,
+            float(&#39;inf&#39;),
+            0,
+            float(&#39;inf&#39;),
+            5],
+        [
+            float(&#39;inf&#39;),
+            4,
+            float(&#39;inf&#39;),
+            2,
+            5,
+            1,
+            5,
+            0,
+            float(&#39;inf&#39;)],
+        [
+            float(&#39;inf&#39;),
+            float(&#39;inf&#39;),
+            1,
+            float(&#39;inf&#39;),
+            3,
+            float(&#39;inf&#39;),
+            float(&#39;inf&#39;),
+            float(&#39;inf&#39;),
+            0]]
+    t = yuanshen(array, 1, 8)
+    IV = (lambda .0: pass# WARNING: Decompyle incomplete
+)(t())
+    IV = adjust_length(IV)
+    check = qidong(flag, key, IV)
+    if check == data:
+        print(&#39;yes,yes,yes!!&#39;)
+        return None
+    &#39;&#39;.join(&#39;bad,bad,bad!!&#39;)
+
+main()
+</code></pre>
+<p>反编译有问题，iv拿不到，但是就差八位</p>
+<p><img src="/2023/11/26/das202311%E6%9C%88%E8%B5%9B/image-20231127111045546.png" alt="image-20231127111045546"></p>
+<p>晚点出个完整的python各个版本应对策略（立flag&amp;鸽）dis一下自己看</p>
+<p>结合一下就加上<code>DASCTF&#123;</code>呗，给他爆一位：<code>DASCTF&#123;D0_U_4ls0_l1k3_7uansH3n&#125;</code></p>
+<p>TODO：后面再补，<del>感觉麻烦死了新东西也不多</del> ，懒了</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>《杀死一只知更鸟》</title>
+    <url>/2023/11/27/%E3%80%8A%E6%9D%80%E6%AD%BB%E4%B8%80%E5%8F%AA%E7%9F%A5%E6%9B%B4%E9%B8%9F%E3%80%8B/</url>
+    <content><![CDATA[<h6 id="PREFACE：推荐读物，感觉以后专门开个分区"><a href="#PREFACE：推荐读物，感觉以后专门开个分区" class="headerlink" title="PREFACE：推荐读物，感觉以后专门开个分区"></a>PREFACE：推荐读物，感觉以后专门开个分区</h6><h6 id="TODO：修一下博客的分类功能"><a href="#TODO：修一下博客的分类功能" class="headerlink" title="TODO：修一下博客的分类功能"></a>TODO：修一下博客的分类功能</h6><span id="more"></span>
+
+<p>确实是好书，不枉经典</p>
+<p>笔触挺平和的，有点《葬送的芙莉蓮》那味（感觉这么比怪怪的，但是有神似之处）</p>
+]]></content>
+  </entry>
 </search>

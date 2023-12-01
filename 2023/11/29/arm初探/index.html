@@ -1,0 +1,201 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+        <title>Arm初探 | Moyao の小屋</title>
+        <meta name="author" content="Moyao">
+        <meta name="description" content="Write down something interesting I met
+feel free to mail me if you have something wanted to talk about
+mail: &lt;moyaoxue@outlook.com&gt;
+">
+        <meta name="keywords" content="">
+        <link rel="icon" href="/images/head.jpg">
+        <script src="https://cdn.staticfile.org/instant.page/5.1.0/instantpage.min.js" type="module"></script>
+        <script src="https://cdn.staticfile.org/font-awesome/6.1.1/js/all.min.js"></script>
+        
+        <link rel="stylesheet" href="/css/fonts.min.css">
+        <link rel="stylesheet" href="/css/particlex.css">
+        
+        <script src="https://cdn.staticfile.org/vue/3.2.33/vue.global.prod.min.js"></script>
+    <meta name="generator" content="Hexo 6.2.0"></head>
+    <body>
+        <div id="loading" style="height:100vh;width:100vw;position:fixed;display:flex;z-index:200;justify-content:space-between;background:#fff;transition:opacity 0.3s ease-out"><div style="position:fixed;height:100vh;width:100vw;display:flex;justify-content:center;align-items:center"><div id="loadcontent" style="width:50vmin;height:50vmin;padding:50px;border-radius:50%;display:flex;justify-content:center;align-items:center;border:solid 10px #a3ddfb;text-align:center"><div><h2>LOADING...</h2><p style="word-break:keep-all">加载过慢请开启缓存(浏览器默认开启)</p><div><img alt="loading" src="/loading.gif"></div></div></div></div></div>
+        <div id="layout">
+            <i data-fa-symbol="calendar-solid" class="fa-solid fa-calendar fa-fw"></i>
+            <i data-fa-symbol="bookmark-solid" class="fa-solid fa-bookmark fa-fw"></i>
+            <i data-fa-symbol="tags-solid" class="fa-solid fa-tags fa-fw"></i>
+            <transition name="into">
+                <div v-show="show_page" style="display: -not-none">
+                    <div id="menu_show">
+                         
+<nav id="menu">
+    <div class="desktop-menu">
+        <a href="/">
+            <span class="title">Moyao の小屋</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;home</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;about</span>
+        </a>
+        
+        <a target="_blank" rel="noopener" href="//tags/re/">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;tags</span>
+        </a>
+        
+    </div>
+    <div :class="'phone-menu ' + menu_show" id="phone-menu">
+        <div class="curtain" @click="menu_show = !menu_show" v-show="menu_show"></div>
+        <div :class="'title'" @click="menu_show = !menu_show">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;Moyao の小屋</span>
+        </div>
+        <transition name="slide">
+        <div class="items" v-show="menu_show">
+            
+            <a href="">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-house fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">home</div>
+                </div>
+            </a>
+            
+            <a href="">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-id-card fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">about</div>
+                </div>
+            </a>
+            
+            <a href="/tags/re/">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-tags fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">tags</div>
+                </div>
+            </a>
+            
+        </div>
+        </transition>
+    </div>
+</nav>
+                    </div>
+                    <div id="main">
+                        
+<div class="article">
+    <div>
+        <h1>Arm初探 </h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
+            </span>
+            2023/11/29
+        </span>
+        
+        
+    </div>
+    <div class="content" v-pre>
+        <h6 id="PREFACE：之前猜猜查查的，感觉不彳亍了，这下不得不和arm爆了！"><a href="#PREFACE：之前猜猜查查的，感觉不彳亍了，这下不得不和arm爆了！" class="headerlink" title="PREFACE：之前猜猜查查的，感觉不彳亍了，这下不得不和arm爆了！"></a>PREFACE：之前猜猜查查的，感觉不彳亍了，这下不得不和arm爆了！</h6><span id="more"></span>
+
+<h3 id="架构介绍"><a href="#架构介绍" class="headerlink" title="架构介绍"></a>架构介绍</h3><p><img src="/2023/11/29/arm%E5%88%9D%E6%8E%A2/V5_to_V8_Architecture.jpg" alt="img"></p>
+<p><img src="/2023/11/29/arm%E5%88%9D%E6%8E%A2/evolution_arm_arch.png" alt="img"></p>
+<h5 id="架构层级"><a href="#架构层级" class="headerlink" title="架构层级"></a>架构层级</h5><ul>
+<li>EL0: 无特权模式(unprivileged)</li>
+<li>EL1: 作业系統核心模式(OS kernel mode)</li>
+<li>EL2: 虚拟机器监视器模式(Hypervisor mode)</li>
+<li>EL3: TrustZone(monitor mode)</li>
+</ul>
+<p>要提升到较高层级需要透过exceptions(如: 中断、page faults等)。</p>
+<ul>
+<li>EL0 &#x3D;&gt; EL1: SVC (system call)</li>
+<li>EL1 &#x3D;&gt; EL2: HVC (hypervisor call)</li>
+<li>EL2 &#x3D;&gt; EL3: SMC (secure monitor call)</li>
+</ul>
+<p>在转换时会将返回地址(return address)记录在例外连结寄存器ELR(Exception-Link-Register)。</p>
+<p>每个EL会有个别的SP(stack pointer)</p>
+<p>根据目前架构，由下层系統的Execution State決定上层系统所在模式</p>
+<p>若下层系統为32bits則上层只能为32bits，反之若为64bits則上层可为32bits or 64bits</p>
+<h5 id="安全性状态-Security-state"><a href="#安全性状态-Security-state" class="headerlink" title="安全性状态 (Security state)"></a>安全性状态 (Security state)</h5><p>ARMv8-A架构提供两种安全性状态，他们有个别的实体记忆体定址空间(Secure physical address space)。</p>
+<p>安全状态(Secure state): PE可以存取安全及不安全的实体定址空间，有EL0.EL1.EL3</p>
+<p>不安全状态(Non-Secure state): 只能存取不安全的实体定址空间，有EL0.EL1.EL2</p>
+<h5 id="虚拟化-Virtualization"><a href="#虚拟化-Virtualization" class="headerlink" title="虚拟化 (Virtualization)"></a>虚拟化 (Virtualization)</h5><p> 这边提到的虚拟化为有实现EL2架构的系统。以下为其基础模型: (manual D1.5 Virtualization)</p>
+<p>一个跑在EL2的Hypervisor负责切换跑在EL1、EL0的virtual machines 一些跑在virtual machines上(在EL1中)的Guest OS 每个Guest OS上跑在EL0的应用程序 每个VM会被Hypervisor指定一个VMID。</p>
+<p>EL2只会实现在 Non-secure state，并负责:</p>
+<p>提供虚拟值给少数特定的暂存器(1)。Guest OS 或其上的应用程序读取这些暂存器时会得到虚拟的值。 Trapping: 当在做记忆体管理及存取其他大多数的暂存器((1)之外的)时会产生exception并由EL2处理。 Routing interrupt: 将中断分配给 现在的Guest OS 现在没在执行的Guest OS hypervisor (以上会在各别的章节特别探讨) 实现EL2包含以下实作:</p>
+<p>Hypervisor Call (HVC) exception Traps to EL2 虚拟中断: 包括: Virtual SError Virtual IRQ Virtual FIQ 所有虚拟中断会由EL1处理 每个虚拟中断可由EL2各别启用 每个虚拟中断都会有其对应的实体中断 当一个虚拟中断被启用时，其对应的实体中断会由EL2处理(除非EL3指定他要处理)</p>
+<p>偷了个，基本上简单入门够了</p>
+<h6 id="【ARM】内核寄存器以及常用汇编指令分析-知乎-zhihu-com"><a href="#【ARM】内核寄存器以及常用汇编指令分析-知乎-zhihu-com" class="headerlink" title="【ARM】内核寄存器以及常用汇编指令分析 - 知乎 (zhihu.com)"></a><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/102395838">【ARM】内核寄存器以及常用汇编指令分析 - 知乎 (zhihu.com)</a></h6><p><a target="_blank" rel="noopener" href="https://azeria-labs.com/arm-data-types-and-registers-part-2/">ARM Data Types and Registers (Part 2) | Azeria Labs (azeria-labs.com)</a></p>
+<p><a target="_blank" rel="noopener" href="http://wiki.csie.ncku.edu.tw/embedded/ARMv8">Wiki - ARMv8 (ncku.edu.tw)</a> ： 这个讲的挺底层的</p>
+<p><a target="_blank" rel="noopener" href="https://hackmd.io/@owlfox/Bkcen7LeL/https%3A%2F%2Fhackmd.io%2Fs%2FBkGRdKmsg">ARM 指令 - HackMD</a>：这个主要偏移动设备</p>
+<h3 id="常见寄存器"><a href="#常见寄存器" class="headerlink" title="常见寄存器"></a>常见寄存器</h3><h5 id="基本寄存器结构"><a href="#基本寄存器结构" class="headerlink" title="基本寄存器结构"></a>基本寄存器结构</h5><p><img src="/2023/11/29/arm%E5%88%9D%E6%8E%A2/v2-eea3bf670b65918c3ff16d0d8c9fa552_1440w.webp" alt="img"></p>
+<h5 id="R13，堆栈指针-Stack-Pointer"><a href="#R13，堆栈指针-Stack-Pointer" class="headerlink" title="R13，堆栈指针(Stack Pointer)"></a>R13，堆栈指针(Stack Pointer)</h5><p>R13寄存器中存放的是堆栈的栈顶指针，CM3中有两个堆栈指针，也就支持两个堆栈。分别是：主堆栈指针(Main Stack Pointer)，进程堆栈指针(Process Stack Pointer)。</p>
+<p>堆栈主要是通过POP，PUSH指令来进行操作。在执行 PUSH 和 POP 操作时，那个通常被称为 SP 的地址寄存器，会自动被调整，以避免后续的操作破坏先前的数据。</p>
+<h5 id="R14-，连接寄存器-Link-Register"><a href="#R14-，连接寄存器-Link-Register" class="headerlink" title="R14 ，连接寄存器(Link Register)"></a>R14 ，连接寄存器(Link Register)</h5><p>在一个汇编程序中， LR 用于在调用子程序时存储返回地址。例如，在使用 BL(分支并连接， Branch and Link)指令时，就自动填充 LR 的值(执行函数调用的下一指令)，进而在函数退出时，正确返回并执行下一指令。</p>
+<p>如果函数中又调用了其他函数，那么LR将会被覆盖，所以需要先将LR寄存器入栈PUSH，保护起来。</p>
+<h5 id="R15，程序计数器-Program-Count"><a href="#R15，程序计数器-Program-Count" class="headerlink" title="R15，程序计数器(Program Count)"></a>R15，程序计数器(Program Count)</h5><p>因为 CM3 内部使用了指令流水线，读 PC 时返回的值是当前指令的地址+4</p>
+<h5 id="特殊功能寄存器组"><a href="#特殊功能寄存器组" class="headerlink" title="特殊功能寄存器组"></a>特殊功能寄存器组</h5><p>Cortex‐M3 中的特殊功能寄存器包括：</p>
+<p>程序状态寄存器组（ xPSR），存放当前CPU的状态</p>
+<p>中断屏蔽寄存器组（ PRIMASK, FAULTMASK,以及 BASEPRI），用于控制异常的使能和除能</p>
+<p>控制寄存器（ CONTROL），用于定义特权级别，以及选择当前使用堆栈指针(PSP&#x2F;MSP?)。</p>
+<h5 id="CM3的操作模式"><a href="#CM3的操作模式" class="headerlink" title="CM3的操作模式"></a>CM3的操作模式</h5><p>为了架构的安全性和健壮性，CM3支持2个模式(线程模式，handler模式)，以及2个特权等级(特权级，用户级)。<strong>handler模式下只能是特权级。</strong></p>
+<p><img src="/2023/11/29/arm%E5%88%9D%E6%8E%A2/v2-a2b2ab0c1ca1dd2ccdd63d31086c51bd_1440w.webp" alt="img"></p>
+<h5 id="复位序列"><a href="#复位序列" class="headerlink" title="复位序列"></a>复位序列</h5><p>在进入复位状态后， CM3 做的第一件事就是读取下列两个 32 位整数的值：</p>
+<p>从地址 0x0000,0000 处取出 MSP 的初始值。(<strong>初始化MSP，为后续的代码执行创造环境</strong>)</p>
+<p>从地址 0x0000,0004 处取出 PC 的初始值—这个值是复位向量。(<strong>启动引导代码</strong>)</p>
+<p><img src="https://pic2.zhimg.com/80/v2-75518ed58d8fc3d6b0689f0dc0f30e59_1440w.webp" alt="img"></p>
+<p><img src="/2023/11/29/arm%E5%88%9D%E6%8E%A2/v2-b05eeba8cc7c4cbded074a0aee4ebcdb_1440w.webp" alt="img"></p>
+<h3 id="ARM汇编指令集"><a href="#ARM汇编指令集" class="headerlink" title="ARM汇编指令集"></a>ARM汇编指令集</h3><p><strong>ARM指令集可以分为跳转指令、数据处理指令、程序状态寄存器(PSR)处理指令、加载&#x2F;存储指令、协处理器指令和异常产生指令六大类</strong>。</p>
+<p>跳转指令：B,BL,BX,BXL(<em>用于函数调用时的跳转，分为带&#x2F;不带 返回地址&#x2F;状态 的跳转</em>)</p>
+<p>数据处理指令：MOV,ADD,SUB,DIV,MUL,AND,ORR,CMP…(<em>赋值，加减乘除，与或逻辑，比较</em>)</p>
+<p>程序状态寄存器(PSR)处理指令：MSR,MRS(<em>用于查询或设置状态寄存器&#x2F;特殊寄存器的数据</em>)</p>
+<p>加载&#x2F;存储指令: LDR,STR…(<em>用于寄存器与内存之间的数据交换，*<em>一般为间接寻址</em></em>)</p>
+<p>异常产生指令：SWI(<em>用于产生软件中断</em>)</p>
+
+    </div>
+    
+</div>
+                         
+<footer id="footer">
+    <div class="footer-wrap">
+        <div>
+            © 20xx - 2023 Moyao の小屋
+            <span class="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            @Moyao
+        </div>
+        <div></div>
+        <div>Based on the <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo Engine</a> & <a
+                target="_blank" rel="noopener" href="https://github.com/argvchs/hexo-theme-particlex">ParticleX Theme</a></div>
+        
+    </div>
+</footer>
+                    </div>
+                </div>
+            </transition>
+            <div id="img_show">
+                <img id="img_content" alt="img_show">
+            </div>
+        </div>
+        <script src="https://cdn.staticfile.org/highlight.js/11.5.1/highlight.min.js"></script>
+        <script src="/js/particlex.js"></script>
+        <script src="/js/showimg.js"></script>
+        
+
+    </body>
+</html>
