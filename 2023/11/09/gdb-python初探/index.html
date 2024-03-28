@@ -144,6 +144,29 @@ rip = frame.read_register(&quot;rip&quot;)
         rdx = frame.read_register(&quot;rdx&quot;)
     gdb.execute(&#39;c&#39;)
 </code></pre>
+<hr>
+<p>一些其他的tips：</p>
+<p>从AT&amp;T语法切换到intel语法：</p>
+<blockquote>
+<p>echo ‘set disassembly-flavor intel’ &gt; ~&#x2F;.gdbinit</p>
+</blockquote>
+<p>使用gdb自带的指令</p>
+<blockquote>
+<p>gdb -x script.gdb .&#x2F;file</p>
+<blockquote>
+<p>script.gdb</p>
+<p>条件断点，eg.在断点处打印$rax或执行一些需要的操作；类似idapython<code>print(get_reg_value(&#39;rax&#39;))</code></p>
+<pre><code>b *main
+commands
+    silent
+    p $rax
+    continue
+end
+r
+q
+</code></pre>
+</blockquote>
+</blockquote>
 
     </div>
     
