@@ -112,9 +112,8 @@ mail: &lt;moyaoxue@outlook.com&gt;
     <div class="content" v-pre>
         <h6 id="PREFACE：感觉有时候用得到（其实是看到了别人的脚本不会用）"><a href="#PREFACE：感觉有时候用得到（其实是看到了别人的脚本不会用）" class="headerlink" title="PREFACE：感觉有时候用得到（其实是看到了别人的脚本不会用）"></a>PREFACE：感觉有时候用得到（<del>其实是看到了别人的脚本不会用</del>）</h6><span id="more"></span>
 
-<p>发现一个好的远调新方法（可以很好解决ida_server地址和gdb不同的问题）：</p>
 <pre><code># https://www.hex-rays.com/products/ida/support/idadoc/1343.shtml
-gdbserver --multi localhost:23947
+gdbserver --multi *:1234
 </code></pre>
 <p>然后可以在gdb里面使用gdb脚本</p>
 <p>使用方法：</p>
@@ -148,7 +147,7 @@ rip = frame.read_register(&quot;rip&quot;)
 <p>一些其他的tips：</p>
 <p>从AT&amp;T语法切换到intel语法：</p>
 <blockquote>
-<p>echo ‘set disassembly-flavor intel’ &gt; ~&#x2F;.gdbinit</p>
+<p>echo ‘set disassembly-flavor intel’ &gt;&gt; ~&#x2F;.gdbinit</p>
 </blockquote>
 <p>使用gdb自带的指令</p>
 <blockquote>
@@ -167,6 +166,7 @@ q
 </code></pre>
 </blockquote>
 </blockquote>
+<p>补：这里有一个issue，dbg或者gef用的时候会调用一个有bug的gdb api，有需要<code>continue</code>的时候用<code>pi gdb.execute(&quot;continue&quot;)</code></p>
 
     </div>
     

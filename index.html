@@ -122,6 +122,99 @@ mail: &lt;moyaoxue@outlook.com&gt;
             
 
 <div class="post">
+    <a href="/2024/04/02/driver复现-铁三2024/">
+        <h2>
+            Driver复现(铁三2024)
+        </h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
+            </span>
+            2024/4/2
+        </span>
+    </div>
+    <div class="excerpt">
+        <div class="content" v-pre>
+            
+            <h6 id="PREFACE：之前看了不少驱动开发，然后发现这题调不起来，静态解不出来，赛后速通unicorn写了个模拟看看"><a href="#PREFACE：之前看了不少驱动开发，然后发现这题调不起来，静态解不出来，赛后速通unicorn写了个模拟看看" class="headerlink" title="PREFACE：之前看了不少驱动开发，然后发现这题调不起来，静态解不出来，赛后速通unicorn写了个模拟看看"></a>PREFACE：之前看了不少驱动开发，然后发现这题调不起来，静态解不出来，赛后速通unicorn写了个模拟看看</h6>
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2024/04/02/driver复现-铁三2024/" class="go-post">
+        阅读全文
+    </a>
+</div>
+
+<div class="post">
+    <a href="/2024/03/28/msf-Android马分析/">
+        <h2>
+            Msf Android马分析
+        </h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
+            </span>
+            2024/3/28
+        </span>
+    </div>
+    <div class="excerpt">
+        <div class="content" v-pre>
+            
+            
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2024/03/28/msf-Android马分析/" class="go-post">
+        阅读全文
+    </a>
+</div>
+
+<div class="post">
+    <a href="/2024/03/28/ACTF-flutter复现/">
+        <h2>
+            ACTF Flutter复现
+        </h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
+            </span>
+            2024/3/28
+        </span>
+    </div>
+    <div class="excerpt">
+        <div class="content" v-pre>
+            
+            <h6 id="RPEFACE：写一个flutter程序以后自己逆逆呗，一看刚好有个高版本flutter的题没复现"><a href="#RPEFACE：写一个flutter程序以后自己逆逆呗，一看刚好有个高版本flutter的题没复现" class="headerlink" title="RPEFACE：写一个flutter程序以后自己逆逆呗，一看刚好有个高版本flutter的题没复现~"></a>RPEFACE：写一个flutter程序以后自己逆逆呗，一看刚好有个高版本flutter的题没复现~</h6>
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2024/03/28/ACTF-flutter复现/" class="go-post">
+        阅读全文
+    </a>
+</div>
+
+<div class="post">
     <a href="/2024/03/28/flutter开发初探/">
         <h2>
             Flutter开发初探
@@ -183,121 +276,6 @@ mail: &lt;moyaoxue@outlook.com&gt;
     </a>
 </div>
 
-<div class="post">
-    <a href="/2024/02/26/pwnCollege/">
-        <h2>
-            pwnCollege
-        </h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
-            </span>
-            2024/2/26
-        </span>
-    </div>
-    <div class="excerpt">
-        <div class="content" v-pre>
-            
-            <p>assembly crash course level 26</p>
-<pre><code class="assembly">.section .text
-.global _start
-
-_start:
-    cmp $4, %rdi               # Compare rdi with 3
-    ja default_case            # If rdi &gt; 3, jump to default case
-
-    # Calculate jump address based on rdi value
-    lea (%rsi,%rdi,8), %rax    # rax = rsi + rdi*8 (address in jump table)
-    jmp (%rax)                # Indirect jump to the address stored at rax
-
-default_case:
-    lea 32(%rsi), %rax    # rax = rsi + rdi*8 (address in jump table)
-    jmp (%rax)                    # Jump to the default case address
-</code></pre>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2024/02/26/pwnCollege/" class="go-post">
-        阅读全文
-    </a>
-</div>
-
-<div class="post">
-    <a href="/2024/01/31/ubuntu-python-version-manage/">
-        <h2>
-            Ubuntu Python Version Manage
-        </h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
-            </span>
-            2024/1/31
-        </span>
-    </div>
-    <div class="excerpt">
-        <div class="content" v-pre>
-            
-            <pre><code class="shell">sudo apt-get install -y make build-essential libssl-dev zlib1g-dev \
-libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev \
-libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python3-openssl
-</code></pre>
-<pre><code class="shell">$ curl https://pyenv.run | bash
-</code></pre>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2024/01/31/ubuntu-python-version-manage/" class="go-post">
-        阅读全文
-    </a>
-</div>
-
-<div class="post">
-    <a href="/2024/01/24/CVE-2017-6736/">
-        <h2>
-            CVE-2017-6736
-        </h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
-            </span>
-            2024/1/24
-        </span>
-    </div>
-    <div class="excerpt">
-        <div class="content" v-pre>
-            
-            <h6 id="PREFACE："><a href="#PREFACE：" class="headerlink" title="PREFACE："></a>PREFACE：</h6>
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2024/01/24/CVE-2017-6736/" class="go-post">
-        阅读全文
-    </a>
-</div>
-
              
 <div class="page-current">
     <div class="prev">
@@ -324,9 +302,9 @@ libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python3-openssl
             
             
             <span class="page-omit">...</span>
-            <a href="/page/13">
+            <a href="/page/14">
                 <span class="page-num">
-                    13
+                    14
                 </span>
             </a>
             

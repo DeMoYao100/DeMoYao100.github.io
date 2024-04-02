@@ -13029,9 +13029,8 @@ print(&#39;&#125;&#39;)
     <url>/2023/11/09/gdb-python%E5%88%9D%E6%8E%A2/</url>
     <content><![CDATA[<h6 id="PREFACE：感觉有时候用得到（其实是看到了别人的脚本不会用）"><a href="#PREFACE：感觉有时候用得到（其实是看到了别人的脚本不会用）" class="headerlink" title="PREFACE：感觉有时候用得到（其实是看到了别人的脚本不会用）"></a>PREFACE：感觉有时候用得到（<del>其实是看到了别人的脚本不会用</del>）</h6><span id="more"></span>
 
-<p>发现一个好的远调新方法（可以很好解决ida_server地址和gdb不同的问题）：</p>
 <pre><code># https://www.hex-rays.com/products/ida/support/idadoc/1343.shtml
-gdbserver --multi localhost:23947
+gdbserver --multi *:1234
 </code></pre>
 <p>然后可以在gdb里面使用gdb脚本</p>
 <p>使用方法：</p>
@@ -13065,7 +13064,7 @@ rip = frame.read_register(&quot;rip&quot;)
 <p>一些其他的tips：</p>
 <p>从AT&amp;T语法切换到intel语法：</p>
 <blockquote>
-<p>echo ‘set disassembly-flavor intel’ &gt; ~&#x2F;.gdbinit</p>
+<p>echo ‘set disassembly-flavor intel’ &gt;&gt; ~&#x2F;.gdbinit</p>
 </blockquote>
 <p>使用gdb自带的指令</p>
 <blockquote>
@@ -13084,6 +13083,7 @@ q
 </code></pre>
 </blockquote>
 </blockquote>
+<p>补：这里有一个issue，dbg或者gef用的时候会调用一个有bug的gdb api，有需要<code>continue</code>的时候用<code>pi gdb.execute(&quot;continue&quot;)</code></p>
 ]]></content>
   </entry>
   <entry>
@@ -13935,13 +13935,17 @@ set endian big
   <entry>
     <title>pwnCollege</title>
     <url>/2024/02/26/pwnCollege/</url>
-    <content><![CDATA[<p>assembly crash course level 26</p>
-<pre><code class="assembly">.section .text
+    <content><![CDATA[<h6 id="隐藏了"><a href="#隐藏了" class="headerlink" title="隐藏了~"></a>隐藏了~</h6><span id="more"></span>
+
+<!-- assembly crash course level 26
+
+```assembly
+.section .text
 .global _start
 
 _start:
     cmp $4, %rdi               # Compare rdi with 3
-    ja default_case            # If rdi &gt; 3, jump to default case
+    ja default_case            # If rdi > 3, jump to default case
 
     # Calculate jump address based on rdi value
     lea (%rsi,%rdi,8), %rax    # rax = rsi + rdi*8 (address in jump table)
@@ -13950,7 +13954,9 @@ _start:
 default_case:
     lea 32(%rsi), %rax    # rax = rsi + rdi*8 (address in jump table)
     jmp (%rax)                    # Jump to the default case address
-</code></pre>
+
+```
+-->
 ]]></content>
   </entry>
   <entry>
@@ -15225,6 +15231,187 @@ p.interactive()
     <title>初探驱动</title>
     <url>/2024/01/15/%E5%88%9D%E6%8E%A2%E9%A9%B1%E5%8A%A8/</url>
     <content><![CDATA[<h6 id="PREFACE：偷点资料入个门吧，性质应该属于随便看看"><a href="#PREFACE：偷点资料入个门吧，性质应该属于随便看看" class="headerlink" title="PREFACE：偷点资料入个门吧，性质应该属于随便看看"></a>PREFACE：偷点资料入个门吧，性质应该属于随便看看</h6><span id="more"></span>
+]]></content>
+  </entry>
+  <entry>
+    <title>ACTF flutter复现</title>
+    <url>/2024/03/28/ACTF-flutter%E5%A4%8D%E7%8E%B0/</url>
+    <content><![CDATA[<h6 id="RPEFACE：写一个flutter程序以后自己逆逆呗，一看刚好有个高版本flutter的题没复现"><a href="#RPEFACE：写一个flutter程序以后自己逆逆呗，一看刚好有个高版本flutter的题没复现" class="headerlink" title="RPEFACE：写一个flutter程序以后自己逆逆呗，一看刚好有个高版本flutter的题没复现~"></a>RPEFACE：写一个flutter程序以后自己逆逆呗，一看刚好有个高版本flutter的题没复现~</h6><span id="more"></span>
+]]></content>
+  </entry>
+  <entry>
+    <title>msf Android马分析</title>
+    <url>/2024/03/28/msf-Android%E9%A9%AC%E5%88%86%E6%9E%90/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>driver复现(铁三2024)</title>
+    <url>/2024/04/02/driver%E5%A4%8D%E7%8E%B0-%E9%93%81%E4%B8%892024/</url>
+    <content><![CDATA[<h6 id="PREFACE：之前看了不少驱动开发，然后发现这题调不起来，静态解不出来，赛后速通unicorn写了个模拟看看"><a href="#PREFACE：之前看了不少驱动开发，然后发现这题调不起来，静态解不出来，赛后速通unicorn写了个模拟看看" class="headerlink" title="PREFACE：之前看了不少驱动开发，然后发现这题调不起来，静态解不出来，赛后速通unicorn写了个模拟看看"></a>PREFACE：之前看了不少驱动开发，然后发现这题调不起来，静态解不出来，赛后速通unicorn写了个模拟看看</h6><span id="more"></span>
+
+<p>首先，可以看到文件的前0x400字符是文件头信息，先rebase+0x400</p>
+<p>这里直接贴一个unicorn脚本，可以看到tea的操作，前后转化了一次端序然后标准TEA， which is WRONG：</p>
+<pre><code class="python">from unicorn import *
+from unicorn.x86_const import *
+import struct
+from capstone import *
+REAL_BASE_OFFSET = 0x400
+md = Cs(CS_ARCH_X86, CS_MODE_64)
+def read(name):
+    with open(name,&#39;rb&#39;) as f:
+        return f.read()
+
+def hookDbgPrint(mu,address,size,user_data):
+    code = mu.mem_read(address, size)
+    # for instruction in md.disasm(code, address):
+    #     print(&quot;0x%x: %s %s&quot; % (instruction.address, instruction.mnemonic, instruction.op_str))
+    DbgList = [0x1400015C9]
+    if (address in DbgList):
+        mu.reg_write(UC_X86_REG_RIP, address+5)
+        print(f&quot;hook: &#123;address&#125;&quot;)
+    if (address == 0x140001940):
+        TEAoutput = mu.mem_read(mu.reg_read(UC_X86_REG_RAX), 32)
+    if (address == 0x1400017DB):
+        # mu.mem_write(mu.reg_read(UC_X86_REG_RSP) + 40, b&#39;12345678&#39;)
+        TEAinput = mu.mem_read(mu.reg_read(UC_X86_REG_RSP) + 40, 8)
+        print(&quot;tea in: &quot;,bytes(TEAinput))
+    if (address == 0x14000166D):
+        mu.mem_write(mu.reg_read(UC_X86_REG_RSP) + 144, b&#39;12345678&#39;)
+    if (address == 0x14000182D):
+        TEAoutput = mu.mem_read(mu.reg_read(UC_X86_REG_RSP) + 40, 8)
+        print(&quot;tea out: &quot;,end=&#39;&#39;)
+        for i in TEAoutput:
+            print(i,end=&#39;,&#39;)
+        print()
+    if (address == 0x14000197A):
+        ENCoutput = mu.mem_read(mu.reg_read(UC_X86_REG_RSP) + 40, 8)
+        print(&quot;enc out:&quot;,end=&#39;&#39;)
+        for i in ENCoutput:
+            print(i,end=&#39;,&#39;)
+        print()
+
+def hookEND(mu : Uc,address,size,user_data):
+    if (address == 0x14000197A):
+        print(&quot;end&quot;)
+        # exit(0)
+        mu.emu_stop()
+
+mu = Uc (UC_ARCH_X86, UC_MODE_64)
+BASE = 0x140001000
+STACK_ADDR = 0x1000
+STACK_SIZE = 1024*1024
+mu.mem_map(BASE, 1024*1024)
+mu.mem_map(STACK_ADDR, STACK_SIZE)
+mu.mem_write(BASE, read(&quot;./ez_driver.sys&quot;))
+mu.reg_write(UC_X86_REG_RBP, STACK_ADDR + STACK_SIZE // 2)
+mu.reg_write(UC_X86_REG_RSP, STACK_ADDR + STACK_SIZE // 3)
+mu.hook_add(UC_HOOK_CODE,hookDbgPrint)
+mu.hook_add(UC_HOOK_CODE,hookEND)
+mu.emu_start(0x14000161D, 0x140004000)
+</code></pre>
+<p>另一个加密就是对称的，其实看了就知道只做了xor，重写一遍就行：</p>
+<pre><code class="cpp">#include &lt;iostream&gt;
+#include &lt;Windows.h&gt;
+BYTE byte_140004000[] =
+&#123;
+    0x72, 0x62, 0xAE, 0x34, 0x52, 0x9A, 0x06, 0xAF, 
+    0x72, 0xFB, 0x40, 0xC0, 0x10, 0x35, 0xBD, 0xD4,
+    0x22, 0xA5, 0x93, 0x07, 0xB4, 0xFB, 0xB5, 0xCA,
+    0xE8, 0x01, 0xF5, 0xAE, 0xED, 0x7B, 0xB8, 0x6A
+&#125;;
+__int64 __fastcall sub_140001A70(unsigned int *input, int a2)
+&#123;
+    int j; // [rsp+4h] [rbp-44h]
+    int i; // [rsp+8h] [rbp-40h]
+    unsigned int input_xor; // [rsp+Ch] [rbp-3Ch] BYREF
+    unsigned char *p_input_xor; // [rsp+10h] [rbp-38h]
+    unsigned int v6; // [rsp+18h] [rbp-30h]
+    char v7[16]; // [rsp+20h] [rbp-28h]
+    
+    v7[1] = a2 ^ 0x25;
+    v7[0] = a2 ^ 0x7A;
+    v7[8] = a2 ^ 0x1A;
+    v7[2] = a2 ^ 0x35;
+    v7[9] = a2 ^ 0x6D;
+    v7[3] = a2 ^ 0x23;
+    v7[11] = a2 ^ 0x94;
+    v7[4] = a2 ^ 0xC5;
+    v7[5] = a2 ^ 0x4B;
+    v7[6] = a2 ^ 0x21;
+    v7[7] = a2 ^ 0x35;
+    v7[10] = a2 ^ 0x91;
+    v7[12] = a2 ^ 0x2C;
+    v7[13] = a2 ^ 0xC1;
+    v7[14] = a2 ^ 0x92;
+    v7[15] = a2 ^ 0x51;
+    for ( i = 0; i &lt; 4; ++i )
+    &#123;
+        p_input_xor = (unsigned char*)&amp;input_xor;
+        input_xor = *input ^ a2;
+        for ( j = 0; j &lt; 4; ++j )
+            *p_input_xor++ ^= v7[15 - (((unsigned __int8)i + (unsigned __int8)j) &amp; 0xF)] | ((unsigned __int8)j &lt;&lt; j) | j | 4;
+        v6 = ~a2 ^ input_xor;
+        *input++ = v6;
+    &#125;
+&#125;
+int main()
+&#123;
+    int v8 = 0;
+    BYTE* v17 = byte_140004000;
+    do
+    &#123;
+        sub_140001A70((unsigned int *)v17, v8++);
+        v17 += 16;
+    &#125; while (v8 &lt; 2);
+    for (unsigned char c : byte_140004000)
+        printf(&quot;%d,&quot;, c);
+    printf(&quot;\n&quot;);
+&#125;
+</code></pre>
+<p>然后发现模拟结果和解密明明对得上，但是出不来，结论是藏东西了或者改东西了，毕竟没有真起起来调，然后发现前面有这个init，寻找特定的结构shr ecx, 0x5，把5改成6</p>
+<p><img src="/2024/04/02/driver%E5%A4%8D%E7%8E%B0-%E9%93%81%E4%B8%892024/image.png" alt="image"></p>
+<p>土里刨一个脚本出来：</p>
+<pre><code class="cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+void decrypt(uint32_t *v, uint32_t *key)
+&#123;
+    uint32_t l = v[0], r = v[1], sum = 0x9E3779B9 * 33;
+    for (int i = 0; i &lt; 33; ++i)
+    &#123;
+        r -= (key[(sum &gt;&gt; 11) &amp; 3] + sum) ^ (l + ((l &gt;&gt; 5) ^ (16 * l)));
+        sum += 0x61C88647;
+        l -= (key[sum &amp; 3] + sum) ^ (r + ((r &gt;&gt; 6) ^ (16 * r)));
+        
+    &#125;
+    v[0] = l, v[1] = r;
+&#125;
+
+int main()&#123;
+    uint32_t key[4];
+    // 加解密对称！！！
+//	uint8_t enc[] = &#123;0x72, 0x62, 0xAE, 0x34, 0x52, 0x9A, 0x06, 0xAF, 
+//							0x72, 0xFB, 0x40, 0xC0, 0x10, 0x35, 0xBD, 0xD4,
+//							0x22, 0xA5, 0x93, 0x07, 0xB4, 0xFB, 0xB5, 0xCA,
+//							0xE8, 0x01, 0xF5, 0xAE, 0xED, 0x7B, 0xB8, 0x6A&#125;;
+    uint8_t enc[] = &#123;216,10,158,244,59,162,215,207,72,43,33,160,195,93,221,84,137,205,162,199,220,195,101,170,211,209,149,206,63,19,217,234&#125;;
+    key[0] = 0x1A2B;
+    key[1] = 0x3A4D;
+    key[2] = 0x5E6F;
+    key[3] = 0xAA33;
+    for (int i=0;i&lt;32;i+=8)&#123;
+        uint32_t *p = (uint32_t *)&amp;enc[i];
+        p[0] = __builtin_bswap32(p[0]);
+        p[1] = __builtin_bswap32(p[1]);
+        decrypt((uint32_t*)p,key);
+        p[0] = __builtin_bswap32(p[0]);
+        p[1] = __builtin_bswap32(p[1]);
+    &#125;
+    for (int i=0;i&lt;32;i++)&#123;
+        printf(&quot;%c&quot;,enc[i]);
+    &#125;
+    return 0;
+&#125;
+</code></pre>
 ]]></content>
   </entry>
 </search>
