@@ -15758,7 +15758,9 @@ int main()&#123;
   <entry>
     <title>sandbox</title>
     <url>/2024/04/04/sandbox/</url>
-    <content><![CDATA[<p>审洞，chroot以后没有chdir，会保留当前文件夹下的状态信息，可以直接到需要的目录下运行读取，sendfile可以跨chroot把东西读出来</p>
+    <content><![CDATA[<span id="more"></span>
+
+<p>审洞，chroot以后没有chdir，会保留当前文件夹下的状态信息，可以直接到需要的目录下运行读取，sendfile可以跨chroot把东西读出来</p>
 <pre><code class="cpp">#define _GNU_SOURCE 1
 
 #include &lt;stdlib.h&gt;
@@ -16578,7 +16580,9 @@ p.kill()
   <entry>
     <title>web入门操作</title>
     <url>/2024/04/14/web%E5%85%A5%E9%97%A8%E6%93%8D%E4%BD%9C/</url>
-    <content><![CDATA[<h3 id="curl"><a href="#curl" class="headerlink" title="curl"></a>curl</h3><ul>
+    <content><![CDATA[<span id="more"></span>
+
+<h3 id="curl"><a href="#curl" class="headerlink" title="curl"></a>curl</h3><ul>
 <li>curl 发送 get指令</li>
 </ul>
 <blockquote>
