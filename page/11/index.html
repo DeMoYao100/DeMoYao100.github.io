@@ -122,6 +122,163 @@ mail: &lt;moyaoxue@outlook.com&gt;
             
 
 <div class="post">
+    <a href="/2023/08/26/交叉编译以及其他架构逆向初探/">
+        <h2>
+            交叉编译以及其他架构逆向初探
+        </h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
+            </span>
+            2023/8/26
+        </span>
+    </div>
+    <div class="excerpt">
+        <div class="content" v-pre>
+            
+            <h6 id="preface-蓝帽杯初赛2023，题目没做出来，理论上能出，实际上没时间，就算有时间估计也不会去看那么多汇编，但是既然结合0CTF2021也有一个类似折磨的pwn题（虽然那个题很多种意义上说其实好很多，即使我还是偏re手）不过感觉还是有很多东西要学以及刚学到，浅记录一下。"><a href="#preface-蓝帽杯初赛2023，题目没做出来，理论上能出，实际上没时间，就算有时间估计也不会去看那么多汇编，但是既然结合0CTF2021也有一个类似折磨的pwn题（虽然那个题很多种意义上说其实好很多，即使我还是偏re手）不过感觉还是有很多东西要学以及刚学到，浅记录一下。" class="headerlink" title="preface: 蓝帽杯初赛2023，题目没做出来，理论上能出，实际上没时间，就算有时间估计也不会去看那么多汇编，但是既然结合0CTF2021也有一个类似折磨的pwn题（虽然那个题很多种意义上说其实好很多，即使我还是偏re手）不过感觉还是有很多东西要学以及刚学到，浅记录一下。"></a>preface: 蓝帽杯初赛2023，题目没做出来，理论上能出，实际上没时间，就算有时间估计也不会去看那么多汇编，但是既然结合0CTF2021也有一个类似折磨的pwn题（虽然那个题很多种意义上说其实好很多，即使我还是偏re手）不过感觉还是有很多东西要学以及刚学到，浅记录一下。</h6>
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/re/" style="color: #00bcd4">
+                re
+            </a>
+        </span>
+        
+    </div>
+    <a href="/2023/08/26/交叉编译以及其他架构逆向初探/" class="go-post">
+        阅读全文
+    </a>
+</div>
+
+<div class="post">
+    <a href="/2023/08/23/初探python-bytecode/">
+        <h2>
+            初探Python Bytecode
+        </h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
+            </span>
+            2023/8/23
+        </span>
+    </div>
+    <div class="excerpt">
+        <div class="content" v-pre>
+            
+            <h6 id="preface-起因是wmctf的一道python题，包括了修复python字节码花指令和虚拟机等考点。算是萌新初见python花，花了一上午学习修了花指令，反编译不了不过可以获得字节码，理论上手动反汇编得到python码就没问题了。但实际上这里的字节码结构也有点问题，顺便从学长那里听闻了一下下antlr这种东西。然后手动翻译的伪代码也错漏百出…最后是学长写了脚本给他自动化修了得以告一段落。不过确实得回来补补python的编译结构功课了。"><a href="#preface-起因是wmctf的一道python题，包括了修复python字节码花指令和虚拟机等考点。算是萌新初见python花，花了一上午学习修了花指令，反编译不了不过可以获得字节码，理论上手动反汇编得到python码就没问题了。但实际上这里的字节码结构也有点问题，顺便从学长那里听闻了一下下antlr这种东西。然后手动翻译的伪代码也错漏百出…最后是学长写了脚本给他自动化修了得以告一段落。不过确实得回来补补python的编译结构功课了。" class="headerlink" title="preface:起因是wmctf的一道python题，包括了修复python字节码花指令和虚拟机等考点。算是萌新初见python花，花了一上午学习修了花指令，反编译不了不过可以获得字节码，理论上手动反汇编得到python码就没问题了。但实际上这里的字节码结构也有点问题，顺便从学长那里听闻了一下下antlr这种东西。然后手动翻译的伪代码也错漏百出…最后是学长写了脚本给他自动化修了得以告一段落。不过确实得回来补补python的编译结构功课了。"></a>preface:起因是wmctf的一道python题，包括了修复python字节码花指令和虚拟机等考点。算是萌新初见python花，花了一上午学习修了花指令，反编译不了不过可以获得字节码，理论上手动反汇编得到python码就没问题了。但实际上这里的字节码结构也有点问题，顺便从学长那里听闻了一下下antlr这种东西。然后手动翻译的伪代码也错漏百出…最后是学长写了脚本给他自动化修了得以告一段落。不过确实得回来补补python的编译结构功课了。</h6>
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/re-python/" style="color: #ff7d73">
+                re python
+            </a>
+        </span>
+        
+    </div>
+    <a href="/2023/08/23/初探python-bytecode/" class="go-post">
+        阅读全文
+    </a>
+</div>
+
+<div class="post">
+    <a href="/2023/08/23/初探flutter/">
+        <h2>
+            初探Flutter
+        </h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
+            </span>
+            2023/8/23
+        </span>
+    </div>
+    <div class="excerpt">
+        <div class="content" v-pre>
+            
+            <h6 id="preface-起因是WMCTF2023有个anticheat2是基于flutter开发的，中间也得用到相关知识。题目是一下子被队里师傅秒了（555队里师傅秒题太快哩毫无存在感属于是）但是总归还是得来补补功课，啥也不学还是啥也不会。（虽然这会我的安卓环境还是不太彳亍容错很低当时比赛的时候就没有环境跑这个题）"><a href="#preface-起因是WMCTF2023有个anticheat2是基于flutter开发的，中间也得用到相关知识。题目是一下子被队里师傅秒了（555队里师傅秒题太快哩毫无存在感属于是）但是总归还是得来补补功课，啥也不学还是啥也不会。（虽然这会我的安卓环境还是不太彳亍容错很低当时比赛的时候就没有环境跑这个题）" class="headerlink" title="preface: 起因是WMCTF2023有个anticheat2是基于flutter开发的，中间也得用到相关知识。题目是一下子被队里师傅秒了（555队里师傅秒题太快哩毫无存在感属于是）但是总归还是得来补补功课，啥也不学还是啥也不会。（虽然这会我的安卓环境还是不太彳亍容错很低当时比赛的时候就没有环境跑这个题）"></a>preface: 起因是WMCTF2023有个anticheat2是基于flutter开发的，中间也得用到相关知识。题目是一下子被队里师傅秒了（<del>555队里师傅秒题太快哩毫无存在感属于是</del>）但是总归还是得来补补功课，啥也不学还是啥也不会。（<del>虽然这会我的安卓环境还是不太彳亍容错很低当时比赛的时候就没有环境跑这个题</del>）</h6>
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2023/08/23/初探flutter/" class="go-post">
+        阅读全文
+    </a>
+</div>
+
+<div class="post">
+    <a href="/2023/08/09/hook某聊天软件lab/">
+        <h2>
+            Hook某聊天软件lab
+        </h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
+            </span>
+            2023/8/9
+        </span>
+    </div>
+    <div class="excerpt">
+        <div class="content" v-pre>
+            
+            <h6 id="起因是在学安卓逆向，而且自己水平太低，打算练练手。恰巧某友的校内lab做了类似的东西，羡慕，遂打算动手尝试复现"><a href="#起因是在学安卓逆向，而且自己水平太低，打算练练手。恰巧某友的校内lab做了类似的东西，羡慕，遂打算动手尝试复现" class="headerlink" title="起因是在学安卓逆向，而且自己水平太低，打算练练手。恰巧某友的校内lab做了类似的东西，羡慕，遂打算动手尝试复现"></a>起因是在学安卓逆向，而且自己水平太低，打算练练手。恰巧某友的校内lab做了类似的东西，羡慕，遂打算动手尝试复现</h6>
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/android/" style="color: #00bcd4">
+                android
+            </a>
+        </span>
+        
+    </div>
+    <a href="/2023/08/09/hook某聊天软件lab/" class="go-post">
+        阅读全文
+    </a>
+</div>
+
+<div class="post">
     <a href="/2023/07/18/junk-code-demo/">
         <h2>
             Junk Code Demo
@@ -152,148 +309,13 @@ mail: &lt;moyaoxue@outlook.com&gt;
         
         <span class="tag">
             
-            <a href="/tags/re/" style="color: #ff7d73">
+            <a href="/tags/re/" style="color: #ffa2c4">
                 re
             </a>
         </span>
         
     </div>
     <a href="/2023/07/18/junk-code-demo/" class="go-post">
-        阅读全文
-    </a>
-</div>
-
-<div class="post">
-    <a href="/2023/07/17/cv与一些classify事项记录/">
-        <h2>
-            Cv与一些classify事项记录
-        </h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
-            </span>
-            2023/7/17
-        </span>
-    </div>
-    <div class="excerpt">
-        <div class="content" v-pre>
-            
-            <h6 id="preface-一些project记录，慢慢学吧调参炼丹"><a href="#preface-一些project记录，慢慢学吧调参炼丹" class="headerlink" title="preface:一些project记录，慢慢学吧调参炼丹"></a>preface:一些project记录，慢慢学吧调参炼丹</h6>
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-        </span>
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/cv/" style="color: #03a9f4">
-                cv
-            </a>
-        </span>
-        
-    </div>
-    <a href="/2023/07/17/cv与一些classify事项记录/" class="go-post">
-        阅读全文
-    </a>
-</div>
-
-<div class="post">
-    <a href="/2023/07/11/d3ctf-2023/">
-        <h2>
-            D3ctf 2023
-        </h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
-            </span>
-            2023/7/11
-        </span>
-    </div>
-    <div class="excerpt">
-        <div class="content" v-pre>
-            
-            <h6 id="好久没写blog了QAQ，受到某人启发觉得有空还是写写，多少动动笔吧。本来是打算先写安卓学习的那篇，想着找个题复现吧，回来看看d3那个写不明白的android，结果一看d3好几个题读作solved，写作看一眼毫无印象，遂决定回来重新做一次"><a href="#好久没写blog了QAQ，受到某人启发觉得有空还是写写，多少动动笔吧。本来是打算先写安卓学习的那篇，想着找个题复现吧，回来看看d3那个写不明白的android，结果一看d3好几个题读作solved，写作看一眼毫无印象，遂决定回来重新做一次" class="headerlink" title="好久没写blog了QAQ，受到某人启发觉得有空还是写写，多少动动笔吧。本来是打算先写安卓学习的那篇，想着找个题复现吧，回来看看d3那个写不明白的android，结果一看d3好几个题读作solved，写作看一眼毫无印象，遂决定回来重新做一次"></a>好久没写blog了QAQ，受到某人启发觉得有空还是写写，多少动动笔吧。本来是打算先写安卓学习的那篇，想着找个题复现吧，回来看看d3那个写不明白的android，<del>结果一看d3好几个题读作solved，写作看一眼毫无印象</del>，遂决定回来重新做一次</h6>
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2023/07/11/d3ctf-2023/" class="go-post">
-        阅读全文
-    </a>
-</div>
-
-<div class="post">
-    <a href="/2023/07/11/安卓调试初探/">
-        <h2>
-            安卓调试初探
-        </h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
-            </span>
-            2023/7/11
-        </span>
-    </div>
-    <div class="excerpt">
-        <div class="content" v-pre>
-            
-            <h6 id="preface：说是初探，也不是很初探吧其实，前面多多少少弄过完整的流程了，但是由于hyperV这玄学东西后面搞的环境一团糟，打算还是重新弄一个完整的调试方案出来，顺便记录一些基础知识"><a href="#preface：说是初探，也不是很初探吧其实，前面多多少少弄过完整的流程了，但是由于hyperV这玄学东西后面搞的环境一团糟，打算还是重新弄一个完整的调试方案出来，顺便记录一些基础知识" class="headerlink" title="preface：说是初探，也不是很初探吧其实，前面多多少少弄过完整的流程了，但是由于hyperV这玄学东西后面搞的环境一团糟，打算还是重新弄一个完整的调试方案出来，顺便记录一些基础知识"></a>preface：说是初探，也不是很初探吧其实，前面多多少少弄过完整的流程了，但是由于hyperV这玄学东西后面搞的环境一团糟，打算还是重新弄一个完整的调试方案出来，顺便记录一些基础知识</h6>
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2023/07/11/安卓调试初探/" class="go-post">
-        阅读全文
-    </a>
-</div>
-
-<div class="post">
-    <a href="/2023/03/17/夜彳亍/">
-        <h2>
-            夜彳亍
-        </h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
-            </span>
-            2023/3/17
-        </span>
-    </div>
-    <div class="excerpt">
-        <div class="content" v-pre>
-            
-            <h4 id="夜彳亍京城"><a href="#夜彳亍京城" class="headerlink" title="夜彳亍京城"></a>夜彳亍京城</h4><h6 id="题目来源于AiDai学长、bridge和nova等"><a href="#题目来源于AiDai学长、bridge和nova等" class="headerlink" title="题目来源于AiDai学长、bridge和nova等"></a>题目来源于AiDai学长、bridge和nova等</h6><h6 id="长久不写文，感觉还是需要偶尔动动笔，不然对不起初高中语文老师"><a href="#长久不写文，感觉还是需要偶尔动动笔，不然对不起初高中语文老师" class="headerlink" title="长久不写文，感觉还是需要偶尔动动笔，不然对不起初高中语文老师"></a>长久不写文，感觉还是需要偶尔动动笔，不然对不起初高中语文老师</h6>
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2023/03/17/夜彳亍/" class="go-post">
         阅读全文
     </a>
 </div>

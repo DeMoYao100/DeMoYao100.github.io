@@ -112,15 +112,13 @@ mail: &lt;moyaoxue@outlook.com&gt;
     <div class="content" v-pre>
         <h6 id="隐藏了"><a href="#隐藏了" class="headerlink" title="隐藏了~"></a>隐藏了~</h6><span id="more"></span>
 
-<!-- assembly crash course level 26
-
-```assembly
-.section .text
+<p>assembly crash course level 26</p>
+<pre><code class="assembly">.section .text
 .global _start
 
 _start:
     cmp $4, %rdi               # Compare rdi with 3
-    ja default_case            # If rdi > 3, jump to default case
+    ja default_case            # If rdi &gt; 3, jump to default case
 
     # Calculate jump address based on rdi value
     lea (%rsi,%rdi,8), %rax    # rax = rsi + rdi*8 (address in jump table)
@@ -129,9 +127,7 @@ _start:
 default_case:
     lea 32(%rsi), %rax    # rax = rsi + rdi*8 (address in jump table)
     jmp (%rax)                    # Jump to the default case address
-
-```
--->
+</code></pre>
 
     </div>
     

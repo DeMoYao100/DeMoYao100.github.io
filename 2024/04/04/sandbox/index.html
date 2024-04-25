@@ -1,0 +1,331 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+        <title>Sandbox | Moyao の小屋</title>
+        <meta name="author" content="Moyao">
+        <meta name="description" content="Write down something interesting I met
+feel free to mail me if you have something wanted to talk about
+mail: &lt;moyaoxue@outlook.com&gt;
+">
+        <meta name="keywords" content="">
+        <link rel="icon" href="/images/head.jpg">
+        <script src="https://cdn.staticfile.org/instant.page/5.1.0/instantpage.min.js" type="module"></script>
+        <script src="https://cdn.staticfile.org/font-awesome/6.1.1/js/all.min.js"></script>
+        
+        <link rel="stylesheet" href="/css/fonts.min.css">
+        <link rel="stylesheet" href="/css/particlex.css">
+        
+        <script src="https://cdn.staticfile.org/vue/3.2.33/vue.global.prod.min.js"></script>
+    <meta name="generator" content="Hexo 6.2.0"></head>
+    <body>
+        <div id="loading" style="height:100vh;width:100vw;position:fixed;display:flex;z-index:200;justify-content:space-between;background:#fff;transition:opacity 0.3s ease-out"><div style="position:fixed;height:100vh;width:100vw;display:flex;justify-content:center;align-items:center"><div id="loadcontent" style="width:50vmin;height:50vmin;padding:50px;border-radius:50%;display:flex;justify-content:center;align-items:center;border:solid 10px #a3ddfb;text-align:center"><div><h2>LOADING...</h2><p style="word-break:keep-all">加载过慢请开启缓存(浏览器默认开启)</p><div><img alt="loading" src="/loading.gif"></div></div></div></div></div>
+        <div id="layout">
+            <i data-fa-symbol="calendar-solid" class="fa-solid fa-calendar fa-fw"></i>
+            <i data-fa-symbol="bookmark-solid" class="fa-solid fa-bookmark fa-fw"></i>
+            <i data-fa-symbol="tags-solid" class="fa-solid fa-tags fa-fw"></i>
+            <transition name="into">
+                <div v-show="show_page" style="display: -not-none">
+                    <div id="menu_show">
+                         
+<nav id="menu">
+    <div class="desktop-menu">
+        <a href="/">
+            <span class="title">Moyao の小屋</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;home</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;about</span>
+        </a>
+        
+        <a target="_blank" rel="noopener" href="//tags/re/">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;tags</span>
+        </a>
+        
+    </div>
+    <div :class="'phone-menu ' + menu_show" id="phone-menu">
+        <div class="curtain" @click="menu_show = !menu_show" v-show="menu_show"></div>
+        <div :class="'title'" @click="menu_show = !menu_show">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;Moyao の小屋</span>
+        </div>
+        <transition name="slide">
+        <div class="items" v-show="menu_show">
+            
+            <a href="">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-house fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">home</div>
+                </div>
+            </a>
+            
+            <a href="">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-id-card fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">about</div>
+                </div>
+            </a>
+            
+            <a href="/tags/re/">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-tags fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">tags</div>
+                </div>
+            </a>
+            
+        </div>
+        </transition>
+    </div>
+</nav>
+                    </div>
+                    <div id="main">
+                        
+<div class="article">
+    <div>
+        <h1>Sandbox </h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
+            </span>
+            2024/4/4
+        </span>
+        
+        
+    </div>
+    <div class="content" v-pre>
+        <p>审洞，chroot以后没有chdir，会保留当前文件夹下的状态信息，可以直接到需要的目录下运行读取，sendfile可以跨chroot把东西读出来</p>
+<pre><code class="cpp">#define _GNU_SOURCE 1
+
+#include &lt;stdlib.h&gt;
+#include &lt;stdint.h&gt;
+#include &lt;stdbool.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;fcntl.h&gt;
+#include &lt;string.h&gt;
+#include &lt;time.h&gt;
+#include &lt;errno.h&gt;
+#include &lt;assert.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;sys/stat.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;sys/wait.h&gt;
+#include &lt;sys/mman.h&gt;
+#include &lt;sys/sendfile.h&gt;
+
+int main(int argc, char **argv, char **envp)
+&#123;
+    assert(argc &gt; 0);
+
+    printf(&quot;###\n&quot;);
+    printf(&quot;### Welcome to %s!\n&quot;, argv[0]);
+    printf(&quot;###\n&quot;);
+    printf(&quot;\n&quot;);
+
+    setvbuf(stdin, NULL, _IONBF, 0);
+    setvbuf(stdout, NULL, _IONBF, 1);
+
+    puts(&quot;This challenge will chroot into a jail in /tmp/jail-XXXXXX. You will be able to easily read a fake flag file inside this&quot;);
+    puts(&quot;jail, not the real flag file outside of it. If you want the real flag, you must escape.\n&quot;);
+    puts(&quot;The only thing you can do in this challenge is read out one single file, as specified by the first argument to the&quot;);
+    puts(&quot;program (argv[1]).\n&quot;);
+
+    assert(argc &gt; 1);
+
+    char jail_path[] = &quot;/tmp/jail-XXXXXX&quot;;
+    assert(mkdtemp(jail_path) != NULL);
+
+    printf(&quot;Creating a jail at `%s`.\n&quot;, jail_path);
+
+    assert(chroot(jail_path) == 0);
+
+    int fffd = open(&quot;/flag&quot;, O_WRONLY | O_CREAT);
+    write(fffd, &quot;FLAG&#123;FAKE&#125;&quot;, 10);
+    close(fffd);
+
+    printf(&quot;Sending the file at `%s` to stdout.\n&quot;, argv[1]);
+    sendfile(1, open(argv[1], 0), 0, 128);
+
+&#125;
+</code></pre>
+<p>level2</p>
+<pre><code class="cpp">#define _GNU_SOURCE 1
+
+#include &lt;stdlib.h&gt;
+#include &lt;stdint.h&gt;
+#include &lt;stdbool.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;fcntl.h&gt;
+#include &lt;string.h&gt;
+#include &lt;time.h&gt;
+#include &lt;errno.h&gt;
+#include &lt;assert.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;sys/stat.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;sys/wait.h&gt;
+#include &lt;sys/mman.h&gt;
+#include &lt;sys/sendfile.h&gt;
+
+#include &lt;capstone/capstone.h&gt;
+
+#define CAPSTONE_ARCH CS_ARCH_X86
+#define CAPSTONE_MODE CS_MODE_64
+
+void print_disassembly(void *shellcode_addr, size_t shellcode_size)
+&#123;
+    csh handle;
+    cs_insn *insn;
+    size_t count;
+
+    if (cs_open(CAPSTONE_ARCH, CAPSTONE_MODE, &amp;handle) != CS_ERR_OK)
+    &#123;
+        printf(&quot;ERROR: disassembler failed to initialize.\n&quot;);
+        return;
+    &#125;
+
+    count = cs_disasm(handle, shellcode_addr, shellcode_size, (uint64_t)shellcode_addr, 0, &amp;insn);
+    if (count &gt; 0)
+    &#123;
+        size_t j;
+        printf(&quot;      Address      |                      Bytes                    |          Instructions\n&quot;);
+        printf(&quot;------------------------------------------------------------------------------------------\n&quot;);
+
+        for (j = 0; j &lt; count; j++)
+        &#123;
+            printf(&quot;0x%016lx | &quot;, (unsigned long)insn[j].address);
+            for (int k = 0; k &lt; insn[j].size; k++) printf(&quot;%02hhx &quot;, insn[j].bytes[k]);
+            for (int k = insn[j].size; k &lt; 15; k++) printf(&quot;   &quot;);
+            printf(&quot; | %s %s\n&quot;, insn[j].mnemonic, insn[j].op_str);
+        &#125;
+
+        cs_free(insn, count);
+    &#125;
+    else
+    &#123;
+        printf(&quot;ERROR: Failed to disassemble shellcode! Bytes are:\n\n&quot;);
+        printf(&quot;      Address      |                      Bytes\n&quot;);
+        printf(&quot;--------------------------------------------------------------------\n&quot;);
+        for (unsigned int i = 0; i &lt;= shellcode_size; i += 16)
+        &#123;
+            printf(&quot;0x%016lx | &quot;, (unsigned long)shellcode_addr+i);
+            for (int k = 0; k &lt; 16; k++) printf(&quot;%02hhx &quot;, ((uint8_t*)shellcode_addr)[i+k]);
+            printf(&quot;\n&quot;);
+        &#125;
+    &#125;
+
+    cs_close(&amp;handle);
+&#125;
+
+int main(int argc, char **argv, char **envp)
+&#123;
+    assert(argc &gt; 0);
+
+    printf(&quot;###\n&quot;);
+    printf(&quot;### Welcome to %s!\n&quot;, argv[0]);
+    printf(&quot;###\n&quot;);
+    printf(&quot;\n&quot;);
+
+    setvbuf(stdin, NULL, _IONBF, 0);
+    setvbuf(stdout, NULL, _IONBF, 1);
+
+    puts(&quot;This challenge will chroot into a jail in /tmp/jail-XXXXXX. You will be able to easily read a fake flag file inside this&quot;);
+    puts(&quot;jail, not the real flag file outside of it. If you want the real flag, you must escape.\n&quot;);
+
+    puts(&quot;You may open a specified file, as given by the first argument to the program (argv[1]).\n&quot;);
+
+    puts(&quot;You may upload custom shellcode to do whatever you want.\n&quot;);
+
+    assert(argc &gt; 1);
+
+    puts(&quot;Checking to make sure you&#39;re not trying to open the flag.\n&quot;);
+    assert(strstr(argv[1], &quot;flag&quot;) == NULL);
+
+    int fd = open(argv[1], O_RDONLY|O_NOFOLLOW);
+    if (fd &lt; 0)
+        printf(&quot;Failed to open the file located at `%s`.\n&quot;, argv[1]);
+    else
+        printf(&quot;Successfully opened the file located at `%s`.\n&quot;, argv[1]);
+
+    char jail_path[] = &quot;/tmp/jail-XXXXXX&quot;;
+    assert(mkdtemp(jail_path) != NULL);
+
+    printf(&quot;Creating a jail at `%s`.\n&quot;, jail_path);
+
+    assert(chroot(jail_path) == 0);
+
+    int fffd = open(&quot;/flag&quot;, O_WRONLY | O_CREAT);
+    write(fffd, &quot;FLAG&#123;FAKE&#125;&quot;, 10);
+    close(fffd);
+
+    void *shellcode = mmap((void *)0x1337000, 0x1000, PROT_READ|PROT_WRITE|PROT_EXEC, MAP_PRIVATE|MAP_ANON, 0, 0);
+    assert(shellcode == (void *)0x1337000);
+    printf(&quot;Mapped 0x1000 bytes for shellcode at %p!\n&quot;, shellcode);
+
+    puts(&quot;Reading 0x1000 bytes of shellcode from stdin.\n&quot;);
+    int shellcode_size = read(0, shellcode, 0x1000);
+
+    puts(&quot;This challenge is about to execute the following shellcode:\n&quot;);
+    print_disassembly(shellcode, shellcode_size);
+    puts(&quot;&quot;);
+
+    puts(&quot;Executing shellcode!\n&quot;);
+
+    ((void(*)())shellcode)();
+&#125;
+</code></pre>
+<blockquote>
+<p>.&#x2F;flag</p>
+</blockquote>
+
+    </div>
+    
+</div>
+                         
+<footer id="footer">
+    <div class="footer-wrap">
+        <div>
+            © 20xx - 2024 Moyao の小屋
+            <span class="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            @Moyao
+        </div>
+        <div></div>
+        <div>Based on the <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo Engine</a> & <a
+                target="_blank" rel="noopener" href="https://github.com/argvchs/hexo-theme-particlex">ParticleX Theme</a></div>
+        
+    </div>
+</footer>
+                    </div>
+                </div>
+            </transition>
+            <div id="img_show">
+                <img id="img_content" alt="img_show">
+            </div>
+        </div>
+        <script src="https://cdn.staticfile.org/highlight.js/11.5.1/highlight.min.js"></script>
+        <script src="/js/particlex.js"></script>
+        <script src="/js/showimg.js"></script>
+        
+
+    </body>
+</html>
