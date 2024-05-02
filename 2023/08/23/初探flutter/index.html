@@ -1,0 +1,301 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+        <title>初探Flutter | Moyao の小屋</title>
+        <meta name="author" content="Moyao">
+        <meta name="description" content="Write down something interesting I met
+feel free to mail me if you have something wanted to talk about
+mail: &lt;moyaoxue@outlook.com&gt;
+">
+        <meta name="keywords" content="">
+        <link rel="icon" href="/images/head.jpg">
+        <script src="https://cdn.staticfile.org/instant.page/5.1.0/instantpage.min.js" type="module"></script>
+        <script src="https://cdn.staticfile.org/font-awesome/6.1.1/js/all.min.js"></script>
+        
+        <link rel="stylesheet" href="/css/fonts.min.css">
+        <link rel="stylesheet" href="/css/particlex.css">
+        
+        <script src="https://cdn.staticfile.org/vue/3.2.33/vue.global.prod.min.js"></script>
+    <meta name="generator" content="Hexo 6.2.0"></head>
+    <body>
+        <div id="loading" style="height:100vh;width:100vw;position:fixed;display:flex;z-index:200;justify-content:space-between;background:#fff;transition:opacity 0.3s ease-out"><div style="position:fixed;height:100vh;width:100vw;display:flex;justify-content:center;align-items:center"><div id="loadcontent" style="width:50vmin;height:50vmin;padding:50px;border-radius:50%;display:flex;justify-content:center;align-items:center;border:solid 10px #a3ddfb;text-align:center"><div><h2>LOADING...</h2><p style="word-break:keep-all">加载过慢请开启缓存(浏览器默认开启)</p><div><img alt="loading" src="/loading.gif"></div></div></div></div></div>
+        <div id="layout">
+            <i data-fa-symbol="calendar-solid" class="fa-solid fa-calendar fa-fw"></i>
+            <i data-fa-symbol="bookmark-solid" class="fa-solid fa-bookmark fa-fw"></i>
+            <i data-fa-symbol="tags-solid" class="fa-solid fa-tags fa-fw"></i>
+            <transition name="into">
+                <div v-show="show_page" style="display: -not-none">
+                    <div id="menu_show">
+                         
+<nav id="menu">
+    <div class="desktop-menu">
+        <a href="/">
+            <span class="title">Moyao の小屋</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;home</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;about</span>
+        </a>
+        
+        <a target="_blank" rel="noopener" href="//tags/re/">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;tags</span>
+        </a>
+        
+    </div>
+    <div :class="'phone-menu ' + menu_show" id="phone-menu">
+        <div class="curtain" @click="menu_show = !menu_show" v-show="menu_show"></div>
+        <div :class="'title'" @click="menu_show = !menu_show">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;Moyao の小屋</span>
+        </div>
+        <transition name="slide">
+        <div class="items" v-show="menu_show">
+            
+            <a href="">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-house fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">home</div>
+                </div>
+            </a>
+            
+            <a href="">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-id-card fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">about</div>
+                </div>
+            </a>
+            
+            <a href="/tags/re/">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-tags fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">tags</div>
+                </div>
+            </a>
+            
+        </div>
+        </transition>
+    </div>
+</nav>
+                    </div>
+                    <div id="main">
+                        
+<div class="article">
+    <div>
+        <h1>初探Flutter </h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
+            </span>
+            2023/8/23
+        </span>
+        
+        
+    </div>
+    <div class="content" v-pre>
+        <h6 id="preface-起因是WMCTF2023有个anticheat2是基于flutter开发的，中间也得用到相关知识。题目是一下子被队里师傅秒了（555队里师傅秒题太快哩毫无存在感属于是）但是总归还是得来补补功课，啥也不学还是啥也不会。（虽然这会我的安卓环境还是不太彳亍容错很低当时比赛的时候就没有环境跑这个题）"><a href="#preface-起因是WMCTF2023有个anticheat2是基于flutter开发的，中间也得用到相关知识。题目是一下子被队里师傅秒了（555队里师傅秒题太快哩毫无存在感属于是）但是总归还是得来补补功课，啥也不学还是啥也不会。（虽然这会我的安卓环境还是不太彳亍容错很低当时比赛的时候就没有环境跑这个题）" class="headerlink" title="preface: 起因是WMCTF2023有个anticheat2是基于flutter开发的，中间也得用到相关知识。题目是一下子被队里师傅秒了（555队里师傅秒题太快哩毫无存在感属于是）但是总归还是得来补补功课，啥也不学还是啥也不会。（虽然这会我的安卓环境还是不太彳亍容错很低当时比赛的时候就没有环境跑这个题）"></a>preface: 起因是WMCTF2023有个anticheat2是基于flutter开发的，中间也得用到相关知识。题目是一下子被队里师傅秒了（<del>555队里师傅秒题太快哩毫无存在感属于是</del>）但是总归还是得来补补功课，啥也不学还是啥也不会。（<del>虽然这会我的安卓环境还是不太彳亍容错很低当时比赛的时候就没有环境跑这个题</del>）</h6><span id="more"></span>
+
+<h5 id="文档：Flutter-架构概览-Flutter-中文文档-Flutter-中文开发者网站-Flutter"><a href="#文档：Flutter-架构概览-Flutter-中文文档-Flutter-中文开发者网站-Flutter" class="headerlink" title="文档：Flutter 架构概览 - Flutter 中文文档 - Flutter 中文开发者网站 - Flutter"></a>文档：<a target="_blank" rel="noopener" href="https://flutter.cn/docs/resources/architectural-overview">Flutter 架构概览 - Flutter 中文文档 - Flutter 中文开发者网站 - Flutter</a></h5><h5 id="参考文章：Reverse-engineering-Flutter-apps-Part-1-tst-sh"><a href="#参考文章：Reverse-engineering-Flutter-apps-Part-1-tst-sh" class="headerlink" title="参考文章：Reverse engineering Flutter apps (Part 1) (tst.sh)"></a>参考文章：<a target="_blank" rel="noopener" href="https://blog.tst.sh/reverse-engineering-flutter-apps-part-1/">Reverse engineering Flutter apps (Part 1) (tst.sh)</a></h5><h5 id="Reverse-engineering-Flutter-apps-Part-2-tst-sh"><a href="#Reverse-engineering-Flutter-apps-Part-2-tst-sh" class="headerlink" title="Reverse engineering Flutter apps (Part 2) (tst.sh)"></a><a target="_blank" rel="noopener" href="https://blog.tst.sh/reverse-engineering-flutter-apps-part-2/">Reverse engineering Flutter apps (Part 2) (tst.sh)</a></h5><h5 id="TODO：工具"><a href="#TODO：工具" class="headerlink" title="TODO：工具"></a>TODO：<a target="_blank" rel="noopener" href="https://bbs.kanxue.com/thread-275287.htm">工具</a></h5><h5 id="flutter逆向初探–-2023国赛ctf的flutterror-1mmorta1的博客-CSDN博客"><a href="#flutter逆向初探–-2023国赛ctf的flutterror-1mmorta1的博客-CSDN博客" class="headerlink" title="flutter逆向初探– 2023国赛ctf的flutterror_1mmorta1的博客-CSDN博客"></a><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41866334/article/details/131032273">flutter逆向初探– 2023国赛ctf的flutterror_1mmorta1的博客-CSDN博客</a></h5><h5 id="Reverse-Engineering-Flutter-Apps-Guardsquare"><a href="#Reverse-Engineering-Flutter-Apps-Guardsquare" class="headerlink" title="Reverse Engineering Flutter Apps | Guardsquare"></a><a target="_blank" rel="noopener" href="https://www.guardsquare.com/blog/current-state-and-future-of-reversing-flutter-apps">Reverse Engineering Flutter Apps | Guardsquare</a></h5><h5 id="Flutter架构：分层系统，上层组件依赖下层组件，组件层间不可越权且各个部分可选可替代（类似层与层间透明）"><a href="#Flutter架构：分层系统，上层组件依赖下层组件，组件层间不可越权且各个部分可选可替代（类似层与层间透明）" class="headerlink" title="Flutter架构：分层系统，上层组件依赖下层组件，组件层间不可越权且各个部分可选可替代（类似层与层间透明）"></a>Flutter架构：分层系统，上层组件依赖下层组件，组件层间不可越权且各个部分可选可替代（类似层与层间透明）</h5><h5 id><a href="#" class="headerlink" title></a><img src="/2023/08/23/%E5%88%9D%E6%8E%A2flutter/archdiagram.webp" alt="archdiagram"></h5><h6 id="对于底层操作系统而言，Flutter-应用程序的包装方式与其他原生应用相同。在每一个平台上，会包含一个特定的嵌入层，从而提供一个程序入口，程序由此可以与底层操作系统进行协调，访问诸如-surface-渲染、辅助功能和输入等服务，并且管理事件循环队列。该嵌入层采用了适合当前平台的语言编写，例如-Android-使用的是-Java-和-C-，-iOS-和-macOS-使用的是-Objective-C-和-Objective-C-，Windows-和-Linux-使用的是-C-。-Flutter-代码可以通过嵌入层，以模块方式集成到现有的应用中，也可以作为应用的主体。-Flutter-本身包含了各个常见平台的嵌入层，同时也-存在一些其他的嵌入层。"><a href="#对于底层操作系统而言，Flutter-应用程序的包装方式与其他原生应用相同。在每一个平台上，会包含一个特定的嵌入层，从而提供一个程序入口，程序由此可以与底层操作系统进行协调，访问诸如-surface-渲染、辅助功能和输入等服务，并且管理事件循环队列。该嵌入层采用了适合当前平台的语言编写，例如-Android-使用的是-Java-和-C-，-iOS-和-macOS-使用的是-Objective-C-和-Objective-C-，Windows-和-Linux-使用的是-C-。-Flutter-代码可以通过嵌入层，以模块方式集成到现有的应用中，也可以作为应用的主体。-Flutter-本身包含了各个常见平台的嵌入层，同时也-存在一些其他的嵌入层。" class="headerlink" title="对于底层操作系统而言，Flutter 应用程序的包装方式与其他原生应用相同。在每一个平台上，会包含一个特定的嵌入层，从而提供一个程序入口，程序由此可以与底层操作系统进行协调，访问诸如 surface 渲染、辅助功能和输入等服务，并且管理事件循环队列。该嵌入层采用了适合当前平台的语言编写，例如 Android 使用的是 Java 和 C++， iOS 和 macOS 使用的是 Objective-C 和 Objective-C++，Windows 和 Linux 使用的是 C++。 Flutter 代码可以通过嵌入层，以模块方式集成到现有的应用中，也可以作为应用的主体。 Flutter 本身包含了各个常见平台的嵌入层，同时也 存在一些其他的嵌入层。"></a>对于底层操作系统而言，Flutter 应用程序的包装方式与其他原生应用相同。在每一个平台上，会包含一个特定的嵌入层，从而提供一个程序入口，程序由此可以与底层操作系统进行协调，访问诸如 surface 渲染、辅助功能和输入等服务，并且管理事件循环队列。该嵌入层采用了适合当前平台的语言编写，例如 Android 使用的是 Java 和 C++， iOS 和 macOS 使用的是 Objective-C 和 Objective-C++，Windows 和 Linux 使用的是 C++。 Flutter 代码可以通过嵌入层，以模块方式集成到现有的应用中，也可以作为应用的主体。 Flutter 本身包含了各个常见平台的嵌入层，同时也 <a target="_blank" rel="noopener" href="https://hover.build/blog/one-year-in/">存在一些其他的嵌入层</a>。</h6><h6 id="Flutter-引擎-毫无疑问是-Flutter-的核心，它主要使用-C-编写，并提供了-Flutter-应用所需的原语。当需要绘制新一帧的内容时，引擎将负责对需要合成的场景进行栅格化。它提供了-Flutter-核心-API-的底层实现，包括图形（在-iOS-和-Android-上通过-Impeller，在其他平台上通过-Skia）、文本布局、文件及网络-IO、辅助功能支持、插件架构和-Dart-运行环境及编译环境的工具链。"><a href="#Flutter-引擎-毫无疑问是-Flutter-的核心，它主要使用-C-编写，并提供了-Flutter-应用所需的原语。当需要绘制新一帧的内容时，引擎将负责对需要合成的场景进行栅格化。它提供了-Flutter-核心-API-的底层实现，包括图形（在-iOS-和-Android-上通过-Impeller，在其他平台上通过-Skia）、文本布局、文件及网络-IO、辅助功能支持、插件架构和-Dart-运行环境及编译环境的工具链。" class="headerlink" title="Flutter 引擎 毫无疑问是 Flutter 的核心，它主要使用 C++ 编写，并提供了 Flutter 应用所需的原语。当需要绘制新一帧的内容时，引擎将负责对需要合成的场景进行栅格化。它提供了 Flutter 核心 API 的底层实现，包括图形（在 iOS 和 Android 上通过 Impeller，在其他平台上通过 Skia）、文本布局、文件及网络 IO、辅助功能支持、插件架构和 Dart 运行环境及编译环境的工具链。"></a><strong>Flutter 引擎</strong> 毫无疑问是 Flutter 的核心，它主要使用 C++ 编写，并提供了 Flutter 应用所需的原语。当需要绘制新一帧的内容时，引擎将负责对需要合成的场景进行栅格化。它提供了 Flutter 核心 API 的底层实现，包括图形（在 iOS 和 Android 上通过 <a target="_blank" rel="noopener" href="https://flutter.cn/docs/perf/impeller">Impeller</a>，在其他平台上通过 <a target="_blank" rel="noopener" href="https://skia.org/">Skia</a>）、文本布局、文件及网络 IO、辅助功能支持、插件架构和 Dart 运行环境及编译环境的工具链。</h6><h6 id="引擎将底层-C-代码包装成-Dart-代码，通过-dart-ui-暴露给-Flutter-框架层。该库暴露了最底层的原语，包括用于驱动输入、图形、和文本渲染的子系统的类。"><a href="#引擎将底层-C-代码包装成-Dart-代码，通过-dart-ui-暴露给-Flutter-框架层。该库暴露了最底层的原语，包括用于驱动输入、图形、和文本渲染的子系统的类。" class="headerlink" title="引擎将底层 C++ 代码包装成 Dart 代码，通过 dart:ui 暴露给 Flutter 框架层。该库暴露了最底层的原语，包括用于驱动输入、图形、和文本渲染的子系统的类。"></a><strong>引擎将底层 C++ 代码包装成 Dart 代码，通过 <a target="_blank" rel="noopener" href="https://github.com/flutter/engine/tree/master/lib/ui"><code>dart:ui</code></a> 暴露给 Flutter 框架层。该库暴露了最底层的原语，包括用于驱动输入、图形、和文本渲染的子系统的类。</strong></h6><h5 id="应用结构："><a href="#应用结构：" class="headerlink" title="应用结构："></a>应用结构：<img src="/2023/08/23/%E5%88%9D%E6%8E%A2flutter/app-anatomy.svg" alt="app-anatomy"></h5><h5 id="flutter构建的文件结构："><a href="#flutter构建的文件结构：" class="headerlink" title="flutter构建的文件结构："></a>flutter构建的文件结构：</h5><pre><code class="text">tree .
+.
+├── arm64-v8a
+│   ├── libapp.so
+│   └── libflutter.so
+└── armeabi-v7a
+    ├── libapp.so
+    └── libflutter.so
+</code></pre>
+<p>Android apk包中两个libapp.so文件，它们分别是作为 ELF 二进制文件的 a64 和 a32 快照。gen_snapshots在此处输出ELF&#x2F;共享对象可能会引起误解，它不会将 dart 方法公开为可以在外部调用的符号。相反，这些文件是“cluster 化快照”格式的容器，但在单独的可执行部分中包含编译的代码，以下是它们的结构：</p>
+<pre><code class="text">$ aarch64-linux-gnu-objdump -T libapp.so
+
+libapp.so:     file format elf64-littleaarch64
+
+DYNAMIC SYMBOL TABLE:
+0000000000001000 g    DF .text  0000000000004ba0 _kDartVmSnapshotInstructions
+0000000000006000 g    DF .text  00000000002d0de0 _kDartIsolateSnapshotInstructions
+00000000002d7000 g    DO .rodata        0000000000007f10 _kDartVmSnapshotData
+00000000002df000 g    DO .rodata        000000000021ad10 _kDartIsolateSnapshotData
+</code></pre>
+<h5 id="Dart-构建"><a href="#Dart-构建" class="headerlink" title="Dart 构建"></a><a target="_blank" rel="noopener" href="https://github.com/dart-lang/sdk/wiki/Building">Dart 构建</a></h5><h5 id="Dart混淆"><a href="#Dart混淆" class="headerlink" title="Dart混淆"></a><a target="_blank" rel="noopener" href="https://github.com/flutter/flutter/wiki/Obfuscating-Dart-Code">Dart混淆</a></h5><h5 id="dart-64的寄存器和函数调用约定："><a href="#dart-64的寄存器和函数调用约定：" class="headerlink" title="dart 64的寄存器和函数调用约定："></a>dart 64的寄存器和函数调用约定：</h5><pre><code>       r0 |     | Returns
+r0  -  r7 |     | Arguments
+r0  - r14 |     | General purpose
+      r15 | sp  | Dart stack pointer
+      r16 | ip0 | Scratch register
+      r17 | ip1 | Scratch register
+      r18 |     | Platform register
+r19 - r25 |     | General purpose
+r19 - r28 |     | Callee saved registers
+      r26 | thr | Current thread
+      r27 | pp  | Object pool
+      r28 | brm | Barrier mask
+      r29 | fp  | Frame pointer
+      r30 | lr  | Link register
+      r31 | zr  | Zero / CSP
+</code></pre>
+<h5 id="dart-32的寄存器和函数调用约定："><a href="#dart-32的寄存器和函数调用约定：" class="headerlink" title="dart 32的寄存器和函数调用约定："></a>dart 32的寄存器和函数调用约定：</h5><pre><code>r0 -  r1 |     | Returns
+r0 -  r9 |     | General purpose
+r4 - r10 |     | Callee saved registers
+      r5 | pp  | Object pool
+     r10 | thr | Current thread
+     r11 | fp  | Frame pointer
+     r12 | ip  | Scratch register
+     r13 | sp  | Stack pointer
+     r14 | lr  | Link register
+     r15 | pc  | Program counter
+</code></pre>
+<h5 id="example："><a href="#example：" class="headerlink" title="example："></a>example：</h5><pre><code class="dart">void hello() &#123;
+  print(&quot;Hello, World!&quot;);
+&#125;
+</code></pre>
+<pre><code class="asm">Code for optimized function &#39;package:dectest/hello_world.dart_::_hello&#39; &#123;
+        ;; B0
+        ;; B1
+        ;; Enter frame（保存当前函数帧指针和返回地址）
+0xf69ace60    e92d4800               stmdb sp!, &#123;fp, lr&#125;;stmdb sp!存储数据前递减寄存器(Store Multiple Decrement Before)
+0xf69ace64    e28db000               add fp, sp, #0
+        ;; CheckStackOverflow:8(stack=0, loop=0)将字段偏移表（限制个数为36）加载到ip中并检测栈溢出
+0xf69ace68    e59ac024               ldr ip, [thr, #+36]
+0xf69ace6c    e15d000c               cmp sp, ip
+0xf69ace70    9bfffffe               blls +0 ; 0xf69ace70
+        ;; PushArgument(v3)
+0xf69ace74    e285ca01               add ip, pp, #4096
+0xf69ace78    e59ccfa7               ldr ip, [ip, #+4007]
+0xf69ace7c    e52dc004               str ip, [sp, #-4]!
+        ;; StaticCall:12( print&lt;0&gt; v3)
+0xf69ace80    ebfffffe               bl +0 ; 0xf69ace80
+0xf69ace84    e28dd004               add sp, sp, #4
+        ;; ParallelMove r0 &lt;- C
+0xf69ace88    e59a0060               ldr r0, [thr, #+96]
+        ;; Return:16(v0)
+0xf69ace8c    e24bd000               sub sp, fp, #0
+0xf69ace90    e8bd8800               ldmia sp!, &#123;fp, pc&#125;
+0xf69ace94    e1200070               bkpt #0x0
+&#125;
+</code></pre>
+<h5 id="another-example"><a href="#another-example" class="headerlink" title="another example:"></a>another example:</h5><pre><code class="asm">// prologue, polymorphic entry
+000 | stmdb sp!, &#123;fp, lr&#125;
+004 | add fp, sp, #0
+008 | sub sp, sp, #4
+// optional parameter handling
+00c | ldr r0, [r4, #0x13] // arr[2] (positional arg count)
+010 | ldr r1, [r4, #0xf]  // arr[1] (argument count)
+014 | cmp r0, #0          // check if we have positional args
+018 | bgt 0x74            // jump to 08c
+// check named args
+01c | ldr r0, [r4, #0x17]  // arr[3] (first arg name)
+020 | add ip, pp, #0x2000  // 
+024 | ldr ip, [ip, #0x4a7] // string &quot;x&quot;
+028 | cmp r0, ip           // check if arg present
+02c | bne 0x20             // jump to 04c
+030 | ldr r0, [r4, #0x1b]    // arr[4] (first arg position)
+034 | sub r2, r1, r0         // r2 = arg_count - position
+038 | add r0, fp, r2, lsl #1 // r0 = fp + r2 * 2
+    |                        // this is really r2 * 4 because it&#39;s an smi
+03c | ldr r0, [r0, #4]       // read arg
+040 | mov r2, r0             // 
+044 | mov r0, #2             // 
+048 | b 12                   // jump to 054
+04c | ldr r2, [thr, #0x68] // thr-&gt;objectNull
+050 | mov r0, #0           // 
+054 | str r2, [fp, #-4] // store arg in local
+// done loading args
+058 | cmp r1, r0 // check if we have read all args
+05c | bne 0x30   // jump to 08c
+// continue prologe
+060 | ldr ip, [thr, #0x24] // thr-&gt;stackLimit
+064 | cmp sp, ip           //
+068 | blls -0x5af00        // stackOverflowStubWithoutFpuRegsStub
+// rest of function
+06c | ...
+// incompatible args path
+08c | ldr r6, [pp, #0x33] // Code* callClosureNoSuchMethod
+090 | sub sp, fp, #0      // 
+094 | ldmia sp!, &#123;fp, lr&#125; // exit frame
+098 | ldr pc, [r6, #3]    // invoke stub
+</code></pre>
+<p>一些普遍做题思路：先reflutter然后对着dump出来的offset进行hook&#x2F;恢复符号表</p>
+<p><del>大概流程懂了，等个环境先</del></p>
+<p>ARM交叉编译工具链(32位)：<code>sudo apt-get install gcc-arm-linux-gnueabi binutils-arm-linux-gnueabi</code> (64位)：<code>sudo apt-get install gcc-aarch64-linux-gnu binutils-aarch64-linux-gnu</code></p>
+<p>寻找<code>SVC</code>指令出现的地址：<code>aarch64-linux-gnu-objdump -D libapp.so | grep -B2 -A2 --color=always &quot;svc&quot;</code></p>
+<hr>
+<h6 id="leaves大哥带着在看这个babyanti2，比赛的时候被他高速非预期了，但是现在复盘感觉预期解难度有点离谱的"><a href="#leaves大哥带着在看这个babyanti2，比赛的时候被他高速非预期了，但是现在复盘感觉预期解难度有点离谱的" class="headerlink" title="leaves大哥带着在看这个babyanti2，比赛的时候被他高速非预期了，但是现在复盘感觉预期解难度有点离谱的"></a>leaves大哥带着在看这个babyanti2，比赛的时候被他高速非预期了，但是现在复盘感觉预期解难度有点离谱的</h6><h5 id="目前还没有完整复现，但是大概记录一下："><a href="#目前还没有完整复现，但是大概记录一下：" class="headerlink" title="目前还没有完整复现，但是大概记录一下："></a>目前还没有完整复现，但是大概记录一下：</h5><ul>
+<li><p>最简单的先把anti里面的环境检测hook掉</p>
+</li>
+<li><p>然后合理就去gg修改分数，但是发现有疑似内存检查</p>
+</li>
+<li><p>flutter的libapp.so恢复符号表（基本上就是我上面说的方法）发现有对内存进行的操作，进行hook</p>
+</li>
+<li><p>然后不够，libapp.so里面有一个<code>generateShellcodes</code>，非常复杂；可以hook <code>mprotect</code>，发现有一个传入0x7（可读、写、执行）的调用，比较异常，对其操作的0x1000长度的地址dump下来分析，发现好几十个SVC调用</p>
+</li>
+<li><p>后续： 结论是两层shellcode 调用 mincore，检查是否有内存缺页更改的操作，确实难</p>
+</li>
+</ul>
+<hr>
+<h6 id="9-14-BabyAnti2完整复现："><a href="#9-14-BabyAnti2完整复现：" class="headerlink" title="9.14: BabyAnti2完整复现："></a>9.14: BabyAnti2完整复现：</h6><p>AntiCheatPlugin的Java层几乎看不到东西，只能判断使用flutter，那么必须继续看下去，找dart层和native层的逻辑</p>
+<p><img src="/2023/08/23/%E5%88%9D%E6%8E%A2flutter/image-20230914083329468.png" alt="image-20230914083329468"></p>
+<p>直接看native：</p>
+<p><img src="/2023/08/23/%E5%88%9D%E6%8E%A2flutter/image-20230914083721077.png" alt="image-20230914083721077"></p>
+<p><code>libflutter.so</code>：flutter预编译的组件库（不会因为开发者的Dart而改变），flutter引擎的主要组成部分，包含了flutter运行所需要的核心代码，负责渲染Flutter widgets、处理事件、与Dart VM进行交互以及其他核心功能</p>
+<p><code>libapp.so</code>：Dart代码编译后的产物，包含所有Dart层的native逻辑、UI、Flutter plugins，当应用启动时，<code>libflutter.so</code>会加载<code>libapp.so</code>并开始执行Dart代码</p>
+<p><code>libanticheat.so（其他）</code>：通过Android NDK编写的native代码编译产物</p>
+<p>尝试通过<a target="_blank" rel="noopener" href="https://github.com/rscloura/Doldrums">rscloura&#x2F;Doldrums: A Flutter&#x2F;Dart reverse engineering tool (github.com)</a>工具提取libapp.so，失败，DartSDK版本对不上</p>
+<p><img src="/2023/08/23/%E5%88%9D%E6%8E%A2flutter/image-20230914094329393.png" alt="image-20230914094329393"></p>
+<p>寻找版本相关信息，可以得到这段，获取版本号3.1.0（这里可以猜测这个是dart的版本）对应到<a target="_blank" rel="noopener" href="https://docs.flutter.dev/release/archive?tab=windows">Flutter SDK archive | Flutter</a>可以查找flutter的版本号beta版本的3.13.0-0.4.pre（根据发布时间和Dart version，不过hash号没有找到，还得看看）</p>
+<p><img src="/2023/08/23/%E5%88%9D%E6%8E%A2flutter/image-20230914103350070.png" alt="image-20230914103350070"></p>
+<p>题目出的时候<code>reflutter</code>还没有更新到这个版本，可以认为，在比赛环境下这让做这道题的预期解难度陡然升高</p>
+<p>那也只能开始漫长学习，先看看这篇的原理：<a target="_blank" rel="noopener" href="https://swarm.ptsecurity.com/fork-bomb-for-flutter/">Fork Bomb for Flutter – PT SWARM (ptsecurity.com)</a></p>
+<p>安装应用：<code>adb push .apk /data/local/tmp </code></p>
+<p><code>pm install -r .apk</code></p>
+<p>签名工具：<a target="_blank" rel="noopener" href="https://github.com/patrickfav/uber-apk-signer/releases/tag/v1.2.1">Release v1.2.1 · patrickfav&#x2F;uber-apk-signer (github.com)</a></p>
+<p><code>java -jar uber-apk-signer.jar --allowResign -**a** release.RE.apk</code></p>
+<p><code> adb logcat -e reflutter | ForEach-Object &#123; $_ -replace &#39;.*DartVM&#39;, &#39;&#39; &#125; &gt;&gt; reflutter.txt</code></p>
+
+    </div>
+    
+</div>
+                         
+<footer id="footer">
+    <div class="footer-wrap">
+        <div>
+            © 20xx - 2024 Moyao の小屋
+            <span class="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            @Moyao
+        </div>
+        <div></div>
+        <div>Based on the <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo Engine</a> & <a
+                target="_blank" rel="noopener" href="https://github.com/argvchs/hexo-theme-particlex">ParticleX Theme</a></div>
+        
+    </div>
+</footer>
+                    </div>
+                </div>
+            </transition>
+            <div id="img_show">
+                <img id="img_content" alt="img_show">
+            </div>
+        </div>
+        <script src="https://cdn.staticfile.org/highlight.js/11.5.1/highlight.min.js"></script>
+        <script src="/js/particlex.js"></script>
+        <script src="/js/showimg.js"></script>
+        
+
+    </body>
+</html>

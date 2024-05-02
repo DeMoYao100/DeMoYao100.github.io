@@ -1,0 +1,331 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+        <title>BuckeyeCTF2023 | Moyao の小屋</title>
+        <meta name="author" content="Moyao">
+        <meta name="description" content="Write down something interesting I met
+feel free to mail me if you have something wanted to talk about
+mail: &lt;moyaoxue@outlook.com&gt;
+">
+        <meta name="keywords" content="">
+        <link rel="icon" href="/images/head.jpg">
+        <script src="https://cdn.staticfile.org/instant.page/5.1.0/instantpage.min.js" type="module"></script>
+        <script src="https://cdn.staticfile.org/font-awesome/6.1.1/js/all.min.js"></script>
+        
+        <link rel="stylesheet" href="/css/fonts.min.css">
+        <link rel="stylesheet" href="/css/particlex.css">
+        
+        <script src="https://cdn.staticfile.org/vue/3.2.33/vue.global.prod.min.js"></script>
+    <meta name="generator" content="Hexo 6.2.0"></head>
+    <body>
+        <div id="loading" style="height:100vh;width:100vw;position:fixed;display:flex;z-index:200;justify-content:space-between;background:#fff;transition:opacity 0.3s ease-out"><div style="position:fixed;height:100vh;width:100vw;display:flex;justify-content:center;align-items:center"><div id="loadcontent" style="width:50vmin;height:50vmin;padding:50px;border-radius:50%;display:flex;justify-content:center;align-items:center;border:solid 10px #a3ddfb;text-align:center"><div><h2>LOADING...</h2><p style="word-break:keep-all">加载过慢请开启缓存(浏览器默认开启)</p><div><img alt="loading" src="/loading.gif"></div></div></div></div></div>
+        <div id="layout">
+            <i data-fa-symbol="calendar-solid" class="fa-solid fa-calendar fa-fw"></i>
+            <i data-fa-symbol="bookmark-solid" class="fa-solid fa-bookmark fa-fw"></i>
+            <i data-fa-symbol="tags-solid" class="fa-solid fa-tags fa-fw"></i>
+            <transition name="into">
+                <div v-show="show_page" style="display: -not-none">
+                    <div id="menu_show">
+                         
+<nav id="menu">
+    <div class="desktop-menu">
+        <a href="/">
+            <span class="title">Moyao の小屋</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;home</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;about</span>
+        </a>
+        
+        <a target="_blank" rel="noopener" href="//tags/re/">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;tags</span>
+        </a>
+        
+    </div>
+    <div :class="'phone-menu ' + menu_show" id="phone-menu">
+        <div class="curtain" @click="menu_show = !menu_show" v-show="menu_show"></div>
+        <div :class="'title'" @click="menu_show = !menu_show">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;Moyao の小屋</span>
+        </div>
+        <transition name="slide">
+        <div class="items" v-show="menu_show">
+            
+            <a href="">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-house fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">home</div>
+                </div>
+            </a>
+            
+            <a href="">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-id-card fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">about</div>
+                </div>
+            </a>
+            
+            <a href="/tags/re/">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-tags fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">tags</div>
+                </div>
+            </a>
+            
+        </div>
+        </transition>
+    </div>
+</nav>
+                    </div>
+                    <div id="main">
+                        
+<div class="article">
+    <div>
+        <h1>BuckeyeCTF2023 </h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
+            </span>
+            2023/10/2
+        </span>
+        
+        
+    </div>
+    <div class="content" v-pre>
+        <h6 id="PREFACE-和maple一个时间段的比赛，似乎是大学新生赛…感觉-比maple难呢…"><a href="#PREFACE-和maple一个时间段的比赛，似乎是大学新生赛…感觉-比maple难呢…" class="headerlink" title="PREFACE: 和maple一个时间段的比赛，似乎是大学新生赛…感觉 比maple难呢…"></a>PREFACE: 和maple一个时间段的比赛，似乎是大学新生赛…感觉 比maple难呢…</h6><h6 id="或者换一种说法…怎么大学新生赛都喜欢搞抽象呢…"><a href="#或者换一种说法…怎么大学新生赛都喜欢搞抽象呢…" class="headerlink" title="或者换一种说法…怎么大学新生赛都喜欢搞抽象呢…"></a>或者换一种说法…怎么大学新生赛都喜欢搞抽象呢…</h6><span id="more"></span>
+
+<h3 id="8ball"><a href="#8ball" class="headerlink" title="8ball"></a>8ball</h3><p>直接动调把前面全nop掉拿就行：<code>bctf&#123;Aw_$hucK$_Y0ur3_m@k1Ng_m3_bLu$h&#125;</code></p>
+<h3 id="Converter"><a href="#Converter" class="headerlink" title="Converter"></a>Converter</h3><p>就在里面：<code>bctf&#123;o0ps_y0u_fOuNd_mE&#125;</code></p>
+<h3 id="Emotional-Damage"><a href="#Emotional-Damage" class="headerlink" title="Emotional_Damage"></a>Emotional_Damage</h3><p>确实给我damage了，总归就是猜emoji代表的符号然后恢复流程逆flag，大部分可以gpt一把梭</p>
+<h3 id="Skribl"><a href="#Skribl" class="headerlink" title="Skribl"></a>Skribl</h3><p>需要配置docker环境把python313环境搞出来，拿到backend字节码</p>
+<pre><code class="python"># backend.pyc
+
+ 0           0 RESUME                   0
+
+  1           2 LOAD_CONST               0 (0)
+              4 LOAD_CONST               1 (None)
+              6 IMPORT_NAME              0 (string)
+              8 STORE_NAME               0 (string)
+
+  2          10 LOAD_CONST               0 (0)
+             12 LOAD_CONST               1 (None)
+             14 IMPORT_NAME              1 (random)
+             16 STORE_NAME               1 (random)
+
+  3          18 LOAD_CONST               0 (0)
+             20 LOAD_CONST               1 (None)
+             22 IMPORT_NAME              2 (time)
+             24 STORE_NAME               2 (time)
+
+  4          26 LOAD_CONST               0 (0)
+             28 LOAD_CONST               1 (None)
+             30 IMPORT_NAME              3 (math)
+             32 STORE_NAME               3 (math)
+
+  5          34 LOAD_CONST               0 (0)
+             36 LOAD_CONST               1 (None)
+             38 IMPORT_NAME              4 (os)
+             40 STORE_NAME               4 (os)
+
+  8          42 LOAD_CONST               2 (&#39;return&#39;)
+             44 LOAD_NAME                5 (str)
+             46 BUILD_TUPLE              2
+             48 LOAD_CONST               3 (&lt;code object create_skribl at 0x7f763b846970, file &quot;/home/rene/Documents/Java/OSUCyberSecurityClub/buckeyectf23/buckeyectf-challenges/chals/rev-pycache/dist/chal/backend.py&quot;, line 8&gt;)
+             50 MAKE_FUNCTION
+             52 SET_FUNCTION_ATTRIBUTE   4 (annotations)
+             54 STORE_NAME               6 (create_skribl)
+
+ 18          56 LOAD_CONST               4 (&lt;code object init_backend at 0x7f763b734670, file &quot;/home/rene/Documents/Java/OSUCyberSecurityClub/buckeyectf23/buckeyectf-challenges/chals/rev-pycache/dist/chal/backend.py&quot;, line 18&gt;)
+             58 MAKE_FUNCTION
+             60 STORE_NAME               7 (init_backend)
+             62 RETURN_CONST             1 (None)
+
+Disassembly of &lt;code object create_skribl at 0x7f763b846970, file &quot;/home/rene/Documents/Java/OSUCyberSecurityClub/buckeyectf23/buckeyectf-challenges/chals/rev-pycache/dist/chal/backend.py&quot;, line 8&gt;:
+   8           0 RESUME                   0
+
+   9           2 LOAD_GLOBAL              1 (print + NULL)
+              12 LOAD_CONST               1 (&#39;Creating skribl &#39;)
+              14 LOAD_FAST                1 (message)
+              16 FORMAT_SIMPLE
+              18 BUILD_STRING             2
+              20 CALL                     1
+              28 POP_TOP
+
+  11          30 LOAD_GLOBAL              2 (string)
+              40 LOAD_ATTR                4 (ascii_lowercase)
+              60 LOAD_GLOBAL              2 (string)
+              70 LOAD_ATTR                6 (ascii_uppercase)
+              90 BINARY_OP                0 (+)
+              94 LOAD_GLOBAL              2 (string)
+             104 LOAD_ATTR                8 (digits)
+             124 BINARY_OP                0 (+)
+             128 STORE_FAST               3 (alphabet)
+
+  12         130 LOAD_GLOBAL             11 (range + NULL)
+             140 LOAD_CONST               2 (40)
+             142 CALL                     1
+             150 GET_ITER
+             152 LOAD_FAST_AND_CLEAR      4 (i)
+             154 SWAP                     2
+             156 BUILD_LIST               0
+             158 SWAP                     2
+         &gt;&gt;  160 FOR_ITER                25 (to 214)
+             164 STORE_FAST               4 (i)
+             166 LOAD_GLOBAL             12 (random)
+             176 LOAD_ATTR               14 (choice)
+             196 PUSH_NULL
+             198 LOAD_FAST                3 (alphabet)
+             200 CALL                     1
+             208 LIST_APPEND              2
+             210 JUMP_BACKWARD           27 (to 160)
+         &gt;&gt;  214 END_FOR
+             216 STORE_FAST               5 (key_list)
+             218 STORE_FAST               4 (i)
+
+  14         220 LOAD_CONST               3 (&#39;&#39;)
+             222 LOAD_ATTR               17 (join + NULL|self)
+             242 LOAD_FAST                5 (key_list)
+             244 CALL                     1
+             252 STORE_FAST               6 (key)
+
+  15         254 LOAD_FAST_LOAD_FAST     18 (message, author)
+             256 BUILD_TUPLE              2
+             258 LOAD_FAST_LOAD_FAST      6 (skribls, key)
+             260 STORE_SUBSCR
+
+  16         264 LOAD_FAST                6 (key)
+             266 RETURN_VALUE
+
+None     &gt;&gt;  268 SWAP                     2
+             270 POP_TOP
+
+  12         272 SWAP                     2
+             274 STORE_FAST               4 (i)
+             276 RERAISE                  0
+ExceptionTable:
+  156 to 214 -&gt; 268 [2]
+
+Disassembly of &lt;code object init_backend at 0x7f763b734670, file &quot;/home/rene/Documents/Java/OSUCyberSecurityClub/buckeyectf23/buckeyectf-challenges/chals/rev-pycache/dist/chal/backend.py&quot;, line 18&gt;:
+ 18           0 RESUME                   0
+
+ 19           2 LOAD_GLOBAL              0 (random)
+             12 LOAD_ATTR                2 (seed)
+             32 PUSH_NULL
+             34 LOAD_GLOBAL              4 (math)
+             44 LOAD_ATTR                6 (floor)
+             64 PUSH_NULL
+             66 LOAD_GLOBAL              8 (time)
+             76 LOAD_ATTR                8 (time)
+             96 PUSH_NULL
+             98 CALL                     0
+            106 CALL                     1
+            114 CALL                     1
+            122 POP_TOP
+
+ 21         124 LOAD_GLOBAL             11 (create_skribl + NULL)
+            134 LOAD_FAST                0 (skribls)
+            136 LOAD_GLOBAL             12 (os)
+            146 LOAD_ATTR               14 (environ)
+            166 LOAD_CONST               1 (&#39;FLAG&#39;)
+            168 BINARY_SUBSCR
+            172 LOAD_CONST               2 (&#39;rene&#39;)
+            174 CALL                     3
+            182 POP_TOP
+            184 RETURN_CONST             0 (None)
+</code></pre>
+<p>这里的字节码简单手动反编译一下</p>
+<pre><code class="python">import string
+import random
+import time
+import math
+import os
+
+def create_skribl(skribls, message, author) -&gt; str:
+    print (f&#39;Creating skribl &#123;message&#125;&#39;)
+    alphabet = string.ascii_lowercase + string.ascii_uppercase + string.digits
+    key_list = [random.choice(alphabet) for i in range(40)]
+    key = &#39;&#39;.join(key_list)
+    skribls[key] = (message, author)
+    return key
+
+def init_backend(skribls):
+    random.seed(math.floor(time.time()))
+    create_skribl(skribls, os.environ[&#39;FLAG&#39;], &#39;rene&#39;)
+</code></pre>
+<p>结合前面的代码，可以看到生成的四十个随机串有一个seed，是可以获取的（当前时间 - 网页持续时间，可以拿到这个环境的创建时间，flag是环境创建后立刻从环境变量中提取并写入的，所以可以直接获得key）</p>
+<p>使用key访问view api即可</p>
+<pre><code class="python">import string
+import random
+import time
+import math
+import os
+import re
+import requests
+a = re.findall(&quot;duration\((\d+)&quot;,requests.get(&quot;https://skribl.chall.pwnoh.io/&quot;).text)
+b = math.floor(time.time())
+random.seed(math.floor(int(a[0]) - b))
+alphabet = string.ascii_lowercase + string.ascii_uppercase + string.digits
+key_list = [random.choice(alphabet) for i in range(40)]
+key = &#39;&#39;.join(key_list)
+url = &#39;https://skribl.chall.pwnoh.io/view/&#39; + key
+response = requests.get(url)
+lines = response.text.split(&#39;\n&#39;)
+for line in lines:
+        if &#39;bctf&#123;&#39; in line:
+            print(line)
+            break
+
+#         &lt;p&gt;bctf&#123;wHy_d0_w3_Ne3d_s0_m@ny_N0T3$_aNyW@y&#125;&lt;/p&gt;
+</code></pre>
+
+    </div>
+    
+</div>
+                         
+<footer id="footer">
+    <div class="footer-wrap">
+        <div>
+            © 20xx - 2024 Moyao の小屋
+            <span class="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            @Moyao
+        </div>
+        <div></div>
+        <div>Based on the <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo Engine</a> & <a
+                target="_blank" rel="noopener" href="https://github.com/argvchs/hexo-theme-particlex">ParticleX Theme</a></div>
+        
+    </div>
+</footer>
+                    </div>
+                </div>
+            </transition>
+            <div id="img_show">
+                <img id="img_content" alt="img_show">
+            </div>
+        </div>
+        <script src="https://cdn.staticfile.org/highlight.js/11.5.1/highlight.min.js"></script>
+        <script src="/js/particlex.js"></script>
+        <script src="/js/showimg.js"></script>
+        
+
+    </body>
+</html>

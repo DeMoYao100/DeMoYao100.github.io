@@ -1,0 +1,876 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+        <title>羊城杯2023 | Moyao の小屋</title>
+        <meta name="author" content="Moyao">
+        <meta name="description" content="Write down something interesting I met
+feel free to mail me if you have something wanted to talk about
+mail: &lt;moyaoxue@outlook.com&gt;
+">
+        <meta name="keywords" content="">
+        <link rel="icon" href="/images/head.jpg">
+        <script src="https://cdn.staticfile.org/instant.page/5.1.0/instantpage.min.js" type="module"></script>
+        <script src="https://cdn.staticfile.org/font-awesome/6.1.1/js/all.min.js"></script>
+        
+        <link rel="stylesheet" href="/css/fonts.min.css">
+        <link rel="stylesheet" href="/css/particlex.css">
+        
+        <script src="https://cdn.staticfile.org/vue/3.2.33/vue.global.prod.min.js"></script>
+    <meta name="generator" content="Hexo 6.2.0"></head>
+    <body>
+        <div id="loading" style="height:100vh;width:100vw;position:fixed;display:flex;z-index:200;justify-content:space-between;background:#fff;transition:opacity 0.3s ease-out"><div style="position:fixed;height:100vh;width:100vw;display:flex;justify-content:center;align-items:center"><div id="loadcontent" style="width:50vmin;height:50vmin;padding:50px;border-radius:50%;display:flex;justify-content:center;align-items:center;border:solid 10px #a3ddfb;text-align:center"><div><h2>LOADING...</h2><p style="word-break:keep-all">加载过慢请开启缓存(浏览器默认开启)</p><div><img alt="loading" src="/loading.gif"></div></div></div></div></div>
+        <div id="layout">
+            <i data-fa-symbol="calendar-solid" class="fa-solid fa-calendar fa-fw"></i>
+            <i data-fa-symbol="bookmark-solid" class="fa-solid fa-bookmark fa-fw"></i>
+            <i data-fa-symbol="tags-solid" class="fa-solid fa-tags fa-fw"></i>
+            <transition name="into">
+                <div v-show="show_page" style="display: -not-none">
+                    <div id="menu_show">
+                         
+<nav id="menu">
+    <div class="desktop-menu">
+        <a href="/">
+            <span class="title">Moyao の小屋</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;home</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;about</span>
+        </a>
+        
+        <a target="_blank" rel="noopener" href="//tags/re/">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;tags</span>
+        </a>
+        
+    </div>
+    <div :class="'phone-menu ' + menu_show" id="phone-menu">
+        <div class="curtain" @click="menu_show = !menu_show" v-show="menu_show"></div>
+        <div :class="'title'" @click="menu_show = !menu_show">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;Moyao の小屋</span>
+        </div>
+        <transition name="slide">
+        <div class="items" v-show="menu_show">
+            
+            <a href="">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-house fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">home</div>
+                </div>
+            </a>
+            
+            <a href="">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-id-card fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">about</div>
+                </div>
+            </a>
+            
+            <a href="/tags/re/">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-tags fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">tags</div>
+                </div>
+            </a>
+            
+        </div>
+        </transition>
+    </div>
+</nav>
+                    </div>
+                    <div id="main">
+                        
+<div class="article">
+    <div>
+        <h1>羊城杯2023 </h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
+            </span>
+            2023/9/3
+        </span>
+        
+        
+    </div>
+    <div class="content" v-pre>
+        <h6 id="preface-尽力了吧，re这边剩下俩题都是一解，赛中肯定没时间做了，最近忙完来复现"><a href="#preface-尽力了吧，re这边剩下俩题都是一解，赛中肯定没时间做了，最近忙完来复现" class="headerlink" title="preface: 尽力了吧，re这边剩下俩题都是一解，赛中肯定没时间做了，最近忙完来复现"></a>preface: 尽力了吧，re这边剩下俩题都是一解，赛中肯定没时间做了，最近忙完来复现</h6><h6 id="9-22：babyobfu混淆去掉了，加密不太能搞懂，主要是不想调了，调着patch一次真有点精神污染"><a href="#9-22：babyobfu混淆去掉了，加密不太能搞懂，主要是不想调了，调着patch一次真有点精神污染" class="headerlink" title="9-22：babyobfu混淆去掉了，加密不太能搞懂，主要是不想调了，调着patch一次真有点精神污染"></a>9-22：babyobfu混淆去掉了，加密不太能搞懂，主要是不想调了，调着patch一次真有点精神污染</h6><h6 id="10-11：还是回来做了，搞定了算"><a href="#10-11：还是回来做了，搞定了算" class="headerlink" title="10-11：还是回来做了，搞定了算"></a>10-11：还是回来做了，搞定了算</h6><span id="more"></span>
+
+<h3 id="Ez加密器"><a href="#Ez加密器" class="headerlink" title="Ez加密器"></a>Ez加密器</h3><p>调一下发现输入六位秘钥（注意是全数字），base64变表成八位做DES秘钥<br>爆破六位即可</p>
+<pre><code class="python">from Crypto.Cipher import DES
+import string
+import itertools
+import base64
+
+def des_decrypt(key, ciphertext):
+    cipher = DES.new(key, DES.MODE_ECB)
+    return cipher.decrypt(ciphertext)
+
+def custom_base64_encode(s, custom_table):
+    std_base64_table = &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/&quot;
+    encoded = base64.b64encode(s).decode()
+    custom_encoded = &quot;&quot;.join([custom_table[std_base64_table.index(c)] for c in encoded])
+    return custom_encoded[:8]
+
+def main():
+    ciphertext = bytes.fromhex(&quot;0723105D5C12217DCDC3601F5ECB54DA9CCEC2279F1684A13A0D716D17217F4C9EA85FF1A42795731CA3C55D3A4D7BEA&quot;)
+    charset = string.digits + &quot; &quot;
+    print()
+    with open(&#39;output.txt&#39;, &#39;w&#39;) as f:
+        for combo in itertools.product(charset, repeat=6):
+            plaintext = &#39;&#39;.join(combo)
+            key = custom_base64_encode(plaintext.encode(), &quot;abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ+/&quot;)
+
+            decrypted = des_decrypt(key.encode(), ciphertext)
+
+            if all(32 &lt;= b &lt; 127 for b in decrypted):
+                print(f&quot;Possible match: &#123;decrypted.decode(&#39;ascii&#39;)&#125;&quot;)
+                print(f&quot;Key: &#123;key&#125;&quot;)
+            f.write(str(decrypted) + &#39;\n&#39;)
+            f.write(str(key)) #file中搜字符串即可
+    # if decrypted.startswith(b&quot;flag&quot;) or decrypted.startswith(&quot;DASC&quot;):
+    #     print(f&quot;Possible match: &#123;decrypted_text&#125;&quot;)
+        # print(f&quot;Key: &#123;key&#125;&quot;)
+
+if __name__ == &quot;__main__&quot;:
+    main()
+
+</code></pre>
+<h3 id="Blast"><a href="#Blast" class="headerlink" title="Blast"></a>Blast</h3><p>比较像Bogus Control Flow，网上脚本去不太干净，把jump $5给nop掉之类的手动修修可以angr脚本恢复main，程序有md5的特征，动调发现比对的地方是flag输入的每一位的md5(md5())，写脚本map一下就行</p>
+<pre><code class="python">import hashlib
+
+
+def generate_md5(text):
+    m = hashlib.md5()
+    m.update(text.encode(&#39;utf-8&#39;))
+    return m.hexdigest()
+
+
+def generate_table():
+    char_to_md5 = &#123;&#125;
+
+    for i in range(32, 127):
+        char = chr(i)
+        md5_hash = generate_md5(generate_md5(char))
+        char_to_md5[char] = md5_hash
+
+    return char_to_md5
+
+
+def main():
+    char_to_md5 = generate_table()
+
+    # print(&quot;Character | Double MD5 Hash&quot;)
+    # print(&quot;---------------------------&quot;)
+    # for char, md5_hash in char_to_md5.items():
+    #     print(f&quot;&#123;repr(char)&#125;      | &#123;md5_hash&#125;&quot;)
+
+    a = [&#39;14d89c38cd0fb23a14be2798d449c182&#39;,
+        &#39;a94837b18f8f43f29448b40a6e7386ba&#39;,
+        &#39;af85d512594fc84a5c65ec9970956ea5&#39;,
+        &#39;af85d512594fc84a5c65ec9970956ea5&#39;,
+        &#39;10e21da237a4a1491e769df6f4c3b419&#39;,
+        &#39;a705e8280082f93f07e3486636f3827a&#39;,
+        &#39;297e7ca127d2eef674c119331fe30dff&#39;,
+        &#39;b5d2099e49bdb07b8176dff5e23b3c14&#39;,
+        &#39;83be264eb452fcf0a1c322f2c7cbf987&#39;,
+        &#39;a94837b18f8f43f29448b40a6e7386ba&#39;,
+        &#39;71b0438bf46aa26928c7f5a371d619e1&#39;,
+        &#39;a705e8280082f93f07e3486636f3827a&#39;,
+        &#39;ac49073a7165f41c57eb2c1806a7092e&#39;,
+        &#39;a94837b18f8f43f29448b40a6e7386ba&#39;,
+        &#39;af85d512594fc84a5c65ec9970956ea5&#39;,
+        &#39;ed108f6919ebadc8e809f8b86ef40b05&#39;,
+        &#39;10e21da237a4a1491e769df6f4c3b419&#39;,
+        &#39;3cfd436919bc3107d68b912ee647f341&#39;,
+        &#39;a705e8280082f93f07e3486636f3827a&#39;,
+        &#39;65c162f7c43612ba1bdf4d0f2912bbc0&#39;,
+        &#39;10e21da237a4a1491e769df6f4c3b419&#39;,
+        &#39;a705e8280082f93f07e3486636f3827a&#39;,
+        &#39;3cfd436919bc3107d68b912ee647f341&#39;,
+        &#39;557460d317ae874c924e9be336a83cbe&#39;,
+        &#39;a705e8280082f93f07e3486636f3827a&#39;,
+        &#39;9203d8a26e241e63e4b35b3527440998&#39;,
+        &#39;10e21da237a4a1491e769df6f4c3b419&#39;,
+        &#39;f91b2663febba8a884487f7de5e1d249&#39;,
+        &#39;a705e8280082f93f07e3486636f3827a&#39;,
+        &#39;d7afde3e7059cd0a0fe09eec4b0008cd&#39;,
+        &#39;488c428cd4a8d916deee7c1613c8b2fd&#39;,
+        &#39;39abe4bca904bca5a11121955a2996bf&#39;,
+        &#39;a705e8280082f93f07e3486636f3827a&#39;,
+        &#39;3cfd436919bc3107d68b912ee647f341&#39;,
+        &#39;39abe4bca904bca5a11121955a2996bf&#39;,
+        &#39;4e44f1ac85cd60e3caa56bfd4afb675e&#39;,
+        &#39;45cf8ddfae1d78741d8f1c622689e4af&#39;,
+        &#39;3cfd436919bc3107d68b912ee647f341&#39;,
+        &#39;39abe4bca904bca5a11121955a2996bf&#39;,
+        &#39;4e44f1ac85cd60e3caa56bfd4afb675e&#39;,
+        &#39;37327bb06c83cb29cefde1963ea588aa&#39;,
+        &#39;a705e8280082f93f07e3486636f3827a&#39;,
+        &#39;23e65a679105b85c5dc7034fded4fb5f&#39;,
+        &#39;10e21da237a4a1491e769df6f4c3b419&#39;,
+        &#39;71b0438bf46aa26928c7f5a371d619e1&#39;,
+        &#39;af85d512594fc84a5c65ec9970956ea5&#39;,
+        &#39;39abe4bca904bca5a11121955a2996bf&#39;,]
+    for query_hash in a:
+        found_char = [char for char, md5_hash in char_to_md5.items() if md5_hash == query_hash]
+
+        print(found_char[0],end=&quot;&quot;)
+
+
+if __name__ == &quot;__main__&quot;:
+    main()
+</code></pre>
+<h3 id="vm-wo"><a href="#vm-wo" class="headerlink" title="vm_wo"></a>vm_wo</h3><p>转化提取一下opcode，模拟流程，单字节加密直接映射回去就行</p>
+<pre><code class="cpp">#include&lt;stdio.h&gt;
+using namespace std;
+
+unsigned char opcode[4][15] = 
+&#123;
+    &#123;0x1A, 0x00, 0x03, 0x19, 0x01, 0x01, 0x0D, 0x02, 0x07, 0x18, 0x01, 0x02, 0x01, 0x00, 0x03&#125;, 
+    &#123;0x1A, 0x00, 0x03, 0x19, 0x01, 0x02, 0x0D, 0x02, 0x06, 0x18, 0x01, 0x02, 0x01, 0x00, 0x04&#125;,
+    &#123;0x1A, 0x00, 0x03, 0x19, 0x01, 0x03, 0x0D, 0x02, 0x05, 0x18, 0x01, 0x02, 0x01, 0x00, 0x05&#125;,
+    &#123;0x1A, 0x00, 0x03, 0x19, 0x01, 0x04, 0x0D, 0x02, 0x04, 0x18, 0x01, 0x02, 0x01, 0x00, 0x06&#125;
+&#125;;
+unsigned char tmp[4][15];
+
+unsigned char vm_body[6];
+unsigned char *reg;
+unsigned int algn[2];
+
+void vm(unsigned char *op)
+&#123;
+    algn[1] = 0;
+    algn[0] = 0;
+    int i = 0;
+    if(i &lt; 15)
+    &#123;
+        while(1)
+        &#123;
+            reg = op + i;
+            unsigned char eax = reg[1];
+            unsigned char ebx = reg[1];
+            unsigned char ecx = reg[2];
+            unsigned char edx = reg[2];
+            unsigned char v11, v12, v13, v14, v15, v16;
+            //for(int j = 0; j &lt; 15; j++)printf(&quot;%d &quot;, op[j]);
+            //printf(&quot;i = %d reg[0] = %d\n&quot;, i, reg[0]);
+            //printf(&quot;ebx = %d, ecx = %d\n&quot;, ebx, ecx);
+            switch(reg[0])
+            &#123;
+                case 0:
+                    v11 = vm_body[ebx];
+                      vm_body[ebx] = vm_body[edx];
+                      vm_body[edx] = v11;
+                      algn[1] += 3;
+                      i = algn[1];
+                      if ( algn[1] &gt;= 15 )
+                        break;
+                    continue;
+                case 1:
+                  	vm_body[ebx] ^= vm_body[ecx];//printf(&quot;vm_body[ebx] ^= vm_body[ecx];\n&quot;);
+                  	algn[1] += 3;
+                  	i = algn[1];
+                      if ( algn[1] &gt;= 15 )
+                        break;
+                    continue;
+                case 2:
+                  	vm_body[ebx] += ecx;
+                  	algn[1] += 3;
+                  	i = algn[1];
+                      if ( algn[1] &gt;= 15 )
+                        break;
+                    continue;
+                case 3:
+                  	vm_body[ebx] += vm_body[ecx];
+                  	algn[1] += 3;
+                  	i = algn[1];
+                      if ( algn[1] &gt;= 15 )
+                        break;
+                    continue;
+                case 4:
+                  	vm_body[ebx] -= ecx;
+                  	algn[1] += 3;
+                  	i = algn[1];
+                      if ( algn[1] &gt;= 15 )
+                        break;
+                    continue;
+                case 5:
+                  	vm_body[ebx] -= vm_body[ecx];
+                  	algn[1] += 3;
+                  	i = algn[1];
+                      if ( algn[1] &gt;= 15 )
+                        break;
+                    continue;
+                case 6:
+                  	vm_body[ebx] *= ecx;
+                  	algn[1] += 3;
+                  	i = algn[1];
+                      if ( algn[1] &gt;= 15 )
+                        break;
+                    continue;
+                case 7:
+                  	vm_body[ebx] *= vm_body[ecx];
+                  	algn[1] += 3;
+                  	i = algn[1];
+                      if ( algn[1] &gt;= 15 )
+                        break;
+                case 8:
+                  	vm_body[ebx] = (unsigned char)vm_body[ebx] / ecx;
+                  	algn[1] += 3;
+                  	i = algn[1];
+                      if ( algn[1] &gt;= 15 )
+                        break;
+                    continue;
+                case 9:
+                  	vm_body[ebx] = (unsigned char)vm_body[ebx] / (unsigned char)vm_body[ecx];
+                  	algn[1] += 3;
+                  	i = algn[1];
+                      if ( algn[1] &gt;= 15 )
+                        break;
+                    continue;
+                case 10:
+                  	vm_body[ebx] = (unsigned char)vm_body[ebx] % ecx;
+                  	algn[1] += 3;
+                  	i = algn[1];
+                      if ( algn[1] &gt;= 15 )
+                        break;
+                    continue;
+                case 11:
+                  	vm_body[ebx] = (unsigned char)vm_body[ebx] % (unsigned char)vm_body[ecx];
+                  	algn[1] += 3;
+                  	i = algn[1];
+                      if ( algn[1] &gt;= 15 )
+                        break;
+                    continue;
+                case 12:
+                  	v12 = (unsigned char)vm_body[ebx];
+                  	vm_body[ebx] = v12 &lt;&lt; ecx;
+                  	algn[1] += 3;
+                  	i = algn[1];
+                      if ( algn[1] &gt;= 15 )
+                        break;
+                    continue;
+                case 13:
+                  	v12 = (unsigned char)vm_body[0];
+                  	vm_body[ebx] = v12 &lt;&lt; ecx;//printf(&quot;vm_body[ebx] = (unsigned char)vm_body[0] &lt;&lt; ecx;\n&quot;);
+                  	algn[1] += 3;
+                  	i = algn[1];
+                      if ( algn[1] &gt;= 15 )
+                        break;
+                    continue;
+                case 14:
+                  	v15 = vm_body[ebx];
+                    vm_body[algn[0] + 16] = v15;
+                  	algn[0] = algn[0] + 1;
+                  	algn[1] += 3;
+                  	i = algn[1];
+                      if ( algn[1] &gt;= 15 )
+                        break;
+                    continue;
+                case 15:
+                  	v13 = (unsigned char)vm_body[ebx];
+                  	printf(&quot;%d\n&quot;, v13);
+                  	algn[1] += 3;
+                  	i = algn[1];
+                      if ( algn[1] &gt;= 15 )
+                        break;
+                    continue;
+                case 16:
+                  	v14 = algn[0] - 1;
+                  	algn[0] = algn[0] - 1;
+                  	v13 = vm_body[v14 + 16];
+                  	printf(&quot;%d\n&quot;, v13);
+                  	algn[1] += 3;
+                  	i = algn[1];
+                      if ( algn[1] &gt;= 15 )
+                        break;
+                    continue;
+                case 17:
+                  	if ( !vm_body[ebx] )
+                    &#123;
+                    	algn[1] = ecx;
+                  		algn[1] += 3;
+                  		i = algn[1];
+                          if ( algn[1] &gt;= 15 )
+                            break;
+                        continue;
+                  	&#125;
+                  	else algn[1] += 3;
+                  	i = algn[1];
+                      if ( algn[1] &gt;= 15 )
+                        break;
+                    continue;
+                case 18:
+                  	if ( vm_body[ebx] )
+                    algn[1] = ecx;
+                  	algn[1] += 3;
+                  	i = algn[1];
+                      if ( algn[1] &gt;= 15 )
+                        break;
+                    continue;
+                case 19:
+                  	algn[1] = eax;
+                  	algn[1] += 3;
+                  	i = algn[1];
+                      if ( algn[1] &gt;= 15 )
+                        break;
+                    continue;
+                case 20:
+                  	ebx = (unsigned char)vm_body[ebx];
+                  	v15 = vm_body[ebx];
+                    vm_body[algn[0] + 16] = v15;
+                  	algn[0] = algn[0] + 1;
+                  	algn[1] += 3;
+                  	i = algn[1];
+                      if ( algn[1] &gt;= 15 )
+                        break;
+                    continue;
+                case 21:
+                  	v16 = algn[0] - 1;
+                  	algn[0] = algn[0] - 1;
+                  	vm_body[0] = vm_body[v16 + 16];
+                  	algn[1] += 3;
+                  	i = algn[1];
+                      if ( algn[1] &gt;= 15 )
+                        break;
+                    continue;
+                case 22:
+                  	v15 = eax;
+                  	vm_body[algn[0] + 16] = v15;
+                  	algn[0] = algn[0] + 1;
+                  	algn[1] += 3;
+                  	i = algn[1];
+                  	if ( algn[1] &gt;= 15 )
+                    	break;
+                  	continue;
+                case 23:
+                	i = algn[1];
+                      if ( algn[1] &gt;= 15 )
+                        break;
+                    continue;
+                case 24:
+                  	vm_body[0] = vm_body[2] | vm_body[1];//printf(&quot;vm_body[0] = vm_body[2] | vm_body[1];\n&quot;);
+                  	algn[1] += 3;
+                  	i = algn[1];
+                      if ( algn[1] &gt;= 15 )
+                        break;
+                    continue;
+                case 25:
+                	vm_body[ebx] = (unsigned char)vm_body[0] &gt;&gt; ecx;//printf(&quot;vm_body[ebx] = (unsigned char)vm_body[0] &gt;&gt; ecx;\n&quot;);
+                  	algn[1] += 3;
+                  	i = algn[1];
+                      if ( algn[1] &gt;= 15 )
+                        break;
+                    continue;
+                case 26:
+                  	vm_body[ebx] = ecx;//printf(&quot;vm_body[ebx] = ecx;\n&quot;);
+                  	algn[1] += 3;
+                  	i = algn[1];
+                      if ( algn[1] &gt;= 15 )
+                        break;
+                      continue;   
+                default:    
+                  	algn[1] += 3;
+                  	i = algn[1];
+                  	if ( algn[1] &gt;= 15 )
+                    	break;
+                  	continue;
+            &#125;
+            break;
+        &#125;
+    &#125;
+&#125;
+
+void init()
+&#123;
+    for(int i = 0; i &lt; 4; i++)
+    &#123;
+        for(int j = 0; j &lt; 15; j++)
+        &#123;
+            tmp[i][j] = opcode[i][j];
+        &#125;
+    &#125;
+&#125;
+
+int main()
+&#123;
+    int len = 29;
+    unsigned char flag[233] = &quot;1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ&#123;&#125;_&quot;;
+    *(unsigned int *)&amp;vm_body[3] = 0xBEEDBEEF;
+    
+    for(int i = 0; i &lt; 65; i++)
+    &#123;
+        
+        init();
+        unsigned char a = flag[i];
+        tmp[0][2] = flag[i];
+        vm(tmp[0]);
+        tmp[1][2] = vm_body[0];
+        vm(tmp[1]);
+        tmp[2][2] = vm_body[0];
+        vm(tmp[2]);
+        tmp[3][2] = vm_body[0];
+        vm(tmp[3]);
+        //printf(&quot;vm_body[0] = %d\n&quot;, vm_body[0]);
+        
+        flag[i] = ((unsigned char)vm_body[0] &gt;&gt; 5) | (8 * vm_body[0]);
+        printf(&quot;0x%x : \&quot;%c\&quot;, &quot;, flag[i], a);
+    &#125;
+&#125;
+
+        
+    
+    
+    
+
+</code></pre>
+<pre><code class="python">enc = [0xDF, 0xD5, 0xF1, 0xD1, 0xFF, 0xDB, 0xA1, 0xA5, 0x89, 0xBD,
+  0xE9, 0x95, 0xB3, 0x9D, 0xE9, 0xB3, 0x85, 0x99, 0x87, 0xBF,
+  0xE9, 0xB1, 0x89, 0xE9, 0x91, 0x89, 0x89, 0x8F, 0xAD]
+
+mp = &#123;0x35 : &quot;1&quot;, 0x33 : &quot;2&quot;, 0x31 : &quot;3&quot;, 0x3f : &quot;4&quot;, 0x3d : &quot;5&quot;, 0x3b : &quot;6&quot;, 0x39 : &quot;7&quot;, 0x27 : &quot;8&quot;, 0x25 : &quot;9&quot;, 0x37 : &quot;0&quot;, 0x95 : &quot;a&quot;, 0x93 : &quot;b&quot;, 0x91 : &quot;c&quot;, 0x9f : &quot;d&quot;, 0x9d : &quot;e&quot;, 0x9b : &quot;f&quot;, 0x99 : &quot;g&quot;, 0x87 : &quot;h&quot;, 0x85 : &quot;i&quot;, 0x83 : &quot;j&quot;, 0x81 : &quot;k&quot;, 0x8f : &quot;l&quot;, 0x8d : &quot;m&quot;, 0x8b : &quot;n&quot;, 0x89 : &quot;o&quot;, 0xb7 : &quot;p&quot;, 0xb5 : &quot;q&quot;, 0xb3 : &quot;r&quot;, 0xb1 : &quot;s&quot;, 0xbf : &quot;t&quot;, 0xbd : &quot;u&quot;, 0xbb : &quot;v&quot;, 0xb9 : &quot;w&quot;, 0xa7 : &quot;x&quot;, 0xa5 : &quot;y&quot;, 0xa3 : &quot;z&quot;, 0xd5 : &quot;A&quot;, 0xd3 : &quot;B&quot;, 0xd1 : &quot;C&quot;, 0xdf : &quot;D&quot;, 0xdd : &quot;E&quot;, 0xdb : &quot;F&quot;, 0xd9 : &quot;G&quot;, 0xc7 : &quot;H&quot;, 0xc5 : &quot;I&quot;, 0xc3 : &quot;J&quot;, 0xc1 : &quot;K&quot;, 0xcf : &quot;L&quot;, 0xcd : &quot;M&quot;, 0xcb : &quot;N&quot;, 0xc9 : &quot;O&quot;, 0xf7 : &quot;P&quot;, 0xf5 : &quot;Q&quot;, 0xf3 : &quot;R&quot;, 0xf1 : &quot;S&quot;, 0xff : &quot;T&quot;, 0xfd : &quot;U&quot;, 0xfb : &quot;V&quot;, 0xf9 : &quot;W&quot;, 0xe7 : &quot;X&quot;, 0xe5 : &quot;Y&quot;, 0xe3 : &quot;Z&quot;, 0xa1 : &quot;&#123;&quot;, 0xad : &quot;&#125;&quot;, 0xe9 : &quot;_&quot;&#125;
+
+for i in enc:
+    print(mp[i],end=&quot;&quot;)
+</code></pre>
+<h3 id="CSGO"><a href="#CSGO" class="headerlink" title="CSGO"></a>CSGO</h3><p>patch反调试，动调获取base变表直接在线解即可<br>表：LMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+&#x2F;ABCDEFGHIJK</p>
+<h3 id="babyobfu"><a href="#babyobfu" class="headerlink" title="babyobfu"></a>babyobfu</h3><p>赛中的零解题，结果回来看真的不那么难……</p>
+<p>​	比较明显的有两种smc，一种解密后续代码，一种加密前面的代码；后续询问了出题人，这里的smc粒度是基本块，量较大</p>
+<p>​	有一个很直观的思路，就是把解密后续代码的<code>smc1</code>执行后nop掉，全局nop掉加密前面代码的<code>smc2</code>，初始化smc数据的函数可以不处理</p>
+<p>其实只需要这一句即可：</p>
+<pre><code class="python">import idautils
+for i in range(5):
+   idc.patch_byte(idc.get_wide_dword(get_reg_value(&quot;rsp&quot;)) - 5 + i, 0x90)
+   print(hex(get_reg_value(&quot;rdi&quot;)) , end = &#39;,&#39;)
+</code></pre>
+<p>​	先跑一次观察最后的位置，然后在那个位置下断点，然后就可以得到几乎所有代码</p>
+<p>​	中间存在特判，可以看出来是<code>0-9a-e</code>的类似uuid的格式，这里没有执行这些地方的代码，但是smc会影响反编译，所以可以手动找到<code>jnz</code> <code>jmp</code>之类的位置手动patch一下，然后可以得到main函数和一些加解密、check操作</p>
+<p>​	密文：</p>
+<p>​	<img src="/2023/09/03/%E7%BE%8A%E5%9F%8E%E6%9D%AF2023/image-20230922211748973.png" alt="image-20230922211748973"></p>
+<p>加密：（这里有个AES的sbox，明显是用来干扰插件的，必须去干净才能看到实际用途）<img src="/2023/09/03/%E7%BE%8A%E5%9F%8E%E6%9D%AF2023/image-20230922211809507.png" alt="image-20230922211809507"></p>
+<p>其实基本上就没啥东西了，这就是ycb的零解题……</p>
+<h6 id="10-11-补个完整流程"><a href="#10-11-补个完整流程" class="headerlink" title="10.11 补个完整流程"></a>10.11 补个完整流程</h6><p>首先是smc和冗余的去除，前面用的动态patch有个问题，在于无法将结果应用回输入文件（文件自smc的部分是没办法写回去的，必须自行patch）</p>
+<p>可以考虑动态获取所有smc的base_addr，脚本smc进行patch（脚本来源于gyc爷，相当精细的patch，考虑到很多传参和编译器优化，能几乎完美去除混淆）</p>
+<pre><code class="python">import idaapi
+import idautils
+from idaapi import *
+arr = [
+    &#123;&quot;base_addr&quot;: &quot;0x40235a&quot;, &quot;len&quot;: &quot;0x135&quot;, &quot;key&quot;: &quot;0x0&quot;&#125;,
+    &#123;&quot;base_addr&quot;: &quot;0x4024de&quot;, &quot;len&quot;: &quot;0x21&quot;, &quot;key&quot;: &quot;0x109cf92e&quot;&#125;,
+    &#123;&quot;base_addr&quot;: &quot;0x403582&quot;, &quot;len&quot;: &quot;0x23&quot;, &quot;key&quot;: &quot;0x109cf92e&quot;&#125;,
+    &#123;&quot;base_addr&quot;: &quot;0x40256d&quot;, &quot;len&quot;: &quot;0x64&quot;, &quot;key&quot;: &quot;0x109cf92e&quot;&#125;,
+    &#123;&quot;base_addr&quot;: &quot;0x40263a&quot;, &quot;len&quot;: &quot;0x23&quot;, &quot;key&quot;: &quot;0x6f403b1d&quot;&#125;,
+    &#123;&quot;base_addr&quot;: &quot;0x4026d5&quot;, &quot;len&quot;: &quot;0x36&quot;, &quot;key&quot;: &quot;0x74afec82&quot;&#125;,
+    &#123;&quot;base_addr&quot;: &quot;0x402758&quot;, &quot;len&quot;: &quot;0x36&quot;, &quot;key&quot;: &quot;0x3508284b&quot;&#125;,
+    &#123;&quot;base_addr&quot;: &quot;0x402937&quot;, &quot;len&quot;: &quot;0x14&quot;, &quot;key&quot;: &quot;0x3508284b&quot;&#125;,
+    &#123;&quot;base_addr&quot;: &quot;0x4029f2&quot;, &quot;len&quot;: &quot;0x22&quot;, &quot;key&quot;: &quot;0x64937846&quot;&#125;,
+    &#123;&quot;base_addr&quot;: &quot;0x402a82&quot;, &quot;len&quot;: &quot;0x39&quot;, &quot;key&quot;: &quot;0x74afec82&quot;&#125;,
+    &#123;&quot;base_addr&quot;: &quot;0x401a35&quot;, &quot;len&quot;: &quot;0x10a&quot;, &quot;key&quot;: &quot;0x0&quot;&#125;,
+    &#123;&quot;base_addr&quot;: &quot;0x401ba2&quot;, &quot;len&quot;: &quot;0x39&quot;, &quot;key&quot;: &quot;0x41b71efb&quot;&#125;,
+    &#123;&quot;base_addr&quot;: &quot;0x401c52&quot;, &quot;len&quot;: &quot;0x57&quot;, &quot;key&quot;: &quot;0x3855b718&quot;&#125;,
+    &#123;&quot;base_addr&quot;: &quot;0x401236&quot;, &quot;len&quot;: &quot;0x1f&quot;, &quot;key&quot;: &quot;0x0&quot;&#125;,
+    &#123;&quot;base_addr&quot;: &quot;0x4012ac&quot;, &quot;len&quot;: &quot;0x14&quot;, &quot;key&quot;: &quot;0x6b8b4567&quot;&#125;,
+    &#123;&quot;base_addr&quot;: &quot;0x401323&quot;, &quot;len&quot;: &quot;0x15d&quot;, &quot;key&quot;: &quot;0x59f066a1&quot;&#125;,
+    &#123;&quot;base_addr&quot;: &quot;0x4014b5&quot;, &quot;len&quot;: &quot;0x19&quot;, &quot;key&quot;: &quot;0x3dccfec8&quot;&#125;,
+    &#123;&quot;base_addr&quot;: &quot;0x40150e&quot;, &quot;len&quot;: &quot;0x5c&quot;, &quot;key&quot;: &quot;0x59f066a1&quot;&#125;,
+    &#123;&quot;base_addr&quot;: &quot;0x401ce4&quot;, &quot;len&quot;: &quot;0x22&quot;, &quot;key&quot;: &quot;0x4d10565e&quot;&#125;,
+    &#123;&quot;base_addr&quot;: &quot;0x401d6e&quot;, &quot;len&quot;: &quot;0x3a&quot;, &quot;key&quot;: &quot;0x3855b718&quot;&#125;,
+    &#123;&quot;base_addr&quot;: &quot;0x401e0b&quot;, &quot;len&quot;: &quot;0x44&quot;, &quot;key&quot;: &quot;0x6385d5da&quot;&#125;,
+    &#123;&quot;base_addr&quot;: &quot;0x401ec9&quot;, &quot;len&quot;: &quot;0x3f&quot;, &quot;key&quot;: &quot;0x71a5dd8e&quot;&#125;,
+    &#123;&quot;base_addr&quot;: &quot;0x401f43&quot;, &quot;len&quot;: &quot;0x22&quot;, &quot;key&quot;: &quot;0x3c14fa76&quot;&#125;,
+    &#123;&quot;base_addr&quot;: &quot;0x401fcd&quot;, &quot;len&quot;: &quot;0x2e&quot;, &quot;key&quot;: &quot;0x71a5dd8e&quot;&#125;,
+    &#123;&quot;base_addr&quot;: &quot;0x40205e&quot;, &quot;len&quot;: &quot;0x39&quot;, &quot;key&quot;: &quot;0x6eb33466&quot;&#125;,
+    &#123;&quot;base_addr&quot;: &quot;0x40210e&quot;, &quot;len&quot;: &quot;0xd2&quot;, &quot;key&quot;: &quot;0x7f23f981&quot;&#125;,
+    &#123;&quot;base_addr&quot;: &quot;0x40160d&quot;, &quot;len&quot;: &quot;0x35&quot;, &quot;key&quot;: &quot;0x0&quot;&#125;,
+    &#123;&quot;base_addr&quot;: &quot;0x4016a5&quot;, &quot;len&quot;: &quot;0x15&quot;, &quot;key&quot;: &quot;0x19495cff&quot;&#125;,
+    &#123;&quot;base_addr&quot;: &quot;0x4016fe&quot;, &quot;len&quot;: &quot;0x25&quot;, &quot;key&quot;: &quot;0x33a1c8b5&quot;&#125;,
+    &#123;&quot;base_addr&quot;: &quot;0x40194a&quot;, &quot;len&quot;: &quot;0x20&quot;, &quot;key&quot;: &quot;0x19495cff&quot;&#125;,
+    &#123;&quot;base_addr&quot;: &quot;0x40221b&quot;, &quot;len&quot;: &quot;0x22&quot;, &quot;key&quot;: &quot;0x19ccba0c&quot;&#125;,
+    &#123;&quot;base_addr&quot;: &quot;0x40227d&quot;, &quot;len&quot;: &quot;0x14&quot;, &quot;key&quot;: &quot;0x7f23f981&quot;&#125;,
+    &#123;&quot;base_addr&quot;: &quot;0x402b24&quot;, &quot;len&quot;: &quot;0x23&quot;, &quot;key&quot;: &quot;0x82c08da&quot;&#125;,
+    &#123;&quot;base_addr&quot;: &quot;0x402bbf&quot;, &quot;len&quot;: &quot;0x84&quot;, &quot;key&quot;: &quot;0x2d5d3879&quot;&#125;,
+    &#123;&quot;base_addr&quot;: &quot;0x402c81&quot;, &quot;len&quot;: &quot;0x22&quot;, &quot;key&quot;: &quot;0x4fe6e123&quot;&#125;,
+    &#123;&quot;base_addr&quot;: &quot;0x40178b&quot;, &quot;len&quot;: &quot;0x21&quot;, &quot;key&quot;: &quot;0x19495cff&quot;&#125;,
+    &#123;&quot;base_addr&quot;: &quot;0x40181e&quot;, &quot;len&quot;: &quot;0x21&quot;, &quot;key&quot;: &quot;0x3ac743d6&quot;&#125;,
+    &#123;&quot;base_addr&quot;: &quot;0x401889&quot;, &quot;len&quot;: &quot;0x2b&quot;, &quot;key&quot;: &quot;0x7c2f3f1b&quot;&#125;,
+    &#123;&quot;base_addr&quot;: &quot;0x402d11&quot;, &quot;len&quot;: &quot;0x21&quot;, &quot;key&quot;: &quot;0x2d5d3879&quot;&#125;,
+    &#123;&quot;base_addr&quot;: &quot;0x402d9b&quot;, &quot;len&quot;: &quot;0x23&quot;, &quot;key&quot;: &quot;0x4fd1b124&quot;&#125;,
+    &#123;&quot;base_addr&quot;: &quot;0x402e33&quot;, &quot;len&quot;: &quot;0x46&quot;, &quot;key&quot;: &quot;0x7ceb0021&quot;&#125;,
+    &#123;&quot;base_addr&quot;: &quot;0x402edf&quot;, &quot;len&quot;: &quot;0x23&quot;, &quot;key&quot;: &quot;0xef6a336&quot;&#125;,
+    &#123;&quot;base_addr&quot;: &quot;0x402f77&quot;, &quot;len&quot;: &quot;0x21&quot;, &quot;key&quot;: &quot;0x2ab50b6e&quot;&#125;,
+    &#123;&quot;base_addr&quot;: &quot;0x402ffe&quot;, &quot;len&quot;: &quot;0x23&quot;, &quot;key&quot;: &quot;0x7a85187&quot;&#125;,
+    &#123;&quot;base_addr&quot;: &quot;0x403096&quot;, &quot;len&quot;: &quot;0xc7&quot;, &quot;key&quot;: &quot;0x60cbd5d9&quot;&#125;,
+    &#123;&quot;base_addr&quot;: &quot;0x403198&quot;, &quot;len&quot;: &quot;0x22&quot;, &quot;key&quot;: &quot;0x15697d0d&quot;&#125;,
+    &#123;&quot;base_addr&quot;: &quot;0x403225&quot;, &quot;len&quot;: &quot;0x14&quot;, &quot;key&quot;: &quot;0x60cbd5d9&quot;&#125;,
+    &#123;&quot;base_addr&quot;: &quot;0x403274&quot;, &quot;len&quot;: &quot;0x22&quot;, &quot;key&quot;: &quot;0x1948596b&quot;&#125;,
+    &#123;&quot;base_addr&quot;: &quot;0x403301&quot;, &quot;len&quot;: &quot;0x14&quot;, &quot;key&quot;: &quot;0x2ab50b6e&quot;&#125;,
+    &#123;&quot;base_addr&quot;: &quot;0x403350&quot;, &quot;len&quot;: &quot;0x22&quot;, &quot;key&quot;: &quot;0x21b6eba8&quot;&#125;,
+    &#123;&quot;base_addr&quot;: &quot;0x4033dd&quot;, &quot;len&quot;: &quot;0x64&quot;, &quot;key&quot;: &quot;0x7ceb0021&quot;&#125;,
+    &#123;&quot;base_addr&quot;: &quot;0x403526&quot;, &quot;len&quot;: &quot;0x21&quot;, &quot;key&quot;: &quot;0x280f9e95&quot;&#125;,
+    &#123;&quot;base_addr&quot;: &quot;0x402806&quot;, &quot;len&quot;: &quot;0x36&quot;, &quot;key&quot;: &quot;0x3508284B&quot;&#125;,
+    &#123;&quot;base_addr&quot;: &quot;0x40298E&quot;, &quot;len&quot;: &quot;0x21&quot;, &quot;key&quot;: &quot;0x7B62D32D&quot;&#125;,
+    &#123;&quot;base_addr&quot;: &quot;0x40348B&quot;, &quot;len&quot;: &quot;0x60&quot;, &quot;key&quot;: &quot;0x280F9E95&quot;&#125;,
+    &#123;&quot;base_addr&quot;: &quot;0x4018F4&quot;, &quot;len&quot;: &quot;0x1b&quot;, &quot;key&quot;: &quot;0x3AC743D6&quot;&#125;,
+    &#123;&quot;base_addr&quot;: &quot;0x402889&quot;, &quot;len&quot;: &quot;0x36&quot;, &quot;key&quot;: &quot;0x7B62D32D&quot;&#125;,
+]
+def decrypt_block(base_addr, block_len, key):
+    code = get_bytes(base_addr, block_len)
+    real_code = bytearray(block_len)
+    s = [(key &gt;&gt; (8 * i)) &amp; 0xff for i in range(4)]
+    for i in range(block_len):
+        real_code[i] = code[i] ^ ((i - 50) &amp; 0xff ^ s[i % 4])
+    return bytes(real_code)
+
+for block in arr:
+    base_addr = int(block[&#39;base_addr&#39;], 16)
+    block_len = int(block[&#39;len&#39;], 16)
+    key = int(block[&#39;key&#39;], 16)
+    code = decrypt_block(base_addr, block_len, key)
+    patch_bytes(base_addr - 5, b&#39;\x90&#39; * 5)
+    patch_bytes(base_addr, code)
+    patch_bytes(base_addr + block_len, b&#39;\x90&#39; * 5)
+
+for block in arr:
+    base_addr = int(block[&#39;base_addr&#39;], 16)
+    block_len = int(block[&#39;len&#39;], 16)
+    addr = base_addr - 5
+    regs = [str2reg(&#39;rdi&#39;), str2reg(&#39;rsi&#39;), str2reg(&#39;rdx&#39;)]
+    i = 0
+    while i &lt; 10:
+        i += 1
+        addr = prev_head(addr, 0x400000)
+        ins = insn_t()
+        decode_insn(ins, addr)
+        if &#39;mov&#39; not in ins.get_canon_mnem():
+            continue
+        op0 = ins.ops[0]
+        op1 = ins.ops[1]
+        if op0.type == idaapi.o_reg:
+            if op0.reg in regs:
+                regs.remove(op0.reg)
+                if op1.type == idaapi.o_reg:
+                    regs.append(op1.reg)
+                patch_bytes(addr, b&#39;\x90&#39; * get_item_size(addr))
+        elif op0.type == idaapi.o_displ and op1.type == idaapi.o_imm:
+            patch_bytes(addr, b&#39;\x90&#39; * get_item_size(addr))
+        elif op1.type == idaapi.o_reg and (op1.reg == str2reg(&#39;rax&#39;) or op1.reg == str2reg(&#39;rcx&#39;)):
+            patch_bytes(addr, b&#39;\x90&#39; * get_item_size(addr))
+
+
+    regs = [str2reg(&#39;rdi&#39;), str2reg(&#39;rsi&#39;), str2reg(&#39;rdx&#39;)]
+    addr = base_addr + block_len
+    i = 0
+    while i &lt; 6:
+        addr = prev_head(addr, 0x400000)
+        ins = insn_t()
+        decode_insn(ins, addr)
+        if &#39;mov&#39; not in ins.get_canon_mnem():
+            continue
+        op0 = ins.ops[0]
+        op1 = ins.ops[1]
+        if op0.type == idaapi.o_reg:
+            if op0.reg in regs:
+                regs.remove(op0.reg)
+                if op1.type == idaapi.o_reg:
+                    regs.append(op1.reg)
+                patch_bytes(addr, b&#39;\x90&#39; * get_item_size(addr))
+        i += 1
+
+refs = idautils.CodeRefsTo(0x4035C0, 0)
+for ref in refs:
+    i = 0
+    regs = [str2reg(&#39;rdi&#39;), str2reg(&#39;rsi&#39;), str2reg(&#39;rdx&#39;), str2reg(&#39;rcx&#39;), str2reg(&#39;r8&#39;)]
+    addr = ref
+    patch_bytes(addr, b&#39;\x90&#39; * get_item_size(addr))
+    while i &lt; 6:
+        addr = prev_head(addr, 0x400000)
+        ins = insn_t()
+        decode_insn(ins, addr)
+        if &#39;mov&#39; not in ins.get_canon_mnem() and &#39;lea&#39; not in ins.get_canon_mnem():
+            continue
+        op0 = ins.ops[0]
+        op1 = ins.ops[1]
+        if op0.type == idaapi.o_reg:
+            if op0.reg in regs:
+                regs.remove(op0.reg)
+                if op1.type == idaapi.o_reg:
+                    regs.append(op1.reg)
+                patch_bytes(addr, b&#39;\x90&#39; * get_item_size(addr))
+        i += 1
+</code></pre>
+<p>检查uuid格式</p>
+<p><img src="/2023/09/03/%E7%BE%8A%E5%9F%8E%E6%9D%AF2023/image-20231012095340707.png" alt="image-20231012095340707"></p>
+<p>通过盒做一个转化映射：</p>
+<p><img src="/2023/09/03/%E7%BE%8A%E5%9F%8E%E6%9D%AF2023/image-20231012095440758.png" alt="image-20231012095440758"></p>
+<p>然后做了一个递推循环（可逆）</p>
+<p><img src="/2023/09/03/%E7%BE%8A%E5%9F%8E%E6%9D%AF2023/image-20231012100145373.png" alt="image-20231012100145373"></p>
+<p>流程用python写一下这样：</p>
+<p>(秘钥流需要自己动调获取)</p>
+<pre><code class="python">input =  &#39;11111111111111111111111111111111&#39;
+enc1 = &#39;ac2018c9c49436ec3154691ea51de52ca91251c38c13722d11a325a18198411e91ca9e4c&#39;
+s_box = [ 0x63, 0x7C, 0x77, 0x7B, 0xF2, 0x6B, 0x6F, 0xC5, 0x30, 0x01,  0x67, 0x2B, 0xFE, 0xD7, 0xAB, 0x76, 0xCA, 0x82, 0xC9, 0x7D,  0xFA, 0x59, 0x47, 0xF0, 0xAD, 0xD4, 0xA2, 0xAF, 0x9C, 0xA4,  0x72, 0xC0, 0xB7, 0xFD, 0x93, 0x26, 0x36, 0x3F, 0xF7, 0xCC,  0x34, 0xA5, 0xE5, 0xF1, 0x71, 0xD8, 0x31, 0x15, 0x04, 0xC7,  0x23, 0xC3, 0x18, 0x96, 0x05, 0x9A, 0x07, 0x12, 0x80, 0xE2,  0xEB, 0x27, 0xB2, 0x75, 0x09, 0x83, 0x2C, 0x1A, 0x1B, 0x6E,  0x5A, 0xA0, 0x52, 0x3B, 0xD6, 0xB3, 0x29, 0xE3, 0x2F, 0x84,  0x53, 0xD1, 0x00, 0xED, 0x20, 0xFC, 0xB1, 0x5B, 0x6A, 0xCB,  0xBE, 0x39, 0x4A, 0x4C, 0x58, 0xCF, 0xD0, 0xEF, 0xAA, 0xFB,  0x43, 0x4D, 0x33, 0x85, 0x45, 0xF9, 0x02, 0x7F, 0x50, 0x3C,  0x9F, 0xA8, 0x51, 0xA3, 0x40, 0x8F, 0x92, 0x9D, 0x38, 0xF5,  0xBC, 0xB6, 0xDA, 0x21, 0x10, 0xFF, 0xF3, 0xD2, 0xCD, 0x0C,  0x13, 0xEC, 0x5F, 0x97, 0x44, 0x17, 0xC4, 0xA7, 0x7E, 0x3D,  0x64, 0x5D, 0x19, 0x73, 0x60, 0x81, 0x4F, 0xDC, 0x22, 0x2A,  0x90, 0x88, 0x46, 0xEE, 0xB8, 0x14, 0xDE, 0x5E, 0x0B, 0xDB,  0xE0, 0x32, 0x3A, 0x0A, 0x49, 0x06, 0x24, 0x5C, 0xC2, 0xD3,  0xAC, 0x62, 0x91, 0x95, 0xE4, 0x79, 0xE7, 0xC8, 0x37, 0x6D,  0x8D, 0xD5, 0x4E, 0xA9, 0x6C, 0x56, 0xF4, 0xEA, 0x65, 0x7A,  0xAE, 0x08, 0xBA, 0x78, 0x25, 0x2E, 0x1C, 0xA6, 0xB4, 0xC6,  0xE8, 0xDD, 0x74, 0x1F, 0x4B, 0xBD, 0x8B, 0x8A, 0x70, 0x3E,  0xB5, 0x66, 0x48, 0x03, 0xF6, 0x0E, 0x61, 0x35, 0x57, 0xB9,  0x86, 0xC1, 0x1D, 0x9E, 0xE1, 0xF8, 0x98, 0x11, 0x69, 0xD9,  0x8E, 0x94, 0x9B, 0x1E, 0x87, 0xE9, 0xCE, 0x55, 0x28, 0xDF,  0x8C, 0xA1, 0x89, 0x0D, 0xBF, 0xE6, 0x42, 0x68, 0x41, 0x99,  0x2D, 0x0F, 0xB0, 0x54, 0xBB, 0x16]
+input1 = []
+keylist2 = [212,253,128,196,80,16,222,109,232,240,12,82,9,64,36,151,222,119,20,95,105,246,192,116,142,109,128,206,204,7,192,244,160,4,240,28,198,0,162,88,244,52,64,176,76,160,168,86,89,233,56,40,208,104,64,102,150,69,210,103,64,208,36,0,19,76,202,120,76,188,192,66,0,16,109,192,0,56,176,4,196,72,128,232,113,255,64,132,70,84,37,122,56,32,248,192,56,148,249,112,228,250,112,8,64,51,231,104,176,214,32,251,129,76,46,138,27,58,146,120,232,36,34,39,92,210,20,138,176,96,100,32,16,229,209,92,233,121,82,52,103,128,76,226,32,160,84,223,40,48,240,134,173,197,133,113,192,78,186,204,152,35,86,18,144,201,91,84,84,72,186,172,44,220,34,144,232,24,140,129,68,49,132,128,232,138,224,140,186,250,188,230,240,158,102,218,84,161,200,30,144,240,147,57,80,24,153,149,72,129,160,74,176,106,128,123,176,200,157,57,251,126,116,64,128,42,144,96,74,226,218,0,14,192,224,190,6,197,97,212,156,51,136,64,112,120,242,124,172,176,248,203,204,62,234,100,160,190,172,10,212,48,88,77,116,72,144,24,234,16,192,0,5,160,78,221,236,168,16,224,32,66,9,100,64,148,147,144,97,2,58,57,223,154,60,41,111,231,16,179,75,211,157,178,91,7,132,240,59,190,206,182,188,10,72,184,99,72,250,104,116,228,248,172,22,151,142,42,233,76,44,235,104,130,184,36,146,6,185,162,240,144,234,170,228,10,123,64,92,252,190,84,144,129,68,244,55,160,147,101,32,22,130,205,174,36,0,41,160,139,68,251,228,88,213,192,156,132,13,141,207,80,40,8,140,190,108,188,24,8,9,89,173,204,248,28,120,40,189,90,49,222,0,108,97,139,35,176,133,141,20,63,152,104,3,172,192,115,150,32,58,194,108,64,49,112,152,46,144,22,186,254,195,129,152,119,196,187,115,248,58,17,112,17,124,29,152,132,12,31,90,77,179,192,49,176,33,76,156,32,230,108,137,192,121,191,53,168,102,137,200,34,118,192,138,193,112,216,45,217,182,128,56,140,128,208,46,35,64,171,123,199,221,52,75,244,192,63,178,205,97,145,48,216,188,228,203,72,165,204,130,178,24,243,30,150,113,89,30,156,104,59,232,65,168,8,117,208,132,248,214,12,221,64,107,51,164,124,32,150,79,47,184,18,200,22,64,232,160,45,112,16,189,96,76,220,57,171,89,97,113,208,192,235,240,254,170,212,92,252,147,248,249,68,97,64,24,230,134,126,3,80,23,184,171,16,130,66,9,68,224,150,202,212,10,70,156,107,210,146,205,144,64,46,107,16,83,96,167,151,99,218,130,41,198,0,112,172,188,74,64,4,224,116,176,176,128,48,220,112,108,64,126,208,144,157,45,135,184,197,100,13,220,94,96,215,12,219,0,128,33,23,221,184,32,253,143,0,184,24,28,4,255,177,104,196,233,171,132,107,130,128,20,68,200,106,33,250,52,166,249,91,216,94,240,211,239,146,246,243,198,126,227,136,45,229,246,191,144,190,228,48,168,59,140,200,236,54,236,0,176,4,248,184,79,64,194,248,124,209,123,48,180,136,107,160,0,112,89,20,133,215,140,68,41,163,233,192,47,166,228,230,251,185,188,180,54,212,156,208,40,100,4,132,16,53,96,200,26,192,237,19,95,154,240,234,96,219,128,75,239,206,159,112,255,0,35,157,138,164,176,208,98,104,47,128,117,116,13,222,0,96,49,64,195,144,148,134,49,255,34,120,52,32,137,55,49,131,46,177,113,64,9,192,196,78,226,82,94,144,160,38,87,71,78,144,84,188,82,67,202,209,144,32,36,25,140,94,148,168,12,168,196,221,145,71,128,96,56,64,184,101,112,32,145,72,71,0,108,112,166,254,36,68,0,132,188,214,125,60,200,113,46,28,149,147,48,169,138,239,101,184,73,192,32,51,104,112,104,16,176,110,234,8,219,98,192,139,102,62,80,96,121,24,212,105,150,28,63,26,80,108,87,0,4,216,124,97,127,164,4,7,116,80,119,41,160,140,224,92,4,248,224,195,222,44,210,158,241,64,92,80,220,45,0,193,208,208,7,20,108,253,158,110,201,94,48,168,58,33,168,149,88,135,64,117,108,12,104,216,158,230,194,112,121,0,103,41,252,1,242,22,236,250,96,175,96,29,236,184,252,157,72,96,232,172,30,136,151,32,61,128,80,16,198,152,96,235,144,70,18,0,32,96,8,84,236,123,0,2,176,7,240,156,88,200,216,12,9,184,57,104,160,16,182,99,0,56,200,128,223,230,58,220,88,88,148,92,99,96,140,147,193,208,224,68,86,96,200,187,122,126,115,27,171,184,11,140,35,28,240,24,123,15,147,250,102,224,76,0,232,180,49,48,240,130,24,64,254,140,240,252,31,113,140,126,200,128,206,0,0,160,213,35,39,4,0,237,217,144,130,108,125,4,0,192,18,211,24,93,134,224,83,65,159,216,221,11,224,230,239,130,100,119,83,123,91,220,20,132,86,128,32,168,57,80,232,96,88,70,240,242,6,192,230,4,208,190,121,205,168,62,160,30,137,36,56,251,58,88,126,38,164,0,56,152,131,232,100,120,176,213,249,246,22,99,136,161,160,96,245,36,246,224,48,228,164,38,16,191,157,220,244,208,56,205,10,38,41,12,208,120,227,176,154,115,128,67,167,163,156,197,124,41,74,112,40,172,135,241,80,212,17,232,50,184,180,76,21,180,124,81,41,172,144,158,18,216,190,191,16,4,132,230,136,220,219,224,0,73,96,196,16,114,146,238,140,22,117,110,126,64,8,148,65,64,96,136,11,0,90,44,46,10,10,78,48,42,136,78,17,35,190,112,128,237,80,185,187,56,80,28,108,35,32,202,162,230,112,248,147,69,128,101,95,123,204,160,220,48,238,86,134,175,16,253,121,221,236,145,24,176,44,168,192,56,241,31,128,21,98,41,96,234,144,151,134,97,226,124,67,213,14,168,0,228,140,16,198,16,52,68,216,242,24,192,217,92,172,182,229,13,15,221,148,136,167,88,254,226,213,176,104,138,20,152,10,70,22,230,96,63,200,72,164,58,61,210,24,214,63,255,36,77,138,0,172,96,246,182,232,0,248,204,248,0,116,14,252,192,248,139,200,85,93,28,32,75,248,16,128,176,0,78,156,137,152,218,48,18,76,205,218,171,63,80,40,224,0,6,240,87,128,15,233,52,68,49,248,134,193,47,0,128,30,194,96,167,182,224,112,202,161,206,79,187,176,198,212,44,198,139,0,176,16,186,141,139,24,12,253,89,195,160,175,23,130,97,254,128,96,235,192,70,144,66,64,238,72,188,64,216,88,96,80,151,68,210,224,161,77,22,80,132,240,84,21,9,173,12,128,128,68,112,224,81,202,52,134,136,18,20,199,32,244,243,107,108,16,220,84,72,236,125,148,184,64,185,49,88,156,240,221,168,80,87,24,208,108,254,32,107,185,23,130,78,217,104,0,147,60,82,160,226,187,64,36,232,196,85,182,39,202,63,118,88,192,169,0,70,8,32,166,144,139,86,52,17,157,29,160,224,24,126,147,148,189,156,250,11,189,110,68,43,179,148,253,167,168,240,100,190,140,250,221,92,14,143,128,92,168,18,119,112,153,220,74,118,8,46,84,96,186,224,173,199,153,154,0,8,0,184,98,148,65,128,154,196,38,237,191,144,245,116,91,45,73,87,192,68,208,159,242,94,96,179,64,134,104,106,32,48,22,208,188,96,7,144,136,49,185,125,139,16,249,112,66,41,98,232,55,80,197,144,40,167,132,70,52,104,64,107,228,64,25,32,144,38,148,174,196,225,50,126,175,253,96,16,100,196,152,8,192,233,219,52,11,112,150,100,4,226,50,186,153,48,232,170,30,142,189,211,142,48,55,125,52,73,248,0,59,94,211,124,200,133,179,243,64,112,128,64,211,197,144,168,162,183,128,0,204,185,40,198,133,190,12,152,250,180,121,118,239,176,128,203,129,0,72,127,240,200,144,78,124,240,107,84,89,214,75,228,121,81,32,0,192,246,169,212,212,224,254,239,28,178,212,114,128,194,234,246,223,240,118,239,120,212,152,215,114,77,235,64,71,24,168,113,82,87,160,119,197,134,0,176,10,45,168,144,219,232,235,247,8,68,146,100,97,250,102,34,220,248,0,93,26,214,181,24,0,248,127,216,104,7,156,220,160,249,14,136,37,176,144,96,241,41,136,207,132,62,32,152,40,58,80,135,51,45,176,132,132,208,164,64,0,120,170,250,32,218,197,45,15,56,32,56,3,220,67,98,113,11,175,32,107,0,228,88,235,198,184,160,160,112,16,118,70,160,180,216,226,120,71,14,79,200,212,48,228,132,76,176,145,194,160,254,112,239,16,64,104,131,210,180,32,205,208,0,254,179,51,55,128,151,215,160,199,98,190,64,255,208,192,68,148,218,50,176,156,216,90,52,114,14,21,12,128,208,194,26,207,250,178,32,72,200,94,93,98,187,38,164,107,115,0,8,242,143,187,19,182,64,11,241,233,241,249,128,248,76,202,61,96,231,154,62,13,119,131,150,96,160,196,129,196,246,32,121,48,64,66,149,228,11,74,48,64,170,115,145,188,167,232,237,32,78,188,109,188,245,34,174,107,121,56,129,92,136,89,188,80,84,107,132,97,184,32,193,236,8,195,156,58,50,7,208,251,209,211,171,191,28,192,147,154,226,144,40,160,224,232,240,209,160,204,224,168,90,160,97,26,174,46,177,25,38,94,0,244,94,156,221,179,208,142,128,94,111,34,40,96,62,232,155,151,20,14,202,80,12,0,15,64,36,255,240,235,14,250,124,116,27,108,33,183,215,176,27,48,130,187,250,92,3,176,200,160,85,225,224,177,131,52,192,186,80,219,68,141,214,177,138,190,231,119,2,136,152,221,0,225,11,16,24,79,1,194,16,112,128,179,42,198,64,79,249,114,14,33,224,122,44,212,188,60,240,242,202,0,114,20,240,186,127,112,152,128,141,167,65,84,63,77,191,198,0,192,16,48,117,214,0,192,50,40,228,63,165,148,88,200,212,182,4,133,56,138,73,28,38,161,236,200,134,25,0,88,112,209,194,36,109,55,46,192,128,28,32,213,17,17,68,152,153,64,128,21,26,222,152,0,0,124,107,0,237,68,195,202,216,232,128,22,196,176,217,184,228,93,239,211,76,96,203,221,80,145,178,64,23,108,220,32,7,220,110,255,248,157,96,47,192,148,60,154,192,144,26,109,112,136,128,174,0,200,1,192,211,165,200,164,182,152,224,128,76,38,240,96,81,60,85,120,54,90,158,241,88,213,9,210,166,183,124,121,138,80,19,149,179,158,50,56,221,189,228,220,143,160,46,64,200,52,154,255,224,73,144,114,217,164,200,170,124,65,32,64,0,76,15,192,238,124,97,188,208,0,148,66,120,197,152,185,31,104,155,145,215,4,8,190,102,0,232,252,112,64,156,62,192,10,60,53,88,183,255,45,96,154,136,190,111,212,16,155,160,122,238,166,86,106,7,85,0,135,212,197,60,239,208,252,214,48,0,246,0,109,114,24,135,216,170,152,150,149,72,177,121,240,158,32,215,64,112,80,228,84,124,204,206,16,22,162,253,54,134,80,154,224,156,164,90,98,206,177,119,234,69,64,83,170,134,240,11,4,178,59,80,16,248,98,208,182,172,112,128,102,216,16,40,56,137,5,249,105,152,91,224,104,242,245,167,171,144,168,203,64,168,184,208,141,40,83,156,82,204,254,192,71,48,255,28,88,230,105,135,192,152,140,192,144,140,249,238,190,16,208,152,32,166,142,232,214,16,50,112,126,66,185,20,108,229,14,200,108,0,1,202,70,116,152,18,199,216,96,156,212,198,248,252,2,96,192,196,16,26,186,172,35,64,223,130,71,125,134,6,208,242,8,3,158,152,112,208,154,14,53,88,177,98,208,63,225,131,11,80,108,60,209,227,72,20,224,130,233,144,62,32,75,122,178,19,36,153,60,92,19,176,73,188,7,185,80,170,244,32,121,136,23,35,85,40,227,179,80,11,243,77,64,192,216,177,22,144,84,83,96,73,248,96,11,169,222,228,0,184,112,148,175,153,4,56,216,30,0,196,156,64,4,75,217,248,112,200,132,52,151,247,234,206,60,192,83,124,250,120,15,147,218,16,72,79,248,44,142,90,224,64,85,76,159,184,143,87,128,97,229,3,135,16,130,194,194,69,198,233,96,0,219,24,168,184,246,234,238,224,52,48,126,20,158,146,156,179,138,240,100,145,144,82,40,184,79,0,76,116,0,160,170,190,48,120,93,76,48,236,210,122,152,204,253,241,56,166,242,120,252,64,128,32,64,212,200,251,208,108,156,120,82,4,11,247,136,17,98,246,40,242,64,144,84,142,175,46,212,185,42,31,176,219,205,52,144,216,69,128,92,240,25,169,194,208,115,185,14,6,15,52,75,212,40,224,10,220,99,42,183,196,240,64,98,23,109,20,203,111,232,77,64,251,2,194,243,112,64,199,105,168,157,213,51,168,28,223,100,152,184,157,224,132,232,14,33,115,135,2,163,6,16,143,84,72,101,32,56,84,182,47,112,160,244,139,39,32,40,7,228,105,62,176,149,112,120,218,34,80,98,7,138,144,1,79,30,120,253,68,28,32,27,100,222,219,3,216,205,52,207,66,240,255,188,162,44,152,125,181,112,110,184,164,36,234,80,128,16,8,95,144,53,178,196,84,56,172,166,104,236,64,228,45,146,182,8,169,224,6,228,176,72,127,208,173,246,188,20,186,89,45,0,232,63,216,47,32,192,100,41,214,101,208,136,6,60,33,164,67,208,240,230,220,0,188,135,120,215,83,212,14,240,56,248,64,252,49,1,98,198,116,119,128,0,72,46,210,13,28,37,220,19,67,0,159,153,61,171,55,124,219,127,42,237,220,250,77,144,238,216,25,222,183,76,137,67,40,176,159,120,78,72,58,152,32,128,208,162,248,64,91,152,192,136,69,188,96,17,248,72,191,228,178,85,207,157,11,244,18,202,0,220,224,252,116,221,142,178,158,64,252,128,126,103,80,46,78,206,29,33,138,152,155,36,32,224,162,100,36,163,162]
+keylist = [  0x03, 0x02, 0x03, 0x01, 0x03, 0x02, 0x03, 0x03, 0x03, 0x02,  0x02, 0x02, 0x02, 0x02, 0x03, 0x03, 0x02, 0x01, 0x03, 0x01,  0x03, 0x02, 0x01, 0x02, 0x03, 0x02, 0x02, 0x01, 0x01, 0x02,  0x02, 0x02]
+
+h = &#39;1234567890abcdef&#39;
+def ord_(a):
+    if(ord(a) &gt;= ord(&#39;0&#39;) and ord(a) &lt;= ord(&#39;9&#39;)):
+        return int(a)
+    else:
+        return ord(a) - ord(&#39;a&#39;) + 10
+
+key = 0
+for i in range(32):
+    key += keylist[i]
+    input1.append(enc1[key])
+    # print(enc1[key],end=&#39; &#39;)
+    input1.append(h[((ord(enc1[key]) &amp; 0xff) + 3 * ord_(input[i])) % 16])
+print()
+enc2 = &#39;&#39;.join(input1)
+enc2 = [int(enc2[i:i+2], 16) for i in range(0, len(enc2), 2)]
+
+count_key = 0
+for i in range(4):
+    v66_in = 8 * i
+    for j in range(100):
+        for k in range(7, -1, -1):
+            v63 = ((keylist2[count_key] &amp; 0xff) + enc2[v66_in + k])
+            count_key += 1
+            v15 = s_box[v63 &amp; 0xff]
+            v62 = enc2[v66_in + (k + 1) % 8]
+            v62 = (v62 &lt;&lt; 7) | (v62 &gt;&gt; 1 &amp; 0xff)
+            enc2[v66_in + ((k + 1) % 8)] = (v62 - v15) &amp; 0xff
+# for i in enc2:
+#     print(hex(i),end=&#39;,&#39;)
+</code></pre>
+<p>可以得到exp：</p>
+<pre><code class="python">enc = [  0x2A, 0x59, 0xD8, 0xEE, 0xAB, 0x56, 0x68, 0x37, 0xAB, 0x40,
+  0xCA, 0x7E, 0x7F, 0x53, 0xCF, 0x3C, 0x19, 0x7A, 0x0A, 0x24,
+  0xF6, 0x25, 0xCC, 0x92, 0x78, 0xFF, 0xCC, 0x2D, 0x59, 0x10,
+  0xA2, 0x2D]
+# print(len(enc))
+s_box = [ 0x63, 0x7C, 0x77, 0x7B, 0xF2, 0x6B, 0x6F, 0xC5, 0x30, 0x01,
+  0x67, 0x2B, 0xFE, 0xD7, 0xAB, 0x76, 0xCA, 0x82, 0xC9, 0x7D,
+  0xFA, 0x59, 0x47, 0xF0, 0xAD, 0xD4, 0xA2, 0xAF, 0x9C, 0xA4,
+  0x72, 0xC0, 0xB7, 0xFD, 0x93, 0x26, 0x36, 0x3F, 0xF7, 0xCC,
+  0x34, 0xA5, 0xE5, 0xF1, 0x71, 0xD8, 0x31, 0x15, 0x04, 0xC7,
+  0x23, 0xC3, 0x18, 0x96, 0x05, 0x9A, 0x07, 0x12, 0x80, 0xE2,
+  0xEB, 0x27, 0xB2, 0x75, 0x09, 0x83, 0x2C, 0x1A, 0x1B, 0x6E,
+  0x5A, 0xA0, 0x52, 0x3B, 0xD6, 0xB3, 0x29, 0xE3, 0x2F, 0x84,
+  0x53, 0xD1, 0x00, 0xED, 0x20, 0xFC, 0xB1, 0x5B, 0x6A, 0xCB,
+  0xBE, 0x39, 0x4A, 0x4C, 0x58, 0xCF, 0xD0, 0xEF, 0xAA, 0xFB,
+  0x43, 0x4D, 0x33, 0x85, 0x45, 0xF9, 0x02, 0x7F, 0x50, 0x3C,
+  0x9F, 0xA8, 0x51, 0xA3, 0x40, 0x8F, 0x92, 0x9D, 0x38, 0xF5,
+  0xBC, 0xB6, 0xDA, 0x21, 0x10, 0xFF, 0xF3, 0xD2, 0xCD, 0x0C,
+  0x13, 0xEC, 0x5F, 0x97, 0x44, 0x17, 0xC4, 0xA7, 0x7E, 0x3D,
+  0x64, 0x5D, 0x19, 0x73, 0x60, 0x81, 0x4F, 0xDC, 0x22, 0x2A,
+  0x90, 0x88, 0x46, 0xEE, 0xB8, 0x14, 0xDE, 0x5E, 0x0B, 0xDB,
+  0xE0, 0x32, 0x3A, 0x0A, 0x49, 0x06, 0x24, 0x5C, 0xC2, 0xD3,
+  0xAC, 0x62, 0x91, 0x95, 0xE4, 0x79, 0xE7, 0xC8, 0x37, 0x6D,
+  0x8D, 0xD5, 0x4E, 0xA9, 0x6C, 0x56, 0xF4, 0xEA, 0x65, 0x7A,
+  0xAE, 0x08, 0xBA, 0x78, 0x25, 0x2E, 0x1C, 0xA6, 0xB4, 0xC6,
+  0xE8, 0xDD, 0x74, 0x1F, 0x4B, 0xBD, 0x8B, 0x8A, 0x70, 0x3E,
+  0xB5, 0x66, 0x48, 0x03, 0xF6, 0x0E, 0x61, 0x35, 0x57, 0xB9,
+  0x86, 0xC1, 0x1D, 0x9E, 0xE1, 0xF8, 0x98, 0x11, 0x69, 0xD9,
+  0x8E, 0x94, 0x9B, 0x1E, 0x87, 0xE9, 0xCE, 0x55, 0x28, 0xDF,
+  0x8C, 0xA1, 0x89, 0x0D, 0xBF, 0xE6, 0x42, 0x68, 0x41, 0x99,
+  0x2D, 0x0F, 0xB0, 0x54, 0xBB, 0x16]
+keylist2 = [212,253,128,196,80,16,222,109,232,240,12,82,9,64,36,151,222,119,20,95,105,246,192,116,142,109,128,206,204,7,192,244,160,4,240,28,198,0,162,88,244,52,64,176,76,160,168,86,89,233,56,40,208,104,64,102,150,69,210,103,64,208,36,0,19,76,202,120,76,188,192,66,0,16,109,192,0,56,176,4,196,72,128,232,113,255,64,132,70,84,37,122,56,32,248,192,56,148,249,112,228,250,112,8,64,51,231,104,176,214,32,251,129,76,46,138,27,58,146,120,232,36,34,39,92,210,20,138,176,96,100,32,16,229,209,92,233,121,82,52,103,128,76,226,32,160,84,223,40,48,240,134,173,197,133,113,192,78,186,204,152,35,86,18,144,201,91,84,84,72,186,172,44,220,34,144,232,24,140,129,68,49,132,128,232,138,224,140,186,250,188,230,240,158,102,218,84,161,200,30,144,240,147,57,80,24,153,149,72,129,160,74,176,106,128,123,176,200,157,57,251,126,116,64,128,42,144,96,74,226,218,0,14,192,224,190,6,197,97,212,156,51,136,64,112,120,242,124,172,176,248,203,204,62,234,100,160,190,172,10,212,48,88,77,116,72,144,24,234,16,192,0,5,160,78,221,236,168,16,224,32,66,9,100,64,148,147,144,97,2,58,57,223,154,60,41,111,231,16,179,75,211,157,178,91,7,132,240,59,190,206,182,188,10,72,184,99,72,250,104,116,228,248,172,22,151,142,42,233,76,44,235,104,130,184,36,146,6,185,162,240,144,234,170,228,10,123,64,92,252,190,84,144,129,68,244,55,160,147,101,32,22,130,205,174,36,0,41,160,139,68,251,228,88,213,192,156,132,13,141,207,80,40,8,140,190,108,188,24,8,9,89,173,204,248,28,120,40,189,90,49,222,0,108,97,139,35,176,133,141,20,63,152,104,3,172,192,115,150,32,58,194,108,64,49,112,152,46,144,22,186,254,195,129,152,119,196,187,115,248,58,17,112,17,124,29,152,132,12,31,90,77,179,192,49,176,33,76,156,32,230,108,137,192,121,191,53,168,102,137,200,34,118,192,138,193,112,216,45,217,182,128,56,140,128,208,46,35,64,171,123,199,221,52,75,244,192,63,178,205,97,145,48,216,188,228,203,72,165,204,130,178,24,243,30,150,113,89,30,156,104,59,232,65,168,8,117,208,132,248,214,12,221,64,107,51,164,124,32,150,79,47,184,18,200,22,64,232,160,45,112,16,189,96,76,220,57,171,89,97,113,208,192,235,240,254,170,212,92,252,147,248,249,68,97,64,24,230,134,126,3,80,23,184,171,16,130,66,9,68,224,150,202,212,10,70,156,107,210,146,205,144,64,46,107,16,83,96,167,151,99,218,130,41,198,0,112,172,188,74,64,4,224,116,176,176,128,48,220,112,108,64,126,208,144,157,45,135,184,197,100,13,220,94,96,215,12,219,0,128,33,23,221,184,32,253,143,0,184,24,28,4,255,177,104,196,233,171,132,107,130,128,20,68,200,106,33,250,52,166,249,91,216,94,240,211,239,146,246,243,198,126,227,136,45,229,246,191,144,190,228,48,168,59,140,200,236,54,236,0,176,4,248,184,79,64,194,248,124,209,123,48,180,136,107,160,0,112,89,20,133,215,140,68,41,163,233,192,47,166,228,230,251,185,188,180,54,212,156,208,40,100,4,132,16,53,96,200,26,192,237,19,95,154,240,234,96,219,128,75,239,206,159,112,255,0,35,157,138,164,176,208,98,104,47,128,117,116,13,222,0,96,49,64,195,144,148,134,49,255,34,120,52,32,137,55,49,131,46,177,113,64,9,192,196,78,226,82,94,144,160,38,87,71,78,144,84,188,82,67,202,209,144,32,36,25,140,94,148,168,12,168,196,221,145,71,128,96,56,64,184,101,112,32,145,72,71,0,108,112,166,254,36,68,0,132,188,214,125,60,200,113,46,28,149,147,48,169,138,239,101,184,73,192,32,51,104,112,104,16,176,110,234,8,219,98,192,139,102,62,80,96,121,24,212,105,150,28,63,26,80,108,87,0,4,216,124,97,127,164,4,7,116,80,119,41,160,140,224,92,4,248,224,195,222,44,210,158,241,64,92,80,220,45,0,193,208,208,7,20,108,253,158,110,201,94,48,168,58,33,168,149,88,135,64,117,108,12,104,216,158,230,194,112,121,0,103,41,252,1,242,22,236,250,96,175,96,29,236,184,252,157,72,96,232,172,30,136,151,32,61,128,80,16,198,152,96,235,144,70,18,0,32,96,8,84,236,123,0,2,176,7,240,156,88,200,216,12,9,184,57,104,160,16,182,99,0,56,200,128,223,230,58,220,88,88,148,92,99,96,140,147,193,208,224,68,86,96,200,187,122,126,115,27,171,184,11,140,35,28,240,24,123,15,147,250,102,224,76,0,232,180,49,48,240,130,24,64,254,140,240,252,31,113,140,126,200,128,206,0,0,160,213,35,39,4,0,237,217,144,130,108,125,4,0,192,18,211,24,93,134,224,83,65,159,216,221,11,224,230,239,130,100,119,83,123,91,220,20,132,86,128,32,168,57,80,232,96,88,70,240,242,6,192,230,4,208,190,121,205,168,62,160,30,137,36,56,251,58,88,126,38,164,0,56,152,131,232,100,120,176,213,249,246,22,99,136,161,160,96,245,36,246,224,48,228,164,38,16,191,157,220,244,208,56,205,10,38,41,12,208,120,227,176,154,115,128,67,167,163,156,197,124,41,74,112,40,172,135,241,80,212,17,232,50,184,180,76,21,180,124,81,41,172,144,158,18,216,190,191,16,4,132,230,136,220,219,224,0,73,96,196,16,114,146,238,140,22,117,110,126,64,8,148,65,64,96,136,11,0,90,44,46,10,10,78,48,42,136,78,17,35,190,112,128,237,80,185,187,56,80,28,108,35,32,202,162,230,112,248,147,69,128,101,95,123,204,160,220,48,238,86,134,175,16,253,121,221,236,145,24,176,44,168,192,56,241,31,128,21,98,41,96,234,144,151,134,97,226,124,67,213,14,168,0,228,140,16,198,16,52,68,216,242,24,192,217,92,172,182,229,13,15,221,148,136,167,88,254,226,213,176,104,138,20,152,10,70,22,230,96,63,200,72,164,58,61,210,24,214,63,255,36,77,138,0,172,96,246,182,232,0,248,204,248,0,116,14,252,192,248,139,200,85,93,28,32,75,248,16,128,176,0,78,156,137,152,218,48,18,76,205,218,171,63,80,40,224,0,6,240,87,128,15,233,52,68,49,248,134,193,47,0,128,30,194,96,167,182,224,112,202,161,206,79,187,176,198,212,44,198,139,0,176,16,186,141,139,24,12,253,89,195,160,175,23,130,97,254,128,96,235,192,70,144,66,64,238,72,188,64,216,88,96,80,151,68,210,224,161,77,22,80,132,240,84,21,9,173,12,128,128,68,112,224,81,202,52,134,136,18,20,199,32,244,243,107,108,16,220,84,72,236,125,148,184,64,185,49,88,156,240,221,168,80,87,24,208,108,254,32,107,185,23,130,78,217,104,0,147,60,82,160,226,187,64,36,232,196,85,182,39,202,63,118,88,192,169,0,70,8,32,166,144,139,86,52,17,157,29,160,224,24,126,147,148,189,156,250,11,189,110,68,43,179,148,253,167,168,240,100,190,140,250,221,92,14,143,128,92,168,18,119,112,153,220,74,118,8,46,84,96,186,224,173,199,153,154,0,8,0,184,98,148,65,128,154,196,38,237,191,144,245,116,91,45,73,87,192,68,208,159,242,94,96,179,64,134,104,106,32,48,22,208,188,96,7,144,136,49,185,125,139,16,249,112,66,41,98,232,55,80,197,144,40,167,132,70,52,104,64,107,228,64,25,32,144,38,148,174,196,225,50,126,175,253,96,16,100,196,152,8,192,233,219,52,11,112,150,100,4,226,50,186,153,48,232,170,30,142,189,211,142,48,55,125,52,73,248,0,59,94,211,124,200,133,179,243,64,112,128,64,211,197,144,168,162,183,128,0,204,185,40,198,133,190,12,152,250,180,121,118,239,176,128,203,129,0,72,127,240,200,144,78,124,240,107,84,89,214,75,228,121,81,32,0,192,246,169,212,212,224,254,239,28,178,212,114,128,194,234,246,223,240,118,239,120,212,152,215,114,77,235,64,71,24,168,113,82,87,160,119,197,134,0,176,10,45,168,144,219,232,235,247,8,68,146,100,97,250,102,34,220,248,0,93,26,214,181,24,0,248,127,216,104,7,156,220,160,249,14,136,37,176,144,96,241,41,136,207,132,62,32,152,40,58,80,135,51,45,176,132,132,208,164,64,0,120,170,250,32,218,197,45,15,56,32,56,3,220,67,98,113,11,175,32,107,0,228,88,235,198,184,160,160,112,16,118,70,160,180,216,226,120,71,14,79,200,212,48,228,132,76,176,145,194,160,254,112,239,16,64,104,131,210,180,32,205,208,0,254,179,51,55,128,151,215,160,199,98,190,64,255,208,192,68,148,218,50,176,156,216,90,52,114,14,21,12,128,208,194,26,207,250,178,32,72,200,94,93,98,187,38,164,107,115,0,8,242,143,187,19,182,64,11,241,233,241,249,128,248,76,202,61,96,231,154,62,13,119,131,150,96,160,196,129,196,246,32,121,48,64,66,149,228,11,74,48,64,170,115,145,188,167,232,237,32,78,188,109,188,245,34,174,107,121,56,129,92,136,89,188,80,84,107,132,97,184,32,193,236,8,195,156,58,50,7,208,251,209,211,171,191,28,192,147,154,226,144,40,160,224,232,240,209,160,204,224,168,90,160,97,26,174,46,177,25,38,94,0,244,94,156,221,179,208,142,128,94,111,34,40,96,62,232,155,151,20,14,202,80,12,0,15,64,36,255,240,235,14,250,124,116,27,108,33,183,215,176,27,48,130,187,250,92,3,176,200,160,85,225,224,177,131,52,192,186,80,219,68,141,214,177,138,190,231,119,2,136,152,221,0,225,11,16,24,79,1,194,16,112,128,179,42,198,64,79,249,114,14,33,224,122,44,212,188,60,240,242,202,0,114,20,240,186,127,112,152,128,141,167,65,84,63,77,191,198,0,192,16,48,117,214,0,192,50,40,228,63,165,148,88,200,212,182,4,133,56,138,73,28,38,161,236,200,134,25,0,88,112,209,194,36,109,55,46,192,128,28,32,213,17,17,68,152,153,64,128,21,26,222,152,0,0,124,107,0,237,68,195,202,216,232,128,22,196,176,217,184,228,93,239,211,76,96,203,221,80,145,178,64,23,108,220,32,7,220,110,255,248,157,96,47,192,148,60,154,192,144,26,109,112,136,128,174,0,200,1,192,211,165,200,164,182,152,224,128,76,38,240,96,81,60,85,120,54,90,158,241,88,213,9,210,166,183,124,121,138,80,19,149,179,158,50,56,221,189,228,220,143,160,46,64,200,52,154,255,224,73,144,114,217,164,200,170,124,65,32,64,0,76,15,192,238,124,97,188,208,0,148,66,120,197,152,185,31,104,155,145,215,4,8,190,102,0,232,252,112,64,156,62,192,10,60,53,88,183,255,45,96,154,136,190,111,212,16,155,160,122,238,166,86,106,7,85,0,135,212,197,60,239,208,252,214,48,0,246,0,109,114,24,135,216,170,152,150,149,72,177,121,240,158,32,215,64,112,80,228,84,124,204,206,16,22,162,253,54,134,80,154,224,156,164,90,98,206,177,119,234,69,64,83,170,134,240,11,4,178,59,80,16,248,98,208,182,172,112,128,102,216,16,40,56,137,5,249,105,152,91,224,104,242,245,167,171,144,168,203,64,168,184,208,141,40,83,156,82,204,254,192,71,48,255,28,88,230,105,135,192,152,140,192,144,140,249,238,190,16,208,152,32,166,142,232,214,16,50,112,126,66,185,20,108,229,14,200,108,0,1,202,70,116,152,18,199,216,96,156,212,198,248,252,2,96,192,196,16,26,186,172,35,64,223,130,71,125,134,6,208,242,8,3,158,152,112,208,154,14,53,88,177,98,208,63,225,131,11,80,108,60,209,227,72,20,224,130,233,144,62,32,75,122,178,19,36,153,60,92,19,176,73,188,7,185,80,170,244,32,121,136,23,35,85,40,227,179,80,11,243,77,64,192,216,177,22,144,84,83,96,73,248,96,11,169,222,228,0,184,112,148,175,153,4,56,216,30,0,196,156,64,4,75,217,248,112,200,132,52,151,247,234,206,60,192,83,124,250,120,15,147,218,16,72,79,248,44,142,90,224,64,85,76,159,184,143,87,128,97,229,3,135,16,130,194,194,69,198,233,96,0,219,24,168,184,246,234,238,224,52,48,126,20,158,146,156,179,138,240,100,145,144,82,40,184,79,0,76,116,0,160,170,190,48,120,93,76,48,236,210,122,152,204,253,241,56,166,242,120,252,64,128,32,64,212,200,251,208,108,156,120,82,4,11,247,136,17,98,246,40,242,64,144,84,142,175,46,212,185,42,31,176,219,205,52,144,216,69,128,92,240,25,169,194,208,115,185,14,6,15,52,75,212,40,224,10,220,99,42,183,196,240,64,98,23,109,20,203,111,232,77,64,251,2,194,243,112,64,199,105,168,157,213,51,168,28,223,100,152,184,157,224,132,232,14,33,115,135,2,163,6,16,143,84,72,101,32,56,84,182,47,112,160,244,139,39,32,40,7,228,105,62,176,149,112,120,218,34,80,98,7,138,144,1,79,30,120,253,68,28,32,27,100,222,219,3,216,205,52,207,66,240,255,188,162,44,152,125,181,112,110,184,164,36,234,80,128,16,8,95,144,53,178,196,84,56,172,166,104,236,64,228,45,146,182,8,169,224,6,228,176,72,127,208,173,246,188,20,186,89,45,0,232,63,216,47,32,192,100,41,214,101,208,136,6,60,33,164,67,208,240,230,220,0,188,135,120,215,83,212,14,240,56,248,64,252,49,1,98,198,116,119,128,0,72,46,210,13,28,37,220,19,67,0,159,153,61,171,55,124,219,127,42,237,220,250,77,144,238,216,25,222,183,76,137,67,40,176,159,120,78,72,58,152,32,128,208,162,248,64,91,152,192,136,69,188,96,17,248,72,191,228,178,85,207,157,11,244,18,202,0,220,224,252,116,221,142,178,158,64,252,128,126,103,80,46,78,206,29,33,138,152,155,36,32,224,162,100,36,163,162]
+count_key = 3200 - 1
+keylist = [  0x03, 0x02, 0x03, 0x01, 0x03, 0x02, 0x03, 0x03, 0x03, 0x02,
+  0x02, 0x02, 0x02, 0x02, 0x03, 0x03, 0x02, 0x01, 0x03, 0x01,
+  0x03, 0x02, 0x01, 0x02, 0x03, 0x02, 0x02, 0x01, 0x01, 0x02,
+  0x02, 0x02]
+enc1 = &#39;ac2018c9c49436ec3154691ea51de52ca91251c38c13722d11a325a18198411e91ca9e4c&#39;
+h = &#39;1234567890abcdef&#39;
+flag = []
+def ord_(a):
+    if(ord(a) &gt;= ord(&#39;0&#39;) and ord(a) &lt;= ord(&#39;9&#39;)):
+        return int(a)
+    else:
+        return ord(a) - ord(&#39;a&#39;) + 10
+
+for i in range(3, -1, -1):
+    v66_in = 8 * i
+    for j in range(100):
+        for k in range(8):
+            tmp = enc[v66_in + ((k + 1) % 8)]
+            tmp += s_box[((keylist2[count_key] &amp; 0xff) + enc[v66_in + ((k) % 8)]) &amp; 0xff]
+            tmp &amp;= 0xff
+            tmp = (tmp &lt;&lt; 1) | (tmp &gt;&gt; 7 &amp; 0xff)
+            enc[v66_in + ((k + 1) % 8)] = tmp &amp; 0xff
+            count_key -= 1
+key = 0
+tmp = &#39;&#39;
+# print(enc)
+for i in enc:
+    if (i &lt;= 0xf):
+        tmp += &#39;0&#39;
+    tmp += hex(i)[2:]
+enc = tmp
+print(enc)
+
+key = 0
+for i in range(1, 64, 2):
+    key += keylist[i // 2]
+    for j in h:
+        if (h[((ord(enc1[key]) &amp; 0xff) + 3 * ord_(j)) % 16] == enc[i]):
+            flag.append(j)
+print(&#39;&#39;.join(flag))
+
+# 9d9b9ff1c62122ba7f5b54385b1f9d64
+</code></pre>
+<p>完结撒花</p>
+<p><img src="/2023/09/03/%E7%BE%8A%E5%9F%8E%E6%9D%AF2023/W6SXN9HRBTXSE%5DH0JNX%5BLW0.png" alt="img"></p>
+
+    </div>
+    
+</div>
+                         
+<footer id="footer">
+    <div class="footer-wrap">
+        <div>
+            © 20xx - 2024 Moyao の小屋
+            <span class="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            @Moyao
+        </div>
+        <div></div>
+        <div>Based on the <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo Engine</a> & <a
+                target="_blank" rel="noopener" href="https://github.com/argvchs/hexo-theme-particlex">ParticleX Theme</a></div>
+        
+    </div>
+</footer>
+                    </div>
+                </div>
+            </transition>
+            <div id="img_show">
+                <img id="img_content" alt="img_show">
+            </div>
+        </div>
+        <script src="https://cdn.staticfile.org/highlight.js/11.5.1/highlight.min.js"></script>
+        <script src="/js/particlex.js"></script>
+        <script src="/js/showimg.js"></script>
+        
+
+    </body>
+</html>

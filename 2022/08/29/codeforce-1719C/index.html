@@ -1,0 +1,182 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+        <title>Codeforce-1719C | Moyao の小屋</title>
+        <meta name="author" content="Moyao">
+        <meta name="description" content="Write down something interesting I met
+feel free to mail me if you have something wanted to talk about
+mail: &lt;moyaoxue@outlook.com&gt;
+">
+        <meta name="keywords" content="">
+        <link rel="icon" href="/images/head.jpg">
+        <script src="https://cdn.staticfile.org/instant.page/5.1.0/instantpage.min.js" type="module"></script>
+        <script src="https://cdn.staticfile.org/font-awesome/6.1.1/js/all.min.js"></script>
+        
+        <link rel="stylesheet" href="/css/fonts.min.css">
+        <link rel="stylesheet" href="/css/particlex.css">
+        
+        <script src="https://cdn.staticfile.org/vue/3.2.33/vue.global.prod.min.js"></script>
+    <meta name="generator" content="Hexo 6.2.0"></head>
+    <body>
+        <div id="loading" style="height:100vh;width:100vw;position:fixed;display:flex;z-index:200;justify-content:space-between;background:#fff;transition:opacity 0.3s ease-out"><div style="position:fixed;height:100vh;width:100vw;display:flex;justify-content:center;align-items:center"><div id="loadcontent" style="width:50vmin;height:50vmin;padding:50px;border-radius:50%;display:flex;justify-content:center;align-items:center;border:solid 10px #a3ddfb;text-align:center"><div><h2>LOADING...</h2><p style="word-break:keep-all">加载过慢请开启缓存(浏览器默认开启)</p><div><img alt="loading" src="/loading.gif"></div></div></div></div></div>
+        <div id="layout">
+            <i data-fa-symbol="calendar-solid" class="fa-solid fa-calendar fa-fw"></i>
+            <i data-fa-symbol="bookmark-solid" class="fa-solid fa-bookmark fa-fw"></i>
+            <i data-fa-symbol="tags-solid" class="fa-solid fa-tags fa-fw"></i>
+            <transition name="into">
+                <div v-show="show_page" style="display: -not-none">
+                    <div id="menu_show">
+                         
+<nav id="menu">
+    <div class="desktop-menu">
+        <a href="/">
+            <span class="title">Moyao の小屋</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;home</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;about</span>
+        </a>
+        
+        <a target="_blank" rel="noopener" href="//tags/re/">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;tags</span>
+        </a>
+        
+    </div>
+    <div :class="'phone-menu ' + menu_show" id="phone-menu">
+        <div class="curtain" @click="menu_show = !menu_show" v-show="menu_show"></div>
+        <div :class="'title'" @click="menu_show = !menu_show">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;Moyao の小屋</span>
+        </div>
+        <transition name="slide">
+        <div class="items" v-show="menu_show">
+            
+            <a href="">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-house fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">home</div>
+                </div>
+            </a>
+            
+            <a href="">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-id-card fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">about</div>
+                </div>
+            </a>
+            
+            <a href="/tags/re/">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-tags fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">tags</div>
+                </div>
+            </a>
+            
+        </div>
+        </transition>
+    </div>
+</nav>
+                    </div>
+                    <div id="main">
+                        
+<div class="article">
+    <div>
+        <h1>Codeforce-1719C </h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
+            </span>
+            2022/8/29
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/codeforces/" style="color: #ffa2c4">
+                    codeforces
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/c/" style="color: #ffa2c4">
+                    c++
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    <div class="content" v-pre>
+        <h1 id="codeforces-1719C"><a href="#codeforces-1719C" class="headerlink" title="codeforces 1719C"></a>codeforces 1719C</h1><span id="more"></span>
+<h3 id="The-problem"><a href="#The-problem" class="headerlink" title="The problem"></a>The problem</h3><blockquote>
+<p>C. Fighting Tournament<br>time limit per test2 seconds<br>memory limit per test256 megabytes<br>inputstandard input<br>outputstandard output<br>Burenka is about to watch the most interesting sporting event of the year — a fighting tournament organized by her friend Tonya.<br>n athletes participate in the tournament, numbered from 1 to n. Burenka determined the strength of the i-th athlete as an integer ai, where 1≤ai≤n. All the strength values are different, that is, the array a is a permutation of length n. We know that in a fight, if ai&gt;aj, then the i-th participant always wins the j-th.<br>The tournament goes like this: initially, all n athletes line up in ascending order of their ids, and then there are infinitely many fighting rounds. In each round there is exactly one fight: the first two people in line come out and fight. The winner goes back to the front of the line, and the loser goes to the back.<br>Burenka decided to ask Tonya q questions. In each question, Burenka asks how many victories the i-th participant gets in the first k rounds of the competition for some given numbers i and k. Tonya is not very good at analytics, so he asks you to help him answer all the questions.</p>
+<blockquote>
+<p>Input<br>The first line contains one integer t (1≤t≤104) — the number of test cases. Description of the test cases follows.<br>The first line of each test case contains two integers n and q (2≤n≤105, 1≤q≤105) — the number of tournament participants and the number of questions.<br>The second line of each test case contains n integers a1,a2,…,an (1≤ai≤n) — the array a, which is a permutation.<br>The next q lines of a test case contain questions. Each line contains two integers i and k (1≤i≤n, 1≤k≤109) — the number of the participant and the number of rounds.<br>It is guaranteed that the sum of n and the sum of q over all test cases do not exceed 105.<br>Output<br>For each Burenka’s question, print a single line containing one integer — the answer to the question.</p>
+</blockquote>
+</blockquote>
+<!--more-->
+<h4 id="Preface"><a href="#Preface" class="headerlink" title="Preface"></a>Preface</h4><h5 id="It’s-not-a-very-hard-problem-but-contains-many-details-This-is-the-record-when-I-tried"><a href="#It’s-not-a-very-hard-problem-but-contains-many-details-This-is-the-record-when-I-tried" class="headerlink" title="It’s not a very hard problem, but contains many details. This is the record when I tried:"></a>It’s not a very hard problem, but contains many details. This is the record when I tried:</h5><p><img src="/2022/08/29/codeforce-1719C/1719C.png"></p>
+<hr>
+<h5 id="The-basic-solution-for-this-problem-is-to-find-out-if-there-are-numbers-bigger-then-a-i-if-so-the-guy-with-the-number-i-CAN-NOT-WIN-ANYBODY-else-tried-to-find-the-number-of-the-guys-AFTER-HIM-with-smaller-a-This-number-is-the-BIGGEST-number-of-his-victories-You-might-notices-if-the-guy-is-the-best-in-the-whole-queue-then-he-can-win-any-guys-he-met-depend-how-big-the-k-is-others-can-not-because-they-may-met-this-guy-and-his-game-can-be-called-“over”"><a href="#The-basic-solution-for-this-problem-is-to-find-out-if-there-are-numbers-bigger-then-a-i-if-so-the-guy-with-the-number-i-CAN-NOT-WIN-ANYBODY-else-tried-to-find-the-number-of-the-guys-AFTER-HIM-with-smaller-a-This-number-is-the-BIGGEST-number-of-his-victories-You-might-notices-if-the-guy-is-the-best-in-the-whole-queue-then-he-can-win-any-guys-he-met-depend-how-big-the-k-is-others-can-not-because-they-may-met-this-guy-and-his-game-can-be-called-“over”" class="headerlink" title="The basic solution for this problem is to find out if there are numbers bigger then a[i], if so, the guy with the number i CAN NOT WIN ANYBODY, else, tried to find the number of the guys AFTER HIM with smaller a[]. This number is the BIGGEST number of his victories. You might notices, if the guy is the best in the whole queue, then he can win any guys he met(depend how big the k is), others can not because they may met this guy and his game can be called “over”."></a>The basic solution for this problem is to find out if there are numbers bigger then a[i], if so, the guy with the number i CAN NOT WIN ANYBODY, else, tried to find the number of the guys AFTER HIM with smaller a[]. This number is the BIGGEST number of his victories. You might notices, if the guy is the best in the whole queue, then he can win any guys he met(depend how big the k is), others can not because they may met this guy and his game can be called “over”.</h5><h4 id="DETAILS"><a href="#DETAILS" class="headerlink" title="DETAILS"></a>DETAILS</h4><ul>
+<li><h5 id="The-first-and-second-guy-is-special-They-fight-each-other-You-can-see-that-i-gt-x3D-2-can-use-the-same-formula-So-you-shall-judge-i-x3D-x3D-1-specially-The-biggest-a-shall-also-be-judge-specially-With-those-you-answer-shall-be-right"><a href="#The-first-and-second-guy-is-special-They-fight-each-other-You-can-see-that-i-gt-x3D-2-can-use-the-same-formula-So-you-shall-judge-i-x3D-x3D-1-specially-The-biggest-a-shall-also-be-judge-specially-With-those-you-answer-shall-be-right" class="headerlink" title="The first and second guy is special. They fight each other. You can see that (i&gt;&#x3D;2) can use the same formula. So you shall judge (i&#x3D;&#x3D;1) specially. The biggest a[] shall also be judge specially. With those, you answer shall be right."></a>The first and second guy is special. They fight each other. You can see that (i&gt;&#x3D;2) can use the same formula. So you shall judge (i&#x3D;&#x3D;1) specially. The biggest a[] shall also be judge specially. With those, you answer shall be right.</h5></li>
+<li><h5 id="However-you-might-get-a-“TLE”-Well-I-did-This-is-how-I-wrote-previously"><a href="#However-you-might-get-a-“TLE”-Well-I-did-This-is-how-I-wrote-previously" class="headerlink" title="However, you might get a “TLE”(Well,I did). This is how I wrote previously:"></a>However, you might get a “TLE”(Well,I did). This is how I wrote previously:</h5><code>//		for (i=1;i&lt;=n;i++)&#123;</code>	<br><code>//			if (a[i]==maxn) continue;</code><br><code>//			for (j=i+1;j&lt;=n;j++)&#123;</code><br><code>//				if (a[j]&gt;=a[i]) break;</code><br><code>//				b[i]++;</code><br><code>//&#125;</code><br><code>//			b[i]++;</code><br><code>//			if (i==1) b[i]--;</code><br><code>//			for (j=1;j&lt;i;j++)&#123;</code><br><code>//				if (a[j]&gt;a[i])&#123;</code><br><code>//					b[i]=0;</code><br><code>//					break;</code><br><code>//				&#125;</code><br><code>//			&#125;</code><br><code>//		&#125;</code></li>
+</ul>
+<h5 id="Clearly-O-n-2-is-too-slow-So-I-tried-to-find-another-way"><a href="#Clearly-O-n-2-is-too-slow-So-I-tried-to-find-another-way" class="headerlink" title="Clearly, O(n^2) is too slow. So I tried to find another way."></a>Clearly, O(n^2) is too slow. So I tried to find another way.</h5><h5 id="We-can-find-that-the-whole-work-can-be-done-in-LINEAR-TIME-Like-this"><a href="#We-can-find-that-the-whole-work-can-be-done-in-LINEAR-TIME-Like-this" class="headerlink" title="We can find that the whole work can be done in LINEAR TIME. Like this:"></a>We can find that the whole work can be done in LINEAR TIME. Like this:</h5><p><code>		int lld=1;</code><br><code>		for (i=1;i&lt;n;i++)&#123;</code><br><code>			if (a[i]&gt;a[i+1])&#123;</code><br><code>				b[lld]++;</code><br><code>				a[i+1]=a[i];</code><br><code>			&#125;</code><br><code>			else&#123;</code><br><code>				lld=i+1;</code><br><code>				b[lld]++;</code><br><code>			&#125;</code><br><code>		&#125;</code></p>
+<h5 id="It’s-not-hard-to-understand-but-effective-Just-read-it-once-in-O-n-the-work-is-done"><a href="#It’s-not-hard-to-understand-but-effective-Just-read-it-once-in-O-n-the-work-is-done" class="headerlink" title="It’s not hard to understand, but effective. Just read it once(in O(n)), the work is done."></a>It’s not hard to understand, but effective. Just read it once(in O(n)), the work is done.</h5>
+    </div>
+    
+</div>
+                         
+<footer id="footer">
+    <div class="footer-wrap">
+        <div>
+            © 20xx - 2024 Moyao の小屋
+            <span class="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            @Moyao
+        </div>
+        <div></div>
+        <div>Based on the <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo Engine</a> & <a
+                target="_blank" rel="noopener" href="https://github.com/argvchs/hexo-theme-particlex">ParticleX Theme</a></div>
+        
+    </div>
+</footer>
+                    </div>
+                </div>
+            </transition>
+            <div id="img_show">
+                <img id="img_content" alt="img_show">
+            </div>
+        </div>
+        <script src="https://cdn.staticfile.org/highlight.js/11.5.1/highlight.min.js"></script>
+        <script src="/js/particlex.js"></script>
+        <script src="/js/showimg.js"></script>
+        
+
+    </body>
+</html>

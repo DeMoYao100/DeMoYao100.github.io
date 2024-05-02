@@ -1,0 +1,203 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+        <title>Gdb_python初探 | Moyao の小屋</title>
+        <meta name="author" content="Moyao">
+        <meta name="description" content="Write down something interesting I met
+feel free to mail me if you have something wanted to talk about
+mail: &lt;moyaoxue@outlook.com&gt;
+">
+        <meta name="keywords" content="">
+        <link rel="icon" href="/images/head.jpg">
+        <script src="https://cdn.staticfile.org/instant.page/5.1.0/instantpage.min.js" type="module"></script>
+        <script src="https://cdn.staticfile.org/font-awesome/6.1.1/js/all.min.js"></script>
+        
+        <link rel="stylesheet" href="/css/fonts.min.css">
+        <link rel="stylesheet" href="/css/particlex.css">
+        
+        <script src="https://cdn.staticfile.org/vue/3.2.33/vue.global.prod.min.js"></script>
+    <meta name="generator" content="Hexo 6.2.0"></head>
+    <body>
+        <div id="loading" style="height:100vh;width:100vw;position:fixed;display:flex;z-index:200;justify-content:space-between;background:#fff;transition:opacity 0.3s ease-out"><div style="position:fixed;height:100vh;width:100vw;display:flex;justify-content:center;align-items:center"><div id="loadcontent" style="width:50vmin;height:50vmin;padding:50px;border-radius:50%;display:flex;justify-content:center;align-items:center;border:solid 10px #a3ddfb;text-align:center"><div><h2>LOADING...</h2><p style="word-break:keep-all">加载过慢请开启缓存(浏览器默认开启)</p><div><img alt="loading" src="/loading.gif"></div></div></div></div></div>
+        <div id="layout">
+            <i data-fa-symbol="calendar-solid" class="fa-solid fa-calendar fa-fw"></i>
+            <i data-fa-symbol="bookmark-solid" class="fa-solid fa-bookmark fa-fw"></i>
+            <i data-fa-symbol="tags-solid" class="fa-solid fa-tags fa-fw"></i>
+            <transition name="into">
+                <div v-show="show_page" style="display: -not-none">
+                    <div id="menu_show">
+                         
+<nav id="menu">
+    <div class="desktop-menu">
+        <a href="/">
+            <span class="title">Moyao の小屋</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;home</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;about</span>
+        </a>
+        
+        <a target="_blank" rel="noopener" href="//tags/re/">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;tags</span>
+        </a>
+        
+    </div>
+    <div :class="'phone-menu ' + menu_show" id="phone-menu">
+        <div class="curtain" @click="menu_show = !menu_show" v-show="menu_show"></div>
+        <div :class="'title'" @click="menu_show = !menu_show">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;Moyao の小屋</span>
+        </div>
+        <transition name="slide">
+        <div class="items" v-show="menu_show">
+            
+            <a href="">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-house fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">home</div>
+                </div>
+            </a>
+            
+            <a href="">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-id-card fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">about</div>
+                </div>
+            </a>
+            
+            <a href="/tags/re/">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-tags fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">tags</div>
+                </div>
+            </a>
+            
+        </div>
+        </transition>
+    </div>
+</nav>
+                    </div>
+                    <div id="main">
+                        
+<div class="article">
+    <div>
+        <h1>Gdb_python初探 </h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
+            </span>
+            2023/11/9
+        </span>
+        
+        
+    </div>
+    <div class="content" v-pre>
+        <h6 id="PREFACE：感觉有时候用得到（其实是看到了别人的脚本不会用）"><a href="#PREFACE：感觉有时候用得到（其实是看到了别人的脚本不会用）" class="headerlink" title="PREFACE：感觉有时候用得到（其实是看到了别人的脚本不会用）"></a>PREFACE：感觉有时候用得到（<del>其实是看到了别人的脚本不会用</del>）</h6><span id="more"></span>
+
+<pre><code># https://www.hex-rays.com/products/ida/support/idadoc/1343.shtml
+gdbserver --multi *:1234
+</code></pre>
+<p>然后可以在gdb里面使用gdb脚本</p>
+<p>使用方法：</p>
+<pre><code>(gdb) source path/to/your/script.py
+</code></pre>
+<p>几个api使用：</p>
+<ul>
+<li>使用gdb内部的指令：</li>
+</ul>
+<pre><code class="python">gdb.execute(&#39;指令&#39;)
+# eg.
+gdb.execute(&#39;c&#39;)  
+gdb.execute(&#39;b *0x55555559C078&#39;)
+</code></pre>
+<ul>
+<li>获取寄存器：</li>
+</ul>
+<pre><code class="python">frame = gdb.selected_frame()
+rip = frame.read_register(&quot;rip&quot;)
+</code></pre>
+<p>其实感觉只需要<code>gdb.execute</code>，配合gdb原生的指令，就可以愉快开始hook了，甚至可以轻松把调试过程都记录下来，确实好东西</p>
+<p>比如这样：</p>
+<pre><code class="python">while 1:
+    frame = gdb.selected_frame()
+    rip = frame.read_register(&quot;rip&quot;)
+    if rip == 0x55555559C078 :	# 这里是断点
+        rdx = frame.read_register(&quot;rdx&quot;)
+    gdb.execute(&#39;c&#39;)
+</code></pre>
+<hr>
+<p>一些其他的tips：</p>
+<p>从AT&amp;T语法切换到intel语法：</p>
+<blockquote>
+<p>echo ‘set disassembly-flavor intel’ &gt;&gt; ~&#x2F;.gdbinit</p>
+</blockquote>
+<p>使用gdb自带的指令</p>
+<blockquote>
+<p>gdb -x script.gdb .&#x2F;file</p>
+<blockquote>
+<p>script.gdb</p>
+<p>条件断点，eg.在断点处打印$rax或执行一些需要的操作；类似idapython<code>print(get_reg_value(&#39;rax&#39;))</code></p>
+<pre><code>b *main
+commands
+    silent
+    p $rax
+    continue
+end
+r
+q
+</code></pre>
+</blockquote>
+</blockquote>
+<p>补：这里有一个issue，dbg或者gef用的时候会调用一个有bug的gdb api，有需要<code>continue</code>的时候用<code>pi gdb.execute(&quot;continue&quot;)</code></p>
+
+    </div>
+    
+</div>
+                         
+<footer id="footer">
+    <div class="footer-wrap">
+        <div>
+            © 20xx - 2024 Moyao の小屋
+            <span class="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            @Moyao
+        </div>
+        <div></div>
+        <div>Based on the <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo Engine</a> & <a
+                target="_blank" rel="noopener" href="https://github.com/argvchs/hexo-theme-particlex">ParticleX Theme</a></div>
+        
+    </div>
+</footer>
+                    </div>
+                </div>
+            </transition>
+            <div id="img_show">
+                <img id="img_content" alt="img_show">
+            </div>
+        </div>
+        <script src="https://cdn.staticfile.org/highlight.js/11.5.1/highlight.min.js"></script>
+        <script src="/js/particlex.js"></script>
+        <script src="/js/showimg.js"></script>
+        
+
+    </body>
+</html>

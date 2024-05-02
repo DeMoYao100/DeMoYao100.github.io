@@ -1,0 +1,282 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+        <title>Moyao の小屋</title>
+        <meta name="author" content="Moyao">
+        <meta name="description" content="Write down something interesting I met
+feel free to mail me if you have something wanted to talk about
+mail: &lt;moyaoxue@outlook.com&gt;
+">
+        <meta name="keywords" content="">
+        <link rel="icon" href="/images/head.jpg">
+        <script src="https://cdn.staticfile.org/instant.page/5.1.0/instantpage.min.js" type="module"></script>
+        <script src="https://cdn.staticfile.org/font-awesome/6.1.1/js/all.min.js"></script>
+        
+        <link rel="stylesheet" href="/css/fonts.min.css">
+        <link rel="stylesheet" href="/css/particlex.css">
+        
+        <script src="https://cdn.staticfile.org/vue/3.2.33/vue.global.prod.min.js"></script>
+    <meta name="generator" content="Hexo 6.2.0"></head>
+    <body>
+        <div id="loading" style="height:100vh;width:100vw;position:fixed;display:flex;z-index:200;justify-content:space-between;background:#fff;transition:opacity 0.3s ease-out"><div style="position:fixed;height:100vh;width:100vw;display:flex;justify-content:center;align-items:center"><div id="loadcontent" style="width:50vmin;height:50vmin;padding:50px;border-radius:50%;display:flex;justify-content:center;align-items:center;border:solid 10px #a3ddfb;text-align:center"><div><h2>LOADING...</h2><p style="word-break:keep-all">加载过慢请开启缓存(浏览器默认开启)</p><div><img alt="loading" src="/loading.gif"></div></div></div></div></div>
+        <div id="layout">
+            <i data-fa-symbol="calendar-solid" class="fa-solid fa-calendar fa-fw"></i>
+            <i data-fa-symbol="bookmark-solid" class="fa-solid fa-bookmark fa-fw"></i>
+            <i data-fa-symbol="tags-solid" class="fa-solid fa-tags fa-fw"></i>
+            <transition name="into">
+                <div v-show="show_page" style="display: -not-none">
+                    <div id="menu_show">
+                         
+<nav id="menu">
+    <div class="desktop-menu">
+        <a href="/">
+            <span class="title">Moyao の小屋</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;home</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;about</span>
+        </a>
+        
+        <a target="_blank" rel="noopener" href="//tags/re/">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;tags</span>
+        </a>
+        
+    </div>
+    <div :class="'phone-menu ' + menu_show" id="phone-menu">
+        <div class="curtain" @click="menu_show = !menu_show" v-show="menu_show"></div>
+        <div :class="'title'" @click="menu_show = !menu_show">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;Moyao の小屋</span>
+        </div>
+        <transition name="slide">
+        <div class="items" v-show="menu_show">
+            
+            <a href="">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-house fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">home</div>
+                </div>
+            </a>
+            
+            <a href="">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-id-card fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">about</div>
+                </div>
+            </a>
+            
+            <a href="/tags/re/">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-tags fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">tags</div>
+                </div>
+            </a>
+            
+        </div>
+        </transition>
+    </div>
+</nav>
+                    </div>
+                    <div id="main">
+                        
+<div class="article">
+    <div>
+        <h1> </h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
+            </span>
+            2024/4/25
+        </span>
+        
+        
+    </div>
+    <div class="content" v-pre>
+        <h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><h5 id="修改ssh"><a href="#修改ssh" class="headerlink" title="修改ssh"></a>修改ssh</h5><p>有的机子vscode连不上，就用tabby</p>
+<pre><code class="bash">passwd [user]
+</code></pre>
+<p>纯ssh操作：</p>
+<pre><code>下载 ： scp ubuntu@12.34.56.78:~/test C:\Users\18238\Downloads
+上传 ：  scp  C:\Users\18238\Downloads\test ubuntu@12.34.56.78:~/tmp
+</code></pre>
+<h5 id="检查权限"><a href="#检查权限" class="headerlink" title="检查权限"></a>检查权限</h5><pre><code class="shell">find &quot;$target_folder&quot; -user &quot;ubuntu&quot; -type d -perm &quot;/u=rwx&quot; -exec ls -ld &#123;&#125; \; &gt; &quot;rights_folder_list.txt&quot;
+</code></pre>
+<h5 id="fscan自扫开放服务"><a href="#fscan自扫开放服务" class="headerlink" title="fscan自扫开放服务"></a>fscan自扫开放服务</h5><pre><code class="bash">if [ -f &quot;./fscan&quot; ]; then
+
+    chmod +x &quot;./fscan&quot;
+
+    if [ -x &quot;./fscan&quot; ]; then
+
+        echo &quot;运行 fscan...&quot;
+        ./fscan -h 127.0.0.1 -p 1-65535 \; &gt; &quot;fscan_result.txt&quot;
+
+    else
+        echo &quot;该目录或该用户下没有权限运行fscan&quot;
+    fi
+else
+    echo &quot;请上传fscan文件&quot;
+fi
+</code></pre>
+<h5 id="强制终止某端口"><a href="#强制终止某端口" class="headerlink" title="强制终止某端口"></a>强制终止某端口</h5><pre><code class="bash">kill -9 $(netstat -nlp | grep :8080 | awk &#39;&#123;print $7&#125;&#39; | awk -F&quot;/&quot; &#39;&#123; print $1 &#125;&#39;)
+</code></pre>
+<h5 id="强制终止除某端口外所有端口"><a href="#强制终止除某端口外所有端口" class="headerlink" title="强制终止除某端口外所有端口"></a>强制终止除某端口外所有端口</h5><pre><code class="bash">kill -9 $(netstat -anopt | grep -v &quot;sshd\|httpd\|mysqld&quot; | awk &#39;&#123;print $7&#125;&#39; | awk -F&quot;/&quot; &#39;&#123; print $1 &#125;&#39;)
+</code></pre>
+<h5 id="尝试修改"><a href="#尝试修改" class="headerlink" title="尝试修改"></a>尝试修改</h5><pre><code class="bash">busybox alias cat=&quot;echo &quot;flag&#123;&quot;`date | md5sum | awk &#39;&#123;print $1&#125;&#39;`&quot;&#125;&quot;||&quot;
+busybox alias curl=&quot;echo &quot;flag&#123;&quot;`date | md5sum | awk &#39;&#123;print $1&#125;&#39;`&quot;&#125;&quot;||&quot;
+</code></pre>
+<h5 id="扫描网段上存在的主机"><a href="#扫描网段上存在的主机" class="headerlink" title="扫描网段上存在的主机"></a>扫描网段上存在的主机</h5><pre><code class="bash">output_file=&quot;others_port_scan_results.txt&quot;
+
+for i in &#123;0..255&#125;; do
+    host=&quot;192.168.1.$&#123;i&#125;&quot; # 修改
+    port=80
+    echo &quot;testing $&#123;host&#125;&quot;
+    nc -z -w2 &quot;$host&quot; &quot;$port&quot; &amp;&amp; echo &quot;$host&quot; &gt;&gt; &quot;$output_file&quot;
+done
+</code></pre>
+<p>python：</p>
+<pre><code class="python">import socket
+
+def check_port(hostname, port):
+    try:
+        # 创建socket对象
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        # 设置超时时间为2秒
+        sock.settimeout(2)
+        # 连接到目标主机和端口
+        result = sock.connect_ex((hostname, port))
+        if result == 0:
+            print(f&quot;&#123;hostname&#125;&quot;)
+
+        sock.close()
+    except socket.error:
+        pass
+
+for i in range(256):
+    host = f&#39;192-168-1-&#123;i&#125;.pvp2328.bugku.cn&#39;
+    port =80
+    check_port(host, port)
+</code></pre>
+<h5 id="检测ubuntu版本"><a href="#检测ubuntu版本" class="headerlink" title="检测ubuntu版本"></a>检测ubuntu版本</h5><blockquote>
+<p>lsb_release -a</p>
+</blockquote>
+<blockquote>
+<p>cat &#x2F;etc&#x2F;os-release</p>
+</blockquote>
+<h5 id="检测内核版本"><a href="#检测内核版本" class="headerlink" title="检测内核版本"></a>检测内核版本</h5><blockquote>
+<p>uname -r </p>
+</blockquote>
+<h3 id="web"><a href="#web" class="headerlink" title="web"></a>web</h3><h5 id="备份网站"><a href="#备份网站" class="headerlink" title="备份网站"></a>备份网站</h5><pre><code class="bash">cd /var/www/html
+tar -zcvf ~/html.tar.gz *
+</code></pre>
+<h5 id="还原网站"><a href="#还原网站" class="headerlink" title="还原网站"></a>还原网站</h5><pre><code>tar -zxvf ~/html.tar.gz -C .
+</code></pre>
+<h5 id="备份数据库"><a href="#备份数据库" class="headerlink" title="备份数据库"></a>备份数据库</h5><pre><code class="bash">cd /var/www/html
+find .|xargs grep &quot;password&quot;
+</code></pre>
+<p>备份</p>
+<pre><code class="bash">cd /var/lib/mysql # (进入到MySQL库目录，根据自己的MySQL的安装情况调整目录)
+mysqldump -u root -p Test &gt; Test.sql # 输入密码即可。
+mysqldump -u root -p --all-databases &gt; ~/backup.sql  # 备份所有数据库
+mysqldump -u root -p --all-databases -skip-lock-tables &gt; ~/backup.sql  # 跳过锁定的数据库表
+</code></pre>
+<p>还原</p>
+<pre><code class="bash">mysql -u root -p
+create database [database_name];
+use [database_name]
+source backup.sql;
+</code></pre>
+<h5 id="php流量监控"><a href="#php流量监控" class="headerlink" title="php流量监控"></a>php流量监控</h5><p>log.php</p>
+<pre><code class="php">&lt;?php
+$ip = $_SERVER[&quot;REMOTE_ADDR&quot;];      //记录访问者的ip
+$filename = $_SERVER[&#39;PHP_SELF&#39;];       //访问者要访问的文件名
+$parameter = $_SERVER[&quot;QUERY_STRING&quot;];      //访问者要请求的参数
+$method = $_SERVER[&#39;REQUEST_METHOD&#39;];       //请求方法
+$uri = $_SERVER[&#39;REQUEST_URI&#39;];             //请求URI
+$time = date(&#39;Y-m-d H:i:s&#39;,time());     //访问时间
+$post = file_get_contents(&quot;php://input&quot;,&#39;r&#39;);       //接收POST数据
+$others = &#39;...其他你想得到的信息...&#39;;
+$logadd = &#39;Visit Time：&#39;.$time.&#39; &#39;.&#39;Visit IP：&#39;.$ip.&quot;\r\n&quot;.&#39;RequestURI：&#39;.$uri.&#39; &#39;.$parameter.&#39;RequestMethod：&#39;.$method.&quot;\r\n&quot;;
+// log记录
+$fh = fopen(&quot;/tmp/log.txt&quot;, &quot;a+&quot;);
+fwrite($fh, $logadd);
+fwrite($fh, print_r($_COOKIE, true).&quot;\r\n&quot;);
+fwrite($fh, $post.&quot;\r\n&quot;);
+fwrite($fh, $others.&quot;\r\n&quot;);
+fclose($fh);
+?&gt;
+</code></pre>
+<p>常见CMS入口</p>
+<pre><code>PHPCMS V9 \phpcms\base.php
+PHPWIND8.7 \data\sql_config.php
+DEDECMS5.7 \data\common.inc.php
+DiscuzX2   \config\config_global.php
+Wordpress   \wp-config.php
+Metinfo   \include\head.php
+</code></pre>
+<h3 id="pwn"><a href="#pwn" class="headerlink" title="pwn"></a>pwn</h3><h2 id="自行环境搭建测试一些东西"><a href="#自行环境搭建测试一些东西" class="headerlink" title="自行环境搭建测试一些东西"></a>自行环境搭建测试一些东西</h2><h3 id="web-1"><a href="#web-1" class="headerlink" title="web"></a>web</h3><h5 id="php-docker"><a href="#php-docker" class="headerlink" title="php docker"></a>php docker</h5><pre><code>FROM php:8.3.2-apache
+
+EXPOSE 5001
+</code></pre>
+<p>挂载运行</p>
+<pre><code>docker run -it -v /本机目录:/容器内目录 centos /bin/bash
+</code></pre>
+<p>暴露端口</p>
+<pre><code>docker run -d -p 5000:80 --name php1 php1
+</code></pre>
+<p>wsl转发docker的流量（总）</p>
+<pre><code>docker run -d -p 5000:80 -v ./html:/var/www/html --name php2 php1
+</code></pre>
+<pre><code>socat -T 600 TCP-LISTEN:6000,fork,reuseaddr TCP:172.17.0.1:5000 &amp;
+</code></pre>
+
+    </div>
+    
+</div>
+                         
+<footer id="footer">
+    <div class="footer-wrap">
+        <div>
+            © 20xx - 2024 Moyao の小屋
+            <span class="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            @Moyao
+        </div>
+        <div></div>
+        <div>Based on the <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo Engine</a> & <a
+                target="_blank" rel="noopener" href="https://github.com/argvchs/hexo-theme-particlex">ParticleX Theme</a></div>
+        
+    </div>
+</footer>
+                    </div>
+                </div>
+            </transition>
+            <div id="img_show">
+                <img id="img_content" alt="img_show">
+            </div>
+        </div>
+        <script src="https://cdn.staticfile.org/highlight.js/11.5.1/highlight.min.js"></script>
+        <script src="/js/particlex.js"></script>
+        <script src="/js/showimg.js"></script>
+        
+
+    </body>
+</html>

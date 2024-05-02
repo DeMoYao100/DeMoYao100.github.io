@@ -1,0 +1,192 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+        <title>Cv与一些classify事项记录 | Moyao の小屋</title>
+        <meta name="author" content="Moyao">
+        <meta name="description" content="Write down something interesting I met
+feel free to mail me if you have something wanted to talk about
+mail: &lt;moyaoxue@outlook.com&gt;
+">
+        <meta name="keywords" content="">
+        <link rel="icon" href="/images/head.jpg">
+        <script src="https://cdn.staticfile.org/instant.page/5.1.0/instantpage.min.js" type="module"></script>
+        <script src="https://cdn.staticfile.org/font-awesome/6.1.1/js/all.min.js"></script>
+        
+        <link rel="stylesheet" href="/css/fonts.min.css">
+        <link rel="stylesheet" href="/css/particlex.css">
+        
+        <script src="https://cdn.staticfile.org/vue/3.2.33/vue.global.prod.min.js"></script>
+    <meta name="generator" content="Hexo 6.2.0"></head>
+    <body>
+        <div id="loading" style="height:100vh;width:100vw;position:fixed;display:flex;z-index:200;justify-content:space-between;background:#fff;transition:opacity 0.3s ease-out"><div style="position:fixed;height:100vh;width:100vw;display:flex;justify-content:center;align-items:center"><div id="loadcontent" style="width:50vmin;height:50vmin;padding:50px;border-radius:50%;display:flex;justify-content:center;align-items:center;border:solid 10px #a3ddfb;text-align:center"><div><h2>LOADING...</h2><p style="word-break:keep-all">加载过慢请开启缓存(浏览器默认开启)</p><div><img alt="loading" src="/loading.gif"></div></div></div></div></div>
+        <div id="layout">
+            <i data-fa-symbol="calendar-solid" class="fa-solid fa-calendar fa-fw"></i>
+            <i data-fa-symbol="bookmark-solid" class="fa-solid fa-bookmark fa-fw"></i>
+            <i data-fa-symbol="tags-solid" class="fa-solid fa-tags fa-fw"></i>
+            <transition name="into">
+                <div v-show="show_page" style="display: -not-none">
+                    <div id="menu_show">
+                         
+<nav id="menu">
+    <div class="desktop-menu">
+        <a href="/">
+            <span class="title">Moyao の小屋</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;home</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;about</span>
+        </a>
+        
+        <a target="_blank" rel="noopener" href="//tags/re/">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;tags</span>
+        </a>
+        
+    </div>
+    <div :class="'phone-menu ' + menu_show" id="phone-menu">
+        <div class="curtain" @click="menu_show = !menu_show" v-show="menu_show"></div>
+        <div :class="'title'" @click="menu_show = !menu_show">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;Moyao の小屋</span>
+        </div>
+        <transition name="slide">
+        <div class="items" v-show="menu_show">
+            
+            <a href="">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-house fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">home</div>
+                </div>
+            </a>
+            
+            <a href="">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-id-card fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">about</div>
+                </div>
+            </a>
+            
+            <a href="/tags/re/">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-tags fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">tags</div>
+                </div>
+            </a>
+            
+        </div>
+        </transition>
+    </div>
+</nav>
+                    </div>
+                    <div id="main">
+                        
+<div class="article">
+    <div>
+        <h1>Cv与一些classify事项记录 </h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
+            </span>
+            2023/7/17
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/cv/" style="color: #03a9f4">
+                    cv
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    <div class="content" v-pre>
+        <h6 id="preface-一些project记录，慢慢学吧调参炼丹"><a href="#preface-一些project记录，慢慢学吧调参炼丹" class="headerlink" title="preface:一些project记录，慢慢学吧调参炼丹"></a>preface:一些project记录，慢慢学吧调参炼丹</h6><span id="more"></span>
+
+<h5 id="需要实现的功能是接收树莓派传过来的植物图像，对其是否病害进行分类预测，用的训练集是-这个-病虫害分类数据集-飞桨AI-Studio-baidu-com-，训练集的话需要写一个加载json数据的方法"><a href="#需要实现的功能是接收树莓派传过来的植物图像，对其是否病害进行分类预测，用的训练集是-这个-病虫害分类数据集-飞桨AI-Studio-baidu-com-，训练集的话需要写一个加载json数据的方法" class="headerlink" title="需要实现的功能是接收树莓派传过来的植物图像，对其是否病害进行分类预测，用的训练集是[这个](病虫害分类数据集 - 飞桨AI Studio (baidu.com))，训练集的话需要写一个加载json数据的方法"></a>需要实现的功能是接收树莓派传过来的植物图像，对其是否病害进行分类预测，用的训练集是[这个](<a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/76075">病虫害分类数据集 - 飞桨AI Studio (baidu.com)</a>)，训练集的话需要写一个加载json数据的方法</h5><pre><code class="python">def create_image_folders_by_class(json_file_path, image_folder_path, output_folder_path):
+    with open(json_file_path, &#39;r&#39;) as f:
+        labels_data = json.load(f)
+
+    # 分割训练集和验证集
+    train_data, val_data = train_test_split(labels_data, test_size=0.2, random_state=42)
+
+    for name, data in [(&#39;train&#39;, train_data), (&#39;val&#39;, val_data)]:
+        for item in data:
+            class_folder = os.path.join(output_folder_path, name, str(item[&#39;disease_class&#39;]))
+            os.makedirs(class_folder, exist_ok=True)
+            shutil.copy(os.path.join(image_folder_path, item[&#39;image_id&#39;]), os.path.join(class_folder, item[&#39;image_id&#39;]))
+</code></pre>
+<h5 id="最开始使用的是ResNet50，后面感觉正确率太低了会不会跟模型有关，改成densenet169，效果是差不太多…"><a href="#最开始使用的是ResNet50，后面感觉正确率太低了会不会跟模型有关，改成densenet169，效果是差不太多…" class="headerlink" title="最开始使用的是ResNet50，后面感觉正确率太低了会不会跟模型有关，改成densenet169，效果是差不太多…"></a>最开始使用的是ResNet50，后面感觉正确率太低了会不会跟模型有关，改成densenet169，效果是差不太多…</h5><h5 id="还发现一个小问题，数据集里面都是带病的植物class，好像没有健康的…"><a href="#还发现一个小问题，数据集里面都是带病的植物class，好像没有健康的…" class="headerlink" title="还发现一个小问题，数据集里面都是带病的植物class，好像没有健康的…"></a>还发现一个小问题，数据集里面都是带病的植物class，好像没有健康的…</h5><h5 id="于是乎感觉反正准确率偏低了，干脆根据置信度分一类专门来判别没病的植物么得，重写一些训模型的部分，log一下平均置信度和方差，然后假装正则大概放一个置信度来判别"><a href="#于是乎感觉反正准确率偏低了，干脆根据置信度分一类专门来判别没病的植物么得，重写一些训模型的部分，log一下平均置信度和方差，然后假装正则大概放一个置信度来判别" class="headerlink" title="于是乎感觉反正准确率偏低了，干脆根据置信度分一类专门来判别没病的植物么得，重写一些训模型的部分，log一下平均置信度和方差，然后假装正则大概放一个置信度来判别"></a>于是乎感觉反正准确率偏低了，干脆根据置信度分一类专门来判别没病的植物么得，重写一些训模型的部分，log一下平均置信度和方差，然后假装正则大概放一个置信度来判别</h5><p><img src="/2023/07/17/cv%E4%B8%8E%E4%B8%80%E4%BA%9Bclassify%E4%BA%8B%E9%A1%B9%E8%AE%B0%E5%BD%95/image-20230717164424184.png" alt="image-20230717164424184"></p>
+<h5 id="大概大概这样子吧"><a href="#大概大概这样子吧" class="headerlink" title="大概大概这样子吧"></a>大概大概这样子吧</h5><pre><code class="python">def predict_image(image_path):
+    img = Image.open(image_path)
+    img = data_transform(img).unsqueeze(0)
+    img = img.to(device)
+    output = model(img)
+    probs = torch.nn.functional.softmax(output, dim=1)
+    max_prob, preds = torch.max(probs, 1)
+
+    # print(max_prob)
+    threshold = 0.7
+    if max_prob &lt; threshold:
+        return &#39;Low confidence&#39;
+    else:
+        return preds
+</code></pre>
+<h5 id="最后正确率还是很一眼难尽，目前是没做数据增强的，应该是不能变太多，主要是病害植物和普通植物确实分类不明显，暂且原谅这程序的低准确率…"><a href="#最后正确率还是很一眼难尽，目前是没做数据增强的，应该是不能变太多，主要是病害植物和普通植物确实分类不明显，暂且原谅这程序的低准确率…" class="headerlink" title="最后正确率还是很一眼难尽，目前是没做数据增强的，应该是不能变太多，主要是病害植物和普通植物确实分类不明显，暂且原谅这程序的低准确率…"></a>最后正确率还是很一眼难尽，目前是没做数据增强的，应该是不能变太多，主要是病害植物和普通植物确实分类不明显，暂且原谅这程序的低准确率…</h5><h5 id="mark一个奇怪的事情：训练模型过程中每个epoch正确率都还不错有50左右，存好model以后再测试正确率就掉到个位数。"><a href="#mark一个奇怪的事情：训练模型过程中每个epoch正确率都还不错有50左右，存好model以后再测试正确率就掉到个位数。" class="headerlink" title="mark一个奇怪的事情：训练模型过程中每个epoch正确率都还不错有50左右，存好model以后再测试正确率就掉到个位数。"></a>mark一个奇怪的事情：训练模型过程中每个epoch正确率都还不错有50左右，存好model以后再测试正确率就掉到个位数。</h5><h6 id="7-18更新"><a href="#7-18更新" class="headerlink" title="*7-18更新"></a>*7-18更新</h6><h5 id="本来dl部分给的数据做的极端处理是mean值-三倍标准差，结果在测温湿度之类的1h内数据根本不变化，导致classifier基本上不工作……这边选择改成手动给调极端数据来训分类器了…"><a href="#本来dl部分给的数据做的极端处理是mean值-三倍标准差，结果在测温湿度之类的1h内数据根本不变化，导致classifier基本上不工作……这边选择改成手动给调极端数据来训分类器了…" class="headerlink" title="本来dl部分给的数据做的极端处理是mean值+-三倍标准差，结果在测温湿度之类的1h内数据根本不变化，导致classifier基本上不工作……这边选择改成手动给调极端数据来训分类器了…"></a>本来dl部分给的数据做的极端处理是mean值+-三倍标准差，结果在测温湿度之类的1h内数据根本不变化，导致classifier基本上不工作……这边选择改成手动给调极端数据来训分类器了…</h5><h6 id="7-27更新（补）"><a href="#7-27更新（补）" class="headerlink" title="*7-27更新（补）"></a>*7-27更新（补）</h6><h5 id="最后更新了label的方法，加入了adam优化，最终准确率94"><a href="#最后更新了label的方法，加入了adam优化，最终准确率94" class="headerlink" title="最后更新了label的方法，加入了adam优化，最终准确率94%"></a>最后更新了label的方法，加入了adam优化，最终准确率94%</h5><p><img src="/2023/07/17/cv%E4%B8%8E%E4%B8%80%E4%BA%9Bclassify%E4%BA%8B%E9%A1%B9%E8%AE%B0%E5%BD%95/image-20230727115911697.png" alt="image-20230727115911697"></p>
+<h6 id="（实测效果也是不错来的，有点点过于灵敏，置信度给的不准，实际使用稍微要求有点严苛）"><a href="#（实测效果也是不错来的，有点点过于灵敏，置信度给的不准，实际使用稍微要求有点严苛）" class="headerlink" title="（实测效果也是不错来的，有点点过于灵敏，置信度给的不准，实际使用稍微要求有点严苛）"></a>（实测效果也是不错来的，有点点过于灵敏，置信度给的不准，实际使用稍微要求有点严苛）</h6><h6 id="不过背景处理啥的还学不太明白，也没啥时间，就先这样子了"><a href="#不过背景处理啥的还学不太明白，也没啥时间，就先这样子了" class="headerlink" title="不过背景处理啥的还学不太明白，也没啥时间，就先这样子了"></a>不过背景处理啥的还学不太明白，也没啥时间，就先这样子了</h6>
+    </div>
+    
+</div>
+                         
+<footer id="footer">
+    <div class="footer-wrap">
+        <div>
+            © 20xx - 2024 Moyao の小屋
+            <span class="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            @Moyao
+        </div>
+        <div></div>
+        <div>Based on the <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo Engine</a> & <a
+                target="_blank" rel="noopener" href="https://github.com/argvchs/hexo-theme-particlex">ParticleX Theme</a></div>
+        
+    </div>
+</footer>
+                    </div>
+                </div>
+            </transition>
+            <div id="img_show">
+                <img id="img_content" alt="img_show">
+            </div>
+        </div>
+        <script src="https://cdn.staticfile.org/highlight.js/11.5.1/highlight.min.js"></script>
+        <script src="/js/particlex.js"></script>
+        <script src="/js/showimg.js"></script>
+        
+
+    </body>
+</html>

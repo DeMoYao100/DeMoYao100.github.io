@@ -1,0 +1,306 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+        <title>ISITDTUCTF | Moyao の小屋</title>
+        <meta name="author" content="Moyao">
+        <meta name="description" content="Write down something interesting I met
+feel free to mail me if you have something wanted to talk about
+mail: &lt;moyaoxue@outlook.com&gt;
+">
+        <meta name="keywords" content="">
+        <link rel="icon" href="/images/head.jpg">
+        <script src="https://cdn.staticfile.org/instant.page/5.1.0/instantpage.min.js" type="module"></script>
+        <script src="https://cdn.staticfile.org/font-awesome/6.1.1/js/all.min.js"></script>
+        
+        <link rel="stylesheet" href="/css/fonts.min.css">
+        <link rel="stylesheet" href="/css/particlex.css">
+        
+        <script src="https://cdn.staticfile.org/vue/3.2.33/vue.global.prod.min.js"></script>
+    <meta name="generator" content="Hexo 6.2.0"></head>
+    <body>
+        <div id="loading" style="height:100vh;width:100vw;position:fixed;display:flex;z-index:200;justify-content:space-between;background:#fff;transition:opacity 0.3s ease-out"><div style="position:fixed;height:100vh;width:100vw;display:flex;justify-content:center;align-items:center"><div id="loadcontent" style="width:50vmin;height:50vmin;padding:50px;border-radius:50%;display:flex;justify-content:center;align-items:center;border:solid 10px #a3ddfb;text-align:center"><div><h2>LOADING...</h2><p style="word-break:keep-all">加载过慢请开启缓存(浏览器默认开启)</p><div><img alt="loading" src="/loading.gif"></div></div></div></div></div>
+        <div id="layout">
+            <i data-fa-symbol="calendar-solid" class="fa-solid fa-calendar fa-fw"></i>
+            <i data-fa-symbol="bookmark-solid" class="fa-solid fa-bookmark fa-fw"></i>
+            <i data-fa-symbol="tags-solid" class="fa-solid fa-tags fa-fw"></i>
+            <transition name="into">
+                <div v-show="show_page" style="display: -not-none">
+                    <div id="menu_show">
+                         
+<nav id="menu">
+    <div class="desktop-menu">
+        <a href="/">
+            <span class="title">Moyao の小屋</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;home</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;about</span>
+        </a>
+        
+        <a target="_blank" rel="noopener" href="//tags/re/">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;tags</span>
+        </a>
+        
+    </div>
+    <div :class="'phone-menu ' + menu_show" id="phone-menu">
+        <div class="curtain" @click="menu_show = !menu_show" v-show="menu_show"></div>
+        <div :class="'title'" @click="menu_show = !menu_show">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;Moyao の小屋</span>
+        </div>
+        <transition name="slide">
+        <div class="items" v-show="menu_show">
+            
+            <a href="">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-house fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">home</div>
+                </div>
+            </a>
+            
+            <a href="">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-id-card fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">about</div>
+                </div>
+            </a>
+            
+            <a href="/tags/re/">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-tags fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">tags</div>
+                </div>
+            </a>
+            
+        </div>
+        </transition>
+    </div>
+</nav>
+                    </div>
+                    <div id="main">
+                        
+<div class="article">
+    <div>
+        <h1>ISITDTUCTF </h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
+            </span>
+            2023/10/17
+        </span>
+        
+        
+    </div>
+    <div class="content" v-pre>
+        <h6 id="PREFACE：最近确实作业很多，题只能慢慢写吧，9-17：小做了四个比较ez的"><a href="#PREFACE：最近确实作业很多，题只能慢慢写吧，9-17：小做了四个比较ez的" class="headerlink" title="PREFACE：最近确实作业很多，题只能慢慢写吧，9-17：小做了四个比较ez的"></a>PREFACE：最近确实作业很多，题只能慢慢写吧，9-17：小做了四个比较ez的</h6><span id="more"></span>
+
+<h3 id="re01"><a href="#re01" class="headerlink" title="re01"></a>re01</h3><p>核心加密部分：</p>
+<p><img src="/2023/10/17/ISITDTUCTF/image-20231017081840615.png" alt="image-20231017081840615"></p>
+<p>翻译为循环：</p>
+<pre><code class="python"># ISITDTU&#123;11111111aaaaaaaa&#125;
+prime = [2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97,101,
+103,107,109,113,127,131,137,139,149,151,157,163,167,173,179,181,191,193,197,199,
+211,223,227,229,233,239,241,251,257,263,269,271,277,281,283,293,307,311,313,317,
+331,337,347,349,353,359,367,373,379,383,389,397,401,409,419,421,431,433,439,443,
+449,457,461,463,467,479,487,491,499,503,509,521,523,541,547,557,563,569,571,577,
+587,593,599,601,607,613,617,619,631,641,643,647,653,659,661,673,677,683,691,701,
+709,719,727,733,739,743,751,757,761,769,773,787,797,809,811,821,823,827,829,839,
+853,857,859,863,877,881,883,887,907,911,919,929,937,941,947,953,967,971,977,983,
+991,997,1009,1013,1019,1021,1031,1033,1039,1049,1051,1061,1063,1069,1087,1091,1093,
+1097,1103,1109,1117,1123,1129,1151,1153,1163,1171,1181,1187,1193,1201,1213,1217,1223,
+1229,1231,1237,1249,1259,1277,1279,1283,1289,1291,1297,1301,1303,1307,1319,1321,1327]
+print(len(prime))
+v14 = [0 for _ in range(25)]
+for k in range(5):
+    for m in range(5):
+        v14[5 * k + m] = prime[k * 5 + m]
+print(v14)
+
+map = &#123;&#125;
+
+a = [0x4CFC,0x52A8,0x5AA2,0x651C,0x4881,0x5203,0x57DF,0x6043,0x6B51,0x49C6,0x538F,0x5975,0x6231,0x6D6B,0x42DC,0x4C10,0x51AC,0x59B8,0x6448,0x1F63,0x2475,0x27C9,0x2C8D,0x333F]
+
+def enc(a):
+    global map, prime
+    output = [0 for _ in range(25)]
+    for i in range(5):
+        for j in range(5):
+            for k in range(5):
+                output[5 * i + j] += prime[5 * k + j] * a[5 * i + k]
+</code></pre>
+<p>z3求解即可</p>
+<pre><code class="python">from z3 import *
+
+input = [Int(f&#39;input_&#123;i&#125;&#39;) for i in range(25)]
+
+count_5 = 5
+count_5_1 = 5
+count_5_2 = 5
+
+a6 = [2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97,101,
+103,107,109,113,127,131,137,139,149,151,157,163,167,173,179,181,191,193,197,199,
+211,223,227,229,233,239,241,251,257,263,269,271,277,281,283,293,307,311,313,317,
+331,337,347,349,353,359,367,373,379,383,389,397,401,409,419,421,431,433,439,443,
+449,457,461,463,467,479,487,491,499,503,509,521,523,541,547,557,563,569,571,577,
+587,593,599,601,607,613,617,619,631,641,643,647,653,659,661,673,677,683,691,701,
+709,719,727,733,739,743,751,757,761,769,773,787,797,809,811,821,823,827,829,839,
+853,857,859,863,877,881,883,887,907,911,919,929,937,941,947,953,967,971,977,983,
+991,997,1009,1013,1019,1021,1031,1033,1039,1049,1051,1061,1063,1069,1087,1091,1093,
+1097,1103,1109,1117,1123,1129,1151,1153,1163,1171,1181,1187,1193,1201,1213,1217,1223,
+1229,1231,1237,1249,1259,1277,1279,1283,1289,1291,1297,1301,1303,1307,1319,1321,1327]
+output = [0x43AD, 0x4CFC,0x52A8,0x5AA2,0x651C,0x4881,0x5203,0x57DF,0x6043,0x6B51,0x49C6,0x538F,0x5975,0x6231,0x6D6B,0x42DC,0x4C10,0x51AC,0x59B8,0x6448,0x1F63,0x2475,0x27C9,0x2C8D,0x333F,0x7F78]
+
+s = Solver()
+
+for i in range(count_5):
+    for j in range(count_5_2):
+        sum_expr = Sum([a6[5 * k + j] * input[5 * i + k] for k in range(count_5_1)])
+        s.add(output[5 * i + j] == sum_expr)
+
+if s.check() == sat:
+    m = s.model()
+    solution = [m[input[i]].as_long() for i in range(25)]
+    print(&quot;Solution for input array:&quot;, solution)
+else:
+    print(&quot;No solution found&quot;)
+
+x = [103, 111, 111, 100, 95, 106, 111, 98, 95, 121, 111, 117, 95, 115, 111, 108, 118, 101, 100, 95, 114, 101, 48, 49, 33]
+for i in x:
+    print(chr(i),end=&#39;&#39;)
+    
+# good_job_you_solved_re01!
+</code></pre>
+<h3 id="dot"><a href="#dot" class="headerlink" title="dot"></a>dot</h3><p>检测<code>osname</code>，然后进行魔改的morse编码，与密文对照</p>
+<p>golang写的，反编译几乎没法看，看汇编即可</p>
+<p>魔改的morse编码可以不用逆，看出来是一一映射的加密即可，动态patch检测的<code>osname</code>（注意第二个返回值是osname的长度，也需要patch）写入表，在加密过程后获得表，与密文对照即可获得flag</p>
+<p>(这里前面有将所有字符变为大写，最后直接交全大写即可)</p>
+<pre><code class="python">map = &#39;abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890&#123;&#125;-&#39;
+a = &#39;-... -.-. ..... --. -- --.- .--. .--- -.... .-.. ..- _ --- - ....- .. ...- .---- .-- ----- --.. -..- -.-- ...-- ..--- .-. -... -.-. ..... --. -- --.- .--. .--- -.... .-.. ..- _ --- - ....- .. ...- .---- .-- ----- --.. -..- -.-- ...-- ..--- .-. . -.. --... ----. -.- ---.. .- ..-. .... ... &#39;
+a = a.split(&#39; &#39;)
+
+b = &#39;..... ... --- .. --.. ----- --... .---- --. ----- --.. -.-- --... _ ..... ... --- --...&#39;
+b = b.split()
+flag = &#39;&#39;
+for i in b:
+    for j in range(len(a)):
+        if (i == a[j]):
+            # print(map[j],end=&#39;&#39;)
+            flag += map[j]
+            break
+flag = flag.upper()
+print(flag)
+
+# C0MPUT3RDTUW3LC0M3
+</code></pre>
+<h3 id="sanity-check"><a href="#sanity-check" class="headerlink" title="sanity_check"></a>sanity_check</h3><p>go的反编译完全的就是…</p>
+<p>硬看汇编即可，对着栈看（这里被nop掉的即为判断并跳出循环的）</p>
+<p><img src="/2023/10/17/ISITDTUCTF/image-20231017142409397.png" alt="image-20231017142409397"></p>
+<p>前面一直没注意到<code>main_calc</code></p>
+<pre><code class="cpp">__int64 __fastcall main_calc()
+&#123;
+  __int64 result; // rax
+  __int64 v1; // r14
+  __int64 v2; // [rsp+0h] [rbp-10h]
+  void *retaddr; // [rsp+10h] [rbp+0h] BYREF
+
+  if ( (unsigned __int64)&amp;retaddr &lt;= *(_QWORD *)(v1 + 16) )
+    runtime_morestack_noctxt_abi0();
+  if ( result &gt; 1 )
+  &#123;
+    v2 = main_calc();
+    return v2 + main_calc();
+  &#125;
+  return result;
+&#125;
+</code></pre>
+<p>这里是一个斐波那契数列，然后结合汇编发现，和flag进行异或即可</p>
+<p>实际上，这里也可以断在合适的位置，直接在栈中找到flag</p>
+<p><img src="/2023/10/17/ISITDTUCTF/image-20231017142853962.png" alt="image-20231017142853962"></p>
+<p>解密exp：</p>
+<pre><code class="python">a = [0x54,0x69,0x68,0x71,0x5C,0x4C,0x7B,0x52,0x42,0x4A,0x52,0x2B,0x0F5,0x0B6,0x120,0x20D,0x3AE,0x64F,0x0A47,0x1007,0x1A28,0x2A9D,0x4565,0x6F9E,0x0B555,0x12563,0x1DA5F,0x2FF27,0x4D90A,0x7D8EA,0x0CB26A,0x148AB8,0x213D62,0x35C78B,0x570489]
+
+b = [0,1]
+for i in range(len(a)):
+    if (i+1 == len(b)):
+        b.append(b[i] + b[i-1])
+    print(chr(a[i] ^ b[i]),end=&#39;&#39;)
+
+# ISITDTU&#123;This_Is_Where_Your_RE_Journey_Begin&#125;
+</code></pre>
+<h3 id="simple-encrypt"><a href="#simple-encrypt" class="headerlink" title="simple_encrypt"></a>simple_encrypt</h3><p>golang，反编译同样有巨大的问题</p>
+<p>换表的base64，然后有个异或0x2a比较明显，但是解密不对，可以猜测，发现数字不会有操作，而字母猜测前几个为<code>Th1s</code></p>
+<pre><code class="python">a = &#39;Guf&#39;
+b = &#39;Ths&#39;
+for i in range(3):
+    print(ord(a[i]) - ord(b[i]))
+</code></pre>
+<p><img src="/2023/10/17/ISITDTUCTF/image-20231017164530423.png" alt="image-20231017164530423"></p>
+<p>差13，猜测得到最后exp…</p>
+<pre><code class="python">a = [0x6d,0x5f,0x1b,0x4c,0x75,0x1b,0x4c,0x75,0x4c,0x1b,0x50,0x49,0x53,0x19,0x75,0x19,0x4b,0x5a,0x4f,0x46,0x49,0x4d,0x75,0x40,0x1b,0x4d,0x5f,0x75,0x7e,0x1a,0x1a,0x1a,0x1a,0x1a,0x1a,0x0b]
+print(&#39;ISITDTU&#123;&#39;,end=&#39;&#39;)
+flag = &#39;&#39;
+for i in a:
+    if chr(i ^ 0x2a) in &#39;ABCDEFGHIJKLMNOPQRSTUVWXYZ&#39;:
+        flag += chr((((i ^ 0x2a) - ord(&#39;A&#39;) + 13) % 26) + ord(&#39;A&#39;))
+    elif chr(i ^ 0x2a) in &#39;abcdefghijklmnopqrstuvwxyz&#39;:
+        flag += chr((((i ^ 0x2a) - ord(&#39;a&#39;) + 13) % 26) + ord(&#39;a&#39;))
+    else:
+        flag += chr(i ^ 0x2a)
+    # flag += chr(i ^ 0x2a)
+print(flag,end=&#39;&#39;)
+print(&#39;&#125;&#39;)
+
+# ISITDTU&#123;Th1s_1s_s1mpl3_3ncrypt_w1th_G000000!&#125;
+</code></pre>
+
+    </div>
+    
+</div>
+                         
+<footer id="footer">
+    <div class="footer-wrap">
+        <div>
+            © 20xx - 2024 Moyao の小屋
+            <span class="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            @Moyao
+        </div>
+        <div></div>
+        <div>Based on the <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo Engine</a> & <a
+                target="_blank" rel="noopener" href="https://github.com/argvchs/hexo-theme-particlex">ParticleX Theme</a></div>
+        
+    </div>
+</footer>
+                    </div>
+                </div>
+            </transition>
+            <div id="img_show">
+                <img id="img_content" alt="img_show">
+            </div>
+        </div>
+        <script src="https://cdn.staticfile.org/highlight.js/11.5.1/highlight.min.js"></script>
+        <script src="/js/particlex.js"></script>
+        <script src="/js/showimg.js"></script>
+        
+
+    </body>
+</html>
