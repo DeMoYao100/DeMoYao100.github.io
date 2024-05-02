@@ -1,296 +1,77 @@
-
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
-        <title>Idapython初探 | Moyao の小屋</title>
-        <meta name="author" content="Moyao">
-        <meta name="description" content="Write down something interesting I met
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"/><meta name="theme-color" content="#222"/><meta http-equiv="X-UA-COMPATIBLE" content="IE=edge,chrome=1"/><meta name="renderer" content="webkit"/><link rel="icon" type="image/ico" sizes="32x32" href="/assets/favicon.ico"/><link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png"/><link rel="alternate" href="/rss.xml" title="Moyao の小屋" type="application/rss+xml"><link rel="alternate" href="/atom.xml" title="Moyao の小屋" type="application/atom+xml"><link rel="alternate" type="application/json" title="Moyao の小屋" href="https://demoyao100.github.io/feed.json"/><link rel="preconnect" href="https://lf9-cdn-tos.bytecdntp.com"/><link rel="preconnect" href="https://at.alicdn.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CFredericka%20the%20Great:400,400italic,700,700italic%7CNoto%20Serif%20JP:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic%7CInconsolata:400,400italic,700,700italic&display=swap&subset=latin,latin-ext" media="none" onload="this.media&#x3D;&#39;all&#39;"><link rel="stylesheet" href="/css/app.css?v=0.4.2"><link rel="modulepreload" href="/js/chunk-346TEOXD.js"></link><link rel="modulepreload" href="/js/chunk-QA6RGM2S.js"></link><link rel="modulepreload" href="/js/chunk-QAWHJ5B3.js"></link><link rel="modulepreload" href="/js/index.esm-SMPOVEZ5.js"></link><link rel="modulepreload" href="/js/post-H6TTLEOZ.js"></link><link rel="modulepreload" href="/js/quicklink-RU6FD7L7.js"></link><link rel="modulepreload" href="/js/siteInit.js"></link><link rel="preload" href="https://tva4.sinaimg.cn/large/6833939bly1gicis3attqj20zk0m8k7l.jpg" as="image" fetchpriority="high"><link rel="preload" href="https://tva4.sinaimg.cn/large/6833939bly1giciryrr3rj20zk0m8nhk.jpg" as="image" fetchpriority="high"><link rel="preload" href="https://tva4.sinaimg.cn/large/6833939bly1gicit31ffoj20zk0m8naf.jpg" as="image" fetchpriority="high"><link rel="preload" href="https://tva4.sinaimg.cn/large/6833939bly1gicit4jrvuj20zk0m8785.jpg" as="image" fetchpriority="high"><link rel="preload" href="https://tva4.sinaimg.cn/large/6833939bly1gicis081o9j20zk0m8dmr.jpg" as="image" fetchpriority="high"><link rel="preload" href="https://tva4.sinaimg.cn/large/6833939bly1gicitcxhpij20zk0m8hdt.jpg" as="image" fetchpriority="high"><meta name="description" content="&lt;h6 id=&quot;preface确实不熟但是确实该学学一些自动化东西反正萌新么记录一下&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#preface确实不熟但是确实该学学一些自动化东西反正萌新么记录一下&quot;&gt;#&lt;/a&gt; PREFACE：确实不熟，但是确实该学学一些自动化东西，反正萌新么记录一下&lt;/h6&gt;
+&lt;h6 id=&quot;1112发现这个httpsbbskanxuecomthread-225920htm&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#1112发现这个httpsbbskanxuecomthread-225920htm&quot;&gt;#&lt;/a&gt; 11.12：发现这个&lt;a href=&quot;https://bbs.kanxue.com/thread-225920.htm&quot;&gt; https://bbs.kanxue.com/thread-225920.htm&lt;/a&gt;&lt;/h6&gt;"/><link rel="canonical" href="https://demoyao100.github.io/2023/10/12/idapython%E5%88%9D%E6%8E%A2/"><title>idapython初探</title><meta name="generator" content="Hexo 7.0.0"></head><body itemscope itemtype="http://schema.org/WebPage"><div id="loading"><div class="cat"><div class="body"></div><div class="head"><div class="face"></div></div><div class="foot"><div class="tummy-end"></div><div class="bottom"></div><div class="legs left"></div><div class="legs right"></div></div><div class="paw"><div class="hands left"></div><div class="hands right"></div></div></div></div><div id="container"><header id="header" itemscope itemtype="http://schema.org/WPHeader"><div class="inner"><div id="brand"><div class="pjax"><h1 itemprop="name headline">idapython初探</h1><div class="meta"><span class="item" title="Created: 2023-10-12 15:13:39"><span class="icon"><i class="ic i-calendar"></i></span><span class="text">Posted on</span><time itemprop="dateCreated datePublished" datetime="2023-10-12T15:13:39+08:00">2023-10-12</time></span><span class="item" title="Symbols count in article"><span class="icon"><i class="ic i-pen"></i></span><span class="text">Symbols count in article</span><span>3.7k</span><span class="text">words</span></span><span class="item" title="Reading time"><span class="icon"><i class="ic i-clock"></i></span><span class="text">Reading time</span><span>3 mins.</span></span></div></div></div><nav id="nav"><div class="inner"><div class="toggle"><div class="lines" aria-label="Toggle navigation bar"><span class="line"></span><span class="line"></span><span class="line"></span></div></div><ul class="menu"><li class="item title"><a href="/" rel="start">testName</a></li></ul><ul class="right" id="rightNav"><li class="item theme"><i class="ic i-sun"></i></li><li class="item search"><i class="ic i-search"></i></li></ul></div></nav></div><div class="pjax" id="imgs"><ul><li class="item" style="background-image: url(&quot;https://tva4.sinaimg.cn/large/6833939bly1gicis3attqj20zk0m8k7l.jpg&quot;);"></li><li class="item" style="background-image: url(&quot;https://tva4.sinaimg.cn/large/6833939bly1giciryrr3rj20zk0m8nhk.jpg&quot;);"></li><li class="item" style="background-image: url(&quot;https://tva4.sinaimg.cn/large/6833939bly1gicit31ffoj20zk0m8naf.jpg&quot;);"></li><li class="item" style="background-image: url(&quot;https://tva4.sinaimg.cn/large/6833939bly1gicit4jrvuj20zk0m8785.jpg&quot;);"></li><li class="item" style="background-image: url(&quot;https://tva4.sinaimg.cn/large/6833939bly1gicis081o9j20zk0m8dmr.jpg&quot;);"></li><li class="item" style="background-image: url(&quot;https://tva4.sinaimg.cn/large/6833939bly1gicitcxhpij20zk0m8hdt.jpg&quot;);"></li></ul></div></header><div id="waves"><svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path></defs><g class="parallax"><use xlink:href="#gentle-wave" x="48" y="0"></use><use xlink:href="#gentle-wave" x="48" y="3"></use><use xlink:href="#gentle-wave" x="48" y="5"></use><use xlink:href="#gentle-wave" x="48" y="7"></use></g></svg></div><main><div class="inner"><div class="pjax" id="main"><div class="article wrap"><div class="breadcrumb" itemListElement itemscope itemtype="https://schema.org/BreadcrumbList"><i class="ic i-home"></i><span><a href="/">Home</a></span></div><article class="post block" itemscope="itemscope" itemtype="http://schema.org/Article" lang="en"><link itemprop="mainEntityOfPage" href="https://demoyao100.github.io/2023/10/12/idapython%E5%88%9D%E6%8E%A2/"/><span hidden="hidden" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person"><meta itemprop="image" content="/assets/avatar.jpg"/><meta itemprop="name" content="Moyao"/><meta itemprop="description" content="Hi,I'm Moyao, Write down something interesting I met
 feel free to mail me if you have something wanted to talk about
-mail: &lt;moyaoxue@outlook.com&gt;
-">
-        <meta name="keywords" content="">
-        <link rel="icon" href="/images/head.jpg">
-        <script src="https://cdn.staticfile.org/instant.page/5.1.0/instantpage.min.js" type="module"></script>
-        <script src="https://cdn.staticfile.org/font-awesome/6.1.1/js/all.min.js"></script>
-        
-        <link rel="stylesheet" href="/css/fonts.min.css">
-        <link rel="stylesheet" href="/css/particlex.css">
-        
-        <script src="https://cdn.staticfile.org/vue/3.2.33/vue.global.prod.min.js"></script>
-    <meta name="generator" content="Hexo 6.2.0"></head>
-    <body>
-        <div id="loading" style="height:100vh;width:100vw;position:fixed;display:flex;z-index:200;justify-content:space-between;background:#fff;transition:opacity 0.3s ease-out"><div style="position:fixed;height:100vh;width:100vw;display:flex;justify-content:center;align-items:center"><div id="loadcontent" style="width:50vmin;height:50vmin;padding:50px;border-radius:50%;display:flex;justify-content:center;align-items:center;border:solid 10px #a3ddfb;text-align:center"><div><h2>LOADING...</h2><p style="word-break:keep-all">加载过慢请开启缓存(浏览器默认开启)</p><div><img alt="loading" src="/loading.gif"></div></div></div></div></div>
-        <div id="layout">
-            <i data-fa-symbol="calendar-solid" class="fa-solid fa-calendar fa-fw"></i>
-            <i data-fa-symbol="bookmark-solid" class="fa-solid fa-bookmark fa-fw"></i>
-            <i data-fa-symbol="tags-solid" class="fa-solid fa-tags fa-fw"></i>
-            <transition name="into">
-                <div v-show="show_page" style="display: -not-none">
-                    <div id="menu_show">
-                         
-<nav id="menu">
-    <div class="desktop-menu">
-        <a href="/">
-            <span class="title">Moyao の小屋</span>
-        </a>
-        
-        <a href="/">
-            <i class="fa-solid fa-house fa-fw"></i>
-            <span>&ensp;home</span>
-        </a>
-        
-        <a href="/">
-            <i class="fa-solid fa-id-card fa-fw"></i>
-            <span>&ensp;about</span>
-        </a>
-        
-        <a target="_blank" rel="noopener" href="//tags/re/">
-            <i class="fa-solid fa-tags fa-fw"></i>
-            <span>&ensp;tags</span>
-        </a>
-        
-    </div>
-    <div :class="'phone-menu ' + menu_show" id="phone-menu">
-        <div class="curtain" @click="menu_show = !menu_show" v-show="menu_show"></div>
-        <div :class="'title'" @click="menu_show = !menu_show">
-            <i class="fa-solid fa-bars fa-fw"></i>
-            <span>&emsp;Moyao の小屋</span>
-        </div>
-        <transition name="slide">
-        <div class="items" v-show="menu_show">
-            
-            <a href="">
-                <div class="item">
-                    <div style="min-width: 20px; max-width: 50px; width: 10%">
-                        <i class="fa-solid fa-house fa-fw"></i>
-                    </div>
-                    <div style="min-width: 100px; max-width: 150%; width: 20%">home</div>
-                </div>
-            </a>
-            
-            <a href="">
-                <div class="item">
-                    <div style="min-width: 20px; max-width: 50px; width: 10%">
-                        <i class="fa-solid fa-id-card fa-fw"></i>
-                    </div>
-                    <div style="min-width: 100px; max-width: 150%; width: 20%">about</div>
-                </div>
-            </a>
-            
-            <a href="/tags/re/">
-                <div class="item">
-                    <div style="min-width: 20px; max-width: 50px; width: 10%">
-                        <i class="fa-solid fa-tags fa-fw"></i>
-                    </div>
-                    <div style="min-width: 100px; max-width: 150%; width: 20%">tags</div>
-                </div>
-            </a>
-            
-        </div>
-        </transition>
-    </div>
-</nav>
-                    </div>
-                    <div id="main">
-                        
-<div class="article">
-    <div>
-        <h1>Idapython初探 </h1>
-    </div>
-    <div class="info">
-        <span class="date">
-            <span class="icon">
-                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
-            </span>
-            2023/10/12
-        </span>
-        
-        
-    </div>
-    <div class="content" v-pre>
-        <h6 id="PREFACE：确实不熟，但是确实该学学一些自动化东西，反正萌新么记录一下"><a href="#PREFACE：确实不熟，但是确实该学学一些自动化东西，反正萌新么记录一下" class="headerlink" title="PREFACE：确实不熟，但是确实该学学一些自动化东西，反正萌新么记录一下"></a>PREFACE：确实不熟，但是确实该学学一些自动化东西，反正萌新么记录一下</h6><h6 id="11-12：发现这个https-bbs-kanxue-com-thread-225920-htm"><a href="#11-12：发现这个https-bbs-kanxue-com-thread-225920-htm" class="headerlink" title="11.12：发现这个https://bbs.kanxue.com/thread-225920.htm"></a>11.12：发现这个<a target="_blank" rel="noopener" href="https://bbs.kanxue.com/thread-225920.htm">https://bbs.kanxue.com/thread-225920.htm</a></h6><span id="more"></span>
-
+mail: &amp;lt;moyaoxue@outlook.com&amp;gt;
+"/></span><span hidden="hidden" itemprop="publisher" itemscope="itemscope" itemtype="http://schema.org/Organization"><meta itemprop="name" content="Moyao の小屋"/></span><div class="body md" itemprop="articleBody"><h6 id="preface确实不熟但是确实该学学一些自动化东西反正萌新么记录一下"><a class="markdownIt-Anchor" href="#preface确实不熟但是确实该学学一些自动化东西反正萌新么记录一下">#</a> PREFACE：确实不熟，但是确实该学学一些自动化东西，反正萌新么记录一下</h6>
+<h6 id="1112发现这个httpsbbskanxuecomthread-225920htm"><a class="markdownIt-Anchor" href="#1112发现这个httpsbbskanxuecomthread-225920htm">#</a> 11.12：发现这个<a target="_blank" rel="noopener" href="https://bbs.kanxue.com/thread-225920.htm"> https://bbs.kanxue.com/thread-225920.htm</a></h6>
+<span id="more"></span>
 <ul>
-<li>批量获取函数Xref</li>
+<li>批量获取函数 Xref</li>
 </ul>
-<pre><code class="python">&quot;&quot;&quot;
-arg: addr : hex
-ret: XrefList : list
-&quot;&quot;&quot;
-def XrefList(addr):
-    x_list = []
-    for x_addr in XrefsTo(addr, flags=0):
-        x_list.append(hex(addr.frm))
-    return x_list
-</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">arg: addr : hex</span></span><br><span class="line"><span class="string">ret: XrefList : list</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">XrefList</span>(<span class="params">addr</span>):</span><br><span class="line">    x_list = []</span><br><span class="line">    <span class="keyword">for</span> x_addr <span class="keyword">in</span> XrefsTo(addr, flags=<span class="number">0</span>):</span><br><span class="line">        x_list.append(<span class="built_in">hex</span>(addr.frm))</span><br><span class="line">    <span class="keyword">return</span> x_list</span><br></pre></td></tr></table></figure>
 <ul>
 <li>返回函数参数（todo，有点难度的）</li>
 </ul>
-<pre><code class="python">import ida_bytes
-import ida_idp
-import ida_search
-import ida_ua
-import idc
-
-def find_function_arg(addr):
-    while True:
-        # 使用 idc.prev_head 而不是 ida_bytes.prev_head
-        addr = idc.prev_head(addr, ida_ida.cvar.inf.min_ea)
-        # 使用 idc.get_mnem 而不是 GetMnem
-        if idc.get_mnem(addr) == &quot;mov&quot; and &quot;esi&quot; in idc.get_operand_value(addr, 0):
-            # 使用 idc.get_operand_value 而不是 GetOperandValue
-            print(&quot;We found it at 0x%x&quot; % idc.get_operand_value(addr, 1))
-            break
-
-# 替换为你的目标地址
-find_function_arg(0x5D2966)
-</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ida_bytes</span><br><span class="line"><span class="keyword">import</span> ida_idp</span><br><span class="line"><span class="keyword">import</span> ida_search</span><br><span class="line"><span class="keyword">import</span> ida_ua</span><br><span class="line"><span class="keyword">import</span> idc</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">find_function_arg</span>(<span class="params">addr</span>):</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="comment"># 使用 idc.prev_head 而不是 ida_bytes.prev_head</span></span><br><span class="line">        addr = idc.prev_head(addr, ida_ida.cvar.inf.min_ea)</span><br><span class="line">        <span class="comment"># 使用 idc.get_mnem 而不是 GetMnem</span></span><br><span class="line">        <span class="keyword">if</span> idc.get_mnem(addr) == <span class="string">&quot;mov&quot;</span> <span class="keyword">and</span> <span class="string">&quot;esi&quot;</span> <span class="keyword">in</span> idc.get_operand_value(addr, <span class="number">0</span>):</span><br><span class="line">            <span class="comment"># 使用 idc.get_operand_value 而不是 GetOperandValue</span></span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;We found it at 0x%x&quot;</span> % idc.get_operand_value(addr, <span class="number">1</span>))</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 替换为你的目标地址</span></span><br><span class="line">find_function_arg(<span class="number">0x5D2966</span>)</span><br></pre></td></tr></table></figure>
 <ul>
 <li>从地址返回指令</li>
 </ul>
-<pre><code class="python">&quot;&quot;&quot;
-arg: addr : hex
-ret: [addr, mnemonic, op_str]
-&quot;&quot;&quot;
-def get_asm_from_addr(addr):
-    md = Cs(CS_ARCH_X86, CS_MODE_32)
-    # 创建一个 insn_t 对象来存储解码的指令
-    insn = ida_ua.insn_t()
-    ida_ua.decode_insn(insn, addr)
-    insn_bytes = ida_bytes.get_bytes(addr, insn.size)
-    # 打印指令的助记符和操作数
-    x = []
-    for i in md.disasm(insn_bytes, addr):
-        x.append(hex(i.address))
-        x.append(i.mnemonic)
-        x.append(i.op_str)
-    return x
-</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">arg: addr : hex</span></span><br><span class="line"><span class="string">ret: [addr, mnemonic, op_str]</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_asm_from_addr</span>(<span class="params">addr</span>):</span><br><span class="line">    md = Cs(CS_ARCH_X86, CS_MODE_32)</span><br><span class="line">    <span class="comment"># 创建一个 insn_t 对象来存储解码的指令</span></span><br><span class="line">    insn = ida_ua.insn_t()</span><br><span class="line">    ida_ua.decode_insn(insn, addr)</span><br><span class="line">    insn_bytes = ida_bytes.get_bytes(addr, insn.size)</span><br><span class="line">    <span class="comment"># 打印指令的助记符和操作数</span></span><br><span class="line">    x = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> md.disasm(insn_bytes, addr):</span><br><span class="line">        x.append(<span class="built_in">hex</span>(i.address))</span><br><span class="line">        x.append(i.mnemonic)</span><br><span class="line">        x.append(i.op_str)</span><br><span class="line">    <span class="keyword">return</span> x</span><br></pre></td></tr></table></figure>
 <ul>
 <li>找到特定的十六进制（全段查找）</li>
 </ul>
-<pre><code class="python">&quot;&quot;&quot;
-arg: hex_of_pattern : str
-ret: void
-&quot;&quot;&quot;
-def find_pattern(bytes_to_find): # 例如 &quot;FF E0&quot;
-    for seg_ea in idautils.Segments():
-        seg_end = idc.get_segm_end(seg_ea)
-        ea = seg_ea
-        while (ea &lt;= seg_end):
-            ea = idaapi.find_binary(ea, seg_end, bytes_to_find, 16, idaapi.SEARCH_DOWN)
-            if ea != idaapi.BADADDR:
-                # 这里填写需要的处理逻辑，ea即找到的地址
-                print(hex(ea))
-            ea = idc.next_head(ea)
-</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">arg: hex_of_pattern : str</span></span><br><span class="line"><span class="string">ret: void</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">find_pattern</span>(<span class="params">bytes_to_find</span>): <span class="comment"># 例如 &quot;FF E0&quot;</span></span><br><span class="line">    <span class="keyword">for</span> seg_ea <span class="keyword">in</span> idautils.Segments():</span><br><span class="line">        seg_end = idc.get_segm_end(seg_ea)</span><br><span class="line">        ea = seg_ea</span><br><span class="line">        <span class="keyword">while</span> (ea &lt;= seg_end):</span><br><span class="line">            ea = idaapi.find_binary(ea, seg_end, bytes_to_find, <span class="number">16</span>, idaapi.SEARCH_DOWN)</span><br><span class="line">            <span class="keyword">if</span> ea != idaapi.BADADDR:</span><br><span class="line">                <span class="comment"># 这里填写需要的处理逻辑，ea即找到的地址</span></span><br><span class="line">                <span class="built_in">print</span>(<span class="built_in">hex</span>(ea))</span><br><span class="line">            ea = idc.next_head(ea)</span><br></pre></td></tr></table></figure>
 <ul>
 <li>查找特定的汇编地址（全段查找）</li>
 </ul>
-<pre><code class="python">&quot;&quot;&quot;
-arg: assembly_code : str
-ret: void
-&quot;&quot;&quot;
-from keystone import *
-def find_pattern(assembly_code):
-    ks = Ks(KS_ARCH_X86, KS_MODE_64)
-    new_bytes , _= ks.asm(assembly_code)
-    new_bytes = [hex(new_bytes[i])[2:] for i in range(0, len(new_bytes), 1)]
-    new_bytes = &#39; &#39;.join(new_bytes)
-    for seg_ea in idautils.Segments():
-        seg_end = idc.get_segm_end(seg_ea)
-        ea = seg_ea
-        while (ea &lt;= seg_end):
-            ea = idaapi.find_binary(ea, seg_end, new_bytes , 16, idaapi.SEARCH_DOWN)
-            if ea != idaapi.BADADDR:
-                # 这里填写需要的处理逻辑，ea即找到的地址
-                print(hex(ea))
-            ea = idc.next_head(ea)
-</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">arg: assembly_code : str</span></span><br><span class="line"><span class="string">ret: void</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="keyword">from</span> keystone <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">find_pattern</span>(<span class="params">assembly_code</span>):</span><br><span class="line">    ks = Ks(KS_ARCH_X86, KS_MODE_64)</span><br><span class="line">    new_bytes , _= ks.asm(assembly_code)</span><br><span class="line">    new_bytes = [<span class="built_in">hex</span>(new_bytes[i])[<span class="number">2</span>:] <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(new_bytes), <span class="number">1</span>)]</span><br><span class="line">    new_bytes = <span class="string">&#x27; &#x27;</span>.join(new_bytes)</span><br><span class="line">    <span class="keyword">for</span> seg_ea <span class="keyword">in</span> idautils.Segments():</span><br><span class="line">        seg_end = idc.get_segm_end(seg_ea)</span><br><span class="line">        ea = seg_ea</span><br><span class="line">        <span class="keyword">while</span> (ea &lt;= seg_end):</span><br><span class="line">            ea = idaapi.find_binary(ea, seg_end, new_bytes , <span class="number">16</span>, idaapi.SEARCH_DOWN)</span><br><span class="line">            <span class="keyword">if</span> ea != idaapi.BADADDR:</span><br><span class="line">                <span class="comment"># 这里填写需要的处理逻辑，ea即找到的地址</span></span><br><span class="line">                <span class="built_in">print</span>(<span class="built_in">hex</span>(ea))</span><br><span class="line">            ea = idc.next_head(ea)</span><br></pre></td></tr></table></figure>
 <ul>
 <li>查找某条地址的上一条汇编地址信息</li>
 </ul>
-<pre><code class="python">&quot;&quot;&quot;
-arg: addr : str
-ret: addr : hex
-    , len_of_opcode : int
-&quot;&quot;&quot;
-def find_prev_addr(addr):
-    prev_inst_addr = ida_bytes.prev_head(address, ida_ida.cvar.inf.min_ea)
-    prev_inst_size = ida_bytes.get_item_size(prev_inst_addr)
-    return prev_inst_addr, prev_inst_size
-</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">arg: addr : str</span></span><br><span class="line"><span class="string">ret: addr : hex</span></span><br><span class="line"><span class="string">  , len_of_opcode : int</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">find_prev_addr</span>(<span class="params">addr</span>):</span><br><span class="line">  prev_inst_addr = ida_bytes.prev_head(address, ida_ida.cvar.inf.min_ea)</span><br><span class="line">    prev_inst_size = ida_bytes.get_item_size(prev_inst_addr)</span><br><span class="line">    <span class="keyword">return</span> prev_inst_addr, prev_inst_size</span><br></pre></td></tr></table></figure>
 <ul>
-<li>patch脚本</li>
+<li>patch 脚本</li>
 </ul>
-<pre><code class="python">&quot;&quot;&quot;
-arg: addr : str
-     assembly_code : str
-ret: void
-&quot;&quot;&quot;
-def patch_addr(addr, assembly_code)
-    new_bytes , _= ks.asm(assembly_code)
-    new_bytes = [(new_bytes[i]) for i in range(0, len(new_bytes), 1)]
-    for i in range(prev_inst_addr, prev_inst_addr + len(new_bytes), 1):
-        patch_byte(i, new_bytes[j])
-        j += 1
-</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">arg: addr : str</span></span><br><span class="line"><span class="string">   assembly_code : str</span></span><br><span class="line"><span class="string">ret: void</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">patch_addr</span>(<span class="params">addr, assembly_code</span>)</span><br><span class="line">  new_bytes , _= ks.asm(assembly_code)</span><br><span class="line">  new_bytes = [(new_bytes[i]) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(new_bytes), <span class="number">1</span>)]</span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(prev_inst_addr, prev_inst_addr + <span class="built_in">len</span>(new_bytes), <span class="number">1</span>):</span><br><span class="line">        patch_byte(i, new_bytes[j])</span><br><span class="line">        j += <span class="number">1</span></span><br></pre></td></tr></table></figure>
 <ul>
-<li>批量hook</li>
+<li>批量 hook</li>
 </ul>
-<pre><code class="python">class MyDbgHook(idaapi.DBG_Hooks):
-    def dbg_bpt(self, tid, ea):
-        if ea in addresses_to_hook:
-            # 设置处理逻辑
-            rax_value = ida_dbg.get_reg_val(&quot;RAX&quot;)
-            print(&quot;Breakpoint at 0x%X, RAX = 0x%X&quot; % (ea, rax_value))
-            ida_dbg.continue_process()
-        return 0
-
-# 实例化并注册我们的调试器 hook
-debug_hook = MyDbgHook()
-debug_hook.hook()
-
-# 为列表中的每个地址设置断点
-for address in addresses_to_hook:
-    idc.add_bpt(address, 0, idc.BPT_SOFT)
-
-# 启动或继续调试过程
-ida_dbg.run_requests()
-</code></pre>
-
-    </div>
-    
-</div>
-                         
-<footer id="footer">
-    <div class="footer-wrap">
-        <div>
-            © 20xx - 2024 Moyao の小屋
-            <span class="footer-icon">
-                <i class="fa-solid fa-font-awesome fa-fw"></i>
-            </span>
-            @Moyao
-        </div>
-        <div></div>
-        <div>Based on the <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo Engine</a> & <a
-                target="_blank" rel="noopener" href="https://github.com/argvchs/hexo-theme-particlex">ParticleX Theme</a></div>
-        
-    </div>
-</footer>
-                    </div>
-                </div>
-            </transition>
-            <div id="img_show">
-                <img id="img_content" alt="img_show">
-            </div>
-        </div>
-        <script src="https://cdn.staticfile.org/highlight.js/11.5.1/highlight.min.js"></script>
-        <script src="/js/particlex.js"></script>
-        <script src="/js/showimg.js"></script>
-        
-
-    </body>
-</html>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyDbgHook</span>(idaapi.DBG_Hooks):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">dbg_bpt</span>(<span class="params">self, tid, ea</span>):</span><br><span class="line">        <span class="keyword">if</span> ea <span class="keyword">in</span> addresses_to_hook:</span><br><span class="line">            <span class="comment"># 设置处理逻辑</span></span><br><span class="line">            rax_value = ida_dbg.get_reg_val(<span class="string">&quot;RAX&quot;</span>)</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;Breakpoint at 0x%X, RAX = 0x%X&quot;</span> % (ea, rax_value))</span><br><span class="line">            ida_dbg.continue_process()</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 实例化并注册我们的调试器 hook</span></span><br><span class="line">debug_hook = MyDbgHook()</span><br><span class="line">debug_hook.hook()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 为列表中的每个地址设置断点</span></span><br><span class="line"><span class="keyword">for</span> address <span class="keyword">in</span> addresses_to_hook:</span><br><span class="line">    idc.add_bpt(address, <span class="number">0</span>, idc.BPT_SOFT)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动或继续调试过程</span></span><br><span class="line">ida_dbg.run_requests()</span><br></pre></td></tr></table></figure>
+</div><footer><div class="meta"><span class="item"><span class="icon"><i class="ic i-calendar-check"></i></span><span class="text">Edited on</span><time title="Modified: 2023-11-12 15:28:08" itemprop="dateModified" datetime="2023-11-12T15:28:08+08:00">2023-11-12</time></span></div><div class="reward"><button><i class="ic i-heartbeat"></i>Donate</button><p>Give me a cup of [coffee]~(￣▽￣)~*</p><div id="qr"><div><img loading="lazy" data-src="/assets/wechatpay.png" alt="Moyao WeChat Pay"/><p>WeChat Pay</p></div><div><img loading="lazy" data-src="/assets/alipay.png" alt="Moyao Alipay"/><p>Alipay</p></div></div></div><div id="copyright"><ul><li class="author"><strong>Post author: </strong>Moyao<i class="ic i-at"><em>@</em></i>Moyao の小屋</li><li class="link"><strong>Post link: </strong><a href="https://demoyao100.github.io/2023/10/12/idapython%E5%88%9D%E6%8E%A2/" title="idapython初探">https://demoyao100.github.io/2023/10/12/idapython初探/</a></li><li class="license"><strong>Copyright Notice: </strong>All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</a> unless stating additionally.</li></ul></div></footer></article></div><div class="post-nav"><div class="item left"><a href="/2023/10/04/flare-on2023/" rel="prev" itemprop="url" data-background-image="https:&#x2F;&#x2F;tva4.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1giciryrr3rj20zk0m8nhk.jpg" title="flare-on2023"><span class="type">Previous Post</span><h3>flare-on2023</h3></a></div><div class="item right"><a href="/2023/10/12/cpp%E8%99%9A%E8%A1%A8%E9%80%86%E5%90%91%E5%88%9D%E6%8E%A2/" rel="next" itemprop="url" data-background-image="https:&#x2F;&#x2F;tva4.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1giciszlczyj20zk0m816d.jpg" title="cpp虚表逆向初探"><span class="type">Next Post</span><h3>cpp虚表逆向初探</h3></a></div></div><div class="wrap" id="comments"></div></div><div id="sidebar"><div class="inner"><div class="panels"><div class="inner"><div class="contents panel pjax" data-title="Contents"><ol class="toc"><li class="toc-item toc-level-6"><a class="toc-link" href="#preface%E7%A1%AE%E5%AE%9E%E4%B8%8D%E7%86%9F%E4%BD%86%E6%98%AF%E7%A1%AE%E5%AE%9E%E8%AF%A5%E5%AD%A6%E5%AD%A6%E4%B8%80%E4%BA%9B%E8%87%AA%E5%8A%A8%E5%8C%96%E4%B8%9C%E8%A5%BF%E5%8F%8D%E6%AD%A3%E8%90%8C%E6%96%B0%E4%B9%88%E8%AE%B0%E5%BD%95%E4%B8%80%E4%B8%8B"><span class="toc-number">1.</span> <span class="toc-text"> PREFACE：确实不熟，但是确实该学学一些自动化东西，反正萌新么记录一下</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#1112%E5%8F%91%E7%8E%B0%E8%BF%99%E4%B8%AAhttpsbbskanxuecomthread-225920htm"><span class="toc-number">2.</span> <span class="toc-text"> 11.12：发现这个 https:&#x2F;&#x2F;bbs.kanxue.com&#x2F;thread-225920.htm</span></a></li></ol></div><div class="related panel pjax" data-title="Related"></div><div class="overview panel" data-title="Overview"><div class="author" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person"><img class="image" loading="lazy" decoding="async" itemprop="image" alt="Moyao" src="/assets/avatar.jpg"/><p class="name" itemprop="name">Moyao</p><div class="description" itemprop="description">Write down something interesting I met
+feel free to mail me if you have something wanted to talk about
+mail: &lt;moyaoxue@outlook.com&gt;
+</div></div><nav class="state"><div class="item posts"><a href="/archives/"><span class="count">71</span><span class="name">posts</span></a></div><div class="item tags"><a href="/tags/"><span class="count">13</span><span class="name">tags</span></a></div></nav><div class="social"><a target="_blank" rel="noopener" href="https://github.com/name" class="item github" title="https:&#x2F;&#x2F;github.com&#x2F;name"><i class="ic i-github"></i></a></div><div class="menu"><li class="item"><a href="/" rel="section"><i class="ic i-home"></i>Home</a></li></div></div></div></div><ul id="quick"><li class="prev pjax"><a href="/2023/10/12/cpp%E8%99%9A%E8%A1%A8%E9%80%86%E5%90%91%E5%88%9D%E6%8E%A2/" rel="prev" title="Previous Post"><i class="ic i-chevron-left"></i></a></li><li class="up"><i class="ic i-arrow-up"></i></li><li class="down"><i class="ic i-arrow-down"></i></li><li class="next pjax"><a href="/2023/10/04/flare-on2023/" rel="next" title="Next Post"><i class="ic i-chevron-right"></i></a></li><li class="percent"></li></ul></div></div><div class="dimmer"></div></div></main><footer id="footer"><div class="inner"><div class="widgets"><div class="rpost pjax"><h2>Random Posts</h2><ul><li class="item"><div class="breadcrumb"></div><span><a href="/2023/09/25/vsCTF/">vsCTF2023</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2023/07/11/d3ctf-2023/">d3ctf 2023</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2023/11/09/gdb-python%E5%88%9D%E6%8E%A2/">gdb_python初探</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2023/11/29/mac%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">mac环境配置</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2023/09/27/print%E5%8D%A0%E4%BD%8D%E7%AC%A6%E9%87%8D%E5%86%99%E5%88%9D%E6%8E%A2/">print占位符重写初探</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2024/04/27/frida%E6%BA%90%E7%A0%81%E5%88%9D%E6%8E%A2/">frida源码初探</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2024/01/31/ubuntu-python-version-manage/">ubuntu python version manage</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2022/11/02/hnctfRe/">hnctfRe</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2022/08/29/codeforce-1719C/">codeforce-1719C</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2023/08/23/%E5%88%9D%E6%8E%A2python-bytecode/">初探python bytecode</a></span></li></ul></div><div class="rpost pjax"><h2>Recent Comments</h2></div></div><div class="status"><div class="copyright">&copy; 2022 -<span itemprop="copyrightYear">2024</span><span class="with-love"><i class="ic i-sakura rotate"></i></span><span class="author" itemprop="copyrightHolder">Moyao @ testName</span></div><div class="count"><span class="post-meta-item-icon"><i class="ic i-chart-area"></i></span><span title="Symbols count total">625k words</span><span class="post-meta-divider"> | </span><span class="post-meta-item-icon"><i class="ic i-coffee"></i></span><span title="Reading time total">9:28</span></div><div class="powered-by">Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> & Theme.<a target="_blank" rel="noopener" href="https://github.com/theme-shoka-x/hexo-theme-shokaX/">ShokaX</a></div></div></div></footer></div><script data-config type="text/javascript">var LOCAL = {
+    ispost: true,
+        path: `2023/10/12/idapython初探/`,
+        favicon: {
+        show: `(●´3｀●) Here we go again.`,
+        hide: `(´Д｀) It's a disaster!`
+    },
+    search: {
+        placeholder: "Search for Posts",
+        empty: "We didn't find any results for the search: ${query}",
+        stats: "${hits} results found in ${time} ms"
+    },
+    copy_tex: false,
+    katex: false,
+    mermaid: false,
+    audio: undefined,
+    fancybox: true,
+    nocopy: false,
+    outime: true,
+    template: `<div class="note warning"><p><span class="label warning">Article Timeliness Alert</span><br>This is an article published {{publish}} days ago and last updated {{updated}} days ago. Some information may have changed, so please be careful to screen it.</p></div>`,
+    quiz: {
+        choice: `Multiple Choice`,
+        multiple: `Multiple Answer`,
+        true_false: `True/False`,
+        essay: `Questions`,
+        gap_fill: `Gap Filling`,
+        mistake: `Wrong Answer`
+    },
+    ignores: [
+        (uri) => uri.includes('#'),
+        (uri) => new RegExp(LOCAL.path + '$').test(uri),
+            []
+    ]
+};
+</script><script src="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-6-M/pace/1.2.4/pace.min.js" async></script><script src="/js/siteInit.js?v=0.4.2" type="module" fetchpriority="high" defer></script></body></html>

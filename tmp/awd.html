@@ -1,282 +1,103 @@
-
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
-        <title>Moyao の小屋</title>
-        <meta name="author" content="Moyao">
-        <meta name="description" content="Write down something interesting I met
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"/><meta name="theme-color" content="#222"/><meta http-equiv="X-UA-COMPATIBLE" content="IE=edge,chrome=1"/><meta name="renderer" content="webkit"/><link rel="icon" type="image/ico" sizes="32x32" href="/assets/favicon.ico"/><link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png"/><link rel="alternate" href="/rss.xml" title="Moyao の小屋" type="application/rss+xml"><link rel="alternate" href="/atom.xml" title="Moyao の小屋" type="application/atom+xml"><link rel="alternate" type="application/json" title="Moyao の小屋" href="https://demoyao100.github.io/feed.json"/><link rel="preconnect" href="https://lf9-cdn-tos.bytecdntp.com"/><link rel="preconnect" href="https://at.alicdn.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CFredericka%20the%20Great:400,400italic,700,700italic%7CNoto%20Serif%20JP:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic%7CInconsolata:400,400italic,700,700italic&display=swap&subset=latin,latin-ext" media="none" onload="this.media&#x3D;&#39;all&#39;"><link rel="stylesheet" href="/css/app.css?v=0.4.2"><link rel="modulepreload" href="/js/chunk-346TEOXD.js"></link><link rel="modulepreload" href="/js/chunk-QA6RGM2S.js"></link><link rel="modulepreload" href="/js/chunk-QAWHJ5B3.js"></link><link rel="modulepreload" href="/js/index.esm-SMPOVEZ5.js"></link><link rel="modulepreload" href="/js/post-H6TTLEOZ.js"></link><link rel="modulepreload" href="/js/quicklink-RU6FD7L7.js"></link><link rel="modulepreload" href="/js/siteInit.js"></link><link rel="preload" href="https://tva4.sinaimg.cn/large/6833939bly1gicis3attqj20zk0m8k7l.jpg" as="image" fetchpriority="high"><link rel="preload" href="https://tva4.sinaimg.cn/large/6833939bly1gicis081o9j20zk0m8dmr.jpg" as="image" fetchpriority="high"><link rel="preload" href="https://tva4.sinaimg.cn/large/6833939bly1giciryrr3rj20zk0m8nhk.jpg" as="image" fetchpriority="high"><link rel="preload" href="https://tva4.sinaimg.cn/large/6833939bly1giciszlczyj20zk0m816d.jpg" as="image" fetchpriority="high"><link rel="preload" href="https://tva4.sinaimg.cn/large/6833939bly1gicit4jrvuj20zk0m8785.jpg" as="image" fetchpriority="high"><link rel="preload" href="https://tva4.sinaimg.cn/large/6833939bly1gicit31ffoj20zk0m8naf.jpg" as="image" fetchpriority="high"><meta name="description" content="Write down something interesting I met
 feel free to mail me if you have something wanted to talk about
-mail: &lt;moyaoxue@outlook.com&gt;
-">
-        <meta name="keywords" content="">
-        <link rel="icon" href="/images/head.jpg">
-        <script src="https://cdn.staticfile.org/instant.page/5.1.0/instantpage.min.js" type="module"></script>
-        <script src="https://cdn.staticfile.org/font-awesome/6.1.1/js/all.min.js"></script>
-        
-        <link rel="stylesheet" href="/css/fonts.min.css">
-        <link rel="stylesheet" href="/css/particlex.css">
-        
-        <script src="https://cdn.staticfile.org/vue/3.2.33/vue.global.prod.min.js"></script>
-    <meta name="generator" content="Hexo 6.2.0"></head>
-    <body>
-        <div id="loading" style="height:100vh;width:100vw;position:fixed;display:flex;z-index:200;justify-content:space-between;background:#fff;transition:opacity 0.3s ease-out"><div style="position:fixed;height:100vh;width:100vw;display:flex;justify-content:center;align-items:center"><div id="loadcontent" style="width:50vmin;height:50vmin;padding:50px;border-radius:50%;display:flex;justify-content:center;align-items:center;border:solid 10px #a3ddfb;text-align:center"><div><h2>LOADING...</h2><p style="word-break:keep-all">加载过慢请开启缓存(浏览器默认开启)</p><div><img alt="loading" src="/loading.gif"></div></div></div></div></div>
-        <div id="layout">
-            <i data-fa-symbol="calendar-solid" class="fa-solid fa-calendar fa-fw"></i>
-            <i data-fa-symbol="bookmark-solid" class="fa-solid fa-bookmark fa-fw"></i>
-            <i data-fa-symbol="tags-solid" class="fa-solid fa-tags fa-fw"></i>
-            <transition name="into">
-                <div v-show="show_page" style="display: -not-none">
-                    <div id="menu_show">
-                         
-<nav id="menu">
-    <div class="desktop-menu">
-        <a href="/">
-            <span class="title">Moyao の小屋</span>
-        </a>
-        
-        <a href="/">
-            <i class="fa-solid fa-house fa-fw"></i>
-            <span>&ensp;home</span>
-        </a>
-        
-        <a href="/">
-            <i class="fa-solid fa-id-card fa-fw"></i>
-            <span>&ensp;about</span>
-        </a>
-        
-        <a target="_blank" rel="noopener" href="//tags/re/">
-            <i class="fa-solid fa-tags fa-fw"></i>
-            <span>&ensp;tags</span>
-        </a>
-        
-    </div>
-    <div :class="'phone-menu ' + menu_show" id="phone-menu">
-        <div class="curtain" @click="menu_show = !menu_show" v-show="menu_show"></div>
-        <div :class="'title'" @click="menu_show = !menu_show">
-            <i class="fa-solid fa-bars fa-fw"></i>
-            <span>&emsp;Moyao の小屋</span>
-        </div>
-        <transition name="slide">
-        <div class="items" v-show="menu_show">
-            
-            <a href="">
-                <div class="item">
-                    <div style="min-width: 20px; max-width: 50px; width: 10%">
-                        <i class="fa-solid fa-house fa-fw"></i>
-                    </div>
-                    <div style="min-width: 100px; max-width: 150%; width: 20%">home</div>
-                </div>
-            </a>
-            
-            <a href="">
-                <div class="item">
-                    <div style="min-width: 20px; max-width: 50px; width: 10%">
-                        <i class="fa-solid fa-id-card fa-fw"></i>
-                    </div>
-                    <div style="min-width: 100px; max-width: 150%; width: 20%">about</div>
-                </div>
-            </a>
-            
-            <a href="/tags/re/">
-                <div class="item">
-                    <div style="min-width: 20px; max-width: 50px; width: 10%">
-                        <i class="fa-solid fa-tags fa-fw"></i>
-                    </div>
-                    <div style="min-width: 100px; max-width: 150%; width: 20%">tags</div>
-                </div>
-            </a>
-            
-        </div>
-        </transition>
-    </div>
-</nav>
-                    </div>
-                    <div id="main">
-                        
-<div class="article">
-    <div>
-        <h1> </h1>
-    </div>
-    <div class="info">
-        <span class="date">
-            <span class="icon">
-                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
-            </span>
-            2024/4/25
-        </span>
-        
-        
-    </div>
-    <div class="content" v-pre>
-        <h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><h5 id="修改ssh"><a href="#修改ssh" class="headerlink" title="修改ssh"></a>修改ssh</h5><p>有的机子vscode连不上，就用tabby</p>
-<pre><code class="bash">passwd [user]
-</code></pre>
-<p>纯ssh操作：</p>
-<pre><code>下载 ： scp ubuntu@12.34.56.78:~/test C:\Users\18238\Downloads
-上传 ：  scp  C:\Users\18238\Downloads\test ubuntu@12.34.56.78:~/tmp
-</code></pre>
-<h5 id="检查权限"><a href="#检查权限" class="headerlink" title="检查权限"></a>检查权限</h5><pre><code class="shell">find &quot;$target_folder&quot; -user &quot;ubuntu&quot; -type d -perm &quot;/u=rwx&quot; -exec ls -ld &#123;&#125; \; &gt; &quot;rights_folder_list.txt&quot;
-</code></pre>
-<h5 id="fscan自扫开放服务"><a href="#fscan自扫开放服务" class="headerlink" title="fscan自扫开放服务"></a>fscan自扫开放服务</h5><pre><code class="bash">if [ -f &quot;./fscan&quot; ]; then
-
-    chmod +x &quot;./fscan&quot;
-
-    if [ -x &quot;./fscan&quot; ]; then
-
-        echo &quot;运行 fscan...&quot;
-        ./fscan -h 127.0.0.1 -p 1-65535 \; &gt; &quot;fscan_result.txt&quot;
-
-    else
-        echo &quot;该目录或该用户下没有权限运行fscan&quot;
-    fi
-else
-    echo &quot;请上传fscan文件&quot;
-fi
-</code></pre>
-<h5 id="强制终止某端口"><a href="#强制终止某端口" class="headerlink" title="强制终止某端口"></a>强制终止某端口</h5><pre><code class="bash">kill -9 $(netstat -nlp | grep :8080 | awk &#39;&#123;print $7&#125;&#39; | awk -F&quot;/&quot; &#39;&#123; print $1 &#125;&#39;)
-</code></pre>
-<h5 id="强制终止除某端口外所有端口"><a href="#强制终止除某端口外所有端口" class="headerlink" title="强制终止除某端口外所有端口"></a>强制终止除某端口外所有端口</h5><pre><code class="bash">kill -9 $(netstat -anopt | grep -v &quot;sshd\|httpd\|mysqld&quot; | awk &#39;&#123;print $7&#125;&#39; | awk -F&quot;/&quot; &#39;&#123; print $1 &#125;&#39;)
-</code></pre>
-<h5 id="尝试修改"><a href="#尝试修改" class="headerlink" title="尝试修改"></a>尝试修改</h5><pre><code class="bash">busybox alias cat=&quot;echo &quot;flag&#123;&quot;`date | md5sum | awk &#39;&#123;print $1&#125;&#39;`&quot;&#125;&quot;||&quot;
-busybox alias curl=&quot;echo &quot;flag&#123;&quot;`date | md5sum | awk &#39;&#123;print $1&#125;&#39;`&quot;&#125;&quot;||&quot;
-</code></pre>
-<h5 id="扫描网段上存在的主机"><a href="#扫描网段上存在的主机" class="headerlink" title="扫描网段上存在的主机"></a>扫描网段上存在的主机</h5><pre><code class="bash">output_file=&quot;others_port_scan_results.txt&quot;
-
-for i in &#123;0..255&#125;; do
-    host=&quot;192.168.1.$&#123;i&#125;&quot; # 修改
-    port=80
-    echo &quot;testing $&#123;host&#125;&quot;
-    nc -z -w2 &quot;$host&quot; &quot;$port&quot; &amp;&amp; echo &quot;$host&quot; &gt;&gt; &quot;$output_file&quot;
-done
-</code></pre>
+mail: &amp;lt;moyaoxue@outlook.com&amp;gt;
+"/><link rel="canonical" href="https://demoyao100.github.io/tmp/awd"><title></title><meta name="generator" content="Hexo 7.0.0"></head><body itemscope itemtype="http://schema.org/WebPage"><div id="loading"><div class="cat"><div class="body"></div><div class="head"><div class="face"></div></div><div class="foot"><div class="tummy-end"></div><div class="bottom"></div><div class="legs left"></div><div class="legs right"></div></div><div class="paw"><div class="hands left"></div><div class="hands right"></div></div></div></div><div id="container"><header id="header" itemscope itemtype="http://schema.org/WPHeader"><div class="inner"><div id="brand"><div class="pjax"><h1 itemprop="name headline"></h1></div></div><nav id="nav"><div class="inner"><div class="toggle"><div class="lines" aria-label="Toggle navigation bar"><span class="line"></span><span class="line"></span><span class="line"></span></div></div><ul class="menu"><li class="item title"><a href="/" rel="start">testName</a></li></ul><ul class="right" id="rightNav"><li class="item theme"><i class="ic i-sun"></i></li><li class="item search"><i class="ic i-search"></i></li></ul></div></nav></div><div class="pjax" id="imgs"><ul><li class="item" style="background-image: url(&quot;https://tva4.sinaimg.cn/large/6833939bly1gicis3attqj20zk0m8k7l.jpg&quot;);"></li><li class="item" style="background-image: url(&quot;https://tva4.sinaimg.cn/large/6833939bly1gicis081o9j20zk0m8dmr.jpg&quot;);"></li><li class="item" style="background-image: url(&quot;https://tva4.sinaimg.cn/large/6833939bly1giciryrr3rj20zk0m8nhk.jpg&quot;);"></li><li class="item" style="background-image: url(&quot;https://tva4.sinaimg.cn/large/6833939bly1giciszlczyj20zk0m816d.jpg&quot;);"></li><li class="item" style="background-image: url(&quot;https://tva4.sinaimg.cn/large/6833939bly1gicit4jrvuj20zk0m8785.jpg&quot;);"></li><li class="item" style="background-image: url(&quot;https://tva4.sinaimg.cn/large/6833939bly1gicit31ffoj20zk0m8naf.jpg&quot;);"></li></ul></div></header><div id="waves"><svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path></defs><g class="parallax"><use xlink:href="#gentle-wave" x="48" y="0"></use><use xlink:href="#gentle-wave" x="48" y="3"></use><use xlink:href="#gentle-wave" x="48" y="5"></use><use xlink:href="#gentle-wave" x="48" y="7"></use></g></svg></div><main><div class="inner"><div class="pjax" id="main"><div class="page wrap"><article class="post block" itemscope="itemscope" itemtype="http://schema.org/Article" lang="en"><link itemprop="mainEntityOfPage" href="https://demoyao100.github.io/tmp/awd.html"/><span hidden="hidden" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person"><meta itemprop="image" content="/assets/avatar.jpg"/><meta itemprop="name" content="Moyao"/><meta itemprop="description" content="Hi,I'm Moyao, Write down something interesting I met
+feel free to mail me if you have something wanted to talk about
+mail: &amp;lt;moyaoxue@outlook.com&amp;gt;
+"/></span><span hidden="hidden" itemprop="publisher" itemscope="itemscope" itemtype="http://schema.org/Organization"><meta itemprop="name" content="Moyao の小屋"/></span><div class="body md" itemprop="articleBody"><h3 id="初始化"><a class="markdownIt-Anchor" href="#初始化">#</a> 初始化</h3>
+<h5 id="修改ssh"><a class="markdownIt-Anchor" href="#修改ssh">#</a> 修改 ssh</h5>
+<p>有的机子 vscode 连不上，就用 tabby</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passwd [user]</span><br></pre></td></tr></table></figure>
+<p>纯 ssh 操作：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">下载 ： scp ubuntu@12.34.56.78:~/test C:\Users\18238\Downloads</span><br><span class="line">上传 ：  scp  C:\Users\18238\Downloads\test ubuntu@12.34.56.78:~/tmp</span><br></pre></td></tr></table></figure>
+<h5 id="检查权限"><a class="markdownIt-Anchor" href="#检查权限">#</a> 检查权限</h5>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find &quot;$target_folder&quot; -user &quot;ubuntu&quot; -type d -perm &quot;/u=rwx&quot; -exec ls -ld &#123;&#125; \; &gt; &quot;rights_folder_list.txt&quot;</span><br></pre></td></tr></table></figure>
+<h5 id="fscan自扫开放服务"><a class="markdownIt-Anchor" href="#fscan自扫开放服务">#</a> fscan 自扫开放服务</h5>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> [ -f <span class="string">&quot;./fscan&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">chmod</span> +x <span class="string">&quot;./fscan&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> [ -x <span class="string">&quot;./fscan&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line"></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;运行 fscan...&quot;</span></span><br><span class="line">        ./fscan -h 127.0.0.1 -p 1-65535 \; &gt; <span class="string">&quot;fscan_result.txt&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;该目录或该用户下没有权限运行fscan&quot;</span></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;请上传fscan文件&quot;</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<h5 id="强制终止某端口"><a class="markdownIt-Anchor" href="#强制终止某端口">#</a> 强制终止某端口</h5>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">kill</span> -9 $(netstat -nlp | grep :8080 | awk <span class="string">&#x27;&#123;print $7&#125;&#x27;</span> | awk -F<span class="string">&quot;/&quot;</span> <span class="string">&#x27;&#123; print $1 &#125;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h5 id="强制终止除某端口外所有端口"><a class="markdownIt-Anchor" href="#强制终止除某端口外所有端口">#</a> 强制终止除某端口外所有端口</h5>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">kill</span> -9 $(netstat -anopt | grep -v <span class="string">&quot;sshd\|httpd\|mysqld&quot;</span> | awk <span class="string">&#x27;&#123;print $7&#125;&#x27;</span> | awk -F<span class="string">&quot;/&quot;</span> <span class="string">&#x27;&#123; print $1 &#125;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h5 id="尝试修改"><a class="markdownIt-Anchor" href="#尝试修改">#</a> 尝试修改</h5>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">busybox <span class="built_in">alias</span> <span class="built_in">cat</span>=<span class="string">&quot;echo &quot;</span>flag&#123;<span class="string">&quot;`date | md5sum | awk &#x27;&#123;print <span class="variable">$1</span>&#125;&#x27;`&quot;</span>&#125;<span class="string">&quot;||&quot;</span></span><br><span class="line">busybox <span class="built_in">alias</span> curl=<span class="string">&quot;echo &quot;</span>flag&#123;<span class="string">&quot;`date | md5sum | awk &#x27;&#123;print <span class="variable">$1</span>&#125;&#x27;`&quot;</span>&#125;<span class="string">&quot;||&quot;</span></span><br></pre></td></tr></table></figure>
+<h5 id="扫描网段上存在的主机"><a class="markdownIt-Anchor" href="#扫描网段上存在的主机">#</a> 扫描网段上存在的主机</h5>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">output_file=<span class="string">&quot;others_port_scan_results.txt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> &#123;0..255&#125;; <span class="keyword">do</span></span><br><span class="line">    host=<span class="string">&quot;192.168.1.<span class="variable">$&#123;i&#125;</span>&quot;</span> <span class="comment"># 修改</span></span><br><span class="line">    port=80</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;testing <span class="variable">$&#123;host&#125;</span>&quot;</span></span><br><span class="line">    nc -z -w2 <span class="string">&quot;<span class="variable">$host</span>&quot;</span> <span class="string">&quot;<span class="variable">$port</span>&quot;</span> &amp;&amp; <span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$host</span>&quot;</span> &gt;&gt; <span class="string">&quot;<span class="variable">$output_file</span>&quot;</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
 <p>python：</p>
-<pre><code class="python">import socket
-
-def check_port(hostname, port):
-    try:
-        # 创建socket对象
-        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        # 设置超时时间为2秒
-        sock.settimeout(2)
-        # 连接到目标主机和端口
-        result = sock.connect_ex((hostname, port))
-        if result == 0:
-            print(f&quot;&#123;hostname&#125;&quot;)
-
-        sock.close()
-    except socket.error:
-        pass
-
-for i in range(256):
-    host = f&#39;192-168-1-&#123;i&#125;.pvp2328.bugku.cn&#39;
-    port =80
-    check_port(host, port)
-</code></pre>
-<h5 id="检测ubuntu版本"><a href="#检测ubuntu版本" class="headerlink" title="检测ubuntu版本"></a>检测ubuntu版本</h5><blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">check_port</span>(<span class="params">hostname, port</span>):</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="comment"># 创建socket对象</span></span><br><span class="line">        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</span><br><span class="line">        <span class="comment"># 设置超时时间为2秒</span></span><br><span class="line">        sock.settimeout(<span class="number">2</span>)</span><br><span class="line">        <span class="comment"># 连接到目标主机和端口</span></span><br><span class="line">        result = sock.connect_ex((hostname, port))</span><br><span class="line">        <span class="keyword">if</span> result == <span class="number">0</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;<span class="subst">&#123;hostname&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">        sock.close()</span><br><span class="line">    <span class="keyword">except</span> socket.error:</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">256</span>):</span><br><span class="line">    host = <span class="string">f&#x27;192-168-1-<span class="subst">&#123;i&#125;</span>.pvp2328.bugku.cn&#x27;</span></span><br><span class="line">    port =<span class="number">80</span></span><br><span class="line">    check_port(host, port)</span><br></pre></td></tr></table></figure>
+<h5 id="检测ubuntu版本"><a class="markdownIt-Anchor" href="#检测ubuntu版本">#</a> 检测 ubuntu 版本</h5>
+<blockquote>
 <p>lsb_release -a</p>
 </blockquote>
 <blockquote>
-<p>cat &#x2F;etc&#x2F;os-release</p>
+<p>cat /etc/os-release</p>
 </blockquote>
-<h5 id="检测内核版本"><a href="#检测内核版本" class="headerlink" title="检测内核版本"></a>检测内核版本</h5><blockquote>
-<p>uname -r </p>
+<h5 id="检测内核版本"><a class="markdownIt-Anchor" href="#检测内核版本">#</a> 检测内核版本</h5>
+<blockquote>
+<p>uname -r</p>
 </blockquote>
-<h3 id="web"><a href="#web" class="headerlink" title="web"></a>web</h3><h5 id="备份网站"><a href="#备份网站" class="headerlink" title="备份网站"></a>备份网站</h5><pre><code class="bash">cd /var/www/html
-tar -zcvf ~/html.tar.gz *
-</code></pre>
-<h5 id="还原网站"><a href="#还原网站" class="headerlink" title="还原网站"></a>还原网站</h5><pre><code>tar -zxvf ~/html.tar.gz -C .
-</code></pre>
-<h5 id="备份数据库"><a href="#备份数据库" class="headerlink" title="备份数据库"></a>备份数据库</h5><pre><code class="bash">cd /var/www/html
-find .|xargs grep &quot;password&quot;
-</code></pre>
+<h3 id="web"><a class="markdownIt-Anchor" href="#web">#</a> web</h3>
+<h5 id="备份网站"><a class="markdownIt-Anchor" href="#备份网站">#</a> 备份网站</h5>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /var/www/html</span><br><span class="line">tar -zcvf ~/html.tar.gz *</span><br></pre></td></tr></table></figure>
+<h5 id="还原网站"><a class="markdownIt-Anchor" href="#还原网站">#</a> 还原网站</h5>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf ~/html.tar.gz -C .</span><br></pre></td></tr></table></figure>
+<h5 id="备份数据库"><a class="markdownIt-Anchor" href="#备份数据库">#</a> 备份数据库</h5>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /var/www/html</span><br><span class="line">find .|xargs grep <span class="string">&quot;password&quot;</span></span><br></pre></td></tr></table></figure>
 <p>备份</p>
-<pre><code class="bash">cd /var/lib/mysql # (进入到MySQL库目录，根据自己的MySQL的安装情况调整目录)
-mysqldump -u root -p Test &gt; Test.sql # 输入密码即可。
-mysqldump -u root -p --all-databases &gt; ~/backup.sql  # 备份所有数据库
-mysqldump -u root -p --all-databases -skip-lock-tables &gt; ~/backup.sql  # 跳过锁定的数据库表
-</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /var/lib/mysql <span class="comment"># (进入到MySQL库目录，根据自己的MySQL的安装情况调整目录)</span></span><br><span class="line">mysqldump -u root -p Test &gt; Test.sql <span class="comment"># 输入密码即可。</span></span><br><span class="line">mysqldump -u root -p --all-databases &gt; ~/backup.sql  <span class="comment"># 备份所有数据库</span></span><br><span class="line">mysqldump -u root -p --all-databases -skip-lock-tables &gt; ~/backup.sql  <span class="comment"># 跳过锁定的数据库表</span></span><br></pre></td></tr></table></figure>
 <p>还原</p>
-<pre><code class="bash">mysql -u root -p
-create database [database_name];
-use [database_name]
-source backup.sql;
-</code></pre>
-<h5 id="php流量监控"><a href="#php流量监控" class="headerlink" title="php流量监控"></a>php流量监控</h5><p>log.php</p>
-<pre><code class="php">&lt;?php
-$ip = $_SERVER[&quot;REMOTE_ADDR&quot;];      //记录访问者的ip
-$filename = $_SERVER[&#39;PHP_SELF&#39;];       //访问者要访问的文件名
-$parameter = $_SERVER[&quot;QUERY_STRING&quot;];      //访问者要请求的参数
-$method = $_SERVER[&#39;REQUEST_METHOD&#39;];       //请求方法
-$uri = $_SERVER[&#39;REQUEST_URI&#39;];             //请求URI
-$time = date(&#39;Y-m-d H:i:s&#39;,time());     //访问时间
-$post = file_get_contents(&quot;php://input&quot;,&#39;r&#39;);       //接收POST数据
-$others = &#39;...其他你想得到的信息...&#39;;
-$logadd = &#39;Visit Time：&#39;.$time.&#39; &#39;.&#39;Visit IP：&#39;.$ip.&quot;\r\n&quot;.&#39;RequestURI：&#39;.$uri.&#39; &#39;.$parameter.&#39;RequestMethod：&#39;.$method.&quot;\r\n&quot;;
-// log记录
-$fh = fopen(&quot;/tmp/log.txt&quot;, &quot;a+&quot;);
-fwrite($fh, $logadd);
-fwrite($fh, print_r($_COOKIE, true).&quot;\r\n&quot;);
-fwrite($fh, $post.&quot;\r\n&quot;);
-fwrite($fh, $others.&quot;\r\n&quot;);
-fclose($fh);
-?&gt;
-</code></pre>
-<p>常见CMS入口</p>
-<pre><code>PHPCMS V9 \phpcms\base.php
-PHPWIND8.7 \data\sql_config.php
-DEDECMS5.7 \data\common.inc.php
-DiscuzX2   \config\config_global.php
-Wordpress   \wp-config.php
-Metinfo   \include\head.php
-</code></pre>
-<h3 id="pwn"><a href="#pwn" class="headerlink" title="pwn"></a>pwn</h3><h2 id="自行环境搭建测试一些东西"><a href="#自行环境搭建测试一些东西" class="headerlink" title="自行环境搭建测试一些东西"></a>自行环境搭建测试一些东西</h2><h3 id="web-1"><a href="#web-1" class="headerlink" title="web"></a>web</h3><h5 id="php-docker"><a href="#php-docker" class="headerlink" title="php docker"></a>php docker</h5><pre><code>FROM php:8.3.2-apache
-
-EXPOSE 5001
-</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br><span class="line">create database [database_name];</span><br><span class="line">use [database_name]</span><br><span class="line"><span class="built_in">source</span> backup.sql;</span><br></pre></td></tr></table></figure>
+<h5 id="php流量监控"><a class="markdownIt-Anchor" href="#php流量监控">#</a> php 流量监控</h5>
+<p>log.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$ip</span> = <span class="variable">$_SERVER</span>[<span class="string">&quot;REMOTE_ADDR&quot;</span>];      <span class="comment">//记录访问者的ip</span></span><br><span class="line"><span class="variable">$filename</span> = <span class="variable">$_SERVER</span>[<span class="string">&#x27;PHP_SELF&#x27;</span>];       <span class="comment">//访问者要访问的文件名</span></span><br><span class="line"><span class="variable">$parameter</span> = <span class="variable">$_SERVER</span>[<span class="string">&quot;QUERY_STRING&quot;</span>];      <span class="comment">//访问者要请求的参数</span></span><br><span class="line"><span class="variable">$method</span> = <span class="variable">$_SERVER</span>[<span class="string">&#x27;REQUEST_METHOD&#x27;</span>];       <span class="comment">//请求方法</span></span><br><span class="line"><span class="variable">$uri</span> = <span class="variable">$_SERVER</span>[<span class="string">&#x27;REQUEST_URI&#x27;</span>];             <span class="comment">//请求URI</span></span><br><span class="line"><span class="variable">$time</span> = <span class="title function_ invoke__">date</span>(<span class="string">&#x27;Y-m-d H:i:s&#x27;</span>,<span class="title function_ invoke__">time</span>());     <span class="comment">//访问时间</span></span><br><span class="line"><span class="variable">$post</span> = <span class="title function_ invoke__">file_get_contents</span>(<span class="string">&quot;php://input&quot;</span>,<span class="string">&#x27;r&#x27;</span>);       <span class="comment">//接收POST数据</span></span><br><span class="line"><span class="variable">$others</span> = <span class="string">&#x27;...其他你想得到的信息...&#x27;</span>;</span><br><span class="line"><span class="variable">$logadd</span> = <span class="string">&#x27;Visit Time：&#x27;</span>.<span class="variable">$time</span>.<span class="string">&#x27; &#x27;</span>.<span class="string">&#x27;Visit IP：&#x27;</span>.<span class="variable">$ip</span>.<span class="string">&quot;\r\n&quot;</span>.<span class="string">&#x27;RequestURI：&#x27;</span>.<span class="variable">$uri</span>.<span class="string">&#x27; &#x27;</span>.<span class="variable">$parameter</span>.<span class="string">&#x27;RequestMethod：&#x27;</span>.<span class="variable">$method</span>.<span class="string">&quot;\r\n&quot;</span>;</span><br><span class="line"><span class="comment">// log记录</span></span><br><span class="line"><span class="variable">$fh</span> = <span class="title function_ invoke__">fopen</span>(<span class="string">&quot;/tmp/log.txt&quot;</span>, <span class="string">&quot;a+&quot;</span>);</span><br><span class="line"><span class="title function_ invoke__">fwrite</span>(<span class="variable">$fh</span>, <span class="variable">$logadd</span>);</span><br><span class="line"><span class="title function_ invoke__">fwrite</span>(<span class="variable">$fh</span>, <span class="title function_ invoke__">print_r</span>(<span class="variable">$_COOKIE</span>, <span class="literal">true</span>).<span class="string">&quot;\r\n&quot;</span>);</span><br><span class="line"><span class="title function_ invoke__">fwrite</span>(<span class="variable">$fh</span>, <span class="variable">$post</span>.<span class="string">&quot;\r\n&quot;</span>);</span><br><span class="line"><span class="title function_ invoke__">fwrite</span>(<span class="variable">$fh</span>, <span class="variable">$others</span>.<span class="string">&quot;\r\n&quot;</span>);</span><br><span class="line"><span class="title function_ invoke__">fclose</span>(<span class="variable">$fh</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>常见 CMS 入口</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">PHPCMS V9 \phpcms\base.php</span><br><span class="line">PHPWIND8.7 \data\sql_config.php</span><br><span class="line">DEDECMS5.7 \data\common.inc.php</span><br><span class="line">DiscuzX2   \config\config_global.php</span><br><span class="line">Wordpress   \wp-config.php</span><br><span class="line">Metinfo   \include\head.php</span><br></pre></td></tr></table></figure>
+<h3 id="pwn"><a class="markdownIt-Anchor" href="#pwn">#</a> pwn</h3>
+<h2 id="自行环境搭建测试一些东西"><a class="markdownIt-Anchor" href="#自行环境搭建测试一些东西">#</a> 自行环境搭建测试一些东西</h2>
+<h3 id="web-2"><a class="markdownIt-Anchor" href="#web-2">#</a> web</h3>
+<h5 id="php-docker"><a class="markdownIt-Anchor" href="#php-docker">#</a> php docker</h5>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">FROM php:8.3.2-apache</span><br><span class="line"></span><br><span class="line">EXPOSE 5001</span><br></pre></td></tr></table></figure>
 <p>挂载运行</p>
-<pre><code>docker run -it -v /本机目录:/容器内目录 centos /bin/bash
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it -v /本机目录:/容器内目录 centos /bin/bash</span><br></pre></td></tr></table></figure>
 <p>暴露端口</p>
-<pre><code>docker run -d -p 5000:80 --name php1 php1
-</code></pre>
-<p>wsl转发docker的流量（总）</p>
-<pre><code>docker run -d -p 5000:80 -v ./html:/var/www/html --name php2 php1
-</code></pre>
-<pre><code>socat -T 600 TCP-LISTEN:6000,fork,reuseaddr TCP:172.17.0.1:5000 &amp;
-</code></pre>
-
-    </div>
-    
-</div>
-                         
-<footer id="footer">
-    <div class="footer-wrap">
-        <div>
-            © 20xx - 2024 Moyao の小屋
-            <span class="footer-icon">
-                <i class="fa-solid fa-font-awesome fa-fw"></i>
-            </span>
-            @Moyao
-        </div>
-        <div></div>
-        <div>Based on the <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo Engine</a> & <a
-                target="_blank" rel="noopener" href="https://github.com/argvchs/hexo-theme-particlex">ParticleX Theme</a></div>
-        
-    </div>
-</footer>
-                    </div>
-                </div>
-            </transition>
-            <div id="img_show">
-                <img id="img_content" alt="img_show">
-            </div>
-        </div>
-        <script src="https://cdn.staticfile.org/highlight.js/11.5.1/highlight.min.js"></script>
-        <script src="/js/particlex.js"></script>
-        <script src="/js/showimg.js"></script>
-        
-
-    </body>
-</html>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p 5000:80 --name php1 php1</span><br></pre></td></tr></table></figure>
+<p>wsl 转发 docker 的流量（总）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p 5000:80 -v ./html:/var/www/html --name php2 php1</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">socat -T 600 TCP-LISTEN:6000,fork,reuseaddr TCP:172.17.0.1:5000 &amp;</span><br></pre></td></tr></table></figure>
+</div><footer><div class="meta"><span class="item"><span class="icon"><i class="ic i-calendar-check"></i></span><span class="text">Edited on</span><time title="Modified: 2024-04-19 13:54:56" itemprop="dateModified" datetime="2024-04-19T13:54:56+08:00">2024-04-19</time></span></div><div class="reward"><button><i class="ic i-heartbeat"></i>Donate</button><p>Give me a cup of [coffee]~(￣▽￣)~*</p><div id="qr"><div><img loading="lazy" data-src="/assets/wechatpay.png" alt="Moyao WeChat Pay"/><p>WeChat Pay</p></div><div><img loading="lazy" data-src="/assets/alipay.png" alt="Moyao Alipay"/><p>Alipay</p></div></div></div><div id="copyright"><ul><li class="author"><strong>Post author: </strong>Moyao<i class="ic i-at"><em>@</em></i>Moyao の小屋</li><li class="link"><strong>Post link: </strong><a href="https://demoyao100.github.io/tmp/awd.html" title="">https://demoyao100.github.io/tmp/awd.html</a></li><li class="license"><strong>Copyright Notice: </strong>All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</a> unless stating additionally.</li></ul></div></footer></article></div><div class="wrap" id="comments"></div></div><div id="sidebar"><div class="inner"><div class="panels"><div class="inner"><div class="contents panel pjax" data-title="Contents"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">1.</span> <span class="toc-text"> 初始化</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9ssh"><span class="toc-number">1.0.1.</span> <span class="toc-text"> 修改 ssh</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5%E6%9D%83%E9%99%90"><span class="toc-number">1.0.2.</span> <span class="toc-text"> 检查权限</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#fscan%E8%87%AA%E6%89%AB%E5%BC%80%E6%94%BE%E6%9C%8D%E5%8A%A1"><span class="toc-number">1.0.3.</span> <span class="toc-text"> fscan 自扫开放服务</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%BC%BA%E5%88%B6%E7%BB%88%E6%AD%A2%E6%9F%90%E7%AB%AF%E5%8F%A3"><span class="toc-number">1.0.4.</span> <span class="toc-text"> 强制终止某端口</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%BC%BA%E5%88%B6%E7%BB%88%E6%AD%A2%E9%99%A4%E6%9F%90%E7%AB%AF%E5%8F%A3%E5%A4%96%E6%89%80%E6%9C%89%E7%AB%AF%E5%8F%A3"><span class="toc-number">1.0.5.</span> <span class="toc-text"> 强制终止除某端口外所有端口</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%B0%9D%E8%AF%95%E4%BF%AE%E6%94%B9"><span class="toc-number">1.0.6.</span> <span class="toc-text"> 尝试修改</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%89%AB%E6%8F%8F%E7%BD%91%E6%AE%B5%E4%B8%8A%E5%AD%98%E5%9C%A8%E7%9A%84%E4%B8%BB%E6%9C%BA"><span class="toc-number">1.0.7.</span> <span class="toc-text"> 扫描网段上存在的主机</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%A3%80%E6%B5%8Bubuntu%E7%89%88%E6%9C%AC"><span class="toc-number">1.0.8.</span> <span class="toc-text"> 检测 ubuntu 版本</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%A3%80%E6%B5%8B%E5%86%85%E6%A0%B8%E7%89%88%E6%9C%AC"><span class="toc-number">1.0.9.</span> <span class="toc-text"> 检测内核版本</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web"><span class="toc-number">2.</span> <span class="toc-text"> web</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%A4%87%E4%BB%BD%E7%BD%91%E7%AB%99"><span class="toc-number">2.0.1.</span> <span class="toc-text"> 备份网站</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%BF%98%E5%8E%9F%E7%BD%91%E7%AB%99"><span class="toc-number">2.0.2.</span> <span class="toc-text"> 还原网站</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%A4%87%E4%BB%BD%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">2.0.3.</span> <span class="toc-text"> 备份数据库</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#php%E6%B5%81%E9%87%8F%E7%9B%91%E6%8E%A7"><span class="toc-number">2.0.4.</span> <span class="toc-text"> php 流量监控</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pwn"><span class="toc-number">3.</span> <span class="toc-text"> pwn</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E8%A1%8C%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E6%B5%8B%E8%AF%95%E4%B8%80%E4%BA%9B%E4%B8%9C%E8%A5%BF"><span class="toc-number"></span> <span class="toc-text"> 自行环境搭建测试一些东西</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#web-2"><span class="toc-number">1.</span> <span class="toc-text"> web</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#php-docker"><span class="toc-number">1.0.1.</span> <span class="toc-text"> php docker</span></a></li></ol></li></ol></li></ol></div><div class="related panel pjax" data-title="Related"></div><div class="overview panel" data-title="Overview"><div class="author" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person"><img class="image" loading="lazy" decoding="async" itemprop="image" alt="Moyao" src="/assets/avatar.jpg"/><p class="name" itemprop="name">Moyao</p><div class="description" itemprop="description">Write down something interesting I met
+feel free to mail me if you have something wanted to talk about
+mail: &lt;moyaoxue@outlook.com&gt;
+</div></div><nav class="state"><div class="item posts"><a href="/archives/"><span class="count">71</span><span class="name">posts</span></a></div><div class="item tags"><a href="/tags/"><span class="count">13</span><span class="name">tags</span></a></div></nav><div class="social"><a target="_blank" rel="noopener" href="https://github.com/name" class="item github" title="https:&#x2F;&#x2F;github.com&#x2F;name"><i class="ic i-github"></i></a></div><div class="menu"><li class="item"><a href="/" rel="section"><i class="ic i-home"></i>Home</a></li></div></div></div></div><ul id="quick"><li class="prev pjax"></li><li class="up"><i class="ic i-arrow-up"></i></li><li class="down"><i class="ic i-arrow-down"></i></li><li class="next pjax"></li><li class="percent"></li></ul></div></div><div class="dimmer"></div></div></main><footer id="footer"><div class="inner"><div class="widgets"><div class="rpost pjax"><h2>Random Posts</h2><ul><li class="item"><div class="breadcrumb"></div><span><a href="/2023/11/08/%E5%B8%B8%E8%A7%81%E9%80%86%E5%90%91%E5%8A%A0%E8%A7%A3%E5%AF%86%E6%95%B4%E5%90%88/">常见逆向加解密整合</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2023/08/23/%E5%88%9D%E6%8E%A2python-bytecode/">初探python bytecode</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2023/11/29/arm%E5%88%9D%E6%8E%A2/">arm初探</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2023/11/26/laurelAndYanny/">laurelAndYanny</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2022/11/01/pythonJail/">pythonJail</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2022/11/02/hnctfRe/">hnctfRe</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2023/09/13/%E9%95%BF%E5%9F%8E%E6%9D%AF2023/">长城杯2023</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2024/04/08/vm%E5%88%9D%E6%8E%A2/">vm初探</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2023/07/11/d3ctf-2023/">d3ctf 2023</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2023/11/12/idaTracing/">idaTracing</a></span></li></ul></div><div class="rpost pjax"><h2>Recent Comments</h2></div></div><div class="status"><div class="copyright">&copy; 2022 -<span itemprop="copyrightYear">2024</span><span class="with-love"><i class="ic i-sakura rotate"></i></span><span class="author" itemprop="copyrightHolder">Moyao @ testName</span></div><div class="count"><span class="post-meta-item-icon"><i class="ic i-chart-area"></i></span><span title="Symbols count total">625k words</span><span class="post-meta-divider"> | </span><span class="post-meta-item-icon"><i class="ic i-coffee"></i></span><span title="Reading time total">9:28</span></div><div class="powered-by">Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> & Theme.<a target="_blank" rel="noopener" href="https://github.com/theme-shoka-x/hexo-theme-shokaX/">ShokaX</a></div></div></div></footer></div><script data-config type="text/javascript">var LOCAL = {
+    ispost: false,
+        path: `tmp/awd`,
+        favicon: {
+        show: `(●´3｀●) Here we go again.`,
+        hide: `(´Д｀) It's a disaster!`
+    },
+    search: {
+        placeholder: "Search for Posts",
+        empty: "We didn't find any results for the search: ${query}",
+        stats: "${hits} results found in ${time} ms"
+    },
+    copy_tex: false,
+    katex: false,
+    mermaid: false,
+    audio: undefined,
+    fancybox: true,
+    nocopy: false,
+    outime: true,
+    template: `<div class="note warning"><p><span class="label warning">Article Timeliness Alert</span><br>This is an article published {{publish}} days ago and last updated {{updated}} days ago. Some information may have changed, so please be careful to screen it.</p></div>`,
+    quiz: {
+        choice: `Multiple Choice`,
+        multiple: `Multiple Answer`,
+        true_false: `True/False`,
+        essay: `Questions`,
+        gap_fill: `Gap Filling`,
+        mistake: `Wrong Answer`
+    },
+    ignores: [
+        (uri) => uri.includes('#'),
+        (uri) => new RegExp(LOCAL.path + '$').test(uri),
+            []
+    ]
+};
+</script><script src="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-6-M/pace/1.2.4/pace.min.js" async></script><script src="/js/siteInit.js?v=0.4.2" type="module" fetchpriority="high" defer></script></body></html>

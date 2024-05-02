@@ -1,185 +1,85 @@
-
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
-        <title>Arknights Recruit Calculator(1) | Moyao の小屋</title>
-        <meta name="author" content="Moyao">
-        <meta name="description" content="Write down something interesting I met
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"/><meta name="theme-color" content="#222"/><meta http-equiv="X-UA-COMPATIBLE" content="IE=edge,chrome=1"/><meta name="renderer" content="webkit"/><link rel="icon" type="image/ico" sizes="32x32" href="/assets/favicon.ico"/><link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png"/><link rel="alternate" href="/rss.xml" title="Moyao の小屋" type="application/rss+xml"><link rel="alternate" href="/atom.xml" title="Moyao の小屋" type="application/atom+xml"><link rel="alternate" type="application/json" title="Moyao の小屋" href="https://demoyao100.github.io/feed.json"/><link rel="preconnect" href="https://lf9-cdn-tos.bytecdntp.com"/><link rel="preconnect" href="https://at.alicdn.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CFredericka%20the%20Great:400,400italic,700,700italic%7CNoto%20Serif%20JP:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic%7CInconsolata:400,400italic,700,700italic&display=swap&subset=latin,latin-ext" media="none" onload="this.media&#x3D;&#39;all&#39;"><link rel="stylesheet" href="/css/app.css?v=0.4.2"><link rel="modulepreload" href="/js/chunk-346TEOXD.js"></link><link rel="modulepreload" href="/js/chunk-QA6RGM2S.js"></link><link rel="modulepreload" href="/js/chunk-QAWHJ5B3.js"></link><link rel="modulepreload" href="/js/index.esm-SMPOVEZ5.js"></link><link rel="modulepreload" href="/js/post-H6TTLEOZ.js"></link><link rel="modulepreload" href="/js/quicklink-RU6FD7L7.js"></link><link rel="modulepreload" href="/js/siteInit.js"></link><link rel="preload" href="https://tva4.sinaimg.cn/large/6833939bly1gicis081o9j20zk0m8dmr.jpg" as="image" fetchpriority="high"><link rel="preload" href="https://tva4.sinaimg.cn/large/6833939bly1giciryrr3rj20zk0m8nhk.jpg" as="image" fetchpriority="high"><link rel="preload" href="https://tva4.sinaimg.cn/large/6833939bly1gicit31ffoj20zk0m8naf.jpg" as="image" fetchpriority="high"><link rel="preload" href="https://tva4.sinaimg.cn/large/6833939bly1gicis3attqj20zk0m8k7l.jpg" as="image" fetchpriority="high"><link rel="preload" href="https://tva4.sinaimg.cn/large/6833939bly1gicitcxhpij20zk0m8hdt.jpg" as="image" fetchpriority="high"><link rel="preload" href="https://tva4.sinaimg.cn/large/6833939bly1giciszlczyj20zk0m816d.jpg" as="image" fetchpriority="high"><meta name="keywords" content="tools,"/><meta name="description" content="&lt;h1 id=&quot;arknights-recruit-calculator1&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#arknights-recruit-calculator1&quot;&gt;#&lt;/a&gt; arknights recruit calculator(1)&lt;/h1&gt;
+&lt;h5 id=&quot;published-20220827&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#published-20220827&quot;&gt;#&lt;/a&gt; Published: 2022/08/27&lt;/h5&gt;
+&lt;h5 id=&quot;updated-20220827&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#updated-20220827&quot;&gt;#&lt;/a&gt; Updated: 2022/08/27&lt;/h5&gt;
+&lt;h3 id=&quot;preface&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#preface&quot;&gt;#&lt;/a&gt; PREFACE&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;I’m pretty addicted to this game named Arknights these days, and there is this module named “公招”(“recruit” in English or whatever). So there is this calculator tools use to help you recruit what you want on website. One day it the website/procedure were been maintained. And I been studying php for couples of days. That’s when I decided to build my own recruit calculator.&lt;/li&gt;
+&lt;li&gt;It’s still in testing phase, when it’s complete, I may put it on a website.&lt;/li&gt;
+&lt;li&gt;The php function mention below can be consulted on &lt;a href=&quot;https://www.php.net/&quot;&gt;php.net&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;"/><link rel="canonical" href="https://demoyao100.github.io/2022/08/27/arknights-recruit-calculator/"><title>arknights recruit calculator(1)</title><meta name="generator" content="Hexo 7.0.0"></head><body itemscope itemtype="http://schema.org/WebPage"><div id="loading"><div class="cat"><div class="body"></div><div class="head"><div class="face"></div></div><div class="foot"><div class="tummy-end"></div><div class="bottom"></div><div class="legs left"></div><div class="legs right"></div></div><div class="paw"><div class="hands left"></div><div class="hands right"></div></div></div></div><div id="container"><header id="header" itemscope itemtype="http://schema.org/WPHeader"><div class="inner"><div id="brand"><div class="pjax"><h1 itemprop="name headline">arknights recruit calculator(1)</h1><div class="meta"><span class="item" title="Created: 2022-08-27 11:31:06"><span class="icon"><i class="ic i-calendar"></i></span><span class="text">Posted on</span><time itemprop="dateCreated datePublished" datetime="2022-08-27T11:31:06+08:00">2022-08-27</time></span><span class="item" title="Symbols count in article"><span class="icon"><i class="ic i-pen"></i></span><span class="text">Symbols count in article</span><span>2.7k</span><span class="text">words</span></span><span class="item" title="Reading time"><span class="icon"><i class="ic i-clock"></i></span><span class="text">Reading time</span><span>2 mins.</span></span></div></div></div><nav id="nav"><div class="inner"><div class="toggle"><div class="lines" aria-label="Toggle navigation bar"><span class="line"></span><span class="line"></span><span class="line"></span></div></div><ul class="menu"><li class="item title"><a href="/" rel="start">testName</a></li></ul><ul class="right" id="rightNav"><li class="item theme"><i class="ic i-sun"></i></li><li class="item search"><i class="ic i-search"></i></li></ul></div></nav></div><div class="pjax" id="imgs"><ul><li class="item" style="background-image: url(&quot;https://tva4.sinaimg.cn/large/6833939bly1gicis081o9j20zk0m8dmr.jpg&quot;);"></li><li class="item" style="background-image: url(&quot;https://tva4.sinaimg.cn/large/6833939bly1giciryrr3rj20zk0m8nhk.jpg&quot;);"></li><li class="item" style="background-image: url(&quot;https://tva4.sinaimg.cn/large/6833939bly1gicit31ffoj20zk0m8naf.jpg&quot;);"></li><li class="item" style="background-image: url(&quot;https://tva4.sinaimg.cn/large/6833939bly1gicis3attqj20zk0m8k7l.jpg&quot;);"></li><li class="item" style="background-image: url(&quot;https://tva4.sinaimg.cn/large/6833939bly1gicitcxhpij20zk0m8hdt.jpg&quot;);"></li><li class="item" style="background-image: url(&quot;https://tva4.sinaimg.cn/large/6833939bly1giciszlczyj20zk0m816d.jpg&quot;);"></li></ul></div></header><div id="waves"><svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path></defs><g class="parallax"><use xlink:href="#gentle-wave" x="48" y="0"></use><use xlink:href="#gentle-wave" x="48" y="3"></use><use xlink:href="#gentle-wave" x="48" y="5"></use><use xlink:href="#gentle-wave" x="48" y="7"></use></g></svg></div><main><div class="inner"><div class="pjax" id="main"><div class="article wrap"><div class="breadcrumb" itemListElement itemscope itemtype="https://schema.org/BreadcrumbList"><i class="ic i-home"></i><span><a href="/">Home</a></span></div><article class="post block" itemscope="itemscope" itemtype="http://schema.org/Article" lang="en"><link itemprop="mainEntityOfPage" href="https://demoyao100.github.io/2022/08/27/arknights-recruit-calculator/"/><span hidden="hidden" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person"><meta itemprop="image" content="/assets/avatar.jpg"/><meta itemprop="name" content="Moyao"/><meta itemprop="description" content="Hi,I'm Moyao, Write down something interesting I met
 feel free to mail me if you have something wanted to talk about
-mail: &lt;moyaoxue@outlook.com&gt;
-">
-        <meta name="keywords" content="">
-        <link rel="icon" href="/images/head.jpg">
-        <script src="https://cdn.staticfile.org/instant.page/5.1.0/instantpage.min.js" type="module"></script>
-        <script src="https://cdn.staticfile.org/font-awesome/6.1.1/js/all.min.js"></script>
-        
-        <link rel="stylesheet" href="/css/fonts.min.css">
-        <link rel="stylesheet" href="/css/particlex.css">
-        
-        <script src="https://cdn.staticfile.org/vue/3.2.33/vue.global.prod.min.js"></script>
-    <meta name="generator" content="Hexo 6.2.0"></head>
-    <body>
-        <div id="loading" style="height:100vh;width:100vw;position:fixed;display:flex;z-index:200;justify-content:space-between;background:#fff;transition:opacity 0.3s ease-out"><div style="position:fixed;height:100vh;width:100vw;display:flex;justify-content:center;align-items:center"><div id="loadcontent" style="width:50vmin;height:50vmin;padding:50px;border-radius:50%;display:flex;justify-content:center;align-items:center;border:solid 10px #a3ddfb;text-align:center"><div><h2>LOADING...</h2><p style="word-break:keep-all">加载过慢请开启缓存(浏览器默认开启)</p><div><img alt="loading" src="/loading.gif"></div></div></div></div></div>
-        <div id="layout">
-            <i data-fa-symbol="calendar-solid" class="fa-solid fa-calendar fa-fw"></i>
-            <i data-fa-symbol="bookmark-solid" class="fa-solid fa-bookmark fa-fw"></i>
-            <i data-fa-symbol="tags-solid" class="fa-solid fa-tags fa-fw"></i>
-            <transition name="into">
-                <div v-show="show_page" style="display: -not-none">
-                    <div id="menu_show">
-                         
-<nav id="menu">
-    <div class="desktop-menu">
-        <a href="/">
-            <span class="title">Moyao の小屋</span>
-        </a>
-        
-        <a href="/">
-            <i class="fa-solid fa-house fa-fw"></i>
-            <span>&ensp;home</span>
-        </a>
-        
-        <a href="/">
-            <i class="fa-solid fa-id-card fa-fw"></i>
-            <span>&ensp;about</span>
-        </a>
-        
-        <a target="_blank" rel="noopener" href="//tags/re/">
-            <i class="fa-solid fa-tags fa-fw"></i>
-            <span>&ensp;tags</span>
-        </a>
-        
-    </div>
-    <div :class="'phone-menu ' + menu_show" id="phone-menu">
-        <div class="curtain" @click="menu_show = !menu_show" v-show="menu_show"></div>
-        <div :class="'title'" @click="menu_show = !menu_show">
-            <i class="fa-solid fa-bars fa-fw"></i>
-            <span>&emsp;Moyao の小屋</span>
-        </div>
-        <transition name="slide">
-        <div class="items" v-show="menu_show">
-            
-            <a href="">
-                <div class="item">
-                    <div style="min-width: 20px; max-width: 50px; width: 10%">
-                        <i class="fa-solid fa-house fa-fw"></i>
-                    </div>
-                    <div style="min-width: 100px; max-width: 150%; width: 20%">home</div>
-                </div>
-            </a>
-            
-            <a href="">
-                <div class="item">
-                    <div style="min-width: 20px; max-width: 50px; width: 10%">
-                        <i class="fa-solid fa-id-card fa-fw"></i>
-                    </div>
-                    <div style="min-width: 100px; max-width: 150%; width: 20%">about</div>
-                </div>
-            </a>
-            
-            <a href="/tags/re/">
-                <div class="item">
-                    <div style="min-width: 20px; max-width: 50px; width: 10%">
-                        <i class="fa-solid fa-tags fa-fw"></i>
-                    </div>
-                    <div style="min-width: 100px; max-width: 150%; width: 20%">tags</div>
-                </div>
-            </a>
-            
-        </div>
-        </transition>
-    </div>
-</nav>
-                    </div>
-                    <div id="main">
-                        
-<div class="article">
-    <div>
-        <h1>Arknights Recruit Calculator(1) </h1>
-    </div>
-    <div class="info">
-        <span class="date">
-            <span class="icon">
-                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
-            </span>
-            2022/8/27
-        </span>
-        
-        
-        <span class="tags">
-            <span class="icon">
-                <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-            </span>
-            
-            <span class="tag">
-                
-                <a href="/tags/tools/" style="color: #00a596">
-                    tools
-                </a>
-            </span>
-            
-            <span class="tag">
-                
-                <a href="/tags/php/" style="color: #00bcd4">
-                    php
-                </a>
-            </span>
-            
-        </span>
-        
-    </div>
-    <div class="content" v-pre>
-        <h1 id="arknights-recruit-calculator-1"><a href="#arknights-recruit-calculator-1" class="headerlink" title="arknights recruit calculator(1)"></a>arknights recruit calculator(1)</h1><h5 id="Published-2022-x2F-08-x2F-27"><a href="#Published-2022-x2F-08-x2F-27" class="headerlink" title="Published: 2022&#x2F;08&#x2F;27"></a>Published: 2022&#x2F;08&#x2F;27</h5><h5 id="Updated-2022-x2F-08-x2F-27"><a href="#Updated-2022-x2F-08-x2F-27" class="headerlink" title="Updated: 2022&#x2F;08&#x2F;27"></a>Updated: 2022&#x2F;08&#x2F;27</h5><h3 id="PREFACE"><a href="#PREFACE" class="headerlink" title="PREFACE"></a>PREFACE</h3><ul>
-<li>I’m pretty addicted to this game named Arknights these days, and there is this module named “公招”(“recruit” in English or whatever). So there is this calculator tools use to help you recruit what you want on website. One day it the website&#x2F;procedure were been maintained. And I been studying php for couples of days. That’s when I decided to build my own recruit calculator.</li>
+mail: &amp;lt;moyaoxue@outlook.com&amp;gt;
+"/></span><span hidden="hidden" itemprop="publisher" itemscope="itemscope" itemtype="http://schema.org/Organization"><meta itemprop="name" content="Moyao の小屋"/></span><div class="body md" itemprop="articleBody"><h1 id="arknights-recruit-calculator1"><a class="markdownIt-Anchor" href="#arknights-recruit-calculator1">#</a> arknights recruit calculator(1)</h1>
+<h5 id="published-20220827"><a class="markdownIt-Anchor" href="#published-20220827">#</a> Published: 2022/08/27</h5>
+<h5 id="updated-20220827"><a class="markdownIt-Anchor" href="#updated-20220827">#</a> Updated: 2022/08/27</h5>
+<h3 id="preface"><a class="markdownIt-Anchor" href="#preface">#</a> PREFACE</h3>
+<ul>
+<li>I’m pretty addicted to this game named Arknights these days, and there is this module named “公招”(“recruit” in English or whatever). So there is this calculator tools use to help you recruit what you want on website. One day it the website/procedure were been maintained. And I been studying php for couples of days. That’s when I decided to build my own recruit calculator.</li>
 <li>It’s still in testing phase, when it’s complete, I may put it on a website.</li>
-<li>The php function mention below can be consulted on <a target="_blank" rel="noopener" href="https://www.php.net/">php.net</a><span id="more"></span></li>
+<li>The php function mention below can be consulted on <a target="_blank" rel="noopener" href="https://www.php.net/">php.net</a></li>
 </ul>
+<span id="more"></span>
 <hr>
 <p>I use html, css to create the User Interface. User can input their tags(5 at most in one post), and program will output the cadres that fits(It will print all combination of the tags that are input).</p>
 <p>The UI designed was easy(not to pursue a perfect, that is), just use a POST method and let the php program receive it. The backend devided the STRING into array, and search in the mysql.</p>
-<p>There is this problem that HOW TO ESTABLISH THE SQL? There isn’t a sql you can find so easily that is ready made. The closest thing I found was a python dictionary. I wasn’t going to wrote the program in python. So I need to transform it into a PHP ARRAY. At first, I tried to use C to read the py dictionary. Obviously it’s too complicate and I should have better choose–<code>json.dumps()</code>,a function in python that can transform a dictionary into a json file. Like this:</p>
+<p>There is this problem that HOW TO ESTABLISH THE SQL? There isn’t a sql you can find so easily that is ready made. The closest thing I found was a python dictionary. I wasn’t going to wrote the program in python. So I need to transform it into a PHP ARRAY. At first, I tried to use C to read the py dictionary. Obviously it’s too complicate and I should have better choose– <code>json.dumps()</code> ,a function in python that can transform a dictionary into a json file. Like this:</p>
 <blockquote>
-<p><code>a=json.dumps(list)</code><br>However, it outputted errors. There I knew json.dumps cann’t dail with Chinese. So I searched for solutions and code down whese:</p>
+<p><code>a=json.dumps(list)</code> <br>
+However, it outputted errors. There I knew json.dumps cann’t dail with Chinese. So I searched for solutions and code down whese:</p>
 </blockquote>
 <blockquote>
-<p><code>import json</code><br><code>import numpy as np</code><br><code>class Encoder(json.JSONEncoder):</code><br><code>    def default(self, obj):</code><br><code>        if isinstance(obj, np.ndarray):</code><br><code>            return obj.tolist()</code><br><code>        elif isinstance(obj, bytes):</code><br><code>            return str(obj, encoding=&#39;utf-8&#39;)</code><br><code>        return json.JSONEncoder.default(self, obj)</code><br><code>a=json.dumps(top_operators_list,cls=Encoder)</code><br><code>with open(&#39;tags.txt&#39;,&#39;a&#39;) as file0:</code><br><code>    print(a,file=file0)</code><br>It actually still output error. After few hours, I found the dictionary’s array used “{}” instead of “[]”. Correct all of that, it works and I got a json file containing the data I need.</p>
+<p><code>import json</code> <br>
+ <code>import numpy as np</code> <br>
+ <code>class Encoder(json.JSONEncoder):</code> <br>
+ <code>    def default(self, obj):</code> <br>
+ <code>        if isinstance(obj, np.ndarray):</code> <br>
+ <code>            return obj.tolist()</code> <br>
+ <code>        elif isinstance(obj, bytes):</code> <br>
+ <code>            return str(obj, encoding='utf-8')</code> <br>
+ <code>        return json.JSONEncoder.default(self, obj)</code> <br>
+ <code>a=json.dumps(top_operators_list,cls=Encoder)</code> <br>
+ <code>with open('tags.txt','a') as file0:</code> <br>
+ <code>    print(a,file=file0)</code> <br>
+It actually still output error. After few hours, I found the dictionary’s array used “{}” instead of “[]”. Correct all of that, it works and I got a json file containing the data I need.</p>
 </blockquote>
-<p>Now, I need to put the data in json file into a php array. Luckly, there is this function <code>json_decode</code> that can do the trick. So now the array was prepared.</p>
+<p>Now, I need to put the data in json file into a php array. Luckly, there is this function  <code>json_decode</code>  that can do the trick. So now the array was prepared.</p>
 <p>To search the cadres, you can combine the array into a string in full permutation.(USING DFS) (TIPS:sort your string each time you search will make the work much easier.)</p>
 <p>Designed the output UI, and it’s all done!</p>
-
-    </div>
-    
-</div>
-                         
-<footer id="footer">
-    <div class="footer-wrap">
-        <div>
-            © 20xx - 2024 Moyao の小屋
-            <span class="footer-icon">
-                <i class="fa-solid fa-font-awesome fa-fw"></i>
-            </span>
-            @Moyao
-        </div>
-        <div></div>
-        <div>Based on the <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo Engine</a> & <a
-                target="_blank" rel="noopener" href="https://github.com/argvchs/hexo-theme-particlex">ParticleX Theme</a></div>
-        
-    </div>
-</footer>
-                    </div>
-                </div>
-            </transition>
-            <div id="img_show">
-                <img id="img_content" alt="img_show">
-            </div>
-        </div>
-        <script src="https://cdn.staticfile.org/highlight.js/11.5.1/highlight.min.js"></script>
-        <script src="/js/particlex.js"></script>
-        <script src="/js/showimg.js"></script>
-        
-
-    </body>
-</html>
+<div class="tags"><a href="/tags/tools/" rel="tag"><i class="ic i-tag"></i>tools</a><a href="/tags/php/" rel="tag"><i class="ic i-tag"></i>php</a></div></div><footer><div class="meta"><span class="item"><span class="icon"><i class="ic i-calendar-check"></i></span><span class="text">Edited on</span><time title="Modified: 2023-09-18 13:52:13" itemprop="dateModified" datetime="2023-09-18T13:52:13+08:00">2023-09-18</time></span></div><div class="reward"><button><i class="ic i-heartbeat"></i>Donate</button><p>Give me a cup of [coffee]~(￣▽￣)~*</p><div id="qr"><div><img loading="lazy" data-src="/assets/wechatpay.png" alt="Moyao WeChat Pay"/><p>WeChat Pay</p></div><div><img loading="lazy" data-src="/assets/alipay.png" alt="Moyao Alipay"/><p>Alipay</p></div></div></div><div id="copyright"><ul><li class="author"><strong>Post author: </strong>Moyao<i class="ic i-at"><em>@</em></i>Moyao の小屋</li><li class="link"><strong>Post link: </strong><a href="https://demoyao100.github.io/2022/08/27/arknights-recruit-calculator/" title="arknights recruit calculator(1)">https://demoyao100.github.io/2022/08/27/arknights-recruit-calculator/</a></li><li class="license"><strong>Copyright Notice: </strong>All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</a> unless stating additionally.</li></ul></div></footer></article></div><div class="post-nav"><div class="item left"><a href="/2022/08/26/%E5%9F%BA%E4%BA%8Ehexo%E6%A1%86%E6%9E%B6%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" rel="prev" itemprop="url" data-background-image="https:&#x2F;&#x2F;tva4.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gicit31ffoj20zk0m8naf.jpg" title="to build your blog on github"><span class="type">Previous Post</span><h3>to build your blog on github</h3></a></div><div class="item right"><a href="/2022/08/28/codeforce-1720C/" rel="next" itemprop="url" data-background-image="https:&#x2F;&#x2F;tva4.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gicitcxhpij20zk0m8hdt.jpg" title="codeforce:1720C"><span class="type">Next Post</span><h3>codeforce:1720C</h3></a></div></div><div class="wrap" id="comments"></div></div><div id="sidebar"><div class="inner"><div class="panels"><div class="inner"><div class="contents panel pjax" data-title="Contents"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#arknights-recruit-calculator1"><span class="toc-number">1.</span> <span class="toc-text"> arknights recruit calculator(1)</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#published-20220827"><span class="toc-number">1.0.0.0.1.</span> <span class="toc-text"> Published: 2022&#x2F;08&#x2F;27</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#updated-20220827"><span class="toc-number">1.0.0.0.2.</span> <span class="toc-text"> Updated: 2022&#x2F;08&#x2F;27</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#preface"><span class="toc-number">1.0.1.</span> <span class="toc-text"> PREFACE</span></a></li></ol></li></ol></li></ol></div><div class="related panel pjax" data-title="Related"></div><div class="overview panel" data-title="Overview"><div class="author" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person"><img class="image" loading="lazy" decoding="async" itemprop="image" alt="Moyao" src="/assets/avatar.jpg"/><p class="name" itemprop="name">Moyao</p><div class="description" itemprop="description">Write down something interesting I met
+feel free to mail me if you have something wanted to talk about
+mail: &lt;moyaoxue@outlook.com&gt;
+</div></div><nav class="state"><div class="item posts"><a href="/archives/"><span class="count">71</span><span class="name">posts</span></a></div><div class="item tags"><a href="/tags/"><span class="count">13</span><span class="name">tags</span></a></div></nav><div class="social"><a target="_blank" rel="noopener" href="https://github.com/name" class="item github" title="https:&#x2F;&#x2F;github.com&#x2F;name"><i class="ic i-github"></i></a></div><div class="menu"><li class="item"><a href="/" rel="section"><i class="ic i-home"></i>Home</a></li></div></div></div></div><ul id="quick"><li class="prev pjax"><a href="/2022/08/28/codeforce-1720C/" rel="prev" title="Previous Post"><i class="ic i-chevron-left"></i></a></li><li class="up"><i class="ic i-arrow-up"></i></li><li class="down"><i class="ic i-arrow-down"></i></li><li class="next pjax"><a href="/2022/08/26/%E5%9F%BA%E4%BA%8Ehexo%E6%A1%86%E6%9E%B6%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" rel="next" title="Next Post"><i class="ic i-chevron-right"></i></a></li><li class="percent"></li></ul></div></div><div class="dimmer"></div></div></main><footer id="footer"><div class="inner"><div class="widgets"><div class="rpost pjax"><h2>Random Posts</h2><ul><li class="item"><div class="breadcrumb"></div><span><a href="/2023/09/18/%E9%B9%A4%E5%9F%8E2023/">鹤城2023</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2023/08/26/%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91%E4%BB%A5%E5%8F%8A%E5%85%B6%E4%BB%96%E6%9E%B6%E6%9E%84%E9%80%86%E5%90%91%E5%88%9D%E6%8E%A2/">交叉编译以及其他架构逆向初探</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2023/10/15/%E9%A6%99%E5%B1%B1%E6%9D%AF/">香山杯</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2023/10/24/angr%E5%88%9D%E6%8E%A2/">angr初探</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2024/04/24/%E9%93%81%E4%B8%89awd%E6%B8%97%E9%80%8F%E5%A4%8D%E7%9B%98/">铁三awd渗透复盘</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2023/11/08/lua%E5%88%9D%E6%8E%A2/">lua初探</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2023/09/25/vsCTF/">vsCTF2023</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2022/11/06/capstone/">capstone</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2022/11/02/hnctfRe/">hnctfRe</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2023/10/12/idapython%E5%88%9D%E6%8E%A2/">idapython初探</a></span></li></ul></div><div class="rpost pjax"><h2>Recent Comments</h2></div></div><div class="status"><div class="copyright">&copy; 2022 -<span itemprop="copyrightYear">2024</span><span class="with-love"><i class="ic i-sakura rotate"></i></span><span class="author" itemprop="copyrightHolder">Moyao @ testName</span></div><div class="count"><span class="post-meta-item-icon"><i class="ic i-chart-area"></i></span><span title="Symbols count total">625k words</span><span class="post-meta-divider"> | </span><span class="post-meta-item-icon"><i class="ic i-coffee"></i></span><span title="Reading time total">9:28</span></div><div class="powered-by">Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> & Theme.<a target="_blank" rel="noopener" href="https://github.com/theme-shoka-x/hexo-theme-shokaX/">ShokaX</a></div></div></div></footer></div><script data-config type="text/javascript">var LOCAL = {
+    ispost: true,
+        path: `2022/08/27/arknights-recruit-calculator/`,
+        favicon: {
+        show: `(●´3｀●) Here we go again.`,
+        hide: `(´Д｀) It's a disaster!`
+    },
+    search: {
+        placeholder: "Search for Posts",
+        empty: "We didn't find any results for the search: ${query}",
+        stats: "${hits} results found in ${time} ms"
+    },
+    copy_tex: false,
+    katex: false,
+    mermaid: false,
+    audio: undefined,
+    fancybox: true,
+    nocopy: false,
+    outime: true,
+    template: `<div class="note warning"><p><span class="label warning">Article Timeliness Alert</span><br>This is an article published {{publish}} days ago and last updated {{updated}} days ago. Some information may have changed, so please be careful to screen it.</p></div>`,
+    quiz: {
+        choice: `Multiple Choice`,
+        multiple: `Multiple Answer`,
+        true_false: `True/False`,
+        essay: `Questions`,
+        gap_fill: `Gap Filling`,
+        mistake: `Wrong Answer`
+    },
+    ignores: [
+        (uri) => uri.includes('#'),
+        (uri) => new RegExp(LOCAL.path + '$').test(uri),
+            []
+    ]
+};
+</script><script src="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-6-M/pace/1.2.4/pace.min.js" async></script><script src="/js/siteInit.js?v=0.4.2" type="module" fetchpriority="high" defer></script></body></html>

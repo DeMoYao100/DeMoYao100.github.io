@@ -1,118 +1,10 @@
-
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
-        <title>Frida源码初探 | Moyao の小屋</title>
-        <meta name="author" content="Moyao">
-        <meta name="description" content="Write down something interesting I met
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"/><meta name="theme-color" content="#222"/><meta http-equiv="X-UA-COMPATIBLE" content="IE=edge,chrome=1"/><meta name="renderer" content="webkit"/><link rel="icon" type="image/ico" sizes="32x32" href="/assets/favicon.ico"/><link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png"/><link rel="alternate" href="/rss.xml" title="Moyao の小屋" type="application/rss+xml"><link rel="alternate" href="/atom.xml" title="Moyao の小屋" type="application/atom+xml"><link rel="alternate" type="application/json" title="Moyao の小屋" href="https://demoyao100.github.io/feed.json"/><link rel="preconnect" href="https://lf9-cdn-tos.bytecdntp.com"/><link rel="preconnect" href="https://at.alicdn.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CFredericka%20the%20Great:400,400italic,700,700italic%7CNoto%20Serif%20JP:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic%7CInconsolata:400,400italic,700,700italic&display=swap&subset=latin,latin-ext" media="none" onload="this.media&#x3D;&#39;all&#39;"><link rel="stylesheet" href="/css/app.css?v=0.4.2"><link rel="modulepreload" href="/js/chunk-346TEOXD.js"></link><link rel="modulepreload" href="/js/chunk-QA6RGM2S.js"></link><link rel="modulepreload" href="/js/chunk-QAWHJ5B3.js"></link><link rel="modulepreload" href="/js/index.esm-SMPOVEZ5.js"></link><link rel="modulepreload" href="/js/post-H6TTLEOZ.js"></link><link rel="modulepreload" href="/js/quicklink-RU6FD7L7.js"></link><link rel="modulepreload" href="/js/siteInit.js"></link><link rel="preload" href="https://tva4.sinaimg.cn/large/6833939bly1gicis3attqj20zk0m8k7l.jpg" as="image" fetchpriority="high"><link rel="preload" href="https://tva4.sinaimg.cn/large/6833939bly1giciryrr3rj20zk0m8nhk.jpg" as="image" fetchpriority="high"><link rel="preload" href="https://tva4.sinaimg.cn/large/6833939bly1giciszlczyj20zk0m816d.jpg" as="image" fetchpriority="high"><link rel="preload" href="https://tva4.sinaimg.cn/large/6833939bly1gicis081o9j20zk0m8dmr.jpg" as="image" fetchpriority="high"><link rel="preload" href="https://tva4.sinaimg.cn/large/6833939bly1gicitcxhpij20zk0m8hdt.jpg" as="image" fetchpriority="high"><link rel="preload" href="https://tva4.sinaimg.cn/large/6833939bly1gicit31ffoj20zk0m8naf.jpg" as="image" fetchpriority="high"><meta name="description" content="&lt;h6 id=&quot;preface被拷打到frida和xpose的原理啥的啥啥不会爬来赶紧学学&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#preface被拷打到frida和xpose的原理啥的啥啥不会爬来赶紧学学&quot;&gt;#&lt;/a&gt; PREFACE：被拷打到 frida 和 xpose 的原理啥的，啥啥不会，爬来赶紧学学&lt;/h6&gt;"/><link rel="canonical" href="https://demoyao100.github.io/2024/04/27/frida%E6%BA%90%E7%A0%81%E5%88%9D%E6%8E%A2/"><title>frida源码初探</title><meta name="generator" content="Hexo 7.0.0"></head><body itemscope itemtype="http://schema.org/WebPage"><div id="loading"><div class="cat"><div class="body"></div><div class="head"><div class="face"></div></div><div class="foot"><div class="tummy-end"></div><div class="bottom"></div><div class="legs left"></div><div class="legs right"></div></div><div class="paw"><div class="hands left"></div><div class="hands right"></div></div></div></div><div id="container"><header id="header" itemscope itemtype="http://schema.org/WPHeader"><div class="inner"><div id="brand"><div class="pjax"><h1 itemprop="name headline">frida源码初探</h1><div class="meta"><span class="item" title="Created: 2024-04-27 17:09:00"><span class="icon"><i class="ic i-calendar"></i></span><span class="text">Posted on</span><time itemprop="dateCreated datePublished" datetime="2024-04-27T17:09:00+08:00">2024-04-27</time></span><span class="item" title="Symbols count in article"><span class="icon"><i class="ic i-pen"></i></span><span class="text">Symbols count in article</span><span>9.2k</span><span class="text">words</span></span><span class="item" title="Reading time"><span class="icon"><i class="ic i-clock"></i></span><span class="text">Reading time</span><span>8 mins.</span></span></div></div></div><nav id="nav"><div class="inner"><div class="toggle"><div class="lines" aria-label="Toggle navigation bar"><span class="line"></span><span class="line"></span><span class="line"></span></div></div><ul class="menu"><li class="item title"><a href="/" rel="start">testName</a></li></ul><ul class="right" id="rightNav"><li class="item theme"><i class="ic i-sun"></i></li><li class="item search"><i class="ic i-search"></i></li></ul></div></nav></div><div class="pjax" id="imgs"><ul><li class="item" style="background-image: url(&quot;https://tva4.sinaimg.cn/large/6833939bly1gicis3attqj20zk0m8k7l.jpg&quot;);"></li><li class="item" style="background-image: url(&quot;https://tva4.sinaimg.cn/large/6833939bly1giciryrr3rj20zk0m8nhk.jpg&quot;);"></li><li class="item" style="background-image: url(&quot;https://tva4.sinaimg.cn/large/6833939bly1giciszlczyj20zk0m816d.jpg&quot;);"></li><li class="item" style="background-image: url(&quot;https://tva4.sinaimg.cn/large/6833939bly1gicis081o9j20zk0m8dmr.jpg&quot;);"></li><li class="item" style="background-image: url(&quot;https://tva4.sinaimg.cn/large/6833939bly1gicitcxhpij20zk0m8hdt.jpg&quot;);"></li><li class="item" style="background-image: url(&quot;https://tva4.sinaimg.cn/large/6833939bly1gicit31ffoj20zk0m8naf.jpg&quot;);"></li></ul></div></header><div id="waves"><svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path></defs><g class="parallax"><use xlink:href="#gentle-wave" x="48" y="0"></use><use xlink:href="#gentle-wave" x="48" y="3"></use><use xlink:href="#gentle-wave" x="48" y="5"></use><use xlink:href="#gentle-wave" x="48" y="7"></use></g></svg></div><main><div class="inner"><div class="pjax" id="main"><div class="article wrap"><div class="breadcrumb" itemListElement itemscope itemtype="https://schema.org/BreadcrumbList"><i class="ic i-home"></i><span><a href="/">Home</a></span></div><article class="post block" itemscope="itemscope" itemtype="http://schema.org/Article" lang="en"><link itemprop="mainEntityOfPage" href="https://demoyao100.github.io/2024/04/27/frida%E6%BA%90%E7%A0%81%E5%88%9D%E6%8E%A2/"/><span hidden="hidden" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person"><meta itemprop="image" content="/assets/avatar.jpg"/><meta itemprop="name" content="Moyao"/><meta itemprop="description" content="Hi,I'm Moyao, Write down something interesting I met
 feel free to mail me if you have something wanted to talk about
-mail: &lt;moyaoxue@outlook.com&gt;
-">
-        <meta name="keywords" content="">
-        <link rel="icon" href="/images/head.jpg">
-        <script src="https://cdn.staticfile.org/instant.page/5.1.0/instantpage.min.js" type="module"></script>
-        <script src="https://cdn.staticfile.org/font-awesome/6.1.1/js/all.min.js"></script>
-        
-        <link rel="stylesheet" href="/css/fonts.min.css">
-        <link rel="stylesheet" href="/css/particlex.css">
-        
-        <script src="https://cdn.staticfile.org/vue/3.2.33/vue.global.prod.min.js"></script>
-    <meta name="generator" content="Hexo 6.2.0"></head>
-    <body>
-        <div id="loading" style="height:100vh;width:100vw;position:fixed;display:flex;z-index:200;justify-content:space-between;background:#fff;transition:opacity 0.3s ease-out"><div style="position:fixed;height:100vh;width:100vw;display:flex;justify-content:center;align-items:center"><div id="loadcontent" style="width:50vmin;height:50vmin;padding:50px;border-radius:50%;display:flex;justify-content:center;align-items:center;border:solid 10px #a3ddfb;text-align:center"><div><h2>LOADING...</h2><p style="word-break:keep-all">加载过慢请开启缓存(浏览器默认开启)</p><div><img alt="loading" src="/loading.gif"></div></div></div></div></div>
-        <div id="layout">
-            <i data-fa-symbol="calendar-solid" class="fa-solid fa-calendar fa-fw"></i>
-            <i data-fa-symbol="bookmark-solid" class="fa-solid fa-bookmark fa-fw"></i>
-            <i data-fa-symbol="tags-solid" class="fa-solid fa-tags fa-fw"></i>
-            <transition name="into">
-                <div v-show="show_page" style="display: -not-none">
-                    <div id="menu_show">
-                         
-<nav id="menu">
-    <div class="desktop-menu">
-        <a href="/">
-            <span class="title">Moyao の小屋</span>
-        </a>
-        
-        <a href="/">
-            <i class="fa-solid fa-house fa-fw"></i>
-            <span>&ensp;home</span>
-        </a>
-        
-        <a href="/">
-            <i class="fa-solid fa-id-card fa-fw"></i>
-            <span>&ensp;about</span>
-        </a>
-        
-        <a target="_blank" rel="noopener" href="//tags/re/">
-            <i class="fa-solid fa-tags fa-fw"></i>
-            <span>&ensp;tags</span>
-        </a>
-        
-    </div>
-    <div :class="'phone-menu ' + menu_show" id="phone-menu">
-        <div class="curtain" @click="menu_show = !menu_show" v-show="menu_show"></div>
-        <div :class="'title'" @click="menu_show = !menu_show">
-            <i class="fa-solid fa-bars fa-fw"></i>
-            <span>&emsp;Moyao の小屋</span>
-        </div>
-        <transition name="slide">
-        <div class="items" v-show="menu_show">
-            
-            <a href="">
-                <div class="item">
-                    <div style="min-width: 20px; max-width: 50px; width: 10%">
-                        <i class="fa-solid fa-house fa-fw"></i>
-                    </div>
-                    <div style="min-width: 100px; max-width: 150%; width: 20%">home</div>
-                </div>
-            </a>
-            
-            <a href="">
-                <div class="item">
-                    <div style="min-width: 20px; max-width: 50px; width: 10%">
-                        <i class="fa-solid fa-id-card fa-fw"></i>
-                    </div>
-                    <div style="min-width: 100px; max-width: 150%; width: 20%">about</div>
-                </div>
-            </a>
-            
-            <a href="/tags/re/">
-                <div class="item">
-                    <div style="min-width: 20px; max-width: 50px; width: 10%">
-                        <i class="fa-solid fa-tags fa-fw"></i>
-                    </div>
-                    <div style="min-width: 100px; max-width: 150%; width: 20%">tags</div>
-                </div>
-            </a>
-            
-        </div>
-        </transition>
-    </div>
-</nav>
-                    </div>
-                    <div id="main">
-                        
-<div class="article">
-    <div>
-        <h1>Frida源码初探 </h1>
-    </div>
-    <div class="info">
-        <span class="date">
-            <span class="icon">
-                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
-            </span>
-            2024/4/27
-        </span>
-        
-        
-    </div>
-    <div class="content" v-pre>
-        <h6 id="PREFACE：被拷打到frida和xpose的原理啥的，啥啥不会，爬来赶紧学学"><a href="#PREFACE：被拷打到frida和xpose的原理啥的，啥啥不会，爬来赶紧学学" class="headerlink" title="PREFACE：被拷打到frida和xpose的原理啥的，啥啥不会，爬来赶紧学学"></a>PREFACE：被拷打到frida和xpose的原理啥的，啥啥不会，爬来赶紧学学</h6><span id="more"></span>
-
-<h3 id="总览"><a href="#总览" class="headerlink" title="总览"></a>总览</h3><p>首先是一整个<a target="_blank" rel="noopener" href="https://github.com/frida/frida">frida</a>项目可以分为这些subprojects：</p>
+mail: &amp;lt;moyaoxue@outlook.com&amp;gt;
+"/></span><span hidden="hidden" itemprop="publisher" itemscope="itemscope" itemtype="http://schema.org/Organization"><meta itemprop="name" content="Moyao の小屋"/></span><div class="body md" itemprop="articleBody"><h6 id="preface被拷打到frida和xpose的原理啥的啥啥不会爬来赶紧学学"><a class="markdownIt-Anchor" href="#preface被拷打到frida和xpose的原理啥的啥啥不会爬来赶紧学学">#</a> PREFACE：被拷打到 frida 和 xpose 的原理啥的，啥啥不会，爬来赶紧学学</h6>
+<span id="more"></span>
+<h3 id="总览"><a class="markdownIt-Anchor" href="#总览">#</a> 总览</h3>
+<p>首先是一整个<a target="_blank" rel="noopener" href="https://github.com/frida/frida"> frida</a> 项目可以分为这些 subprojects：</p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://github.com/frida/frida-clr">frida-clr</a>：Frida .NET bindings</li>
 <li><a target="_blank" rel="noopener" href="https://github.com/frida/frida-core/tree/da417fd46b4fd7af8f157498e9e5f38e6242be45">frida-core</a>：Frida core library intended for static linking into bindings</li>
@@ -124,328 +16,80 @@ mail: &lt;moyaoxue@outlook.com&gt;
 <li><a target="_blank" rel="noopener" href="https://github.com/frida/frida-swift/tree/ce8f781ef000b7bfc9f90f942df2d0c973d4f52b">frida-swift</a>：Frida Swift bindings</li>
 <li><a target="_blank" rel="noopener" href="https://github.com/frida/frida-tools/tree/49f4330d8fde4e5250ac78f35ea71b4d7441fdb6">frida-tools</a>：Frida CLI tools</li>
 </ul>
-<p>感觉网上许多文章都着重在看frida-core和frida-gum，那么就先看看这两部分</p>
-<h3 id="frida-gum"><a href="#frida-gum" class="headerlink" title="frida-gum"></a>frida-gum</h3><p>分析过程中感觉直接干看还是有点困难，这里先整理一些frida所实现的功能，对照着功能看进去</p>
-<h4 id="一、前置原理"><a href="#一、前置原理" class="headerlink" title="一、前置原理"></a>一、前置原理</h4><h5 id="1-1-inline-hook"><a href="#1-1-inline-hook" class="headerlink" title="1.1 inline hook"></a>1.1 inline hook</h5><p>​		我们可以使用 Frida 的 API 在程序运行时拦截函数的调用，并且在拦截到函数调用时，通过修改函数的参数或者返回值来改变程序的行为。</p>
-<p>​		这里的核心原理是：动态替换需要 Hook 的指令片段为一段经过设计的跳板指令，即 trampoline ，目标为我们设计好的一段 shellCode，这里可以看[<a target="_blank" rel="noopener" href="https://bbs.kanxue.com/thread-273273.htm">原创]Frida inlineHook原理分析及简单设计一款AArch64 inlineHook工具-Android安全-看雪-安全社区|安全招聘|kanxue.com</a>这篇文章对于Frida生成的shellcode进行了详细的研究，暂时没有进行复现，先纸面学习，大概需要注意的点是：</p>
+<p>感觉网上许多文章都着重在看 frida-core 和 frida-gum，那么就先看看这两部分</p>
+<h3 id="frida-gum"><a class="markdownIt-Anchor" href="#frida-gum">#</a> frida-gum</h3>
+<p>分析过程中感觉直接干看还是有点困难，这里先整理一些 frida 所实现的功能，对照着功能看进去</p>
+<h4 id="一-前置原理"><a class="markdownIt-Anchor" href="#一-前置原理">#</a> 一、前置原理</h4>
+<h5 id="11-inline-hook"><a class="markdownIt-Anchor" href="#11-inline-hook">#</a> 1.1 inline hook</h5>
+<p>​		我们可以使用 Frida 的 API 在程序运行时拦截函数的调用，并且在拦截到函数调用时，通过修改函数的参数或者返回值来改变程序的行为。</p>
+<p>​		这里的核心原理是：动态替换需要 Hook 的指令片段为一段经过设计的跳板指令，即 trampoline ，目标为我们设计好的一段 shellCode，这里可以看 [<a target="_blank" rel="noopener" href="https://bbs.kanxue.com/thread-273273.htm">原创] Frida inlineHook 原理分析及简单设计一款 AArch64 inlineHook 工具 - Android 安全 - 看雪 - 安全社区 | 安全招聘 | kanxue.com</a> 这篇文章对于 Frida 生成的 shellcode 进行了详细的研究，暂时没有进行复现，先纸面学习，大概需要注意的点是：</p>
 <ul>
-<li>frida寻找前后128MB的地址获取一个空闲地址，将hook的点的前16个字节（或4字节）替换掉为LDR和BR指令，并且利用x16寄存器作为trampoline跳板</li>
-<li>第一段跳板跳到shellcode后mmap一段匿名内存，保存当前寄存器状态与用于写入第二段跳板指令</li>
-<li>然后是onenter和onleave的编写，注入shellcode实现需求的逻辑即可（这里是简易的核心原理，后面代码会复杂很多）</li>
+<li>frida 寻找前后 128MB 的地址获取一个空闲地址，将 hook 的点的前 16 个字节（或 4 字节）替换掉为 LDR 和 BR 指令，并且利用 x16 寄存器作为 trampoline 跳板</li>
+<li>第一段跳板跳到 shellcode 后 mmap 一段匿名内存，保存当前寄存器状态与用于写入第二段跳板指令</li>
+<li>然后是 onenter 和 onleave 的编写，注入 shellcode 实现需求的逻辑即可（这里是简易的核心原理，后面代码会复杂很多）</li>
 </ul>
-<h6 id="1-2-inline-hook-检测"><a href="#1-2-inline-hook-检测" class="headerlink" title="1.2 inline hook 检测"></a>1.2 inline hook 检测</h6><p>恰好学习的时候搜到<a target="_blank" rel="noopener" href="https://www.cnblogs.com/r0ysue/p/15424821.html">这篇文章</a>，一块记录了</p>
-<p>​		既然frida会生成trampoline和shellcode，那么有个很简单的方法：开一个线程，检查函数开头有没有被替换过，并且有没有被替换成类似BR到shellcode的格式</p>
-<h4 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h4><p>readme描述：</p>
+<h6 id="12-inline-hook-检测"><a class="markdownIt-Anchor" href="#12-inline-hook-检测">#</a> 1.2 inline hook 检测</h6>
+<p>恰好学习的时候搜到<a target="_blank" rel="noopener" href="https://www.cnblogs.com/r0ysue/p/15424821.html">这篇文章</a>，一块记录了</p>
+<p>​		既然 frida 会生成 trampoline 和 shellcode，那么有个很简单的方法：开一个线程，检查函数开头有没有被替换过，并且有没有被替换成类似 BR 到 shellcode 的格式</p>
+<h4 id="源码"><a class="markdownIt-Anchor" href="#源码">#</a> 源码</h4>
+<p>readme 描述：</p>
 <p>Cross-platform instrumentation and introspection library written in C.</p>
 <p>This library is consumed by <a target="_blank" rel="noopener" href="https://github.com/frida/frida-core">frida-core</a> through its JavaScript bindings, <a target="_blank" rel="noopener" href="https://github.com/frida/frida-gum/tree/master/bindings/gumjs">GumJS</a>.</p>
 <p>然后文档有大概给出不同部分的功能（词汇量稍微有点不够咳咳）不过直接看着稍微有点没头绪，先看看<a target="_blank" rel="noopener" href="https://o0xmuhe.github.io/2019/11/15/frida-gum%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/">别人的分析</a>，这篇写的不错)</p>
 <p>偷看一下别人的阅读思路：</p>
-<p><img src="/2024/04/27/frida%E6%BA%90%E7%A0%81%E5%88%9D%E6%8E%A2/image-20240428202138661.png" alt="image-20240428202138661"></p>
-<p>首先有个meson.build构建文件，其中可以先看gumtest.c这一测试运行器（根据testcase递归看进代码）</p>
-<pre><code class="cpp">runner_sources = [
-  &#39;gumtest.c&#39;,
-  &#39;testutil.c&#39;,
-  &#39;stubs&#39; / &#39;dummyclasses.c&#39;,
-  &#39;stubs&#39; / &#39;fakebacktracer.c&#39;,
-  &#39;stubs&#39; / &#39;fakeeventsink.c&#39;,
-  &#39;stalkerdummychannel.c&#39;,
-  &#39;lowlevelhelpers.c&#39;,
-]
-</code></pre>
-<h5 id="gumtest-c"><a href="#gumtest-c" class="headerlink" title="gumtest.c"></a>gumtest.c</h5><p>前面一大段代码根据宏来判断，是用于根据平台信息做初始化的</p>
+<p><img loading="lazy" data-src="frida%E6%BA%90%E7%A0%81%E5%88%9D%E6%8E%A2/image-20240428202138661.png" alt="image-20240428202138661"></p>
+<p>首先有个 meson.build 构建文件，其中可以先看 gumtest.c 这一测试运行器（根据 testcase 递归看进代码）</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">runner_sources = [</span><br><span class="line">  <span class="string">&#x27;gumtest.c&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;testutil.c&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;stubs&#x27;</span> / <span class="string">&#x27;dummyclasses.c&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;stubs&#x27;</span> / <span class="string">&#x27;fakebacktracer.c&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;stubs&#x27;</span> / <span class="string">&#x27;fakeeventsink.c&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;stalkerdummychannel.c&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;lowlevelhelpers.c&#x27;</span>,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<h5 id="gumtestc"><a class="markdownIt-Anchor" href="#gumtestc">#</a> gumtest.c</h5>
+<p>前面一大段代码根据宏来判断，是用于根据平台信息做初始化的</p>
 <p>标记一个核心对象先：</p>
-<pre><code class="cpp">struct _GumInterceptor
-&#123;
-#ifndef GUM_DIET
-  GObject parent;
-#else
-  GumObject parent;
-#endif
-
-  GRecMutex mutex;
-
-  GHashTable * function_by_address;
-
-  GumInterceptorBackend * backend;
-  GumCodeAllocator allocator;
-
-  volatile guint selected_thread_id;
-
-  GumInterceptorTransaction current_transaction;
-&#125;;
-</code></pre>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">_GumInterceptor</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="meta">#<span class="keyword">ifndef</span> GUM_DIET</span></span><br><span class="line">  GObject parent;</span><br><span class="line"><span class="meta">#<span class="keyword">else</span></span></span><br><span class="line">  GumObject parent;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line">  GRecMutex mutex;</span><br><span class="line"></span><br><span class="line">  GHashTable * function_by_address;</span><br><span class="line"></span><br><span class="line">  GumInterceptorBackend * backend;</span><br><span class="line">  GumCodeAllocator allocator;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">volatile</span> guint selected_thread_id;</span><br><span class="line"></span><br><span class="line">  GumInterceptorTransaction current_transaction;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>拦截器初始化</p>
-<pre><code class="cpp">GumInterceptor *
-gum_interceptor_obtain (void)
-&#123;
-  GumInterceptor * interceptor;
-
-  g_mutex_lock (&amp;_gum_interceptor_lock);
-
-#ifndef GUM_DIET
-  if (_the_interceptor != NULL)
-  &#123;
-    interceptor = GUM_INTERCEPTOR (g_object_ref (_the_interceptor));
-  &#125;
-  else
-  &#123;
-    _the_interceptor = g_object_new (GUM_TYPE_INTERCEPTOR, NULL);
-    g_object_weak_ref (G_OBJECT (_the_interceptor),
-        the_interceptor_weak_notify, NULL);
-
-    interceptor = _the_interceptor;
-  &#125;
-#else
-  if (_the_interceptor != NULL)
-  &#123;
-    interceptor = gum_object_ref (_the_interceptor);
-  &#125;
-  else
-  &#123;
-    _the_interceptor = g_new0 (GumInterceptor, 1);
-    _the_interceptor-&gt;parent.ref_count = 1;
-    _the_interceptor-&gt;parent.finalize = gum_interceptor_finalize;
-    gum_interceptor_init (_the_interceptor);
-
-    interceptor = _the_interceptor;
-  &#125;
-#endif
-
-  g_mutex_unlock (&amp;_gum_interceptor_lock);
-
-  return interceptor;
-&#125;
-</code></pre>
-<p>attach上函数的方法：</p>
-<p>传入地址，调用<code>gum_interceptor_resolve</code></p>
-<pre><code class="cpp">GumAttachReturn
-gum_interceptor_attach (GumInterceptor * self,
-                        gpointer function_address,
-                        GumInvocationListener * listener,
-                        gpointer listener_function_data)
-&#123;
-  GumAttachReturn result = GUM_ATTACH_OK;
-  GumFunctionContext * function_ctx;
-  GumInstrumentationError error;
-
-  gum_interceptor_ignore_current_thread (self);
-  GUM_INTERCEPTOR_LOCK (self);
-  gum_interceptor_transaction_begin (&amp;self-&gt;current_transaction);
-  self-&gt;current_transaction.is_dirty = TRUE;
-
-  function_address = gum_interceptor_resolve (self, function_address);
-
-  function_ctx = gum_interceptor_instrument (self, GUM_INTERCEPTOR_TYPE_DEFAULT,
-      function_address, &amp;error);
-
-  if (function_ctx == NULL)
-    goto instrumentation_error;
-
-  if (gum_function_context_has_listener (function_ctx, listener))
-    goto already_attached;
-
-  gum_function_context_add_listener (function_ctx, listener,
-      listener_function_data);
-
-  goto beach;
-
-instrumentation_error:
-  &#123;
-    switch (error)
-    &#123;
-      case GUM_INSTRUMENTATION_ERROR_WRONG_SIGNATURE:
-        result = GUM_ATTACH_WRONG_SIGNATURE;
-        break;
-      case GUM_INSTRUMENTATION_ERROR_POLICY_VIOLATION:
-        result = GUM_ATTACH_POLICY_VIOLATION;
-        break;
-      case GUM_INSTRUMENTATION_ERROR_WRONG_TYPE:
-        result = GUM_ATTACH_WRONG_TYPE;
-        break;
-      default:
-        g_assert_not_reached ();
-    &#125;
-    goto beach;
-  &#125;
-already_attached:
-  &#123;
-    result = GUM_ATTACH_ALREADY_ATTACHED;
-    goto beach;
-  &#125;
-beach:
-  &#123;
-    gum_interceptor_transaction_end (&amp;self-&gt;current_transaction);
-    GUM_INTERCEPTOR_UNLOCK (self);
-    gum_interceptor_unignore_current_thread (self);
-
-    return result;
-  &#125;
-&#125;
-</code></pre>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">GumInterceptor *</span></span><br><span class="line"><span class="function"><span class="title">gum_interceptor_obtain</span> <span class="params">(<span class="type">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  GumInterceptor * interceptor;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">g_mutex_lock</span> (&amp;_gum_interceptor_lock);</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">ifndef</span> GUM_DIET</span></span><br><span class="line">  <span class="keyword">if</span> (_the_interceptor != <span class="literal">NULL</span>)</span><br><span class="line">  &#123;</span><br><span class="line">    interceptor = <span class="built_in">GUM_INTERCEPTOR</span> (<span class="built_in">g_object_ref</span> (_the_interceptor));</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">  &#123;</span><br><span class="line">    _the_interceptor = <span class="built_in">g_object_new</span> (GUM_TYPE_INTERCEPTOR, <span class="literal">NULL</span>);</span><br><span class="line">    <span class="built_in">g_object_weak_ref</span> (<span class="built_in">G_OBJECT</span> (_the_interceptor),</span><br><span class="line">        the_interceptor_weak_notify, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">    interceptor = _the_interceptor;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="meta">#<span class="keyword">else</span></span></span><br><span class="line">  <span class="keyword">if</span> (_the_interceptor != <span class="literal">NULL</span>)</span><br><span class="line">  &#123;</span><br><span class="line">    interceptor = <span class="built_in">gum_object_ref</span> (_the_interceptor);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">  &#123;</span><br><span class="line">    _the_interceptor = <span class="built_in">g_new0</span> (GumInterceptor, <span class="number">1</span>);</span><br><span class="line">    _the_interceptor-&gt;parent.ref_count = <span class="number">1</span>;</span><br><span class="line">    _the_interceptor-&gt;parent.finalize = gum_interceptor_finalize;</span><br><span class="line">    <span class="built_in">gum_interceptor_init</span> (_the_interceptor);</span><br><span class="line"></span><br><span class="line">    interceptor = _the_interceptor;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">g_mutex_unlock</span> (&amp;_gum_interceptor_lock);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> interceptor;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>attach 上函数的方法：</p>
+<p>传入地址，调用 <code>gum_interceptor_resolve</code></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">GumAttachReturn</span></span><br><span class="line"><span class="function"><span class="title">gum_interceptor_attach</span> <span class="params">(GumInterceptor * self,</span></span></span><br><span class="line"><span class="params"><span class="function">                        gpointer function_address,</span></span></span><br><span class="line"><span class="params"><span class="function">                        GumInvocationListener * listener,</span></span></span><br><span class="line"><span class="params"><span class="function">                        gpointer listener_function_data)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  GumAttachReturn result = GUM_ATTACH_OK;</span><br><span class="line">  GumFunctionContext * function_ctx;</span><br><span class="line">  GumInstrumentationError error;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">gum_interceptor_ignore_current_thread</span> (self);</span><br><span class="line">  <span class="built_in">GUM_INTERCEPTOR_LOCK</span> (self);</span><br><span class="line">  <span class="built_in">gum_interceptor_transaction_begin</span> (&amp;self-&gt;current_transaction);</span><br><span class="line">  self-&gt;current_transaction.is_dirty = TRUE;</span><br><span class="line"></span><br><span class="line">  function_address = <span class="built_in">gum_interceptor_resolve</span> (self, function_address);</span><br><span class="line"></span><br><span class="line">  function_ctx = <span class="built_in">gum_interceptor_instrument</span> (self, GUM_INTERCEPTOR_TYPE_DEFAULT,</span><br><span class="line">      function_address, &amp;error);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (function_ctx == <span class="literal">NULL</span>)</span><br><span class="line">    <span class="keyword">goto</span> instrumentation_error;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (<span class="built_in">gum_function_context_has_listener</span> (function_ctx, listener))</span><br><span class="line">    <span class="keyword">goto</span> already_attached;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">gum_function_context_add_listener</span> (function_ctx, listener,</span><br><span class="line">      listener_function_data);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">goto</span> beach;</span><br><span class="line"></span><br><span class="line">instrumentation_error:</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">switch</span> (error)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">case</span> GUM_INSTRUMENTATION_ERROR_WRONG_SIGNATURE:</span><br><span class="line">        result = GUM_ATTACH_WRONG_SIGNATURE;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> GUM_INSTRUMENTATION_ERROR_POLICY_VIOLATION:</span><br><span class="line">        result = GUM_ATTACH_POLICY_VIOLATION;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> GUM_INSTRUMENTATION_ERROR_WRONG_TYPE:</span><br><span class="line">        result = GUM_ATTACH_WRONG_TYPE;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">default</span>:</span><br><span class="line">        <span class="built_in">g_assert_not_reached</span> ();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">goto</span> beach;</span><br><span class="line">  &#125;</span><br><span class="line">already_attached:</span><br><span class="line">  &#123;</span><br><span class="line">    result = GUM_ATTACH_ALREADY_ATTACHED;</span><br><span class="line">    <span class="keyword">goto</span> beach;</span><br><span class="line">  &#125;</span><br><span class="line">beach:</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">gum_interceptor_transaction_end</span> (&amp;self-&gt;current_transaction);</span><br><span class="line">    <span class="built_in">GUM_INTERCEPTOR_UNLOCK</span> (self);</span><br><span class="line">    <span class="built_in">gum_interceptor_unignore_current_thread</span> (self);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>跟进看这里的实现</p>
-<pre><code class="cpp">static gpointer
-gum_interceptor_resolve (GumInterceptor * self,
-                         gpointer address)
-&#123;
-  address = gum_strip_code_pointer (address);
-
-  if (!gum_interceptor_has (self, address))
-  &#123;
-    const gsize max_redirect_size = 16;
-    gpointer target;
-
-    gum_ensure_code_readable (address, max_redirect_size);
-
-    /* Avoid following grafted branches. */
-    if (gum_process_get_code_signing_policy () == GUM_CODE_SIGNING_REQUIRED)
-      return address;
-
-    target = _gum_interceptor_backend_resolve_redirect (self-&gt;backend,
-        address);
-    if (target != NULL)
-      return gum_interceptor_resolve (self, target);
-  &#125;
-
-  return address;
-&#125;
-</code></pre>
-<p>可以进到：这部分是比较核心的生成跳转shellcode的部分，或许也可以从这部分下手来考虑对抗？(TODO+1)</p>
-<pre><code class="cpp">gpointer
-gum_arm64_reader_try_get_relative_jump_target (gconstpointer address)
-&#123;
-  gpointer result = NULL;
-  csh capstone;
-  cs_insn * insn;
-  const uint8_t * code;
-  size_t size;
-  uint64_t pc;
-  const cs_arm64_op * ops;
-
-  cs_arch_register_arm64 ();
-  cs_open (CS_ARCH_ARM64, GUM_DEFAULT_CS_ENDIAN, &amp;capstone);
-  cs_option (capstone, CS_OPT_DETAIL, CS_OPT_ON);
-
-  insn = cs_malloc (capstone);
-
-  code = address;
-  size = 16;
-  pc = GPOINTER_TO_SIZE (address);
-
-#define GUM_DISASM_NEXT() \
-    if (!cs_disasm_iter (capstone, &amp;code, &amp;size, &amp;pc, insn)) \
-      goto beach; \
-    ops = insn-&gt;detail-&gt;arm64.operands
-#define GUM_CHECK_ID(i) \
-    if (insn-&gt;id != G_PASTE (ARM64_INS_, i)) \
-      goto beach
-#define GUM_CHECK_OP_TYPE(n, t) \
-    if (ops[n].type != G_PASTE (ARM64_OP_, t)) \
-      goto beach
-#define GUM_CHECK_OP_REG(n, r) \
-    if (ops[n].reg != G_PASTE (ARM64_REG_, r)) \
-      goto beach
-#define GUM_CHECK_OP_MEM(n, b, i, d) \
-    if (ops[n].mem.base != G_PASTE (ARM64_REG_, b)) \
-      goto beach; \
-    if (ops[n].mem.index != G_PASTE (ARM64_REG_, i)) \
-      goto beach; \
-    if (ops[n].mem.disp != d) \
-      goto beach
-
-  GUM_DISASM_NEXT ();
-
-  switch (insn-&gt;id)
-  &#123;
-    case ARM64_INS_B:
-      result = GSIZE_TO_POINTER (ops[0].imm);
-      break;
-#ifdef HAVE_DARWIN
-    case ARM64_INS_ADRP:
-    &#123;
-      GumAddress target;
-
-      GUM_CHECK_OP_REG (0, X17);
-      target = ops[1].imm;
-
-      GUM_DISASM_NEXT ();
-      GUM_CHECK_ID (ADD);
-      GUM_CHECK_OP_REG (0, X17);
-      GUM_CHECK_OP_REG (1, X17);
-      GUM_CHECK_OP_TYPE (2, IMM);
-      target += ops[2].imm;
-
-      GUM_DISASM_NEXT ();
-      GUM_CHECK_ID (LDR);
-      GUM_CHECK_OP_REG (0, X16);
-      GUM_CHECK_OP_TYPE (1, MEM);
-      GUM_CHECK_OP_MEM (1, X17, INVALID, 0);
-
-      GUM_DISASM_NEXT ();
-      GUM_CHECK_ID (BRAA);
-      GUM_CHECK_OP_REG (0, X16);
-      GUM_CHECK_OP_REG (1, X17);
-
-      result = *((gpointer *) GSIZE_TO_POINTER (target));
-
-      break;
-    &#125;
-#endif
-    default:
-      break;
-  &#125;
-
-beach:
-  cs_free (insn, 1);
-
-  cs_close (&amp;capstone);
-
-  return result;
-&#125;
-</code></pre>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">static</span> gpointer</span></span><br><span class="line"><span class="function"><span class="title">gum_interceptor_resolve</span> <span class="params">(GumInterceptor * self,</span></span></span><br><span class="line"><span class="params"><span class="function">                         gpointer address)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  address = <span class="built_in">gum_strip_code_pointer</span> (address);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">gum_interceptor_has</span> (self, address))</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="type">const</span> gsize max_redirect_size = <span class="number">16</span>;</span><br><span class="line">    gpointer target;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">gum_ensure_code_readable</span> (address, max_redirect_size);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Avoid following grafted branches. */</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">gum_process_get_code_signing_policy</span> () == GUM_CODE_SIGNING_REQUIRED)</span><br><span class="line">      <span class="keyword">return</span> address;</span><br><span class="line"></span><br><span class="line">    target = _gum_interceptor_backend_resolve_redirect (self-&gt;backend,</span><br><span class="line">        address);</span><br><span class="line">    <span class="keyword">if</span> (target != <span class="literal">NULL</span>)</span><br><span class="line">      <span class="keyword">return</span> <span class="built_in">gum_interceptor_resolve</span> (self, target);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> address;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以进到：这部分是比较核心的生成跳转 shellcode 的部分，或许也可以从这部分下手来考虑对抗？(TODO+1)</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">gpointer</span></span><br><span class="line"><span class="function"><span class="title">gum_arm64_reader_try_get_relative_jump_target</span> <span class="params">(gconstpointer address)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  gpointer result = <span class="literal">NULL</span>;</span><br><span class="line">  csh capstone;</span><br><span class="line">  cs_insn * insn;</span><br><span class="line">  <span class="type">const</span> <span class="type">uint8_t</span> * code;</span><br><span class="line">  <span class="type">size_t</span> size;</span><br><span class="line">  <span class="type">uint64_t</span> pc;</span><br><span class="line">  <span class="type">const</span> cs_arm64_op * ops;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">cs_arch_register_arm64</span> ();</span><br><span class="line">  <span class="built_in">cs_open</span> (CS_ARCH_ARM64, GUM_DEFAULT_CS_ENDIAN, &amp;capstone);</span><br><span class="line">  <span class="built_in">cs_option</span> (capstone, CS_OPT_DETAIL, CS_OPT_ON);</span><br><span class="line"></span><br><span class="line">  insn = <span class="built_in">cs_malloc</span> (capstone);</span><br><span class="line"></span><br><span class="line">  code = address;</span><br><span class="line">  size = <span class="number">16</span>;</span><br><span class="line">  pc = <span class="built_in">GPOINTER_TO_SIZE</span> (address);</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> GUM_DISASM_NEXT() \</span></span><br><span class="line"><span class="meta">    <span class="keyword">if</span> (!cs_disasm_iter (capstone, &amp;code, &amp;size, &amp;pc, insn)) \</span></span><br><span class="line"><span class="meta">      goto beach; \</span></span><br><span class="line"><span class="meta">    ops = insn-&gt;detail-&gt;arm64.operands</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> GUM_CHECK_ID(i) \</span></span><br><span class="line"><span class="meta">    <span class="keyword">if</span> (insn-&gt;id != G_PASTE (ARM64_INS_, i)) \</span></span><br><span class="line"><span class="meta">      goto beach</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> GUM_CHECK_OP_TYPE(n, t) \</span></span><br><span class="line"><span class="meta">    <span class="keyword">if</span> (ops[n].type != G_PASTE (ARM64_OP_, t)) \</span></span><br><span class="line"><span class="meta">      goto beach</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> GUM_CHECK_OP_REG(n, r) \</span></span><br><span class="line"><span class="meta">    <span class="keyword">if</span> (ops[n].reg != G_PASTE (ARM64_REG_, r)) \</span></span><br><span class="line"><span class="meta">      goto beach</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> GUM_CHECK_OP_MEM(n, b, i, d) \</span></span><br><span class="line"><span class="meta">    <span class="keyword">if</span> (ops[n].mem.base != G_PASTE (ARM64_REG_, b)) \</span></span><br><span class="line"><span class="meta">      goto beach; \</span></span><br><span class="line"><span class="meta">    <span class="keyword">if</span> (ops[n].mem.index != G_PASTE (ARM64_REG_, i)) \</span></span><br><span class="line"><span class="meta">      goto beach; \</span></span><br><span class="line"><span class="meta">    <span class="keyword">if</span> (ops[n].mem.disp != d) \</span></span><br><span class="line"><span class="meta">      goto beach</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">GUM_DISASM_NEXT</span> ();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">switch</span> (insn-&gt;id)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">case</span> ARM64_INS_B:</span><br><span class="line">      result = <span class="built_in">GSIZE_TO_POINTER</span> (ops[<span class="number">0</span>].imm);</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> HAVE_DARWIN</span></span><br><span class="line">    <span class="keyword">case</span> ARM64_INS_ADRP:</span><br><span class="line">    &#123;</span><br><span class="line">      GumAddress target;</span><br><span class="line"></span><br><span class="line">      <span class="built_in">GUM_CHECK_OP_REG</span> (<span class="number">0</span>, X17);</span><br><span class="line">      target = ops[<span class="number">1</span>].imm;</span><br><span class="line"></span><br><span class="line">      <span class="built_in">GUM_DISASM_NEXT</span> ();</span><br><span class="line">      <span class="built_in">GUM_CHECK_ID</span> (ADD);</span><br><span class="line">      <span class="built_in">GUM_CHECK_OP_REG</span> (<span class="number">0</span>, X17);</span><br><span class="line">      <span class="built_in">GUM_CHECK_OP_REG</span> (<span class="number">1</span>, X17);</span><br><span class="line">      <span class="built_in">GUM_CHECK_OP_TYPE</span> (<span class="number">2</span>, IMM);</span><br><span class="line">      target += ops[<span class="number">2</span>].imm;</span><br><span class="line"></span><br><span class="line">      <span class="built_in">GUM_DISASM_NEXT</span> ();</span><br><span class="line">      <span class="built_in">GUM_CHECK_ID</span> (LDR);</span><br><span class="line">      <span class="built_in">GUM_CHECK_OP_REG</span> (<span class="number">0</span>, X16);</span><br><span class="line">      <span class="built_in">GUM_CHECK_OP_TYPE</span> (<span class="number">1</span>, MEM);</span><br><span class="line">      <span class="built_in">GUM_CHECK_OP_MEM</span> (<span class="number">1</span>, X17, INVALID, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">      <span class="built_in">GUM_DISASM_NEXT</span> ();</span><br><span class="line">      <span class="built_in">GUM_CHECK_ID</span> (BRAA);</span><br><span class="line">      <span class="built_in">GUM_CHECK_OP_REG</span> (<span class="number">0</span>, X16);</span><br><span class="line">      <span class="built_in">GUM_CHECK_OP_REG</span> (<span class="number">1</span>, X17);</span><br><span class="line"></span><br><span class="line">      result = *((gpointer *) <span class="built_in">GSIZE_TO_POINTER</span> (target));</span><br><span class="line"></span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">beach:</span><br><span class="line">  <span class="built_in">cs_free</span> (insn, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">cs_close</span> (&amp;capstone);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>创建拦截器后端以及分配器初始化</p>
-<pre><code class="cpp">gum_interceptor_init (GumInterceptor * self)
-&#123;
-  g_rec_mutex_init (&amp;self-&gt;mutex);
-
-  self-&gt;function_by_address = g_hash_table_new_full (NULL, NULL, NULL,
-      (GDestroyNotify) gum_function_context_destroy);
-
-  gum_code_allocator_init (&amp;self-&gt;allocator, GUM_INTERCEPTOR_CODE_SLICE_SIZE);
-
-  gum_interceptor_transaction_init (&amp;self-&gt;current_transaction, self);
-&#125;
-</code></pre>
-
-    </div>
-    
-</div>
-                         
-<footer id="footer">
-    <div class="footer-wrap">
-        <div>
-            © 20xx - 2024 Moyao の小屋
-            <span class="footer-icon">
-                <i class="fa-solid fa-font-awesome fa-fw"></i>
-            </span>
-            @Moyao
-        </div>
-        <div></div>
-        <div>Based on the <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo Engine</a> & <a
-                target="_blank" rel="noopener" href="https://github.com/argvchs/hexo-theme-particlex">ParticleX Theme</a></div>
-        
-    </div>
-</footer>
-                    </div>
-                </div>
-            </transition>
-            <div id="img_show">
-                <img id="img_content" alt="img_show">
-            </div>
-        </div>
-        <script src="https://cdn.staticfile.org/highlight.js/11.5.1/highlight.min.js"></script>
-        <script src="/js/particlex.js"></script>
-        <script src="/js/showimg.js"></script>
-        
-
-    </body>
-</html>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">gum_interceptor_init</span> (GumInterceptor * self)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="built_in">g_rec_mutex_init</span> (&amp;self-&gt;mutex);</span><br><span class="line"></span><br><span class="line">  self-&gt;function_by_address = <span class="built_in">g_hash_table_new_full</span> (<span class="literal">NULL</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>,</span><br><span class="line">      (GDestroyNotify) gum_function_context_destroy);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">gum_code_allocator_init</span> (&amp;self-&gt;allocator, GUM_INTERCEPTOR_CODE_SLICE_SIZE);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">gum_interceptor_transaction_init</span> (&amp;self-&gt;current_transaction, self);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</div><footer><div class="meta"><span class="item"><span class="icon"><i class="ic i-calendar-check"></i></span><span class="text">Edited on</span><time title="Modified: 2024-04-30 19:16:43" itemprop="dateModified" datetime="2024-04-30T19:16:43+08:00">2024-04-30</time></span></div><div class="reward"><button><i class="ic i-heartbeat"></i>Donate</button><p>Give me a cup of [coffee]~(￣▽￣)~*</p><div id="qr"><div><img loading="lazy" data-src="/assets/wechatpay.png" alt="Moyao WeChat Pay"/><p>WeChat Pay</p></div><div><img loading="lazy" data-src="/assets/alipay.png" alt="Moyao Alipay"/><p>Alipay</p></div></div></div><div id="copyright"><ul><li class="author"><strong>Post author: </strong>Moyao<i class="ic i-at"><em>@</em></i>Moyao の小屋</li><li class="link"><strong>Post link: </strong><a href="https://demoyao100.github.io/2024/04/27/frida%E6%BA%90%E7%A0%81%E5%88%9D%E6%8E%A2/" title="frida源码初探">https://demoyao100.github.io/2024/04/27/frida源码初探/</a></li><li class="license"><strong>Copyright Notice: </strong>All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</a> unless stating additionally.</li></ul></div></footer></article></div><div class="post-nav"><div class="item left"><a href="/2024/04/24/%E9%93%81%E4%B8%89awd%E6%B8%97%E9%80%8F%E5%A4%8D%E7%9B%98/" rel="prev" itemprop="url" data-background-image="https:&#x2F;&#x2F;tva4.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gicis3attqj20zk0m8k7l.jpg" title="铁三awd渗透复盘"><span class="type">Previous Post</span><h3>铁三awd渗透复盘</h3></a></div><div class="item right"></div></div><div class="wrap" id="comments"></div></div><div id="sidebar"><div class="inner"><div class="panels"><div class="inner"><div class="contents panel pjax" data-title="Contents"><ol class="toc"><li class="toc-item toc-level-6"><a class="toc-link" href="#preface%E8%A2%AB%E6%8B%B7%E6%89%93%E5%88%B0frida%E5%92%8Cxpose%E7%9A%84%E5%8E%9F%E7%90%86%E5%95%A5%E7%9A%84%E5%95%A5%E5%95%A5%E4%B8%8D%E4%BC%9A%E7%88%AC%E6%9D%A5%E8%B5%B6%E7%B4%A7%E5%AD%A6%E5%AD%A6"><span class="toc-number">1.</span> <span class="toc-text"> PREFACE：被拷打到 frida 和 xpose 的原理啥的，啥啥不会，爬来赶紧学学</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E8%A7%88"><span class="toc-number"></span> <span class="toc-text"> 总览</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#frida-gum"><span class="toc-number"></span> <span class="toc-text"> frida-gum</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80-%E5%89%8D%E7%BD%AE%E5%8E%9F%E7%90%86"><span class="toc-number"></span> <span class="toc-text"> 一、前置原理</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#11-inline-hook"><span class="toc-number"></span> <span class="toc-text"> 1.1 inline hook</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#12-inline-hook-%E6%A3%80%E6%B5%8B"><span class="toc-number">1.</span> <span class="toc-text"> 1.2 inline hook 检测</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%BA%90%E7%A0%81"><span class="toc-number"></span> <span class="toc-text"> 源码</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#gumtestc"><span class="toc-number"></span> <span class="toc-text"> gumtest.c</span></a></div><div class="related panel pjax" data-title="Related"></div><div class="overview panel" data-title="Overview"><div class="author" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person"><img class="image" loading="lazy" decoding="async" itemprop="image" alt="Moyao" src="/assets/avatar.jpg"/><p class="name" itemprop="name">Moyao</p><div class="description" itemprop="description">Write down something interesting I met
+feel free to mail me if you have something wanted to talk about
+mail: &lt;moyaoxue@outlook.com&gt;
+</div></div><nav class="state"><div class="item posts"><a href="/archives/"><span class="count">71</span><span class="name">posts</span></a></div><div class="item tags"><a href="/tags/"><span class="count">13</span><span class="name">tags</span></a></div></nav><div class="social"><a target="_blank" rel="noopener" href="https://github.com/name" class="item github" title="https:&#x2F;&#x2F;github.com&#x2F;name"><i class="ic i-github"></i></a></div><div class="menu"><li class="item"><a href="/" rel="section"><i class="ic i-home"></i>Home</a></li></div></div></div></div><ul id="quick"><li class="prev pjax"></li><li class="up"><i class="ic i-arrow-up"></i></li><li class="down"><i class="ic i-arrow-down"></i></li><li class="next pjax"><a href="/2024/04/24/%E9%93%81%E4%B8%89awd%E6%B8%97%E9%80%8F%E5%A4%8D%E7%9B%98/" rel="next" title="Next Post"><i class="ic i-chevron-right"></i></a></li><li class="percent"></li></ul></div></div><div class="dimmer"></div></div></main><footer id="footer"><div class="inner"><div class="widgets"><div class="rpost pjax"><h2>Random Posts</h2><ul><li class="item"><div class="breadcrumb"></div><span><a href="/2024/03/28/flutter%E5%BC%80%E5%8F%91%E5%88%9D%E6%8E%A2/">flutter开发初探</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2024/04/27/frida%E6%BA%90%E7%A0%81%E5%88%9D%E6%8E%A2/">frida源码初探</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2023/12/08/tctf/">tctf</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2023/11/27/%E3%80%8A%E6%9D%80%E6%AD%BB%E4%B8%80%E5%8F%AA%E7%9F%A5%E6%9B%B4%E9%B8%9F%E3%80%8B/">《杀死一只知更鸟》</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2024/03/28/ACTF-flutter%E5%A4%8D%E7%8E%B0/">ACTF flutter复现</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2023/10/02/BuckeyeCTF2023/">BuckeyeCTF2023</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2023/10/01/mapleCTF2023/">mapleCTF2023</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2023/08/09/hook%E6%9F%90%E8%81%8A%E5%A4%A9%E8%BD%AF%E4%BB%B6lab/">hook某聊天软件lab</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2024/01/31/ubuntu-python-version-manage/">ubuntu python version manage</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2023/09/06/electron-%E6%89%93%E5%8C%85/">electron 打包</a></span></li></ul></div><div class="rpost pjax"><h2>Recent Comments</h2></div></div><div class="status"><div class="copyright">&copy; 2022 -<span itemprop="copyrightYear">2024</span><span class="with-love"><i class="ic i-sakura rotate"></i></span><span class="author" itemprop="copyrightHolder">Moyao @ testName</span></div><div class="count"><span class="post-meta-item-icon"><i class="ic i-chart-area"></i></span><span title="Symbols count total">625k words</span><span class="post-meta-divider"> | </span><span class="post-meta-item-icon"><i class="ic i-coffee"></i></span><span title="Reading time total">9:28</span></div><div class="powered-by">Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> & Theme.<a target="_blank" rel="noopener" href="https://github.com/theme-shoka-x/hexo-theme-shokaX/">ShokaX</a></div></div></div></footer></div><script data-config type="text/javascript">var LOCAL = {
+    ispost: true,
+        path: `2024/04/27/frida源码初探/`,
+        favicon: {
+        show: `(●´3｀●) Here we go again.`,
+        hide: `(´Д｀) It's a disaster!`
+    },
+    search: {
+        placeholder: "Search for Posts",
+        empty: "We didn't find any results for the search: ${query}",
+        stats: "${hits} results found in ${time} ms"
+    },
+    copy_tex: false,
+    katex: false,
+    mermaid: false,
+    audio: undefined,
+    fancybox: true,
+    nocopy: false,
+    outime: true,
+    template: `<div class="note warning"><p><span class="label warning">Article Timeliness Alert</span><br>This is an article published {{publish}} days ago and last updated {{updated}} days ago. Some information may have changed, so please be careful to screen it.</p></div>`,
+    quiz: {
+        choice: `Multiple Choice`,
+        multiple: `Multiple Answer`,
+        true_false: `True/False`,
+        essay: `Questions`,
+        gap_fill: `Gap Filling`,
+        mistake: `Wrong Answer`
+    },
+    ignores: [
+        (uri) => uri.includes('#'),
+        (uri) => new RegExp(LOCAL.path + '$').test(uri),
+            []
+    ]
+};
+</script><script src="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-6-M/pace/1.2.4/pace.min.js" async></script><script src="/js/siteInit.js?v=0.4.2" type="module" fetchpriority="high" defer></script></body></html>

