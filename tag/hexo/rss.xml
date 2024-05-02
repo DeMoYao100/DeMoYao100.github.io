@@ -20,9 +20,9 @@ mail: &amp;lt;moyaoxue@outlook.com&amp;gt;
         <category>cv</category>
         <category>android</category>
         <category>jail</category>
+        <category>re python</category>
         <category>hexo</category>
         <category>node.js</category>
-        <category>re python</category>
         <item>
             <guid isPermalink="true">https://demoyao100.github.io/2022/08/26/%E5%9F%BA%E4%BA%8Ehexo%E6%A1%86%E6%9E%B6%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</guid>
             <title>to build your blog on github</title>
@@ -31,13 +31,13 @@ mail: &amp;lt;moyaoxue@outlook.com&amp;gt;
             <category>hexo</category>
             <category>node.js</category>
             <pubDate>Fri, 26 Aug 2022 21:37:03 +0800</pubDate>
-            <description><![CDATA[ &lt;h1 id=&#34;build-blog-with-hexo-and-github-pages&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#build-blog-with-hexo-and-github-pages&#34;&gt;#&lt;/a&gt; Build Blog with Hexo and GitHub Pages&lt;/h1&gt;
-&lt;h5 id=&#34;published-20220826&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#published-20220826&#34;&gt;#&lt;/a&gt; Published: 2022/08/26&lt;/h5&gt;
-&lt;h5 id=&#34;updated-20220826&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#updated-20220826&#34;&gt;#&lt;/a&gt; Updated: 2022/08/26&lt;/h5&gt;
-&lt;h2 id=&#34;preface&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#preface&#34;&gt;#&lt;/a&gt; PREFACE&lt;/h2&gt;
-&lt;h6 id=&#34;as-my-very-first-blog-here-i-want-to-record-some-point-and-hope-that-it-will-help-whoever-wants-to-build-his-own-blog&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#as-my-very-first-blog-here-i-want-to-record-some-point-and-hope-that-it-will-help-whoever-wants-to-build-his-own-blog&#34;&gt;#&lt;/a&gt; As my very first blog, here I want to record some point and hope that it will help whoever wants to build his own blog.&lt;/h6&gt;
-&lt;h6 id=&#34;the-things-need-to-be-done&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#the-things-need-to-be-done&#34;&gt;#&lt;/a&gt; THE THINGS NEED TO BE DONE&lt;/h6&gt;
-&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+            <description><![CDATA[ &lt;h1 id=&#34;build-blog-with-hexo-and-github-pages&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#build-blog-with-hexo-and-github-pages&#34;&gt;#&lt;/a&gt; Build Blog with Hexo and GitHub Pages&lt;/h1&gt;
+&lt;h5 id=&#34;published-20220826&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#published-20220826&#34;&gt;#&lt;/a&gt; Published: 2022/08/26&lt;/h5&gt;
+&lt;h5 id=&#34;updated-20220826&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#updated-20220826&#34;&gt;#&lt;/a&gt; Updated: 2022/08/26&lt;/h5&gt;
+&lt;h2 id=&#34;preface&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#preface&#34;&gt;#&lt;/a&gt; PREFACE&lt;/h2&gt;
+&lt;h6 id=&#34;as-my-very-first-blog-here-i-want-to-record-some-point-and-hope-that-it-will-help-whoever-wants-to-build-his-own-blog&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#as-my-very-first-blog-here-i-want-to-record-some-point-and-hope-that-it-will-help-whoever-wants-to-build-his-own-blog&#34;&gt;#&lt;/a&gt; As my very first blog, here I want to record some point and hope that it will help whoever wants to build his own blog.&lt;/h6&gt;
+&lt;h6 id=&#34;the-things-need-to-be-done&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#the-things-need-to-be-done&#34;&gt;#&lt;/a&gt; THE THINGS NEED TO BE DONE&lt;/h6&gt;
+&lt;p&gt;&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;&lt;/p&gt;
 &lt;hr&gt;
 &lt;blockquote&gt;
 &lt;p&gt;hexo&lt;/p&gt;
@@ -57,11 +57,11 @@ mail: &amp;lt;moyaoxue@outlook.com&amp;gt;
 &lt;p&gt;GitHub Pages is a static site hosting service designed to host your personal, organization or project pages directly from a GitHub repository&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;/blockquote&gt;
-&lt;h3 id=&#34;nodejs&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#nodejs&#34;&gt;#&lt;/a&gt; Node.js&lt;/h3&gt;
+&lt;h3 id=&#34;nodejs&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#nodejs&#34;&gt;#&lt;/a&gt; Node.js&lt;/h3&gt;
 &lt;p&gt;Go to &lt;a href=&#34;https://nodejs.org/en/download/&#34;&gt;Download - Node.js&lt;/a&gt;, choose and install the right version for your computer.&lt;/p&gt;
-&lt;p&gt;Run  &lt;code&gt;node -v&lt;/code&gt;  then  &lt;code&gt;npm -v&lt;/code&gt;  on cmd, check your Node.js version if it doesn’t output two version of node and npm.&lt;/p&gt;
-&lt;h3 id=&#34;git&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#git&#34;&gt;#&lt;/a&gt; git&lt;/h3&gt;
-&lt;p&gt;Go to &lt;a href=&#34;https://git-scm.com/downloads&#34;&gt;Download - git&lt;/a&gt;, leave the options default if you don’t understand.&lt;/p&gt;
+&lt;p&gt;Run  &lt;code&gt;node -v&lt;/code&gt;  then  &lt;code&gt;npm -v&lt;/code&gt;  on cmd, check your Node.js version if it doesn&#39;t output two version of node and npm.&lt;/p&gt;
+&lt;h3 id=&#34;git&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#git&#34;&gt;#&lt;/a&gt; git&lt;/h3&gt;
+&lt;p&gt;Go to &lt;a href=&#34;https://git-scm.com/downloads&#34;&gt;Download - git&lt;/a&gt;, leave the options default if you don&#39;t understand.&lt;/p&gt;
 &lt;p&gt;When you are done, use cmd to chack if you do it right by run&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;code&gt;git --version&lt;/code&gt; &lt;br&gt;
@@ -72,19 +72,19 @@ If it outputs your git version, you do it right.&lt;/p&gt;
  &lt;code&gt;git config --global user.email youremail@example.com&lt;/code&gt; &lt;br&gt;
  &lt;code&gt; ssh-keygen -t rsa -C &amp;quot;youremail@example.com&amp;quot;&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;and you will get two files(your own screen name and your email)&lt;/p&gt;
-&lt;h3 id=&#34;hexo&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#hexo&#34;&gt;#&lt;/a&gt; Hexo&lt;/h3&gt;
+&lt;h3 id=&#34;hexo&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#hexo&#34;&gt;#&lt;/a&gt; Hexo&lt;/h3&gt;
 &lt;p&gt;Run  &lt;code&gt;npm install hexo-cli -g&lt;/code&gt;  on a folder you would like to&lt;/p&gt;
 &lt;p&gt;Run  &lt;code&gt;hexo init&lt;/code&gt;  and  &lt;code&gt;npm install&lt;/code&gt;  on THE FOLDER YOU WANT TO PUT YOUR BLOG IN, run  &lt;code&gt;hexo version&lt;/code&gt; ( &lt;code&gt;hexo -v&lt;/code&gt; ) to verify Hexo.&lt;/p&gt;
-&lt;p&gt;run  &lt;code&gt;hexo g&lt;/code&gt;  then  &lt;code&gt;hexo s&lt;/code&gt;   &lt;code&gt;(hexo server)&lt;/code&gt;  and visit &lt;a href=&#34;http://localhost:4000&#34;&gt;your blog&lt;/a&gt; (&lt;a href=&#34;http://localhost:4000&#34;&gt;http://localhost:4000&lt;/a&gt;, the default port is 4000, if it reports error, try to run  &lt;code&gt;hexo s -i&lt;/code&gt; , i stands for the port that isn’t occupied)&lt;/p&gt;
+&lt;p&gt;run  &lt;code&gt;hexo g&lt;/code&gt;  then  &lt;code&gt;hexo s&lt;/code&gt;   &lt;code&gt;(hexo server)&lt;/code&gt;  and visit &lt;a href=&#34;http://localhost:4000&#34;&gt;your blog&lt;/a&gt; (&lt;a href=&#34;http://localhost:4000&#34;&gt;http://localhost:4000&lt;/a&gt;, the default port is 4000, if it reports error, try to run  &lt;code&gt;hexo s -i&lt;/code&gt; , i stands for the port that isn&#39;t occupied)&lt;/p&gt;
 &lt;p&gt;find  &lt;code&gt;_config.yml&lt;/code&gt; , find  &lt;code&gt;deploy:&lt;/code&gt; ,part and edit:&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;deploy:&lt;/code&gt; &lt;br&gt;
  &lt;code&gt;type: git&lt;/code&gt; &lt;br&gt;
  &lt;code&gt;repo: git@github.com:yourname/yourname.github.io.git&lt;/code&gt; &lt;br&gt;
  &lt;code&gt;branch: master&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;Create a GitHub Repository&lt;/p&gt;
-&lt;h4 id=&#34;tips&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#tips&#34;&gt;#&lt;/a&gt; TIPS:&lt;/h4&gt;
-&lt;p&gt;Change your GitHub Branch from “main” to “Master”&lt;/p&gt;
-&lt;p&gt;Find a file end with “id_rsa.pub” which generated when you install git and get the ssh key above. Copy it and paste it into your GitHub Repository ssh key&lt;/p&gt;
+&lt;h4 id=&#34;tips&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#tips&#34;&gt;#&lt;/a&gt; TIPS:&lt;/h4&gt;
+&lt;p&gt;Change your GitHub Branch from &amp;quot;main&amp;quot; to &amp;quot;Master&amp;quot;&lt;/p&gt;
+&lt;p&gt;Find a file end with &amp;quot;id_rsa.pub&amp;quot; which generated when you install git and get the ssh key above. Copy it and paste it into your GitHub Repository ssh key&lt;/p&gt;
 &lt;p&gt;run  &lt;code&gt;npm install hexo-deployer-git --save&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;Now, run  &lt;code&gt;hexo d -g&lt;/code&gt;  and visit your GitHub wesite (which you can find in your repository SETTING), you should see your blog above.&lt;/p&gt;
  ]]></description>

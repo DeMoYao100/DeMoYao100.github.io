@@ -14,19 +14,19 @@
     <category term="cv" />
     <category term="android" />
     <category term="jail" />
+    <category term="re python" />
     <category term="hexo" />
     <category term="node.js" />
-    <category term="re python" />
     <entry>
         <id>https://demoyao100.github.io/2023/08/09/hook%E6%9F%90%E8%81%8A%E5%A4%A9%E8%BD%AF%E4%BB%B6lab/</id>
         <title>hook某聊天软件lab</title>
         <link rel="alternate" href="https://demoyao100.github.io/2023/08/09/hook%E6%9F%90%E8%81%8A%E5%A4%A9%E8%BD%AF%E4%BB%B6lab/"/>
-        <content type="html">&lt;h6 id=&#34;起因是在学安卓逆向而且自己水平太低打算练练手-恰巧某友的校内lab做了类似的东西羡慕遂打算动手尝试复现&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#起因是在学安卓逆向而且自己水平太低打算练练手-恰巧某友的校内lab做了类似的东西羡慕遂打算动手尝试复现&#34;&gt;#&lt;/a&gt; 起因是在学安卓逆向，而且自己水平太低，打算练练手。恰巧某友的校内 lab 做了类似的东西，羡慕，遂打算动手尝试复现&lt;/h6&gt;
-&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
-&lt;h4 id=&#34;一-某绿色软件防撤回&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#一-某绿色软件防撤回&#34;&gt;#&lt;/a&gt; 一、某绿色软件防撤回&lt;/h4&gt;
+        <content type="html">&lt;h6 id=&#34;起因是在学安卓逆向而且自己水平太低打算练练手-恰巧某友的校内lab做了类似的东西羡慕遂打算动手尝试复现&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#起因是在学安卓逆向而且自己水平太低打算练练手-恰巧某友的校内lab做了类似的东西羡慕遂打算动手尝试复现&#34;&gt;#&lt;/a&gt; 起因是在学安卓逆向，而且自己水平太低，打算练练手。恰巧某友的校内 lab 做了类似的东西，羡慕，遂打算动手尝试复现&lt;/h6&gt;
+&lt;p&gt;&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;h4 id=&#34;一-某绿色软件防撤回&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#一-某绿色软件防撤回&#34;&gt;#&lt;/a&gt; 一、某绿色软件防撤回&lt;/h4&gt;
 &lt;p&gt;首先搜索相关字串 &lt;code&gt;revoke&lt;/code&gt; ，找到一个 &lt;code&gt;RevokeMsgEvent&lt;/code&gt; ，看起来很像，然后翻找代码，发现了这个 listener 用于接收一个撤回消息事件&lt;/p&gt;
-&lt;h5 id=&#34;image-20230809174202432&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#image-20230809174202432&#34;&gt;#&lt;/a&gt; &lt;img loading=&#34;lazy&#34; data-src=&#34;hook%E6%9F%90%E8%81%8A%E5%A4%A9%E8%BD%AF%E4%BB%B6lab/image-20230809174202432.png&#34; alt=&#34;image-20230809174202432&#34;&gt;&lt;/h5&gt;
-&lt;p&gt;观察这里的 callback 函数，先赋值到一个叫做 &lt;code&gt;revokeMsgEvent2&lt;/code&gt;  的 class 上（什么鬼命名… 但是看起来可能挺重要的，marked 一下）&lt;/p&gt;
+&lt;h5 id=&#34;image-20230809174202432&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#image-20230809174202432&#34;&gt;#&lt;/a&gt; &lt;img loading=&#34;lazy&#34; data-src=&#34;hook%E6%9F%90%E8%81%8A%E5%A4%A9%E8%BD%AF%E4%BB%B6lab/image-20230809174202432.png&#34; alt=&#34;image-20230809174202432&#34;&gt;&lt;/h5&gt;
+&lt;p&gt;观察这里的 callback 函数，先赋值到一个叫做 &lt;code&gt;revokeMsgEvent2&lt;/code&gt;  的 class 上（什么鬼命名... 但是看起来可能挺重要的，marked 一下）&lt;/p&gt;
 &lt;p&gt;接着合法性检测，不需要管&lt;/p&gt;
 &lt;p&gt;p0.D 的声明如下&lt;/p&gt;
 &lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;hook%E6%9F%90%E8%81%8A%E5%A4%A9%E8%BD%AF%E4%BB%B6lab/image-20230809175148467.png&#34; alt=&#34;image-20230809175148467&#34;&gt;&lt;/p&gt;
@@ -55,23 +55,23 @@
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;这里选择先用 AS 尝试了一下，配置如下（一点点尝试可以运行起来的 arm 架构）：&lt;img loading=&#34;lazy&#34; data-src=&#34;hook%E6%9F%90%E8%81%8A%E5%A4%A9%E8%BD%AF%E4%BB%B6lab/image-20230810132624458.png&#34; alt=&#34;image-20230810132624458&#34;&gt;&lt;/p&gt;
-&lt;p&gt;巨慢无比，还不支持 android studio 的一些便携操作，结果和绿色软件的 so 还不兼容… 麻了…&lt;/p&gt;
+&lt;p&gt;巨慢无比，还不支持 android studio 的一些便携操作，结果和绿色软件的 so 还不兼容... 麻了...&lt;/p&gt;
 &lt;p&gt;尝试使用 mumuX（亲测只有 mumux 在本机可以和 WSL2 共存，其他声称支持 hyperV 的都会出问题，待修复），会被检测环境，来尝试配一下 qemu&lt;/p&gt;
-&lt;p&gt;疑似不太行，毕竟 AS 也是基于 qemu 的，该卡照样卡（据说 mac 上用 as 模拟 android 非常流畅…）&lt;/p&gt;
+&lt;p&gt;疑似不太行，毕竟 AS 也是基于 qemu 的，该卡照样卡（据说 mac 上用 as 模拟 android 非常流畅......）&lt;/p&gt;
 &lt;p&gt;然后发现微软自家的 vs 有安卓模拟器，那来尝试一下下&lt;/p&gt;
-&lt;h6 id=&#34;-to-be-continue&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#-to-be-continue&#34;&gt;#&lt;/a&gt; - to be continue&lt;/h6&gt;
-&lt;h4 id=&#34;二-某运动软件广告消除以及强制更新破解&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#二-某运动软件广告消除以及强制更新破解&#34;&gt;#&lt;/a&gt; 二、某运动软件广告消除以及强制更新破解&lt;/h4&gt;
-&lt;h6 id=&#34;之前队里一直有跌说加了壳搞不了但是感觉好像么有点机会遂来看看这里是用的一个旧版本好像对root的检测没那么严格但是也能用后面有空再调一个新版本的&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#之前队里一直有跌说加了壳搞不了但是感觉好像么有点机会遂来看看这里是用的一个旧版本好像对root的检测没那么严格但是也能用后面有空再调一个新版本的&#34;&gt;#&lt;/a&gt; &lt;s&gt;之前队里一直有跌说加了壳搞不了，但是感觉好像么有点机会，遂来看看，这里是用的一个旧版本，好像对 root 的检测没那么严格，但是也能用，后面有空再调一个新版本的&lt;/s&gt;&lt;/h6&gt;
+&lt;h6 id=&#34;-to-be-continue&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#-to-be-continue&#34;&gt;#&lt;/a&gt; - to be continue&lt;/h6&gt;
+&lt;h4 id=&#34;二-某运动软件广告消除以及强制更新破解&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#二-某运动软件广告消除以及强制更新破解&#34;&gt;#&lt;/a&gt; 二、某运动软件广告消除以及强制更新破解&lt;/h4&gt;
+&lt;h6 id=&#34;之前队里一直有跌说加了壳搞不了但是感觉好像么有点机会遂来看看这里是用的一个旧版本好像对root的检测没那么严格但是也能用后面有空再调一个新版本的&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#之前队里一直有跌说加了壳搞不了但是感觉好像么有点机会遂来看看这里是用的一个旧版本好像对root的检测没那么严格但是也能用后面有空再调一个新版本的&#34;&gt;#&lt;/a&gt; &lt;s&gt;之前队里一直有跌说加了壳搞不了，但是感觉好像么有点机会，遂来看看，这里是用的一个旧版本，好像对 root 的检测没那么严格，但是也能用，后面有空再调一个新版本的&lt;/s&gt;&lt;/h6&gt;
 &lt;p&gt;通过搜索引擎可以找到一个文档，&lt;a href=&#34;https://www.csjplatform.com/supportcenter/5398&#34;&gt;开屏广告 - Android 集成文档 - 开发测试 - 穿山甲广告平台 (csjplatform.com)&lt;/a&gt;，这个 app 的部分广告大概就是基于这个开发的&lt;/p&gt;
 &lt;p&gt;大概定位到这个类上，是广告加载用的类&lt;/p&gt;
-&lt;h5 id=&#34;image-20230810164814274&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#image-20230810164814274&#34;&gt;#&lt;/a&gt; &lt;img loading=&#34;lazy&#34; data-src=&#34;hook%E6%9F%90%E8%81%8A%E5%A4%A9%E8%BD%AF%E4%BB%B6lab/image-20230810164814274.png&#34; alt=&#34;image-20230810164814274&#34;&gt;&lt;/h5&gt;
+&lt;h5 id=&#34;image-20230810164814274&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#image-20230810164814274&#34;&gt;#&lt;/a&gt; &lt;img loading=&#34;lazy&#34; data-src=&#34;hook%E6%9F%90%E8%81%8A%E5%A4%A9%E8%BD%AF%E4%BB%B6lab/image-20230810164814274.png&#34; alt=&#34;image-20230810164814274&#34;&gt;&lt;/h5&gt;
 &lt;p&gt;合理来说把这里 hook 一下&lt;/p&gt;
 &lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;hook%E6%9F%90%E8%81%8A%E5%A4%A9%E8%BD%AF%E4%BB%B6lab/image-20230810165617746.png&#34; alt=&#34;image-20230810165617746&#34;&gt;&lt;/p&gt;
 &lt;p&gt;就能消掉大部分和 ad 相关的事件了&lt;/p&gt;
-&lt;p&gt;但是接着看下去就感觉事情不对头了，这里的 &lt;code&gt;com.fighter.wrapper&lt;/code&gt;  疑似只是一个 ad 的处理方法，仔细看左边的包还有一万个不同公司的 ad… 破软件没啥功能，集成的广告不少&lt;/p&gt;
+&lt;p&gt;但是接着看下去就感觉事情不对头了，这里的 &lt;code&gt;com.fighter.wrapper&lt;/code&gt;  疑似只是一个 ad 的处理方法，仔细看左边的包还有一万个不同公司的 ad...... 破软件没啥功能，集成的广告不少&lt;/p&gt;
 &lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;hook%E6%9F%90%E8%81%8A%E5%A4%A9%E8%BD%AF%E4%BB%B6lab/image-20230810171514620.png&#34; alt=&#34;image-20230810171514620&#34;&gt;&lt;/p&gt;
 &lt;p&gt;而且后面很多广告用的不是这个方法，那就是不能在这层 hook 了，会累死自己，最好的解决方法还是在调用这 n 个广告类前就掐掉源头&lt;/p&gt;
-&lt;p&gt;可以搜索发现 &lt;code&gt;com.zjwh&lt;/code&gt;  应该是这软件自己的包，命名做的手动混淆，全都是 oO0 啥的…&lt;/p&gt;
+&lt;p&gt;可以搜索发现 &lt;code&gt;com.zjwh&lt;/code&gt;  应该是这软件自己的包，命名做的手动混淆，全都是 oO0 啥的...&lt;/p&gt;
 &lt;p&gt;这里发现了反虚拟环境和反 hook 的操作，那看来后面有点点不好整的&lt;/p&gt;
 &lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;hook%E6%9F%90%E8%81%8A%E5%A4%A9%E8%BD%AF%E4%BB%B6lab/image-20230810173613500.png&#34; alt=&#34;image-20230810173613500&#34;&gt;&lt;/p&gt;
 &lt;p&gt;另外，可以手动调试发现，apk 启动的时候会与 server 交互获取应用更新信息，然后触发强制更新，交互方法疑似使用的 &lt;code&gt;okhttp&lt;/code&gt; , 但是 zjwh 包进行了混淆，与服务器也都用的 okhttp 交互，需要一定工作量找到&lt;/p&gt;
@@ -84,8 +84,8 @@
 &lt;p&gt;这个包的源码可以找到一个很类似的（虽然只有部分）：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://mogua.co/view_file/?file=com/ijm/detect/drisk/DRiskNativeTool.java&amp;amp;md5=746753952f66bd8794683d37ccdd2642&amp;amp;type=apk&amp;amp;appname=%E5%BE%97%E7%89%A9&amp;amp;lines=84&#34;&gt;DRiskNativeTool.java - 得物.apk 源代码分析 - 摸瓜 (mogua.co)&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;然后顺着搜，可以找到&lt;a href=&#34;https://www.ijiami.cn/enindex&#34;&gt; iJiami - Guarding the Smart World | mobile information security service provider&lt;/a&gt; 这家公司，专门做安全的，这些安全相关的包就是它家做的了&lt;/p&gt;
-&lt;h5 id=&#34;image-20230810221152187&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#image-20230810221152187&#34;&gt;#&lt;/a&gt; &lt;img loading=&#34;lazy&#34; data-src=&#34;hook%E6%9F%90%E8%81%8A%E5%A4%A9%E8%BD%AF%E4%BB%B6lab/image-20230810221152187.png&#34; alt=&#34;image-20230810221152187&#34;&gt;&lt;/h5&gt;
-&lt;p&gt;到这里就要考虑放弃了，毕竟是商业级的加固，就算级别不高，破解再怎么说也要不小的工程量…&lt;/p&gt;
+&lt;h5 id=&#34;image-20230810221152187&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#image-20230810221152187&#34;&gt;#&lt;/a&gt; &lt;img loading=&#34;lazy&#34; data-src=&#34;hook%E6%9F%90%E8%81%8A%E5%A4%A9%E8%BD%AF%E4%BB%B6lab/image-20230810221152187.png&#34; alt=&#34;image-20230810221152187&#34;&gt;&lt;/h5&gt;
+&lt;p&gt;到这里就要考虑放弃了，毕竟是商业级的加固，就算级别不高，破解再怎么说也要不小的工程量...&lt;/p&gt;
 </content>
         <category term="android" />
         <updated>2023-08-09T09:35:45.000Z</updated>
