@@ -9,15 +9,15 @@
     <category term="开发" />
     <category term="codeforces" />
     <category term="cv" />
-    <category term="docker" />
     <category term="驱动" />
+    <category term="docker" />
     <category term="electron" />
     <category term="杂文" />
     <category term="web" />
     <category term="jail" />
     <category term="IOT" />
-    <category term="python" />
     <category term="hexo" />
+    <category term="python" />
     <entry>
         <id>https://demoyao100.github.io/2024/03/28/ACTF-flutter%E5%A4%8D%E7%8E%B0/</id>
         <title>ACTF flutter复现</title>

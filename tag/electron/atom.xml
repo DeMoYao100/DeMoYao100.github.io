@@ -9,15 +9,15 @@
     <category term="开发" />
     <category term="codeforces" />
     <category term="cv" />
-    <category term="docker" />
     <category term="驱动" />
+    <category term="docker" />
     <category term="electron" />
     <category term="杂文" />
     <category term="web" />
     <category term="jail" />
     <category term="IOT" />
-    <category term="python" />
     <category term="hexo" />
+    <category term="python" />
     <entry>
         <id>https://demoyao100.github.io/2023/09/06/electron-%E6%89%93%E5%8C%85/</id>
         <title>electron 打包</title>

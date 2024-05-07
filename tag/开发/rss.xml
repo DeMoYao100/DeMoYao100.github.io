@@ -15,15 +15,15 @@ mail: &amp;lt;moyaoxue@outlook.com&amp;gt;
         <category>开发</category>
         <category>codeforces</category>
         <category>cv</category>
-        <category>docker</category>
         <category>驱动</category>
+        <category>docker</category>
         <category>electron</category>
         <category>杂文</category>
         <category>web</category>
         <category>jail</category>
         <category>IOT</category>
-        <category>python</category>
         <category>hexo</category>
+        <category>python</category>
         <item>
             <guid isPermalink="true">https://demoyao100.github.io/2023/09/06/electron-%E6%89%93%E5%8C%85/</guid>
             <title>electron 打包</title>
