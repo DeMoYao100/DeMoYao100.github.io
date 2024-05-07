@@ -1,19 +1,316 @@
-<!doctypehtml><html lang=en><meta charset=UTF-8><meta content=width=device-width,initial-scale=1,maximum-scale=2 name=viewport><meta content=#222 name=theme-color><meta content=IE=edge,chrome=1 http-equiv=X-UA-COMPATIBLE><meta content=webkit name=renderer><link href=/assets/favicon.ico rel=icon sizes=32x32 type=image/ico><link href=/assets/apple-touch-icon.png rel=apple-touch-icon sizes=180x180><link href=/rss.xml rel=alternate title=rev@天枢 type=application/rss+xml><link href=/atom.xml rel=alternate title=rev@天枢 type=application/atom+xml><link href=https://demoyao100.github.io/feed.json rel=alternate title=rev@天枢 type=application/json><link href=https://lf9-cdn-tos.bytecdntp.com rel=preconnect><link href=https://cdn.jsdelivr.net rel=dns-prefetch><link href=https://unpkg.com rel=dns-prefetch><link href=https://fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext rel=stylesheet><link href=/css/app.css?v=0.3.15 rel=stylesheet><link href=https://demoyao100.github.io/2024/04/14/web%E5%85%A5%E9%97%A8%E6%93%8D%E4%BD%9C/ rel=canonical><title>web入门操作</title><meta content="Hexo 7.0.0" name=generator><body itemscope itemtype=http://schema.org/WebPage><div id=loading><div class=cat><div class=body></div><div class=head><div class=face></div></div><div class=foot><div class=tummy-end></div><div class=bottom></div><div class="legs left"></div><div class="legs right"></div></div><div class=paw><div class="hands left"></div><div class="hands right"></div></div></div></div><div id=container><header id=header itemscope itemtype=http://schema.org/WPHeader><div class=inner><div id=brand><div class=pjax><h1 itemprop="name headline">web入门操作</h1><div class=meta><span title="Created: 2024-04-14 19:09:40" class=item><span class=icon><i class="ic i-calendar"></i></span><span class=text>Posted on</span><time itemprop="dateCreated datePublished" datetime=2024-04-14T19:09:40+08:00>2024-04-14</time></span><span title="Symbols count in article" class=item><span class=icon><i class="ic i-pen"></i></span><span class=text>Symbols count in article</span><span>21k</span><span class=text>words</span></span><span title="Reading time" class=item><span class=icon><i class="ic i-clock"></i></span><span class=text>Reading time</span><span>19 mins.</span></span></div></div></div><nav id=nav><div class=inner><div class=toggle><div aria-label="Toggle navigation bar" class=lines><span class=line></span><span class=line></span><span class=line></span></div></div><ul class=menu><li class="item title"><a href=/ rel=start>Moyao の小屋</a></ul><ul class=right id=rightNav><li class="item theme" @click=changeThemeByBtn><i :class="{'i-sun': !themeStatus,'i-moon': themeStatus}" class=ic></i><li class="item search"><i class="ic i-search"></i></ul></div></nav></div><div class=pjax id=imgs><img src=https://tva4.sinaimg.cn/mw690/6833939bly1gicit4jrvuj20zk0m8785.jpg></div></header><div id=waves><svg viewbox="0 24 150 28" class=waves preserveaspectratio=none shape-rendering=auto xmlns=http://www.w3.org/2000/svg xmlns:xlink=http://www.w3.org/1999/xlink><defs><path d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" id=gentle-wave></path></defs><g class=parallax><use x=48 xlink:href=#gentle-wave y=0></use><use x=48 xlink:href=#gentle-wave y=3></use><use x=48 xlink:href=#gentle-wave y=5></use><use x=48 xlink:href=#gentle-wave y=7></use></g></svg></div><main><div class=inner><div class=pjax id=main><div class="article wrap"><div class=breadcrumb itemlistelement itemscope itemtype=https://schema.org/BreadcrumbList><i class="ic i-home"></i><span><a href=/>Home</a></span></div><article class="post block" itemscope itemtype=http://schema.org/Article lang=en><link href=https://demoyao100.github.io/2024/04/14/web%E5%85%A5%E9%97%A8%E6%93%8D%E4%BD%9C/ itemprop=mainEntityOfPage><span hidden itemprop=author itemscope itemtype=http://schema.org/Person><meta content=/assets/avatar.jpg itemprop=image><meta content=Moyao itemprop=name><meta content="Hi,I'm Moyaoxue, Write down something interesting I met<br />
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"demoyao100.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false,"trigger":"auto"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="# PREFACE：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="web入门操作">
+<meta property="og:url" content="https://demoyao100.github.io/2024/04/14/web%E5%85%A5%E9%97%A8%E6%93%8D%E4%BD%9C/index.html">
+<meta property="og:site_name" content="Moyao の小屋">
+<meta property="og:description" content="# PREFACE：">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://demoyao100.github.io/2024/04/14/web%E5%85%A5%E9%97%A8%E6%93%8D%E4%BD%9C/image-20240415202715805.png">
+<meta property="article:published_time" content="2024-04-14T11:09:40.000Z">
+<meta property="article:modified_time" content="2024-04-25T11:44:45.518Z">
+<meta property="article:author" content="Moyao">
+<meta property="article:tag" content="CTF, Rev, Pwn, 渗透, Web Security">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://demoyao100.github.io/2024/04/14/web%E5%85%A5%E9%97%A8%E6%93%8D%E4%BD%9C/image-20240415202715805.png">
+
+
+<link rel="canonical" href="https://demoyao100.github.io/2024/04/14/web%E5%85%A5%E9%97%A8%E6%93%8D%E4%BD%9C/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://demoyao100.github.io/2024/04/14/web%E5%85%A5%E9%97%A8%E6%93%8D%E4%BD%9C/","path":"2024/04/14/web入门操作/","title":"web入门操作"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>web入门操作 | Moyao の小屋</title>
+  
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-KKC145B2WB"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-KKC145B2WB","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope="" itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Moyao の小屋</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Hi,I'm Moyaoxue</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags.html" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories.html" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-about"><a href="/about.html" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80" placeholder="Searching..." spellcheck="false" type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-6"><a class="nav-link" href="#preface"><span class="nav-number">1.</span> <span class="nav-text"> PREFACE：</span></a></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#curl"><span class="nav-number"></span> <span class="nav-text"> curl</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nc"><span class="nav-number"></span> <span class="nav-text"> nc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python"><span class="nav-number"></span> <span class="nav-text"> python</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web-syscall"><span class="nav-number"></span> <span class="nav-text"> web syscall</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nc-2"><span class="nav-number"></span> <span class="nav-text"> nc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tcpdump%E5%8A%AB%E6%8C%81"><span class="nav-number"></span> <span class="nav-text"> tcpdump 劫持</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hijack"><span class="nav-number"></span> <span class="nav-text"> hijack</span></a></li></div>
+        </div>
+        
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Moyao" src="/images/avatar.webp">
+  <p class="site-author-name" itemprop="name">Moyao</p>
+  <div class="site-description" itemprop="description">Write down something interesting I met<br>
 Feel free to mail me if you have something wanted to talk about, plz
-mail: &amplt;moyaoxue@outlook.com&ampgt;
-" itemprop=description></span><span hidden itemprop=publisher itemscope itemtype=http://schema.org/Organization><meta content=rev@天枢 itemprop=name></span><div class="body md" itemprop=articleBody><h6 id=preface><a class=anchor href=#preface>#</a> PREFACE：</h6><p><span id=more></span><h3 id=curl><a class=anchor href=#curl>#</a> curl</h3><ul><li>curl 发送 get 指令</ul><blockquote><p>curl 127.0.0.1 -p 80</blockquote><p>注意 url 编码<p>添加 header<blockquote><p>curl 127.0.0.1 -p 80 --header "Host:40bb89ca76728698378750073647169d"</blockquote><p>注意转义<blockquote><p>curl 127.0.0.1?a=963fe9d3ff95f80bff64f57c210a739f<br> \&b=f8e12324%202bbd1304%2634341212%231eebbb9b</blockquote><p>POST data：<blockquote><p>curl 127.0.0.1 -d a=5129ddc180c847f3788d5493e2fdea93</blockquote><p>发送 json（json 内不需要转义）<blockquote><p>curl 127.0.0.1:80 -H "Content-Type:application/json" -d '{"a":"17aa707fc88e62cab3cf40403d43e025","b":{"c":"6869f0a6","d":["193c021a","1de1e1a0 9384ce04&8ae5cbbb#6<br> eabcff1"]}}'</blockquote><p>重定向<blockquote><p>curl 127.0.0.1 --location-trusted</blockquote><p>获取 cookie<blockquote><p>curl -c - 127.0.0.1:80</blockquote><p>发送 cookie<blockquote><p>curl --cookie 71ed1a72ed58d7146e2798f2945a11dc 127.0.0.1</blockquote><h3 id=nc><a class=anchor href=#nc>#</a> nc</h3><ul><li>nc 发送 get 指令</ul><blockquote><p>printf "GET /index.html HTTP/1.1\r\nUser-Agent: nc/0.0.1\r\nHost: 127.0.0.1\r\nAccept: <em>/</em>\r\n\r\n" | nc 127.0.0.1 80</blockquote><p>注意：更改为其他 input 方式，否则 url 编码会过不了<blockquote><p>hacker@talking-web~level14:/$ nc 127.0.0.1 80<br> GET /index.html?a=a1834ce5ff3a8434e97e721b647e84a0 HTTP/1.1</blockquote><p>可以：nc 127.0.0.1 80 < exp.txt<p>tips: 这里 nc 会自动把 \n 处理成 \r\n<pre><code>POST / HTTP/1.1
+mail: &lt;moyaoxue@outlook.com&gt;
+</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">74</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags.html">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="/moyaoxue@outlook.com" title="E-Mail → moyaoxue@outlook.com" rel="noopener me"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://demoyao100.github.io/2024/04/14/web%E5%85%A5%E9%97%A8%E6%93%8D%E4%BD%9C/">
+
+    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Moyao">
+    </span>
+
+    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Moyao の小屋">
+      <meta itemprop="description" content="Write down something interesting I met<br />
+Feel free to mail me if you have something wanted to talk about, plz
+mail: <moyaoxue@outlook.com>
+">
+    </span>
+
+    <span hidden="" itemprop="post" itemscope="" itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="web入门操作 | Moyao の小屋">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          web入门操作
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-04-14 19:09:40" itemprop="dateCreated datePublished" datetime="2024-04-14T19:09:40+08:00">2024-04-14</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h6 id="preface"><a class="anchor" href="#preface">#</a> PREFACE：</h6>
+<p><span id="more"></span></p>
+<h3 id="curl"><a class="anchor" href="#curl">#</a> curl</h3>
+<ul>
+<li>curl 发送 get 指令</li>
+</ul>
+<blockquote>
+<p>curl 127.0.0.1 -p 80</p>
+</blockquote>
+<p>注意 url 编码</p>
+<p>添加 header</p>
+<blockquote>
+<p>curl 127.0.0.1 -p 80 --header "Host:40bb89ca76728698378750073647169d"</p>
+</blockquote>
+<p>注意转义</p>
+<blockquote>
+<p>curl 127.0.0.1?a=963fe9d3ff95f80bff64f57c210a739f<br>
+\&amp;b=f8e12324%202bbd1304%2634341212%231eebbb9b</p>
+</blockquote>
+<p>POST data：</p>
+<blockquote>
+<p>curl 127.0.0.1 -d a=5129ddc180c847f3788d5493e2fdea93</p>
+</blockquote>
+<p>发送 json（json 内不需要转义）</p>
+<blockquote>
+<p>curl 127.0.0.1:80 -H "Content-Type:application/json" -d '{"a":"17aa707fc88e62cab3cf40403d43e025","b":{"c":"6869f0a6","d":["193c021a","1de1e1a0 9384ce04&amp;8ae5cbbb#6<br>
+eabcff1"]}}'</p>
+</blockquote>
+<p>重定向</p>
+<blockquote>
+<p>curl 127.0.0.1 --location-trusted</p>
+</blockquote>
+<p>获取 cookie</p>
+<blockquote>
+<p>curl -c - 127.0.0.1:80</p>
+</blockquote>
+<p>发送 cookie</p>
+<blockquote>
+<p>curl --cookie 71ed1a72ed58d7146e2798f2945a11dc 127.0.0.1</p>
+</blockquote>
+<h3 id="nc"><a class="anchor" href="#nc">#</a> nc</h3>
+<ul>
+<li>nc 发送 get 指令</li>
+</ul>
+<blockquote>
+<p>printf "GET /index.html HTTP/1.1\r\nUser-Agent: nc/0.0.1\r\nHost: 127.0.0.1\r\nAccept: <em>/</em>\r\n\r\n" | nc 127.0.0.1 80</p>
+</blockquote>
+<p>注意：更改为其他 input 方式，否则 url 编码会过不了</p>
+<blockquote>
+<p>hacker@talking-web~level14:/$ nc 127.0.0.1 80<br>
+GET /index.html?a=a1834ce5ff3a8434e97e721b647e84a0 HTTP/1.1</p>
+</blockquote>
+<p>可以：nc 127.0.0.1 80 &lt; exp.txt</p>
+<p>tips: 这里 nc 会自动把 \n 处理成 \r\n</p>
+<pre><code>POST / HTTP/1.1
 Host: 127.0.0.1:80
 Content-Type: application/x-www-form-urlencoded; charset=utf-8
 Content-Length: 34
 
 a=b7f875a1d22f3884e72c830ccd2dae79
-</code></pre><pre><code>POST / HTTP/1.1
+</code></pre>
+<pre><code>POST / HTTP/1.1
 Host: 127.0.0.1:80
 Content-Type: application/json
 Content-Length: 40
 
 {"a":"fb1fcbc678ea9ab1c60e7d89291a6ad0"}
-</code></pre><p>nc 信任重定向<p>cookie：<pre><code>POST /08ef55da8a1e676feea750320e3b0942 HTTP/1.1
+</code></pre>
+<p>nc 信任重定向</p>
+<p>cookie：</p>
+<pre><code>POST /08ef55da8a1e676feea750320e3b0942 HTTP/1.1
 Host: 127.0.0.1
 Content-Type: application/json
 Content-Length: 116
@@ -21,12 +318,34 @@ Cookie: cookie=c106c3a4d0d7620eee3b2cd121ff77ec
 Referer: 127.0.0.1
 
 
-</code></pre><h3 id=python><a class=anchor href=#python>#</a> python</h3><ul><li>python 发送 get（不需要 url 编码）</ul><figure class="highlight python"><figcaption data-lang=python></figcaption><table><tr><td data-num=1><td><pre><span class="token keyword">import</span> requests</pre><tr><td data-num=2><td><pre>headers <span class="token operator">=</span> <span class="token punctuation">{</span></pre><tr><td data-num=3><td><pre>    <span class="token string">'Host'</span><span class="token punctuation">:</span><span class="token string">"71da60ef1b789332773275354004e689"</span><span class="token punctuation">,</span></pre><tr><td data-num=4><td><pre><span class="token punctuation">}</span></pre><tr><td data-num=5><td><pre>response <span class="token operator">=</span> requests<span class="token punctuation">.</span>post<span class="token punctuation">(</span><span class="token string">"http://127.0.0.1:80"</span><span class="token punctuation">,</span>params<span class="token operator">=</span><span class="token punctuation">{</span><span class="token string">"a"</span><span class="token punctuation">:</span><span class="token string">"62e9fb4ed3b5fafd87b163b3a20fef5b"</span><span class="token punctuation">,</span><span class="token string">"b"</span><span class="token punctuation">:</span><span class="token string">"93db500a 663544b4&c0fa24b2#5b3824c1"</span><span class="token punctuation">}</span><span class="token punctuation">,</span>headers<span class="token operator">=</span>headers<span class="token punctuation">)</span></pre><tr><td data-num=6><td><pre><span class="token keyword">print</span><span class="token punctuation">(</span>response<span class="token punctuation">.</span>text<span class="token punctuation">)</span></pre></table></figure><ul><li>post</ul><figure class="highlight python"><figcaption data-lang=python></figcaption><table><tr><td data-num=1><td><pre><span class="token keyword">import</span> requests</pre><tr><td data-num=2><td><pre><span class="token keyword">import</span> json</pre><tr><td data-num=3><td><pre>data <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">"a"</span><span class="token punctuation">:</span><span class="token string">"fb7a58692e22a3fc71c5017aa0541b00"</span><span class="token punctuation">}</span></pre><tr><td data-num=4><td><pre>headers <span class="token operator">=</span> <span class="token punctuation">{</span></pre><tr><td data-num=5><td><pre>    <span class="token string">'Host'</span><span class="token punctuation">:</span><span class="token string">"71da60ef1b789332773275354004e689"</span><span class="token punctuation">,</span></pre><tr><td data-num=6><td><pre>    <span class="token string">"Content-Type"</span><span class="token punctuation">:</span><span class="token string">"application/x-www-form-urlencoded; charset=utf-8"</span><span class="token punctuation">,</span></pre><tr><td data-num=7><td><pre><span class="token punctuation">}</span></pre><tr><td data-num=8><td><pre>response <span class="token operator">=</span> requests<span class="token punctuation">.</span>post<span class="token punctuation">(</span><span class="token string">"http://127.0.0.1:80"</span><span class="token punctuation">,</span>data<span class="token operator">=</span>data<span class="token punctuation">,</span>headers<span class="token operator">=</span>headers<span class="token punctuation">)</span></pre><tr><td data-num=9><td><pre><span class="token keyword">print</span><span class="token punctuation">(</span>response<span class="token punctuation">.</span>text<span class="token punctuation">)</span></pre></table></figure><p>json<figure class="highlight python"><figcaption data-lang=python></figcaption><table><tr><td data-num=1><td><pre><span class="token keyword">import</span> requests</pre><tr><td data-num=2><td><pre><span class="token keyword">import</span> json</pre><tr><td data-num=3><td><pre>data <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">"a"</span><span class="token punctuation">:</span><span class="token string">"cb449746a07887172af1ad3bc700d7cc"</span><span class="token punctuation">,</span><span class="token string">"b"</span><span class="token punctuation">:</span><span class="token string">"6b0e7b4b 208ac3c8&2a6652a6#b948b54f"</span><span class="token punctuation">}</span></pre><tr><td data-num=4><td><pre>data <span class="token operator">=</span> json<span class="token punctuation">.</span>dumps<span class="token punctuation">(</span>data<span class="token punctuation">)</span></pre><tr><td data-num=5><td><pre>headers <span class="token operator">=</span> <span class="token punctuation">{</span></pre><tr><td data-num=6><td><pre>    <span class="token string">'Host'</span><span class="token punctuation">:</span><span class="token string">"71da60ef1b789332773275354004e689"</span><span class="token punctuation">,</span></pre><tr><td data-num=7><td><pre>    <span class="token string">"Content-Type"</span><span class="token punctuation">:</span><span class="token string">"application/json"</span><span class="token punctuation">,</span></pre><tr><td data-num=8><td><pre><span class="token punctuation">}</span></pre><tr><td data-num=9><td><pre>response <span class="token operator">=</span> requests<span class="token punctuation">.</span>post<span class="token punctuation">(</span><span class="token string">"http://127.0.0.1:80"</span><span class="token punctuation">,</span>data<span class="token operator">=</span>data<span class="token punctuation">,</span>headers<span class="token operator">=</span>headers<span class="token punctuation">)</span></pre><tr><td data-num=10><td><pre><span class="token keyword">print</span><span class="token punctuation">(</span>response<span class="token punctuation">.</span>text<span class="token punctuation">)</span></pre></table></figure><p>Python 自动重定向<p>Python 不需要手动维护 cookie<h3 id=web-syscall><a class=anchor href=#web-syscall>#</a> web syscall</h3><p>network system calls are mostly big endian<p>ip protocol socket:<blockquote><p>socket(AF_INET, SOCK_STREAM, IPPROTO_IP)</blockquote><pre><code class=language-asm>    mov rdi, 2
+</code></pre>
+<h3 id="python"><a class="anchor" href="#python">#</a> python</h3>
+<ul>
+<li>python 发送 get（不需要 url 编码）</li>
+</ul>
+<figure class="highlight python"><figcaption data-lang="python"></figcaption><table><tbody><tr><td data-num="1"></td><td><pre><span class="token keyword">import</span> requests</pre></td></tr><tr><td data-num="2"></td><td><pre>headers <span class="token operator">=</span> <span class="token punctuation">{</span></pre></td></tr><tr><td data-num="3"></td><td><pre>    <span class="token string">'Host'</span><span class="token punctuation">:</span><span class="token string">"71da60ef1b789332773275354004e689"</span><span class="token punctuation">,</span></pre></td></tr><tr><td data-num="4"></td><td><pre><span class="token punctuation">}</span></pre></td></tr><tr><td data-num="5"></td><td><pre>response <span class="token operator">=</span> requests<span class="token punctuation">.</span>post<span class="token punctuation">(</span><span class="token string">"http://127.0.0.1:80"</span><span class="token punctuation">,</span>params<span class="token operator">=</span><span class="token punctuation">{</span><span class="token string">"a"</span><span class="token punctuation">:</span><span class="token string">"62e9fb4ed3b5fafd87b163b3a20fef5b"</span><span class="token punctuation">,</span><span class="token string">"b"</span><span class="token punctuation">:</span><span class="token string">"93db500a 663544b4&amp;c0fa24b2#5b3824c1"</span><span class="token punctuation">}</span><span class="token punctuation">,</span>headers<span class="token operator">=</span>headers<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="6"></td><td><pre><span class="token keyword">print</span><span class="token punctuation">(</span>response<span class="token punctuation">.</span>text<span class="token punctuation">)</span></pre></td></tr></tbody></table></figure><ul>
+<li>post</li>
+</ul>
+<figure class="highlight python"><figcaption data-lang="python"></figcaption><table><tbody><tr><td data-num="1"></td><td><pre><span class="token keyword">import</span> requests</pre></td></tr><tr><td data-num="2"></td><td><pre><span class="token keyword">import</span> json</pre></td></tr><tr><td data-num="3"></td><td><pre>data <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">"a"</span><span class="token punctuation">:</span><span class="token string">"fb7a58692e22a3fc71c5017aa0541b00"</span><span class="token punctuation">}</span></pre></td></tr><tr><td data-num="4"></td><td><pre>headers <span class="token operator">=</span> <span class="token punctuation">{</span></pre></td></tr><tr><td data-num="5"></td><td><pre>    <span class="token string">'Host'</span><span class="token punctuation">:</span><span class="token string">"71da60ef1b789332773275354004e689"</span><span class="token punctuation">,</span></pre></td></tr><tr><td data-num="6"></td><td><pre>    <span class="token string">"Content-Type"</span><span class="token punctuation">:</span><span class="token string">"application/x-www-form-urlencoded; charset=utf-8"</span><span class="token punctuation">,</span></pre></td></tr><tr><td data-num="7"></td><td><pre><span class="token punctuation">}</span></pre></td></tr><tr><td data-num="8"></td><td><pre>response <span class="token operator">=</span> requests<span class="token punctuation">.</span>post<span class="token punctuation">(</span><span class="token string">"http://127.0.0.1:80"</span><span class="token punctuation">,</span>data<span class="token operator">=</span>data<span class="token punctuation">,</span>headers<span class="token operator">=</span>headers<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="9"></td><td><pre><span class="token keyword">print</span><span class="token punctuation">(</span>response<span class="token punctuation">.</span>text<span class="token punctuation">)</span></pre></td></tr></tbody></table></figure><p>json</p>
+<figure class="highlight python"><figcaption data-lang="python"></figcaption><table><tbody><tr><td data-num="1"></td><td><pre><span class="token keyword">import</span> requests</pre></td></tr><tr><td data-num="2"></td><td><pre><span class="token keyword">import</span> json</pre></td></tr><tr><td data-num="3"></td><td><pre>data <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">"a"</span><span class="token punctuation">:</span><span class="token string">"cb449746a07887172af1ad3bc700d7cc"</span><span class="token punctuation">,</span><span class="token string">"b"</span><span class="token punctuation">:</span><span class="token string">"6b0e7b4b 208ac3c8&amp;2a6652a6#b948b54f"</span><span class="token punctuation">}</span></pre></td></tr><tr><td data-num="4"></td><td><pre>data <span class="token operator">=</span> json<span class="token punctuation">.</span>dumps<span class="token punctuation">(</span>data<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="5"></td><td><pre>headers <span class="token operator">=</span> <span class="token punctuation">{</span></pre></td></tr><tr><td data-num="6"></td><td><pre>    <span class="token string">'Host'</span><span class="token punctuation">:</span><span class="token string">"71da60ef1b789332773275354004e689"</span><span class="token punctuation">,</span></pre></td></tr><tr><td data-num="7"></td><td><pre>    <span class="token string">"Content-Type"</span><span class="token punctuation">:</span><span class="token string">"application/json"</span><span class="token punctuation">,</span></pre></td></tr><tr><td data-num="8"></td><td><pre><span class="token punctuation">}</span></pre></td></tr><tr><td data-num="9"></td><td><pre>response <span class="token operator">=</span> requests<span class="token punctuation">.</span>post<span class="token punctuation">(</span><span class="token string">"http://127.0.0.1:80"</span><span class="token punctuation">,</span>data<span class="token operator">=</span>data<span class="token punctuation">,</span>headers<span class="token operator">=</span>headers<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="10"></td><td><pre><span class="token keyword">print</span><span class="token punctuation">(</span>response<span class="token punctuation">.</span>text<span class="token punctuation">)</span></pre></td></tr></tbody></table></figure><p>Python 自动重定向</p>
+<p>Python 不需要手动维护 cookie</p>
+<h3 id="web-syscall"><a class="anchor" href="#web-syscall">#</a> web syscall</h3>
+<p>network system calls are mostly big endian</p>
+<p>ip protocol socket:</p>
+<blockquote>
+<p>socket(AF_INET, SOCK_STREAM, IPPROTO_IP)</p>
+</blockquote>
+<pre><code class="language-asm">    mov rdi, 2
     mov rsi, 1
     mov rdx, 0
     mov rax, 41
     syscall
-</code></pre><p>bind:<blockquote><p>bind(3, {sa_family=AF_INET, sin_port=htons(80), sin_addr=inet_addr("0.0.0.0")}, 16)</blockquote><pre><code class=language-asm>    sub rsp, 4
+</code></pre>
+<p>bind:</p>
+<blockquote>
+<p>bind(3, {sa_family=AF_INET, sin_port=htons(80), sin_addr=inet_addr("0.0.0.0")}, 16)</p>
+</blockquote>
+<pre><code class="language-asm">    sub rsp, 4
     mov word ptr [rsp], 2
     mov word ptr [rsp + 3], 80
     mov dword ptr [rsp + 4], 0x00000000
@@ -36,12 +355,30 @@ Referer: 127.0.0.1
     mov rdx, 16
     mov rax, 49
     syscall
-</code></pre><p>accept<blockquote><p>accept(3, NULL, NULL)</blockquote><pre><code class=language-asm>    mov rdi, 3
+</code></pre>
+<p>accept</p>
+<blockquote>
+<p>accept(3, NULL, NULL)</p>
+</blockquote>
+<pre><code class="language-asm">    mov rdi, 3
     xor rsi, rsi
     xor rdx, rdx
     mov rax, 43
     syscall
-</code></pre><p>进行接收 & 回包<blockquote><p>[✓] execve("/proc/self/fd/3", ["/proc/self/fd/3"], 0x7f0eeb6ad980 /* 0 vars */) = 0<br> [✓] socket(AF_INET, SOCK_STREAM, IPPROTO_IP) = 3<br> [✓] bind(3, {sa_family=AF_INET, sin_port=htons(80), sin_addr=inet_addr("0.0.0.0")}, 16) = 0<br> [✓] listen(3, 0) = 0<br> [✓] accept(3, NULL, NULL) = 4<br> [✓] read(4, "GET / HTTP/1.1\r\nHost: localhost\r\nUser-Agent: python-requests/2.31.0\r\nAccept-Encoding: gzip, deflate, zstd\r\nAccept: <em>/</em>\r\nConnection: keep-alive\r\n\r\n", 10000) = 146<br> [✓] write(4, "HTTP/1.0 200 OK\r\n\r\n", 19) = 19<br> [✓] close(4) = 0<br> [✓] exit(0) = ?</blockquote><pre><code class=language-asm>.intel_syntax noprefix
+</code></pre>
+<p>进行接收 &amp; 回包</p>
+<blockquote>
+<p>[✓] execve("/proc/self/fd/3", ["/proc/self/fd/3"], 0x7f0eeb6ad980 /* 0 vars */) = 0<br>
+[✓] socket(AF_INET, SOCK_STREAM, IPPROTO_IP) = 3<br>
+[✓] bind(3, {sa_family=AF_INET, sin_port=htons(80), sin_addr=inet_addr("0.0.0.0")}, 16) = 0<br>
+[✓] listen(3, 0)                            = 0<br>
+[✓] accept(3, NULL, NULL)                   = 4<br>
+[✓] read(4, "GET / HTTP/1.1\r\nHost: localhost\r\nUser-Agent: python-requests/2.31.0\r\nAccept-Encoding: gzip, deflate, zstd\r\nAccept: <em>/</em>\r\nConnection: keep-alive\r\n\r\n", 10000) = 146<br>
+[✓] write(4, "HTTP/1.0 200 OK\r\n\r\n", 19) = 19<br>
+[✓] close(4)                                = 0<br>
+[✓] exit(0)                                 = ?</p>
+</blockquote>
+<pre><code class="language-asm">.intel_syntax noprefix
 .globl _start
 .section .text
 _start:
@@ -94,7 +431,9 @@ _start:
     mov rax, 60
     syscall
 
-</code></pre><p>根据接包进行 get 请求：<pre><code class=language-asm>.intel_syntax noprefix
+</code></pre>
+<p>根据接包进行 get 请求：</p>
+<pre><code class="language-asm">.intel_syntax noprefix
 .globl _start
 .section .text
 _start:
@@ -208,7 +547,8 @@ _start:
     mov rax, 43
     syscall
 
-</code></pre><pre><code class=language-asm>.intel_syntax noprefix
+</code></pre>
+<pre><code class="language-asm">.intel_syntax noprefix
 .globl _start
 .section .text
 _start:
@@ -256,29 +596,32 @@ _start:
     mov rax, 43
     syscall
 
-</code></pre><p>循环开线程接包发包 get<pre><code>========= Parent Process ==========
-[ ] execve(&LTexecve_args>) = 0
+</code></pre>
+<p>循环开线程接包发包 get</p>
+<pre><code>========= Parent Process ==========
+[ ] execve(&lt;execve_args&gt;) = 0
 [ ] socket(AF_INET, SOCK_STREAM, IPPROTO_IP) = 3
-[ ] bind(3, {sa_family=AF_INET, sin_port=htons(&LTbind_port>), sin_addr=inet_addr("&LTbind_address>")}, 16) = 0
+[ ] bind(3, {sa_family=AF_INET, sin_port=htons(&lt;bind_port&gt;), sin_addr=inet_addr("&lt;bind_address&gt;")}, 16) = 0
     - Bind to port 80
     - Bind to address 0.0.0.0
 [ ] listen(3, 0) = 0
 [ ] accept(3, NULL, NULL) = 4
-[ ] fork() = &LTfork_result>
+[ ] fork() = &lt;fork_result&gt;
 [ ] close(4) = 0
 [ ] accept(3, NULL, NULL) = ?
 
 
 ========= Child Process ==========
 [ ] close(3) = 0
-[ ] read(4, &LTread_request>, &LTread_request_count>) = &LTread_request_result>
-[ ] open("&LTopen_path>", O_RDONLY) = 3
-[ ] read(3, &LTread_file>, &LTread_file_count>) = &LTread_file_result>
+[ ] read(4, &lt;read_request&gt;, &lt;read_request_count&gt;) = &lt;read_request_result&gt;
+[ ] open("&lt;open_path&gt;", O_RDONLY) = 3
+[ ] read(3, &lt;read_file&gt;, &lt;read_file_count&gt;) = &lt;read_file_result&gt;
 [ ] close(3) = 0
 [ ] write(4, "HTTP/1.0 200 OK\r\n\r\n", 19) = 19
-[ ] write(4, &LTwrite_file>, &LTwrite_file_count>) = &LTwrite_file_result>
+[ ] write(4, &lt;write_file&gt;, &lt;write_file_count&gt;) = &lt;write_file_result&gt;
 [ ] exit(0) = ?
-</code></pre><pre><code class=language-asm>.intel_syntax noprefix
+</code></pre>
+<pre><code class="language-asm">.intel_syntax noprefix
 .globl _start
 .section .text
 _start:
@@ -418,7 +761,10 @@ child:
     mov rdi, 0
     mov rax, 60
     syscall
-</code></pre><p>post 接收参数并写入文件<p><img alt=image-20240415202715805 data-src=web%E5%85%A5%E9%97%A8%E6%93%8D%E4%BD%9C/image-20240415202715805.png loading=lazy><pre><code class=language-asm>.intel_syntax noprefix
+</code></pre>
+<p>post 接收参数并写入文件</p>
+<p><img src="/2024/04/14/web%E5%85%A5%E9%97%A8%E6%93%8D%E4%BD%9C/image-20240415202715805.webp" alt="image-20240415202715805"></p>
+<pre><code class="language-asm">.intel_syntax noprefix
 .globl _start
 .section .text
 _start:
@@ -537,7 +883,9 @@ child:
     mov rdi, 0
     mov rax, 60
     syscall
-</code></pre><p>最终版 orz，整合了前面几个操作支持 get、post<pre><code class=language-asm>.intel_syntax noprefix
+</code></pre>
+<p>最终版 orz，整合了前面几个操作支持 get、post</p>
+<pre><code class="language-asm">.intel_syntax noprefix
 .globl _start
 .section .text
 _start:
@@ -723,36 +1071,154 @@ addOne:
     mov rdi, 0
     mov rax, 60
     syscall
-</code></pre><h3 id=nc-2><a class=anchor href=#nc-2>#</a> nc</h3><p>连接<blockquote><p>nc 127.0.0.1 80</blockquote><p>接听<blockquote><p>nc -lp 80</blockquote><p>多线程扫描<figure class="highlight python"><figcaption data-lang=python></figcaption><table><tr><td data-num=1><td><pre><span class="token keyword">import</span> socket</pre><tr><td data-num=2><td><pre><span class="token keyword">import</span> threading</pre><tr><td data-num=3><td><pre><span class="token keyword">def</span> <span class="token function">check_port</span><span class="token punctuation">(</span>hostname<span class="token punctuation">,</span> port<span class="token punctuation">)</span><span class="token punctuation">:</span></pre><tr><td data-num=4><td><pre>    <span class="token keyword">try</span><span class="token punctuation">:</span></pre><tr><td data-num=5><td><pre>        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f'testing:</span><span class="token interpolation"><span class="token punctuation">{</span>hostname<span class="token punctuation">}</span></span><span class="token string">'</span></span><span class="token punctuation">)</span></pre><tr><td data-num=6><td><pre>        sock<span class="token operator">=</span>socket<span class="token punctuation">.</span>socket<span class="token punctuation">(</span>socket<span class="token punctuation">.</span>AF_INET<span class="token punctuation">,</span>socket<span class="token punctuation">.</span>SOCK_STREAM<span class="token punctuation">)</span></pre><tr><td data-num=7><td><pre>        sock<span class="token punctuation">.</span>settimeout<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span></pre><tr><td data-num=8><td><pre>        result<span class="token operator">=</span>sock<span class="token punctuation">.</span>connect_ex<span class="token punctuation">(</span><span class="token punctuation">(</span>hostname<span class="token punctuation">,</span>port<span class="token punctuation">)</span><span class="token punctuation">)</span></pre><tr><td data-num=9><td><pre>        <span class="token keyword">if</span> <span class="token punctuation">(</span>result <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">:</span></pre><tr><td data-num=10><td><pre>            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f'</span><span class="token interpolation"><span class="token punctuation">{</span>hostname<span class="token punctuation">}</span></span><span class="token string">----------'</span></span><span class="token punctuation">)</span></pre><tr><td data-num=11><td><pre>        sock<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span></pre><tr><td data-num=12><td><pre>    <span class="token keyword">except</span><span class="token punctuation">:</span></pre><tr><td data-num=13><td><pre>        <span class="token keyword">pass</span></pre><tr><td data-num=14><td><pre></pre><tr><td data-num=15><td><pre><span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">256</span><span class="token punctuation">)</span><span class="token punctuation">:</span></pre><tr><td data-num=16><td><pre>    <span class="token keyword">try</span><span class="token punctuation">:</span></pre><tr><td data-num=17><td><pre>        t <span class="token operator">=</span> threading<span class="token punctuation">.</span>Thread<span class="token punctuation">(</span>target<span class="token operator">=</span>check_port<span class="token punctuation">,</span>args<span class="token operator">=</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f'10.0.0.</span><span class="token interpolation"><span class="token punctuation">{</span>i<span class="token punctuation">}</span></span><span class="token string">'</span></span><span class="token punctuation">,</span><span class="token number">31337</span><span class="token punctuation">)</span><span class="token punctuation">)</span></pre><tr><td data-num=18><td><pre>        t<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span></pre><tr><td data-num=19><td><pre>    <span class="token keyword">except</span><span class="token punctuation">:</span></pre><tr><td data-num=20><td><pre>        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Error: unable to start thread"</span><span class="token punctuation">)</span></pre><tr><td data-num=21><td><pre></pre><tr><td data-num=22><td><pre><span class="token keyword">while</span> <span class="token number">1</span><span class="token punctuation">:</span></pre><tr><td data-num=23><td><pre>    <span class="token keyword">pass</span></pre></table></figure><p>更好的多线程扫描<figure class="highlight python"><figcaption data-lang=python></figcaption><table><tr><td data-num=1><td><pre><span class="token keyword">import</span> socket</pre><tr><td data-num=2><td><pre><span class="token keyword">import</span> logging</pre><tr><td data-num=3><td><pre><span class="token keyword">from</span> concurrent<span class="token punctuation">.</span>futures <span class="token keyword">import</span> ProcessPoolExecutor<span class="token punctuation">,</span> as_completed</pre><tr><td data-num=4><td><pre></pre><tr><td data-num=5><td><pre><span class="token comment"># 配置日志</span></pre><tr><td data-num=6><td><pre>logging<span class="token punctuation">.</span>basicConfig<span class="token punctuation">(</span>filename<span class="token operator">=</span><span class="token string">'port_check.log'</span><span class="token punctuation">,</span> level<span class="token operator">=</span>logging<span class="token punctuation">.</span>INFO<span class="token punctuation">,</span> <span class="token builtin">format</span><span class="token operator">=</span><span class="token string">'%(asctime)s - %(message)s'</span><span class="token punctuation">)</span></pre><tr><td data-num=7><td><pre></pre><tr><td data-num=8><td><pre><span class="token keyword">def</span> <span class="token function">check_port</span><span class="token punctuation">(</span>hostname<span class="token punctuation">,</span> port<span class="token punctuation">)</span><span class="token punctuation">:</span></pre><tr><td data-num=9><td><pre>    <span class="token comment"># print(hostname)</span></pre><tr><td data-num=10><td><pre>    <span class="token comment"># print(port)</span></pre><tr><td data-num=11><td><pre></pre><tr><td data-num=12><td><pre>    <span class="token keyword">try</span><span class="token punctuation">:</span></pre><tr><td data-num=13><td><pre>        <span class="token comment"># logging.info(f'testing: {hostname}')</span></pre><tr><td data-num=14><td><pre>        sock <span class="token operator">=</span> socket<span class="token punctuation">.</span>socket<span class="token punctuation">(</span>socket<span class="token punctuation">.</span>AF_INET<span class="token punctuation">,</span> socket<span class="token punctuation">.</span>SOCK_STREAM<span class="token punctuation">)</span></pre><tr><td data-num=15><td><pre>        sock<span class="token punctuation">.</span>settimeout<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span></pre><tr><td data-num=16><td><pre>        result <span class="token operator">=</span> sock<span class="token punctuation">.</span>connect_ex<span class="token punctuation">(</span><span class="token punctuation">(</span>hostname<span class="token punctuation">,</span> port<span class="token punctuation">)</span><span class="token punctuation">)</span></pre><tr><td data-num=17><td><pre>        <span class="token keyword">if</span> result <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span></pre><tr><td data-num=18><td><pre>            logging<span class="token punctuation">.</span>info<span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f'</span><span class="token interpolation"><span class="token punctuation">{</span>hostname<span class="token punctuation">}</span></span><span class="token string">----------'</span></span><span class="token punctuation">)</span></pre><tr><td data-num=19><td><pre>            <span class="token keyword">return</span> <span class="token boolean">True</span></pre><tr><td data-num=20><td><pre>        sock<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span></pre><tr><td data-num=21><td><pre>    <span class="token keyword">except</span><span class="token punctuation">:</span></pre><tr><td data-num=22><td><pre>        <span class="token keyword">pass</span></pre><tr><td data-num=23><td><pre>    <span class="token keyword">return</span> <span class="token boolean">False</span></pre><tr><td data-num=24><td><pre></pre><tr><td data-num=25><td><pre><span class="token keyword">def</span> <span class="token function">parallel_process</span><span class="token punctuation">(</span>array<span class="token punctuation">,</span> function<span class="token punctuation">)</span><span class="token punctuation">:</span></pre><tr><td data-num=26><td><pre>    <span class="token triple-quoted-string string">"""</span></pre><tr><td data-num=27><td><pre>    A parallel version of the map function with a progress bar. </pre><tr><td data-num=28><td><pre></pre><tr><td data-num=29><td><pre>    Args:</pre><tr><td data-num=30><td><pre>        array (array-like): An array to iterate over.</pre><tr><td data-num=31><td><pre>        function (function): A python function to apply to the elements of array</pre><tr><td data-num=32><td><pre>    Returns:</pre><tr><td data-num=33><td><pre>        [function(array[0]), function(array[1]), ...]</pre><tr><td data-num=34><td><pre>    """</pre><tr><td data-num=35><td><pre>    n_jobs <span class="token operator">=</span> <span class="token number">512</span>  <span class="token comment"># 线程数</span></pre><tr><td data-num=36><td><pre>    <span class="token keyword">with</span> ProcessPoolExecutor<span class="token punctuation">(</span>max_workers<span class="token operator">=</span>n_jobs<span class="token punctuation">)</span> <span class="token keyword">as</span> pool<span class="token punctuation">:</span></pre><tr><td data-num=37><td><pre>        futures <span class="token operator">=</span> <span class="token punctuation">[</span>pool<span class="token punctuation">.</span>submit<span class="token punctuation">(</span>function<span class="token punctuation">,</span> <span class="token operator">*</span>a<span class="token punctuation">)</span> <span class="token keyword">for</span> a <span class="token keyword">in</span> array<span class="token punctuation">]</span>  <span class="token comment"># 使用 *a 解包参数元组</span></pre><tr><td data-num=38><td><pre>        kwargs <span class="token operator">=</span> <span class="token punctuation">{</span></pre><tr><td data-num=39><td><pre>            <span class="token string">'total'</span><span class="token punctuation">:</span> <span class="token builtin">len</span><span class="token punctuation">(</span>futures<span class="token punctuation">)</span><span class="token punctuation">,</span></pre><tr><td data-num=40><td><pre>            <span class="token string">'unit'</span><span class="token punctuation">:</span> <span class="token string">'it'</span><span class="token punctuation">,</span></pre><tr><td data-num=41><td><pre>            <span class="token string">'unit_scale'</span><span class="token punctuation">:</span> <span class="token boolean">True</span><span class="token punctuation">,</span></pre><tr><td data-num=42><td><pre>            <span class="token string">'leave'</span><span class="token punctuation">:</span> <span class="token boolean">True</span></pre><tr><td data-num=43><td><pre>        <span class="token punctuation">}</span></pre><tr><td data-num=44><td><pre>        <span class="token comment"># Print out the progress as tasks complete</span></pre><tr><td data-num=45><td><pre></pre><tr><td data-num=46><td><pre></pre><tr><td data-num=47><td><pre><span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span></pre><tr><td data-num=48><td><pre>    array <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f'10.0.</span><span class="token interpolation"><span class="token punctuation">{</span>j<span class="token punctuation">}</span></span><span class="token string">.</span><span class="token interpolation"><span class="token punctuation">{</span>i<span class="token punctuation">}</span></span><span class="token string">'</span></span><span class="token punctuation">,</span> <span class="token number">31337</span><span class="token punctuation">)</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">256</span><span class="token punctuation">)</span> <span class="token keyword">for</span> j <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">256</span><span class="token punctuation">)</span><span class="token punctuation">]</span>  <span class="token comment"># 构造参数数组</span></pre><tr><td data-num=49><td><pre>    <span class="token comment"># array = [(f'192.168.0.{i}', 31337) for i in range(256)]</span></pre><tr><td data-num=50><td><pre>    <span class="token comment"># print(array)</span></pre><tr><td data-num=51><td><pre>    res <span class="token operator">=</span> parallel_process<span class="token punctuation">(</span>array<span class="token punctuation">,</span> check_port<span class="token punctuation">)</span></pre></table></figure><h3 id=tcpdump劫持><a class=anchor href=#tcpdump劫持>#</a> tcpdump 劫持</h3><blockquote><p>tcpdump -i any port 31337 -w capture.pcap</blockquote><h3 id=hijack><a class=anchor href=#hijack>#</a> hijack</h3><p>增加 ip 监听以获取包<p><a href=https://ubuntu.com/server/docs/configuring-networks rel=noopener target=_blank>Configuring networks | Ubuntu</a><blockquote><p>ip addr add 10.0.0.2 dev eth0</blockquote><p>scapy 用法<p><a href=https://scapy.readthedocs.io/en/latest/usage.html rel=noopener target=_blank>Usage — Scapy 2.5.0 documentation</a><p>一些可用的指令：<blockquote><p>ip route show<p>ip route add default via 10.0.0.1</blockquote><p>广播 Ethernet 包（srp1 注意增加 filter，这样不会收到自己发的包，或者用 srp 批量都接收）<figure class="highlight python"><figcaption data-lang=python></figcaption><table><tr><td data-num=1><td><pre><span class="token keyword">from</span> scapy<span class="token punctuation">.</span><span class="token builtin">all</span> <span class="token keyword">import</span> <span class="token operator">*</span></pre><tr><td data-num=2><td><pre></pre><tr><td data-num=3><td><pre><span class="token comment"># Get your MAC address (assuming you're on a Linux system)</span></pre><tr><td data-num=4><td><pre></pre><tr><td data-num=5><td><pre><span class="token comment"># Create the Ethernet frame with your MAC address as the source</span></pre><tr><td data-num=6><td><pre>eth_frame <span class="token operator">=</span> Ether<span class="token punctuation">(</span>src<span class="token operator">=</span><span class="token string">"e6:d2:90:8f:34:8f"</span><span class="token punctuation">,</span> dst<span class="token operator">=</span><span class="token string">"ff:ff:ff:ff:ff:ff"</span><span class="token punctuation">,</span> <span class="token builtin">type</span><span class="token operator">=</span><span class="token number">0xFFFF</span><span class="token punctuation">)</span></pre><tr><td data-num=7><td><pre></pre><tr><td data-num=8><td><pre><span class="token comment"># Send the Ethernet frame and receive packets</span></pre><tr><td data-num=9><td><pre>reply_packets <span class="token operator">=</span> srp1<span class="token punctuation">(</span>eth_frame<span class="token punctuation">,</span> timeout<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> iface<span class="token operator">=</span><span class="token string">"eth0"</span><span class="token punctuation">,</span> <span class="token builtin">filter</span><span class="token operator">=</span><span class="token string">"ether src not e6:d2:90:8f:34:8f"</span><span class="token punctuation">)</span></pre><tr><td data-num=10><td><pre></pre><tr><td data-num=11><td><pre><span class="token comment"># Display received packets</span></pre><tr><td data-num=12><td><pre><span class="token keyword">if</span> reply_packets<span class="token punctuation">:</span></pre><tr><td data-num=13><td><pre>    <span class="token keyword">print</span><span class="token punctuation">(</span>reply_packets<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span></pre><tr><td data-num=14><td><pre><span class="token keyword">else</span><span class="token punctuation">:</span></pre><tr><td data-num=15><td><pre>    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"No reply received."</span><span class="token punctuation">)</span></pre></table></figure><p>发送 ip 包（注意，这里是一层一层搭建的，每层的包正常运转下一层的包才能成功发送，！注意！前面的 type 不能指定，这里是自动对 field 适应的，指定后会导致后续上层信息丢包）<figure class="highlight python"><figcaption data-lang=python></figcaption><table><tr><td data-num=1><td><pre><span class="token keyword">from</span> scapy<span class="token punctuation">.</span><span class="token builtin">all</span> <span class="token keyword">import</span> <span class="token operator">*</span></pre><tr><td data-num=2><td><pre></pre><tr><td data-num=3><td><pre>eth_frame <span class="token operator">=</span> Ether<span class="token punctuation">(</span>src<span class="token operator">=</span><span class="token string">"3e:72:ce:70:a9:74"</span><span class="token punctuation">,</span> dst<span class="token operator">=</span><span class="token string">"ff:ff:ff:ff:ff:ff"</span><span class="token punctuation">)</span></pre><tr><td data-num=4><td><pre></pre><tr><td data-num=5><td><pre>ip_packet <span class="token operator">=</span> IP<span class="token punctuation">(</span>proto<span class="token operator">=</span><span class="token number">0xFF</span><span class="token punctuation">,</span> dst<span class="token operator">=</span><span class="token string">"10.0.0.3"</span><span class="token punctuation">,</span>src<span class="token operator">=</span><span class="token string">"10.0.0.2"</span><span class="token punctuation">)</span></pre><tr><td data-num=6><td><pre>packet <span class="token operator">=</span> eth_frame<span class="token operator">/</span>ip_packet</pre><tr><td data-num=7><td><pre></pre><tr><td data-num=8><td><pre>reply_packets <span class="token operator">=</span> srp1<span class="token punctuation">(</span>packet<span class="token punctuation">,</span> timeout<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> iface<span class="token operator">=</span><span class="token string">"eth0"</span><span class="token punctuation">)</span></pre><tr><td data-num=9><td><pre></pre><tr><td data-num=10><td><pre><span class="token keyword">if</span> reply_packets<span class="token punctuation">:</span></pre><tr><td data-num=11><td><pre>    <span class="token keyword">print</span><span class="token punctuation">(</span>reply_packets<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span></pre><tr><td data-num=12><td><pre><span class="token keyword">else</span><span class="token punctuation">:</span></pre><tr><td data-num=13><td><pre>    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"No reply received."</span><span class="token punctuation">)</span></pre></table></figure><p>发送 tcp 包，和上面一样的注意事项就一遍过<figure class="highlight python"><figcaption data-lang=python></figcaption><table><tr><td data-num=1><td><pre><span class="token keyword">from</span> scapy<span class="token punctuation">.</span><span class="token builtin">all</span> <span class="token keyword">import</span> <span class="token operator">*</span></pre><tr><td data-num=2><td><pre></pre><tr><td data-num=3><td><pre>eth_frame <span class="token operator">=</span> Ether<span class="token punctuation">(</span>src<span class="token operator">=</span><span class="token string">"02:42:0a:00:b5:ef"</span><span class="token punctuation">,</span> dst<span class="token operator">=</span><span class="token string">"ff:ff:ff:ff:ff:ff"</span><span class="token punctuation">)</span></pre><tr><td data-num=4><td><pre></pre><tr><td data-num=5><td><pre>ip_packet <span class="token operator">=</span> IP<span class="token punctuation">(</span>dst<span class="token operator">=</span><span class="token string">"10.0.0.3"</span><span class="token punctuation">,</span>src<span class="token operator">=</span><span class="token string">"10.0.181.239"</span><span class="token punctuation">)</span></pre><tr><td data-num=6><td><pre></pre><tr><td data-num=7><td><pre>tcp_packet <span class="token operator">=</span> TCP<span class="token punctuation">(</span>sport<span class="token operator">=</span><span class="token number">31337</span><span class="token punctuation">,</span> dport<span class="token operator">=</span><span class="token number">31337</span><span class="token punctuation">,</span> seq<span class="token operator">=</span><span class="token number">31337</span><span class="token punctuation">,</span> ack<span class="token operator">=</span><span class="token number">31337</span><span class="token punctuation">,</span> flags<span class="token operator">=</span><span class="token string">"APRSF"</span><span class="token punctuation">)</span></pre><tr><td data-num=8><td><pre></pre><tr><td data-num=9><td><pre>packet <span class="token operator">=</span> eth_frame<span class="token operator">/</span>ip_packet<span class="token operator">/</span>tcp_packet</pre><tr><td data-num=10><td><pre></pre><tr><td data-num=11><td><pre>reply_packets <span class="token operator">=</span> srp1<span class="token punctuation">(</span>packet<span class="token punctuation">,</span> timeout<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> iface<span class="token operator">=</span><span class="token string">"eth0"</span><span class="token punctuation">)</span></pre><tr><td data-num=12><td><pre></pre><tr><td data-num=13><td><pre><span class="token keyword">if</span> reply_packets<span class="token punctuation">:</span></pre><tr><td data-num=14><td><pre>    <span class="token keyword">print</span><span class="token punctuation">(</span>reply_packets<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span></pre><tr><td data-num=15><td><pre><span class="token keyword">else</span><span class="token punctuation">:</span></pre><tr><td data-num=16><td><pre>    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"No reply received."</span><span class="token punctuation">)</span></pre></table></figure><p>官网的 demo： <code>a=Ether()/IP(dst="www.slashdot.org")/TCP()/"GET /index.html HTTP/1.0 \n\n"</code><p>TCP handshake：<figure class="highlight python"><figcaption data-lang=python></figcaption><table><tr><td data-num=1><td><pre><span class="token keyword">from</span> scapy<span class="token punctuation">.</span><span class="token builtin">all</span> <span class="token keyword">import</span> <span class="token operator">*</span></pre><tr><td data-num=2><td><pre></pre><tr><td data-num=3><td><pre>eth_frame <span class="token operator">=</span> Ether<span class="token punctuation">(</span>src<span class="token operator">=</span><span class="token string">"8a:c9:61:2b:94:3c"</span><span class="token punctuation">,</span> dst<span class="token operator">=</span><span class="token string">"ff:ff:ff:ff:ff:ff"</span><span class="token punctuation">)</span></pre><tr><td data-num=4><td><pre></pre><tr><td data-num=5><td><pre>ip_packet <span class="token operator">=</span> IP<span class="token punctuation">(</span>dst<span class="token operator">=</span><span class="token string">"10.0.0.3"</span><span class="token punctuation">,</span>src<span class="token operator">=</span><span class="token string">"10.0.0.2"</span><span class="token punctuation">)</span></pre><tr><td data-num=6><td><pre></pre><tr><td data-num=7><td><pre>tcp_packet <span class="token operator">=</span> TCP<span class="token punctuation">(</span>sport<span class="token operator">=</span><span class="token number">31337</span><span class="token punctuation">,</span> dport<span class="token operator">=</span><span class="token number">31337</span><span class="token punctuation">,</span> seq<span class="token operator">=</span><span class="token number">31337</span><span class="token punctuation">,</span> flags<span class="token operator">=</span><span class="token string">"S"</span><span class="token punctuation">)</span></pre><tr><td data-num=8><td><pre></pre><tr><td data-num=9><td><pre>packet <span class="token operator">=</span> eth_frame<span class="token operator">/</span>ip_packet<span class="token operator">/</span>tcp_packet</pre><tr><td data-num=10><td><pre></pre><tr><td data-num=11><td><pre>reply_packets <span class="token operator">=</span> srp1<span class="token punctuation">(</span>packet<span class="token punctuation">,</span> timeout<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> iface<span class="token operator">=</span><span class="token string">"eth0"</span><span class="token punctuation">)</span></pre><tr><td data-num=12><td><pre></pre><tr><td data-num=13><td><pre><span class="token keyword">if</span> reply_packets<span class="token punctuation">:</span></pre><tr><td data-num=14><td><pre>    <span class="token keyword">print</span><span class="token punctuation">(</span>reply_packets<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span></pre><tr><td data-num=15><td><pre><span class="token keyword">else</span><span class="token punctuation">:</span></pre><tr><td data-num=16><td><pre>    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"No reply received."</span><span class="token punctuation">)</span></pre><tr><td data-num=17><td><pre></pre><tr><td data-num=18><td><pre>eth_frame <span class="token operator">=</span> Ether<span class="token punctuation">(</span>src<span class="token operator">=</span><span class="token string">"8a:c9:61:2b:94:3c"</span><span class="token punctuation">,</span> dst<span class="token operator">=</span><span class="token string">"ff:ff:ff:ff:ff:ff"</span><span class="token punctuation">)</span></pre><tr><td data-num=19><td><pre></pre><tr><td data-num=20><td><pre>ip_packet <span class="token operator">=</span> IP<span class="token punctuation">(</span>dst<span class="token operator">=</span><span class="token string">"10.0.0.3"</span><span class="token punctuation">,</span>src<span class="token operator">=</span><span class="token string">"10.0.0.2"</span><span class="token punctuation">)</span></pre><tr><td data-num=21><td><pre></pre><tr><td data-num=22><td><pre>tcp_packet <span class="token operator">=</span> TCP<span class="token punctuation">(</span>sport<span class="token operator">=</span><span class="token number">31337</span><span class="token punctuation">,</span> dport<span class="token operator">=</span><span class="token number">31337</span><span class="token punctuation">,</span> seq<span class="token operator">=</span><span class="token number">31338</span><span class="token punctuation">,</span> ack <span class="token operator">=</span> reply_packets<span class="token punctuation">.</span>seq <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> flags<span class="token operator">=</span><span class="token string">"A"</span><span class="token punctuation">)</span></pre><tr><td data-num=23><td><pre></pre><tr><td data-num=24><td><pre>packet <span class="token operator">=</span> eth_frame<span class="token operator">/</span>ip_packet<span class="token operator">/</span>tcp_packet</pre><tr><td data-num=25><td><pre></pre><tr><td data-num=26><td><pre>reply_packets <span class="token operator">=</span> srp1<span class="token punctuation">(</span>packet<span class="token punctuation">,</span> timeout<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span> iface<span class="token operator">=</span><span class="token string">"eth0"</span><span class="token punctuation">)</span></pre><tr><td data-num=27><td><pre></pre><tr><td data-num=28><td><pre><span class="token keyword">if</span> reply_packets<span class="token punctuation">:</span></pre><tr><td data-num=29><td><pre>    <span class="token keyword">print</span><span class="token punctuation">(</span>reply_packets<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span></pre><tr><td data-num=30><td><pre><span class="token keyword">else</span><span class="token punctuation">:</span></pre><tr><td data-num=31><td><pre>    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"No reply received."</span><span class="token punctuation">)</span></pre></table></figure><p>ARP（注意 ARP 中的 hwsrc 需要再设置一次 mac，否则接收不到回包）<figure class="highlight python"><figcaption data-lang=python></figcaption><table><tr><td data-num=1><td><pre><span class="token keyword">from</span> scapy<span class="token punctuation">.</span><span class="token builtin">all</span> <span class="token keyword">import</span> <span class="token operator">*</span></pre><tr><td data-num=2><td><pre></pre><tr><td data-num=3><td><pre>eth_frame <span class="token operator">=</span> Ether<span class="token punctuation">(</span>src<span class="token operator">=</span><span class="token string">"3a:a0:e5:64:0f:e3"</span><span class="token punctuation">,</span> dst<span class="token operator">=</span><span class="token string">"ff:ff:ff:ff:ff:ff"</span><span class="token punctuation">)</span></pre><tr><td data-num=4><td><pre></pre><tr><td data-num=5><td><pre>arp_packet <span class="token operator">=</span> ARP<span class="token punctuation">(</span>hwsrc<span class="token operator">=</span><span class="token string">"3a:a0:e5:64:0f:e3"</span><span class="token punctuation">,</span>op<span class="token operator">=</span><span class="token string">'is-at'</span><span class="token punctuation">,</span>psrc<span class="token operator">=</span><span class="token string">"10.0.0.2"</span><span class="token punctuation">,</span>pdst<span class="token operator">=</span><span class="token string">"10.0.0.3"</span><span class="token punctuation">,</span>hwdst<span class="token operator">=</span><span class="token string">"ff:ff:ff:ff:ff:ff"</span><span class="token punctuation">)</span></pre><tr><td data-num=6><td><pre></pre><tr><td data-num=7><td><pre>packet <span class="token operator">=</span> eth_frame<span class="token operator">/</span>arp_packet</pre><tr><td data-num=8><td><pre></pre><tr><td data-num=9><td><pre>reply_packets <span class="token operator">=</span> srp1<span class="token punctuation">(</span>packet<span class="token punctuation">,</span> timeout<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span> iface<span class="token operator">=</span><span class="token string">"eth0"</span><span class="token punctuation">)</span></pre><tr><td data-num=10><td><pre></pre><tr><td data-num=11><td><pre><span class="token keyword">if</span> reply_packets<span class="token punctuation">:</span></pre><tr><td data-num=12><td><pre>    <span class="token keyword">print</span><span class="token punctuation">(</span>reply_packets<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span></pre><tr><td data-num=13><td><pre><span class="token keyword">else</span><span class="token punctuation">:</span></pre><tr><td data-num=14><td><pre>    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"No reply received."</span><span class="token punctuation">)</span></pre><tr><td data-num=15><td><pre></pre><tr><td data-num=16><td><pre><span class="token comment"># print(arp_mitm("10.0.0.3","10.0.0.2"))</span></pre></table></figure><p>ARP 欺骗（直接伪造 ip 即可）<figure class="highlight python"><figcaption data-lang=python></figcaption><table><tr><td data-num=1><td><pre>sendp<span class="token punctuation">(</span>Ether<span class="token punctuation">(</span>src<span class="token operator">=</span>get_if_hwaddr<span class="token punctuation">(</span><span class="token string">"eth0"</span><span class="token punctuation">)</span><span class="token punctuation">,</span> dst<span class="token operator">=</span><span class="token string">"ff:ff:ff:ff:ff:ff"</span><span class="token punctuation">)</span> <span class="token operator">/</span> ARP<span class="token punctuation">(</span>op<span class="token operator">=</span><span class="token string">"is-at"</span><span class="token punctuation">,</span> psrc<span class="token operator">=</span><span class="token string">"10.0.0.2"</span><span class="token punctuation">,</span> hwsrc<span class="token operator">=</span>get_if_hwaddr<span class="token punctuation">(</span><span class="token string">"eth0"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> iface<span class="token operator">=</span><span class="token string">"eth0"</span><span class="token punctuation">)</span></pre></table></figure><p>差一个题，稍微复杂，大概知道怎么做但是晚点做吧...</div><footer><div class=meta><span class=item><span class=icon><i class="ic i-calendar-check"></i></span><span class=text>Edited on</span><time title="Modified: 2024-04-25 19:44:45" datetime=2024-04-25T19:44:45+08:00 itemprop=dateModified>2024-04-25</time></span></div><div class=reward><button><i class="ic i-heartbeat"></i>Donate</button><p>Give me a cup of [coffee]~(￣▽￣)~*<div id=qr><div><img alt="Moyao WeChat Pay" data-src=/assets/wechatpay.png loading=lazy><p>WeChat Pay</div><div><img alt="Moyao Alipay" data-src=/assets/alipay.png loading=lazy><p>Alipay</div></div></div><div id=copyright><ul><li class=author><strong>Post author: </strong>Moyao<i class="ic i-at"><em>@</em></i>rev@天枢<li class=link><strong>Post link: </strong><a href=https://demoyao100.github.io/2024/04/14/web%E5%85%A5%E9%97%A8%E6%93%8D%E4%BD%9C/ title=web入门操作>https://demoyao100.github.io/2024/04/14/web入门操作/</a><li class=license><strong>Copyright Notice: </strong>All articles in this blog are licensed under <a href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh rel=noopener target=_blank><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</a> unless stating additionally.</ul></div></footer></article></div><div class=post-nav><div class="item left"><a data-background-image=https://tva4.sinaimg.cn/mw690/6833939bly1gicis3attqj20zk0m8k7l.jpg href=/2024/04/08/vm%E5%88%9D%E6%8E%A2/ itemprop=url rel=prev title=vm初探><span class=type>Previous Post</span><h3>vm初探</h3></a></div><div class="item right"><a data-background-image=https://tva4.sinaimg.cn/mw690/6833939bly1gicis081o9j20zk0m8dmr.jpg href=/2024/04/24/%E9%93%81%E4%B8%89awd%E6%B8%97%E9%80%8F%E5%A4%8D%E7%9B%98/ itemprop=url rel=next title=铁三awd渗透复盘><span class=type>Next Post</span><h3>铁三awd渗透复盘</h3></a></div></div></div><div id=sidebar><div class=inner><div class=panels><div class=inner><div class="contents panel pjax" data-title=Contents><ol class=toc><li class="toc-item toc-level-6"><a class=toc-link href=#preface><span class=toc-number>1.</span> <span class=toc-text> PREFACE：</span></a></ol><li class="toc-item toc-level-3"><a class=toc-link href=#curl><span class=toc-number></span> <span class=toc-text> curl</span></a><li class="toc-item toc-level-3"><a class=toc-link href=#nc><span class=toc-number></span> <span class=toc-text> nc</span></a><li class="toc-item toc-level-3"><a class=toc-link href=#python><span class=toc-number></span> <span class=toc-text> python</span></a><li class="toc-item toc-level-3"><a class=toc-link href=#web-syscall><span class=toc-number></span> <span class=toc-text> web syscall</span></a><li class="toc-item toc-level-3"><a class=toc-link href=#nc-2><span class=toc-number></span> <span class=toc-text> nc</span></a><li class="toc-item toc-level-3"><a class=toc-link href=#tcpdump%E5%8A%AB%E6%8C%81><span class=toc-number></span> <span class=toc-text> tcpdump 劫持</span></a><li class="toc-item toc-level-3"><a class=toc-link href=#hijack><span class=toc-number></span> <span class=toc-text> hijack</span></a></div><div class="related panel pjax" data-title=Related></div><div class="overview panel" data-title=Overview><div class=author itemprop=author itemscope itemtype=http://schema.org/Person><img alt=Moyao class=image data-src=/assets/avatar.jpg itemprop=image loading=lazy><p class=name itemprop=name>Moyao<div class=description itemprop=description>Write down something interesting I met<br> Feel free to mail me if you have something wanted to talk about, plz mail: &LTmoyaoxue@outlook.com></div></div><nav class=state><div class="item posts"><a href=/archives/><span class=count>74</span><span class=name>posts</span></a></div><div class="item tags"><a href=/tags/><span class=count>14</span><span class=name>tags</span></a></div></nav><div class=social><a class="item github" href=https://github.com/name rel=noopener target=_blank title=https://github.com/name><i class="ic i-github"></i></a></div><div class=menu><li class=item><a href=/ rel=section><i class="ic i-home"></i>Home</a></div></div></div></div><ul id=quick><li class="prev pjax"><a title="Previous Post" href=/2024/04/24/%E9%93%81%E4%B8%89awd%E6%B8%97%E9%80%8F%E5%A4%8D%E7%9B%98/ rel=prev><i class="ic i-chevron-left"></i></a><li class=up><i class="ic i-arrow-up"></i><li class=down><i class="ic i-arrow-down"></i><li class="next pjax"><a title="Next Post" href=/2024/04/08/vm%E5%88%9D%E6%8E%A2/ rel=next><i class="ic i-chevron-right"></i></a><li class=percent></ul></div></div><div class=dimmer></div></div></main><footer id=footer><div class=inner><div class=widgets><div class="rpost pjax"><h2>Random Posts</h2><ul><li class=item><div class=breadcrumb></div><span><a href=/2024/03/28/msf-Android%E9%A9%AC%E5%88%86%E6%9E%90/>msf Android马分析</a></span><li class=item><div class=breadcrumb></div><span><a href=/2023/11/27/Ghidra%E5%88%9D%E6%8E%A2/>Ghidra初探</a></span><li class=item><div class=breadcrumb></div><span><a href=/2023/10/12/cpp%E8%99%9A%E8%A1%A8%E9%80%86%E5%90%91%E5%88%9D%E6%8E%A2/>cpp虚表逆向初探</a></span><li class=item><div class=breadcrumb></div><span><a href=/2024/05/03/%E4%B8%8D%E5%90%8C%E7%9A%84android-hook%E5%A7%BF%E5%8A%BF/>不同的android hook姿势</a></span><li class=item><div class=breadcrumb></div><span><a href=/2023/09/18/pickle%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/>pickle反序列化</a></span><li class=item><div class=breadcrumb></div><span><a href=/2023/08/26/%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91%E4%BB%A5%E5%8F%8A%E5%85%B6%E4%BB%96%E6%9E%B6%E6%9E%84%E9%80%86%E5%90%91%E5%88%9D%E6%8E%A2/>交叉编译以及其他架构逆向初探</a></span><li class=item><div class=breadcrumb></div><span><a href=/2023/10/17/ISITDTUCTF/>ISITDTUCTF</a></span><li class=item><div class=breadcrumb></div><span><a href=/2024/05/03/xpose%E5%8E%9F%E7%90%86%E5%88%9D%E6%8E%A2/>xpose原理初探</a></span><li class=item><div class=breadcrumb></div><span><a href=/2023/09/18/seccon-2023/>seccon 2023</a></span><li class=item><div class=breadcrumb></div><span><a href=/2024/02/26/pwnCollege/>pwnCollege</a></span></ul></div><div class="rpost pjax"><h2>Recent Comments</h2><ul class=leancloud-recent-comment id=new-comment></ul></div></div><div class=status><div class=copyright>© 2022 -<span itemprop=copyrightYear>2024</span><span class=with-love><i class="ic i-sakura rotate"></i></span><span class=author itemprop=copyrightHolder>Moyao @ Moyao の小屋</span></div><div class=count><span class=post-meta-item-icon><i class="ic i-chart-area"></i></span><span title="Symbols count total">649k words</span><span class=post-meta-divider>|</span><span class=post-meta-item-icon><i class="ic i-coffee"></i></span><span title="Reading time total">9:50</span></div><div class=powered-by>Powered by <a href=https://hexo.io/ rel=noopener target=_blank>Hexo</a> & Theme.<a href=https://github.com/theme-shoka-x/hexo-theme-shokaX/ rel=noopener target=_blank>ShokaX</a></div></div></div></footer></div><script data-config>var LOCAL = {
-        path: `2024/04/14/web入门操作/`,
-        favicon: {
-        show: `(●´3｀●) Here we go again.`,
-        hide: `(´Д｀) It's a disaster!`
-    },
-    search: {
-        placeholder: "Search for Posts",
-        empty: "We didn't find any results for the search: ${query}",
-        stats: "${hits} results found in ${time} ms"
-    },
-    copy_tex: false,
-    katex: false,
-    mermaid: false,
-    audio: undefined,
-    fancybox: true,
-    nocopy: false,
-    outime: true,
-    template: `<div class="note warning"><p><span class="label warning">Article Timeliness Alert</span><br>This is an article published {{publish}} days ago and last updated {{updated}} days ago. Some information may have changed, so please be careful to screen it.</p></div>`,
-    quiz: {
-        choice: `Multiple Choice`,
-        multiple: `Multiple Answer`,
-        true_false: `True/False`,
-        essay: `Questions`,
-        gap_fill: `Gap Filling`,
-        mistake: `Wrong Answer`
-    },
-    ignores: [
-        (uri) => uri.includes('#'),
-        (uri) => new RegExp(LOCAL.path + '$').test(uri),
-            []
-    ]
-};</script><script src=https://cdn.bootcdn.net/ajax/libs/vue/3.3.4/vue.global.prod.min.js></script><script src=https://lf9-cdn-tos.bytecdntp.com/cdn/expire-6-M/pace/1.2.4/pace.min.js></script><script src=https://lf9-cdn-tos.bytecdntp.com/cdn/expire-6-M/algoliasearch/4.12.1/algoliasearch-lite.umd.min.js></script><script src=https://lf9-cdn-tos.bytecdntp.com/cdn/expire-6-M/instantsearch.js/4.39.0/instantsearch.production.min.js></script><script src=https://npm.webcache.cn/quicklink@2.3.0/dist/quicklink.umd.js></script><script src=/js/app.js?v=0.3.15></script>
+</code></pre>
+<h3 id="nc-2"><a class="anchor" href="#nc-2">#</a> nc</h3>
+<p>连接</p>
+<blockquote>
+<p>nc 127.0.0.1 80</p>
+</blockquote>
+<p>接听</p>
+<blockquote>
+<p>nc -lp 80</p>
+</blockquote>
+<p>多线程扫描</p>
+<figure class="highlight python"><figcaption data-lang="python"></figcaption><table><tbody><tr><td data-num="1"></td><td><pre><span class="token keyword">import</span> socket</pre></td></tr><tr><td data-num="2"></td><td><pre><span class="token keyword">import</span> threading</pre></td></tr><tr><td data-num="3"></td><td><pre><span class="token keyword">def</span> <span class="token function">check_port</span><span class="token punctuation">(</span>hostname<span class="token punctuation">,</span> port<span class="token punctuation">)</span><span class="token punctuation">:</span></pre></td></tr><tr><td data-num="4"></td><td><pre>    <span class="token keyword">try</span><span class="token punctuation">:</span></pre></td></tr><tr><td data-num="5"></td><td><pre>        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f'testing:</span><span class="token interpolation"><span class="token punctuation">{</span>hostname<span class="token punctuation">}</span></span><span class="token string">'</span></span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="6"></td><td><pre>        sock<span class="token operator">=</span>socket<span class="token punctuation">.</span>socket<span class="token punctuation">(</span>socket<span class="token punctuation">.</span>AF_INET<span class="token punctuation">,</span>socket<span class="token punctuation">.</span>SOCK_STREAM<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="7"></td><td><pre>        sock<span class="token punctuation">.</span>settimeout<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="8"></td><td><pre>        result<span class="token operator">=</span>sock<span class="token punctuation">.</span>connect_ex<span class="token punctuation">(</span><span class="token punctuation">(</span>hostname<span class="token punctuation">,</span>port<span class="token punctuation">)</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="9"></td><td><pre>        <span class="token keyword">if</span> <span class="token punctuation">(</span>result <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">:</span></pre></td></tr><tr><td data-num="10"></td><td><pre>            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f'</span><span class="token interpolation"><span class="token punctuation">{</span>hostname<span class="token punctuation">}</span></span><span class="token string">----------'</span></span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="11"></td><td><pre>        sock<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="12"></td><td><pre>    <span class="token keyword">except</span><span class="token punctuation">:</span></pre></td></tr><tr><td data-num="13"></td><td><pre>        <span class="token keyword">pass</span></pre></td></tr><tr><td data-num="14"></td><td><pre></pre></td></tr><tr><td data-num="15"></td><td><pre><span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">256</span><span class="token punctuation">)</span><span class="token punctuation">:</span></pre></td></tr><tr><td data-num="16"></td><td><pre>    <span class="token keyword">try</span><span class="token punctuation">:</span></pre></td></tr><tr><td data-num="17"></td><td><pre>        t <span class="token operator">=</span> threading<span class="token punctuation">.</span>Thread<span class="token punctuation">(</span>target<span class="token operator">=</span>check_port<span class="token punctuation">,</span>args<span class="token operator">=</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f'10.0.0.</span><span class="token interpolation"><span class="token punctuation">{</span>i<span class="token punctuation">}</span></span><span class="token string">'</span></span><span class="token punctuation">,</span><span class="token number">31337</span><span class="token punctuation">)</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="18"></td><td><pre>        t<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="19"></td><td><pre>    <span class="token keyword">except</span><span class="token punctuation">:</span></pre></td></tr><tr><td data-num="20"></td><td><pre>        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Error: unable to start thread"</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="21"></td><td><pre></pre></td></tr><tr><td data-num="22"></td><td><pre><span class="token keyword">while</span> <span class="token number">1</span><span class="token punctuation">:</span></pre></td></tr><tr><td data-num="23"></td><td><pre>    <span class="token keyword">pass</span></pre></td></tr></tbody></table></figure><p>更好的多线程扫描</p>
+<figure class="highlight python"><figcaption data-lang="python"></figcaption><table><tbody><tr><td data-num="1"></td><td><pre><span class="token keyword">import</span> socket</pre></td></tr><tr><td data-num="2"></td><td><pre><span class="token keyword">import</span> logging</pre></td></tr><tr><td data-num="3"></td><td><pre><span class="token keyword">from</span> concurrent<span class="token punctuation">.</span>futures <span class="token keyword">import</span> ProcessPoolExecutor<span class="token punctuation">,</span> as_completed</pre></td></tr><tr><td data-num="4"></td><td><pre></pre></td></tr><tr><td data-num="5"></td><td><pre><span class="token comment"># 配置日志</span></pre></td></tr><tr><td data-num="6"></td><td><pre>logging<span class="token punctuation">.</span>basicConfig<span class="token punctuation">(</span>filename<span class="token operator">=</span><span class="token string">'port_check.log'</span><span class="token punctuation">,</span> level<span class="token operator">=</span>logging<span class="token punctuation">.</span>INFO<span class="token punctuation">,</span> <span class="token builtin">format</span><span class="token operator">=</span><span class="token string">'%(asctime)s - %(message)s'</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="7"></td><td><pre></pre></td></tr><tr><td data-num="8"></td><td><pre><span class="token keyword">def</span> <span class="token function">check_port</span><span class="token punctuation">(</span>hostname<span class="token punctuation">,</span> port<span class="token punctuation">)</span><span class="token punctuation">:</span></pre></td></tr><tr><td data-num="9"></td><td><pre>    <span class="token comment"># print(hostname)</span></pre></td></tr><tr><td data-num="10"></td><td><pre>    <span class="token comment"># print(port)</span></pre></td></tr><tr><td data-num="11"></td><td><pre></pre></td></tr><tr><td data-num="12"></td><td><pre>    <span class="token keyword">try</span><span class="token punctuation">:</span></pre></td></tr><tr><td data-num="13"></td><td><pre>        <span class="token comment"># logging.info(f'testing: {hostname}')</span></pre></td></tr><tr><td data-num="14"></td><td><pre>        sock <span class="token operator">=</span> socket<span class="token punctuation">.</span>socket<span class="token punctuation">(</span>socket<span class="token punctuation">.</span>AF_INET<span class="token punctuation">,</span> socket<span class="token punctuation">.</span>SOCK_STREAM<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="15"></td><td><pre>        sock<span class="token punctuation">.</span>settimeout<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="16"></td><td><pre>        result <span class="token operator">=</span> sock<span class="token punctuation">.</span>connect_ex<span class="token punctuation">(</span><span class="token punctuation">(</span>hostname<span class="token punctuation">,</span> port<span class="token punctuation">)</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="17"></td><td><pre>        <span class="token keyword">if</span> result <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span></pre></td></tr><tr><td data-num="18"></td><td><pre>            logging<span class="token punctuation">.</span>info<span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f'</span><span class="token interpolation"><span class="token punctuation">{</span>hostname<span class="token punctuation">}</span></span><span class="token string">----------'</span></span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="19"></td><td><pre>            <span class="token keyword">return</span> <span class="token boolean">True</span></pre></td></tr><tr><td data-num="20"></td><td><pre>        sock<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="21"></td><td><pre>    <span class="token keyword">except</span><span class="token punctuation">:</span></pre></td></tr><tr><td data-num="22"></td><td><pre>        <span class="token keyword">pass</span></pre></td></tr><tr><td data-num="23"></td><td><pre>    <span class="token keyword">return</span> <span class="token boolean">False</span></pre></td></tr><tr><td data-num="24"></td><td><pre></pre></td></tr><tr><td data-num="25"></td><td><pre><span class="token keyword">def</span> <span class="token function">parallel_process</span><span class="token punctuation">(</span>array<span class="token punctuation">,</span> function<span class="token punctuation">)</span><span class="token punctuation">:</span></pre></td></tr><tr><td data-num="26"></td><td><pre>    <span class="token triple-quoted-string string">"""</span></pre></td></tr><tr><td data-num="27"></td><td><pre>    A parallel version of the map function with a progress bar. </pre></td></tr><tr><td data-num="28"></td><td><pre></pre></td></tr><tr><td data-num="29"></td><td><pre>    Args:</pre></td></tr><tr><td data-num="30"></td><td><pre>        array (array-like): An array to iterate over.</pre></td></tr><tr><td data-num="31"></td><td><pre>        function (function): A python function to apply to the elements of array</pre></td></tr><tr><td data-num="32"></td><td><pre>    Returns:</pre></td></tr><tr><td data-num="33"></td><td><pre>        [function(array[0]), function(array[1]), ...]</pre></td></tr><tr><td data-num="34"></td><td><pre>    """</pre></td></tr><tr><td data-num="35"></td><td><pre>    n_jobs <span class="token operator">=</span> <span class="token number">512</span>  <span class="token comment"># 线程数</span></pre></td></tr><tr><td data-num="36"></td><td><pre>    <span class="token keyword">with</span> ProcessPoolExecutor<span class="token punctuation">(</span>max_workers<span class="token operator">=</span>n_jobs<span class="token punctuation">)</span> <span class="token keyword">as</span> pool<span class="token punctuation">:</span></pre></td></tr><tr><td data-num="37"></td><td><pre>        futures <span class="token operator">=</span> <span class="token punctuation">[</span>pool<span class="token punctuation">.</span>submit<span class="token punctuation">(</span>function<span class="token punctuation">,</span> <span class="token operator">*</span>a<span class="token punctuation">)</span> <span class="token keyword">for</span> a <span class="token keyword">in</span> array<span class="token punctuation">]</span>  <span class="token comment"># 使用 *a 解包参数元组</span></pre></td></tr><tr><td data-num="38"></td><td><pre>        kwargs <span class="token operator">=</span> <span class="token punctuation">{</span></pre></td></tr><tr><td data-num="39"></td><td><pre>            <span class="token string">'total'</span><span class="token punctuation">:</span> <span class="token builtin">len</span><span class="token punctuation">(</span>futures<span class="token punctuation">)</span><span class="token punctuation">,</span></pre></td></tr><tr><td data-num="40"></td><td><pre>            <span class="token string">'unit'</span><span class="token punctuation">:</span> <span class="token string">'it'</span><span class="token punctuation">,</span></pre></td></tr><tr><td data-num="41"></td><td><pre>            <span class="token string">'unit_scale'</span><span class="token punctuation">:</span> <span class="token boolean">True</span><span class="token punctuation">,</span></pre></td></tr><tr><td data-num="42"></td><td><pre>            <span class="token string">'leave'</span><span class="token punctuation">:</span> <span class="token boolean">True</span></pre></td></tr><tr><td data-num="43"></td><td><pre>        <span class="token punctuation">}</span></pre></td></tr><tr><td data-num="44"></td><td><pre>        <span class="token comment"># Print out the progress as tasks complete</span></pre></td></tr><tr><td data-num="45"></td><td><pre></pre></td></tr><tr><td data-num="46"></td><td><pre></pre></td></tr><tr><td data-num="47"></td><td><pre><span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span></pre></td></tr><tr><td data-num="48"></td><td><pre>    array <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f'10.0.</span><span class="token interpolation"><span class="token punctuation">{</span>j<span class="token punctuation">}</span></span><span class="token string">.</span><span class="token interpolation"><span class="token punctuation">{</span>i<span class="token punctuation">}</span></span><span class="token string">'</span></span><span class="token punctuation">,</span> <span class="token number">31337</span><span class="token punctuation">)</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">256</span><span class="token punctuation">)</span> <span class="token keyword">for</span> j <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">256</span><span class="token punctuation">)</span><span class="token punctuation">]</span>  <span class="token comment"># 构造参数数组</span></pre></td></tr><tr><td data-num="49"></td><td><pre>    <span class="token comment"># array = [(f'192.168.0.{i}', 31337) for i in range(256)]</span></pre></td></tr><tr><td data-num="50"></td><td><pre>    <span class="token comment"># print(array)</span></pre></td></tr><tr><td data-num="51"></td><td><pre>    res <span class="token operator">=</span> parallel_process<span class="token punctuation">(</span>array<span class="token punctuation">,</span> check_port<span class="token punctuation">)</span></pre></td></tr></tbody></table></figure><h3 id="tcpdump劫持"><a class="anchor" href="#tcpdump劫持">#</a> tcpdump 劫持</h3>
+<blockquote>
+<p>tcpdump -i any port 31337 -w capture.pcap</p>
+</blockquote>
+<h3 id="hijack"><a class="anchor" href="#hijack">#</a> hijack</h3>
+<p>增加 ip 监听以获取包</p>
+<p><a target="_blank" rel="noopener" href="https://ubuntu.com/server/docs/configuring-networks">Configuring networks | Ubuntu</a></p>
+<blockquote>
+<p>ip addr add 10.0.0.2 dev eth0</p>
+</blockquote>
+<p>scapy 用法</p>
+<p><a target="_blank" rel="noopener" href="https://scapy.readthedocs.io/en/latest/usage.html">Usage — Scapy 2.5.0 documentation</a></p>
+<p>一些可用的指令：</p>
+<blockquote>
+<p>ip route show</p>
+<p>ip route add default via 10.0.0.1</p>
+</blockquote>
+<p>广播 Ethernet 包（srp1 注意增加 filter，这样不会收到自己发的包，或者用 srp 批量都接收）</p>
+<figure class="highlight python"><figcaption data-lang="python"></figcaption><table><tbody><tr><td data-num="1"></td><td><pre><span class="token keyword">from</span> scapy<span class="token punctuation">.</span><span class="token builtin">all</span> <span class="token keyword">import</span> <span class="token operator">*</span></pre></td></tr><tr><td data-num="2"></td><td><pre></pre></td></tr><tr><td data-num="3"></td><td><pre><span class="token comment"># Get your MAC address (assuming you're on a Linux system)</span></pre></td></tr><tr><td data-num="4"></td><td><pre></pre></td></tr><tr><td data-num="5"></td><td><pre><span class="token comment"># Create the Ethernet frame with your MAC address as the source</span></pre></td></tr><tr><td data-num="6"></td><td><pre>eth_frame <span class="token operator">=</span> Ether<span class="token punctuation">(</span>src<span class="token operator">=</span><span class="token string">"e6:d2:90:8f:34:8f"</span><span class="token punctuation">,</span> dst<span class="token operator">=</span><span class="token string">"ff:ff:ff:ff:ff:ff"</span><span class="token punctuation">,</span> <span class="token builtin">type</span><span class="token operator">=</span><span class="token number">0xFFFF</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="7"></td><td><pre></pre></td></tr><tr><td data-num="8"></td><td><pre><span class="token comment"># Send the Ethernet frame and receive packets</span></pre></td></tr><tr><td data-num="9"></td><td><pre>reply_packets <span class="token operator">=</span> srp1<span class="token punctuation">(</span>eth_frame<span class="token punctuation">,</span> timeout<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> iface<span class="token operator">=</span><span class="token string">"eth0"</span><span class="token punctuation">,</span> <span class="token builtin">filter</span><span class="token operator">=</span><span class="token string">"ether src not e6:d2:90:8f:34:8f"</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="10"></td><td><pre></pre></td></tr><tr><td data-num="11"></td><td><pre><span class="token comment"># Display received packets</span></pre></td></tr><tr><td data-num="12"></td><td><pre><span class="token keyword">if</span> reply_packets<span class="token punctuation">:</span></pre></td></tr><tr><td data-num="13"></td><td><pre>    <span class="token keyword">print</span><span class="token punctuation">(</span>reply_packets<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="14"></td><td><pre><span class="token keyword">else</span><span class="token punctuation">:</span></pre></td></tr><tr><td data-num="15"></td><td><pre>    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"No reply received."</span><span class="token punctuation">)</span></pre></td></tr></tbody></table></figure><p>发送 ip 包（注意，这里是一层一层搭建的，每层的包正常运转下一层的包才能成功发送，！注意！前面的 type 不能指定，这里是自动对 field 适应的，指定后会导致后续上层信息丢包）</p>
+<figure class="highlight python"><figcaption data-lang="python"></figcaption><table><tbody><tr><td data-num="1"></td><td><pre><span class="token keyword">from</span> scapy<span class="token punctuation">.</span><span class="token builtin">all</span> <span class="token keyword">import</span> <span class="token operator">*</span></pre></td></tr><tr><td data-num="2"></td><td><pre></pre></td></tr><tr><td data-num="3"></td><td><pre>eth_frame <span class="token operator">=</span> Ether<span class="token punctuation">(</span>src<span class="token operator">=</span><span class="token string">"3e:72:ce:70:a9:74"</span><span class="token punctuation">,</span> dst<span class="token operator">=</span><span class="token string">"ff:ff:ff:ff:ff:ff"</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="4"></td><td><pre></pre></td></tr><tr><td data-num="5"></td><td><pre>ip_packet <span class="token operator">=</span> IP<span class="token punctuation">(</span>proto<span class="token operator">=</span><span class="token number">0xFF</span><span class="token punctuation">,</span> dst<span class="token operator">=</span><span class="token string">"10.0.0.3"</span><span class="token punctuation">,</span>src<span class="token operator">=</span><span class="token string">"10.0.0.2"</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="6"></td><td><pre>packet <span class="token operator">=</span> eth_frame<span class="token operator">/</span>ip_packet</pre></td></tr><tr><td data-num="7"></td><td><pre></pre></td></tr><tr><td data-num="8"></td><td><pre>reply_packets <span class="token operator">=</span> srp1<span class="token punctuation">(</span>packet<span class="token punctuation">,</span> timeout<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> iface<span class="token operator">=</span><span class="token string">"eth0"</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="9"></td><td><pre></pre></td></tr><tr><td data-num="10"></td><td><pre><span class="token keyword">if</span> reply_packets<span class="token punctuation">:</span></pre></td></tr><tr><td data-num="11"></td><td><pre>    <span class="token keyword">print</span><span class="token punctuation">(</span>reply_packets<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="12"></td><td><pre><span class="token keyword">else</span><span class="token punctuation">:</span></pre></td></tr><tr><td data-num="13"></td><td><pre>    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"No reply received."</span><span class="token punctuation">)</span></pre></td></tr></tbody></table></figure><p>发送 tcp 包，和上面一样的注意事项就一遍过</p>
+<figure class="highlight python"><figcaption data-lang="python"></figcaption><table><tbody><tr><td data-num="1"></td><td><pre><span class="token keyword">from</span> scapy<span class="token punctuation">.</span><span class="token builtin">all</span> <span class="token keyword">import</span> <span class="token operator">*</span></pre></td></tr><tr><td data-num="2"></td><td><pre></pre></td></tr><tr><td data-num="3"></td><td><pre>eth_frame <span class="token operator">=</span> Ether<span class="token punctuation">(</span>src<span class="token operator">=</span><span class="token string">"02:42:0a:00:b5:ef"</span><span class="token punctuation">,</span> dst<span class="token operator">=</span><span class="token string">"ff:ff:ff:ff:ff:ff"</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="4"></td><td><pre></pre></td></tr><tr><td data-num="5"></td><td><pre>ip_packet <span class="token operator">=</span> IP<span class="token punctuation">(</span>dst<span class="token operator">=</span><span class="token string">"10.0.0.3"</span><span class="token punctuation">,</span>src<span class="token operator">=</span><span class="token string">"10.0.181.239"</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="6"></td><td><pre></pre></td></tr><tr><td data-num="7"></td><td><pre>tcp_packet <span class="token operator">=</span> TCP<span class="token punctuation">(</span>sport<span class="token operator">=</span><span class="token number">31337</span><span class="token punctuation">,</span> dport<span class="token operator">=</span><span class="token number">31337</span><span class="token punctuation">,</span> seq<span class="token operator">=</span><span class="token number">31337</span><span class="token punctuation">,</span> ack<span class="token operator">=</span><span class="token number">31337</span><span class="token punctuation">,</span> flags<span class="token operator">=</span><span class="token string">"APRSF"</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="8"></td><td><pre></pre></td></tr><tr><td data-num="9"></td><td><pre>packet <span class="token operator">=</span> eth_frame<span class="token operator">/</span>ip_packet<span class="token operator">/</span>tcp_packet</pre></td></tr><tr><td data-num="10"></td><td><pre></pre></td></tr><tr><td data-num="11"></td><td><pre>reply_packets <span class="token operator">=</span> srp1<span class="token punctuation">(</span>packet<span class="token punctuation">,</span> timeout<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> iface<span class="token operator">=</span><span class="token string">"eth0"</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="12"></td><td><pre></pre></td></tr><tr><td data-num="13"></td><td><pre><span class="token keyword">if</span> reply_packets<span class="token punctuation">:</span></pre></td></tr><tr><td data-num="14"></td><td><pre>    <span class="token keyword">print</span><span class="token punctuation">(</span>reply_packets<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="15"></td><td><pre><span class="token keyword">else</span><span class="token punctuation">:</span></pre></td></tr><tr><td data-num="16"></td><td><pre>    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"No reply received."</span><span class="token punctuation">)</span></pre></td></tr></tbody></table></figure><p>官网的 demo： <code>a=Ether()/IP(dst="www.slashdot.org")/TCP()/"GET /index.html HTTP/1.0 \n\n"</code></p>
+<p>TCP handshake：</p>
+<figure class="highlight python"><figcaption data-lang="python"></figcaption><table><tbody><tr><td data-num="1"></td><td><pre><span class="token keyword">from</span> scapy<span class="token punctuation">.</span><span class="token builtin">all</span> <span class="token keyword">import</span> <span class="token operator">*</span></pre></td></tr><tr><td data-num="2"></td><td><pre></pre></td></tr><tr><td data-num="3"></td><td><pre>eth_frame <span class="token operator">=</span> Ether<span class="token punctuation">(</span>src<span class="token operator">=</span><span class="token string">"8a:c9:61:2b:94:3c"</span><span class="token punctuation">,</span> dst<span class="token operator">=</span><span class="token string">"ff:ff:ff:ff:ff:ff"</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="4"></td><td><pre></pre></td></tr><tr><td data-num="5"></td><td><pre>ip_packet <span class="token operator">=</span> IP<span class="token punctuation">(</span>dst<span class="token operator">=</span><span class="token string">"10.0.0.3"</span><span class="token punctuation">,</span>src<span class="token operator">=</span><span class="token string">"10.0.0.2"</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="6"></td><td><pre></pre></td></tr><tr><td data-num="7"></td><td><pre>tcp_packet <span class="token operator">=</span> TCP<span class="token punctuation">(</span>sport<span class="token operator">=</span><span class="token number">31337</span><span class="token punctuation">,</span> dport<span class="token operator">=</span><span class="token number">31337</span><span class="token punctuation">,</span> seq<span class="token operator">=</span><span class="token number">31337</span><span class="token punctuation">,</span> flags<span class="token operator">=</span><span class="token string">"S"</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="8"></td><td><pre></pre></td></tr><tr><td data-num="9"></td><td><pre>packet <span class="token operator">=</span> eth_frame<span class="token operator">/</span>ip_packet<span class="token operator">/</span>tcp_packet</pre></td></tr><tr><td data-num="10"></td><td><pre></pre></td></tr><tr><td data-num="11"></td><td><pre>reply_packets <span class="token operator">=</span> srp1<span class="token punctuation">(</span>packet<span class="token punctuation">,</span> timeout<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> iface<span class="token operator">=</span><span class="token string">"eth0"</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="12"></td><td><pre></pre></td></tr><tr><td data-num="13"></td><td><pre><span class="token keyword">if</span> reply_packets<span class="token punctuation">:</span></pre></td></tr><tr><td data-num="14"></td><td><pre>    <span class="token keyword">print</span><span class="token punctuation">(</span>reply_packets<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="15"></td><td><pre><span class="token keyword">else</span><span class="token punctuation">:</span></pre></td></tr><tr><td data-num="16"></td><td><pre>    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"No reply received."</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="17"></td><td><pre></pre></td></tr><tr><td data-num="18"></td><td><pre>eth_frame <span class="token operator">=</span> Ether<span class="token punctuation">(</span>src<span class="token operator">=</span><span class="token string">"8a:c9:61:2b:94:3c"</span><span class="token punctuation">,</span> dst<span class="token operator">=</span><span class="token string">"ff:ff:ff:ff:ff:ff"</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="19"></td><td><pre></pre></td></tr><tr><td data-num="20"></td><td><pre>ip_packet <span class="token operator">=</span> IP<span class="token punctuation">(</span>dst<span class="token operator">=</span><span class="token string">"10.0.0.3"</span><span class="token punctuation">,</span>src<span class="token operator">=</span><span class="token string">"10.0.0.2"</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="21"></td><td><pre></pre></td></tr><tr><td data-num="22"></td><td><pre>tcp_packet <span class="token operator">=</span> TCP<span class="token punctuation">(</span>sport<span class="token operator">=</span><span class="token number">31337</span><span class="token punctuation">,</span> dport<span class="token operator">=</span><span class="token number">31337</span><span class="token punctuation">,</span> seq<span class="token operator">=</span><span class="token number">31338</span><span class="token punctuation">,</span> ack <span class="token operator">=</span> reply_packets<span class="token punctuation">.</span>seq <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> flags<span class="token operator">=</span><span class="token string">"A"</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="23"></td><td><pre></pre></td></tr><tr><td data-num="24"></td><td><pre>packet <span class="token operator">=</span> eth_frame<span class="token operator">/</span>ip_packet<span class="token operator">/</span>tcp_packet</pre></td></tr><tr><td data-num="25"></td><td><pre></pre></td></tr><tr><td data-num="26"></td><td><pre>reply_packets <span class="token operator">=</span> srp1<span class="token punctuation">(</span>packet<span class="token punctuation">,</span> timeout<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span> iface<span class="token operator">=</span><span class="token string">"eth0"</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="27"></td><td><pre></pre></td></tr><tr><td data-num="28"></td><td><pre><span class="token keyword">if</span> reply_packets<span class="token punctuation">:</span></pre></td></tr><tr><td data-num="29"></td><td><pre>    <span class="token keyword">print</span><span class="token punctuation">(</span>reply_packets<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="30"></td><td><pre><span class="token keyword">else</span><span class="token punctuation">:</span></pre></td></tr><tr><td data-num="31"></td><td><pre>    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"No reply received."</span><span class="token punctuation">)</span></pre></td></tr></tbody></table></figure><p>ARP（注意 ARP 中的 hwsrc 需要再设置一次 mac，否则接收不到回包）</p>
+<figure class="highlight python"><figcaption data-lang="python"></figcaption><table><tbody><tr><td data-num="1"></td><td><pre><span class="token keyword">from</span> scapy<span class="token punctuation">.</span><span class="token builtin">all</span> <span class="token keyword">import</span> <span class="token operator">*</span></pre></td></tr><tr><td data-num="2"></td><td><pre></pre></td></tr><tr><td data-num="3"></td><td><pre>eth_frame <span class="token operator">=</span> Ether<span class="token punctuation">(</span>src<span class="token operator">=</span><span class="token string">"3a:a0:e5:64:0f:e3"</span><span class="token punctuation">,</span> dst<span class="token operator">=</span><span class="token string">"ff:ff:ff:ff:ff:ff"</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="4"></td><td><pre></pre></td></tr><tr><td data-num="5"></td><td><pre>arp_packet <span class="token operator">=</span> ARP<span class="token punctuation">(</span>hwsrc<span class="token operator">=</span><span class="token string">"3a:a0:e5:64:0f:e3"</span><span class="token punctuation">,</span>op<span class="token operator">=</span><span class="token string">'is-at'</span><span class="token punctuation">,</span>psrc<span class="token operator">=</span><span class="token string">"10.0.0.2"</span><span class="token punctuation">,</span>pdst<span class="token operator">=</span><span class="token string">"10.0.0.3"</span><span class="token punctuation">,</span>hwdst<span class="token operator">=</span><span class="token string">"ff:ff:ff:ff:ff:ff"</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="6"></td><td><pre></pre></td></tr><tr><td data-num="7"></td><td><pre>packet <span class="token operator">=</span> eth_frame<span class="token operator">/</span>arp_packet</pre></td></tr><tr><td data-num="8"></td><td><pre></pre></td></tr><tr><td data-num="9"></td><td><pre>reply_packets <span class="token operator">=</span> srp1<span class="token punctuation">(</span>packet<span class="token punctuation">,</span> timeout<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span> iface<span class="token operator">=</span><span class="token string">"eth0"</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="10"></td><td><pre></pre></td></tr><tr><td data-num="11"></td><td><pre><span class="token keyword">if</span> reply_packets<span class="token punctuation">:</span></pre></td></tr><tr><td data-num="12"></td><td><pre>    <span class="token keyword">print</span><span class="token punctuation">(</span>reply_packets<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="13"></td><td><pre><span class="token keyword">else</span><span class="token punctuation">:</span></pre></td></tr><tr><td data-num="14"></td><td><pre>    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"No reply received."</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="15"></td><td><pre></pre></td></tr><tr><td data-num="16"></td><td><pre><span class="token comment"># print(arp_mitm("10.0.0.3","10.0.0.2"))</span></pre></td></tr></tbody></table></figure><p>ARP 欺骗（直接伪造 ip 即可）</p>
+<figure class="highlight python"><figcaption data-lang="python"></figcaption><table><tbody><tr><td data-num="1"></td><td><pre>sendp<span class="token punctuation">(</span>Ether<span class="token punctuation">(</span>src<span class="token operator">=</span>get_if_hwaddr<span class="token punctuation">(</span><span class="token string">"eth0"</span><span class="token punctuation">)</span><span class="token punctuation">,</span> dst<span class="token operator">=</span><span class="token string">"ff:ff:ff:ff:ff:ff"</span><span class="token punctuation">)</span> <span class="token operator">/</span> ARP<span class="token punctuation">(</span>op<span class="token operator">=</span><span class="token string">"is-at"</span><span class="token punctuation">,</span> psrc<span class="token operator">=</span><span class="token string">"10.0.0.2"</span><span class="token punctuation">,</span> hwsrc<span class="token operator">=</span>get_if_hwaddr<span class="token punctuation">(</span><span class="token string">"eth0"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> iface<span class="token operator">=</span><span class="token string">"eth0"</span><span class="token punctuation">)</span></pre></td></tr></tbody></table></figure><p>差一个题，稍微复杂，大概知道怎么做但是晚点做吧...</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>Moyao
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="https://demoyao100.github.io/2024/04/14/web%E5%85%A5%E9%97%A8%E6%93%8D%E4%BD%9C/" title="web入门操作">https://demoyao100.github.io/2024/04/14/web入门操作/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/04/08/vm%E5%88%9D%E6%8E%A2/" rel="prev" title="vm初探">
+                  <i class="fa fa-angle-left"></i> vm初探
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/04/24/%E9%93%81%E4%B8%89awd%E6%B8%97%E9%80%8F%E5%A4%8D%E7%9B%98/" rel="next" title="铁三awd渗透复盘">
+                  铁三awd渗透复盘 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    © 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Moyao</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> &amp; <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+
+
+</body></html>

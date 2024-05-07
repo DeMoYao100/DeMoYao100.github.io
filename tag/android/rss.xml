@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <rss version="2.0">
     <channel>
-        <title>rev@天枢 • Posts by &#34;android&#34; tag</title>
+        <title>Moyao の小屋 • Posts by &#34;android&#34; tag</title>
         <link>https://demoyao100.github.io</link>
         <description>Write down something interesting I met&lt;br /&gt;
 Feel free to mail me if you have something wanted to talk about, plz
@@ -12,18 +12,18 @@ mail: &amp;lt;moyaoxue@outlook.com&amp;gt;
         <lastBuildDate>Thu, 28 Mar 2024 20:57:57 +0800</lastBuildDate>
         <category>re</category>
         <category>Android</category>
-        <category>开发</category>
         <category>codeforces</category>
+        <category>开发</category>
         <category>cv</category>
-        <category>驱动</category>
         <category>docker</category>
+        <category>驱动</category>
         <category>electron</category>
         <category>杂文</category>
         <category>web</category>
         <category>jail</category>
         <category>IOT</category>
-        <category>hexo</category>
         <category>python</category>
+        <category>hexo</category>
         <item>
             <guid isPermalink="true">https://demoyao100.github.io/2024/03/28/ACTF-flutter%E5%A4%8D%E7%8E%B0/</guid>
             <title>ACTF flutter复现</title>
@@ -45,8 +45,8 @@ mail: &amp;lt;moyaoxue@outlook.com&amp;gt;
             <description><![CDATA[ &lt;h6 id=&#34;preface之前猜猜查查的感觉不彳亍了这下不得不和arm爆了&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#preface之前猜猜查查的感觉不彳亍了这下不得不和arm爆了&#34;&gt;#&lt;/a&gt; PREFACE：之前猜猜查查的，感觉不彳亍了，这下不得不和 arm 爆了！&lt;/h6&gt;
 &lt;p&gt;&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;&lt;/p&gt;
 &lt;h3 id=&#34;架构介绍&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#架构介绍&#34;&gt;#&lt;/a&gt; 架构介绍&lt;/h3&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;arm%E5%88%9D%E6%8E%A2/V5_to_V8_Architecture.jpg&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;arm%E5%88%9D%E6%8E%A2/evolution_arm_arch.png&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/2023/11/29/arm%E5%88%9D%E6%8E%A2/V5_to_V8_Architecture.jpg&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/2023/11/29/arm%E5%88%9D%E6%8E%A2/evolution_arm_arch.png&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
 &lt;h5 id=&#34;架构层级&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#架构层级&#34;&gt;#&lt;/a&gt; 架构层级&lt;/h5&gt;
 &lt;ul&gt;
 &lt;li&gt;EL0: 无特权模式 (unprivileged)&lt;/li&gt;
@@ -81,7 +81,7 @@ mail: &amp;lt;moyaoxue@outlook.com&amp;gt;
 &lt;p&gt;&lt;a href=&#34;https://hackmd.io/@owlfox/Bkcen7LeL/https%3A%2F%2Fhackmd.io%2Fs%2FBkGRdKmsg&#34;&gt;ARM 指令 - HackMD&lt;/a&gt;：这个主要偏移动设备&lt;/p&gt;
 &lt;h3 id=&#34;常见寄存器&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#常见寄存器&#34;&gt;#&lt;/a&gt; 常见寄存器&lt;/h3&gt;
 &lt;h5 id=&#34;基本寄存器结构&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#基本寄存器结构&#34;&gt;#&lt;/a&gt; 基本寄存器结构&lt;/h5&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;arm%E5%88%9D%E6%8E%A2/v2-eea3bf670b65918c3ff16d0d8c9fa552_1440w.webp&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/2023/11/29/arm%E5%88%9D%E6%8E%A2/v2-eea3bf670b65918c3ff16d0d8c9fa552_1440w.webp&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
 &lt;h5 id=&#34;r13堆栈指针stack-pointer&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#r13堆栈指针stack-pointer&#34;&gt;#&lt;/a&gt; R13，堆栈指针 (Stack Pointer)&lt;/h5&gt;
 &lt;p&gt;R13 寄存器中存放的是堆栈的栈顶指针，CM3 中有两个堆栈指针，也就支持两个堆栈。分别是：主堆栈指针 (Main Stack Pointer)，进程堆栈指针 (Process Stack Pointer)。&lt;/p&gt;
 &lt;p&gt;堆栈主要是通过 POP，PUSH 指令来进行操作。在执行 PUSH 和 POP 操作时，那个通常被称为 SP 的地址寄存器，会自动被调整，以避免后续的操作破坏先前的数据。&lt;/p&gt;
@@ -97,13 +97,13 @@ mail: &amp;lt;moyaoxue@outlook.com&amp;gt;
 &lt;p&gt;控制寄存器（ CONTROL），用于定义特权级别，以及选择当前使用堆栈指针 (PSP/MSP?)。&lt;/p&gt;
 &lt;h5 id=&#34;cm3的操作模式&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#cm3的操作模式&#34;&gt;#&lt;/a&gt; CM3 的操作模式&lt;/h5&gt;
 &lt;p&gt;为了架构的安全性和健壮性，CM3 支持 2 个模式 (线程模式，handler 模式)，以及 2 个特权等级 (特权级，用户级)。&lt;strong&gt;handler 模式下只能是特权级。&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;arm%E5%88%9D%E6%8E%A2/v2-a2b2ab0c1ca1dd2ccdd63d31086c51bd_1440w.webp&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/2023/11/29/arm%E5%88%9D%E6%8E%A2/v2-a2b2ab0c1ca1dd2ccdd63d31086c51bd_1440w.webp&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
 &lt;h5 id=&#34;复位序列&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#复位序列&#34;&gt;#&lt;/a&gt; 复位序列&lt;/h5&gt;
 &lt;p&gt;在进入复位状态后， CM3 做的第一件事就是读取下列两个 32 位整数的值：&lt;/p&gt;
 &lt;p&gt;从地址 0x0000,0000 处取出 MSP 的初始值。(&lt;strong&gt;初始化 MSP，为后续的代码执行创造环境&lt;/strong&gt;)&lt;/p&gt;
 &lt;p&gt;从地址 0x0000,0004 处取出 PC 的初始值 --- 这个值是复位向量。(&lt;strong&gt;启动引导代码&lt;/strong&gt;)&lt;/p&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;https://pic2.zhimg.com/80/v2-75518ed58d8fc3d6b0689f0dc0f30e59_1440w.webp&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;arm%E5%88%9D%E6%8E%A2/v2-b05eeba8cc7c4cbded074a0aee4ebcdb_1440w.webp&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://pic2.zhimg.com/80/v2-75518ed58d8fc3d6b0689f0dc0f30e59_1440w.webp&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/2023/11/29/arm%E5%88%9D%E6%8E%A2/v2-b05eeba8cc7c4cbded074a0aee4ebcdb_1440w.webp&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;arm汇编指令集&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#arm汇编指令集&#34;&gt;#&lt;/a&gt; ARM 汇编指令集&lt;/h3&gt;
 &lt;p&gt;&lt;strong&gt;ARM 指令集可以分为跳转指令、数据处理指令、程序状态寄存器 (PSR) 处理指令、加载 / 存储指令、协处理器指令和异常产生指令六大类&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;跳转指令：B,BL,BX,BXL (&lt;em&gt;用于函数调用时的跳转，分为带 / 不带 返回地址 / 状态 的跳转&lt;/em&gt;)&lt;/p&gt;
@@ -125,7 +125,7 @@ mail: &amp;lt;moyaoxue@outlook.com&amp;gt;
 &lt;hr&gt;
 &lt;h5 id=&#34;环境mumu12模拟器&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#环境mumu12模拟器&#34;&gt;#&lt;/a&gt; 环境：mumu12 模拟器&lt;/h5&gt;
 &lt;h6 id=&#34;adb连接&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#adb连接&#34;&gt;#&lt;/a&gt; adb 连接：&lt;/h6&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;%E5%AE%89%E5%8D%93hook%E5%88%9D%E6%8E%A2/image-20230828105143258.png&#34; alt=&#34;image-20230828105143258&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/2023/08/28/%E5%AE%89%E5%8D%93hook%E5%88%9D%E6%8E%A2/image-20230828105143258.png&#34; alt=&#34;image-20230828105143258&#34;&gt;&lt;/p&gt;
 &lt;h5 id=&#34;连接adbexe-connect-127001-断开adbexe-disconnect-127001&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#连接adbexe-connect-127001-断开adbexe-disconnect-127001&#34;&gt;#&lt;/a&gt; 连接： &lt;code&gt;adb.exe connect 127.0.0.1:*****&lt;/code&gt;   断开： &lt;code&gt;adb.exe disconnect 127.0.0.1:*****&lt;/code&gt;&lt;/h5&gt;
 &lt;h5 id=&#34;检查设备adbexe-devices&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#检查设备adbexe-devices&#34;&gt;#&lt;/a&gt; 检查设备： &lt;code&gt;adb.exe devices&lt;/code&gt;&lt;/h5&gt;
 &lt;h5 id=&#34;shell-adb-s-127001-shell-或-adb-shell&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#shell-adb-s-127001-shell-或-adb-shell&#34;&gt;#&lt;/a&gt; shell:  &lt;code&gt;adb -s 127.0.0.1:***** shell&lt;/code&gt;  或  &lt;code&gt;adb shell&lt;/code&gt;&lt;/h5&gt;
@@ -161,11 +161,11 @@ mail: &amp;lt;moyaoxue@outlook.com&amp;gt;
 &lt;h5 id=&#34;flutter逆向初探-2023国赛ctf的flutterror_1mmorta1的博客-csdn博客&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#flutter逆向初探-2023国赛ctf的flutterror_1mmorta1的博客-csdn博客&#34;&gt;#&lt;/a&gt; &lt;a href=&#34;https://blog.csdn.net/qq_41866334/article/details/131032273&#34;&gt;flutter 逆向初探 -- 2023 国赛 ctf 的 flutterror_1mmorta1 的博客 - CSDN 博客&lt;/a&gt;&lt;/h5&gt;
 &lt;h5 id=&#34;reverse-engineering-flutter-apps-guardsquare&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#reverse-engineering-flutter-apps-guardsquare&#34;&gt;#&lt;/a&gt; &lt;a href=&#34;https://www.guardsquare.com/blog/current-state-and-future-of-reversing-flutter-apps&#34;&gt;Reverse Engineering Flutter Apps | Guardsquare&lt;/a&gt;&lt;/h5&gt;
 &lt;h5 id=&#34;flutter架构分层系统上层组件依赖下层组件组件层间不可越权且各个部分可选可替代类似层与层间透明&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#flutter架构分层系统上层组件依赖下层组件组件层间不可越权且各个部分可选可替代类似层与层间透明&#34;&gt;#&lt;/a&gt; Flutter 架构：分层系统，上层组件依赖下层组件，组件层间不可越权且各个部分可选可替代（类似层与层间透明）&lt;/h5&gt;
-&lt;h5 id=&#34;archdiagram&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#archdiagram&#34;&gt;#&lt;/a&gt; &lt;img loading=&#34;lazy&#34; data-src=&#34;%E5%88%9D%E6%8E%A2flutter/archdiagram.webp&#34; alt=&#34;archdiagram&#34;&gt;&lt;/h5&gt;
+&lt;h5 id=&#34;archdiagram&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#archdiagram&#34;&gt;#&lt;/a&gt; &lt;img src=&#34;/2023/08/23/%E5%88%9D%E6%8E%A2flutter/archdiagram.webp&#34; alt=&#34;archdiagram&#34;&gt;&lt;/h5&gt;
 &lt;h6 id=&#34;对于底层操作系统而言flutter-应用程序的包装方式与其他原生应用相同-在每一个平台上会包含一个特定的嵌入层从而提供一个程序入口程序由此可以与底层操作系统进行协调访问诸如-surface-渲染-辅助功能和输入等服务并且管理事件循环队列-该嵌入层采用了适合当前平台的语言编写例如-android-使用的是-java-和-c-ios-和-macos-使用的是-objective-c-和-objective-cwindows-和-linux-使用的是-c-flutter-代码可以通过嵌入层以模块方式集成到现有的应用中也可以作为应用的主体-flutter-本身包含了各个常见平台的嵌入层同时也-存在一些其他的嵌入层&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#对于底层操作系统而言flutter-应用程序的包装方式与其他原生应用相同-在每一个平台上会包含一个特定的嵌入层从而提供一个程序入口程序由此可以与底层操作系统进行协调访问诸如-surface-渲染-辅助功能和输入等服务并且管理事件循环队列-该嵌入层采用了适合当前平台的语言编写例如-android-使用的是-java-和-c-ios-和-macos-使用的是-objective-c-和-objective-cwindows-和-linux-使用的是-c-flutter-代码可以通过嵌入层以模块方式集成到现有的应用中也可以作为应用的主体-flutter-本身包含了各个常见平台的嵌入层同时也-存在一些其他的嵌入层&#34;&gt;#&lt;/a&gt; 对于底层操作系统而言，Flutter 应用程序的包装方式与其他原生应用相同。在每一个平台上，会包含一个特定的嵌入层，从而提供一个程序入口，程序由此可以与底层操作系统进行协调，访问诸如 surface 渲染、辅助功能和输入等服务，并且管理事件循环队列。该嵌入层采用了适合当前平台的语言编写，例如 Android 使用的是 Java 和 C++， iOS 和 macOS 使用的是 Objective-C 和 Objective-C++，Windows 和 Linux 使用的是 C++。 Flutter 代码可以通过嵌入层，以模块方式集成到现有的应用中，也可以作为应用的主体。 Flutter 本身包含了各个常见平台的嵌入层，同时也 &lt;a href=&#34;https://hover.build/blog/one-year-in/&#34;&gt;存在一些其他的嵌入层&lt;/a&gt;。&lt;/h6&gt;
 &lt;h6 id=&#34;flutter-引擎-毫无疑问是-flutter-的核心它主要使用-c-编写并提供了-flutter-应用所需的原语-当需要绘制新一帧的内容时引擎将负责对需要合成的场景进行栅格化-它提供了-flutter-核心-api-的底层实现包括图形在-ios-和-android-上通过-impeller在其他平台上通过-skia-文本布局-文件及网络-io-辅助功能支持-插件架构和-dart-运行环境及编译环境的工具链&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#flutter-引擎-毫无疑问是-flutter-的核心它主要使用-c-编写并提供了-flutter-应用所需的原语-当需要绘制新一帧的内容时引擎将负责对需要合成的场景进行栅格化-它提供了-flutter-核心-api-的底层实现包括图形在-ios-和-android-上通过-impeller在其他平台上通过-skia-文本布局-文件及网络-io-辅助功能支持-插件架构和-dart-运行环境及编译环境的工具链&#34;&gt;#&lt;/a&gt; &lt;strong&gt;Flutter 引擎&lt;/strong&gt; 毫无疑问是 Flutter 的核心，它主要使用 C++ 编写，并提供了 Flutter 应用所需的原语。当需要绘制新一帧的内容时，引擎将负责对需要合成的场景进行栅格化。它提供了 Flutter 核心 API 的底层实现，包括图形（在 iOS 和 Android 上通过 &lt;a href=&#34;https://flutter.cn/docs/perf/impeller&#34;&gt;Impeller&lt;/a&gt;，在其他平台上通过 &lt;a href=&#34;https://skia.org/&#34;&gt;Skia&lt;/a&gt;）、文本布局、文件及网络 IO、辅助功能支持、插件架构和 Dart 运行环境及编译环境的工具链。&lt;/h6&gt;
 &lt;h6 id=&#34;引擎将底层-c-代码包装成-dart-代码通过-dartui-暴露给-flutter-框架层-该库暴露了最底层的原语包括用于驱动输入-图形-和文本渲染的子系统的类&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#引擎将底层-c-代码包装成-dart-代码通过-dartui-暴露给-flutter-框架层-该库暴露了最底层的原语包括用于驱动输入-图形-和文本渲染的子系统的类&#34;&gt;#&lt;/a&gt; &lt;strong&gt;引擎将底层 C++ 代码包装成 Dart 代码，通过 &lt;a href=&#34;https://github.com/flutter/engine/tree/master/lib/ui&#34;&gt; &lt;code&gt;dart:ui&lt;/code&gt; &lt;/a&gt; 暴露给 Flutter 框架层。该库暴露了最底层的原语，包括用于驱动输入、图形、和文本渲染的子系统的类。&lt;/strong&gt;&lt;/h6&gt;
-&lt;h5 id=&#34;应用结构app-anatomy&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#应用结构app-anatomy&#34;&gt;#&lt;/a&gt; 应用结构：&lt;img loading=&#34;lazy&#34; data-src=&#34;%E5%88%9D%E6%8E%A2flutter/app-anatomy.svg&#34; alt=&#34;app-anatomy&#34;&gt;&lt;/h5&gt;
+&lt;h5 id=&#34;应用结构app-anatomy&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#应用结构app-anatomy&#34;&gt;#&lt;/a&gt; 应用结构：&lt;img src=&#34;/2023/08/23/%E5%88%9D%E6%8E%A2flutter/app-anatomy.svg&#34; alt=&#34;app-anatomy&#34;&gt;&lt;/h5&gt;
 &lt;h5 id=&#34;flutter构建的文件结构&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#flutter构建的文件结构&#34;&gt;#&lt;/a&gt; flutter 构建的文件结构：&lt;/h5&gt;
 &lt;figure class=&#34;highlight text&#34;&gt;&lt;figcaption data-lang=&#34;text&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;tree .&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;.&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;├── arm64-v8a&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;│   ├── libapp.so&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;│   └── libflutter.so&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;└── armeabi-v7a&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;7&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    ├── libapp.so&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;8&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    └── libflutter.so&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;Android apk 包中两个 libapp.so 文件，它们分别是作为 ELF 二进制文件的 a64 和 a32 快照。gen_snapshots 在此处输出 ELF / 共享对象可能会引起误解，它不会将 dart 方法公开为可以在外部调用的符号。相反，这些文件是 “cluster 化快照” 格式的容器，但在单独的可执行部分中包含编译的代码，以下是它们的结构：&lt;/p&gt;
 &lt;figure class=&#34;highlight text&#34;&gt;&lt;figcaption data-lang=&#34;text&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;$ aarch64-linux-gnu-objdump -T libapp.so&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;libapp.so:     file format elf64-littleaarch64&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;DYNAMIC SYMBOL TABLE:&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;0000000000001000 g    DF .text  0000000000004ba0 _kDartVmSnapshotInstructions&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;7&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;0000000000006000 g    DF .text  00000000002d0de0 _kDartIsolateSnapshotInstructions&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;8&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;00000000002d7000 g    DO .rodata        0000000000007f10 _kDartVmSnapshotData&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;9&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;00000000002df000 g    DO .rodata        000000000021ad10 _kDartIsolateSnapshotData&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;h5 id=&#34;dart-构建&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#dart-构建&#34;&gt;#&lt;/a&gt; &lt;a href=&#34;https://github.com/dart-lang/sdk/wiki/Building&#34;&gt;Dart 构建&lt;/a&gt;&lt;/h5&gt;
@@ -294,16 +294,16 @@ r4 - r10 |     | Callee saved registers
 &lt;hr&gt;
 &lt;h6 id=&#34;914-babyanti2完整复现&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#914-babyanti2完整复现&#34;&gt;#&lt;/a&gt; 9.14: BabyAnti2 完整复现：&lt;/h6&gt;
 &lt;p&gt;AntiCheatPlugin 的 Java 层几乎看不到东西，只能判断使用 flutter，那么必须继续看下去，找 dart 层和 native 层的逻辑&lt;/p&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;%E5%88%9D%E6%8E%A2flutter/image-20230914083329468.png&#34; alt=&#34;image-20230914083329468&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/2023/08/23/%E5%88%9D%E6%8E%A2flutter/image-20230914083329468.png&#34; alt=&#34;image-20230914083329468&#34;&gt;&lt;/p&gt;
 &lt;p&gt;直接看 native：&lt;/p&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;%E5%88%9D%E6%8E%A2flutter/image-20230914083721077.png&#34; alt=&#34;image-20230914083721077&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/2023/08/23/%E5%88%9D%E6%8E%A2flutter/image-20230914083721077.png&#34; alt=&#34;image-20230914083721077&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;libflutter.so&lt;/code&gt; ：flutter 预编译的组件库（不会因为开发者的 Dart 而改变），flutter 引擎的主要组成部分，包含了 flutter 运行所需要的核心代码，负责渲染 Flutter widgets、处理事件、与 Dart VM 进行交互以及其他核心功能&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;libapp.so&lt;/code&gt; ：Dart 代码编译后的产物，包含所有 Dart 层的 native 逻辑、UI、Flutter plugins，当应用启动时， &lt;code&gt;libflutter.so&lt;/code&gt;  会加载 &lt;code&gt;libapp.so&lt;/code&gt;  并开始执行 Dart 代码&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;libanticheat.so（其他）&lt;/code&gt; ：通过 Android NDK 编写的 native 代码编译产物&lt;/p&gt;
 &lt;p&gt;尝试通过&lt;a href=&#34;https://github.com/rscloura/Doldrums&#34;&gt; rscloura/Doldrums: A Flutter/Dart reverse engineering tool (github.com)&lt;/a&gt;&lt;a href=&#34;http://xn--libapp-op2ju0ndo1a5qn.so&#34;&gt; 工具提取 libapp.so&lt;/a&gt;，失败，DartSDK 版本对不上&lt;/p&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;%E5%88%9D%E6%8E%A2flutter/image-20230914094329393.png&#34; alt=&#34;image-20230914094329393&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/2023/08/23/%E5%88%9D%E6%8E%A2flutter/image-20230914094329393.png&#34; alt=&#34;image-20230914094329393&#34;&gt;&lt;/p&gt;
 &lt;p&gt;寻找版本相关信息，可以得到这段，获取版本号 3.1.0（这里可以猜测这个是 dart 的版本）对应到&lt;a href=&#34;https://docs.flutter.dev/release/archive?tab=windows&#34;&gt; Flutter SDK archive | Flutter&lt;/a&gt; 可以查找 flutter 的版本号 beta 版本的 3.13.0-0.4.pre（根据发布时间和 Dart version，不过 hash 号没有找到，还得看看）&lt;/p&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;%E5%88%9D%E6%8E%A2flutter/image-20230914103350070.png&#34; alt=&#34;image-20230914103350070&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/2023/08/23/%E5%88%9D%E6%8E%A2flutter/image-20230914103350070.png&#34; alt=&#34;image-20230914103350070&#34;&gt;&lt;/p&gt;
 &lt;p&gt;题目出的时候 &lt;code&gt;reflutter&lt;/code&gt;  还没有更新到这个版本，可以认为，在比赛环境下这让做这道题的预期解难度陡然升高&lt;/p&gt;
 &lt;p&gt;那也只能开始漫长学习，先看看这篇的原理：&lt;a href=&#34;https://swarm.ptsecurity.com/fork-bomb-for-flutter/&#34;&gt;Fork Bomb for Flutter – PT SWARM (ptsecurity.com)&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;安装应用： &lt;code&gt;adb push .apk /data/local/tmp &lt;/code&gt;&lt;/p&gt;
@@ -324,17 +324,17 @@ r4 - r10 |     | Callee saved registers
 &lt;p&gt;&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;&lt;/p&gt;
 &lt;h4 id=&#34;一-某绿色软件防撤回&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#一-某绿色软件防撤回&#34;&gt;#&lt;/a&gt; 一、某绿色软件防撤回&lt;/h4&gt;
 &lt;p&gt;首先搜索相关字串 &lt;code&gt;revoke&lt;/code&gt; ，找到一个 &lt;code&gt;RevokeMsgEvent&lt;/code&gt; ，看起来很像，然后翻找代码，发现了这个 listener 用于接收一个撤回消息事件&lt;/p&gt;
-&lt;h5 id=&#34;image-20230809174202432&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#image-20230809174202432&#34;&gt;#&lt;/a&gt; &lt;img loading=&#34;lazy&#34; data-src=&#34;hook%E6%9F%90%E8%81%8A%E5%A4%A9%E8%BD%AF%E4%BB%B6lab/image-20230809174202432.png&#34; alt=&#34;image-20230809174202432&#34;&gt;&lt;/h5&gt;
+&lt;h5 id=&#34;image-20230809174202432&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#image-20230809174202432&#34;&gt;#&lt;/a&gt; &lt;img src=&#34;/2023/08/09/hook%E6%9F%90%E8%81%8A%E5%A4%A9%E8%BD%AF%E4%BB%B6lab/image-20230809174202432.png&#34; alt=&#34;image-20230809174202432&#34;&gt;&lt;/h5&gt;
 &lt;p&gt;观察这里的 callback 函数，先赋值到一个叫做 &lt;code&gt;revokeMsgEvent2&lt;/code&gt;  的 class 上（什么鬼命名... 但是看起来可能挺重要的，marked 一下）&lt;/p&gt;
 &lt;p&gt;接着合法性检测，不需要管&lt;/p&gt;
 &lt;p&gt;p0.D 的声明如下&lt;/p&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;hook%E6%9F%90%E8%81%8A%E5%A4%A9%E8%BD%AF%E4%BB%B6lab/image-20230809175148467.png&#34; alt=&#34;image-20230809175148467&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/2023/08/09/hook%E6%9F%90%E8%81%8A%E5%A4%A9%E8%BD%AF%E4%BB%B6lab/image-20230809175148467.png&#34; alt=&#34;image-20230809175148467&#34;&gt;&lt;/p&gt;
 &lt;p&gt;猜测这里是通知一栏，将原通知的属性修改为已撤回的属性，两者参数 string 声明如下：&lt;/p&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;hook%E6%9F%90%E8%81%8A%E5%A4%A9%E8%BD%AF%E4%BB%B6lab/image-20230809175818647.png&#34; alt=&#34;image-20230809175818647&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;hook%E6%9F%90%E8%81%8A%E5%A4%A9%E8%BD%AF%E4%BB%B6lab/image-20230809175830933.png&#34; alt=&#34;image-20230809175830933&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/2023/08/09/hook%E6%9F%90%E8%81%8A%E5%A4%A9%E8%BD%AF%E4%BB%B6lab/image-20230809175818647.png&#34; alt=&#34;image-20230809175818647&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/2023/08/09/hook%E6%9F%90%E8%81%8A%E5%A4%A9%E8%BD%AF%E4%BB%B6lab/image-20230809175830933.png&#34; alt=&#34;image-20230809175830933&#34;&gt;&lt;/p&gt;
 &lt;p&gt;不好懂，接着往下看&lt;/p&gt;
 &lt;p&gt;可以明确的是这里的 class h 是和撤回相关操作的类，结合下面的调用，猜测这里就是集中处理撤回用的函数（对本地数据库进行了一些操作与删除），查看一下其声明，均是 revoke 的相关操作，那合理来说不会影响正常的流程，直接 hook 就行。&lt;/p&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;hook%E6%9F%90%E8%81%8A%E5%A4%A9%E8%BD%AF%E4%BB%B6lab/image-20230809185208738.png&#34; alt=&#34;image-20230809185208738&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/2023/08/09/hook%E6%9F%90%E8%81%8A%E5%A4%A9%E8%BD%AF%E4%BB%B6lab/image-20230809185208738.png&#34; alt=&#34;image-20230809185208738&#34;&gt;&lt;/p&gt;
 &lt;p&gt;这里试一下 &lt;code&gt;frida&lt;/code&gt;  脚本 hook 的操作。&lt;/p&gt;
 &lt;p&gt;首先是这里只有 arm 的包，暂时没有物理机做测试，可以用的方案有三个：AS、qemu、商业模拟器&lt;/p&gt;
 &lt;table&gt;
@@ -353,7 +353,7 @@ r4 - r10 |     | Callee saved registers
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;这里选择先用 AS 尝试了一下，配置如下（一点点尝试可以运行起来的 arm 架构）：&lt;img loading=&#34;lazy&#34; data-src=&#34;hook%E6%9F%90%E8%81%8A%E5%A4%A9%E8%BD%AF%E4%BB%B6lab/image-20230810132624458.png&#34; alt=&#34;image-20230810132624458&#34;&gt;&lt;/p&gt;
+&lt;p&gt;这里选择先用 AS 尝试了一下，配置如下（一点点尝试可以运行起来的 arm 架构）：&lt;img src=&#34;/2023/08/09/hook%E6%9F%90%E8%81%8A%E5%A4%A9%E8%BD%AF%E4%BB%B6lab/image-20230810132624458.png&#34; alt=&#34;image-20230810132624458&#34;&gt;&lt;/p&gt;
 &lt;p&gt;巨慢无比，还不支持 android studio 的一些便携操作，结果和绿色软件的 so 还不兼容... 麻了...&lt;/p&gt;
 &lt;p&gt;尝试使用 mumuX（亲测只有 mumux 在本机可以和 WSL2 共存，其他声称支持 hyperV 的都会出问题，待修复），会被检测环境，来尝试配一下 qemu&lt;/p&gt;
 &lt;p&gt;疑似不太行，毕竟 AS 也是基于 qemu 的，该卡照样卡（据说 mac 上用 as 模拟 android 非常流畅......）&lt;/p&gt;
@@ -363,27 +363,27 @@ r4 - r10 |     | Callee saved registers
 &lt;h6 id=&#34;之前队里一直有跌说加了壳搞不了但是感觉好像么有点机会遂来看看这里是用的一个旧版本好像对root的检测没那么严格但是也能用后面有空再调一个新版本的&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#之前队里一直有跌说加了壳搞不了但是感觉好像么有点机会遂来看看这里是用的一个旧版本好像对root的检测没那么严格但是也能用后面有空再调一个新版本的&#34;&gt;#&lt;/a&gt; &lt;s&gt;之前队里一直有跌说加了壳搞不了，但是感觉好像么有点机会，遂来看看，这里是用的一个旧版本，好像对 root 的检测没那么严格，但是也能用，后面有空再调一个新版本的&lt;/s&gt;&lt;/h6&gt;
 &lt;p&gt;通过搜索引擎可以找到一个文档，&lt;a href=&#34;https://www.csjplatform.com/supportcenter/5398&#34;&gt;开屏广告 - Android 集成文档 - 开发测试 - 穿山甲广告平台 (csjplatform.com)&lt;/a&gt;，这个 app 的部分广告大概就是基于这个开发的&lt;/p&gt;
 &lt;p&gt;大概定位到这个类上，是广告加载用的类&lt;/p&gt;
-&lt;h5 id=&#34;image-20230810164814274&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#image-20230810164814274&#34;&gt;#&lt;/a&gt; &lt;img loading=&#34;lazy&#34; data-src=&#34;hook%E6%9F%90%E8%81%8A%E5%A4%A9%E8%BD%AF%E4%BB%B6lab/image-20230810164814274.png&#34; alt=&#34;image-20230810164814274&#34;&gt;&lt;/h5&gt;
+&lt;h5 id=&#34;image-20230810164814274&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#image-20230810164814274&#34;&gt;#&lt;/a&gt; &lt;img src=&#34;/2023/08/09/hook%E6%9F%90%E8%81%8A%E5%A4%A9%E8%BD%AF%E4%BB%B6lab/image-20230810164814274.png&#34; alt=&#34;image-20230810164814274&#34;&gt;&lt;/h5&gt;
 &lt;p&gt;合理来说把这里 hook 一下&lt;/p&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;hook%E6%9F%90%E8%81%8A%E5%A4%A9%E8%BD%AF%E4%BB%B6lab/image-20230810165617746.png&#34; alt=&#34;image-20230810165617746&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/2023/08/09/hook%E6%9F%90%E8%81%8A%E5%A4%A9%E8%BD%AF%E4%BB%B6lab/image-20230810165617746.png&#34; alt=&#34;image-20230810165617746&#34;&gt;&lt;/p&gt;
 &lt;p&gt;就能消掉大部分和 ad 相关的事件了&lt;/p&gt;
 &lt;p&gt;但是接着看下去就感觉事情不对头了，这里的 &lt;code&gt;com.fighter.wrapper&lt;/code&gt;  疑似只是一个 ad 的处理方法，仔细看左边的包还有一万个不同公司的 ad...... 破软件没啥功能，集成的广告不少&lt;/p&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;hook%E6%9F%90%E8%81%8A%E5%A4%A9%E8%BD%AF%E4%BB%B6lab/image-20230810171514620.png&#34; alt=&#34;image-20230810171514620&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/2023/08/09/hook%E6%9F%90%E8%81%8A%E5%A4%A9%E8%BD%AF%E4%BB%B6lab/image-20230810171514620.png&#34; alt=&#34;image-20230810171514620&#34;&gt;&lt;/p&gt;
 &lt;p&gt;而且后面很多广告用的不是这个方法，那就是不能在这层 hook 了，会累死自己，最好的解决方法还是在调用这 n 个广告类前就掐掉源头&lt;/p&gt;
 &lt;p&gt;可以搜索发现 &lt;code&gt;com.zjwh&lt;/code&gt;  应该是这软件自己的包，命名做的手动混淆，全都是 oO0 啥的...&lt;/p&gt;
 &lt;p&gt;这里发现了反虚拟环境和反 hook 的操作，那看来后面有点点不好整的&lt;/p&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;hook%E6%9F%90%E8%81%8A%E5%A4%A9%E8%BD%AF%E4%BB%B6lab/image-20230810173613500.png&#34; alt=&#34;image-20230810173613500&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/2023/08/09/hook%E6%9F%90%E8%81%8A%E5%A4%A9%E8%BD%AF%E4%BB%B6lab/image-20230810173613500.png&#34; alt=&#34;image-20230810173613500&#34;&gt;&lt;/p&gt;
 &lt;p&gt;另外，可以手动调试发现，apk 启动的时候会与 server 交互获取应用更新信息，然后触发强制更新，交互方法疑似使用的 &lt;code&gt;okhttp&lt;/code&gt; , 但是 zjwh 包进行了混淆，与服务器也都用的 okhttp 交互，需要一定工作量找到&lt;/p&gt;
 &lt;p&gt;进度记录：这里仔细找引用和具体的实现方式&lt;/p&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;hook%E6%9F%90%E8%81%8A%E5%A4%A9%E8%BD%AF%E4%BB%B6lab/image-20230810212148480.png&#34; alt=&#34;image-20230810212148480&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/2023/08/09/hook%E6%9F%90%E8%81%8A%E5%A4%A9%E8%BD%AF%E4%BB%B6lab/image-20230810212148480.png&#34; alt=&#34;image-20230810212148480&#34;&gt;&lt;/p&gt;
 &lt;p&gt;检测 xposed 框架是否存在的方法，也需要 hook 掉&lt;/p&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;hook%E6%9F%90%E8%81%8A%E5%A4%A9%E8%BD%AF%E4%BB%B6lab/image-20230810213654727.png&#34; alt=&#34;image-20230810213654727&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/2023/08/09/hook%E6%9F%90%E8%81%8A%E5%A4%A9%E8%BD%AF%E4%BB%B6lab/image-20230810213654727.png&#34; alt=&#34;image-20230810213654727&#34;&gt;&lt;/p&gt;
 &lt;p&gt;这个包看起来是比较重要的，下面还有检测攻击等等函数：&lt;/p&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;hook%E6%9F%90%E8%81%8A%E5%A4%A9%E8%BD%AF%E4%BB%B6lab/image-20230810214035445.png&#34; alt=&#34;image-20230810214035445&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/2023/08/09/hook%E6%9F%90%E8%81%8A%E5%A4%A9%E8%BD%AF%E4%BB%B6lab/image-20230810214035445.png&#34; alt=&#34;image-20230810214035445&#34;&gt;&lt;/p&gt;
 &lt;p&gt;这个包的源码可以找到一个很类似的（虽然只有部分）：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://mogua.co/view_file/?file=com/ijm/detect/drisk/DRiskNativeTool.java&amp;amp;md5=746753952f66bd8794683d37ccdd2642&amp;amp;type=apk&amp;amp;appname=%E5%BE%97%E7%89%A9&amp;amp;lines=84&#34;&gt;DRiskNativeTool.java - 得物.apk 源代码分析 - 摸瓜 (mogua.co)&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;然后顺着搜，可以找到&lt;a href=&#34;https://www.ijiami.cn/enindex&#34;&gt; iJiami - Guarding the Smart World | mobile information security service provider&lt;/a&gt; 这家公司，专门做安全的，这些安全相关的包就是它家做的了&lt;/p&gt;
-&lt;h5 id=&#34;image-20230810221152187&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#image-20230810221152187&#34;&gt;#&lt;/a&gt; &lt;img loading=&#34;lazy&#34; data-src=&#34;hook%E6%9F%90%E8%81%8A%E5%A4%A9%E8%BD%AF%E4%BB%B6lab/image-20230810221152187.png&#34; alt=&#34;image-20230810221152187&#34;&gt;&lt;/h5&gt;
+&lt;h5 id=&#34;image-20230810221152187&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#image-20230810221152187&#34;&gt;#&lt;/a&gt; &lt;img src=&#34;/2023/08/09/hook%E6%9F%90%E8%81%8A%E5%A4%A9%E8%BD%AF%E4%BB%B6lab/image-20230810221152187.png&#34; alt=&#34;image-20230810221152187&#34;&gt;&lt;/h5&gt;
 &lt;p&gt;到这里就要考虑放弃了，毕竟是商业级的加固，就算级别不高，破解再怎么说也要不小的工程量...&lt;/p&gt;
  ]]></description>
         </item>
@@ -417,7 +417,7 @@ r4 - r10 |     | Callee saved registers
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;h5 id=&#34;1-android-studio&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1-android-studio&#34;&gt;#&lt;/a&gt; 1、Android Studio&lt;/h5&gt;
-&lt;p&gt;在 so 有 x86 支持时为比较优解，可以随意选择安卓版本来使用。仅支持 arm 时本机能成功运行的镜像仅有：&lt;img loading=&#34;lazy&#34; data-src=&#34;%E5%AE%89%E5%8D%93%E8%B0%83%E8%AF%95%E5%88%9D%E6%8E%A2/image-20230811134825647.png&#34; alt=&#34;image-20230811134825647&#34;&gt;armeabi-v7a 的 Nougat，但很多新的 apk 都是 arm64-v8a，这里本机跑会报很多错，而且很慢很慢&lt;/p&gt;
+&lt;p&gt;在 so 有 x86 支持时为比较优解，可以随意选择安卓版本来使用。仅支持 arm 时本机能成功运行的镜像仅有：&lt;img src=&#34;/2023/07/11/%E5%AE%89%E5%8D%93%E8%B0%83%E8%AF%95%E5%88%9D%E6%8E%A2/image-20230811134825647.png&#34; alt=&#34;image-20230811134825647&#34;&gt;armeabi-v7a 的 Nougat，但很多新的 apk 都是 arm64-v8a，这里本机跑会报很多错，而且很慢很慢&lt;/p&gt;
 &lt;p&gt;2、正常情况下可以用 nox 或者雷电模拟器，稳定性还行，但是有 wsl2 的情况下会出奇怪问题（雷电号称是有兼容的，但是实测用起来会卡死，懒得修了直接换个）之前一直用的 mumux，但是这两天连 adb 会触发强制更新，换成 mumu12 居然还可以用，属于比较惊喜的，在真机拿到前可以先用这个方案&lt;/p&gt;
 &lt;p&gt;mumu12 用的 x86 的架构，但是实测是可以跑 arm64-v8a 的，具体原理不太懂，但是确实挺好用的，可以按照这篇操作，调试 so 层&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://www.cnblogs.com/ddms/p/8820044.html&#34;&gt;IDA 远程调试 Android 中 so 文件 - jKing777 - 博客园 (cnblogs.com)&lt;/a&gt;&lt;/p&gt;
@@ -458,7 +458,7 @@ r4 - r10 |     | Callee saved registers
 &lt;li&gt;
 &lt;p&gt;在手机上根据提示操作，adb 上 &lt;code&gt;su&lt;/code&gt;  即可获得 root&lt;/p&gt;
 &lt;h5 id=&#34;大功告成&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#大功告成&#34;&gt;#&lt;/a&gt; 大功告成！&lt;/h5&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;%E5%AE%89%E5%8D%93%E8%B0%83%E8%AF%95%E5%88%9D%E6%8E%A2/image-20230913202333767.png&#34; alt=&#34;image-20230913202333767&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/2023/07/11/%E5%AE%89%E5%8D%93%E8%B0%83%E8%AF%95%E5%88%9D%E6%8E%A2/image-20230913202333767.png&#34; alt=&#34;image-20230913202333767&#34;&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;

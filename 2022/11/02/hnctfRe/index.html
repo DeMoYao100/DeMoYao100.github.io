@@ -1,30 +1,296 @@
-<!doctypehtml><html lang=en><meta charset=UTF-8><meta content=width=device-width,initial-scale=1,maximum-scale=2 name=viewport><meta content=#222 name=theme-color><meta content=IE=edge,chrome=1 http-equiv=X-UA-COMPATIBLE><meta content=webkit name=renderer><link href=/assets/favicon.ico rel=icon sizes=32x32 type=image/ico><link href=/assets/apple-touch-icon.png rel=apple-touch-icon sizes=180x180><link href=/rss.xml rel=alternate title=rev@天枢 type=application/rss+xml><link href=/atom.xml rel=alternate title=rev@天枢 type=application/atom+xml><link href=https://demoyao100.github.io/feed.json rel=alternate title=rev@天枢 type=application/json><link href=https://lf9-cdn-tos.bytecdntp.com rel=preconnect><link href=https://cdn.jsdelivr.net rel=dns-prefetch><link href=https://unpkg.com rel=dns-prefetch><link href=https://fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext rel=stylesheet><link href=/css/app.css?v=0.3.15 rel=stylesheet><meta content=re name=keywords><link href=https://demoyao100.github.io/2022/11/02/hnctfRe/ rel=canonical><title>hnctfRe</title><meta content="Hexo 7.0.0" name=generator><body itemscope itemtype=http://schema.org/WebPage><div id=loading><div class=cat><div class=body></div><div class=head><div class=face></div></div><div class=foot><div class=tummy-end></div><div class=bottom></div><div class="legs left"></div><div class="legs right"></div></div><div class=paw><div class="hands left"></div><div class="hands right"></div></div></div></div><div id=container><header id=header itemscope itemtype=http://schema.org/WPHeader><div class=inner><div id=brand><div class=pjax><h1 itemprop="name headline">hnctfRe</h1><div class=meta><span title="Created: 2022-11-02 21:08:02" class=item><span class=icon><i class="ic i-calendar"></i></span><span class=text>Posted on</span><time itemprop="dateCreated datePublished" datetime=2022-11-02T21:08:02+08:00>2022-11-02</time></span><span title="Symbols count in article" class=item><span class=icon><i class="ic i-pen"></i></span><span class=text>Symbols count in article</span><span>16k</span><span class=text>words</span></span><span title="Reading time" class=item><span class=icon><i class="ic i-clock"></i></span><span class=text>Reading time</span><span>14 mins.</span></span></div></div></div><nav id=nav><div class=inner><div class=toggle><div aria-label="Toggle navigation bar" class=lines><span class=line></span><span class=line></span><span class=line></span></div></div><ul class=menu><li class="item title"><a href=/ rel=start>Moyao の小屋</a></ul><ul class=right id=rightNav><li class="item theme" @click=changeThemeByBtn><i :class="{'i-sun': !themeStatus,'i-moon': themeStatus}" class=ic></i><li class="item search"><i class="ic i-search"></i></ul></div></nav></div><div class=pjax id=imgs><img src=https://tva4.sinaimg.cn/mw690/6833939bly1giciszlczyj20zk0m816d.jpg></div></header><div id=waves><svg viewbox="0 24 150 28" class=waves preserveaspectratio=none shape-rendering=auto xmlns=http://www.w3.org/2000/svg xmlns:xlink=http://www.w3.org/1999/xlink><defs><path d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" id=gentle-wave></path></defs><g class=parallax><use x=48 xlink:href=#gentle-wave y=0></use><use x=48 xlink:href=#gentle-wave y=3></use><use x=48 xlink:href=#gentle-wave y=5></use><use x=48 xlink:href=#gentle-wave y=7></use></g></svg></div><main><div class=inner><div class=pjax id=main><div class="article wrap"><div class=breadcrumb itemlistelement itemscope itemtype=https://schema.org/BreadcrumbList><i class="ic i-home"></i><span><a href=/>Home</a></span></div><article class="post block" itemscope itemtype=http://schema.org/Article lang=en><link href=https://demoyao100.github.io/2022/11/02/hnctfRe/ itemprop=mainEntityOfPage><span hidden itemprop=author itemscope itemtype=http://schema.org/Person><meta content=/assets/avatar.jpg itemprop=image><meta content=Moyao itemprop=name><meta content="Hi,I'm Moyaoxue, Write down something interesting I met<br />
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"demoyao100.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false,"trigger":"auto"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="# Some reverse questions I didn't have time to solve. (Or didn't solve out...)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hnctfRe">
+<meta property="og:url" content="https://demoyao100.github.io/2022/11/02/hnctfRe/index.html">
+<meta property="og:site_name" content="Moyao の小屋">
+<meta property="og:description" content="# Some reverse questions I didn't have time to solve. (Or didn't solve out...)">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://demoyao100.github.io/2022/11/02/hnctfRe/cm2.png">
+<meta property="og:image" content="https://demoyao100.github.io/2022/11/02/hnctfRe/debug2_1.png">
+<meta property="og:image" content="https://demoyao100.github.io/2022/11/02/hnctfRe/debug2_2.png">
+<meta property="og:image" content="https://demoyao100.github.io/2022/11/02/hnctfRe/dll_1.png">
+<meta property="og:image" content="https://demoyao100.github.io/2022/11/02/hnctfRe/ez_maze_1.png">
+<meta property="og:image" content="https://demoyao100.github.io/2022/11/02/hnctfRe/extracted.png">
+<meta property="og:image" content="https://demoyao100.github.io/2022/11/02/hnctfRe/uncompyle6.png">
+<meta property="og:image" content="https://demoyao100.github.io/2022/11/02/hnctfRe/cmakeInstall.png">
+<meta property="og:image" content="https://demoyao100.github.io/2022/11/02/hnctfRe/magicNumber_1.jpg">
+<meta property="og:image" content="https://demoyao100.github.io/2022/11/02/hnctfRe/uncompyle.jpg">
+<meta property="og:image" content="https://demoyao100.github.io/2022/11/02/hnctfRe/findItShell.png">
+<meta property="og:image" content="https://demoyao100.github.io/2022/11/02/hnctfRe/finditIda_1.png">
+<meta property="og:image" content="https://demoyao100.github.io/2022/11/02/hnctfRe/finditIda_2.png">
+<meta property="og:image" content="https://demoyao100.github.io/2022/11/02/hnctfRe/finditIda_3.png">
+<meta property="og:image" content="https://demoyao100.github.io/2022/11/02/hnctfRe/flower_junkcode_1.png">
+<meta property="og:image" content="https://demoyao100.github.io/2022/11/02/hnctfRe/flower_junkcode_2.png">
+<meta property="og:image" content="https://demoyao100.github.io/2022/11/02/hnctfRe/flowerPDF.png">
+<meta property="og:image" content="https://demoyao100.github.io/2022/11/02/hnctfRe/flowerIda.png">
+<meta property="og:image" content="https://demoyao100.github.io/2022/11/02/hnctfRe/flowerEncrypt.png">
+<meta property="og:image" content="https://demoyao100.github.io/2022/11/02/hnctfRe/dynamic_1.png">
+<meta property="og:image" content="https://demoyao100.github.io/2022/11/02/hnctfRe/dynamic_2.png">
+<meta property="og:image" content="https://demoyao100.github.io/2022/11/02/hnctfRe/dynamic_3.png">
+<meta property="og:image" content="https://demoyao100.github.io/2022/11/02/hnctfRe/dynamic_4.png">
+<meta property="og:image" content="https://demoyao100.github.io/2022/11/02/hnctfRe/dynamic_5.png">
+<meta property="article:published_time" content="2022-11-02T13:08:02.000Z">
+<meta property="article:modified_time" content="2024-05-05T01:55:38.375Z">
+<meta property="article:author" content="Moyao">
+<meta property="article:tag" content="re">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://demoyao100.github.io/2022/11/02/hnctfRe/cm2.png">
+
+
+<link rel="canonical" href="https://demoyao100.github.io/2022/11/02/hnctfRe/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://demoyao100.github.io/2022/11/02/hnctfRe/","path":"2022/11/02/hnctfRe/","title":"hnctfRe"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>hnctfRe | Moyao の小屋</title>
+  
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-KKC145B2WB"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-KKC145B2WB","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope="" itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Moyao の小屋</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Hi,I'm Moyaoxue</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags.html" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories.html" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-about"><a href="/about.html" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80" placeholder="Searching..." spellcheck="false" type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-6"><a class="nav-link" href="#some-reverse-questions-i-didnt-have-time-to-solve-or-didnt-solve-out"><span class="nav-number">1.</span> <span class="nav-text"> Some reverse questions I didn't have time to solve. (Or didn't solve out...)</span></a></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#help_me"><span class="nav-number"></span> <span class="nav-text"> Help_Me!</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#my-exp"><span class="nav-number"></span> <span class="nav-text"> My exp:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#official-exp"><span class="nav-number"></span> <span class="nav-text"> Official exp:</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cm2"><span class="nav-number"></span> <span class="nav-text"> CM2</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#dont-understand-how-to-debug-to-find-the-place-though-by-guessing-i-work-it-out-anyway"><span class="nav-number">1.</span> <span class="nav-text"> Don't understand how to debug to find the place... Though by guessing I work it out anyway.</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#officail-wp"><span class="nav-number"></span> <span class="nav-text"> Officail wp:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#try2debugplusplus"><span class="nav-number"></span> <span class="nav-text"> Try2debugPlusPlus</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#what_1in_d11"><span class="nav-number"></span> <span class="nav-text"> What_1in_D11</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#official-writeup"><span class="nav-number"></span> <span class="nav-text"> Official writeup:</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#a-btea-encrypt-which-i-am-not-fimilar-with-yet-shall-get-more-study-about-encryption-and-decryption-later"><span class="nav-number">1.</span> <span class="nav-text"> (A btea encrypt, which I am not fimilar with yet. Shall get more study about encryption and decryption later.)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mazes"><span class="nav-number"></span> <span class="nav-text"> Mazes</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#a-bit-complex-wait-until-later"><span class="nav-number">1.</span> <span class="nav-text"> A bit complex, wait until later...</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#stub"><span class="nav-number"></span> <span class="nav-text"> stub</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#never-seen-before-later"><span class="nav-number">1.</span> <span class="nav-text"> Never seen before, later...</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ez_maze"><span class="nav-number"></span> <span class="nav-text"> ez_maze</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#complex-it-is"><span class="nav-number">1.</span> <span class="nav-text"> complex it is...</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#some-magic-number"><span class="nav-number"></span> <span class="nav-text"> some magic number:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#findit"><span class="nav-number"></span> <span class="nav-text"> findit</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#open-it-with-ida"><span class="nav-number"></span> <span class="nav-text"> Open it with ida.</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#official-wp"><span class="nav-number"></span> <span class="nav-text"> Official wp:</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flower"><span class="nav-number"></span> <span class="nav-text"> flower</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#some-script-to-nop-the-junkcodes"><span class="nav-number"></span> <span class="nav-text"> Some script to nop the junkcodes:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#scripts1"><span class="nav-number"></span> <span class="nav-text"> scripts1:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#scripts2"><span class="nav-number"></span> <span class="nav-text"> scripts2:</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#some-interlude"><span class="nav-number">1.</span> <span class="nav-text"> Some interlude:</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#anyway-the-uncompilation-shall-look-like-this"><span class="nav-number"></span> <span class="nav-text"> Anyway, the uncompilation shall look like this:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#the-encrypt-function"><span class="nav-number"></span> <span class="nav-text"> The encrypt function:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#now-we-get-the-encryption-we-can-know-that-it-is-a-rc4-encryption-and-here-comes-the-official-exp"><span class="nav-number"></span> <span class="nav-text"> Now we get the encryption, we can know that it is a RC4- encryption, and here comes the official exp:</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#just-input-a-series-of-1-and-look-into-the-ecx-register"><span class="nav-number">1.</span> <span class="nav-text"> Just input a series of '1' and look into the  ECX  register!</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#and-so-on"><span class="nav-number"></span> <span class="nav-text"> And so on...</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#maze"><span class="nav-number"></span> <span class="nav-text"> MAZE</span></a></li></div>
+        </div>
+        
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Moyao" src="/images/avatar.webp">
+  <p class="site-author-name" itemprop="name">Moyao</p>
+  <div class="site-description" itemprop="description">Write down something interesting I met<br>
 Feel free to mail me if you have something wanted to talk about, plz
-mail: &amplt;moyaoxue@outlook.com&ampgt;
-" itemprop=description></span><span hidden itemprop=publisher itemscope itemtype=http://schema.org/Organization><meta content=rev@天枢 itemprop=name></span><div class="body md" itemprop=articleBody><h6 id=some-reverse-questions-i-didnt-have-time-to-solve-or-didnt-solve-out><a class=anchor href=#some-reverse-questions-i-didnt-have-time-to-solve-or-didnt-solve-out>#</a> Some reverse questions I didn't have time to solve. (Or didn't solve out...)</h6><p><span id=more></span><h3 id=help_me><a class=anchor href=#help_me>#</a> Help_Me!</h3><h5 id=my-exp><a class=anchor href=#my-exp>#</a> My exp:</h5><pre><code>#include&LTbits/stdc++.h>
+mail: &lt;moyaoxue@outlook.com&gt;
+</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">74</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags.html">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="/moyaoxue@outlook.com" title="E-Mail → moyaoxue@outlook.com" rel="noopener me"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://demoyao100.github.io/2022/11/02/hnctfRe/">
+
+    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Moyao">
+    </span>
+
+    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Moyao の小屋">
+      <meta itemprop="description" content="Write down something interesting I met<br />
+Feel free to mail me if you have something wanted to talk about, plz
+mail: <moyaoxue@outlook.com>
+">
+    </span>
+
+    <span hidden="" itemprop="post" itemscope="" itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="hnctfRe | Moyao の小屋">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          hnctfRe
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-11-02 21:08:02" itemprop="dateCreated datePublished" datetime="2022-11-02T21:08:02+08:00">2022-11-02</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h6 id="some-reverse-questions-i-didnt-have-time-to-solve-or-didnt-solve-out"><a class="anchor" href="#some-reverse-questions-i-didnt-have-time-to-solve-or-didnt-solve-out">#</a> Some reverse questions I didn't have time to solve. (Or didn't solve out...)</h6>
+<p><span id="more"></span></p>
+<h3 id="help_me"><a class="anchor" href="#help_me">#</a> Help_Me!</h3>
+<h5 id="my-exp"><a class="anchor" href="#my-exp">#</a> My exp:</h5>
+<pre><code>#include&lt;bits/stdc++.h&gt;
 using namespace std;
 int v12[1000]={0};
 int v13[1000]={0};
 long long maxn;
 int v[1000];
 void dfs(int cns,int n,int num,long long sum){
-    if (num>200 || n==20)
+    if (num&gt;200 || n==20)
     {
         if (n!=20)
         sum-=v12[n];
         cns--;
-        if (sum>=maxn){
+        if (sum&gt;=maxn){
             maxn=sum;
-            cout<<"sum  =  "<&LTsum<<"    :  "<<"cns="<&LTcns<<"   ";
-            for (int i=0;i&LTcns;i++){
-                cout<&LTv[i]<<" ";
+            cout&lt;&lt;"sum  =  "&lt;&lt;sum&lt;&lt;"    :  "&lt;&lt;"cns="&lt;&lt;cns&lt;&lt;"   ";
+            for (int i=0;i&lt;cns;i++){
+                cout&lt;&lt;v[i]&lt;&lt;" ";
             }
-            cout<&LTendl;
+            cout&lt;&lt;endl;
         }
         return ;
     }
     
-    for (int i=n+1;i<=20;i++){
+    for (int i=n+1;i&lt;=20;i++){
         v[cns]=i;
         
         dfs(cns+1,i,num+v13[i],sum+v12[i]);
@@ -81,7 +347,9 @@ int main(){
     maxn=0;
     dfs(0,-1,0,1);
 }
-</code></pre><h5 id=official-exp><a class=anchor href=#official-exp>#</a> Official exp:</h5><pre><code>#include "iostream"
+</code></pre>
+<h5 id="official-exp"><a class="anchor" href="#official-exp">#</a> Official exp:</h5>
+<pre><code>#include "iostream"
 #include "stdio.h"
 using namespace std;
 int val[50]={26, 59, 30, 19, 66, 85, 94, 8, 3, 44, 5, 1, 41, 82, 76, 1,    12,    81,    73,    32},
@@ -91,10 +359,10 @@ int main()
 {
     int t=200;
     int m = 20;
-    for(int i=1;i<=m;i++) 
-        for(int j=t;j>=0;j--)  
+    for(int i=1;i&lt;=m;i++) 
+        for(int j=t;j&gt;=0;j--)  
     {
-        if(j>=w[i])//容量可以放 
+        if(j&gt;=w[i])//容量可以放 
         {
             int tmp;
             dp[i][j]=max(dp[i-1][j-w[i]]+val[i],dp[i-1][j]);
@@ -109,7 +377,7 @@ int main()
     int y = 200;
     while(x!=0)
     {
-        if(dp[x-1][y-w[x]]+val[x] > dp[x-1][y])        
+        if(dp[x-1][y-w[x]]+val[x] &gt; dp[x-1][y])        
         {
             printf("%d,",x); 
             y-=w[x];
@@ -118,15 +386,32 @@ int main()
     }
     return 0;
 }
-</code></pre><p>A 0-1 bag problem. And notice that you should &LTc style="color: #FF0000;">ADD&LT/c> v12, not MULTIPLY, like in the ida......<h3 id=cm2><a class=anchor href=#cm2>#</a> CM2</h3><h6 id=dont-understand-how-to-debug-to-find-the-place-though-by-guessing-i-work-it-out-anyway><a class=anchor href=#dont-understand-how-to-debug-to-find-the-place-though-by-guessing-i-work-it-out-anyway>#</a> Don't understand how to debug to find the place... Though by guessing I work it out anyway.</h6><h5 id=officail-wp><a class=anchor href=#officail-wp>#</a> Officail wp:</h5><p><img alt=cm2 data-src=hnctfRe/cm2.png loading=lazy><h3 id=try2debugplusplus><a class=anchor href=#try2debugplusplus>#</a> Try2debugPlusPlus</h3><p>Nop the <code>IsDebuggerPresent()</code> (noticed that there are two of them) and get the key(remember to set breakpoint after <code>printf()</code> ):<p><img alt=debug2_1 data-src=hnctfRe/debug2_1.png loading=lazy><p>Though is easy for us to decrypt the tea_encrypt, question setter seems to have forgotten something...<p><img alt=debug2_2 data-src=hnctfRe/debug2_2.png loading=lazy><h3 id=what_1in_d11><a class=anchor href=#what_1in_d11>#</a> What_1in_D11</h3><p>Repair the upx's features(easy in this problem, to study more you can refer to <a href=https://www.52pojie.cn/thread-326995-1-1.html rel=noopener target=_blank>this blog</a>)<p>And <code>upx -d</code> to unpacked the .dll, check it in ida, we got:<p><img alt=dll data-src=hnctfRe/dll_1.png loading=lazy><h5 id=official-writeup><a class=anchor href=#official-writeup>#</a> Official writeup:</h5><h6 id=a-btea-encrypt-which-i-am-not-fimilar-with-yet-shall-get-more-study-about-encryption-and-decryption-later><a class=anchor href=#a-btea-encrypt-which-i-am-not-fimilar-with-yet-shall-get-more-study-about-encryption-and-decryption-later>#</a> (A btea encrypt, which I am not fimilar with yet. Shall get more study about encryption and decryption later.)</h6><pre><code>#include &LTstdio.h>  
-#include &LTstdint.h>  
+</code></pre>
+<p>A 0-1 bag problem. And notice that you should &lt;c style="color: #FF0000;"&gt;ADD&lt;/c&gt; v12, not MULTIPLY, like in the ida......</p>
+<h3 id="cm2"><a class="anchor" href="#cm2">#</a> CM2</h3>
+<h6 id="dont-understand-how-to-debug-to-find-the-place-though-by-guessing-i-work-it-out-anyway"><a class="anchor" href="#dont-understand-how-to-debug-to-find-the-place-though-by-guessing-i-work-it-out-anyway">#</a> Don't understand how to debug to find the place... Though by guessing I work it out anyway.</h6>
+<h5 id="officail-wp"><a class="anchor" href="#officail-wp">#</a> Officail wp:</h5>
+<p><img src="/2022/11/02/hnctfRe/cm2.webp" alt="cm2"></p>
+<h3 id="try2debugplusplus"><a class="anchor" href="#try2debugplusplus">#</a> Try2debugPlusPlus</h3>
+<p>Nop the  <code>IsDebuggerPresent()</code> (noticed that there are two of them) and get the key(remember to set breakpoint after  <code>printf()</code> ):</p>
+<p><img src="/2022/11/02/hnctfRe/debug2_1.webp" alt="debug2_1"></p>
+<p>Though is easy for us to decrypt the tea_encrypt, question setter seems to have forgotten something...</p>
+<p><img src="/2022/11/02/hnctfRe/debug2_2.webp" alt="debug2_2"></p>
+<h3 id="what_1in_d11"><a class="anchor" href="#what_1in_d11">#</a> What_1in_D11</h3>
+<p>Repair the upx's features(easy in this problem, to study more you can refer to <a target="_blank" rel="noopener" href="https://www.52pojie.cn/thread-326995-1-1.html">this blog</a>)</p>
+<p>And  <code>upx -d</code>  to unpacked the .dll, check it in ida, we got:</p>
+<p><img src="/2022/11/02/hnctfRe/dll_1.webp" alt="dll"></p>
+<h5 id="official-writeup"><a class="anchor" href="#official-writeup">#</a> Official writeup:</h5>
+<h6 id="a-btea-encrypt-which-i-am-not-fimilar-with-yet-shall-get-more-study-about-encryption-and-decryption-later"><a class="anchor" href="#a-btea-encrypt-which-i-am-not-fimilar-with-yet-shall-get-more-study-about-encryption-and-decryption-later">#</a> (A btea encrypt, which I am not fimilar with yet. Shall get more study about encryption and decryption later.)</h6>
+<pre><code>#include &lt;stdio.h&gt;  
+#include &lt;stdint.h&gt;  
 #define DELTA 0x9e3779b9  
-#define MX (((z>>5^y<&LT2) + (y>>3^z<&LT4)) ^ ((sum^y) + (key[(p&3)^e] ^ z)))  
+#define MX (((z&gt;&gt;5^y&lt;&lt;2) + (y&gt;&gt;3^z&lt;&lt;4)) ^ ((sum^y) + (key[(p&amp;3)^e] ^ z)))  
 void btea(uint32_t *v, int n, uint32_t const key[4])  
 {  
     uint32_t y, z, sum;  
     unsigned p, rounds, e;  
-    if (n > 1)            /* Coding Part */  
+    if (n &gt; 1)            /* Coding Part */  
     {  
         rounds = 6 + 52/n;  
         sum = 0;  
@@ -134,8 +419,8 @@ void btea(uint32_t *v, int n, uint32_t const key[4])
         do  
         {  
             sum += DELTA;  
-            e = (sum >> 2) & 3;  
-            for (p=0; p&LTn-1; p++)  
+            e = (sum &gt;&gt; 2) &amp; 3;  
+            for (p=0; p&lt;n-1; p++)  
             {  
                 y = v[p+1];  
                 z = v[p] += MX;  
@@ -145,7 +430,7 @@ void btea(uint32_t *v, int n, uint32_t const key[4])
         }  
         while (--rounds);  
     }  
-    else if (n < -1)      /* Decoding Part */  
+    else if (n &lt; -1)      /* Decoding Part */  
     {  
         n = -n;  
         rounds = 6 + 52/n;  
@@ -153,8 +438,8 @@ void btea(uint32_t *v, int n, uint32_t const key[4])
         y = v[0];  
         do  
         {  
-            e = (sum >> 2) & 3;  
-            for (p=n-1; p>0; p--)  
+            e = (sum &gt;&gt; 2) &amp; 3;  
+            for (p=n-1; p&gt;0; p--)  
             {  
                 z = v[p-1];  
                 y = v[p] -= MX;  
@@ -174,13 +459,35 @@ int main()
     // v为要加密的数据是两个32位无符号整数  
     // k为加密解密密钥，为4个32位无符号整数，即密钥长度为128位  
     btea(enc, -n, k);  
-    for(int i=0;i&LT5;i++)
+    for(int i=0;i&lt;5;i++)
     {
             printf("%x",enc[i]);
         }
     return 0;  
 }  
-</code></pre><h3 id=mazes><a class=anchor href=#mazes>#</a> Mazes</h3><h6 id=a-bit-complex-wait-until-later><a class=anchor href=#a-bit-complex-wait-until-later>#</a> A bit complex, wait until later...</h6><h3 id=stub><a class=anchor href=#stub>#</a> stub</h3><h6 id=never-seen-before-later><a class=anchor href=#never-seen-before-later>#</a> Never seen before, later...</h6><h3 id=ez_maze><a class=anchor href=#ez_maze>#</a> ez_maze</h3><p>We get a .exe file, from its' icon we know that we should uncompile it to .pyc with <code>pyinstxtractor</code><p><img alt=ez_maze data-src=hnctfRe/ez_maze_1.png loading=lazy><p>Then, we got a package <code>_extracted</code> :<h6 id=complex-it-is><a class=anchor href=#complex-it-is>#</a> complex it is...</h6><p><img alt=extracted data-src=hnctfRe/extracted.png loading=lazy><p>Find a file named <code>maze</code> (without a suffix one!) Change its suffix into <code>.pyc</code> and Try <code>compyle6 -o maze.py maze.pyc</code> , it went wrong:<p><img alt=compyle6 data-src=hnctfRe/uncompyle6.png loading=lazy><p>That's when you find out that pyinstxtractor didn't fix your .pyc file's magic number.<p><img alt=cmake data-src=hnctfRe/cmakeInstall.png loading=lazy><p><a href=https://www.jb51.net/article/231188.htm rel=noopener target=_blank>The link problem setter gives you</a>, which does no help at all...The <code>magic number</code> of the file <code>struct</code> is destroy as well...<p><img alt=magicNumber_1 data-src=hnctfRe/magicNumber_1.jpg loading=lazy><p>I been trying tools like <code>uncompyle6</code> (which does not support python 3.10, and install python 3.9 does not help at all. Later I should look into this problem and try to solved it...) and <code>pycdc</code> (which is said to support high edition, but can not identify the magic number as well) However, when I tried to add some magic number from other python edition(Python 3.8b2, if I remember it right), and put it in an <a href=https://tool.lu/pyc/ rel=noopener target=_blank>online uncompiler</a>. It just worked...<blockquote><p><a href=https://www.cnblogs.com/Here-is-SG/p/15885799.html rel=noopener target=_blank>a blog from my classmate that may help(though I do not really think so...)</a></blockquote><h5 id=some-magic-number><a class=anchor href=#some-magic-number>#</a> some magic number:</h5><pre><code>enum PycMagic {
+</code></pre>
+<h3 id="mazes"><a class="anchor" href="#mazes">#</a> Mazes</h3>
+<h6 id="a-bit-complex-wait-until-later"><a class="anchor" href="#a-bit-complex-wait-until-later">#</a> A bit complex, wait until later...</h6>
+<h3 id="stub"><a class="anchor" href="#stub">#</a> stub</h3>
+<h6 id="never-seen-before-later"><a class="anchor" href="#never-seen-before-later">#</a> Never seen before, later...</h6>
+<h3 id="ez_maze"><a class="anchor" href="#ez_maze">#</a> ez_maze</h3>
+<p>We get a .exe file, from its' icon we know that we should uncompile it to .pyc with  <code>pyinstxtractor</code></p>
+<p><img src="/2022/11/02/hnctfRe/ez_maze_1.webp" alt="ez_maze"></p>
+<p>Then, we got a package  <code>_extracted</code> :</p>
+<h6 id="complex-it-is"><a class="anchor" href="#complex-it-is">#</a> complex it is...</h6>
+<p><img src="/2022/11/02/hnctfRe/extracted.webp" alt="extracted"></p>
+<p>Find a file named  <code>maze</code>  (without a suffix one!) Change its suffix into  <code>.pyc</code>  and Try  <code>compyle6 -o maze.py maze.pyc</code> , it went wrong:</p>
+<p><img src="/2022/11/02/hnctfRe/uncompyle6.webp" alt="compyle6"></p>
+<p>That's when you find out that pyinstxtractor didn't fix your .pyc file's magic number.</p>
+<p><img src="/2022/11/02/hnctfRe/cmakeInstall.webp" alt="cmake"></p>
+<p><a target="_blank" rel="noopener" href="https://www.jb51.net/article/231188.htm">The link problem setter gives you</a>, which does no help at all...The  <code>magic number</code>  of the file  <code>struct</code>  is destroy as well...</p>
+<p><img src="/2022/11/02/hnctfRe/magicNumber_1.webp" alt="magicNumber_1"></p>
+<p>I been trying tools like  <code>uncompyle6</code> (which does not support python 3.10, and install python 3.9 does not help at all. Later I should look into this problem and try to solved it...)  and  <code>pycdc</code> (which is said to support high edition, but can not identify the magic number as well) However, when I tried to add some magic number from other python edition(Python 3.8b2, if I remember it right), and put it in an <a target="_blank" rel="noopener" href="https://tool.lu/pyc/">online uncompiler</a>. It just worked...</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/Here-is-SG/p/15885799.html">a blog from my classmate that may help(though I do not really think so...)</a></p>
+</blockquote>
+<h5 id="some-magic-number"><a class="anchor" href="#some-magic-number">#</a> some magic number:</h5>
+<pre><code>enum PycMagic {
     MAGIC_1_0 = 0x00999902,
     MAGIC_1_1 = 0x00999903, /* Also covers 1.2 */
     MAGIC_1_3 = 0x0A0D2E89,
@@ -209,7 +516,11 @@ int main()
     MAGIC_3_8 = 0x0A0D0D55,
     MAGIC_3_9 = 0x0A0D0D61,
 };
-</code></pre><p>uncompyle:(to long the maze is, I didn't put it here)<p><img alt=uncompyle data-src=hnctfRe/uncompyle.jpg loading=lazy><p>Dfs script(From official wp):<pre><code>map1=[...]
+</code></pre>
+<p>uncompyle:(to long the maze is, I didn't put it here)</p>
+<p><img src="/2022/11/02/hnctfRe/uncompyle.webp" alt="uncompyle"></p>
+<p>Dfs script(From official wp):</p>
+<pre><code>map1=[...]
 map2 =  [[0 for i in range(len(map1))] for i in range(len(map1)) ]
 flag=""
 def DFS(x,y):
@@ -243,7 +554,17 @@ def DFS(x,y):
 y=1
 x=1
 DFS(x,y)
-</code></pre><h3 id=findit><a class=anchor href=#findit>#</a> findit</h3><p>Gets a .exe file, check whether shell exists.<p><img alt=shell data-src=hnctfRe/findItShell.png loading=lazy><h5 id=open-it-with-ida><a class=anchor href=#open-it-with-ida>#</a> Open it with ida.</h5><p><img alt=ida1 data-src=hnctfRe/finditIda_1.png loading=lazy><br> <img alt=ida2 data-src=hnctfRe/finditIda_2.png loading=lazy><br> <img alt=ida3 data-src=hnctfRe/finditIda_3.png loading=lazy><p>A complex encryption. The key and the flag both needs to be brute forces out. I shall do a emersion later...<h5 id=official-wp><a class=anchor href=#official-wp>#</a> Official wp:</h5><pre><code>mid=[32,59,121,60,125,45,32,17,38,0,43,45,48,48,28,42,11,20,49,100,63,119,103,53,173,46,136,158,49,78,78,176]
+</code></pre>
+<h3 id="findit"><a class="anchor" href="#findit">#</a> findit</h3>
+<p>Gets a .exe file, check whether shell exists.</p>
+<p><img src="/2022/11/02/hnctfRe/findItShell.webp" alt="shell"></p>
+<h5 id="open-it-with-ida"><a class="anchor" href="#open-it-with-ida">#</a> Open it with ida.</h5>
+<p><img src="/2022/11/02/hnctfRe/finditIda_1.webp" alt="ida1"><br>
+<img src="/2022/11/02/hnctfRe/finditIda_2.webp" alt="ida2"><br>
+<img src="/2022/11/02/hnctfRe/finditIda_3.webp" alt="ida3"></p>
+<p>A complex encryption. The key and the flag both needs to be brute forces out. I shall do a emersion later...</p>
+<h5 id="official-wp"><a class="anchor" href="#official-wp">#</a> Official wp:</h5>
+<pre><code>mid=[32,59,121,60,125,45,32,17,38,0,43,45,48,48,28,42,11,20,49,100,63,119,103,53,173,46,136,158,49,78,78,176]
 enc=[29,70,92,84,87,19,61,43,62,60,29,9,18,63,6,6,42,14,124,110,109,60,105,191,7,162,64,104,92,61,223,179]
 flag=[0]*32
 flag[31]=179
@@ -272,7 +593,14 @@ def dfs(deep):
                 flag[deep-1] = i
                 dfs(deep-1)
 dfs(31)
-</code></pre><h3 id=flower><a class=anchor href=#flower>#</a> flower</h3><p>From ida, there are a lot of junkcodes inside, and we have to patch them before I can analyze the code.<p><a href=https://www.52pojie.cn/thread-1512089-1-1.html rel=noopener target=_blank>junkcode</a><h5 id=some-script-to-nop-the-junkcodes><a class=anchor href=#some-script-to-nop-the-junkcodes>#</a> Some script to nop the junkcodes:</h5><p><img alt=junkcode1 data-src=hnctfRe/flower_junkcode_1.png loading=lazy><h5 id=scripts1><a class=anchor href=#scripts1>#</a> scripts1:</h5><pre><code>import idc
+</code></pre>
+<h3 id="flower"><a class="anchor" href="#flower">#</a> flower</h3>
+<p>From ida, there are a lot of junkcodes inside, and we have to patch them before I can analyze the code.</p>
+<p><a target="_blank" rel="noopener" href="https://www.52pojie.cn/thread-1512089-1-1.html">junkcode</a></p>
+<h5 id="some-script-to-nop-the-junkcodes"><a class="anchor" href="#some-script-to-nop-the-junkcodes">#</a> Some script to nop the junkcodes:</h5>
+<p><img src="/2022/11/02/hnctfRe/flower_junkcode_1.webp" alt="junkcode1"></p>
+<h5 id="scripts1"><a class="anchor" href="#scripts1">#</a> scripts1:</h5>
+<pre><code>import idc
 import idautils
 start =0x00401000
 end = 0x00401401
@@ -289,7 +617,10 @@ for i in range(start,end):
             for j in range(len(bad)):
                 patch_byte(i+j,0x90)
                 print("success")
-</code></pre><h5 id=scripts2><a class=anchor href=#scripts2>#</a> scripts2:</h5><p><img alt=junkcode2 data-src=hnctfRe/flower_junkcode_2.png loading=lazy><pre><code>import idc
+</code></pre>
+<h5 id="scripts2"><a class="anchor" href="#scripts2">#</a> scripts2:</h5>
+<p><img src="/2022/11/02/hnctfRe/flower_junkcode_2.webp" alt="junkcode2"></p>
+<pre><code>import idc
 import idautils
 start =0x00401000
 end = 0x00401401
@@ -306,7 +637,15 @@ for i in range(start,end):
             for j in range(len(bad)):
                 patch_byte(i+j,0x90)
                 print("success")
-</code></pre><h6 id=some-interlude><a class=anchor href=#some-interlude>#</a> Some interlude:</h6><p><img alt=PDF data-src=hnctfRe/flowerPDF.png loading=lazy><h5 id=anyway-the-uncompilation-shall-look-like-this><a class=anchor href=#anyway-the-uncompilation-shall-look-like-this>#</a> Anyway, the uncompilation shall look like this:</h5><p><img alt=ida data-src=hnctfRe/flowerIda.png loading=lazy><h5 id=the-encrypt-function><a class=anchor href=#the-encrypt-function>#</a> The encrypt function:</h5><p><img alt=encrypt data-src=hnctfRe/flowerEncrypt.png loading=lazy><h5 id=now-we-get-the-encryption-we-can-know-that-it-is-a-rc4-encryption-and-here-comes-the-official-exp><a class=anchor href=#now-we-get-the-encryption-we-can-know-that-it-is-a-rc4-encryption-and-here-comes-the-official-exp>#</a> Now we get the encryption, we can know that it is a RC4- encryption, and here comes the official exp:</h5><pre><code>#include &LTiostream>
+</code></pre>
+<h6 id="some-interlude"><a class="anchor" href="#some-interlude">#</a> Some interlude:</h6>
+<p><img src="/2022/11/02/hnctfRe/flowerPDF.webp" alt="PDF"></p>
+<h5 id="anyway-the-uncompilation-shall-look-like-this"><a class="anchor" href="#anyway-the-uncompilation-shall-look-like-this">#</a> Anyway, the uncompilation shall look like this:</h5>
+<p><img src="/2022/11/02/hnctfRe/flowerIda.webp" alt="ida"></p>
+<h5 id="the-encrypt-function"><a class="anchor" href="#the-encrypt-function">#</a> The encrypt function:</h5>
+<p><img src="/2022/11/02/hnctfRe/flowerEncrypt.webp" alt="encrypt"></p>
+<h5 id="now-we-get-the-encryption-we-can-know-that-it-is-a-rc4-encryption-and-here-comes-the-official-exp"><a class="anchor" href="#now-we-get-the-encryption-we-can-know-that-it-is-a-rc4-encryption-and-here-comes-the-official-exp">#</a> Now we get the encryption, we can know that it is a RC4- encryption, and here comes the official exp:</h5>
+<pre><code>#include &lt;iostream&gt;
 using namespace std;
 unsigned int ar[40] = { 0x4d,0xffffffe6,0x49,0xffffff95,0x3,0x2d,0x2b,0xffffffba,0xffffffea,0x6d,0xffffffff,0x59,0x70,0x0,0x1b,0xffffffa9,0x2c,0xffffffb0,0x32,0xffffff98,0x6f,0xffffff8c,0x56,0xffffffa2,0x4c,0x79,0x7f };
 // c[i]_ = c[i]^c[(i+1)%27]
@@ -316,12 +655,12 @@ void O0oo00OOo00o0(unsigned char *m, int mlen, int keylen) {
         unsigned char s[256];
         unsigned char t[256];
         int i;
-        for ( i = 0; i < 256; i++) { //初始化s和t向量 
+        for ( i = 0; i &lt; 256; i++) { //初始化s和t向量 
                 s[i] = i;
                 t[i] = st[i%keylen];
         }        
         int j = 0;
-        for ( i = 0; i < 256; i++) {
+        for ( i = 0; i &lt; 256; i++) {
                 j = (j + s[i] + t[i]) % 256;
                 swap(s[i],s[j]);
                 //根据t向量打乱s盒 
@@ -330,14 +669,14 @@ void O0oo00OOo00o0(unsigned char *m, int mlen, int keylen) {
         i = 0; j = 0; 
         int tmp;
         int index ;
-        for ( index = 0; index < mlen; index++) {   //生成与明文长度一致的秘钥流 
+        for ( index = 0; index &lt; mlen; index++) {   //生成与明文长度一致的秘钥流 
                 i = (i + 3) % 256;
                 j = (j + s[i]+1) % 256;
                 swap(s[i],s[j]); 
                 tmp = (s[i] + s[j]) % 256;
                 k[index] = s[tmp];//保存秘钥 
         }
-        for (i = 0; i < mlen; i++)
+        for (i = 0; i &lt; mlen; i++)
         {
                 m[i] = m[i] ^ k[i];//主要进行了一步异或，加密的逆过程就是解密 
         }
@@ -346,26 +685,39 @@ int main()
 {
         char c[27]={0x4d,0xffffffe6,0x49,0xffffff95,0x3,0x2d,0x2b,0xffffffba,0xffffffea,0x6d,0xffffffff,0x59,0x70,0x0,0x1b,0xffffffa9,0x2c,0xffffffb0,0x32,0xffffff98,0x6f,0xffffff8c,0x56,0xffffffa2,0x4c,0x79,0x7f };
         int i;
-        for(i=26;i>=0;i--)
+        for(i=26;i&gt;=0;i--)
         {
                 c[i] = c[(i+1)%27]^c[i];
         }
-        for(i=0;i&LT27;i++)
+        for(i=0;i&lt;27;i++)
         {
                 printf("0x%x,",c[i]) ;
         }
         O0oo00OOo00o0((unsigned char *)c,27,16);
         printf("\n");
-                for(i=0;i&LT27;i++)
+                for(i=0;i&lt;27;i++)
         {
-                printf("%c",c[i]&0xff) ;
+                printf("%c",c[i]&amp;0xff) ;
         }
 }
-</code></pre><p>It base on static crack here, but a bro told me that since there is only &LTc style="color: #FF0000;">ONE&LT/c> <code>XOR</code> that really do something to your flag, you can dynamic debug to get the array <code>v4</code> . (in the upper encryption photograth) Which is really genius because whether you know how to decrypt rc4 or not you can solve this problem and it do save you tons of work!<h6 id=just-input-a-series-of-1-and-look-into-the-ecx-register><a class=anchor href=#just-input-a-series-of-1-and-look-into-the-ecx-register>#</a> Just input a series of '1' and look into the <code>ECX</code> register!</h6><p><img alt=dynamic_1 data-src=hnctfRe/dynamic_1.png loading=lazy><br> <img alt=dynamic_2 data-src=hnctfRe/dynamic_2.png loading=lazy><br> <img alt=dynamic_3 data-src=hnctfRe/dynamic_3.png loading=lazy><br> <img alt=dynamic_4 data-src=hnctfRe/dynamic_4.png loading=lazy><br> <img alt=dynamic_5 data-src=hnctfRe/dynamic_5.png loading=lazy><h5 id=and-so-on><a class=anchor href=#and-so-on>#</a> And so on...</h5><pre><code>###### Two thinkings(should be tried out later):
+</code></pre>
+<p>It base on static crack here, but a bro told me that since there is only &lt;c style="color: #FF0000;"&gt;ONE&lt;/c&gt;  <code>XOR</code>  that really do something to your flag, you can dynamic debug to get the array  <code>v4</code> . (in the upper encryption photograth) Which is really genius because whether you know how to decrypt rc4 or not you can solve this problem and it do save you tons of work!</p>
+<h6 id="just-input-a-series-of-1-and-look-into-the-ecx-register"><a class="anchor" href="#just-input-a-series-of-1-and-look-into-the-ecx-register">#</a> Just input a series of '1' and look into the  <code>ECX</code>  register!</h6>
+<p><img src="/2022/11/02/hnctfRe/dynamic_1.webp" alt="dynamic_1"><br>
+<img src="/2022/11/02/hnctfRe/dynamic_2.webp" alt="dynamic_2"><br>
+<img src="/2022/11/02/hnctfRe/dynamic_3.webp" alt="dynamic_3"><br>
+<img src="/2022/11/02/hnctfRe/dynamic_4.webp" alt="dynamic_4"><br>
+<img src="/2022/11/02/hnctfRe/dynamic_5.webp" alt="dynamic_5"></p>
+<h5 id="and-so-on"><a class="anchor" href="#and-so-on">#</a> And so on...</h5>
+<pre><code>###### Two thinkings(should be tried out later):
 ###### Can `angr` solve `rc4` immediately?
 ###### Can I add a `hook` so it prints the `ECX` rightaway and I don't need to check it once and once again?
 ######                                                                                          --2022.11.4
-</code></pre><p>From here, the last few problems are quite hard...<h3 id=maze><a class=anchor href=#maze>#</a> MAZE</h3><p>We found thounds of junkcodes here, and we nop them:<pre><code>import idc
+</code></pre>
+<p>From here, the last few problems are quite hard...</p>
+<h3 id="maze"><a class="anchor" href="#maze">#</a> MAZE</h3>
+<p>We found thounds of junkcodes here, and we nop them:</p>
+<pre><code>import idc
 import idautils
 start =0x00140001000
 end = 0x00140CEF1F0
@@ -382,36 +734,121 @@ for i in range(start,end):
             for j in range(len(bad)):
                 patch_byte(i+j,0x90)
                 print("success")
-</code></pre><div class=tags><a href=/tags/re/ rel=tag><i class="ic i-tag"></i>re</a></div></div><footer><div class=meta><span class=item><span class=icon><i class="ic i-calendar-check"></i></span><span class=text>Edited on</span><time title="Modified: 2024-05-05 09:55:38" datetime=2024-05-05T09:55:38+08:00 itemprop=dateModified>2024-05-05</time></span></div><div class=reward><button><i class="ic i-heartbeat"></i>Donate</button><p>Give me a cup of [coffee]~(￣▽￣)~*<div id=qr><div><img alt="Moyao WeChat Pay" data-src=/assets/wechatpay.png loading=lazy><p>WeChat Pay</div><div><img alt="Moyao Alipay" data-src=/assets/alipay.png loading=lazy><p>Alipay</div></div></div><div id=copyright><ul><li class=author><strong>Post author: </strong>Moyao<i class="ic i-at"><em>@</em></i>rev@天枢<li class=link><strong>Post link: </strong><a href=https://demoyao100.github.io/2022/11/02/hnctfRe/ title=hnctfRe>https://demoyao100.github.io/2022/11/02/hnctfRe/</a><li class=license><strong>Copyright Notice: </strong>All articles in this blog are licensed under <a href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh rel=noopener target=_blank><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</a> unless stating additionally.</ul></div></footer></article></div><div class=post-nav><div class="item left"><a data-background-image=https://tva4.sinaimg.cn/mw690/6833939bly1giciryrr3rj20zk0m8nhk.jpg href=/2022/11/01/pythonJail/ itemprop=url rel=prev title=pythonJail><span class=type>Previous Post</span><h3>pythonJail</h3></a></div><div class="item right"><a data-background-image=https://tva4.sinaimg.cn/mw690/6833939bly1gicit31ffoj20zk0m8naf.jpg href=/2022/11/06/capstone/ itemprop=url rel=next title=capstone><span class=type>Next Post</span><h3>capstone</h3></a></div></div></div><div id=sidebar><div class=inner><div class=panels><div class=inner><div class="contents panel pjax" data-title=Contents><ol class=toc><li class="toc-item toc-level-6"><a class=toc-link href=#some-reverse-questions-i-didnt-have-time-to-solve-or-didnt-solve-out><span class=toc-number>1.</span> <span class=toc-text> Some reverse questions I didn't have time to solve. (Or didn't solve out...)</span></a></ol><li class="toc-item toc-level-3"><a class=toc-link href=#help_me><span class=toc-number></span> <span class=toc-text> Help_Me!</span></a><ol class=toc-child><li class="toc-item toc-level-5"><a class=toc-link href=#my-exp><span class=toc-number></span> <span class=toc-text> My exp:</span></a><li class="toc-item toc-level-5"><a class=toc-link href=#official-exp><span class=toc-number></span> <span class=toc-text> Official exp:</span></a></ol><li class="toc-item toc-level-3"><a class=toc-link href=#cm2><span class=toc-number></span> <span class=toc-text> CM2</span></a><ol class=toc-child><li class="toc-item toc-level-6"><a class=toc-link href=#dont-understand-how-to-debug-to-find-the-place-though-by-guessing-i-work-it-out-anyway><span class=toc-number>1.</span> <span class=toc-text> Don't understand how to debug to find the place... Though by guessing I work it out anyway.</span></a></ol><li class="toc-item toc-level-5"><a class=toc-link href=#officail-wp><span class=toc-number></span> <span class=toc-text> Officail wp:</span></a><li class="toc-item toc-level-3"><a class=toc-link href=#try2debugplusplus><span class=toc-number></span> <span class=toc-text> Try2debugPlusPlus</span></a><li class="toc-item toc-level-3"><a class=toc-link href=#what_1in_d11><span class=toc-number></span> <span class=toc-text> What_1in_D11</span></a><ol class=toc-child><li class="toc-item toc-level-5"><a class=toc-link href=#official-writeup><span class=toc-number></span> <span class=toc-text> Official writeup:</span></a><ol class=toc-child><li class="toc-item toc-level-6"><a class=toc-link href=#a-btea-encrypt-which-i-am-not-fimilar-with-yet-shall-get-more-study-about-encryption-and-decryption-later><span class=toc-number>1.</span> <span class=toc-text> (A btea encrypt, which I am not fimilar with yet. Shall get more study about encryption and decryption later.)</span></a></ol></ol><li class="toc-item toc-level-3"><a class=toc-link href=#mazes><span class=toc-number></span> <span class=toc-text> Mazes</span></a><ol class=toc-child><li class="toc-item toc-level-6"><a class=toc-link href=#a-bit-complex-wait-until-later><span class=toc-number>1.</span> <span class=toc-text> A bit complex, wait until later...</span></a></ol><li class="toc-item toc-level-3"><a class=toc-link href=#stub><span class=toc-number></span> <span class=toc-text> stub</span></a><ol class=toc-child><li class="toc-item toc-level-6"><a class=toc-link href=#never-seen-before-later><span class=toc-number>1.</span> <span class=toc-text> Never seen before, later...</span></a></ol><li class="toc-item toc-level-3"><a class=toc-link href=#ez_maze><span class=toc-number></span> <span class=toc-text> ez_maze</span></a><ol class=toc-child><li class="toc-item toc-level-6"><a class=toc-link href=#complex-it-is><span class=toc-number>1.</span> <span class=toc-text> complex it is...</span></a></ol><li class="toc-item toc-level-5"><a class=toc-link href=#some-magic-number><span class=toc-number></span> <span class=toc-text> some magic number:</span></a><li class="toc-item toc-level-3"><a class=toc-link href=#findit><span class=toc-number></span> <span class=toc-text> findit</span></a><ol class=toc-child><li class="toc-item toc-level-5"><a class=toc-link href=#open-it-with-ida><span class=toc-number></span> <span class=toc-text> Open it with ida.</span></a><li class="toc-item toc-level-5"><a class=toc-link href=#official-wp><span class=toc-number></span> <span class=toc-text> Official wp:</span></a></ol><li class="toc-item toc-level-3"><a class=toc-link href=#flower><span class=toc-number></span> <span class=toc-text> flower</span></a><ol class=toc-child><li class="toc-item toc-level-5"><a class=toc-link href=#some-script-to-nop-the-junkcodes><span class=toc-number></span> <span class=toc-text> Some script to nop the junkcodes:</span></a><li class="toc-item toc-level-5"><a class=toc-link href=#scripts1><span class=toc-number></span> <span class=toc-text> scripts1:</span></a><li class="toc-item toc-level-5"><a class=toc-link href=#scripts2><span class=toc-number></span> <span class=toc-text> scripts2:</span></a><ol class=toc-child><li class="toc-item toc-level-6"><a class=toc-link href=#some-interlude><span class=toc-number>1.</span> <span class=toc-text> Some interlude:</span></a></ol><li class="toc-item toc-level-5"><a class=toc-link href=#anyway-the-uncompilation-shall-look-like-this><span class=toc-number></span> <span class=toc-text> Anyway, the uncompilation shall look like this:</span></a><li class="toc-item toc-level-5"><a class=toc-link href=#the-encrypt-function><span class=toc-number></span> <span class=toc-text> The encrypt function:</span></a><li class="toc-item toc-level-5"><a class=toc-link href=#now-we-get-the-encryption-we-can-know-that-it-is-a-rc4-encryption-and-here-comes-the-official-exp><span class=toc-number></span> <span class=toc-text> Now we get the encryption, we can know that it is a RC4- encryption, and here comes the official exp:</span></a><ol class=toc-child><li class="toc-item toc-level-6"><a class=toc-link href=#just-input-a-series-of-1-and-look-into-the-ecx-register><span class=toc-number>1.</span> <span class=toc-text> Just input a series of '1' and look into the ECX register!</span></a></ol><li class="toc-item toc-level-5"><a class=toc-link href=#and-so-on><span class=toc-number></span> <span class=toc-text> And so on...</span></a></ol><li class="toc-item toc-level-3"><a class=toc-link href=#maze><span class=toc-number></span> <span class=toc-text> MAZE</span></a></div><div class="related panel pjax" data-title=Related></div><div class="overview panel" data-title=Overview><div class=author itemprop=author itemscope itemtype=http://schema.org/Person><img alt=Moyao class=image data-src=/assets/avatar.jpg itemprop=image loading=lazy><p class=name itemprop=name>Moyao<div class=description itemprop=description>Write down something interesting I met<br> Feel free to mail me if you have something wanted to talk about, plz mail: &LTmoyaoxue@outlook.com></div></div><nav class=state><div class="item posts"><a href=/archives/><span class=count>74</span><span class=name>posts</span></a></div><div class="item tags"><a href=/tags/><span class=count>14</span><span class=name>tags</span></a></div></nav><div class=social><a class="item github" href=https://github.com/name rel=noopener target=_blank title=https://github.com/name><i class="ic i-github"></i></a></div><div class=menu><li class=item><a href=/ rel=section><i class="ic i-home"></i>Home</a></div></div></div></div><ul id=quick><li class="prev pjax"><a title="Previous Post" href=/2022/11/06/capstone/ rel=prev><i class="ic i-chevron-left"></i></a><li class=up><i class="ic i-arrow-up"></i><li class=down><i class="ic i-arrow-down"></i><li class="next pjax"><a title="Next Post" href=/2022/11/01/pythonJail/ rel=next><i class="ic i-chevron-right"></i></a><li class=percent></ul></div></div><div class=dimmer></div></div></main><footer id=footer><div class=inner><div class=widgets><div class="rpost pjax"><h2>Random Posts</h2><ul><li class=item><div class=breadcrumb></div><span><a href=/2023/11/09/gdb-python%E5%88%9D%E6%8E%A2/>gdb_python初探</a></span><li class=item><div class=breadcrumb></div><span><a href=/2023/09/19/%E8%93%9D%E5%B8%BD2023%E5%8D%8A%E5%86%B3/>蓝帽2023半决</a></span><li class=item><div class=breadcrumb></div><span><a href=/2023/10/15/%E9%A6%99%E5%B1%B1%E6%9D%AF/>香山杯</a></span><li class=item><div class=breadcrumb></div><span><a href=/2022/09/02/codeforce-817E/>codeforce-817E</a></span><li class=item><div class=breadcrumb></div><span><a href=/2023/10/12/idapython%E5%88%9D%E6%8E%A2/>idapython初探</a></span><li class=item><div class=breadcrumb></div><span><a href=/2023/09/25/vsCTF/>vsCTF2023</a></span><li class=item><div class=breadcrumb></div><span><a href=/2023/03/03/VM/>VM</a></span><li class=item><div class=breadcrumb></div><span><a href=/2024/04/24/%E9%93%81%E4%B8%89awd%E6%B8%97%E9%80%8F%E5%A4%8D%E7%9B%98/>铁三awd渗透复盘</a></span><li class=item><div class=breadcrumb></div><span><a href=/2023/08/28/%E5%AE%89%E5%8D%93hook%E5%88%9D%E6%8E%A2/>安卓hook初探</a></span><li class=item><div class=breadcrumb></div><span><a href=/2023/11/13/%E3%80%8A%E8%A2%AB%E8%AE%A8%E5%8E%8C%E7%9A%84%E5%8B%87%E6%B0%94%E3%80%8B/>《被讨厌的勇气》</a></span></ul></div><div class="rpost pjax"><h2>Recent Comments</h2><ul class=leancloud-recent-comment id=new-comment></ul></div></div><div class=status><div class=copyright>© 2022 -<span itemprop=copyrightYear>2024</span><span class=with-love><i class="ic i-sakura rotate"></i></span><span class=author itemprop=copyrightHolder>Moyao @ Moyao の小屋</span></div><div class=count><span class=post-meta-item-icon><i class="ic i-chart-area"></i></span><span title="Symbols count total">649k words</span><span class=post-meta-divider>|</span><span class=post-meta-item-icon><i class="ic i-coffee"></i></span><span title="Reading time total">9:50</span></div><div class=powered-by>Powered by <a href=https://hexo.io/ rel=noopener target=_blank>Hexo</a> & Theme.<a href=https://github.com/theme-shoka-x/hexo-theme-shokaX/ rel=noopener target=_blank>ShokaX</a></div></div></div></footer></div><script data-config>var LOCAL = {
-        path: `2022/11/02/hnctfRe/`,
-        favicon: {
-        show: `(●´3｀●) Here we go again.`,
-        hide: `(´Д｀) It's a disaster!`
-    },
-    search: {
-        placeholder: "Search for Posts",
-        empty: "We didn't find any results for the search: ${query}",
-        stats: "${hits} results found in ${time} ms"
-    },
-    copy_tex: false,
-    katex: false,
-    mermaid: false,
-    audio: undefined,
-    fancybox: true,
-    nocopy: false,
-    outime: true,
-    template: `<div class="note warning"><p><span class="label warning">Article Timeliness Alert</span><br>This is an article published {{publish}} days ago and last updated {{updated}} days ago. Some information may have changed, so please be careful to screen it.</p></div>`,
-    quiz: {
-        choice: `Multiple Choice`,
-        multiple: `Multiple Answer`,
-        true_false: `True/False`,
-        essay: `Questions`,
-        gap_fill: `Gap Filling`,
-        mistake: `Wrong Answer`
-    },
-    ignores: [
-        (uri) => uri.includes('#'),
-        (uri) => new RegExp(LOCAL.path + '$').test(uri),
-            []
-    ]
-};</script><script src=https://cdn.bootcdn.net/ajax/libs/vue/3.3.4/vue.global.prod.min.js></script><script src=https://lf9-cdn-tos.bytecdntp.com/cdn/expire-6-M/pace/1.2.4/pace.min.js></script><script src=https://lf9-cdn-tos.bytecdntp.com/cdn/expire-6-M/algoliasearch/4.12.1/algoliasearch-lite.umd.min.js></script><script src=https://lf9-cdn-tos.bytecdntp.com/cdn/expire-6-M/instantsearch.js/4.39.0/instantsearch.production.min.js></script><script src=https://npm.webcache.cn/quicklink@2.3.0/dist/quicklink.umd.js></script><script src=/js/app.js?v=0.3.15></script>
+</code></pre>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>Moyao
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="https://demoyao100.github.io/2022/11/02/hnctfRe/" title="hnctfRe">https://demoyao100.github.io/2022/11/02/hnctfRe/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/re/" rel="tag"># re</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/11/01/pythonJail/" rel="prev" title="pythonJail">
+                  <i class="fa fa-angle-left"></i> pythonJail
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/11/06/capstone/" rel="next" title="capstone">
+                  capstone <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    © 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Moyao</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> &amp; <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+
+
+</body></html>

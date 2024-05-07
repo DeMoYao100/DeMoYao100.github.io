@@ -1,36 +1,431 @@
-<!doctypehtml><html lang=en><meta charset=UTF-8><meta content=width=device-width,initial-scale=1,maximum-scale=2 name=viewport><meta content=#222 name=theme-color><meta content=IE=edge,chrome=1 http-equiv=X-UA-COMPATIBLE><meta content=webkit name=renderer><link href=/assets/favicon.ico rel=icon sizes=32x32 type=image/ico><link href=/assets/apple-touch-icon.png rel=apple-touch-icon sizes=180x180><link href=/rss.xml rel=alternate title=rev@天枢 type=application/rss+xml><link href=/atom.xml rel=alternate title=rev@天枢 type=application/atom+xml><link href=https://demoyao100.github.io/feed.json rel=alternate title=rev@天枢 type=application/json><link href=https://lf9-cdn-tos.bytecdntp.com rel=preconnect><link href=https://cdn.jsdelivr.net rel=dns-prefetch><link href=https://unpkg.com rel=dns-prefetch><link href=https://fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext rel=stylesheet><link href=/css/app.css?v=0.3.15 rel=stylesheet><meta content=re, name=keywords><link href=https://demoyao100.github.io/2023/07/11/%E5%AE%89%E5%8D%93%E8%B0%83%E8%AF%95%E5%88%9D%E6%8E%A2/ rel=canonical><title>安卓调试初探</title><meta content="Hexo 7.0.0" name=generator><body itemscope itemtype=http://schema.org/WebPage><div id=loading><div class=cat><div class=body></div><div class=head><div class=face></div></div><div class=foot><div class=tummy-end></div><div class=bottom></div><div class="legs left"></div><div class="legs right"></div></div><div class=paw><div class="hands left"></div><div class="hands right"></div></div></div></div><div id=container><header id=header itemscope itemtype=http://schema.org/WPHeader><div class=inner><div id=brand><div class=pjax><h1 itemprop="name headline">安卓调试初探</h1><div class=meta><span title="Created: 2023-07-11 18:14:26" class=item><span class=icon><i class="ic i-calendar"></i></span><span class=text>Posted on</span><time itemprop="dateCreated datePublished" datetime=2023-07-11T18:14:26+08:00>2023-07-11</time></span><span title="Symbols count in article" class=item><span class=icon><i class="ic i-pen"></i></span><span class=text>Symbols count in article</span><span>2.1k</span><span class=text>words</span></span><span title="Reading time" class=item><span class=icon><i class="ic i-clock"></i></span><span class=text>Reading time</span><span>2 mins.</span></span></div></div></div><nav id=nav><div class=inner><div class=toggle><div aria-label="Toggle navigation bar" class=lines><span class=line></span><span class=line></span><span class=line></span></div></div><ul class=menu><li class="item title"><a href=/ rel=start>Moyao の小屋</a></ul><ul class=right id=rightNav><li class="item theme" @click=changeThemeByBtn><i :class="{'i-sun': !themeStatus,'i-moon': themeStatus}" class=ic></i><li class="item search"><i class="ic i-search"></i></ul></div></nav></div><div class=pjax id=imgs><img src=https://tva4.sinaimg.cn/mw690/6833939bly1giciszlczyj20zk0m816d.jpg></div></header><div id=waves><svg viewbox="0 24 150 28" class=waves preserveaspectratio=none shape-rendering=auto xmlns=http://www.w3.org/2000/svg xmlns:xlink=http://www.w3.org/1999/xlink><defs><path d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" id=gentle-wave></path></defs><g class=parallax><use x=48 xlink:href=#gentle-wave y=0></use><use x=48 xlink:href=#gentle-wave y=3></use><use x=48 xlink:href=#gentle-wave y=5></use><use x=48 xlink:href=#gentle-wave y=7></use></g></svg></div><main><div class=inner><div class=pjax id=main><div class="article wrap"><div class=breadcrumb itemlistelement itemscope itemtype=https://schema.org/BreadcrumbList><i class="ic i-home"></i><span><a href=/>Home</a></span></div><article class="post block" itemscope itemtype=http://schema.org/Article lang=en><link href=https://demoyao100.github.io/2023/07/11/%E5%AE%89%E5%8D%93%E8%B0%83%E8%AF%95%E5%88%9D%E6%8E%A2/ itemprop=mainEntityOfPage><span hidden itemprop=author itemscope itemtype=http://schema.org/Person><meta content=/assets/avatar.jpg itemprop=image><meta content=Moyao itemprop=name><meta content="Hi,I'm Moyaoxue, Write down something interesting I met<br />
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"demoyao100.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false,"trigger":"auto"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="# preface：说是初探，也不是很初探吧其实，前面多多少少弄过完整的流程了，但是由于 hyperV 这玄学东西后面搞的环境一团糟，打算还是重新弄一个完整的调试方案出来，顺便记录一些基础知识">
+<meta property="og:type" content="article">
+<meta property="og:title" content="安卓调试初探">
+<meta property="og:url" content="https://demoyao100.github.io/2023/07/11/%E5%AE%89%E5%8D%93%E8%B0%83%E8%AF%95%E5%88%9D%E6%8E%A2/index.html">
+<meta property="og:site_name" content="Moyao の小屋">
+<meta property="og:description" content="# preface：说是初探，也不是很初探吧其实，前面多多少少弄过完整的流程了，但是由于 hyperV 这玄学东西后面搞的环境一团糟，打算还是重新弄一个完整的调试方案出来，顺便记录一些基础知识">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://demoyao100.github.io/2023/07/11/%E5%AE%89%E5%8D%93%E8%B0%83%E8%AF%95%E5%88%9D%E6%8E%A2/image-20230811134825647.png">
+<meta property="og:image" content="https://demoyao100.github.io/2023/07/11/%E5%AE%89%E5%8D%93%E8%B0%83%E8%AF%95%E5%88%9D%E6%8E%A2/image-20230913202333767.png">
+<meta property="article:published_time" content="2023-07-11T10:14:26.000Z">
+<meta property="article:modified_time" content="2024-05-05T02:05:57.890Z">
+<meta property="article:author" content="Moyao">
+<meta property="article:tag" content="re">
+<meta property="article:tag" content="Android">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://demoyao100.github.io/2023/07/11/%E5%AE%89%E5%8D%93%E8%B0%83%E8%AF%95%E5%88%9D%E6%8E%A2/image-20230811134825647.png">
+
+
+<link rel="canonical" href="https://demoyao100.github.io/2023/07/11/%E5%AE%89%E5%8D%93%E8%B0%83%E8%AF%95%E5%88%9D%E6%8E%A2/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://demoyao100.github.io/2023/07/11/%E5%AE%89%E5%8D%93%E8%B0%83%E8%AF%95%E5%88%9D%E6%8E%A2/","path":"2023/07/11/安卓调试初探/","title":"安卓调试初探"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>安卓调试初探 | Moyao の小屋</title>
+  
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-KKC145B2WB"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-KKC145B2WB","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope="" itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Moyao の小屋</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Hi,I'm Moyaoxue</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags.html" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories.html" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-about"><a href="/about.html" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80" placeholder="Searching..." spellcheck="false" type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-6"><a class="nav-link" href="#preface%E8%AF%B4%E6%98%AF%E5%88%9D%E6%8E%A2%E4%B9%9F%E4%B8%8D%E6%98%AF%E5%BE%88%E5%88%9D%E6%8E%A2%E5%90%A7%E5%85%B6%E5%AE%9E%E5%89%8D%E9%9D%A2%E5%A4%9A%E5%A4%9A%E5%B0%91%E5%B0%91%E5%BC%84%E8%BF%87%E5%AE%8C%E6%95%B4%E7%9A%84%E6%B5%81%E7%A8%8B%E4%BA%86%E4%BD%86%E6%98%AF%E7%94%B1%E4%BA%8Ehyperv%E8%BF%99%E7%8E%84%E5%AD%A6%E4%B8%9C%E8%A5%BF%E5%90%8E%E9%9D%A2%E6%90%9E%E7%9A%84%E7%8E%AF%E5%A2%83%E4%B8%80%E5%9B%A2%E7%B3%9F%E6%89%93%E7%AE%97%E8%BF%98%E6%98%AF%E9%87%8D%E6%96%B0%E5%BC%84%E4%B8%80%E4%B8%AA%E5%AE%8C%E6%95%B4%E7%9A%84%E8%B0%83%E8%AF%95%E6%96%B9%E6%A1%88%E5%87%BA%E6%9D%A5%E9%A1%BA%E4%BE%BF%E8%AE%B0%E5%BD%95%E4%B8%80%E4%BA%9B%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="nav-number">1.</span> <span class="nav-text"> preface：说是初探，也不是很初探吧其实，前面多多少少弄过完整的流程了，但是由于 hyperV 这玄学东西后面搞的环境一团糟，打算还是重新弄一个完整的调试方案出来，顺便记录一些基础知识</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%88%9D%E5%AD%A6%E9%85%8D%E5%AE%89%E5%8D%93%E7%8E%AF%E5%A2%83%E6%8C%BA%E7%97%9B%E8%8B%A6%E7%9A%84%E6%9C%89%E5%87%A0%E5%A4%A7%E5%8E%9F%E5%9B%A0%E8%BF%98%E6%B2%A1%E5%87%86%E5%A4%87%E5%8F%AF%E4%BB%A5root%E7%9A%84%E7%9C%9F%E6%9C%BA%E5%9C%A8x86%E6%9E%B6%E6%9E%84%E4%B8%8B%E8%B7%91arm%E7%9A%84%E6%96%B9%E6%A1%88%E5%BE%88%E5%B0%91%E6%B5%81%E7%95%85%E7%9A%84%E6%9B%B4%E5%B0%91%E8%83%BD%E6%AF%94%E8%BE%83%E6%B5%81%E7%95%85%E8%BF%90%E8%A1%8C%E7%9A%84%E5%A4%A7%E5%A4%9A%E6%98%AF%E5%95%86%E4%B8%9A%E6%A8%A1%E6%8B%9F%E5%99%A8%E4%BD%86%E6%98%AF%E6%88%91%E7%9A%84%E6%9C%AC%E5%9C%B0linux%E7%8E%AF%E5%A2%83%E5%A4%A7%E5%A4%9A%E6%94%BE%E5%9C%A8wsl2%E4%B8%8A%E5%95%86%E4%B8%9A%E6%A8%A1%E6%8B%9F%E5%99%A8%E5%BE%88%E5%A4%9A%E4%B8%8Ewsl2%E7%9A%84hyperv%E5%86%B2%E7%AA%81"><span class="nav-number">2.</span> <span class="nav-text"> 初学配安卓环境挺痛苦的，有几大原因：还没准备可以 root 的真机；在 x86 架构下跑 arm 的方案很少，流畅的更少；能比较流畅运行的大多是商业模拟器，但是我的本地 linux 环境大多放在 wsl2 上，商业模拟器很多与 wsl2 的 hyperV 冲突</span></a></li></ol><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%87%A0%E4%B8%AA%E5%B0%9D%E8%AF%95%E8%BF%87%E6%88%96%E5%8F%AF%E4%BB%A5%E8%80%83%E8%99%91%E7%9A%84%E6%96%B9%E6%A1%88"><span class="nav-number"></span> <span class="nav-text"> 几个尝试过或可以考虑的方案：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-android-studio"><span class="nav-number"></span> <span class="nav-text"> 1、Android Studio</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-qemu"><span class="nav-number"></span> <span class="nav-text"> 3、qemu</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-%E7%9C%9F%E6%9C%BA"><span class="nav-number"></span> <span class="nav-text"> 4、真机</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%BE%A4%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E9%82%A3%E9%87%8C%E6%94%B6%E4%BA%86%E4%B8%AA%E4%BA%8C%E6%89%8B%E7%BA%A2%E7%B1%B3%E8%BF%98%E5%BE%97%E6%98%AF%E5%B0%8F%E7%B1%B3"><span class="nav-number">1.</span> <span class="nav-text"> 群开发高手那里收了个二手红米，还得是小米</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A4%A7%E5%8A%9F%E5%91%8A%E6%88%90"><span class="nav-number"></span> <span class="nav-text"> 大功告成！</span></a></li></div>
+        </div>
+        
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Moyao" src="/images/avatar.webp">
+  <p class="site-author-name" itemprop="name">Moyao</p>
+  <div class="site-description" itemprop="description">Write down something interesting I met<br>
 Feel free to mail me if you have something wanted to talk about, plz
-mail: &amplt;moyaoxue@outlook.com&ampgt;
-" itemprop=description></span><span hidden itemprop=publisher itemscope itemtype=http://schema.org/Organization><meta content=rev@天枢 itemprop=name></span><div class="body md" itemprop=articleBody><h6 id=preface说是初探也不是很初探吧其实前面多多少少弄过完整的流程了但是由于hyperv这玄学东西后面搞的环境一团糟打算还是重新弄一个完整的调试方案出来顺便记录一些基础知识><a class=anchor href=#preface说是初探也不是很初探吧其实前面多多少少弄过完整的流程了但是由于hyperv这玄学东西后面搞的环境一团糟打算还是重新弄一个完整的调试方案出来顺便记录一些基础知识>#</a> preface：说是初探，也不是很初探吧其实，前面多多少少弄过完整的流程了，但是由于 hyperV 这玄学东西后面搞的环境一团糟，打算还是重新弄一个完整的调试方案出来，顺便记录一些基础知识</h6><p><span id=more></span><h6 id=初学配安卓环境挺痛苦的有几大原因还没准备可以root的真机在x86架构下跑arm的方案很少流畅的更少能比较流畅运行的大多是商业模拟器但是我的本地linux环境大多放在wsl2上商业模拟器很多与wsl2的hyperv冲突><a class=anchor href=#初学配安卓环境挺痛苦的有几大原因还没准备可以root的真机在x86架构下跑arm的方案很少流畅的更少能比较流畅运行的大多是商业模拟器但是我的本地linux环境大多放在wsl2上商业模拟器很多与wsl2的hyperv冲突>#</a> 初学配安卓环境挺痛苦的，有几大原因：还没准备可以 root 的真机；在 x86 架构下跑 arm 的方案很少，流畅的更少；能比较流畅运行的大多是商业模拟器，但是我的本地 linux 环境大多放在 wsl2 上，商业模拟器很多与 wsl2 的 hyperV 冲突</h6><h5 id=几个尝试过或可以考虑的方案><a class=anchor href=#几个尝试过或可以考虑的方案>#</a> 几个尝试过<s>或可以考虑</s>的方案：</h5><table><thead><tr><th style=text-align:center>Android Studio<th style=text-align:center>mumu12<th style=text-align:center>qemu<th style=text-align:center>真机<tbody><tr><td style=text-align:center>选择多，但是 arm 调不动<td style=text-align:center>使用方便<td style=text-align:center>~~ 配置麻烦，~~ 多数时候没法用<td style=text-align:center><s>准备尝试</s> <s>已配置，需要 root，略麻烦</s> 启动！</table><h5 id=1-android-studio><a class=anchor href=#1-android-studio>#</a> 1、Android Studio</h5><p>在 so 有 x86 支持时为比较优解，可以随意选择安卓版本来使用。仅支持 arm 时本机能成功运行的镜像仅有：<img alt=image-20230811134825647 data-src=%E5%AE%89%E5%8D%93%E8%B0%83%E8%AF%95%E5%88%9D%E6%8E%A2/image-20230811134825647.png loading=lazy>armeabi-v7a 的 Nougat，但很多新的 apk 都是 arm64-v8a，这里本机跑会报很多错，而且很慢很慢<p>2、正常情况下可以用 nox 或者雷电模拟器，稳定性还行，但是有 wsl2 的情况下会出奇怪问题（雷电号称是有兼容的，但是实测用起来会卡死，懒得修了直接换个）之前一直用的 mumux，但是这两天连 adb 会触发强制更新，换成 mumu12 居然还可以用，属于比较惊喜的，在真机拿到前可以先用这个方案<p>mumu12 用的 x86 的架构，但是实测是可以跑 arm64-v8a 的，具体原理不太懂，但是确实挺好用的，可以按照这篇操作，调试 so 层<p><a href=https://www.cnblogs.com/ddms/p/8820044.html rel=noopener target=_blank>IDA 远程调试 Android 中 so 文件 - jKing777 - 博客园 (cnblogs.com)</a><h5 id=3-qemu><a class=anchor href=#3-qemu>#</a> 3、qemu</h5><p>搭建很麻烦，需要配置可视化，非常麻烦。<h5 id=4-真机><a class=anchor href=#4-真机>#</a> 4、真机</h5><p>理论上的最优解，但是不知道比起商业模拟器优多少呢<hr><h6 id=群开发高手那里收了个二手红米还得是小米><a class=anchor href=#群开发高手那里收了个二手红米还得是小米>#</a> <s>群开发高手那里收了个二手红米，还得是小米</s></h6><p>简单记录一下：<ul><li><p>收的手机是已经解了 bl 锁的，可以暂时跳过这一步（<a href=http://www.romleyuan.com/lec/read?id=83 rel=noopener target=_blank>小米手机官方解锁 BootLoader 图文教程 - 适用于全部机型 20210925 更新 - ROM 乐园官网 (romleyuan.com)</a>）</p> <ul><li><p>” 我的设备 “-> “全部参数” -> 连续点击 “MIUI 版本” 进入开发者模式 -> 在开发者模式中打开 adb 调试等选项</p><li><p><code>adb devices</code> 检查设备</p><li><p><code>adb shell</code> 进入</p></ul><li><p>刷入 TWRP 进行 root（刷失败了就下音量 + 电源键重新进入 FASTBOOT，每次需要重新刷入）</p> <ul><li><code>adb reboot bootloader</code> 转为 FASTBOOT 模式（<a href=https://www.hardreset.info/zh/devices/xiaomi/xiaomi-redmi-note-8-pro/faq/drivers/drivers-xiaomi/ rel=noopener target=_blank>windows 缺少驱动在这里下载</a>）<li><code>fastboot devices</code> 看到设备<li><code>fastboot flash recovery D:\android\BRP3.5.2v3.1-Red-twrp\recovery.img</code> 刷入 TWRP（[<a href=https://forum.xda-developers.com/t/recovery-unofficial-begonia-recovery-project-themed-twrp-3-5-0-v2-unified-begonia-begoniain.4242717/ rel=noopener target=_blank>RECOVERY][UNOFFICIAL] Begonia Recovery Project Themed TWRP 3.5.0 V2 UNIFIED [begonia/begoniain] | XDA Forums (xda-developers.com)</a>）<li><code>fastboot flash recover</code> 启动 TWRP（选择系统重启可以回到系统）</ul><li><p>刷入 Magisk（ <code>adb push D:\android\Magisk\Magisk.v26.3.zip /sdcard/</code> ）</p> <ul><li><p>在手机上根据提示操作，adb 上 <code>su</code> 即可获得 root</p> <h5 id=大功告成><a class=anchor href=#大功告成>#</a> 大功告成！</h5> <p><img alt=image-20230913202333767 data-src=%E5%AE%89%E5%8D%93%E8%B0%83%E8%AF%95%E5%88%9D%E6%8E%A2/image-20230913202333767.png loading=lazy></p></ul></ul><div class=tags><a href=/tags/re/ rel=tag><i class="ic i-tag"></i>re</a><a href=/tags/Android/ rel=tag><i class="ic i-tag"></i>Android</a></div></div><footer><div class=meta><span class=item><span class=icon><i class="ic i-calendar-check"></i></span><span class=text>Edited on</span><time title="Modified: 2024-05-05 10:05:57" datetime=2024-05-05T10:05:57+08:00 itemprop=dateModified>2024-05-05</time></span></div><div class=reward><button><i class="ic i-heartbeat"></i>Donate</button><p>Give me a cup of [coffee]~(￣▽￣)~*<div id=qr><div><img alt="Moyao WeChat Pay" data-src=/assets/wechatpay.png loading=lazy><p>WeChat Pay</div><div><img alt="Moyao Alipay" data-src=/assets/alipay.png loading=lazy><p>Alipay</div></div></div><div id=copyright><ul><li class=author><strong>Post author: </strong>Moyao<i class="ic i-at"><em>@</em></i>rev@天枢<li class=link><strong>Post link: </strong><a href=https://demoyao100.github.io/2023/07/11/%E5%AE%89%E5%8D%93%E8%B0%83%E8%AF%95%E5%88%9D%E6%8E%A2/ title=安卓调试初探>https://demoyao100.github.io/2023/07/11/安卓调试初探/</a><li class=license><strong>Copyright Notice: </strong>All articles in this blog are licensed under <a href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh rel=noopener target=_blank><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</a> unless stating additionally.</ul></div></footer></article></div><div class=post-nav><div class="item left"><a data-background-image=https://tva4.sinaimg.cn/mw690/6833939bly1giciszlczyj20zk0m816d.jpg href=/2023/03/17/%E5%A4%9C%E5%BD%B3%E4%BA%8D/ itemprop=url rel=prev title=夜彳亍><span class=type>Previous Post</span><h3>夜彳亍</h3></a></div><div class="item right"><a title="d3ctf 2023" data-background-image=https://tva4.sinaimg.cn/mw690/6833939bly1gicis3attqj20zk0m8k7l.jpg href=/2023/07/11/d3ctf-2023/ itemprop=url rel=next><span class=type>Next Post</span><h3>d3ctf 2023</h3></a></div></div></div><div id=sidebar><div class=inner><div class=panels><div class=inner><div class="contents panel pjax" data-title=Contents><ol class=toc><li class="toc-item toc-level-6"><a class=toc-link href=#preface%E8%AF%B4%E6%98%AF%E5%88%9D%E6%8E%A2%E4%B9%9F%E4%B8%8D%E6%98%AF%E5%BE%88%E5%88%9D%E6%8E%A2%E5%90%A7%E5%85%B6%E5%AE%9E%E5%89%8D%E9%9D%A2%E5%A4%9A%E5%A4%9A%E5%B0%91%E5%B0%91%E5%BC%84%E8%BF%87%E5%AE%8C%E6%95%B4%E7%9A%84%E6%B5%81%E7%A8%8B%E4%BA%86%E4%BD%86%E6%98%AF%E7%94%B1%E4%BA%8Ehyperv%E8%BF%99%E7%8E%84%E5%AD%A6%E4%B8%9C%E8%A5%BF%E5%90%8E%E9%9D%A2%E6%90%9E%E7%9A%84%E7%8E%AF%E5%A2%83%E4%B8%80%E5%9B%A2%E7%B3%9F%E6%89%93%E7%AE%97%E8%BF%98%E6%98%AF%E9%87%8D%E6%96%B0%E5%BC%84%E4%B8%80%E4%B8%AA%E5%AE%8C%E6%95%B4%E7%9A%84%E8%B0%83%E8%AF%95%E6%96%B9%E6%A1%88%E5%87%BA%E6%9D%A5%E9%A1%BA%E4%BE%BF%E8%AE%B0%E5%BD%95%E4%B8%80%E4%BA%9B%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86><span class=toc-number>1.</span> <span class=toc-text> preface：说是初探，也不是很初探吧其实，前面多多少少弄过完整的流程了，但是由于 hyperV 这玄学东西后面搞的环境一团糟，打算还是重新弄一个完整的调试方案出来，顺便记录一些基础知识</span></a><li class="toc-item toc-level-6"><a class=toc-link href=#%E5%88%9D%E5%AD%A6%E9%85%8D%E5%AE%89%E5%8D%93%E7%8E%AF%E5%A2%83%E6%8C%BA%E7%97%9B%E8%8B%A6%E7%9A%84%E6%9C%89%E5%87%A0%E5%A4%A7%E5%8E%9F%E5%9B%A0%E8%BF%98%E6%B2%A1%E5%87%86%E5%A4%87%E5%8F%AF%E4%BB%A5root%E7%9A%84%E7%9C%9F%E6%9C%BA%E5%9C%A8x86%E6%9E%B6%E6%9E%84%E4%B8%8B%E8%B7%91arm%E7%9A%84%E6%96%B9%E6%A1%88%E5%BE%88%E5%B0%91%E6%B5%81%E7%95%85%E7%9A%84%E6%9B%B4%E5%B0%91%E8%83%BD%E6%AF%94%E8%BE%83%E6%B5%81%E7%95%85%E8%BF%90%E8%A1%8C%E7%9A%84%E5%A4%A7%E5%A4%9A%E6%98%AF%E5%95%86%E4%B8%9A%E6%A8%A1%E6%8B%9F%E5%99%A8%E4%BD%86%E6%98%AF%E6%88%91%E7%9A%84%E6%9C%AC%E5%9C%B0linux%E7%8E%AF%E5%A2%83%E5%A4%A7%E5%A4%9A%E6%94%BE%E5%9C%A8wsl2%E4%B8%8A%E5%95%86%E4%B8%9A%E6%A8%A1%E6%8B%9F%E5%99%A8%E5%BE%88%E5%A4%9A%E4%B8%8Ewsl2%E7%9A%84hyperv%E5%86%B2%E7%AA%81><span class=toc-number>2.</span> <span class=toc-text> 初学配安卓环境挺痛苦的，有几大原因：还没准备可以 root 的真机；在 x86 架构下跑 arm 的方案很少，流畅的更少；能比较流畅运行的大多是商业模拟器，但是我的本地 linux 环境大多放在 wsl2 上，商业模拟器很多与 wsl2 的 hyperV 冲突</span></a></ol><li class="toc-item toc-level-5"><a class=toc-link href=#%E5%87%A0%E4%B8%AA%E5%B0%9D%E8%AF%95%E8%BF%87%E6%88%96%E5%8F%AF%E4%BB%A5%E8%80%83%E8%99%91%E7%9A%84%E6%96%B9%E6%A1%88><span class=toc-number></span> <span class=toc-text> 几个尝试过或可以考虑的方案：</span></a><li class="toc-item toc-level-5"><a class=toc-link href=#1-android-studio><span class=toc-number></span> <span class=toc-text> 1、Android Studio</span></a><li class="toc-item toc-level-5"><a class=toc-link href=#3-qemu><span class=toc-number></span> <span class=toc-text> 3、qemu</span></a><li class="toc-item toc-level-5"><a class=toc-link href=#4-%E7%9C%9F%E6%9C%BA><span class=toc-number></span> <span class=toc-text> 4、真机</span></a><ol class=toc-child><li class="toc-item toc-level-6"><a class=toc-link href=#%E7%BE%A4%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E9%82%A3%E9%87%8C%E6%94%B6%E4%BA%86%E4%B8%AA%E4%BA%8C%E6%89%8B%E7%BA%A2%E7%B1%B3%E8%BF%98%E5%BE%97%E6%98%AF%E5%B0%8F%E7%B1%B3><span class=toc-number>1.</span> <span class=toc-text> 群开发高手那里收了个二手红米，还得是小米</span></a></ol><li class="toc-item toc-level-5"><a class=toc-link href=#%E5%A4%A7%E5%8A%9F%E5%91%8A%E6%88%90><span class=toc-number></span> <span class=toc-text> 大功告成！</span></a></div><div class="related panel pjax" data-title=Related></div><div class="overview panel" data-title=Overview><div class=author itemprop=author itemscope itemtype=http://schema.org/Person><img alt=Moyao class=image data-src=/assets/avatar.jpg itemprop=image loading=lazy><p class=name itemprop=name>Moyao<div class=description itemprop=description>Write down something interesting I met<br> Feel free to mail me if you have something wanted to talk about, plz mail: &LTmoyaoxue@outlook.com></div></div><nav class=state><div class="item posts"><a href=/archives/><span class=count>74</span><span class=name>posts</span></a></div><div class="item tags"><a href=/tags/><span class=count>14</span><span class=name>tags</span></a></div></nav><div class=social><a class="item github" href=https://github.com/name rel=noopener target=_blank title=https://github.com/name><i class="ic i-github"></i></a></div><div class=menu><li class=item><a href=/ rel=section><i class="ic i-home"></i>Home</a></div></div></div></div><ul id=quick><li class="prev pjax"><a title="Previous Post" href=/2023/07/11/d3ctf-2023/ rel=prev><i class="ic i-chevron-left"></i></a><li class=up><i class="ic i-arrow-up"></i><li class=down><i class="ic i-arrow-down"></i><li class="next pjax"><a title="Next Post" href=/2023/03/17/%E5%A4%9C%E5%BD%B3%E4%BA%8D/ rel=next><i class="ic i-chevron-right"></i></a><li class=percent></ul></div></div><div class=dimmer></div></div></main><footer id=footer><div class=inner><div class=widgets><div class="rpost pjax"><h2>Random Posts</h2><ul><li class=item><div class=breadcrumb></div><span><a href=/2023/09/24/ASIS-CTF2023/>ASIS_CTF2023</a></span><li class=item><div class=breadcrumb></div><span><a href=/2023/09/03/%E7%BE%8A%E5%9F%8E%E6%9D%AF2023/>羊城杯2023</a></span><li class=item><div class=breadcrumb></div><span><a href=/2024/02/26/pwnCollege/>pwnCollege</a></span><li class=item><div class=breadcrumb></div><span><a href=/2023/12/08/tctf/>tctf</a></span><li class=item><div class=breadcrumb></div><span><a href=/2023/02/27/vnctf2023/>vnctf2023</a></span><li class=item><div class=breadcrumb></div><span><a href=/2023/08/23/%E5%88%9D%E6%8E%A2flutter/>初探flutter</a></span><li class=item><div class=breadcrumb></div><span><a href=/2024/04/27/frida%E6%BA%90%E7%A0%81%E5%88%9D%E6%8E%A2/>frida源码初探</a></span><li class=item><div class=breadcrumb></div><span><a href=/2022/08/27/arknights-recruit-calculator/>arknights recruit calculator(1)</a></span><li class=item><div class=breadcrumb></div><span><a href=/2023/08/09/hook%E6%9F%90%E8%81%8A%E5%A4%A9%E8%BD%AF%E4%BB%B6lab/>hook某聊天软件lab</a></span><li class=item><div class=breadcrumb></div><span><a href=/2023/10/02/BuckeyeCTF2023/>BuckeyeCTF2023</a></span></ul></div><div class="rpost pjax"><h2>Recent Comments</h2><ul class=leancloud-recent-comment id=new-comment></ul></div></div><div class=status><div class=copyright>© 2022 -<span itemprop=copyrightYear>2024</span><span class=with-love><i class="ic i-sakura rotate"></i></span><span class=author itemprop=copyrightHolder>Moyao @ Moyao の小屋</span></div><div class=count><span class=post-meta-item-icon><i class="ic i-chart-area"></i></span><span title="Symbols count total">649k words</span><span class=post-meta-divider>|</span><span class=post-meta-item-icon><i class="ic i-coffee"></i></span><span title="Reading time total">9:50</span></div><div class=powered-by>Powered by <a href=https://hexo.io/ rel=noopener target=_blank>Hexo</a> & Theme.<a href=https://github.com/theme-shoka-x/hexo-theme-shokaX/ rel=noopener target=_blank>ShokaX</a></div></div></div></footer></div><script data-config>var LOCAL = {
-        path: `2023/07/11/安卓调试初探/`,
-        favicon: {
-        show: `(●´3｀●) Here we go again.`,
-        hide: `(´Д｀) It's a disaster!`
-    },
-    search: {
-        placeholder: "Search for Posts",
-        empty: "We didn't find any results for the search: ${query}",
-        stats: "${hits} results found in ${time} ms"
-    },
-    copy_tex: false,
-    katex: false,
-    mermaid: false,
-    audio: undefined,
-    fancybox: true,
-    nocopy: false,
-    outime: true,
-    template: `<div class="note warning"><p><span class="label warning">Article Timeliness Alert</span><br>This is an article published {{publish}} days ago and last updated {{updated}} days ago. Some information may have changed, so please be careful to screen it.</p></div>`,
-    quiz: {
-        choice: `Multiple Choice`,
-        multiple: `Multiple Answer`,
-        true_false: `True/False`,
-        essay: `Questions`,
-        gap_fill: `Gap Filling`,
-        mistake: `Wrong Answer`
-    },
-    ignores: [
-        (uri) => uri.includes('#'),
-        (uri) => new RegExp(LOCAL.path + '$').test(uri),
-            []
-    ]
-};</script><script src=https://cdn.bootcdn.net/ajax/libs/vue/3.3.4/vue.global.prod.min.js></script><script src=https://lf9-cdn-tos.bytecdntp.com/cdn/expire-6-M/pace/1.2.4/pace.min.js></script><script src=https://lf9-cdn-tos.bytecdntp.com/cdn/expire-6-M/algoliasearch/4.12.1/algoliasearch-lite.umd.min.js></script><script src=https://lf9-cdn-tos.bytecdntp.com/cdn/expire-6-M/instantsearch.js/4.39.0/instantsearch.production.min.js></script><script src=https://npm.webcache.cn/quicklink@2.3.0/dist/quicklink.umd.js></script><script src=/js/app.js?v=0.3.15></script>
+mail: &lt;moyaoxue@outlook.com&gt;
+</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">74</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags.html">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="/moyaoxue@outlook.com" title="E-Mail → moyaoxue@outlook.com" rel="noopener me"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://demoyao100.github.io/2023/07/11/%E5%AE%89%E5%8D%93%E8%B0%83%E8%AF%95%E5%88%9D%E6%8E%A2/">
+
+    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Moyao">
+    </span>
+
+    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Moyao の小屋">
+      <meta itemprop="description" content="Write down something interesting I met<br />
+Feel free to mail me if you have something wanted to talk about, plz
+mail: <moyaoxue@outlook.com>
+">
+    </span>
+
+    <span hidden="" itemprop="post" itemscope="" itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="安卓调试初探 | Moyao の小屋">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          安卓调试初探
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-07-11 18:14:26" itemprop="dateCreated datePublished" datetime="2023-07-11T18:14:26+08:00">2023-07-11</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h6 id="preface说是初探也不是很初探吧其实前面多多少少弄过完整的流程了但是由于hyperv这玄学东西后面搞的环境一团糟打算还是重新弄一个完整的调试方案出来顺便记录一些基础知识"><a class="anchor" href="#preface说是初探也不是很初探吧其实前面多多少少弄过完整的流程了但是由于hyperv这玄学东西后面搞的环境一团糟打算还是重新弄一个完整的调试方案出来顺便记录一些基础知识">#</a> preface：说是初探，也不是很初探吧其实，前面多多少少弄过完整的流程了，但是由于 hyperV 这玄学东西后面搞的环境一团糟，打算还是重新弄一个完整的调试方案出来，顺便记录一些基础知识</h6>
+<p><span id="more"></span></p>
+<h6 id="初学配安卓环境挺痛苦的有几大原因还没准备可以root的真机在x86架构下跑arm的方案很少流畅的更少能比较流畅运行的大多是商业模拟器但是我的本地linux环境大多放在wsl2上商业模拟器很多与wsl2的hyperv冲突"><a class="anchor" href="#初学配安卓环境挺痛苦的有几大原因还没准备可以root的真机在x86架构下跑arm的方案很少流畅的更少能比较流畅运行的大多是商业模拟器但是我的本地linux环境大多放在wsl2上商业模拟器很多与wsl2的hyperv冲突">#</a> 初学配安卓环境挺痛苦的，有几大原因：还没准备可以 root 的真机；在 x86 架构下跑 arm 的方案很少，流畅的更少；能比较流畅运行的大多是商业模拟器，但是我的本地 linux 环境大多放在 wsl2 上，商业模拟器很多与 wsl2 的 hyperV 冲突</h6>
+<h5 id="几个尝试过或可以考虑的方案"><a class="anchor" href="#几个尝试过或可以考虑的方案">#</a> 几个尝试过<s>或可以考虑</s>的方案：</h5>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Android Studio</th>
+<th style="text-align:center">mumu12</th>
+<th style="text-align:center">qemu</th>
+<th style="text-align:center">真机</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">选择多，但是 arm 调不动</td>
+<td style="text-align:center">使用方便</td>
+<td style="text-align:center">~~ 配置麻烦，~~ 多数时候没法用</td>
+<td style="text-align:center"><s>准备尝试</s> <s>已配置，需要 root，略麻烦</s> 启动！</td>
+</tr>
+</tbody>
+</table>
+<h5 id="1-android-studio"><a class="anchor" href="#1-android-studio">#</a> 1、Android Studio</h5>
+<p>在 so 有 x86 支持时为比较优解，可以随意选择安卓版本来使用。仅支持 arm 时本机能成功运行的镜像仅有：<img src="/2023/07/11/%E5%AE%89%E5%8D%93%E8%B0%83%E8%AF%95%E5%88%9D%E6%8E%A2/image-20230811134825647.webp" alt="image-20230811134825647">armeabi-v7a 的 Nougat，但很多新的 apk 都是 arm64-v8a，这里本机跑会报很多错，而且很慢很慢</p>
+<p>2、正常情况下可以用 nox 或者雷电模拟器，稳定性还行，但是有 wsl2 的情况下会出奇怪问题（雷电号称是有兼容的，但是实测用起来会卡死，懒得修了直接换个）之前一直用的 mumux，但是这两天连 adb 会触发强制更新，换成 mumu12 居然还可以用，属于比较惊喜的，在真机拿到前可以先用这个方案</p>
+<p>mumu12 用的 x86 的架构，但是实测是可以跑 arm64-v8a 的，具体原理不太懂，但是确实挺好用的，可以按照这篇操作，调试 so 层</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/ddms/p/8820044.html">IDA 远程调试 Android 中 so 文件 - jKing777 - 博客园 (cnblogs.com)</a></p>
+<h5 id="3-qemu"><a class="anchor" href="#3-qemu">#</a> 3、qemu</h5>
+<p>搭建很麻烦，需要配置可视化，非常麻烦。</p>
+<h5 id="4-真机"><a class="anchor" href="#4-真机">#</a> 4、真机</h5>
+<p>理论上的最优解，但是不知道比起商业模拟器优多少呢</p>
+<hr>
+<h6 id="群开发高手那里收了个二手红米还得是小米"><a class="anchor" href="#群开发高手那里收了个二手红米还得是小米">#</a> <s>群开发高手那里收了个二手红米，还得是小米</s></h6>
+<p>简单记录一下：</p>
+<ul>
+<li>
+<p>收的手机是已经解了 bl 锁的，可以暂时跳过这一步（<a target="_blank" rel="noopener" href="http://www.romleyuan.com/lec/read?id=83">小米手机官方解锁 BootLoader 图文教程 - 适用于全部机型 20210925 更新 - ROM 乐园官网 (romleyuan.com)</a>）</p>
+<ul>
+<li>
+<p>” 我的设备 “-&gt; “全部参数” -&gt; 连续点击 “MIUI 版本” 进入开发者模式 -&gt; 在开发者模式中打开 adb 调试等选项</p>
+</li>
+<li>
+<p><code>adb devices</code>  检查设备</p>
+</li>
+<li>
+<p><code>adb shell</code>  进入</p>
+</li>
+</ul>
+</li>
+<li>
+<p>刷入 TWRP 进行 root（刷失败了就下音量 + 电源键重新进入 FASTBOOT，每次需要重新刷入）</p>
+<ul>
+<li><code>adb reboot bootloader</code>  转为 FASTBOOT 模式（<a target="_blank" rel="noopener" href="https://www.hardreset.info/zh/devices/xiaomi/xiaomi-redmi-note-8-pro/faq/drivers/drivers-xiaomi/">windows 缺少驱动在这里下载</a>）</li>
+<li><code>fastboot devices</code>  看到设备</li>
+<li><code>fastboot flash recovery D:\android\BRP3.5.2v3.1-Red-twrp\recovery.img</code>  刷入 TWRP（[<a target="_blank" rel="noopener" href="https://forum.xda-developers.com/t/recovery-unofficial-begonia-recovery-project-themed-twrp-3-5-0-v2-unified-begonia-begoniain.4242717/">RECOVERY][UNOFFICIAL] Begonia Recovery Project Themed TWRP 3.5.0 V2 UNIFIED [begonia/begoniain] | XDA Forums (xda-developers.com)</a>）</li>
+<li><code>fastboot flash recover</code>  启动 TWRP（选择系统重启可以回到系统）</li>
+</ul>
+</li>
+<li>
+<p>刷入 Magisk（ <code>adb push D:\android\Magisk\Magisk.v26.3.zip /sdcard/</code> ）</p>
+<ul>
+<li>
+<p>在手机上根据提示操作，adb 上 <code>su</code>  即可获得 root</p>
+<h5 id="大功告成"><a class="anchor" href="#大功告成">#</a> 大功告成！</h5>
+<p><img src="/2023/07/11/%E5%AE%89%E5%8D%93%E8%B0%83%E8%AF%95%E5%88%9D%E6%8E%A2/image-20230913202333767.webp" alt="image-20230913202333767"></p>
+</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>Moyao
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="https://demoyao100.github.io/2023/07/11/%E5%AE%89%E5%8D%93%E8%B0%83%E8%AF%95%E5%88%9D%E6%8E%A2/" title="安卓调试初探">https://demoyao100.github.io/2023/07/11/安卓调试初探/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/re/" rel="tag"># re</a>
+              <a href="/tags/Android/" rel="tag"># Android</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/03/17/%E5%A4%9C%E5%BD%B3%E4%BA%8D/" rel="prev" title="夜彳亍">
+                  <i class="fa fa-angle-left"></i> 夜彳亍
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/07/11/d3ctf-2023/" rel="next" title="d3ctf 2023">
+                  d3ctf 2023 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    © 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Moyao</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> &amp; <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+
+
+</body></html>

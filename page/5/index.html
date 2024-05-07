@@ -1,33 +1,648 @@
-<!doctypehtml><html lang=en><meta charset=UTF-8><meta content=width=device-width,initial-scale=1,maximum-scale=2 name=viewport><meta content=#222 name=theme-color><meta content=IE=edge,chrome=1 http-equiv=X-UA-COMPATIBLE><meta content=webkit name=renderer><link href=/assets/favicon.ico rel=icon sizes=32x32 type=image/ico><link href=/assets/apple-touch-icon.png rel=apple-touch-icon sizes=180x180><link href=/rss.xml rel=alternate title=rev@天枢 type=application/rss+xml><link href=/atom.xml rel=alternate title=rev@天枢 type=application/atom+xml><link href=https://demoyao100.github.io/feed.json rel=alternate title=rev@天枢 type=application/json><link href=https://lf9-cdn-tos.bytecdntp.com rel=preconnect><link href=https://cdn.jsdelivr.net rel=dns-prefetch><link href=https://unpkg.com rel=dns-prefetch><link href=https://fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext rel=stylesheet><link href=/css/app.css?v=0.3.15 rel=stylesheet><link href=https://demoyao100.github.io/page/5/ rel=canonical><title>Moyao の小屋 = rev@天枢 = Hi,I'm Moyaoxue</title><meta content="Hexo 7.0.0" name=generator><body itemscope itemtype=http://schema.org/WebPage><div id=loading><div class=cat><div class=body></div><div class=head><div class=face></div></div><div class=foot><div class=tummy-end></div><div class=bottom></div><div class="legs left"></div><div class="legs right"></div></div><div class=paw><div class="hands left"></div><div class="hands right"></div></div></div></div><div id=container><header id=header itemscope itemtype=http://schema.org/WPHeader><div class=inner><div id=brand><div class=pjax><a class=logo href=/ rel=start><p class=artboard>Moyao の小屋<h1 itemprop="name headline" class=title>rev@天枢</h1></a><p class=meta itemprop=description>= Hi,I'm Moyaoxue =</div></div><nav id=nav><div class=inner><div class=toggle><div aria-label="Toggle navigation bar" class=lines><span class=line></span><span class=line></span><span class=line></span></div></div><ul class=menu><li class="item title"><a href=/ rel=start>Moyao の小屋</a></ul><ul class=right id=rightNav><li class="item theme" @click=changeThemeByBtn><i :class="{'i-sun': !themeStatus,'i-moon': themeStatus}" class=ic></i><li class="item search"><i class="ic i-search"></i></ul></div></nav></div><div class=pjax id=imgs><img src=https://tva4.sinaimg.cn/mw690/6833939bly1gicit31ffoj20zk0m8naf.jpg></div></header><div id=waves><svg viewbox="0 24 150 28" class=waves preserveaspectratio=none shape-rendering=auto xmlns=http://www.w3.org/2000/svg xmlns:xlink=http://www.w3.org/1999/xlink><defs><path d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" id=gentle-wave></path></defs><g class=parallax><use x=48 xlink:href=#gentle-wave y=0></use><use x=48 xlink:href=#gentle-wave y=3></use><use x=48 xlink:href=#gentle-wave y=5></use><use x=48 xlink:href=#gentle-wave y=7></use></g></svg></div><main><div class=inner><div class=pjax id=main><div class="index wrap"><div class="segments posts"><article class=item><div class=cover><a href=/2023/11/27/Ghidra%E5%88%9D%E6%8E%A2/ itemprop=url title=Ghidra初探><img alt="article cover" data-src=https://tva4.sinaimg.cn/mw690/6833939bly1giciszlczyj20zk0m816d.jpg loading=lazy></a></div><div class=info><div class=meta><span title="Created: 2023-11-27 15:34:01" class=item><span class=icon><i class="ic i-calendar"></i></span><time itemprop="dateCreated datePublished" datetime=2023-11-27T15:34:01+08:00>2023-11-27</time></span><span title="Symbols count in article" class=item><span class=icon><i class="ic i-pen"></i></span><span>241</span><span class=text>words</span></span><span title="Reading time" class=item><span class=icon><i class="ic i-clock"></i></span><span>1 mins.</span></span></div><h3><a href=/2023/11/27/Ghidra%E5%88%9D%E6%8E%A2/ itemprop=url title=Ghidra初探>Ghidra初探</a></h3><div class=excerpt><h6 id=preface之前是能不用就不用现在遇到第二次不用不行了xdm和ghidra爆了><a class=anchor href=#preface之前是能不用就不用现在遇到第二次不用不行了xdm和ghidra爆了>#</a> PREFACE：之前是能不用就不用，现在遇到第二次不用不行了，xdm，和 Ghidra 爆了！</h6><h6 id=这一篇仅介绍ghidra一些操作开发等等暂时没这个水平5555555555><a class=anchor href=#这一篇仅介绍ghidra一些操作开发等等暂时没这个水平5555555555>#</a> 这一篇仅介绍 Ghidra 一些操作，开发等等暂时没这个水平 5555555555</h6><p></div><a class=btn href=/2023/11/27/Ghidra%E5%88%9D%E6%8E%A2/ itemprop=url title=Ghidra初探>more...</a></div></article><article class=item><div class=cover><a href=/2023/11/27/%E3%80%8A%E6%9D%80%E6%AD%BB%E4%B8%80%E5%8F%AA%E7%9F%A5%E6%9B%B4%E9%B8%9F%E3%80%8B/ itemprop=url title=《杀死一只知更鸟》><img alt="article cover" data-src=https://tva4.sinaimg.cn/mw690/6833939bly1giciszlczyj20zk0m816d.jpg loading=lazy></a></div><div class=info><div class=meta><span title="Created: 2023-11-27 08:54:41" class=item><span class=icon><i class="ic i-calendar"></i></span><time itemprop="dateCreated datePublished" datetime=2023-11-27T08:54:41+08:00>2023-11-27</time></span><span title="Symbols count in article" class=item><span class=icon><i class="ic i-pen"></i></span><span>122</span><span class=text>words</span></span><span title="Reading time" class=item><span class=icon><i class="ic i-clock"></i></span><span>1 mins.</span></span></div><h3><a href=/2023/11/27/%E3%80%8A%E6%9D%80%E6%AD%BB%E4%B8%80%E5%8F%AA%E7%9F%A5%E6%9B%B4%E9%B8%9F%E3%80%8B/ itemprop=url title=《杀死一只知更鸟》>《杀死一只知更鸟》</a></h3><div class=excerpt><h6 id=preface推荐读物感觉以后专门开个分区><a class=anchor href=#preface推荐读物感觉以后专门开个分区>#</a> PREFACE：推荐读物，感觉以后专门开个分区</h6><h6 id=todo修一下博客的分类功能><a class=anchor href=#todo修一下博客的分类功能>#</a> TODO：修一下博客的分类功能</h6><p></div><a class=btn href=/2023/11/27/%E3%80%8A%E6%9D%80%E6%AD%BB%E4%B8%80%E5%8F%AA%E7%9F%A5%E6%9B%B4%E9%B8%9F%E3%80%8B/ itemprop=url title=《杀死一只知更鸟》>more...</a></div></article><article class=item><div class=cover><a href=/2023/11/26/das202311%E6%9C%88%E8%B5%9B/ itemprop=url title=das202311月赛><img alt="article cover" data-src=https://tva4.sinaimg.cn/mw690/6833939bly1gicitcxhpij20zk0m8hdt.jpg loading=lazy></a></div><div class=info><div class=meta><span title="Created: 2023-11-26 18:50:08" class=item><span class=icon><i class="ic i-calendar"></i></span><time itemprop="dateCreated datePublished" datetime=2023-11-26T18:50:08+08:00>2023-11-26</time></span><span title="Symbols count in article" class=item><span class=icon><i class="ic i-pen"></i></span><span>6.8k</span><span class=text>words</span></span><span title="Reading time" class=item><span class=icon><i class="ic i-clock"></i></span><span>6 mins.</span></span></div><h3><a href=/2023/11/26/das202311%E6%9C%88%E8%B5%9B/ itemprop=url title=das202311月赛>das202311月赛</a></h3><div class=excerpt><h6 id=preface说实话一直打不明白这个das这今年最后一次算是比较认真打的一次最后是稳稳第一拿下了但是好像和我关系不大不能说没有贡献吧但是光自己做肯定是差很多的还是tcl5555555><a class=anchor href=#preface说实话一直打不明白这个das这今年最后一次算是比较认真打的一次最后是稳稳第一拿下了但是好像和我关系不大不能说没有贡献吧但是光自己做肯定是差很多的还是tcl5555555>#</a> PREFACE：说实话一直打不明白这个 das，这今年最后一次算是比较认真打的一次，最后是稳稳第一拿下了但是好像和我关系不大... 不能说没有贡献吧但是光自己做肯定是差很多的... 还是 tcl5555555</h6><p></div><a class=btn href=/2023/11/26/das202311%E6%9C%88%E8%B5%9B/ itemprop=url title=das202311月赛>more...</a></div></article><article class=item><div class=cover><a href=/2023/11/26/laurelAndYanny/ itemprop=url title=laurelAndYanny><img alt="article cover" data-src=https://tva4.sinaimg.cn/mw690/6833939bly1gicis3attqj20zk0m8k7l.jpg loading=lazy></a></div><div class=info><div class=meta><span title="Created: 2023-11-26 18:26:56" class=item><span class=icon><i class="ic i-calendar"></i></span><time itemprop="dateCreated datePublished" datetime=2023-11-26T18:26:56+08:00>2023-11-26</time></span><span title="Symbols count in article" class=item><span class=icon><i class="ic i-pen"></i></span><span>688</span><span class=text>words</span></span><span title="Reading time" class=item><span class=icon><i class="ic i-clock"></i></span><span>1 mins.</span></span></div><h3><a href=/2023/11/26/laurelAndYanny/ itemprop=url title=laurelAndYanny>laurelAndYanny</a></h3><div class=excerpt><h6 id=preface宿舍传了一个wwwxiaohongshucom视频就是那个mimi和gulu混淆那个声音-然后传给一个复旦做aigc的爷想着要不要写个小工具玩玩鸽子叫><a class=anchor href=#preface宿舍传了一个wwwxiaohongshucom视频就是那个mimi和gulu混淆那个声音-然后传给一个复旦做aigc的爷想着要不要写个小工具玩玩鸽子叫>#</a> PREFACE：宿舍传了一个<a href=https://www.xiaohongshu.com/discovery/item/655e08f10000000032030e79?app_platform=ios&app_version=8.14.3&share_from_user_hidden=true&type=video&xhsshare=WeixinSession&appuid=61a4c0af000000000201859a&apptime=1700751420 rel=noopener target=_blank> www.xiaohongshu.com</a> 视频，就是那个 mimi 和 gulu 混淆那个声音。然后传给一个复旦做 aigc 的爷，想着要不要写个小工具玩玩 (鸽子叫)</h6><h6 id=这两天总算ddl弄了一下来做下子信息收集才发现已有一些研究><a class=anchor href=#这两天总算ddl弄了一下来做下子信息收集才发现已有一些研究>#</a> 这两天总算 ddl 弄了一下，来做下子信息收集，才发现已有一些研究</h6><p></div><a class=btn href=/2023/11/26/laurelAndYanny/ itemprop=url title=laurelAndYanny>more...</a></div></article><article class=item><div class=cover><a href=/2023/11/14/qemu%E8%B0%83%E8%AF%95%E8%AE%B0%E5%BD%95/ itemprop=url title=qemu调试记录><img alt="article cover" data-src=https://tva4.sinaimg.cn/mw690/6833939bly1giciryrr3rj20zk0m8nhk.jpg loading=lazy></a></div><div class=info><div class=meta><span title="Created: 2023-11-14 15:27:02" class=item><span class=icon><i class="ic i-calendar"></i></span><time itemprop="dateCreated datePublished" datetime=2023-11-14T15:27:02+08:00>2023-11-14</time></span><span title="Symbols count in article" class=item><span class=icon><i class="ic i-pen"></i></span><span>21</span><span class=text>words</span></span><span title="Reading time" class=item><span class=icon><i class="ic i-clock"></i></span><span>1 mins.</span></span></div><h3><a href=/2023/11/14/qemu%E8%B0%83%E8%AF%95%E8%AE%B0%E5%BD%95/ itemprop=url title=qemu调试记录>qemu调试记录</a></h3><div class=excerpt># PREFACE：记录一下</div><a class=btn href=/2023/11/14/qemu%E8%B0%83%E8%AF%95%E8%AE%B0%E5%BD%95/ itemprop=url title=qemu调试记录>more...</a></div></article></div></div><nav class=pagination><div class=inner><a class="extend prev" href=/page/4/ rel=prev><i aria-label="Previous page" class="ic i-angle-left"></i></a><a class=page-number href=/>1</a><span class=space>…</span><a class=page-number href=/page/4/>4</a><span class="page-number current">5</span><a class=page-number href=/page/6/>6</a><span class=space>…</span><a class=page-number href=/page/15/>15</a><a class="extend next" href=/page/6/ rel=next><i aria-label="Next page" class="ic i-angle-right"></i></a></div></nav></div><div id=sidebar><div class=inner><div class=panels><div class=inner><div class="contents panel pjax" data-title=Contents></div><div class="related panel pjax" data-title=Related></div><div class="overview panel" data-title=Overview><div class=author itemprop=author itemscope itemtype=http://schema.org/Person><img alt=Moyao class=image data-src=/assets/avatar.jpg itemprop=image loading=lazy><p class=name itemprop=name>Moyao<div class=description itemprop=description>Write down something interesting I met<br> Feel free to mail me if you have something wanted to talk about, plz mail: &LTmoyaoxue@outlook.com></div></div><nav class=state><div class="item posts"><a href=/archives/><span class=count>74</span><span class=name>posts</span></a></div><div class="item tags"><a href=/tags/><span class=count>14</span><span class=name>tags</span></a></div></nav><div class=social><a class="item github" href=https://github.com/name rel=noopener target=_blank title=https://github.com/name><i class="ic i-github"></i></a></div><div class=menu><li class=item><a href=/ rel=section><i class="ic i-home"></i>Home</a></div></div></div></div><ul id=quick><li class="prev pjax"><a title="Previous Post" href=/page/4/ rel=prev><i class="ic i-chevron-left"></i></a><li class=up><i class="ic i-arrow-up"></i><li class=down><i class="ic i-arrow-down"></i><li class="next pjax"><a title="Next Post" href=/page/6/ rel=next><i class="ic i-chevron-right"></i></a><li class=percent></ul></div></div><div class=dimmer></div></div></main><footer id=footer><div class=inner><div class=widgets><div class="rpost pjax"><h2>Random Posts</h2><ul><li class=item><div class=breadcrumb></div><span><a href=/2023/11/29/arm%E5%88%9D%E6%8E%A2/>arm初探</a></span><li class=item><div class=breadcrumb></div><span><a href=/2023/12/08/tctf/>tctf</a></span><li class=item><div class=breadcrumb></div><span><a href=/2024/03/28/flutter%E5%BC%80%E5%8F%91%E5%88%9D%E6%8E%A2/>flutter开发初探</a></span><li class=item><div class=breadcrumb></div><span><a href=/2023/10/01/mapleCTF2023/>mapleCTF2023</a></span><li class=item><div class=breadcrumb></div><span><a href=/2023/08/23/%E5%88%9D%E6%8E%A2flutter/>初探flutter</a></span><li class=item><div class=breadcrumb></div><span><a href=/2022/08/28/codeforce-1720C/>codeforce:1720C</a></span><li class=item><div class=breadcrumb></div><span><a href=/2023/08/09/hook%E6%9F%90%E8%81%8A%E5%A4%A9%E8%BD%AF%E4%BB%B6lab/>hook某聊天软件lab</a></span><li class=item><div class=breadcrumb></div><span><a href=/2023/09/18/%E9%B9%A4%E5%9F%8E2023/>鹤城2023</a></span><li class=item><div class=breadcrumb></div><span><a href=/2023/10/04/flare-on2023/>flare-on2023</a></span><li class=item><div class=breadcrumb></div><span><a href=/2022/11/02/hnctfRe/>hnctfRe</a></span></ul></div><div class="rpost pjax"><h2>Recent Comments</h2><ul class=leancloud-recent-comment id=new-comment></ul></div></div><div class=status><div class=copyright>© 2022 -<span itemprop=copyrightYear>2024</span><span class=with-love><i class="ic i-sakura rotate"></i></span><span class=author itemprop=copyrightHolder>Moyao @ Moyao の小屋</span></div><div class=count><span class=post-meta-item-icon><i class="ic i-chart-area"></i></span><span title="Symbols count total">649k words</span><span class=post-meta-divider>|</span><span class=post-meta-item-icon><i class="ic i-coffee"></i></span><span title="Reading time total">9:50</span></div><div class=powered-by>Powered by <a href=https://hexo.io/ rel=noopener target=_blank>Hexo</a> & Theme.<a href=https://github.com/theme-shoka-x/hexo-theme-shokaX/ rel=noopener target=_blank>ShokaX</a></div></div></div></footer></div><script data-config>var LOCAL = {
-        path: `page/5/`,
-        favicon: {
-        show: `(●´3｀●) Here we go again.`,
-        hide: `(´Д｀) It's a disaster!`
-    },
-    search: {
-        placeholder: "Search for Posts",
-        empty: "We didn't find any results for the search: ${query}",
-        stats: "${hits} results found in ${time} ms"
-    },
-    copy_tex: false,
-    katex: false,
-    mermaid: false,
-    audio: undefined,
-    fancybox: true,
-    nocopy: false,
-    outime: true,
-    template: `<div class="note warning"><p><span class="label warning">Article Timeliness Alert</span><br>This is an article published {{publish}} days ago and last updated {{updated}} days ago. Some information may have changed, so please be careful to screen it.</p></div>`,
-    quiz: {
-        choice: `Multiple Choice`,
-        multiple: `Multiple Answer`,
-        true_false: `True/False`,
-        essay: `Questions`,
-        gap_fill: `Gap Filling`,
-        mistake: `Wrong Answer`
-    },
-    ignores: [
-        (uri) => uri.includes('#'),
-        (uri) => new RegExp(LOCAL.path + '$').test(uri),
-            []
-    ]
-};</script><script src=https://cdn.bootcdn.net/ajax/libs/vue/3.3.4/vue.global.prod.min.js></script><script src=https://lf9-cdn-tos.bytecdntp.com/cdn/expire-6-M/pace/1.2.4/pace.min.js></script><script src=https://lf9-cdn-tos.bytecdntp.com/cdn/expire-6-M/algoliasearch/4.12.1/algoliasearch-lite.umd.min.js></script><script src=https://lf9-cdn-tos.bytecdntp.com/cdn/expire-6-M/instantsearch.js/4.39.0/instantsearch.production.min.js></script><script src=https://npm.webcache.cn/quicklink@2.3.0/dist/quicklink.umd.js></script><script src=/js/app.js?v=0.3.15></script>
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"demoyao100.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false,"trigger":"auto"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Write down something interesting I met Feel free to mail me if you have something wanted to talk about, plz mail: <moyaoxue@outlook.com>">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Moyao の小屋">
+<meta property="og:url" content="https://demoyao100.github.io/page/5/index.html">
+<meta property="og:site_name" content="Moyao の小屋">
+<meta property="og:description" content="Write down something interesting I met Feel free to mail me if you have something wanted to talk about, plz mail: <moyaoxue@outlook.com>">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="Moyao">
+<meta property="article:tag" content="CTF, Rev, Pwn, 渗透, Web Security">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://demoyao100.github.io/page/5/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"en","comments":"","permalink":"","path":"page/5/index.html","title":""}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Moyao の小屋 - Hi,I'm Moyaoxue</title>
+  
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-KKC145B2WB"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-KKC145B2WB","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope="" itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Moyao の小屋</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Hi,I'm Moyaoxue</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags.html" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories.html" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-about"><a href="/about.html" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80" placeholder="Searching..." spellcheck="false" type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Moyao" src="/images/avatar.webp">
+  <p class="site-author-name" itemprop="name">Moyao</p>
+  <div class="site-description" itemprop="description">Write down something interesting I met<br>
+Feel free to mail me if you have something wanted to talk about, plz
+mail: &lt;moyaoxue@outlook.com&gt;
+</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">74</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags.html">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="/moyaoxue@outlook.com" title="E-Mail → moyaoxue@outlook.com" rel="noopener me"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://demoyao100.github.io/2023/11/27/Ghidra%E5%88%9D%E6%8E%A2/">
+
+    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Moyao">
+    </span>
+
+    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Moyao の小屋">
+      <meta itemprop="description" content="Write down something interesting I met<br />
+Feel free to mail me if you have something wanted to talk about, plz
+mail: <moyaoxue@outlook.com>
+">
+    </span>
+
+    <span hidden="" itemprop="post" itemscope="" itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Moyao の小屋">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/11/27/Ghidra%E5%88%9D%E6%8E%A2/" class="post-title-link" itemprop="url">Ghidra初探</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-11-27 15:34:01" itemprop="dateCreated datePublished" datetime="2023-11-27T15:34:01+08:00">2023-11-27</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h6 id="preface之前是能不用就不用现在遇到第二次不用不行了xdm和ghidra爆了"><a class="anchor" href="#preface之前是能不用就不用现在遇到第二次不用不行了xdm和ghidra爆了">#</a> PREFACE：之前是能不用就不用，现在遇到第二次不用不行了，xdm，和 Ghidra 爆了！</h6>
+<h6 id="这一篇仅介绍ghidra一些操作开发等等暂时没这个水平5555555555"><a class="anchor" href="#这一篇仅介绍ghidra一些操作开发等等暂时没这个水平5555555555">#</a> 这一篇仅介绍 Ghidra 一些操作，开发等等暂时没这个水平 5555555555</h6>
+<p></p>
+          
+            <div class="post-button">
+              <a class="btn" href="/2023/11/27/Ghidra%E5%88%9D%E6%8E%A2/#more" rel="contents">
+                Read more »
+              </a>
+            </div>
+          
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://demoyao100.github.io/2023/11/27/%E3%80%8A%E6%9D%80%E6%AD%BB%E4%B8%80%E5%8F%AA%E7%9F%A5%E6%9B%B4%E9%B8%9F%E3%80%8B/">
+
+    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Moyao">
+    </span>
+
+    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Moyao の小屋">
+      <meta itemprop="description" content="Write down something interesting I met<br />
+Feel free to mail me if you have something wanted to talk about, plz
+mail: <moyaoxue@outlook.com>
+">
+    </span>
+
+    <span hidden="" itemprop="post" itemscope="" itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Moyao の小屋">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/11/27/%E3%80%8A%E6%9D%80%E6%AD%BB%E4%B8%80%E5%8F%AA%E7%9F%A5%E6%9B%B4%E9%B8%9F%E3%80%8B/" class="post-title-link" itemprop="url">《杀死一只知更鸟》</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-11-27 08:54:41" itemprop="dateCreated datePublished" datetime="2023-11-27T08:54:41+08:00">2023-11-27</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h6 id="preface推荐读物感觉以后专门开个分区"><a class="anchor" href="#preface推荐读物感觉以后专门开个分区">#</a> PREFACE：推荐读物，感觉以后专门开个分区</h6>
+<h6 id="todo修一下博客的分类功能"><a class="anchor" href="#todo修一下博客的分类功能">#</a> TODO：修一下博客的分类功能</h6>
+<p></p>
+          
+            <div class="post-button">
+              <a class="btn" href="/2023/11/27/%E3%80%8A%E6%9D%80%E6%AD%BB%E4%B8%80%E5%8F%AA%E7%9F%A5%E6%9B%B4%E9%B8%9F%E3%80%8B/#more" rel="contents">
+                Read more »
+              </a>
+            </div>
+          
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://demoyao100.github.io/2023/11/26/das202311%E6%9C%88%E8%B5%9B/">
+
+    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Moyao">
+    </span>
+
+    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Moyao の小屋">
+      <meta itemprop="description" content="Write down something interesting I met<br />
+Feel free to mail me if you have something wanted to talk about, plz
+mail: <moyaoxue@outlook.com>
+">
+    </span>
+
+    <span hidden="" itemprop="post" itemscope="" itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Moyao の小屋">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/11/26/das202311%E6%9C%88%E8%B5%9B/" class="post-title-link" itemprop="url">das202311月赛</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-11-26 18:50:08" itemprop="dateCreated datePublished" datetime="2023-11-26T18:50:08+08:00">2023-11-26</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h6 id="preface说实话一直打不明白这个das这今年最后一次算是比较认真打的一次最后是稳稳第一拿下了但是好像和我关系不大不能说没有贡献吧但是光自己做肯定是差很多的还是tcl5555555"><a class="anchor" href="#preface说实话一直打不明白这个das这今年最后一次算是比较认真打的一次最后是稳稳第一拿下了但是好像和我关系不大不能说没有贡献吧但是光自己做肯定是差很多的还是tcl5555555">#</a> PREFACE：说实话一直打不明白这个 das，这今年最后一次算是比较认真打的一次，最后是稳稳第一拿下了但是好像和我关系不大... 不能说没有贡献吧但是光自己做肯定是差很多的... 还是 tcl5555555</h6>
+<p></p>
+          
+            <div class="post-button">
+              <a class="btn" href="/2023/11/26/das202311%E6%9C%88%E8%B5%9B/#more" rel="contents">
+                Read more »
+              </a>
+            </div>
+          
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://demoyao100.github.io/2023/11/26/laurelAndYanny/">
+
+    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Moyao">
+    </span>
+
+    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Moyao の小屋">
+      <meta itemprop="description" content="Write down something interesting I met<br />
+Feel free to mail me if you have something wanted to talk about, plz
+mail: <moyaoxue@outlook.com>
+">
+    </span>
+
+    <span hidden="" itemprop="post" itemscope="" itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Moyao の小屋">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/11/26/laurelAndYanny/" class="post-title-link" itemprop="url">laurelAndYanny</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-11-26 18:26:56" itemprop="dateCreated datePublished" datetime="2023-11-26T18:26:56+08:00">2023-11-26</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h6 id="preface宿舍传了一个wwwxiaohongshucom视频就是那个mimi和gulu混淆那个声音-然后传给一个复旦做aigc的爷想着要不要写个小工具玩玩鸽子叫"><a class="anchor" href="#preface宿舍传了一个wwwxiaohongshucom视频就是那个mimi和gulu混淆那个声音-然后传给一个复旦做aigc的爷想着要不要写个小工具玩玩鸽子叫">#</a> PREFACE：宿舍传了一个<a target="_blank" rel="noopener" href="https://www.xiaohongshu.com/discovery/item/655e08f10000000032030e79?app_platform=ios&amp;app_version=8.14.3&amp;share_from_user_hidden=true&amp;type=video&amp;xhsshare=WeixinSession&amp;appuid=61a4c0af000000000201859a&amp;apptime=1700751420"> www.xiaohongshu.com</a> 视频，就是那个 mimi 和 gulu 混淆那个声音。然后传给一个复旦做 aigc 的爷，想着要不要写个小工具玩玩 (鸽子叫)</h6>
+<h6 id="这两天总算ddl弄了一下来做下子信息收集才发现已有一些研究"><a class="anchor" href="#这两天总算ddl弄了一下来做下子信息收集才发现已有一些研究">#</a> 这两天总算 ddl 弄了一下，来做下子信息收集，才发现已有一些研究</h6>
+<p></p>
+          
+            <div class="post-button">
+              <a class="btn" href="/2023/11/26/laurelAndYanny/#more" rel="contents">
+                Read more »
+              </a>
+            </div>
+          
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://demoyao100.github.io/2023/11/14/qemu%E8%B0%83%E8%AF%95%E8%AE%B0%E5%BD%95/">
+
+    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Moyao">
+    </span>
+
+    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Moyao の小屋">
+      <meta itemprop="description" content="Write down something interesting I met<br />
+Feel free to mail me if you have something wanted to talk about, plz
+mail: <moyaoxue@outlook.com>
+">
+    </span>
+
+    <span hidden="" itemprop="post" itemscope="" itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Moyao の小屋">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/11/14/qemu%E8%B0%83%E8%AF%95%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">qemu调试记录</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-11-14 15:27:02" itemprop="dateCreated datePublished" datetime="2023-11-14T15:27:02+08:00">2023-11-14</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h6 id="preface记录一下"><a class="anchor" href="#preface记录一下">#</a> PREFACE：记录一下</h6>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">…</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">…</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/6/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    © 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Moyao</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> &amp; <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+
+
+</body></html>

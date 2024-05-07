@@ -1,36 +1,384 @@
-<!doctypehtml><html lang=en><meta charset=UTF-8><meta content=width=device-width,initial-scale=1,maximum-scale=2 name=viewport><meta content=#222 name=theme-color><meta content=IE=edge,chrome=1 http-equiv=X-UA-COMPATIBLE><meta content=webkit name=renderer><link href=/assets/favicon.ico rel=icon sizes=32x32 type=image/ico><link href=/assets/apple-touch-icon.png rel=apple-touch-icon sizes=180x180><link href=/rss.xml rel=alternate title=rev@天枢 type=application/rss+xml><link href=/atom.xml rel=alternate title=rev@天枢 type=application/atom+xml><link href=https://demoyao100.github.io/feed.json rel=alternate title=rev@天枢 type=application/json><link href=https://lf9-cdn-tos.bytecdntp.com rel=preconnect><link href=https://cdn.jsdelivr.net rel=dns-prefetch><link href=https://unpkg.com rel=dns-prefetch><link href=https://fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext rel=stylesheet><link href=/css/app.css?v=0.3.15 rel=stylesheet><meta content=re, name=keywords><link href=https://demoyao100.github.io/2023/08/28/%E5%AE%89%E5%8D%93hook%E5%88%9D%E6%8E%A2/ rel=canonical><title>安卓hook初探</title><meta content="Hexo 7.0.0" name=generator><body itemscope itemtype=http://schema.org/WebPage><div id=loading><div class=cat><div class=body></div><div class=head><div class=face></div></div><div class=foot><div class=tummy-end></div><div class=bottom></div><div class="legs left"></div><div class="legs right"></div></div><div class=paw><div class="hands left"></div><div class="hands right"></div></div></div></div><div id=container><header id=header itemscope itemtype=http://schema.org/WPHeader><div class=inner><div id=brand><div class=pjax><h1 itemprop="name headline">安卓hook初探</h1><div class=meta><span title="Created: 2023-08-28 10:49:54" class=item><span class=icon><i class="ic i-calendar"></i></span><span class=text>Posted on</span><time itemprop="dateCreated datePublished" datetime=2023-08-28T10:49:54+08:00>2023-08-28</time></span><span title="Symbols count in article" class=item><span class=icon><i class="ic i-pen"></i></span><span class=text>Symbols count in article</span><span>1.1k</span><span class=text>words</span></span><span title="Reading time" class=item><span class=icon><i class="ic i-clock"></i></span><span class=text>Reading time</span><span>1 mins.</span></span></div></div></div><nav id=nav><div class=inner><div class=toggle><div aria-label="Toggle navigation bar" class=lines><span class=line></span><span class=line></span><span class=line></span></div></div><ul class=menu><li class="item title"><a href=/ rel=start>Moyao の小屋</a></ul><ul class=right id=rightNav><li class="item theme" @click=changeThemeByBtn><i :class="{'i-sun': !themeStatus,'i-moon': themeStatus}" class=ic></i><li class="item search"><i class="ic i-search"></i></ul></div></nav></div><div class=pjax id=imgs><img src=https://tva4.sinaimg.cn/mw690/6833939bly1gicitcxhpij20zk0m8hdt.jpg></div></header><div id=waves><svg viewbox="0 24 150 28" class=waves preserveaspectratio=none shape-rendering=auto xmlns=http://www.w3.org/2000/svg xmlns:xlink=http://www.w3.org/1999/xlink><defs><path d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" id=gentle-wave></path></defs><g class=parallax><use x=48 xlink:href=#gentle-wave y=0></use><use x=48 xlink:href=#gentle-wave y=3></use><use x=48 xlink:href=#gentle-wave y=5></use><use x=48 xlink:href=#gentle-wave y=7></use></g></svg></div><main><div class=inner><div class=pjax id=main><div class="article wrap"><div class=breadcrumb itemlistelement itemscope itemtype=https://schema.org/BreadcrumbList><i class="ic i-home"></i><span><a href=/>Home</a></span></div><article class="post block" itemscope itemtype=http://schema.org/Article lang=en><link href=https://demoyao100.github.io/2023/08/28/%E5%AE%89%E5%8D%93hook%E5%88%9D%E6%8E%A2/ itemprop=mainEntityOfPage><span hidden itemprop=author itemscope itemtype=http://schema.org/Person><meta content=/assets/avatar.jpg itemprop=image><meta content=Moyao itemprop=name><meta content="Hi,I'm Moyaoxue, Write down something interesting I met<br />
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"demoyao100.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false,"trigger":"auto"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="# preface: 隐约记得之前弄过一次，但是这次换了个环境折腾了一整天吧还挺麻烦的，总之记录一下后面搞起来方便.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="安卓hook初探">
+<meta property="og:url" content="https://demoyao100.github.io/2023/08/28/%E5%AE%89%E5%8D%93hook%E5%88%9D%E6%8E%A2/index.html">
+<meta property="og:site_name" content="Moyao の小屋">
+<meta property="og:description" content="# preface: 隐约记得之前弄过一次，但是这次换了个环境折腾了一整天吧还挺麻烦的，总之记录一下后面搞起来方便.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://demoyao100.github.io/2023/08/28/%E5%AE%89%E5%8D%93hook%E5%88%9D%E6%8E%A2/image-20230828105143258.png">
+<meta property="article:published_time" content="2023-08-28T02:49:54.000Z">
+<meta property="article:modified_time" content="2024-05-05T01:48:01.813Z">
+<meta property="article:author" content="Moyao">
+<meta property="article:tag" content="re">
+<meta property="article:tag" content="Android">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://demoyao100.github.io/2023/08/28/%E5%AE%89%E5%8D%93hook%E5%88%9D%E6%8E%A2/image-20230828105143258.png">
+
+
+<link rel="canonical" href="https://demoyao100.github.io/2023/08/28/%E5%AE%89%E5%8D%93hook%E5%88%9D%E6%8E%A2/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://demoyao100.github.io/2023/08/28/%E5%AE%89%E5%8D%93hook%E5%88%9D%E6%8E%A2/","path":"2023/08/28/安卓hook初探/","title":"安卓hook初探"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>安卓hook初探 | Moyao の小屋</title>
+  
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-KKC145B2WB"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-KKC145B2WB","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope="" itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Moyao の小屋</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Hi,I'm Moyaoxue</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags.html" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories.html" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-about"><a href="/about.html" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80" placeholder="Searching..." spellcheck="false" type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-6"><a class="nav-link" href="#preface-%E9%9A%90%E7%BA%A6%E8%AE%B0%E5%BE%97%E4%B9%8B%E5%89%8D%E5%BC%84%E8%BF%87%E4%B8%80%E6%AC%A1%E4%BD%86%E6%98%AF%E8%BF%99%E6%AC%A1%E6%8D%A2%E4%BA%86%E4%B8%AA%E7%8E%AF%E5%A2%83%E6%8A%98%E8%85%BE%E4%BA%86%E4%B8%80%E6%95%B4%E5%A4%A9%E5%90%A7%E8%BF%98%E6%8C%BA%E9%BA%BB%E7%83%A6%E7%9A%84%E6%80%BB%E4%B9%8B%E8%AE%B0%E5%BD%95%E4%B8%80%E4%B8%8B%E5%90%8E%E9%9D%A2%E6%90%9E%E8%B5%B7%E6%9D%A5%E6%96%B9%E4%BE%BF"><span class="nav-number">1.</span> <span class="nav-text"> preface: 隐约记得之前弄过一次，但是这次换了个环境折腾了一整天吧还挺麻烦的，总之记录一下后面搞起来方便.</span></a></li></ol><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83mumu12%E6%A8%A1%E6%8B%9F%E5%99%A8"><span class="nav-number"></span> <span class="nav-text"> 环境：mumu12 模拟器</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#adb%E8%BF%9E%E6%8E%A5"><span class="nav-number">1.</span> <span class="nav-text"> adb 连接：</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5adbexe-connect-127001-%E6%96%AD%E5%BC%80adbexe-disconnect-127001"><span class="nav-number"></span> <span class="nav-text"> 连接： adb.exe connect 127.0.0.1:*****   断开： adb.exe disconnect 127.0.0.1:*****</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A3%80%E6%9F%A5%E8%AE%BE%E5%A4%87adbexe-devices"><span class="nav-number"></span> <span class="nav-text"> 检查设备： adb.exe devices</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#shell-adb-s-127001-shell-%E6%88%96-adb-shell"><span class="nav-number"></span> <span class="nav-text"> shell:  adb -s 127.0.0.1:***** shell  或  adb shell</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%89%8B%E6%9C%BAcpu%E6%9E%B6%E6%9E%84-getprop-roproductcpuabi"><span class="nav-number"></span> <span class="nav-text"> 查看手机 CPU 架构 ：  getprop ro.product.cpu.abi</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%89%BE%E5%88%B0%E5%AF%B9%E5%BA%94frida-server-frida-version%E6%A3%80%E6%9F%A5%E6%9C%AC%E6%9C%BAfrida%E7%89%88%E6%9C%ACreleases-fridafrida-githubcom"><span class="nav-number"></span> <span class="nav-text"> 找到对应 frida server：  frida version  检查本机 frida 版本 Releases・frida/frida (github.com)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BF%90%E8%A1%8Cfrida-server-adb-push-frida-server-datalocaltmp"><span class="nav-number"></span> <span class="nav-text"> 运行 frida server:  adb push frida-server /data/local/tmp/</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#cd-datalocaltmp"><span class="nav-number"></span> <span class="nav-text">  cd /data/local/tmp</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#frida-server"><span class="nav-number"></span> <span class="nav-text">  ./frida-server</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%94%B5%E8%84%91%E6%9F%A5%E7%9C%8B%E6%89%8B%E6%9C%BA%E6%AD%A3%E5%9C%A8%E8%BF%90%E8%A1%8C%E7%9A%84%E8%BF%9B%E7%A8%8Bfirda-ps-u"><span class="nav-number"></span> <span class="nav-text"> 电脑查看手机正在运行的进程： firda-ps -U</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91-adb-forward-tcp27042-tcp27042"><span class="nav-number"></span> <span class="nav-text"> 端口转发:  adb forward tcp:27042 tcp:27042</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%8C%85%E5%90%8D"><span class="nav-number"></span> <span class="nav-text"> 查看包名：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BF%90%E8%A1%8Cfrida%E8%84%9A%E6%9C%ACfrida-u-l-your-scriptjs-f-comyourapppackage"><span class="nav-number"></span> <span class="nav-text"> 运行 frida 脚本: frida -U -l your-script.js -f com.yourapp.package</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#frida%E6%A3%80%E6%9F%A5%E5%8C%85%E5%90%8Dadb-shell-pm-list-packages-grep"><span class="nav-number"></span> <span class="nav-text"> frida 检查包名： adb shell pm list packages | grep ***</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#gg%E4%BF%AE%E6%94%B9%E5%99%A8-httpsgameguardiannetforumfilesfile2-gameguardian"><span class="nav-number"></span> <span class="nav-text"> gg 修改器:    https://gameguardian.net/forum/files/file/2-gameguardian/</span></a></li></div>
+        </div>
+        
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Moyao" src="/images/avatar.webp">
+  <p class="site-author-name" itemprop="name">Moyao</p>
+  <div class="site-description" itemprop="description">Write down something interesting I met<br>
 Feel free to mail me if you have something wanted to talk about, plz
-mail: &amplt;moyaoxue@outlook.com&ampgt;
-" itemprop=description></span><span hidden itemprop=publisher itemscope itemtype=http://schema.org/Organization><meta content=rev@天枢 itemprop=name></span><div class="body md" itemprop=articleBody><h6 id=preface-隐约记得之前弄过一次但是这次换了个环境折腾了一整天吧还挺麻烦的总之记录一下后面搞起来方便><a class=anchor href=#preface-隐约记得之前弄过一次但是这次换了个环境折腾了一整天吧还挺麻烦的总之记录一下后面搞起来方便>#</a> preface: 隐约记得之前弄过一次，但是这次换了个环境折腾了一整天吧还挺麻烦的，总之记录一下后面搞起来方便.</h6><p><span id=more></span><hr><h5 id=环境mumu12模拟器><a class=anchor href=#环境mumu12模拟器>#</a> 环境：mumu12 模拟器</h5><h6 id=adb连接><a class=anchor href=#adb连接>#</a> adb 连接：</h6><p><img alt=image-20230828105143258 data-src=%E5%AE%89%E5%8D%93hook%E5%88%9D%E6%8E%A2/image-20230828105143258.png loading=lazy><h5 id=连接adbexe-connect-127001-断开adbexe-disconnect-127001><a class=anchor href=#连接adbexe-connect-127001-断开adbexe-disconnect-127001>#</a> 连接： <code>adb.exe connect 127.0.0.1:*****</code> 断开： <code>adb.exe disconnect 127.0.0.1:*****</code></h5><h5 id=检查设备adbexe-devices><a class=anchor href=#检查设备adbexe-devices>#</a> 检查设备： <code>adb.exe devices</code></h5><h5 id=shell-adb-s-127001-shell-或-adb-shell><a class=anchor href=#shell-adb-s-127001-shell-或-adb-shell>#</a> shell: <code>adb -s 127.0.0.1:***** shell</code> 或 <code>adb shell</code></h5><hr><h5 id=查看手机cpu架构-getprop-roproductcpuabi><a class=anchor href=#查看手机cpu架构-getprop-roproductcpuabi>#</a> 查看手机 CPU 架构 ： <code>getprop ro.product.cpu.abi</code></h5><h5 id=找到对应frida-server-frida-version检查本机frida版本releases-fridafrida-githubcom><a class=anchor href=#找到对应frida-server-frida-version检查本机frida版本releases-fridafrida-githubcom>#</a> 找到对应 frida server： <code>frida version</code> 检查本机 frida 版本<a href=https://github.com/frida/frida/releases rel=noopener target=_blank> Releases・frida/frida (github.com)</a></h5><h5 id=运行frida-server-adb-push-frida-server-datalocaltmp><a class=anchor href=#运行frida-server-adb-push-frida-server-datalocaltmp>#</a> 运行 frida server: <code>adb push frida-server /data/local/tmp/</code></h5><h5 id=cd-datalocaltmp><a class=anchor href=#cd-datalocaltmp>#</a> <code>cd /data/local/tmp</code></h5><h5 id=frida-server><a class=anchor href=#frida-server>#</a> <code>./frida-server</code></h5><h5 id=电脑查看手机正在运行的进程firda-ps-u><a class=anchor href=#电脑查看手机正在运行的进程firda-ps-u>#</a> 电脑查看手机正在运行的进程： <code>firda-ps -U</code></h5><h5 id=端口转发-adb-forward-tcp27042-tcp27042><a class=anchor href=#端口转发-adb-forward-tcp27042-tcp27042>#</a> 端口转发: <code>adb forward tcp:27042 tcp:27042</code></h5><h5 id=查看包名><a class=anchor href=#查看包名>#</a> 查看包名：</h5><figure class="highlight text"><figcaption data-lang=text></figcaption><table><tr><td data-num=1><td><pre>#查看进程中的信息</pre><tr><td data-num=2><td><pre>#process = frida.get_usb_device().enumerate_processes()</pre><tr><td data-num=3><td><pre>#print(process)</pre><tr><td data-num=4><td><pre></pre><tr><td data-num=5><td><pre>1.新开一个shell输入命令：</pre><tr><td data-num=6><td><pre>adb shell am monitor</pre><tr><td data-num=7><td><pre>2.启动需要获取包名的应用</pre></table></figure><hr><h5 id=运行frida脚本frida-u-l-your-scriptjs-f-comyourapppackage><a class=anchor href=#运行frida脚本frida-u-l-your-scriptjs-f-comyourapppackage>#</a> 运行 frida 脚本: <code>frida -U -l your-script.js -f com.yourapp.package</code></h5><h5 id=frida检查包名adb-shell-pm-list-packages-grep><a class=anchor href=#frida检查包名adb-shell-pm-list-packages-grep>#</a> frida 检查包名： <code>adb shell pm list packages | grep ***</code></h5><hr><h5 id=gg修改器-httpsgameguardiannetforumfilesfile2-gameguardian><a class=anchor href=#gg修改器-httpsgameguardiannetforumfilesfile2-gameguardian>#</a> gg 修改器: <a href=https://gameguardian.net/forum/files/file/2-gameguardian/ rel=noopener target=_blank>https://gameguardian.net/forum/files/file/2-gameguardian/</a></h5><div class=tags><a href=/tags/re/ rel=tag><i class="ic i-tag"></i>re</a><a href=/tags/Android/ rel=tag><i class="ic i-tag"></i>Android</a></div></div><footer><div class=meta><span class=item><span class=icon><i class="ic i-calendar-check"></i></span><span class=text>Edited on</span><time title="Modified: 2024-05-05 09:48:01" datetime=2024-05-05T09:48:01+08:00 itemprop=dateModified>2024-05-05</time></span></div><div class=reward><button><i class="ic i-heartbeat"></i>Donate</button><p>Give me a cup of [coffee]~(￣▽￣)~*<div id=qr><div><img alt="Moyao WeChat Pay" data-src=/assets/wechatpay.png loading=lazy><p>WeChat Pay</div><div><img alt="Moyao Alipay" data-src=/assets/alipay.png loading=lazy><p>Alipay</div></div></div><div id=copyright><ul><li class=author><strong>Post author: </strong>Moyao<i class="ic i-at"><em>@</em></i>rev@天枢<li class=link><strong>Post link: </strong><a href=https://demoyao100.github.io/2023/08/28/%E5%AE%89%E5%8D%93hook%E5%88%9D%E6%8E%A2/ title=安卓hook初探>https://demoyao100.github.io/2023/08/28/安卓hook初探/</a><li class=license><strong>Copyright Notice: </strong>All articles in this blog are licensed under <a href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh rel=noopener target=_blank><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</a> unless stating additionally.</ul></div></footer></article></div><div class=post-nav><div class="item left"><a data-background-image=https://tva4.sinaimg.cn/mw690/6833939bly1gicitcxhpij20zk0m8hdt.jpg href=/2023/08/26/%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91%E4%BB%A5%E5%8F%8A%E5%85%B6%E4%BB%96%E6%9E%B6%E6%9E%84%E9%80%86%E5%90%91%E5%88%9D%E6%8E%A2/ itemprop=url rel=prev title=交叉编译以及其他架构逆向初探><span class=type>Previous Post</span><h3>交叉编译以及其他架构逆向初探</h3></a></div><div class="item right"><a data-background-image=https://tva4.sinaimg.cn/mw690/6833939bly1giciryrr3rj20zk0m8nhk.jpg href=/2023/09/03/%E7%BE%8A%E5%9F%8E%E6%9D%AF2023/ itemprop=url rel=next title=羊城杯2023><span class=type>Next Post</span><h3>羊城杯2023</h3></a></div></div></div><div id=sidebar><div class=inner><div class=panels><div class=inner><div class="contents panel pjax" data-title=Contents><ol class=toc><li class="toc-item toc-level-6"><a class=toc-link href=#preface-%E9%9A%90%E7%BA%A6%E8%AE%B0%E5%BE%97%E4%B9%8B%E5%89%8D%E5%BC%84%E8%BF%87%E4%B8%80%E6%AC%A1%E4%BD%86%E6%98%AF%E8%BF%99%E6%AC%A1%E6%8D%A2%E4%BA%86%E4%B8%AA%E7%8E%AF%E5%A2%83%E6%8A%98%E8%85%BE%E4%BA%86%E4%B8%80%E6%95%B4%E5%A4%A9%E5%90%A7%E8%BF%98%E6%8C%BA%E9%BA%BB%E7%83%A6%E7%9A%84%E6%80%BB%E4%B9%8B%E8%AE%B0%E5%BD%95%E4%B8%80%E4%B8%8B%E5%90%8E%E9%9D%A2%E6%90%9E%E8%B5%B7%E6%9D%A5%E6%96%B9%E4%BE%BF><span class=toc-number>1.</span> <span class=toc-text> preface: 隐约记得之前弄过一次，但是这次换了个环境折腾了一整天吧还挺麻烦的，总之记录一下后面搞起来方便.</span></a></ol><li class="toc-item toc-level-5"><a class=toc-link href=#%E7%8E%AF%E5%A2%83mumu12%E6%A8%A1%E6%8B%9F%E5%99%A8><span class=toc-number></span> <span class=toc-text> 环境：mumu12 模拟器</span></a><ol class=toc-child><li class="toc-item toc-level-6"><a class=toc-link href=#adb%E8%BF%9E%E6%8E%A5><span class=toc-number>1.</span> <span class=toc-text> adb 连接：</span></a></ol><li class="toc-item toc-level-5"><a class=toc-link href=#%E8%BF%9E%E6%8E%A5adbexe-connect-127001-%E6%96%AD%E5%BC%80adbexe-disconnect-127001><span class=toc-number></span> <span class=toc-text> 连接： adb.exe connect 127.0.0.1:***** 断开： adb.exe disconnect 127.0.0.1:*****</span></a><li class="toc-item toc-level-5"><a class=toc-link href=#%E6%A3%80%E6%9F%A5%E8%AE%BE%E5%A4%87adbexe-devices><span class=toc-number></span> <span class=toc-text> 检查设备： adb.exe devices</span></a><li class="toc-item toc-level-5"><a class=toc-link href=#shell-adb-s-127001-shell-%E6%88%96-adb-shell><span class=toc-number></span> <span class=toc-text> shell: adb -s 127.0.0.1:***** shell 或 adb shell</span></a><li class="toc-item toc-level-5"><a class=toc-link href=#%E6%9F%A5%E7%9C%8B%E6%89%8B%E6%9C%BAcpu%E6%9E%B6%E6%9E%84-getprop-roproductcpuabi><span class=toc-number></span> <span class=toc-text> 查看手机 CPU 架构 ： getprop ro.product.cpu.abi</span></a><li class="toc-item toc-level-5"><a class=toc-link href=#%E6%89%BE%E5%88%B0%E5%AF%B9%E5%BA%94frida-server-frida-version%E6%A3%80%E6%9F%A5%E6%9C%AC%E6%9C%BAfrida%E7%89%88%E6%9C%ACreleases-fridafrida-githubcom><span class=toc-number></span> <span class=toc-text> 找到对应 frida server： frida version 检查本机 frida 版本 Releases・frida/frida (github.com)</span></a><li class="toc-item toc-level-5"><a class=toc-link href=#%E8%BF%90%E8%A1%8Cfrida-server-adb-push-frida-server-datalocaltmp><span class=toc-number></span> <span class=toc-text> 运行 frida server: adb push frida-server /data/local/tmp/</span></a><li class="toc-item toc-level-5"><a class=toc-link href=#cd-datalocaltmp><span class=toc-number></span> <span class=toc-text> cd /data/local/tmp</span></a><li class="toc-item toc-level-5"><a class=toc-link href=#frida-server><span class=toc-number></span> <span class=toc-text> ./frida-server</span></a><li class="toc-item toc-level-5"><a class=toc-link href=#%E7%94%B5%E8%84%91%E6%9F%A5%E7%9C%8B%E6%89%8B%E6%9C%BA%E6%AD%A3%E5%9C%A8%E8%BF%90%E8%A1%8C%E7%9A%84%E8%BF%9B%E7%A8%8Bfirda-ps-u><span class=toc-number></span> <span class=toc-text> 电脑查看手机正在运行的进程： firda-ps -U</span></a><li class="toc-item toc-level-5"><a class=toc-link href=#%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91-adb-forward-tcp27042-tcp27042><span class=toc-number></span> <span class=toc-text> 端口转发: adb forward tcp:27042 tcp:27042</span></a><li class="toc-item toc-level-5"><a class=toc-link href=#%E6%9F%A5%E7%9C%8B%E5%8C%85%E5%90%8D><span class=toc-number></span> <span class=toc-text> 查看包名：</span></a><li class="toc-item toc-level-5"><a class=toc-link href=#%E8%BF%90%E8%A1%8Cfrida%E8%84%9A%E6%9C%ACfrida-u-l-your-scriptjs-f-comyourapppackage><span class=toc-number></span> <span class=toc-text> 运行 frida 脚本: frida -U -l your-script.js -f com.yourapp.package</span></a><li class="toc-item toc-level-5"><a class=toc-link href=#frida%E6%A3%80%E6%9F%A5%E5%8C%85%E5%90%8Dadb-shell-pm-list-packages-grep><span class=toc-number></span> <span class=toc-text> frida 检查包名： adb shell pm list packages | grep ***</span></a><li class="toc-item toc-level-5"><a class=toc-link href=#gg%E4%BF%AE%E6%94%B9%E5%99%A8-httpsgameguardiannetforumfilesfile2-gameguardian><span class=toc-number></span> <span class=toc-text> gg 修改器: https://gameguardian.net/forum/files/file/2-gameguardian/</span></a></div><div class="related panel pjax" data-title=Related></div><div class="overview panel" data-title=Overview><div class=author itemprop=author itemscope itemtype=http://schema.org/Person><img alt=Moyao class=image data-src=/assets/avatar.jpg itemprop=image loading=lazy><p class=name itemprop=name>Moyao<div class=description itemprop=description>Write down something interesting I met<br> Feel free to mail me if you have something wanted to talk about, plz mail: &LTmoyaoxue@outlook.com></div></div><nav class=state><div class="item posts"><a href=/archives/><span class=count>74</span><span class=name>posts</span></a></div><div class="item tags"><a href=/tags/><span class=count>14</span><span class=name>tags</span></a></div></nav><div class=social><a class="item github" href=https://github.com/name rel=noopener target=_blank title=https://github.com/name><i class="ic i-github"></i></a></div><div class=menu><li class=item><a href=/ rel=section><i class="ic i-home"></i>Home</a></div></div></div></div><ul id=quick><li class="prev pjax"><a title="Previous Post" href=/2023/09/03/%E7%BE%8A%E5%9F%8E%E6%9D%AF2023/ rel=prev><i class="ic i-chevron-left"></i></a><li class=up><i class="ic i-arrow-up"></i><li class=down><i class="ic i-arrow-down"></i><li class="next pjax"><a title="Next Post" href=/2023/08/26/%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91%E4%BB%A5%E5%8F%8A%E5%85%B6%E4%BB%96%E6%9E%B6%E6%9E%84%E9%80%86%E5%90%91%E5%88%9D%E6%8E%A2/ rel=next><i class="ic i-chevron-right"></i></a><li class=percent></ul></div></div><div class=dimmer></div></div></main><footer id=footer><div class=inner><div class=widgets><div class="rpost pjax"><h2>Random Posts</h2><ul><li class=item><div class=breadcrumb></div><span><a href=/2023/09/06/electron-%E6%89%93%E5%8C%85/>electron 打包</a></span><li class=item><div class=breadcrumb></div><span><a href=/2024/04/14/web%E5%85%A5%E9%97%A8%E6%93%8D%E4%BD%9C/>web入门操作</a></span><li class=item><div class=breadcrumb></div><span><a href=/2022/08/27/arknights-recruit-calculator/>arknights recruit calculator(1)</a></span><li class=item><div class=breadcrumb></div><span><a href=/2023/07/11/d3ctf-2023/>d3ctf 2023</a></span><li class=item><div class=breadcrumb></div><span><a href=/2023/12/08/tctf/>tctf</a></span><li class=item><div class=breadcrumb></div><span><a href=/2023/09/18/%E9%B9%A4%E5%9F%8E2023/>鹤城2023</a></span><li class=item><div class=breadcrumb></div><span><a href=/2024/05/03/selinux%E5%88%9D%E6%8E%A2/>selinux初探</a></span><li class=item><div class=breadcrumb></div><span><a href=/2023/11/27/%E3%80%8A%E6%9D%80%E6%AD%BB%E4%B8%80%E5%8F%AA%E7%9F%A5%E6%9B%B4%E9%B8%9F%E3%80%8B/>《杀死一只知更鸟》</a></span><li class=item><div class=breadcrumb></div><span><a href=/2022/09/02/codeforce-817E/>codeforce-817E</a></span><li class=item><div class=breadcrumb></div><span><a href=/2022/08/29/codeforce-1719C/>codeforce-1719C</a></span></ul></div><div class="rpost pjax"><h2>Recent Comments</h2><ul class=leancloud-recent-comment id=new-comment></ul></div></div><div class=status><div class=copyright>© 2022 -<span itemprop=copyrightYear>2024</span><span class=with-love><i class="ic i-sakura rotate"></i></span><span class=author itemprop=copyrightHolder>Moyao @ Moyao の小屋</span></div><div class=count><span class=post-meta-item-icon><i class="ic i-chart-area"></i></span><span title="Symbols count total">649k words</span><span class=post-meta-divider>|</span><span class=post-meta-item-icon><i class="ic i-coffee"></i></span><span title="Reading time total">9:50</span></div><div class=powered-by>Powered by <a href=https://hexo.io/ rel=noopener target=_blank>Hexo</a> & Theme.<a href=https://github.com/theme-shoka-x/hexo-theme-shokaX/ rel=noopener target=_blank>ShokaX</a></div></div></div></footer></div><script data-config>var LOCAL = {
-        path: `2023/08/28/安卓hook初探/`,
-        favicon: {
-        show: `(●´3｀●) Here we go again.`,
-        hide: `(´Д｀) It's a disaster!`
-    },
-    search: {
-        placeholder: "Search for Posts",
-        empty: "We didn't find any results for the search: ${query}",
-        stats: "${hits} results found in ${time} ms"
-    },
-    copy_tex: false,
-    katex: false,
-    mermaid: false,
-    audio: undefined,
-    fancybox: true,
-    nocopy: false,
-    outime: true,
-    template: `<div class="note warning"><p><span class="label warning">Article Timeliness Alert</span><br>This is an article published {{publish}} days ago and last updated {{updated}} days ago. Some information may have changed, so please be careful to screen it.</p></div>`,
-    quiz: {
-        choice: `Multiple Choice`,
-        multiple: `Multiple Answer`,
-        true_false: `True/False`,
-        essay: `Questions`,
-        gap_fill: `Gap Filling`,
-        mistake: `Wrong Answer`
-    },
-    ignores: [
-        (uri) => uri.includes('#'),
-        (uri) => new RegExp(LOCAL.path + '$').test(uri),
-            []
-    ]
-};</script><script src=https://cdn.bootcdn.net/ajax/libs/vue/3.3.4/vue.global.prod.min.js></script><script src=https://lf9-cdn-tos.bytecdntp.com/cdn/expire-6-M/pace/1.2.4/pace.min.js></script><script src=https://lf9-cdn-tos.bytecdntp.com/cdn/expire-6-M/algoliasearch/4.12.1/algoliasearch-lite.umd.min.js></script><script src=https://lf9-cdn-tos.bytecdntp.com/cdn/expire-6-M/instantsearch.js/4.39.0/instantsearch.production.min.js></script><script src=https://npm.webcache.cn/quicklink@2.3.0/dist/quicklink.umd.js></script><script src=/js/app.js?v=0.3.15></script>
+mail: &lt;moyaoxue@outlook.com&gt;
+</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">74</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags.html">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="/moyaoxue@outlook.com" title="E-Mail → moyaoxue@outlook.com" rel="noopener me"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://demoyao100.github.io/2023/08/28/%E5%AE%89%E5%8D%93hook%E5%88%9D%E6%8E%A2/">
+
+    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Moyao">
+    </span>
+
+    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Moyao の小屋">
+      <meta itemprop="description" content="Write down something interesting I met<br />
+Feel free to mail me if you have something wanted to talk about, plz
+mail: <moyaoxue@outlook.com>
+">
+    </span>
+
+    <span hidden="" itemprop="post" itemscope="" itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="安卓hook初探 | Moyao の小屋">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          安卓hook初探
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-08-28 10:49:54" itemprop="dateCreated datePublished" datetime="2023-08-28T10:49:54+08:00">2023-08-28</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h6 id="preface-隐约记得之前弄过一次但是这次换了个环境折腾了一整天吧还挺麻烦的总之记录一下后面搞起来方便"><a class="anchor" href="#preface-隐约记得之前弄过一次但是这次换了个环境折腾了一整天吧还挺麻烦的总之记录一下后面搞起来方便">#</a> preface: 隐约记得之前弄过一次，但是这次换了个环境折腾了一整天吧还挺麻烦的，总之记录一下后面搞起来方便.</h6>
+<p><span id="more"></span></p>
+<hr>
+<h5 id="环境mumu12模拟器"><a class="anchor" href="#环境mumu12模拟器">#</a> 环境：mumu12 模拟器</h5>
+<h6 id="adb连接"><a class="anchor" href="#adb连接">#</a> adb 连接：</h6>
+<p><img src="/2023/08/28/%E5%AE%89%E5%8D%93hook%E5%88%9D%E6%8E%A2/image-20230828105143258.webp" alt="image-20230828105143258"></p>
+<h5 id="连接adbexe-connect-127001-断开adbexe-disconnect-127001"><a class="anchor" href="#连接adbexe-connect-127001-断开adbexe-disconnect-127001">#</a> 连接： <code>adb.exe connect 127.0.0.1:*****</code>   断开： <code>adb.exe disconnect 127.0.0.1:*****</code></h5>
+<h5 id="检查设备adbexe-devices"><a class="anchor" href="#检查设备adbexe-devices">#</a> 检查设备： <code>adb.exe devices</code></h5>
+<h5 id="shell-adb-s-127001-shell-或-adb-shell"><a class="anchor" href="#shell-adb-s-127001-shell-或-adb-shell">#</a> shell:  <code>adb -s 127.0.0.1:***** shell</code>  或  <code>adb shell</code></h5>
+<hr>
+<h5 id="查看手机cpu架构-getprop-roproductcpuabi"><a class="anchor" href="#查看手机cpu架构-getprop-roproductcpuabi">#</a> 查看手机 CPU 架构 ：  <code>getprop ro.product.cpu.abi</code></h5>
+<h5 id="找到对应frida-server-frida-version检查本机frida版本releases-fridafrida-githubcom"><a class="anchor" href="#找到对应frida-server-frida-version检查本机frida版本releases-fridafrida-githubcom">#</a> 找到对应 frida server：  <code>frida version</code>  检查本机 frida 版本<a target="_blank" rel="noopener" href="https://github.com/frida/frida/releases"> Releases・frida/frida (github.com)</a></h5>
+<h5 id="运行frida-server-adb-push-frida-server-datalocaltmp"><a class="anchor" href="#运行frida-server-adb-push-frida-server-datalocaltmp">#</a> 运行 frida server:  <code>adb push frida-server /data/local/tmp/</code></h5>
+<h5 id="cd-datalocaltmp"><a class="anchor" href="#cd-datalocaltmp">#</a>  <code>cd /data/local/tmp</code></h5>
+<h5 id="frida-server"><a class="anchor" href="#frida-server">#</a>  <code>./frida-server</code></h5>
+<h5 id="电脑查看手机正在运行的进程firda-ps-u"><a class="anchor" href="#电脑查看手机正在运行的进程firda-ps-u">#</a> 电脑查看手机正在运行的进程： <code>firda-ps -U</code></h5>
+<h5 id="端口转发-adb-forward-tcp27042-tcp27042"><a class="anchor" href="#端口转发-adb-forward-tcp27042-tcp27042">#</a> 端口转发:  <code>adb forward tcp:27042 tcp:27042</code></h5>
+<h5 id="查看包名"><a class="anchor" href="#查看包名">#</a> 查看包名：</h5>
+<figure class="highlight text"><figcaption data-lang="text"></figcaption><table><tbody><tr><td data-num="1"></td><td><pre>#查看进程中的信息</pre></td></tr><tr><td data-num="2"></td><td><pre>#process = frida.get_usb_device().enumerate_processes()</pre></td></tr><tr><td data-num="3"></td><td><pre>#print(process)</pre></td></tr><tr><td data-num="4"></td><td><pre></pre></td></tr><tr><td data-num="5"></td><td><pre>1.新开一个shell输入命令：</pre></td></tr><tr><td data-num="6"></td><td><pre>adb shell am monitor</pre></td></tr><tr><td data-num="7"></td><td><pre>2.启动需要获取包名的应用</pre></td></tr></tbody></table></figure><hr>
+<h5 id="运行frida脚本frida-u-l-your-scriptjs-f-comyourapppackage"><a class="anchor" href="#运行frida脚本frida-u-l-your-scriptjs-f-comyourapppackage">#</a> 运行 frida 脚本: <code>frida -U -l your-script.js -f com.yourapp.package</code></h5>
+<h5 id="frida检查包名adb-shell-pm-list-packages-grep"><a class="anchor" href="#frida检查包名adb-shell-pm-list-packages-grep">#</a> frida 检查包名： <code>adb shell pm list packages | grep ***</code></h5>
+<hr>
+<h5 id="gg修改器-httpsgameguardiannetforumfilesfile2-gameguardian"><a class="anchor" href="#gg修改器-httpsgameguardiannetforumfilesfile2-gameguardian">#</a> gg 修改器:    <a target="_blank" rel="noopener" href="https://gameguardian.net/forum/files/file/2-gameguardian/">https://gameguardian.net/forum/files/file/2-gameguardian/</a></h5>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>Moyao
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="https://demoyao100.github.io/2023/08/28/%E5%AE%89%E5%8D%93hook%E5%88%9D%E6%8E%A2/" title="安卓hook初探">https://demoyao100.github.io/2023/08/28/安卓hook初探/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/re/" rel="tag"># re</a>
+              <a href="/tags/Android/" rel="tag"># Android</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/08/26/%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91%E4%BB%A5%E5%8F%8A%E5%85%B6%E4%BB%96%E6%9E%B6%E6%9E%84%E9%80%86%E5%90%91%E5%88%9D%E6%8E%A2/" rel="prev" title="交叉编译以及其他架构逆向初探">
+                  <i class="fa fa-angle-left"></i> 交叉编译以及其他架构逆向初探
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/09/03/%E7%BE%8A%E5%9F%8E%E6%9D%AF2023/" rel="next" title="羊城杯2023">
+                  羊城杯2023 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    © 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Moyao</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> &amp; <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+
+
+</body></html>

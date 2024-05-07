@@ -1,23 +1,23 @@
 <?xml version="1.0"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://demoyao100.github.io</id>
-    <title>rev@天枢 • Posts by &#34;杂文&#34; tag</title>
+    <title>Moyao の小屋 • Posts by &#34;杂文&#34; tag</title>
     <link href="https://demoyao100.github.io" />
     <updated>2023-11-27T00:54:41.000Z</updated>
     <category term="re" />
     <category term="Android" />
-    <category term="开发" />
     <category term="codeforces" />
+    <category term="开发" />
     <category term="cv" />
-    <category term="驱动" />
     <category term="docker" />
+    <category term="驱动" />
     <category term="electron" />
     <category term="杂文" />
     <category term="web" />
     <category term="jail" />
     <category term="IOT" />
-    <category term="hexo" />
     <category term="python" />
+    <category term="hexo" />
     <entry>
         <id>https://demoyao100.github.io/2023/11/27/%E3%80%8A%E6%9D%80%E6%AD%BB%E4%B8%80%E5%8F%AA%E7%9F%A5%E6%9B%B4%E9%B8%9F%E3%80%8B/</id>
         <title>《杀死一只知更鸟》</title>

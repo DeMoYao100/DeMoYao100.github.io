@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <rss version="2.0">
     <channel>
-        <title>rev@天枢 • Posts by &#34;杂文&#34; tag</title>
+        <title>Moyao の小屋 • Posts by &#34;杂文&#34; tag</title>
         <link>https://demoyao100.github.io</link>
         <description>Write down something interesting I met&lt;br /&gt;
 Feel free to mail me if you have something wanted to talk about, plz
@@ -12,18 +12,18 @@ mail: &amp;lt;moyaoxue@outlook.com&amp;gt;
         <lastBuildDate>Mon, 27 Nov 2023 08:54:41 +0800</lastBuildDate>
         <category>re</category>
         <category>Android</category>
-        <category>开发</category>
         <category>codeforces</category>
+        <category>开发</category>
         <category>cv</category>
-        <category>驱动</category>
         <category>docker</category>
+        <category>驱动</category>
         <category>electron</category>
         <category>杂文</category>
         <category>web</category>
         <category>jail</category>
         <category>IOT</category>
-        <category>hexo</category>
         <category>python</category>
+        <category>hexo</category>
         <item>
             <guid isPermalink="true">https://demoyao100.github.io/2023/11/27/%E3%80%8A%E6%9D%80%E6%AD%BB%E4%B8%80%E5%8F%AA%E7%9F%A5%E6%9B%B4%E9%B8%9F%E3%80%8B/</guid>
             <title>《杀死一只知更鸟》</title>

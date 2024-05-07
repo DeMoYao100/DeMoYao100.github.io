@@ -1,23 +1,23 @@
 <?xml version="1.0"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://demoyao100.github.io</id>
-    <title>rev@天枢 • Posts by &#34;codeforces&#34; tag</title>
+    <title>Moyao の小屋 • Posts by &#34;codeforces&#34; tag</title>
     <link href="https://demoyao100.github.io" />
     <updated>2022-09-02T15:11:43.000Z</updated>
     <category term="re" />
     <category term="Android" />
-    <category term="开发" />
     <category term="codeforces" />
+    <category term="开发" />
     <category term="cv" />
-    <category term="驱动" />
     <category term="docker" />
+    <category term="驱动" />
     <category term="electron" />
     <category term="杂文" />
     <category term="web" />
     <category term="jail" />
     <category term="IOT" />
-    <category term="hexo" />
     <category term="python" />
+    <category term="hexo" />
     <entry>
         <id>https://demoyao100.github.io/2022/09/02/codeforce-817E/</id>
         <title>codeforce-817E</title>
@@ -118,7 +118,7 @@ For each Burenka&#39;s question, print a single line containing one integer — 
 &lt;/blockquote&gt;
 &lt;h4 id=&#34;preface&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#preface&#34;&gt;#&lt;/a&gt; Preface&lt;/h4&gt;
 &lt;h5 id=&#34;its-not-a-very-hard-problem-but-contains-many-details-this-is-the-record-when-i-tried&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#its-not-a-very-hard-problem-but-contains-many-details-this-is-the-record-when-i-tried&#34;&gt;#&lt;/a&gt; It&#39;s not a very hard problem, but contains many details. This is the record when I tried:&lt;/h5&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;/codeforce-1719C/1719C.png&#34; alt&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/2022/08/29/codeforce-1719C/1719C.png&#34; alt&gt;&lt;/p&gt;
 &lt;hr&gt;
 &lt;h5 id=&#34;the-basic-solution-for-this-problem-is-to-find-out-if-there-are-numbers-bigger-then-ai-if-so-the-guy-with-the-number-i-can-not-win-anybody-else-tried-to-find-the-number-of-the-guys-after-him-with-smaller-a-this-number-is-the-biggest-number-of-his-victories-you-might-notices-if-the-guy-is-the-best-in-the-whole-queue-then-he-can-win-any-guys-he-metdepend-how-big-the-k-is-others-can-not-because-they-may-met-this-guy-and-his-game-can-be-called-over&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#the-basic-solution-for-this-problem-is-to-find-out-if-there-are-numbers-bigger-then-ai-if-so-the-guy-with-the-number-i-can-not-win-anybody-else-tried-to-find-the-number-of-the-guys-after-him-with-smaller-a-this-number-is-the-biggest-number-of-his-victories-you-might-notices-if-the-guy-is-the-best-in-the-whole-queue-then-he-can-win-any-guys-he-metdepend-how-big-the-k-is-others-can-not-because-they-may-met-this-guy-and-his-game-can-be-called-over&#34;&gt;#&lt;/a&gt; The basic solution for this problem is to find out if there are numbers bigger then a[i], if so, the guy with the number i CAN NOT WIN ANYBODY, else, tried to find the number of the guys AFTER HIM with smaller a[]. This number is the BIGGEST number of his victories. You might notices, if the guy is the best in the whole queue, then he can win any guys he met(depend how big the k is), others can not because they may met this guy and his game can be called &amp;quot;over&amp;quot;.&lt;/h5&gt;
 &lt;h4 id=&#34;details&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#details&#34;&gt;#&lt;/a&gt; DETAILS&lt;/h4&gt;

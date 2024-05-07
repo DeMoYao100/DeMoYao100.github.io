@@ -1,33 +1,657 @@
-<!doctypehtml><html lang=en><meta charset=UTF-8><meta content=width=device-width,initial-scale=1,maximum-scale=2 name=viewport><meta content=#222 name=theme-color><meta content=IE=edge,chrome=1 http-equiv=X-UA-COMPATIBLE><meta content=webkit name=renderer><link href=/assets/favicon.ico rel=icon sizes=32x32 type=image/ico><link href=/assets/apple-touch-icon.png rel=apple-touch-icon sizes=180x180><link href=/rss.xml rel=alternate title=rev@天枢 type=application/rss+xml><link href=/atom.xml rel=alternate title=rev@天枢 type=application/atom+xml><link href=https://demoyao100.github.io/feed.json rel=alternate title=rev@天枢 type=application/json><link href=https://lf9-cdn-tos.bytecdntp.com rel=preconnect><link href=https://cdn.jsdelivr.net rel=dns-prefetch><link href=https://unpkg.com rel=dns-prefetch><link href=https://fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext rel=stylesheet><link href=/css/app.css?v=0.3.15 rel=stylesheet><link href=https://demoyao100.github.io/page/13/ rel=canonical><title>Moyao の小屋 = rev@天枢 = Hi,I'm Moyaoxue</title><meta content="Hexo 7.0.0" name=generator><body itemscope itemtype=http://schema.org/WebPage><div id=loading><div class=cat><div class=body></div><div class=head><div class=face></div></div><div class=foot><div class=tummy-end></div><div class=bottom></div><div class="legs left"></div><div class="legs right"></div></div><div class=paw><div class="hands left"></div><div class="hands right"></div></div></div></div><div id=container><header id=header itemscope itemtype=http://schema.org/WPHeader><div class=inner><div id=brand><div class=pjax><a class=logo href=/ rel=start><p class=artboard>Moyao の小屋<h1 itemprop="name headline" class=title>rev@天枢</h1></a><p class=meta itemprop=description>= Hi,I'm Moyaoxue =</div></div><nav id=nav><div class=inner><div class=toggle><div aria-label="Toggle navigation bar" class=lines><span class=line></span><span class=line></span><span class=line></span></div></div><ul class=menu><li class="item title"><a href=/ rel=start>Moyao の小屋</a></ul><ul class=right id=rightNav><li class="item theme" @click=changeThemeByBtn><i :class="{'i-sun': !themeStatus,'i-moon': themeStatus}" class=ic></i><li class="item search"><i class="ic i-search"></i></ul></div></nav></div><div class=pjax id=imgs><img src=https://tva4.sinaimg.cn/mw690/6833939bly1giciszlczyj20zk0m816d.jpg></div></header><div id=waves><svg viewbox="0 24 150 28" class=waves preserveaspectratio=none shape-rendering=auto xmlns=http://www.w3.org/2000/svg xmlns:xlink=http://www.w3.org/1999/xlink><defs><path d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" id=gentle-wave></path></defs><g class=parallax><use x=48 xlink:href=#gentle-wave y=0></use><use x=48 xlink:href=#gentle-wave y=3></use><use x=48 xlink:href=#gentle-wave y=5></use><use x=48 xlink:href=#gentle-wave y=7></use></g></svg></div><main><div class=inner><div class=pjax id=main><div class="index wrap"><div class="segments posts"><article class=item><div class=cover><a title="d3ctf 2023" href=/2023/07/11/d3ctf-2023/ itemprop=url><img alt="article cover" data-src=https://tva4.sinaimg.cn/mw690/6833939bly1gicis081o9j20zk0m8dmr.jpg loading=lazy></a></div><div class=info><div class=meta><span title="Created: 2023-07-11 18:49:45" class=item><span class=icon><i class="ic i-calendar"></i></span><time itemprop="dateCreated datePublished" datetime=2023-07-11T18:49:45+08:00>2023-07-11</time></span><span title="Symbols count in article" class=item><span class=icon><i class="ic i-pen"></i></span><span>2k</span><span class=text>words</span></span><span title="Reading time" class=item><span class=icon><i class="ic i-clock"></i></span><span>2 mins.</span></span></div><h3><a title="d3ctf 2023" href=/2023/07/11/d3ctf-2023/ itemprop=url>d3ctf 2023</a></h3><div class=excerpt><h6 id=好久没写blog了qaq受到某人启发觉得有空还是写写多少动动笔吧-本来是打算先写安卓学习的那篇想着找个题复现吧回来看看d3那个写不明白的android结果一看d3好几个题读作solved写作看一眼毫无印象遂决定回来重新做一次><a class=anchor href=#好久没写blog了qaq受到某人启发觉得有空还是写写多少动动笔吧-本来是打算先写安卓学习的那篇想着找个题复现吧回来看看d3那个写不明白的android结果一看d3好几个题读作solved写作看一眼毫无印象遂决定回来重新做一次>#</a> 好久没写 blog 了 QAQ，受到某人启发觉得有空还是写写，多少动动笔吧。本来是打算先写安卓学习的那篇，想着找个题复现吧，回来看看 d3 那个写不明白的 android，<s>结果一看 d3 好几个题读作 solved，写作看一眼毫无印象</s>，遂决定回来重新做一次</h6><p></div><a title="d3ctf 2023" class=btn href=/2023/07/11/d3ctf-2023/ itemprop=url>more...</a></div></article><article class=item><div class=cover><a href=/2023/07/11/%E5%AE%89%E5%8D%93%E8%B0%83%E8%AF%95%E5%88%9D%E6%8E%A2/ itemprop=url title=安卓调试初探><img alt="article cover" data-src=https://tva4.sinaimg.cn/mw690/6833939bly1gicit31ffoj20zk0m8naf.jpg loading=lazy></a></div><div class=info><div class=meta><span title="Created: 2023-07-11 18:14:26" class=item><span class=icon><i class="ic i-calendar"></i></span><time itemprop="dateCreated datePublished" datetime=2023-07-11T18:14:26+08:00>2023-07-11</time></span><span title="Symbols count in article" class=item><span class=icon><i class="ic i-pen"></i></span><span>2.1k</span><span class=text>words</span></span><span title="Reading time" class=item><span class=icon><i class="ic i-clock"></i></span><span>2 mins.</span></span></div><h3><a href=/2023/07/11/%E5%AE%89%E5%8D%93%E8%B0%83%E8%AF%95%E5%88%9D%E6%8E%A2/ itemprop=url title=安卓调试初探>安卓调试初探</a></h3><div class=excerpt><h6 id=preface说是初探也不是很初探吧其实前面多多少少弄过完整的流程了但是由于hyperv这玄学东西后面搞的环境一团糟打算还是重新弄一个完整的调试方案出来顺便记录一些基础知识><a class=anchor href=#preface说是初探也不是很初探吧其实前面多多少少弄过完整的流程了但是由于hyperv这玄学东西后面搞的环境一团糟打算还是重新弄一个完整的调试方案出来顺便记录一些基础知识>#</a> preface：说是初探，也不是很初探吧其实，前面多多少少弄过完整的流程了，但是由于 hyperV 这玄学东西后面搞的环境一团糟，打算还是重新弄一个完整的调试方案出来，顺便记录一些基础知识</h6><p></div><a class=btn href=/2023/07/11/%E5%AE%89%E5%8D%93%E8%B0%83%E8%AF%95%E5%88%9D%E6%8E%A2/ itemprop=url title=安卓调试初探>more...</a></div></article><article class=item><div class=cover><a href=/2023/03/17/%E5%A4%9C%E5%BD%B3%E4%BA%8D/ itemprop=url title=夜彳亍><img alt="article cover" data-src=https://tva4.sinaimg.cn/mw690/6833939bly1giciszlczyj20zk0m816d.jpg loading=lazy></a></div><div class=info><div class=meta><span title="Created: 2023-03-17 21:25:15" class=item><span class=icon><i class="ic i-calendar"></i></span><time itemprop="dateCreated datePublished" datetime=2023-03-17T21:25:15+08:00>2023-03-17</time></span><span title="Symbols count in article" class=item><span class=icon><i class="ic i-pen"></i></span><span>2k</span><span class=text>words</span></span><span title="Reading time" class=item><span class=icon><i class="ic i-clock"></i></span><span>2 mins.</span></span></div><h3><a href=/2023/03/17/%E5%A4%9C%E5%BD%B3%E4%BA%8D/ itemprop=url title=夜彳亍>夜彳亍</a></h3><div class=excerpt><h4 id=夜彳亍京城><a class=anchor href=#夜彳亍京城>#</a> 夜彳亍京城</h4><h6 id=题目来源于aidai学长-bridge和nova等><a class=anchor href=#题目来源于aidai学长-bridge和nova等>#</a> 题目来源于 AiDai 学长、bridge 和 nova 等</h6><h6 id=长久不写文感觉还是需要偶尔动动笔不然对不起初高中语文老师><a class=anchor href=#长久不写文感觉还是需要偶尔动动笔不然对不起初高中语文老师>#</a> 长久不写文，感觉还是需要偶尔动动笔，不然对不起初高中语文老师</h6><p></div><a class=btn href=/2023/03/17/%E5%A4%9C%E5%BD%B3%E4%BA%8D/ itemprop=url title=夜彳亍>more...</a></div></article><article class=item><div class=cover><a href=/2023/03/03/VM/ itemprop=url title=VM><img alt="article cover" data-src=https://tva4.sinaimg.cn/mw690/6833939bly1gicit4jrvuj20zk0m8785.jpg loading=lazy></a></div><div class=info><div class=meta><span title="Created: 2023-03-03 09:53:02" class=item><span class=icon><i class="ic i-calendar"></i></span><time itemprop="dateCreated datePublished" datetime=2023-03-03T09:53:02+08:00>2023-03-03</time></span><span title="Symbols count in article" class=item><span class=icon><i class="ic i-pen"></i></span><span>54k</span><span class=text>words</span></span><span title="Reading time" class=item><span class=icon><i class="ic i-clock"></i></span><span>50 mins.</span></span></div><h3><a href=/2023/03/03/VM/ itemprop=url title=VM>VM</a></h3><div class=excerpt><h4 id=preface><a class=anchor href=#preface>#</a> preface</h4><h6 id=its-quite-a-while-since-last-been-working-out-a-reverse-problems-when-came-into-a-vmgolang-problem-in-vnctf-i-spent-much-time-but-done-nothing-so-here-i-collect-some-vm-problems-and-tried-to-get-better-understand-of-the-thing><a class=anchor href=#its-quite-a-while-since-last-been-working-out-a-reverse-problems-when-came-into-a-vmgolang-problem-in-vnctf-i-spent-much-time-but-done-nothing-so-here-i-collect-some-vm-problems-and-tried-to-get-better-understand-of-the-thing>#</a> It's quite a while since last been working out a reverse problems. When came into a VM(golang) problem in VNCTF, I spent much time but done nothing. So here I collect some VM problems and tried to get better understand of the thing.</h6><p></div><a class=btn href=/2023/03/03/VM/ itemprop=url title=VM>more...</a></div></article><article class=item><div class=cover><a href=/2023/02/27/vnctf2023/ itemprop=url title=vnctf2023><img alt="article cover" data-src=https://tva4.sinaimg.cn/mw690/6833939bly1gicit4jrvuj20zk0m8785.jpg loading=lazy></a></div><div class=info><div class=meta><span title="Created: 2023-02-27 15:14:19" class=item><span class=icon><i class="ic i-calendar"></i></span><time itemprop="dateCreated datePublished" datetime=2023-02-27T15:14:19+08:00>2023-02-27</time></span><span title="Symbols count in article" class=item><span class=icon><i class="ic i-pen"></i></span><span>463</span><span class=text>words</span></span><span title="Reading time" class=item><span class=icon><i class="ic i-clock"></i></span><span>1 mins.</span></span></div><h3><a href=/2023/02/27/vnctf2023/ itemprop=url title=vnctf2023>vnctf2023</a></h3><div class=excerpt><h3 id=vnctf2023-re><a class=anchor href=#vnctf2023-re>#</a> vnctf2023 re</h3><ul><li><a href=#1.1>BabyAnti</a><br></ul></div><a class=btn href=/2023/02/27/vnctf2023/ itemprop=url title=vnctf2023>more...</a></div></article></div></div><nav class=pagination><div class=inner><a class="extend prev" href=/page/12/ rel=prev><i aria-label="Previous page" class="ic i-angle-left"></i></a><a class=page-number href=/>1</a><span class=space>…</span><a class=page-number href=/page/12/>12</a><span class="page-number current">13</span><a class=page-number href=/page/14/>14</a><a class=page-number href=/page/15/>15</a><a class="extend next" href=/page/14/ rel=next><i aria-label="Next page" class="ic i-angle-right"></i></a></div></nav></div><div id=sidebar><div class=inner><div class=panels><div class=inner><div class="contents panel pjax" data-title=Contents></div><div class="related panel pjax" data-title=Related></div><div class="overview panel" data-title=Overview><div class=author itemprop=author itemscope itemtype=http://schema.org/Person><img alt=Moyao class=image data-src=/assets/avatar.jpg itemprop=image loading=lazy><p class=name itemprop=name>Moyao<div class=description itemprop=description>Write down something interesting I met<br> Feel free to mail me if you have something wanted to talk about, plz mail: &LTmoyaoxue@outlook.com></div></div><nav class=state><div class="item posts"><a href=/archives/><span class=count>74</span><span class=name>posts</span></a></div><div class="item tags"><a href=/tags/><span class=count>14</span><span class=name>tags</span></a></div></nav><div class=social><a class="item github" href=https://github.com/name rel=noopener target=_blank title=https://github.com/name><i class="ic i-github"></i></a></div><div class=menu><li class=item><a href=/ rel=section><i class="ic i-home"></i>Home</a></div></div></div></div><ul id=quick><li class="prev pjax"><a title="Previous Post" href=/page/12/ rel=prev><i class="ic i-chevron-left"></i></a><li class=up><i class="ic i-arrow-up"></i><li class=down><i class="ic i-arrow-down"></i><li class="next pjax"><a title="Next Post" href=/page/14/ rel=next><i class="ic i-chevron-right"></i></a><li class=percent></ul></div></div><div class=dimmer></div></div></main><footer id=footer><div class=inner><div class=widgets><div class="rpost pjax"><h2>Random Posts</h2><ul><li class=item><div class=breadcrumb></div><span><a href=/2023/09/27/print%E5%8D%A0%E4%BD%8D%E7%AC%A6%E9%87%8D%E5%86%99%E5%88%9D%E6%8E%A2/>print占位符重写初探</a></span><li class=item><div class=breadcrumb></div><span><a href=/2023/08/23/%E5%88%9D%E6%8E%A2flutter/>初探flutter</a></span><li class=item><div class=breadcrumb></div><span><a href=/2024/01/15/%E5%88%9D%E6%8E%A2%E9%A9%B1%E5%8A%A8/>初探驱动</a></span><li class=item><div class=breadcrumb></div><span><a href=/2022/11/06/capstone/>capstone</a></span><li class=item><div class=breadcrumb></div><span><a href=/2023/11/29/mac%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/>mac环境配置</a></span><li class=item><div class=breadcrumb></div><span><a href=/2023/09/03/%E7%BE%8A%E5%9F%8E%E6%9D%AF2023/>羊城杯2023</a></span><li class=item><div class=breadcrumb></div><span><a href=/2023/10/25/das202310/>das202310</a></span><li class=item><div class=breadcrumb></div><span><a href=/2023/09/18/%E9%B9%A4%E5%9F%8E2023/>鹤城2023</a></span><li class=item><div class=breadcrumb></div><span><a href=/2023/11/13/%E3%80%8A%E8%A2%AB%E8%AE%A8%E5%8E%8C%E7%9A%84%E5%8B%87%E6%B0%94%E3%80%8B/>《被讨厌的勇气》</a></span><li class=item><div class=breadcrumb></div><span><a href=/2024/01/24/CVE-2017-6736/>CVE-2017-6736</a></span></ul></div><div class="rpost pjax"><h2>Recent Comments</h2><ul class=leancloud-recent-comment id=new-comment></ul></div></div><div class=status><div class=copyright>© 2022 -<span itemprop=copyrightYear>2024</span><span class=with-love><i class="ic i-sakura rotate"></i></span><span class=author itemprop=copyrightHolder>Moyao @ Moyao の小屋</span></div><div class=count><span class=post-meta-item-icon><i class="ic i-chart-area"></i></span><span title="Symbols count total">649k words</span><span class=post-meta-divider>|</span><span class=post-meta-item-icon><i class="ic i-coffee"></i></span><span title="Reading time total">9:50</span></div><div class=powered-by>Powered by <a href=https://hexo.io/ rel=noopener target=_blank>Hexo</a> & Theme.<a href=https://github.com/theme-shoka-x/hexo-theme-shokaX/ rel=noopener target=_blank>ShokaX</a></div></div></div></footer></div><script data-config>var LOCAL = {
-        path: `page/13/`,
-        favicon: {
-        show: `(●´3｀●) Here we go again.`,
-        hide: `(´Д｀) It's a disaster!`
-    },
-    search: {
-        placeholder: "Search for Posts",
-        empty: "We didn't find any results for the search: ${query}",
-        stats: "${hits} results found in ${time} ms"
-    },
-    copy_tex: false,
-    katex: false,
-    mermaid: false,
-    audio: undefined,
-    fancybox: true,
-    nocopy: false,
-    outime: true,
-    template: `<div class="note warning"><p><span class="label warning">Article Timeliness Alert</span><br>This is an article published {{publish}} days ago and last updated {{updated}} days ago. Some information may have changed, so please be careful to screen it.</p></div>`,
-    quiz: {
-        choice: `Multiple Choice`,
-        multiple: `Multiple Answer`,
-        true_false: `True/False`,
-        essay: `Questions`,
-        gap_fill: `Gap Filling`,
-        mistake: `Wrong Answer`
-    },
-    ignores: [
-        (uri) => uri.includes('#'),
-        (uri) => new RegExp(LOCAL.path + '$').test(uri),
-            []
-    ]
-};</script><script src=https://cdn.bootcdn.net/ajax/libs/vue/3.3.4/vue.global.prod.min.js></script><script src=https://lf9-cdn-tos.bytecdntp.com/cdn/expire-6-M/pace/1.2.4/pace.min.js></script><script src=https://lf9-cdn-tos.bytecdntp.com/cdn/expire-6-M/algoliasearch/4.12.1/algoliasearch-lite.umd.min.js></script><script src=https://lf9-cdn-tos.bytecdntp.com/cdn/expire-6-M/instantsearch.js/4.39.0/instantsearch.production.min.js></script><script src=https://npm.webcache.cn/quicklink@2.3.0/dist/quicklink.umd.js></script><script src=/js/app.js?v=0.3.15></script>
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"demoyao100.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false,"trigger":"auto"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Write down something interesting I met Feel free to mail me if you have something wanted to talk about, plz mail: <moyaoxue@outlook.com>">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Moyao の小屋">
+<meta property="og:url" content="https://demoyao100.github.io/page/13/index.html">
+<meta property="og:site_name" content="Moyao の小屋">
+<meta property="og:description" content="Write down something interesting I met Feel free to mail me if you have something wanted to talk about, plz mail: <moyaoxue@outlook.com>">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="Moyao">
+<meta property="article:tag" content="CTF, Rev, Pwn, 渗透, Web Security">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://demoyao100.github.io/page/13/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"en","comments":"","permalink":"","path":"page/13/index.html","title":""}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Moyao の小屋 - Hi,I'm Moyaoxue</title>
+  
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-KKC145B2WB"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-KKC145B2WB","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope="" itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Moyao の小屋</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Hi,I'm Moyaoxue</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags.html" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories.html" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-about"><a href="/about.html" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80" placeholder="Searching..." spellcheck="false" type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Moyao" src="/images/avatar.webp">
+  <p class="site-author-name" itemprop="name">Moyao</p>
+  <div class="site-description" itemprop="description">Write down something interesting I met<br>
+Feel free to mail me if you have something wanted to talk about, plz
+mail: &lt;moyaoxue@outlook.com&gt;
+</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">74</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags.html">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="/moyaoxue@outlook.com" title="E-Mail → moyaoxue@outlook.com" rel="noopener me"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://demoyao100.github.io/2023/07/11/d3ctf-2023/">
+
+    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Moyao">
+    </span>
+
+    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Moyao の小屋">
+      <meta itemprop="description" content="Write down something interesting I met<br />
+Feel free to mail me if you have something wanted to talk about, plz
+mail: <moyaoxue@outlook.com>
+">
+    </span>
+
+    <span hidden="" itemprop="post" itemscope="" itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Moyao の小屋">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/07/11/d3ctf-2023/" class="post-title-link" itemprop="url">d3ctf 2023</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-07-11 18:49:45" itemprop="dateCreated datePublished" datetime="2023-07-11T18:49:45+08:00">2023-07-11</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h6 id="好久没写blog了qaq受到某人启发觉得有空还是写写多少动动笔吧-本来是打算先写安卓学习的那篇想着找个题复现吧回来看看d3那个写不明白的android结果一看d3好几个题读作solved写作看一眼毫无印象遂决定回来重新做一次"><a class="anchor" href="#好久没写blog了qaq受到某人启发觉得有空还是写写多少动动笔吧-本来是打算先写安卓学习的那篇想着找个题复现吧回来看看d3那个写不明白的android结果一看d3好几个题读作solved写作看一眼毫无印象遂决定回来重新做一次">#</a> 好久没写 blog 了 QAQ，受到某人启发觉得有空还是写写，多少动动笔吧。本来是打算先写安卓学习的那篇，想着找个题复现吧，回来看看 d3 那个写不明白的 android，<s>结果一看 d3 好几个题读作 solved，写作看一眼毫无印象</s>，遂决定回来重新做一次</h6>
+<p></p>
+          
+            <div class="post-button">
+              <a class="btn" href="/2023/07/11/d3ctf-2023/#more" rel="contents">
+                Read more »
+              </a>
+            </div>
+          
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://demoyao100.github.io/2023/07/11/%E5%AE%89%E5%8D%93%E8%B0%83%E8%AF%95%E5%88%9D%E6%8E%A2/">
+
+    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Moyao">
+    </span>
+
+    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Moyao の小屋">
+      <meta itemprop="description" content="Write down something interesting I met<br />
+Feel free to mail me if you have something wanted to talk about, plz
+mail: <moyaoxue@outlook.com>
+">
+    </span>
+
+    <span hidden="" itemprop="post" itemscope="" itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Moyao の小屋">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/07/11/%E5%AE%89%E5%8D%93%E8%B0%83%E8%AF%95%E5%88%9D%E6%8E%A2/" class="post-title-link" itemprop="url">安卓调试初探</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-07-11 18:14:26" itemprop="dateCreated datePublished" datetime="2023-07-11T18:14:26+08:00">2023-07-11</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h6 id="preface说是初探也不是很初探吧其实前面多多少少弄过完整的流程了但是由于hyperv这玄学东西后面搞的环境一团糟打算还是重新弄一个完整的调试方案出来顺便记录一些基础知识"><a class="anchor" href="#preface说是初探也不是很初探吧其实前面多多少少弄过完整的流程了但是由于hyperv这玄学东西后面搞的环境一团糟打算还是重新弄一个完整的调试方案出来顺便记录一些基础知识">#</a> preface：说是初探，也不是很初探吧其实，前面多多少少弄过完整的流程了，但是由于 hyperV 这玄学东西后面搞的环境一团糟，打算还是重新弄一个完整的调试方案出来，顺便记录一些基础知识</h6>
+<p></p>
+          
+            <div class="post-button">
+              <a class="btn" href="/2023/07/11/%E5%AE%89%E5%8D%93%E8%B0%83%E8%AF%95%E5%88%9D%E6%8E%A2/#more" rel="contents">
+                Read more »
+              </a>
+            </div>
+          
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://demoyao100.github.io/2023/03/17/%E5%A4%9C%E5%BD%B3%E4%BA%8D/">
+
+    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Moyao">
+    </span>
+
+    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Moyao の小屋">
+      <meta itemprop="description" content="Write down something interesting I met<br />
+Feel free to mail me if you have something wanted to talk about, plz
+mail: <moyaoxue@outlook.com>
+">
+    </span>
+
+    <span hidden="" itemprop="post" itemscope="" itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Moyao の小屋">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/03/17/%E5%A4%9C%E5%BD%B3%E4%BA%8D/" class="post-title-link" itemprop="url">夜彳亍</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-03-17 21:25:15" itemprop="dateCreated datePublished" datetime="2023-03-17T21:25:15+08:00">2023-03-17</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h4 id="夜彳亍京城"><a class="anchor" href="#夜彳亍京城">#</a> 夜彳亍京城</h4>
+<h6 id="题目来源于aidai学长-bridge和nova等"><a class="anchor" href="#题目来源于aidai学长-bridge和nova等">#</a> 题目来源于 AiDai 学长、bridge 和 nova 等</h6>
+<h6 id="长久不写文感觉还是需要偶尔动动笔不然对不起初高中语文老师"><a class="anchor" href="#长久不写文感觉还是需要偶尔动动笔不然对不起初高中语文老师">#</a> 长久不写文，感觉还是需要偶尔动动笔，不然对不起初高中语文老师</h6>
+<p></p>
+          
+            <div class="post-button">
+              <a class="btn" href="/2023/03/17/%E5%A4%9C%E5%BD%B3%E4%BA%8D/#more" rel="contents">
+                Read more »
+              </a>
+            </div>
+          
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://demoyao100.github.io/2023/03/03/VM/">
+
+    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Moyao">
+    </span>
+
+    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Moyao の小屋">
+      <meta itemprop="description" content="Write down something interesting I met<br />
+Feel free to mail me if you have something wanted to talk about, plz
+mail: <moyaoxue@outlook.com>
+">
+    </span>
+
+    <span hidden="" itemprop="post" itemscope="" itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Moyao の小屋">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/03/03/VM/" class="post-title-link" itemprop="url">VM</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-03-03 09:53:02" itemprop="dateCreated datePublished" datetime="2023-03-03T09:53:02+08:00">2023-03-03</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h4 id="preface"><a class="anchor" href="#preface">#</a> preface</h4>
+<h6 id="its-quite-a-while-since-last-been-working-out-a-reverse-problems-when-came-into-a-vmgolang-problem-in-vnctf-i-spent-much-time-but-done-nothing-so-here-i-collect-some-vm-problems-and-tried-to-get-better-understand-of-the-thing"><a class="anchor" href="#its-quite-a-while-since-last-been-working-out-a-reverse-problems-when-came-into-a-vmgolang-problem-in-vnctf-i-spent-much-time-but-done-nothing-so-here-i-collect-some-vm-problems-and-tried-to-get-better-understand-of-the-thing">#</a> It's quite a while since last been working out a reverse problems. When came into a VM(golang) problem in VNCTF, I spent much time but done nothing. So here I collect some VM problems and tried to get better understand of the thing.</h6>
+<p></p>
+          
+            <div class="post-button">
+              <a class="btn" href="/2023/03/03/VM/#more" rel="contents">
+                Read more »
+              </a>
+            </div>
+          
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://demoyao100.github.io/2023/02/27/vnctf2023/">
+
+    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Moyao">
+    </span>
+
+    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Moyao の小屋">
+      <meta itemprop="description" content="Write down something interesting I met<br />
+Feel free to mail me if you have something wanted to talk about, plz
+mail: <moyaoxue@outlook.com>
+">
+    </span>
+
+    <span hidden="" itemprop="post" itemscope="" itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Moyao の小屋">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/02/27/vnctf2023/" class="post-title-link" itemprop="url">vnctf2023</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-02-27 15:14:19" itemprop="dateCreated datePublished" datetime="2023-02-27T15:14:19+08:00">2023-02-27</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="vnctf2023-re"><a class="anchor" href="#vnctf2023-re">#</a> vnctf2023 re</h3>
+<ul>
+<li><a href="#1.1">BabyAnti</a><br></li></ul>
+          
+            <div class="post-button">
+              <a class="btn" href="/2023/02/27/vnctf2023/#more" rel="contents">
+                Read more »
+              </a>
+            </div>
+          
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/12/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">…</span><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/">14</a><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/14/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    © 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Moyao</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> &amp; <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+
+
+</body></html>
