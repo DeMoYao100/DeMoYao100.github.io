@@ -1,0 +1,18 @@
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "rev@天枢 • All posts by \"web\" tag",
+    "description": "Write down something interesting I met<br />\nFeel free to mail me if you have something wanted to talk about, plz\nmail: &lt;moyaoxue@outlook.com&gt;\n",
+    "home_page_url": "https://demoyao100.github.io",
+    "items": [
+        {
+            "id": "https://demoyao100.github.io/2023/09/18/pickle%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/",
+            "url": "https://demoyao100.github.io/2023/09/18/pickle%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/",
+            "title": "pickle反序列化",
+            "date_published": "2023-09-18T06:28:10.000Z",
+            "content_html": "<h6 id=\"preface-就是看看~\"><a class=\"anchor\" href=\"#preface-就是看看~\">#</a> PREFACE: 就是看看～</h6>\n<p><span id=\"more\"></span></p>\n<p><a href=\"https://zhuanlan.zhihu.com/p/89132768\">从零开始 python 反序列化攻击：pickle 原理解析 &amp; 不用 reduce 的 RCE 姿势 - 知乎 (zhihu.com)</a></p>\n",
+            "tags": [
+                "web"
+            ]
+        }
+    ]
+}

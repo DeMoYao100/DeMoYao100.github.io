@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://demoyao100.github.io</id>
+    <title>rev@天枢 • Posts by &#34;杂文&#34; tag</title>
+    <link href="https://demoyao100.github.io" />
+    <updated>2023-11-27T00:54:41.000Z</updated>
+    <category term="re" />
+    <category term="Android" />
+    <category term="开发" />
+    <category term="codeforces" />
+    <category term="cv" />
+    <category term="docker" />
+    <category term="驱动" />
+    <category term="electron" />
+    <category term="杂文" />
+    <category term="web" />
+    <category term="jail" />
+    <category term="IOT" />
+    <category term="python" />
+    <category term="hexo" />
+    <entry>
+        <id>https://demoyao100.github.io/2023/11/27/%E3%80%8A%E6%9D%80%E6%AD%BB%E4%B8%80%E5%8F%AA%E7%9F%A5%E6%9B%B4%E9%B8%9F%E3%80%8B/</id>
+        <title>《杀死一只知更鸟》</title>
+        <link rel="alternate" href="https://demoyao100.github.io/2023/11/27/%E3%80%8A%E6%9D%80%E6%AD%BB%E4%B8%80%E5%8F%AA%E7%9F%A5%E6%9B%B4%E9%B8%9F%E3%80%8B/"/>
+        <content type="html">&lt;h6 id=&#34;preface推荐读物感觉以后专门开个分区&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#preface推荐读物感觉以后专门开个分区&#34;&gt;#&lt;/a&gt; PREFACE：推荐读物，感觉以后专门开个分区&lt;/h6&gt;
+&lt;h6 id=&#34;todo修一下博客的分类功能&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#todo修一下博客的分类功能&#34;&gt;#&lt;/a&gt; TODO：修一下博客的分类功能&lt;/h6&gt;
+&lt;p&gt;&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;确实是好书，不枉经典&lt;/p&gt;
+&lt;p&gt;笔触挺平和的，有点《葬送的芙莉蓮》那味（感觉这么比怪怪的，但是有神似之处）&lt;/p&gt;
+</content>
+        <category term="杂文" />
+        <updated>2023-11-27T00:54:41.000Z</updated>
+    </entry>
+    <entry>
+        <id>https://demoyao100.github.io/2023/11/26/laurelAndYanny/</id>
+        <title>laurelAndYanny</title>
+        <link rel="alternate" href="https://demoyao100.github.io/2023/11/26/laurelAndYanny/"/>
+        <content type="html">&lt;h6 id=&#34;preface宿舍传了一个wwwxiaohongshucom视频就是那个mimi和gulu混淆那个声音-然后传给一个复旦做aigc的爷想着要不要写个小工具玩玩鸽子叫&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#preface宿舍传了一个wwwxiaohongshucom视频就是那个mimi和gulu混淆那个声音-然后传给一个复旦做aigc的爷想着要不要写个小工具玩玩鸽子叫&#34;&gt;#&lt;/a&gt; PREFACE：宿舍传了一个&lt;a href=&#34;https://www.xiaohongshu.com/discovery/item/655e08f10000000032030e79?app_platform=ios&amp;amp;app_version=8.14.3&amp;amp;share_from_user_hidden=true&amp;amp;type=video&amp;amp;xhsshare=WeixinSession&amp;amp;appuid=61a4c0af000000000201859a&amp;amp;apptime=1700751420&#34;&gt; www.xiaohongshu.com&lt;/a&gt; 视频，就是那个 mimi 和 gulu 混淆那个声音。然后传给一个复旦做 aigc 的爷，想着要不要写个小工具玩玩 (鸽子叫)&lt;/h6&gt;
+&lt;h6 id=&#34;这两天总算ddl弄了一下来做下子信息收集才发现已有一些研究&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#这两天总算ddl弄了一下来做下子信息收集才发现已有一些研究&#34;&gt;#&lt;/a&gt; 这两天总算 ddl 弄了一下，来做下子信息收集，才发现已有一些研究&lt;/h6&gt;
+&lt;p&gt;&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;历史小故事&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://zh.wikipedia.org/wiki/Laurel%E6%88%96Yanny%E7%88%AD%E8%AB%96&#34;&gt;Laurel 或 Yanny 争论 - 维基百科，自由的百科全书 (wikipedia.org)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;好玩的工具 (一开始我们想实现的效果，不过既然有人做了～)：&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.nytimes.com/interactive/2018/05/16/upshot/audio-clip-yanny-laurel-debate.html&#34;&gt;We Made a Tool So You Can Hear Both Yanny and Laurel - The New York Times (nytimes.com)&lt;/a&gt;&lt;/p&gt;
+</content>
+        <category term="杂文" />
+        <updated>2023-11-26T10:26:56.000Z</updated>
+    </entry>
+    <entry>
+        <id>https://demoyao100.github.io/2023/11/13/%E3%80%8A%E8%A2%AB%E8%AE%A8%E5%8E%8C%E7%9A%84%E5%8B%87%E6%B0%94%E3%80%8B/</id>
+        <title>《被讨厌的勇气》</title>
+        <link rel="alternate" href="https://demoyao100.github.io/2023/11/13/%E3%80%8A%E8%A2%AB%E8%AE%A8%E5%8E%8C%E7%9A%84%E5%8B%87%E6%B0%94%E3%80%8B/"/>
+        <content type="html">&lt;h6 id=&#34;preface哲学心理学作品与技术无关但是私认为每一个对自己的人生价值-意义对人际交往对自己的过去与未来心存迷茫或芥蒂的人或许都能从中感悟或碰撞出一些结论&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#preface哲学心理学作品与技术无关但是私认为每一个对自己的人生价值-意义对人际交往对自己的过去与未来心存迷茫或芥蒂的人或许都能从中感悟或碰撞出一些结论&#34;&gt;#&lt;/a&gt; PREFACE：哲学心理学作品，与技术无关，但是私认为每一个对自己的人生价值、意义，对人际交往，对自己的过去与未来心存迷茫或芥蒂的人，或许都能从中感悟或碰撞出一些结论&lt;/h6&gt;
+&lt;h6 id=&#34;简单聊聊无指向或针对性&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#简单聊聊无指向或针对性&#34;&gt;#&lt;/a&gt; 简单聊聊，无指向或针对性&lt;/h6&gt;
+&lt;p&gt;&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;​		看完了，总计花了 5h 左右，书不太长，看得比较慢。以哲学的口吻讲述阿德勒心理学，本质上是哲学，核心问题是以看待人际关系的角度（个人以及与他人的联系，以及我们的潜意识和表意识对待这种联系的态度）来解释个人的行为。阿德勒心理学也称为个体心理学，这本书基本上是立足于对个人的思考进行的。&lt;/p&gt;
+&lt;p&gt;​		书中采用年轻人和哲学家的对话进行（话说《苏菲的世界》好像也是类似的对话教学模式，莫不是哲学家都喜欢这样叙事 ×）&lt;/p&gt;
+&lt;p&gt;​		年轻人有的苦恼，以及年轻人举例的苦恼，感觉上是很多人都会有的。感觉猛猛对号入座了一把...&lt;/p&gt;
+&lt;h6 id=&#34;todo有空再补补感想写一半写累了不想写了&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#todo有空再补补感想写一半写累了不想写了&#34;&gt;#&lt;/a&gt; TODO：有空再补补感想，写一半写累了不想写了&lt;/h6&gt;
+&lt;p&gt;​		总归为自己很长一段时间的探求给出了一个结论，接下来是对待这个结论的态度。&lt;/p&gt;
+&lt;p&gt;​		话说今天一天光看书了，啥活也没干，啥也没学，明明是最忙的周一：）&lt;/p&gt;
+</content>
+        <category term="杂文" />
+        <updated>2023-11-13T12:25:39.000Z</updated>
+    </entry>
+    <entry>
+        <id>https://demoyao100.github.io/2023/03/17/%E5%A4%9C%E5%BD%B3%E4%BA%8D/</id>
+        <title>夜彳亍</title>
+        <link rel="alternate" href="https://demoyao100.github.io/2023/03/17/%E5%A4%9C%E5%BD%B3%E4%BA%8D/"/>
+        <content type="html">&lt;h4 id=&#34;夜彳亍京城&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#夜彳亍京城&#34;&gt;#&lt;/a&gt; 夜彳亍京城&lt;/h4&gt;
+&lt;h6 id=&#34;题目来源于aidai学长-bridge和nova等&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#题目来源于aidai学长-bridge和nova等&#34;&gt;#&lt;/a&gt; 题目来源于 AiDai 学长、bridge 和 nova 等&lt;/h6&gt;
+&lt;h6 id=&#34;长久不写文感觉还是需要偶尔动动笔不然对不起初高中语文老师&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#长久不写文感觉还是需要偶尔动动笔不然对不起初高中语文老师&#34;&gt;#&lt;/a&gt; 长久不写文，感觉还是需要偶尔动动笔，不然对不起初高中语文老师&lt;/h6&gt;
+&lt;p&gt;&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#1&#34;&gt;夜彳亍&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#2&#34;&gt;回程&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;div-id-1夜彳亍div&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#div-id-1夜彳亍div&#34;&gt;#&lt;/a&gt; &amp;lt;div id = &amp;quot;1&amp;quot;&amp;gt; 夜彳亍 &amp;lt; div&amp;gt;&lt;/h4&gt;
+&lt;p&gt;倒也没有什么特别想去的地方，但缘由是一直呆在校内挺累的，一天也没有什么安静的独处时间，于是乎于 2023 年 3 月 17 日夜晚八点零七分，欣然骑了个车夜彳亍。&lt;/p&gt;
+&lt;p&gt;这样的夜彳亍前一阵也来了一次，约莫是在下午的夜彳亍。但出校门右转，沿着高架上的地铁一路走，走到尽头，由于不能判断前面的路上了高架还能不能正常下来，便作罢回校。&lt;/p&gt;
+&lt;p&gt;这么走是没有目的的，所以也不看导航，但也总该有点方向，旁边的岔路晚上并不怎么开灯，对于夜彳亍来说似乎也有些危险。于是沿着同一个高架，同一个地铁线走，往左。天气很冷，夜晚夜彳亍比下午冷多了，尤其是骑车，颇有手指不可屈伸的美感。&lt;/p&gt;
+&lt;p&gt;但往左走原来也有尽头，高架只会带你走短短一些路。等到了路尾，发现没有路了，人群往四面散去。有些人似乎是执意孤行的，在末尾上了地铁。似乎都是大学生。短暂的二十载中，我也一直跟着地铁，我不知道该往哪走，我只知道大家都走这条路。不走这条路的人，或许附近有房，或许在附近打晚工，总归不是一道人。跟着一道人走，往往是没错的。但尽头没路了。但上地铁并不是我此行的目的，也不是我这个时间的想法。那往左拐，左边的人比较多，或许会指引我到什么地方。&lt;/p&gt;
+&lt;p&gt;这条路真的很长，长到看不出有什么尽头。就只是一路往下。这里真的很不像北京。或者说不像我想象中的北京。感觉就只是，无端的，荒凉。也许它并不荒凉。但是比想象中的荒凉。车水马龙。&lt;/p&gt;
+&lt;p&gt;这个点的车水马龙，并不是什么繁华的象征。&lt;/p&gt;
+&lt;p&gt;这意味着这条路是背离市中心的，向着居民区延伸的。&lt;/p&gt;
+&lt;p&gt;也许也不是，期间看到一些奇怪的路牌，但是并没有看到与之相称的人，或许是荒废已久的路牌。&lt;/p&gt;
+&lt;p&gt;一路走下去，没什么特别的。&lt;/p&gt;
+&lt;p&gt;就只是不断不断的出现岔路，岔路的尽头是黑的，一进岔路就几乎没有光了。我的小小共享单车没有车头灯，如果在八十线小城骑一辆有灯的小电动，也许可以敢往下拐，但是我只能不断前进。&lt;/p&gt;
+&lt;p&gt;就只是车越来越少，人行道上也看不见什么人了。&lt;/p&gt;
+&lt;p&gt;那看看手机地图吧。&lt;/p&gt;
+&lt;p&gt;路途中间我是没有看地图的。本来就是没有目的的夜彳亍，看地图总归煞了风景。但那条路真的很长。长得怎么骑也看不到尽头，我也不知道我骑了多远。但这趟夜彳亍我不打算过夜的，我的东西还放在图书馆，得十一点前回来收拾。所以还是看了看地图。&lt;/p&gt;
+&lt;p&gt;我原以为我一直在走大道。但实际上似乎还是走到小道里了。&lt;/p&gt;
+&lt;p&gt;看不出来，因为一直在自认为最光亮的一条路上走。所以回过头看地图，却也感到诧异。&lt;/p&gt;
+&lt;p&gt;不过嘛，没有目的的夜彳亍，确实应该是这样的，也比较有意思。&lt;/p&gt;
+&lt;p&gt;那就回来吧，其实也挺无聊的。&lt;/p&gt;
+&lt;p&gt;一般都是这样，来的时候总觉得走了好长好长一段路，回首却一会就到了。&lt;/p&gt;
+&lt;p&gt;来的时候，右边看到一个卖馒头的。&lt;/p&gt;
+&lt;p&gt;看不清，似乎没人，看到了微信收款码。&lt;/p&gt;
+&lt;p&gt;还听到（或许是看到呢）一清二楚的大馒头一块钱一个。&lt;/p&gt;
+&lt;p&gt;来的时候，就在最后一个十字路口，有一个老太在卖玉米。&lt;/p&gt;
+&lt;p&gt;烤玉米，用一个炉子在烧。她似乎在将硬纸板一点一点的塞进去，也许是有火星子冒出来。&lt;/p&gt;
+&lt;p&gt;她戴的手套看着很暖和。人群中似乎就我一个人愚蠢到不戴手套。但是具体的我没太注意，绿灯亮起我也就过去了。她似乎在对着过往的人群，大学生或什么，并不大声地喊着烤玉米或玉米的价格或什么。总能在眼里看到一些希冀，或者其他什么。&lt;/p&gt;
+&lt;p&gt;总归这次出行没注意什么细节，也许是夜里冷，人太少的缘故。但过来的路确实也又有些不同。总感觉，遛狗的人，悠闲的人多了。&lt;/p&gt;
+&lt;p&gt;提着菜的，忙碌的人比来时的路少了。&lt;/p&gt;
+&lt;p&gt;回到十字路口。茫然发现，其实过来这条路并不长。&lt;/p&gt;
+&lt;p&gt;确实，回头看的时候总觉得，其实确实不是一条有多长的路。&lt;/p&gt;
+&lt;p&gt;但反正，还有时间，那在地铁入口的路口，往右拐看看。&lt;/p&gt;
+&lt;p&gt;但房屋却比较高大了。虽然还是稀疏。道路也比较宽广了。&lt;/p&gt;
+&lt;p&gt;一阵后，感觉没有那么想继续了，回程吧。下次或许从这里继续。&lt;/p&gt;
+&lt;p&gt;也有可能去看一下水库，据说风景不错。但是水库大抵是不能晚上去，那只能白天夜彳亍去一趟。&lt;/p&gt;
+&lt;h4 id=&#34;div-id-2-回程div&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#div-id-2-回程div&#34;&gt;#&lt;/a&gt; &amp;lt;div id = &amp;quot;2&amp;quot;&amp;gt;・回程 &amp;lt; div&amp;gt;&lt;/h4&gt;
+&lt;p&gt;总归是一会就回来了，什么也没发生。本来也不期待什么会发生。&lt;/p&gt;
+&lt;p&gt;但也还算发生了点什么，算是给点时间。&lt;/p&gt;
+&lt;p&gt;回来看这群打 ctf 的好像也没聊啥，那倒没错过啥。&lt;/p&gt;
+&lt;p&gt;虽然水群太多是该戒戒就是。&lt;/p&gt;
+&lt;p&gt;倒是收到某位的消息，想给我 “测评” 铃芽之旅。你最好是在测评，还是等我们这些非北大生惨兮兮下周看完电影再聊吧。&lt;/p&gt;
+&lt;h6 id=&#34;感觉确实是不如bridge或者nova写的有水平的反正随手一记当是开个新坑以后多做一些记录&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#感觉确实是不如bridge或者nova写的有水平的反正随手一记当是开个新坑以后多做一些记录&#34;&gt;#&lt;/a&gt; 感觉确实是不如 bridge 或者 nova 写的有水平的，反正随手一记，当是开个新坑，以后多做一些记录。&lt;/h6&gt;
+&lt;h6 id=&#34;没拍啥照片确实没啥好拍的也确实手冻的拿不住手机&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#没拍啥照片确实没啥好拍的也确实手冻的拿不住手机&#34;&gt;#&lt;/a&gt; 没拍啥照片，确实没啥好拍的，也确实手冻的拿不住手机。&lt;/h6&gt;
+</content>
+        <category term="杂文" />
+        <updated>2023-03-17T13:25:15.000Z</updated>
+    </entry>
+</feed>

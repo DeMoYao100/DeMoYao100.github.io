@@ -1,0 +1,18 @@
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "rev@天枢 • All posts by \"docker\" tag",
+    "description": "Write down something interesting I met<br />\nFeel free to mail me if you have something wanted to talk about, plz\nmail: &lt;moyaoxue@outlook.com&gt;\n",
+    "home_page_url": "https://demoyao100.github.io",
+    "items": [
+        {
+            "id": "https://demoyao100.github.io/2023/10/03/docker%E6%93%8D%E4%BD%9C%E8%AE%B0%E5%BD%95/",
+            "url": "https://demoyao100.github.io/2023/10/03/docker%E6%93%8D%E4%BD%9C%E8%AE%B0%E5%BD%95/",
+            "title": "docker操作记录",
+            "date_published": "2023-10-03T01:16:11.000Z",
+            "content_html": "<h6 id=\"preface记录\"><a class=\"anchor\" href=\"#preface记录\">#</a> PREFACE：记录</h6>\n<p><span id=\"more\"></span></p>\n<p>构建 docker 镜像：</p>\n<pre><code>docker-compose build\n</code></pre>\n<p>启动 docker 至后台：</p>\n<pre><code>docker-compose up -d\n</code></pre>\n<p>进入 docker 进行交互：</p>\n<pre><code>docker exec -it compiler /bin/bash\n</code></pre>\n<p>以命令行模式进入 docker：</p>\n<pre><code>docker run -it ubuntu /bin/bash\n</code></pre>\n<p>退出 docker：</p>\n<pre><code>exit\n</code></pre>\n<p>停止与删除容器：</p>\n<pre><code> docker-compose down\n</code></pre>\n<p>查看所有 docker：</p>\n<pre><code>docker ps -a\n</code></pre>\n<p>启动已经停止的 docker：</p>\n<pre><code>docker start &lt;容器 ID&gt;\n</code></pre>\n<p>指定 docker 运行模式（-d 不进入 docker）：</p>\n<pre><code>docker run -itd --name ubuntu-test ubuntu /bin/bash\n</code></pre>\n<p>sleep 休眠状态，保持容器运行：</p>\n<pre><code>docker run -d python313 sleep infinity\n</code></pre>\n<p>停止容器：</p>\n<pre><code>docker stop &lt;容器 ID&gt;\n</code></pre>\n<p>进入正在后台的容器：</p>\n<pre><code>docker attach\n</code></pre>\n<p>退出容器终端但不停止：</p>\n<pre><code>docker exec\n</code></pre>\n<p>重新进入容器交互界面</p>\n<pre><code>docker exec -it &lt;容器 ID&gt; /bin/bash\n</code></pre>\n<p>导出容器快照：</p>\n<pre><code>docker export 1e560fca3906 &gt; ubuntu.tar\n</code></pre>\n<p>重将容器快照导入为镜像：</p>\n<pre><code>cat docker/ubuntu.tar | docker import - test/ubuntu:v1\n</code></pre>\n<p>或</p>\n<pre><code>docker import http://example.com/exampleimage.tgz example/imagerepo\n</code></pre>\n<p>删除容器：</p>\n<pre><code>docker rm -f 1e560fca3906\n</code></pre>\n<p>传入文件：</p>\n<pre><code>docker cp file &lt;容器 ID&gt;:/app/file\n</code></pre>\n",
+            "tags": [
+                "docker"
+            ]
+        }
+    ]
+}

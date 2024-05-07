@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>rev@天枢 • Posts by &#34;web&#34; tag</title>
+        <link>https://demoyao100.github.io</link>
+        <description>Write down something interesting I met&lt;br /&gt;
+Feel free to mail me if you have something wanted to talk about, plz
+mail: &amp;lt;moyaoxue@outlook.com&amp;gt;
+</description>
+        <language>en</language>
+        <pubDate>Mon, 18 Sep 2023 14:28:10 +0800</pubDate>
+        <lastBuildDate>Mon, 18 Sep 2023 14:28:10 +0800</lastBuildDate>
+        <category>re</category>
+        <category>Android</category>
+        <category>开发</category>
+        <category>codeforces</category>
+        <category>cv</category>
+        <category>docker</category>
+        <category>驱动</category>
+        <category>electron</category>
+        <category>杂文</category>
+        <category>web</category>
+        <category>jail</category>
+        <category>IOT</category>
+        <category>python</category>
+        <category>hexo</category>
+        <item>
+            <guid isPermalink="true">https://demoyao100.github.io/2023/09/18/pickle%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/</guid>
+            <title>pickle反序列化</title>
+            <link>https://demoyao100.github.io/2023/09/18/pickle%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/</link>
+            <category>web</category>
+            <pubDate>Mon, 18 Sep 2023 14:28:10 +0800</pubDate>
+            <description><![CDATA[ &lt;h6 id=&#34;preface-就是看看~&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#preface-就是看看~&#34;&gt;#&lt;/a&gt; PREFACE: 就是看看～&lt;/h6&gt;
+&lt;p&gt;&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://zhuanlan.zhihu.com/p/89132768&#34;&gt;从零开始 python 反序列化攻击：pickle 原理解析 &amp;amp; 不用 reduce 的 RCE 姿势 - 知乎 (zhihu.com)&lt;/a&gt;&lt;/p&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>

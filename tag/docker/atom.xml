@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://demoyao100.github.io</id>
+    <title>rev@天枢 • Posts by &#34;docker&#34; tag</title>
+    <link href="https://demoyao100.github.io" />
+    <updated>2023-10-03T01:16:11.000Z</updated>
+    <category term="re" />
+    <category term="Android" />
+    <category term="开发" />
+    <category term="codeforces" />
+    <category term="cv" />
+    <category term="docker" />
+    <category term="驱动" />
+    <category term="electron" />
+    <category term="杂文" />
+    <category term="web" />
+    <category term="jail" />
+    <category term="IOT" />
+    <category term="python" />
+    <category term="hexo" />
+    <entry>
+        <id>https://demoyao100.github.io/2023/10/03/docker%E6%93%8D%E4%BD%9C%E8%AE%B0%E5%BD%95/</id>
+        <title>docker操作记录</title>
+        <link rel="alternate" href="https://demoyao100.github.io/2023/10/03/docker%E6%93%8D%E4%BD%9C%E8%AE%B0%E5%BD%95/"/>
+        <content type="html">&lt;h6 id=&#34;preface记录&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#preface记录&#34;&gt;#&lt;/a&gt; PREFACE：记录&lt;/h6&gt;
+&lt;p&gt;&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;构建 docker 镜像：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;docker-compose build
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;启动 docker 至后台：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;docker-compose up -d
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;进入 docker 进行交互：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;docker exec -it compiler /bin/bash
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;以命令行模式进入 docker：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;docker run -it ubuntu /bin/bash
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;退出 docker：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;exit
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;停止与删除容器：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; docker-compose down
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;查看所有 docker：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;docker ps -a
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;启动已经停止的 docker：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;docker start &amp;lt;容器 ID&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;指定 docker 运行模式（-d 不进入 docker）：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;docker run -itd --name ubuntu-test ubuntu /bin/bash
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;sleep 休眠状态，保持容器运行：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;docker run -d python313 sleep infinity
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;停止容器：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;docker stop &amp;lt;容器 ID&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;进入正在后台的容器：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;docker attach
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;退出容器终端但不停止：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;docker exec
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;重新进入容器交互界面&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;docker exec -it &amp;lt;容器 ID&amp;gt; /bin/bash
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;导出容器快照：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;docker export 1e560fca3906 &amp;gt; ubuntu.tar
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;重将容器快照导入为镜像：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;cat docker/ubuntu.tar | docker import - test/ubuntu:v1
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;或&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;docker import http://example.com/exampleimage.tgz example/imagerepo
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;删除容器：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;docker rm -f 1e560fca3906
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;传入文件：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;docker cp file &amp;lt;容器 ID&amp;gt;:/app/file
+&lt;/code&gt;&lt;/pre&gt;
+</content>
+        <category term="docker" />
+        <updated>2023-10-03T01:16:11.000Z</updated>
+    </entry>
+</feed>
