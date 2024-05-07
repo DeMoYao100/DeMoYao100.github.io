@@ -6,18 +6,22 @@
     <updated>2023-11-14T07:27:02.000Z</updated>
     <category term="re" />
     <category term="Android" />
-    <category term="codeforces" />
     <category term="开发" />
-    <category term="cv" />
-    <category term="docker" />
+    <category term="codeforces" />
     <category term="驱动" />
     <category term="electron" />
+    <category term="docker" />
+    <category term="cv" />
     <category term="杂文" />
     <category term="web" />
     <category term="jail" />
     <category term="IOT" />
+    <category term="re Android linux" />
+    <category term="web shiro" />
+    <category term="re Android" />
     <category term="python" />
     <category term="hexo" />
+    <category term="car" />
     <entry>
         <id>https://demoyao100.github.io/2023/11/14/qemu%E8%B0%83%E8%AF%95%E8%AE%B0%E5%BD%95/</id>
         <title>qemu调试记录</title>
