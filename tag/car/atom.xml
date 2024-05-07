@@ -8,10 +8,10 @@
     <category term="Android" />
     <category term="开发" />
     <category term="codeforces" />
-    <category term="驱动" />
-    <category term="electron" />
-    <category term="docker" />
     <category term="cv" />
+    <category term="驱动" />
+    <category term="docker" />
+    <category term="electron" />
     <category term="杂文" />
     <category term="web" />
     <category term="jail" />
@@ -26,7 +26,8 @@
         <id>https://demoyao100.github.io/2024/05/08/%E8%BD%A6UDS%E8%AF%8A%E6%96%AD%E5%8D%8F%E8%AE%AE%E5%AD%A6%E4%B9%A0/</id>
         <title>车UDS诊断协议学习</title>
         <link rel="alternate" href="https://demoyao100.github.io/2024/05/08/%E8%BD%A6UDS%E8%AF%8A%E6%96%AD%E5%8D%8F%E8%AE%AE%E5%AD%A6%E4%B9%A0/"/>
-        <content type="html">&lt;h1 id=&#34;车uds诊断协议学习&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#车uds诊断协议学习&#34;&gt;#&lt;/a&gt; 车 UDS 诊断协议学习&lt;/h1&gt;
+        <content type="html">&lt;p&gt;&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;h1 id=&#34;车uds诊断协议学习&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#车uds诊断协议学习&#34;&gt;#&lt;/a&gt; 车 UDS 诊断协议学习&lt;/h1&gt;
 &lt;h2 id=&#34;概念&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#概念&#34;&gt;#&lt;/a&gt; 概念&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;统一诊断服务&lt;/strong&gt;（英语：&lt;strong&gt;Unified Diagnostic Services&lt;/strong&gt;，简称 UDS）是车用电子的通信协议，是电子控制器（ECU）中设备诊断用的网络传输协议，对应的标准是 ISO 14229-1。&lt;/p&gt;
 &lt;p&gt;诊断工具可以连接车上所有支持统一诊断服务功能的电子控制器。车上常用的控制器局域网只用到 OSI 模型的第一层及第二层，而统一诊断服务集成了 OSI 模型的第五层及第七层。服务标识符（Service ID、SID）及服务相关的参数都放在 8 个字节的消息框内。&lt;/p&gt;
@@ -814,7 +815,8 @@
         <id>https://demoyao100.github.io/2024/05/08/%E8%BD%A6CAN%E6%80%BB%E7%BA%BF%E5%8D%8F%E8%AE%AE%E5%AD%A6%E4%B9%A0/</id>
         <title>车CAN总线协议学习</title>
         <link rel="alternate" href="https://demoyao100.github.io/2024/05/08/%E8%BD%A6CAN%E6%80%BB%E7%BA%BF%E5%8D%8F%E8%AE%AE%E5%AD%A6%E4%B9%A0/"/>
-        <content type="html">&lt;h3 id=&#34;基本概念&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#基本概念&#34;&gt;#&lt;/a&gt; 基本概念：&lt;/h3&gt;
+        <content type="html">&lt;p&gt;&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;h3 id=&#34;基本概念&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#基本概念&#34;&gt;#&lt;/a&gt; 基本概念：&lt;/h3&gt;
 &lt;p&gt;CAN（Controller Area Network）总线协议是由 BOSCH 发明的一种&lt;strong&gt;基于消息广播模式的串行通信总线&lt;/strong&gt;，它起初用于实现汽车内 ECU 之间可靠的通信，后因其简单实用可靠等特点，而广泛应用于工业自动化、船舶、医疗等其它领域。&lt;/p&gt;
 &lt;p&gt;ECU（Electronic Control Unit）电子控制器单元，它们的用途就是控制汽车的行驶状态以及实现其各种功能。主要是利用各种传感器、总线的数据采集与交换，来判断车辆状态以及司机的意图并通过执行器来操控汽车。&lt;/p&gt;
 &lt;p&gt;简而言之 CAN 总线是&lt;strong&gt;用于各个 ECU 之间互相通信的网络以及协议&lt;/strong&gt;。&lt;/p&gt;

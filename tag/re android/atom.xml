@@ -8,10 +8,10 @@
     <category term="Android" />
     <category term="开发" />
     <category term="codeforces" />
-    <category term="驱动" />
-    <category term="electron" />
-    <category term="docker" />
     <category term="cv" />
+    <category term="驱动" />
+    <category term="docker" />
+    <category term="electron" />
     <category term="杂文" />
     <category term="web" />
     <category term="jail" />
@@ -27,7 +27,7 @@
         <title>不同的android hook姿势</title>
         <link rel="alternate" href="https://demoyao100.github.io/2024/05/03/%E4%B8%8D%E5%90%8C%E7%9A%84android-hook%E5%A7%BF%E5%8A%BF/"/>
         <content type="html">&lt;p&gt;PREFACE：被拷打一排甚至没听过，之前确实一点不懂这个，爬来快速过一下&lt;/p&gt;
-&lt;p&gt;&amp;lt;!— more —&amp;gt;&lt;/p&gt;
+&lt;p&gt;&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;&lt;/p&gt;
 &lt;h3 id=&#34;一-got表hook&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#一-got表hook&#34;&gt;#&lt;/a&gt; 一、GOT 表 HOOK&lt;/h3&gt;
 &lt;p&gt;参考：&lt;a href=&#34;https://zhuanlan.zhihu.com/p/269441842&#34;&gt;PLT HOOK - 知乎 (zhihu.com)&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;仅能 hook got 表中引用的函数，替换某个 SO 的外部调用，通过将外部函数调用跳转成我们的目标函数。&lt;/p&gt;

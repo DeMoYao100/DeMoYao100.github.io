@@ -17,16 +17,16 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"demoyao100.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false,"trigger":"auto"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="PREFACE：被拷打一排甚至没听过，之前确实一点不懂这个，爬来快速过一下 <!— more —> # 一、GOT 表 HOOK 参考：PLT HOOK - 知乎 (zhihu.com) 仅能 hook got 表中引用的函数，替换某个 SO 的外部调用，通过将外部函数调用跳转成我们的目标函数。 当需要使用一个 Native 库（.so 文件）的时候，我们需要调用 dlopen (&amp;q">
+    <meta name="description" content="PREFACE：被拷打一排甚至没听过，之前确实一点不懂这个，爬来快速过一下">
 <meta property="og:type" content="article">
 <meta property="og:title" content="不同的android hook姿势">
 <meta property="og:url" content="https://demoyao100.github.io/2024/05/03/%E4%B8%8D%E5%90%8C%E7%9A%84android-hook%E5%A7%BF%E5%8A%BF/index.html">
 <meta property="og:site_name" content="Moyao の小屋">
-<meta property="og:description" content="PREFACE：被拷打一排甚至没听过，之前确实一点不懂这个，爬来快速过一下 <!— more —> # 一、GOT 表 HOOK 参考：PLT HOOK - 知乎 (zhihu.com) 仅能 hook got 表中引用的函数，替换某个 SO 的外部调用，通过将外部函数调用跳转成我们的目标函数。 当需要使用一个 Native 库（.so 文件）的时候，我们需要调用 dlopen (&amp;q">
+<meta property="og:description" content="PREFACE：被拷打一排甚至没听过，之前确实一点不懂这个，爬来快速过一下">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://demoyao100.github.io/2024/05/03/%E4%B8%8D%E5%90%8C%E7%9A%84android-hook%E5%A7%BF%E5%8A%BF/Untitled.png">
 <meta property="article:published_time" content="2024-05-03T10:55:01.000Z">
-<meta property="article:modified_time" content="2024-05-07T16:39:16.501Z">
+<meta property="article:modified_time" content="2024-05-07T16:53:43.423Z">
 <meta property="article:author" content="Moyao">
 <meta property="article:tag" content="re Android">
 <meta name="twitter:card" content="summary">
@@ -241,7 +241,7 @@ mail: <moyaoxue@outlook.com>
     
     
     <div class="post-body" itemprop="articleBody"><p>PREFACE：被拷打一排甚至没听过，之前确实一点不懂这个，爬来快速过一下</p>
-<p>&lt;!— more —&gt;</p>
+<p><span id="more"></span></p>
 <h3 id="一-got表hook"><a class="anchor" href="#一-got表hook">#</a> 一、GOT 表 HOOK</h3>
 <p>参考：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/269441842">PLT HOOK - 知乎 (zhihu.com)</a></p>
 <p>仅能 hook got 表中引用的函数，替换某个 SO 的外部调用，通过将外部函数调用跳转成我们的目标函数。</p>

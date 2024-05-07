@@ -17,16 +17,14 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"demoyao100.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false,"trigger":"auto"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="# PREFACE：渗透和 awd 里面都遇到了，web 手说这个容易… 那就看看呗，反正也得多看 java，这把当个 web 手呗 写很好，二进制也能看:>，下面的基本上是扣这里的：https://www.freebuf.com/articles/web/367363.html # Shiro-550 反序列化漏洞（CVE-2016-4437） # 漏洞简介 shiro-550 主要是由">
-<meta property="og:type" content="article">
+    <meta property="og:type" content="article">
 <meta property="og:title" content="shiro安全浅探">
 <meta property="og:url" content="https://demoyao100.github.io/2024/05/08/shiro%E5%AE%89%E5%85%A8%E6%B5%85%E6%8E%A2/index.html">
 <meta property="og:site_name" content="Moyao の小屋">
-<meta property="og:description" content="# PREFACE：渗透和 awd 里面都遇到了，web 手说这个容易… 那就看看呗，反正也得多看 java，这把当个 web 手呗 写很好，二进制也能看:>，下面的基本上是扣这里的：https://www.freebuf.com/articles/web/367363.html # Shiro-550 反序列化漏洞（CVE-2016-4437） # 漏洞简介 shiro-550 主要是由">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://demoyao100.github.io/2024/05/08/shiro%E5%AE%89%E5%85%A8%E6%B5%85%E6%8E%A2/Untitled.png">
 <meta property="article:published_time" content="2024-05-07T16:26:13.000Z">
-<meta property="article:modified_time" content="2024-05-07T16:37:43.505Z">
+<meta property="article:modified_time" content="2024-05-07T16:53:49.302Z">
 <meta property="article:author" content="Moyao">
 <meta property="article:tag" content="web shiro">
 <meta name="twitter:card" content="summary">
@@ -240,7 +238,8 @@ mail: <moyaoxue@outlook.com>
     
     
     
-    <div class="post-body" itemprop="articleBody"><h6 id="preface渗透和awd里面都遇到了web手说这个容易那就看看呗反正也得多看java这把当个web手呗"><a class="anchor" href="#preface渗透和awd里面都遇到了web手说这个容易那就看看呗反正也得多看java这把当个web手呗">#</a> PREFACE：渗透和 awd 里面都遇到了，web 手说这个容易… 那就看看呗，反正也得多看 java，这把当个 web 手呗</h6>
+    <div class="post-body" itemprop="articleBody"><p><span id="more"></span></p>
+<h6 id="preface渗透和awd里面都遇到了web手说这个容易那就看看呗反正也得多看java这把当个web手呗"><a class="anchor" href="#preface渗透和awd里面都遇到了web手说这个容易那就看看呗反正也得多看java这把当个web手呗">#</a> PREFACE：渗透和 awd 里面都遇到了，web 手说这个容易… 那就看看呗，反正也得多看 java，这把当个 web 手呗</h6>
 <p>写很好，二进制也能看:&gt;，下面的基本上是扣这里的：<a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/web/367363.html">https://www.freebuf.com/articles/web/367363.html</a></p>
 <h2 id="shiro-550反序列化漏洞cve-2016-4437"><a class="anchor" href="#shiro-550反序列化漏洞cve-2016-4437">#</a> Shiro-550 反序列化漏洞（CVE-2016-4437）</h2>
 <h4 id="漏洞简介"><a class="anchor" href="#漏洞简介">#</a> 漏洞简介</h4>
