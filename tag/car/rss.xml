@@ -34,7 +34,9 @@ mail: &amp;lt;moyaoxue@outlook.com&amp;gt;
             <link>https://demoyao100.github.io/%E8%BD%A6UDS%E8%AF%8A%E6%96%AD%E5%8D%8F%E8%AE%AE%E5%AD%A6%E4%B9%A0/</link>
             <category>car</category>
             <pubDate>Wed, 08 May 2024 00:40:00 +0800</pubDate>
-            <description><![CDATA[ &lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+            <description><![CDATA[ &lt;h6 id=&#34;preface&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#preface&#34;&gt;#&lt;/a&gt; PREFACE：&lt;/h6&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;!-- more --&gt;
 &lt;h1 id=&#34;车uds诊断协议学习&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#车uds诊断协议学习&#34;&gt;#&lt;/a&gt; 车 UDS 诊断协议学习&lt;/h1&gt;
 &lt;h2 id=&#34;概念&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#概念&#34;&gt;#&lt;/a&gt; 概念&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;统一诊断服务&lt;/strong&gt;（英语：&lt;strong&gt;Unified Diagnostic Services&lt;/strong&gt;，简称 UDS）是车用电子的通信协议，是电子控制器（ECU）中设备诊断用的网络传输协议，对应的标准是 ISO 14229-1。&lt;/p&gt;
@@ -823,7 +825,8 @@ mail: &amp;lt;moyaoxue@outlook.com&amp;gt;
             <link>https://demoyao100.github.io/%E8%BD%A6CAN%E6%80%BB%E7%BA%BF%E5%8D%8F%E8%AE%AE%E5%AD%A6%E4%B9%A0/</link>
             <category>car</category>
             <pubDate>Wed, 08 May 2024 00:32:00 +0800</pubDate>
-            <description><![CDATA[ &lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+            <description><![CDATA[ &lt;h6 id=&#34;preface&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#preface&#34;&gt;#&lt;/a&gt; PREFACE：&lt;/h6&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
 &lt;h3 id=&#34;基本概念&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#基本概念&#34;&gt;#&lt;/a&gt; 基本概念：&lt;/h3&gt;
 &lt;p&gt;CAN（Controller Area Network）总线协议是由 BOSCH 发明的一种&lt;strong&gt;基于消息广播模式的串行通信总线&lt;/strong&gt;，它起初用于实现汽车内 ECU 之间可靠的通信，后因其简单实用可靠等特点，而广泛应用于工业自动化、船舶、医疗等其它领域。&lt;/p&gt;
 &lt;p&gt;ECU（Electronic Control Unit）电子控制器单元，它们的用途就是控制汽车的行驶状态以及实现其各种功能。主要是利用各种传感器、总线的数据采集与交换，来判断车辆状态以及司机的意图并通过执行器来操控汽车。&lt;/p&gt;

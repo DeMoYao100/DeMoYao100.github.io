@@ -34,7 +34,8 @@ mail: &amp;lt;moyaoxue@outlook.com&amp;gt;
             <link>https://demoyao100.github.io/shiro%E5%AE%89%E5%85%A8%E6%B5%85%E6%8E%A2/</link>
             <category>web shiro</category>
             <pubDate>Wed, 08 May 2024 00:26:13 +0800</pubDate>
-            <description><![CDATA[ &lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+            <description><![CDATA[ &lt;h6 id=&#34;preface&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#preface&#34;&gt;#&lt;/a&gt; PREFACE：&lt;/h6&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
 &lt;h6 id=&#34;preface渗透和awd里面都遇到了web手说这个容易那就看看呗反正也得多看java这把当个web手呗&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#preface渗透和awd里面都遇到了web手说这个容易那就看看呗反正也得多看java这把当个web手呗&#34;&gt;#&lt;/a&gt; PREFACE：渗透和 awd 里面都遇到了，web 手说这个容易… 那就看看呗，反正也得多看 java，这把当个 web 手呗&lt;/h6&gt;
 &lt;p&gt;写很好，二进制也能看:&amp;gt;，下面的基本上是扣这里的：&lt;a href=&#34;https://www.freebuf.com/articles/web/367363.html&#34;&gt;https://www.freebuf.com/articles/web/367363.html&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;shiro-550反序列化漏洞cve-2016-4437&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#shiro-550反序列化漏洞cve-2016-4437&#34;&gt;#&lt;/a&gt; Shiro-550 反序列化漏洞（CVE-2016-4437）&lt;/h2&gt;

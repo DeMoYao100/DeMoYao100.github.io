@@ -17,12 +17,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"demoyao100.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false,"trigger":"auto"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="# 车 UDS 诊断协议学习 # 概念 统一诊断服务（英语：Unified Diagnostic Services，简称 UDS）是车用电子的通信协议，是电子控制器（ECU）中设备诊断用的网络传输协议，对应的标准是 ISO 14229-1。 诊断工具可以连接车上所有支持统一诊断服务功能的电子控制器。车上常用的控制器局域网只用到 OSI 模型的第一层及第二层，而统一诊断服务集成了 OSI 模型的第">
+    <meta name="description" content="# PREFACE：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="车UDS诊断协议学习">
 <meta property="og:url" content="https://demoyao100.github.io/%E8%BD%A6UDS%E8%AF%8A%E6%96%AD%E5%8D%8F%E8%AE%AE%E5%AD%A6%E4%B9%A0/index.html">
 <meta property="og:site_name" content="Moyao の小屋">
-<meta property="og:description" content="# 车 UDS 诊断协议学习 # 概念 统一诊断服务（英语：Unified Diagnostic Services，简称 UDS）是车用电子的通信协议，是电子控制器（ECU）中设备诊断用的网络传输协议，对应的标准是 ISO 14229-1。 诊断工具可以连接车上所有支持统一诊断服务功能的电子控制器。车上常用的控制器局域网只用到 OSI 模型的第一层及第二层，而统一诊断服务集成了 OSI 模型的第">
+<meta property="og:description" content="# PREFACE：">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://pic2.zhimg.com/80/v2-77482878fd4af8374b34d8eb1cd648f1_1440w.webp">
 <meta property="og:image" content="https://pic4.zhimg.com/80/v2-6ae2618313c5487b2c7579dc09455d7b_1440w.webp">
@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://pic1.zhimg.com/80/v2-35fcf45931108493f16f71bbe0bba5e8_1440w.webp">
 <meta property="og:image" content="https://pic2.zhimg.com/80/v2-f499d2093bc10d07c17db3b576d08975_1440w.webp">
 <meta property="article:published_time" content="2024-05-07T16:40:00.000Z">
-<meta property="article:modified_time" content="2024-05-07T16:53:11.204Z">
+<meta property="article:modified_time" content="2024-05-08T03:00:42.417Z">
 <meta property="article:author" content="Moyao">
 <meta property="article:tag" content="car">
 <meta name="twitter:card" content="summary">
@@ -146,7 +146,7 @@
       <div class="sidebar-panel-container">
         
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BD%A6uds%E8%AF%8A%E6%96%AD%E5%8D%8F%E8%AE%AE%E5%AD%A6%E4%B9%A0"><span class="nav-number">1.</span> <span class="nav-text"> 车 UDS 诊断协议学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5"><span class="nav-number">1.1.</span> <span class="nav-text"> 概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AF%E8%AF%AD"><span class="nav-number">1.2.</span> <span class="nav-text"> 术语</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.3.</span> <span class="nav-text"> 通信模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E5%92%8C%E5%93%8D%E5%BA%94"><span class="nav-number">1.4.</span> <span class="nav-text"> 请求和响应</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1"><span class="nav-number">1.5.</span> <span class="nav-text"> 服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nrc-negative-response-codes"><span class="nav-number">1.6.</span> <span class="nav-text"> NRC: Negative response codes</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-6"><a class="nav-link" href="#preface"><span class="nav-number">1.</span> <span class="nav-text"> PREFACE：</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BD%A6uds%E8%AF%8A%E6%96%AD%E5%8D%8F%E8%AE%AE%E5%AD%A6%E4%B9%A0"><span class="nav-number"></span> <span class="nav-text"> 车 UDS 诊断协议学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5"><span class="nav-number"></span> <span class="nav-text"> 概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AF%E8%AF%AD"><span class="nav-number"></span> <span class="nav-text"> 术语</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%BC%8F"><span class="nav-number"></span> <span class="nav-text"> 通信模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E5%92%8C%E5%93%8D%E5%BA%94"><span class="nav-number"></span> <span class="nav-text"> 请求和响应</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1"><span class="nav-number"></span> <span class="nav-text"> 服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nrc-negative-response-codes"><span class="nav-number"></span> <span class="nav-text"> NRC: Negative response codes</span></a></li></ol></li></div>
         </div>
         
 
@@ -245,7 +245,9 @@ mail: <moyaoxue@outlook.com>
     
     
     
-    <div class="post-body" itemprop="articleBody"><span id="more"></span>
+    <div class="post-body" itemprop="articleBody"><h6 id="preface"><a class="markdownIt-Anchor" href="#preface">#</a> PREFACE：</h6>
+<span id="more"></span>
+
 <h1 id="车uds诊断协议学习"><a class="markdownIt-Anchor" href="#车uds诊断协议学习">#</a> 车 UDS 诊断协议学习</h1>
 <h2 id="概念"><a class="markdownIt-Anchor" href="#概念">#</a> 概念</h2>
 <p><strong>统一诊断服务</strong>（英语：<strong>Unified Diagnostic Services</strong>，简称 UDS）是车用电子的通信协议，是电子控制器（ECU）中设备诊断用的网络传输协议，对应的标准是 ISO 14229-1。</p>
