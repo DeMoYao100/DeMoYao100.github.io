@@ -9,13 +9,13 @@
     <category term="开发" />
     <category term="codeforces" />
     <category term="cv" />
-    <category term="docker" />
     <category term="驱动" />
+    <category term="docker" />
     <category term="electron" />
     <category term="杂文" />
     <category term="web" />
-    <category term="jail" />
     <category term="IOT" />
+    <category term="jail" />
     <category term="re Android linux" />
     <category term="web shiro" />
     <category term="re Android" />
@@ -23,14 +23,14 @@
     <category term="hexo" />
     <category term="car" />
     <entry>
-        <id>https://demoyao100.github.io/2024/05/08/shiro%E5%AE%89%E5%85%A8%E6%B5%85%E6%8E%A2/</id>
+        <id>https://demoyao100.github.io/shiro%E5%AE%89%E5%85%A8%E6%B5%85%E6%8E%A2/</id>
         <title>shiro安全浅探</title>
-        <link rel="alternate" href="https://demoyao100.github.io/2024/05/08/shiro%E5%AE%89%E5%85%A8%E6%B5%85%E6%8E%A2/"/>
-        <content type="html">&lt;p&gt;&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;&lt;/p&gt;
-&lt;h6 id=&#34;preface渗透和awd里面都遇到了web手说这个容易那就看看呗反正也得多看java这把当个web手呗&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#preface渗透和awd里面都遇到了web手说这个容易那就看看呗反正也得多看java这把当个web手呗&#34;&gt;#&lt;/a&gt; PREFACE：渗透和 awd 里面都遇到了，web 手说这个容易… 那就看看呗，反正也得多看 java，这把当个 web 手呗&lt;/h6&gt;
+        <link rel="alternate" href="https://demoyao100.github.io/shiro%E5%AE%89%E5%85%A8%E6%B5%85%E6%8E%A2/"/>
+        <content type="html">&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;h6 id=&#34;preface渗透和awd里面都遇到了web手说这个容易那就看看呗反正也得多看java这把当个web手呗&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#preface渗透和awd里面都遇到了web手说这个容易那就看看呗反正也得多看java这把当个web手呗&#34;&gt;#&lt;/a&gt; PREFACE：渗透和 awd 里面都遇到了，web 手说这个容易… 那就看看呗，反正也得多看 java，这把当个 web 手呗&lt;/h6&gt;
 &lt;p&gt;写很好，二进制也能看:&amp;gt;，下面的基本上是扣这里的：&lt;a href=&#34;https://www.freebuf.com/articles/web/367363.html&#34;&gt;https://www.freebuf.com/articles/web/367363.html&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;shiro-550反序列化漏洞cve-2016-4437&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#shiro-550反序列化漏洞cve-2016-4437&#34;&gt;#&lt;/a&gt; Shiro-550 反序列化漏洞（CVE-2016-4437）&lt;/h2&gt;
-&lt;h4 id=&#34;漏洞简介&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#漏洞简介&#34;&gt;#&lt;/a&gt; 漏洞简介&lt;/h4&gt;
+&lt;h2 id=&#34;shiro-550反序列化漏洞cve-2016-4437&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#shiro-550反序列化漏洞cve-2016-4437&#34;&gt;#&lt;/a&gt; Shiro-550 反序列化漏洞（CVE-2016-4437）&lt;/h2&gt;
+&lt;h4 id=&#34;漏洞简介&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#漏洞简介&#34;&gt;#&lt;/a&gt; 漏洞简介&lt;/h4&gt;
 &lt;p&gt;shiro-550 主要是由 shiro 的 rememberMe 内容反序列化导致的命令执行漏洞，造成的原因是&lt;strong&gt;默认加密密钥是硬编码在 shiro 源码中&lt;/strong&gt;，任何有权访问源代码的人都可以知道默认加密密钥。于是攻击者可以创建一个恶意对象，对其进行序列化、编码，然后将其作为 cookie 的 rememberMe 字段内容发送，Shiro 将对其解码和反序列化，导致服务器运行一些恶意代码。&lt;/p&gt;
 &lt;p&gt;特征： &lt;code&gt;cookie中含有rememberMe字段&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;修复建议：&lt;/p&gt;
@@ -38,9 +38,9 @@
 &lt;li&gt;更新 shiro 到 1.2.4 以上的版本。&lt;/li&gt;
 &lt;li&gt;不使用默认的加密密钥，改为随机生成密钥。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h4 id=&#34;漏洞原理&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#漏洞原理&#34;&gt;#&lt;/a&gt; 漏洞原理&lt;/h4&gt;
+&lt;h4 id=&#34;漏洞原理&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#漏洞原理&#34;&gt;#&lt;/a&gt; 漏洞原理&lt;/h4&gt;
 &lt;p&gt;在 Apache Shiro&amp;lt;=1.2.4 版本中 AES 加密时采用的 key 是&lt;strong&gt;硬编码&lt;/strong&gt;在代码中的，于是我们就可以构造 RememberMe 的值，然后让其反序列化执行。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/2024/05/08/shiro%E5%AE%89%E5%85%A8%E6%B5%85%E6%8E%A2/Untitled.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/shiro%E5%AE%89%E5%85%A8%E6%B5%85%E6%8E%A2/Untitled.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/p&gt;
 &lt;p&gt;Primary Cocnerns（基本关注点）:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Authentication（认证）：经常和登录挂钩，是证明用户说他们是谁的一个工作&lt;/li&gt;
@@ -54,56 +54,56 @@
 &lt;li&gt;Caching（缓存）: 保证安全操作使用快速有效&lt;/li&gt;
 &lt;li&gt;Concurrency（并发）: 支持多线程应用&lt;/li&gt;
 &lt;li&gt;Testing（测试）：支持集成单元测试&lt;/li&gt;
-&lt;li&gt;Run As（以.. 运行）：可以假定用户为另一个用户&lt;/li&gt;
+&lt;li&gt;Run As（以… 运行）：可以假定用户为另一个用户&lt;/li&gt;
 &lt;li&gt;Remeber Me: 记住用户，无需再次登录&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;一-shiro服务器识别身份加解密处理的流程&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#一-shiro服务器识别身份加解密处理的流程&#34;&gt;#&lt;/a&gt; 一、Shiro 服务器识别身份加解密处理的流程&lt;/h3&gt;
-&lt;h4 id=&#34;1-加密&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1-加密&#34;&gt;#&lt;/a&gt; &lt;strong&gt;1、加密&lt;/strong&gt;&lt;/h4&gt;
+&lt;h3 id=&#34;一-shiro服务器识别身份加解密处理的流程&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#一-shiro服务器识别身份加解密处理的流程&#34;&gt;#&lt;/a&gt; 一、Shiro 服务器识别身份加解密处理的流程&lt;/h3&gt;
+&lt;h4 id=&#34;1-加密&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#1-加密&#34;&gt;#&lt;/a&gt; &lt;strong&gt;1、加密&lt;/strong&gt;&lt;/h4&gt;
 &lt;ol&gt;
 &lt;li&gt;用户使用账号密码进行登录，并勾选”Remember Me“。&lt;/li&gt;
 &lt;li&gt;Shiro 验证用户登录信息，通过后，查看用户是否勾选了”Remember Me“。&lt;/li&gt;
 &lt;li&gt;若勾选，则将用户身份序列化，并将序列化后的内容进行 AES 加密，再使用 base64 编码。&lt;/li&gt;
 &lt;li&gt;最后将处理好的内容放于 cookie 中的 rememberMe 字段。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h4 id=&#34;2-解密&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#2-解密&#34;&gt;#&lt;/a&gt; &lt;strong&gt;2、解密&lt;/strong&gt;&lt;/h4&gt;
+&lt;h4 id=&#34;2-解密&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#2-解密&#34;&gt;#&lt;/a&gt; &lt;strong&gt;2、解密&lt;/strong&gt;&lt;/h4&gt;
 &lt;ol&gt;
 &lt;li&gt;当服务端收到来自未经身份验证的用户的请求时，会在客户端发送请求中的 cookie 中获取 rememberMe 字段内容。&lt;/li&gt;
 &lt;li&gt;将获取到的 rememberMe 字段进行 base64 解码，再使用 AES 解密。&lt;/li&gt;
 &lt;li&gt;最后将解密的内容进行反序列化，获取到用户身份。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h3 id=&#34;二-key&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#二-key&#34;&gt;#&lt;/a&gt; 二、Key&lt;/h3&gt;
+&lt;h3 id=&#34;二-key&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#二-key&#34;&gt;#&lt;/a&gt; 二、Key&lt;/h3&gt;
 &lt;p&gt;AES 加密的密钥 Key 被硬编码在代码里&lt;/p&gt;
-&lt;h2 id=&#34;shiro-721反序列化漏洞cve-2019-12422&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#shiro-721反序列化漏洞cve-2019-12422&#34;&gt;#&lt;/a&gt; Shiro-721 反序列化漏洞（CVE-2019-12422）&lt;/h2&gt;
+&lt;h2 id=&#34;shiro-721反序列化漏洞cve-2019-12422&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#shiro-721反序列化漏洞cve-2019-12422&#34;&gt;#&lt;/a&gt; Shiro-721 反序列化漏洞（CVE-2019-12422）&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;Shiro550 和 Shiro721 的区别：&lt;/strong&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;Shiro550只需要通过碰撞key，爆破出来密钥，就可以进行利用
 Shiro721的ase加密的key一般情况下猜不到，是系统随机生成的，并且当存在有效的用户信息时才会进入下一阶段的流程所以我们需要使用登录后的rememberMe Cookie，才可以进行下一步攻击
 &lt;/code&gt;&lt;/pre&gt;
-&lt;h3 id=&#34;漏洞指纹&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#漏洞指纹&#34;&gt;#&lt;/a&gt; 漏洞指纹&lt;/h3&gt;
+&lt;h3 id=&#34;漏洞指纹&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#漏洞指纹&#34;&gt;#&lt;/a&gt; 漏洞指纹&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;URL 中含有 Shiro 字段&lt;/li&gt;
 &lt;li&gt;cookie 中含有 rememberMe 字段&lt;/li&gt;
 &lt;li&gt;返回包中含有 rememberMe&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;漏洞介绍&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#漏洞介绍&#34;&gt;#&lt;/a&gt; 漏洞介绍&lt;/h3&gt;
+&lt;h3 id=&#34;漏洞介绍&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#漏洞介绍&#34;&gt;#&lt;/a&gt; 漏洞介绍&lt;/h3&gt;
 &lt;p&gt;在 Shiro721 中，Shiro 通过 AES-128-CBC 对 cookie 中的 &lt;code&gt;rememberMe&lt;/code&gt;  字段进行加密，所以用户可以通过 &lt;code&gt;Padding Oracle&lt;/code&gt;  加密生成的攻击代码来构造恶意的 &lt;code&gt;rememberMe&lt;/code&gt;  字段，进行反序列化攻击，需要执行的命令越复杂，生成 payload 需要的时间就越长。&lt;/p&gt;
-&lt;h3 id=&#34;漏洞原理-2&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#漏洞原理-2&#34;&gt;#&lt;/a&gt; 漏洞原理&lt;/h3&gt;
+&lt;h3 id=&#34;漏洞原理-2&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#漏洞原理-2&#34;&gt;#&lt;/a&gt; 漏洞原理&lt;/h3&gt;
 &lt;p&gt;由于 Apache Shiro cookie 中通过 AES-128-CBC 模式加密的 rememberMe 字段存在问题，用户可通过 Padding Oracle 加密生成的攻击代码来构造恶意的 rememberMe 字段，用有效的 RememberMe cookie 作为 Padding Oracle Attack 的前缀，然后制作精心制作的 RememberMe 来执行 Java 反序列化攻击&lt;/p&gt;
-&lt;h3 id=&#34;攻击流程&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#攻击流程&#34;&gt;#&lt;/a&gt; 攻击流程&lt;/h3&gt;
+&lt;h3 id=&#34;攻击流程&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#攻击流程&#34;&gt;#&lt;/a&gt; 攻击流程&lt;/h3&gt;
 &lt;p&gt;登录网站，并从 cookie 中获取 RememberMe。使用 RememberMe cookie 作为 Padding Oracle Attack 的前缀。加密 syserial 的序列化有效负载，以通过 Padding Oracle Attack 制作精心制作的 RememberMe。请求带有新的 RememberMe cookie 的网站，以执行反序列化攻击。攻击者无需知道 RememberMe 加密的密码密钥。&lt;/p&gt;
-&lt;h4 id=&#34;aes-128-cbc&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#aes-128-cbc&#34;&gt;#&lt;/a&gt; &lt;strong&gt;AES-128-CBC&lt;/strong&gt;&lt;/h4&gt;
+&lt;h4 id=&#34;aes-128-cbc&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#aes-128-cbc&#34;&gt;#&lt;/a&gt; &lt;strong&gt;AES-128-CBC&lt;/strong&gt;&lt;/h4&gt;
 &lt;p&gt;属于 AES 加密算法的 CBC 模式，使用 128 位数据块为一组进行加密解密，即 16 字节明文，对应 16 字节密文，，明文加密时，如果数据不够 16 字节，则会将数据补全剩余字节&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;若最后剩余的明文不够 16 字节，需要进行填充，通常采用 PKCS7 进行填充。比如最后缺 3 个字节，则填充 3 个字节的 0x03; 若最后缺 10 个字节，则填充 10 个字节的 0x0a;&lt;/li&gt;
 &lt;li&gt;若明文正好是 16 个字节的整数倍，最后要再加入一个 16 字节 0x10 的组再进行加密&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h4 id=&#34;padding-oracle-attack原理&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#padding-oracle-attack原理&#34;&gt;#&lt;/a&gt; Padding Oracle Attack 原理&lt;/h4&gt;
+&lt;h4 id=&#34;padding-oracle-attack原理&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#padding-oracle-attack原理&#34;&gt;#&lt;/a&gt; Padding Oracle Attack 原理&lt;/h4&gt;
 &lt;p&gt;Padding Oracle 攻击可以在没有密钥的情况下加密或解密密文&lt;/p&gt;
 &lt;p&gt;Shiro Padding Oracle Attack（Shiro 填充 Oracle 攻击）是一种针对 Apache Shiro 身份验证框架的安全漏洞攻击。Apache Shiro 是 Java 应用程序中广泛使用的身份验证和授权框架，用于管理用户会话、权限验证等功能。&lt;/p&gt;
 &lt;p&gt;Padding Oracle Attack（填充 Oracle 攻击）是一种针对加密算法使用填充的安全漏洞攻击。在加密通信中，填充用于将明文数据扩展到加密算法块大小的倍数。在此攻击中，攻击者利用填充的响应信息来推断出加密算法中的秘密信息。&lt;/p&gt;
 &lt;p&gt;Shiro Padding Oracle Attack 利用了 Shiro 框架中的身份验证过程中的一个漏洞，该漏洞允许攻击者通过填充信息的不同响应时间来确定身份验证过程中的错误。通过不断尝试不同的填充方式，攻击者可以逐步推断出加密秘钥，并最终获取访问权限。&lt;/p&gt;
 &lt;p&gt;这种攻击利用了填充错误的身份验证响应来获取关于秘密信息的信息泄漏，然后根据这些信息进行进一步的攻击。为了防止 Shiro Padding Oracle Attack，建议及时更新 Apache Shiro 版本，确保已修复该漏洞，并采取其他安全措施，如使用安全的加密算法和密钥管理策略。&lt;/p&gt;
-&lt;h2 id=&#34;shiro-认证绕过漏洞cve-2020-1957&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#shiro-认证绕过漏洞cve-2020-1957&#34;&gt;#&lt;/a&gt; Shiro 认证绕过漏洞（CVE-2020-1957）&lt;/h2&gt;
-&lt;h3 id=&#34;漏洞原理-3&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#漏洞原理-3&#34;&gt;#&lt;/a&gt; 漏洞原理&lt;/h3&gt;
+&lt;h2 id=&#34;shiro-认证绕过漏洞cve-2020-1957&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#shiro-认证绕过漏洞cve-2020-1957&#34;&gt;#&lt;/a&gt; Shiro 认证绕过漏洞（CVE-2020-1957）&lt;/h2&gt;
+&lt;h3 id=&#34;漏洞原理-3&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#漏洞原理-3&#34;&gt;#&lt;/a&gt; 漏洞原理&lt;/h3&gt;
 &lt;p&gt;在 Apache Shiro 1.5.2 以前的版本中，在使用 Spring 动态控制器时，攻击者通过构造 &lt;code&gt;..;&lt;/code&gt;  这样的跳转，可以绕过 Shiro 中对目录的权限限制。&lt;/p&gt;
 &lt;p&gt;URL 请求过程：&lt;/p&gt;
 &lt;ul&gt;
@@ -111,18 +111,18 @@ Shiro721的ase加密的key一般情况下猜不到，是系统随机生成的，
 &lt;li&gt;Shrio 内部处理得到校验 URL 为 &lt;code&gt;/xxxx/..&lt;/code&gt; , 校验通过&lt;/li&gt;
 &lt;li&gt;SpringBoot 处理 &lt;code&gt;/xxx/..;/admin/&lt;/code&gt; , 最终请求 &lt;code&gt;/admin/&lt;/code&gt; , 成功访问了后台请求。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;shiro-身份验证绕过-cve-2020-13933&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#shiro-身份验证绕过-cve-2020-13933&#34;&gt;#&lt;/a&gt; Shiro 身份验证绕过 （CVE-2020-13933）&lt;/h2&gt;
-&lt;h3 id=&#34;漏洞简介-2&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#漏洞简介-2&#34;&gt;#&lt;/a&gt; 漏洞简介&lt;/h3&gt;
+&lt;h2 id=&#34;shiro-身份验证绕过-cve-2020-13933&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#shiro-身份验证绕过-cve-2020-13933&#34;&gt;#&lt;/a&gt; Shiro 身份验证绕过 （CVE-2020-13933）&lt;/h2&gt;
+&lt;h3 id=&#34;漏洞简介-2&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#漏洞简介-2&#34;&gt;#&lt;/a&gt; 漏洞简介&lt;/h3&gt;
 &lt;p&gt;CVE-2020-11989 的修复补丁存在缺陷，在 1.5.3 及其之前的版本，由于 shiro 在处理 url 时与 spring 仍然存在差异，依然存在身份校验绕过漏洞由于处理身份验证请求时出错，远程攻击者可以发送特制的 HTTP 请求，绕过身份验证过程并获得对应用程序的未授权访问。&lt;/p&gt;
 &lt;p&gt;该漏洞产生的原因主要是 &lt;code&gt;shiro&lt;/code&gt;  层在处理 &lt;code&gt;url&lt;/code&gt;  上和 &lt;code&gt;spring&lt;/code&gt;  上存在差异，主要是在处理 &lt;code&gt;;&lt;/code&gt;  上的问题，通过构造含有 &lt;code&gt;;&lt;/code&gt;  符号的 &lt;code&gt;url&lt;/code&gt;  即可绕过 &lt;code&gt;shiro&lt;/code&gt;  在权限上的处理，而 &lt;code&gt;spring&lt;/code&gt;  不负责权限管控，所以最终会导致权限绕过。 &lt;code&gt;ant&lt;/code&gt;  风格的路径仅出现一个 &lt;code&gt;*&lt;/code&gt;  时才能成功，而 &lt;code&gt;**&lt;/code&gt;  无法绕过， &lt;code&gt;*&lt;/code&gt; ：匹配一个或者多个任意的字符。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;*&lt;/code&gt; ：匹配零个或者多个目录。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;shiro-授权绕过-cve-2022-32532&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#shiro-授权绕过-cve-2022-32532&#34;&gt;#&lt;/a&gt; Shiro 授权绕过 （CVE-2022-32532）&lt;/h2&gt;
-&lt;h3 id=&#34;漏洞简介-3&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#漏洞简介-3&#34;&gt;#&lt;/a&gt; 漏洞简介&lt;/h3&gt;
+&lt;h2 id=&#34;shiro-授权绕过-cve-2022-32532&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#shiro-授权绕过-cve-2022-32532&#34;&gt;#&lt;/a&gt; Shiro 授权绕过 （CVE-2022-32532）&lt;/h2&gt;
+&lt;h3 id=&#34;漏洞简介-3&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#漏洞简介-3&#34;&gt;#&lt;/a&gt; 漏洞简介&lt;/h3&gt;
 &lt;p&gt;Apache Shiro 是一个强大且易用的 Java 安全框架，执行身份验证、授权、密码和会话管理。&lt;/p&gt;
 &lt;p&gt;1.9.1 之前的 Apache Shiro，RegexRequestMatcher 可能被错误配置为在某些 servlet 容器上被绕过。在正则表达式中使用带有 &lt;code&gt;.&lt;/code&gt;  的 RegExPatternMatcher 的应用程序可能容易受到授权绕过。&lt;/p&gt;
-&lt;h3 id=&#34;漏洞概述&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#漏洞概述&#34;&gt;#&lt;/a&gt; 漏洞概述&lt;/h3&gt;
+&lt;h3 id=&#34;漏洞概述&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#漏洞概述&#34;&gt;#&lt;/a&gt; 漏洞概述&lt;/h3&gt;
 &lt;p&gt;2022 年 6 月 29 日，Apache 官方披露 Apache Shiro 权限绕过漏洞 (CVE-2022-32532)，当 Apache Shiro 中使用 RegexRequestMatcher 进行权限配置，且正则表达式中携带 “.” 时，未经授权的远程攻击者可通过构造恶意数据包绕过身份认证。&lt;/p&gt;
 &lt;p&gt;参考文章：&lt;a href=&#34;https://www.freebuf.com/articles/web/367363.html&#34;&gt;https://www.freebuf.com/articles/web/367363.html&lt;/a&gt;&lt;/p&gt;
 </content>

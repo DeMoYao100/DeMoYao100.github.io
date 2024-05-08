@@ -9,13 +9,13 @@
     <category term="开发" />
     <category term="codeforces" />
     <category term="cv" />
-    <category term="docker" />
     <category term="驱动" />
+    <category term="docker" />
     <category term="electron" />
     <category term="杂文" />
     <category term="web" />
-    <category term="jail" />
     <category term="IOT" />
+    <category term="jail" />
     <category term="re Android linux" />
     <category term="web shiro" />
     <category term="re Android" />
@@ -23,11 +23,11 @@
     <category term="hexo" />
     <category term="car" />
     <entry>
-        <id>https://demoyao100.github.io/2023/10/03/docker%E6%93%8D%E4%BD%9C%E8%AE%B0%E5%BD%95/</id>
+        <id>https://demoyao100.github.io/docker%E6%93%8D%E4%BD%9C%E8%AE%B0%E5%BD%95/</id>
         <title>docker操作记录</title>
-        <link rel="alternate" href="https://demoyao100.github.io/2023/10/03/docker%E6%93%8D%E4%BD%9C%E8%AE%B0%E5%BD%95/"/>
-        <content type="html">&lt;h6 id=&#34;preface记录&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#preface记录&#34;&gt;#&lt;/a&gt; PREFACE：记录&lt;/h6&gt;
-&lt;p&gt;&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;&lt;/p&gt;
+        <link rel="alternate" href="https://demoyao100.github.io/docker%E6%93%8D%E4%BD%9C%E8%AE%B0%E5%BD%95/"/>
+        <content type="html">&lt;h6 id=&#34;preface记录&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#preface记录&#34;&gt;#&lt;/a&gt; PREFACE：记录&lt;/h6&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
 &lt;p&gt;构建 docker 镜像：&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;docker-compose build
 &lt;/code&gt;&lt;/pre&gt;

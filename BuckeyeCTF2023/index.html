@@ -1,0 +1,371 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"demoyao100.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false,"trigger":"auto"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="# PREFACE: 和 maple 一个时间段的比赛，似乎是大学新生赛… 感觉 比 maple 难呢… # 或者换一种说法… 怎么大学新生赛都喜欢搞抽象呢…">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BuckeyeCTF2023">
+<meta property="og:url" content="https://demoyao100.github.io/BuckeyeCTF2023/index.html">
+<meta property="og:site_name" content="Moyao の小屋">
+<meta property="og:description" content="# PREFACE: 和 maple 一个时间段的比赛，似乎是大学新生赛… 感觉 比 maple 难呢… # 或者换一种说法… 怎么大学新生赛都喜欢搞抽象呢…">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-10-02T01:00:16.000Z">
+<meta property="article:modified_time" content="2024-05-05T01:57:05.207Z">
+<meta property="article:author" content="Moyao">
+<meta property="article:tag" content="re">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://demoyao100.github.io/BuckeyeCTF2023/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://demoyao100.github.io/BuckeyeCTF2023/","path":"BuckeyeCTF2023/","title":"BuckeyeCTF2023"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>BuckeyeCTF2023 | Moyao の小屋</title>
+  
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-KKC145B2WB"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-KKC145B2WB","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope="" itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Moyao の小屋</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Hi,I'm Moyaoxue</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags.html" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories.html" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-about"><a href="/about.html" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80" placeholder="Searching..." spellcheck="false" type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-6"><a class="nav-link" href="#preface-%E5%92%8Cmaple%E4%B8%80%E4%B8%AA%E6%97%B6%E9%97%B4%E6%AE%B5%E7%9A%84%E6%AF%94%E8%B5%9B%E4%BC%BC%E4%B9%8E%E6%98%AF%E5%A4%A7%E5%AD%A6%E6%96%B0%E7%94%9F%E8%B5%9B%E6%84%9F%E8%A7%89-%E6%AF%94maple%E9%9A%BE%E5%91%A2"><span class="nav-number">1.</span> <span class="nav-text"> PREFACE: 和 maple 一个时间段的比赛，似乎是大学新生赛… 感觉 比 maple 难呢…</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%88%96%E8%80%85%E6%8D%A2%E4%B8%80%E7%A7%8D%E8%AF%B4%E6%B3%95%E6%80%8E%E4%B9%88%E5%A4%A7%E5%AD%A6%E6%96%B0%E7%94%9F%E8%B5%9B%E9%83%BD%E5%96%9C%E6%AC%A2%E6%90%9E%E6%8A%BD%E8%B1%A1%E5%91%A2"><span class="nav-number">2.</span> <span class="nav-text"> 或者换一种说法… 怎么大学新生赛都喜欢搞抽象呢…</span></a></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#8ball"><span class="nav-number"></span> <span class="nav-text"> 8ball</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#converter"><span class="nav-number"></span> <span class="nav-text"> Converter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#emotional_damage"><span class="nav-number"></span> <span class="nav-text"> Emotional_Damage</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#skribl"><span class="nav-number"></span> <span class="nav-text"> Skribl</span></a></li></div>
+        </div>
+        
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Moyao" src="/images/avatar.webp">
+  <p class="site-author-name" itemprop="name">Moyao</p>
+  <div class="site-description" itemprop="description">Write down something interesting I met<br>
+Feel free to mail me if you have something wanted to talk about, plz
+mail: &lt;moyaoxue@outlook.com&gt;
+</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">78</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags.html">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="/moyaoxue@outlook.com" title="E-Mail → moyaoxue@outlook.com" rel="noopener me"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://demoyao100.github.io/BuckeyeCTF2023/">
+
+    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Moyao">
+    </span>
+
+    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Moyao の小屋">
+      <meta itemprop="description" content="Write down something interesting I met<br />
+Feel free to mail me if you have something wanted to talk about, plz
+mail: <moyaoxue@outlook.com>
+">
+    </span>
+
+    <span hidden="" itemprop="post" itemscope="" itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="BuckeyeCTF2023 | Moyao の小屋">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          BuckeyeCTF2023
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-10-02 09:00:16" itemprop="dateCreated datePublished" datetime="2023-10-02T09:00:16+08:00">2023-10-02</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h6 id="preface-和maple一个时间段的比赛似乎是大学新生赛感觉-比maple难呢"><a class="markdownIt-Anchor" href="#preface-和maple一个时间段的比赛似乎是大学新生赛感觉-比maple难呢">#</a> PREFACE: 和 maple 一个时间段的比赛，似乎是大学新生赛… 感觉 比 maple 难呢…</h6>
+<h6 id="或者换一种说法怎么大学新生赛都喜欢搞抽象呢"><a class="markdownIt-Anchor" href="#或者换一种说法怎么大学新生赛都喜欢搞抽象呢">#</a> 或者换一种说法… 怎么大学新生赛都喜欢搞抽象呢…</h6>
+<span id="more"></span>
+<h3 id="8ball"><a class="markdownIt-Anchor" href="#8ball">#</a> 8ball</h3>
+<p>直接动调把前面全 nop 掉拿就行： <code>bctf{Aw_$hucK$_Y0ur3_m@k1Ng_m3_bLu$h}</code></p>
+<h3 id="converter"><a class="markdownIt-Anchor" href="#converter">#</a> Converter</h3>
+<p>就在里面： <code>bctf{o0ps_y0u_fOuNd_mE}</code></p>
+<h3 id="emotional_damage"><a class="markdownIt-Anchor" href="#emotional_damage">#</a> Emotional_Damage</h3>
+<p>确实给我 damage 了，总归就是猜 emoji 代表的符号然后恢复流程逆 flag，大部分可以 gpt 一把梭</p>
+<h3 id="skribl"><a class="markdownIt-Anchor" href="#skribl">#</a> Skribl</h3>
+<p>需要配置 docker 环境把 python313 环境搞出来，拿到 backend 字节码</p>
+<figure class="highlight python"><figcaption data-lang="python"><span>n</span></figcaption><table><tbody><tr><td data-num="1"></td><td><pre><span class="token comment"># backend.pyc</span></pre></td></tr><tr><td data-num="2"></td><td><pre></pre></td></tr><tr><td data-num="3"></td><td><pre> <span class="token number">0</span>           <span class="token number">0</span> RESUME                   <span class="token number">0</span></pre></td></tr><tr><td data-num="4"></td><td><pre></pre></td></tr><tr><td data-num="5"></td><td><pre>  <span class="token number">1</span>           <span class="token number">2</span> LOAD_CONST               <span class="token number">0</span> <span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="6"></td><td><pre>              <span class="token number">4</span> LOAD_CONST               <span class="token number">1</span> <span class="token punctuation">(</span><span class="token boolean">None</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="7"></td><td><pre>              <span class="token number">6</span> IMPORT_NAME              <span class="token number">0</span> <span class="token punctuation">(</span>string<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="8"></td><td><pre>              <span class="token number">8</span> STORE_NAME               <span class="token number">0</span> <span class="token punctuation">(</span>string<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="9"></td><td><pre></pre></td></tr><tr><td data-num="10"></td><td><pre>  <span class="token number">2</span>          <span class="token number">10</span> LOAD_CONST               <span class="token number">0</span> <span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="11"></td><td><pre>             <span class="token number">12</span> LOAD_CONST               <span class="token number">1</span> <span class="token punctuation">(</span><span class="token boolean">None</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="12"></td><td><pre>             <span class="token number">14</span> IMPORT_NAME              <span class="token number">1</span> <span class="token punctuation">(</span>random<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="13"></td><td><pre>             <span class="token number">16</span> STORE_NAME               <span class="token number">1</span> <span class="token punctuation">(</span>random<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="14"></td><td><pre></pre></td></tr><tr><td data-num="15"></td><td><pre>  <span class="token number">3</span>          <span class="token number">18</span> LOAD_CONST               <span class="token number">0</span> <span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="16"></td><td><pre>             <span class="token number">20</span> LOAD_CONST               <span class="token number">1</span> <span class="token punctuation">(</span><span class="token boolean">None</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="17"></td><td><pre>             <span class="token number">22</span> IMPORT_NAME              <span class="token number">2</span> <span class="token punctuation">(</span>time<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="18"></td><td><pre>             <span class="token number">24</span> STORE_NAME               <span class="token number">2</span> <span class="token punctuation">(</span>time<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="19"></td><td><pre></pre></td></tr><tr><td data-num="20"></td><td><pre>  <span class="token number">4</span>          <span class="token number">26</span> LOAD_CONST               <span class="token number">0</span> <span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="21"></td><td><pre>             <span class="token number">28</span> LOAD_CONST               <span class="token number">1</span> <span class="token punctuation">(</span><span class="token boolean">None</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="22"></td><td><pre>             <span class="token number">30</span> IMPORT_NAME              <span class="token number">3</span> <span class="token punctuation">(</span>math<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="23"></td><td><pre>             <span class="token number">32</span> STORE_NAME               <span class="token number">3</span> <span class="token punctuation">(</span>math<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="24"></td><td><pre></pre></td></tr><tr><td data-num="25"></td><td><pre>  <span class="token number">5</span>          <span class="token number">34</span> LOAD_CONST               <span class="token number">0</span> <span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="26"></td><td><pre>             <span class="token number">36</span> LOAD_CONST               <span class="token number">1</span> <span class="token punctuation">(</span><span class="token boolean">None</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="27"></td><td><pre>             <span class="token number">38</span> IMPORT_NAME              <span class="token number">4</span> <span class="token punctuation">(</span>os<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="28"></td><td><pre>             <span class="token number">40</span> STORE_NAME               <span class="token number">4</span> <span class="token punctuation">(</span>os<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="29"></td><td><pre></pre></td></tr><tr><td data-num="30"></td><td><pre>  <span class="token number">8</span>          <span class="token number">42</span> LOAD_CONST               <span class="token number">2</span> <span class="token punctuation">(</span><span class="token string">'return'</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="31"></td><td><pre>             <span class="token number">44</span> LOAD_NAME                <span class="token number">5</span> <span class="token punctuation">(</span><span class="token builtin">str</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="32"></td><td><pre>             <span class="token number">46</span> BUILD_TUPLE              <span class="token number">2</span></pre></td></tr><tr><td data-num="33"></td><td><pre>             <span class="token number">48</span> LOAD_CONST               <span class="token number">3</span> <span class="token punctuation">(</span><span class="token operator">&lt;</span>code <span class="token builtin">object</span> create_skribl at <span class="token number">0x7f763b846970</span><span class="token punctuation">,</span> <span class="token builtin">file</span> <span class="token string">"/home/rene/Documents/Java/OSUCyberSecurityClub/buckeyectf23/buckeyectf-challenges/chals/rev-pycache/dist/chal/backend.py"</span><span class="token punctuation">,</span> line <span class="token number">8</span><span class="token operator">&gt;</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="34"></td><td><pre>             <span class="token number">50</span> MAKE_FUNCTION</pre></td></tr><tr><td data-num="35"></td><td><pre>             <span class="token number">52</span> SET_FUNCTION_ATTRIBUTE   <span class="token number">4</span> <span class="token punctuation">(</span>annotations<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="36"></td><td><pre>             <span class="token number">54</span> STORE_NAME               <span class="token number">6</span> <span class="token punctuation">(</span>create_skribl<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="37"></td><td><pre></pre></td></tr><tr><td data-num="38"></td><td><pre> <span class="token number">18</span>          <span class="token number">56</span> LOAD_CONST               <span class="token number">4</span> <span class="token punctuation">(</span><span class="token operator">&lt;</span>code <span class="token builtin">object</span> init_backend at <span class="token number">0x7f763b734670</span><span class="token punctuation">,</span> <span class="token builtin">file</span> <span class="token string">"/home/rene/Documents/Java/OSUCyberSecurityClub/buckeyectf23/buckeyectf-challenges/chals/rev-pycache/dist/chal/backend.py"</span><span class="token punctuation">,</span> line <span class="token number">18</span><span class="token operator">&gt;</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="39"></td><td><pre>             <span class="token number">58</span> MAKE_FUNCTION</pre></td></tr><tr><td data-num="40"></td><td><pre>             <span class="token number">60</span> STORE_NAME               <span class="token number">7</span> <span class="token punctuation">(</span>init_backend<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="41"></td><td><pre>             <span class="token number">62</span> RETURN_CONST             <span class="token number">1</span> <span class="token punctuation">(</span><span class="token boolean">None</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="42"></td><td><pre></pre></td></tr><tr><td data-num="43"></td><td><pre>Disassembly of <span class="token operator">&lt;</span>code <span class="token builtin">object</span> create_skribl at <span class="token number">0x7f763b846970</span><span class="token punctuation">,</span> <span class="token builtin">file</span> <span class="token string">"/home/rene/Documents/Java/OSUCyberSecurityClub/buckeyectf23/buckeyectf-challenges/chals/rev-pycache/dist/chal/backend.py"</span><span class="token punctuation">,</span> line <span class="token number">8</span><span class="token operator">&gt;</span><span class="token punctuation">:</span></pre></td></tr><tr><td data-num="44"></td><td><pre>   <span class="token number">8</span>           <span class="token number">0</span> RESUME                   <span class="token number">0</span></pre></td></tr><tr><td data-num="45"></td><td><pre></pre></td></tr><tr><td data-num="46"></td><td><pre>   <span class="token number">9</span>           <span class="token number">2</span> LOAD_GLOBAL              <span class="token number">1</span> <span class="token punctuation">(</span><span class="token keyword">print</span> <span class="token operator">+</span> NULL<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="47"></td><td><pre>              <span class="token number">12</span> LOAD_CONST               <span class="token number">1</span> <span class="token punctuation">(</span><span class="token string">'Creating skribl '</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="48"></td><td><pre>              <span class="token number">14</span> LOAD_FAST                <span class="token number">1</span> <span class="token punctuation">(</span>message<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="49"></td><td><pre>              <span class="token number">16</span> FORMAT_SIMPLE</pre></td></tr><tr><td data-num="50"></td><td><pre>              <span class="token number">18</span> BUILD_STRING             <span class="token number">2</span></pre></td></tr><tr><td data-num="51"></td><td><pre>              <span class="token number">20</span> CALL                     <span class="token number">1</span></pre></td></tr><tr><td data-num="52"></td><td><pre>              <span class="token number">28</span> POP_TOP</pre></td></tr><tr><td data-num="53"></td><td><pre></pre></td></tr><tr><td data-num="54"></td><td><pre>  <span class="token number">11</span>          <span class="token number">30</span> LOAD_GLOBAL              <span class="token number">2</span> <span class="token punctuation">(</span>string<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="55"></td><td><pre>              <span class="token number">40</span> LOAD_ATTR                <span class="token number">4</span> <span class="token punctuation">(</span>ascii_lowercase<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="56"></td><td><pre>              <span class="token number">60</span> LOAD_GLOBAL              <span class="token number">2</span> <span class="token punctuation">(</span>string<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="57"></td><td><pre>              <span class="token number">70</span> LOAD_ATTR                <span class="token number">6</span> <span class="token punctuation">(</span>ascii_uppercase<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="58"></td><td><pre>              <span class="token number">90</span> BINARY_OP                <span class="token number">0</span> <span class="token punctuation">(</span><span class="token operator">+</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="59"></td><td><pre>              <span class="token number">94</span> LOAD_GLOBAL              <span class="token number">2</span> <span class="token punctuation">(</span>string<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="60"></td><td><pre>             <span class="token number">104</span> LOAD_ATTR                <span class="token number">8</span> <span class="token punctuation">(</span>digits<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="61"></td><td><pre>             <span class="token number">124</span> BINARY_OP                <span class="token number">0</span> <span class="token punctuation">(</span><span class="token operator">+</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="62"></td><td><pre>             <span class="token number">128</span> STORE_FAST               <span class="token number">3</span> <span class="token punctuation">(</span>alphabet<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="63"></td><td><pre></pre></td></tr><tr><td data-num="64"></td><td><pre>  <span class="token number">12</span>         <span class="token number">130</span> LOAD_GLOBAL             <span class="token number">11</span> <span class="token punctuation">(</span><span class="token builtin">range</span> <span class="token operator">+</span> NULL<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="65"></td><td><pre>             <span class="token number">140</span> LOAD_CONST               <span class="token number">2</span> <span class="token punctuation">(</span><span class="token number">40</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="66"></td><td><pre>             <span class="token number">142</span> CALL                     <span class="token number">1</span></pre></td></tr><tr><td data-num="67"></td><td><pre>             <span class="token number">150</span> GET_ITER</pre></td></tr><tr><td data-num="68"></td><td><pre>             <span class="token number">152</span> LOAD_FAST_AND_CLEAR      <span class="token number">4</span> <span class="token punctuation">(</span>i<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="69"></td><td><pre>             <span class="token number">154</span> SWAP                     <span class="token number">2</span></pre></td></tr><tr><td data-num="70"></td><td><pre>             <span class="token number">156</span> BUILD_LIST               <span class="token number">0</span></pre></td></tr><tr><td data-num="71"></td><td><pre>             <span class="token number">158</span> SWAP                     <span class="token number">2</span></pre></td></tr><tr><td data-num="72"></td><td><pre>         <span class="token operator">&gt;&gt;</span>  <span class="token number">160</span> FOR_ITER                <span class="token number">25</span> <span class="token punctuation">(</span>to <span class="token number">214</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="73"></td><td><pre>             <span class="token number">164</span> STORE_FAST               <span class="token number">4</span> <span class="token punctuation">(</span>i<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="74"></td><td><pre>             <span class="token number">166</span> LOAD_GLOBAL             <span class="token number">12</span> <span class="token punctuation">(</span>random<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="75"></td><td><pre>             <span class="token number">176</span> LOAD_ATTR               <span class="token number">14</span> <span class="token punctuation">(</span>choice<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="76"></td><td><pre>             <span class="token number">196</span> PUSH_NULL</pre></td></tr><tr><td data-num="77"></td><td><pre>             <span class="token number">198</span> LOAD_FAST                <span class="token number">3</span> <span class="token punctuation">(</span>alphabet<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="78"></td><td><pre>             <span class="token number">200</span> CALL                     <span class="token number">1</span></pre></td></tr><tr><td data-num="79"></td><td><pre>             <span class="token number">208</span> LIST_APPEND              <span class="token number">2</span></pre></td></tr><tr><td data-num="80"></td><td><pre>             <span class="token number">210</span> JUMP_BACKWARD           <span class="token number">27</span> <span class="token punctuation">(</span>to <span class="token number">160</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="81"></td><td><pre>         <span class="token operator">&gt;&gt;</span>  <span class="token number">214</span> END_FOR</pre></td></tr><tr><td data-num="82"></td><td><pre>             <span class="token number">216</span> STORE_FAST               <span class="token number">5</span> <span class="token punctuation">(</span>key_list<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="83"></td><td><pre>             <span class="token number">218</span> STORE_FAST               <span class="token number">4</span> <span class="token punctuation">(</span>i<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="84"></td><td><pre></pre></td></tr><tr><td data-num="85"></td><td><pre>  <span class="token number">14</span>         <span class="token number">220</span> LOAD_CONST               <span class="token number">3</span> <span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="86"></td><td><pre>             <span class="token number">222</span> LOAD_ATTR               <span class="token number">17</span> <span class="token punctuation">(</span>join <span class="token operator">+</span> NULL<span class="token operator">|</span>self<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="87"></td><td><pre>             <span class="token number">242</span> LOAD_FAST                <span class="token number">5</span> <span class="token punctuation">(</span>key_list<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="88"></td><td><pre>             <span class="token number">244</span> CALL                     <span class="token number">1</span></pre></td></tr><tr><td data-num="89"></td><td><pre>             <span class="token number">252</span> STORE_FAST               <span class="token number">6</span> <span class="token punctuation">(</span>key<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="90"></td><td><pre></pre></td></tr><tr><td data-num="91"></td><td><pre>  <span class="token number">15</span>         <span class="token number">254</span> LOAD_FAST_LOAD_FAST     <span class="token number">18</span> <span class="token punctuation">(</span>message<span class="token punctuation">,</span> author<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="92"></td><td><pre>             <span class="token number">256</span> BUILD_TUPLE              <span class="token number">2</span></pre></td></tr><tr><td data-num="93"></td><td><pre>             <span class="token number">258</span> LOAD_FAST_LOAD_FAST      <span class="token number">6</span> <span class="token punctuation">(</span>skribls<span class="token punctuation">,</span> key<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="94"></td><td><pre>             <span class="token number">260</span> STORE_SUBSCR</pre></td></tr><tr><td data-num="95"></td><td><pre></pre></td></tr><tr><td data-num="96"></td><td><pre>  <span class="token number">16</span>         <span class="token number">264</span> LOAD_FAST                <span class="token number">6</span> <span class="token punctuation">(</span>key<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="97"></td><td><pre>             <span class="token number">266</span> RETURN_VALUE</pre></td></tr><tr><td data-num="98"></td><td><pre></pre></td></tr><tr><td data-num="99"></td><td><pre><span class="token boolean">None</span>     <span class="token operator">&gt;&gt;</span>  <span class="token number">268</span> SWAP                     <span class="token number">2</span></pre></td></tr><tr><td data-num="100"></td><td><pre>             <span class="token number">270</span> POP_TOP</pre></td></tr><tr><td data-num="101"></td><td><pre></pre></td></tr><tr><td data-num="102"></td><td><pre>  <span class="token number">12</span>         <span class="token number">272</span> SWAP                     <span class="token number">2</span></pre></td></tr><tr><td data-num="103"></td><td><pre>             <span class="token number">274</span> STORE_FAST               <span class="token number">4</span> <span class="token punctuation">(</span>i<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="104"></td><td><pre>             <span class="token number">276</span> RERAISE                  <span class="token number">0</span></pre></td></tr><tr><td data-num="105"></td><td><pre>ExceptionTable<span class="token punctuation">:</span></pre></td></tr><tr><td data-num="106"></td><td><pre>  <span class="token number">156</span> to <span class="token number">214</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token number">268</span> <span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span></pre></td></tr><tr><td data-num="107"></td><td><pre></pre></td></tr><tr><td data-num="108"></td><td><pre>Disassembly of <span class="token operator">&lt;</span>code <span class="token builtin">object</span> init_backend at <span class="token number">0x7f763b734670</span><span class="token punctuation">,</span> <span class="token builtin">file</span> <span class="token string">"/home/rene/Documents/Java/OSUCyberSecurityClub/buckeyectf23/buckeyectf-challenges/chals/rev-pycache/dist/chal/backend.py"</span><span class="token punctuation">,</span> line <span class="token number">18</span><span class="token operator">&gt;</span><span class="token punctuation">:</span></pre></td></tr><tr><td data-num="109"></td><td><pre> <span class="token number">18</span>           <span class="token number">0</span> RESUME                   <span class="token number">0</span></pre></td></tr><tr><td data-num="110"></td><td><pre></pre></td></tr><tr><td data-num="111"></td><td><pre> <span class="token number">19</span>           <span class="token number">2</span> LOAD_GLOBAL              <span class="token number">0</span> <span class="token punctuation">(</span>random<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="112"></td><td><pre>             <span class="token number">12</span> LOAD_ATTR                <span class="token number">2</span> <span class="token punctuation">(</span>seed<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="113"></td><td><pre>             <span class="token number">32</span> PUSH_NULL</pre></td></tr><tr><td data-num="114"></td><td><pre>             <span class="token number">34</span> LOAD_GLOBAL              <span class="token number">4</span> <span class="token punctuation">(</span>math<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="115"></td><td><pre>             <span class="token number">44</span> LOAD_ATTR                <span class="token number">6</span> <span class="token punctuation">(</span>floor<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="116"></td><td><pre>             <span class="token number">64</span> PUSH_NULL</pre></td></tr><tr><td data-num="117"></td><td><pre>             <span class="token number">66</span> LOAD_GLOBAL              <span class="token number">8</span> <span class="token punctuation">(</span>time<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="118"></td><td><pre>             <span class="token number">76</span> LOAD_ATTR                <span class="token number">8</span> <span class="token punctuation">(</span>time<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="119"></td><td><pre>             <span class="token number">96</span> PUSH_NULL</pre></td></tr><tr><td data-num="120"></td><td><pre>             <span class="token number">98</span> CALL                     <span class="token number">0</span></pre></td></tr><tr><td data-num="121"></td><td><pre>            <span class="token number">106</span> CALL                     <span class="token number">1</span></pre></td></tr><tr><td data-num="122"></td><td><pre>            <span class="token number">114</span> CALL                     <span class="token number">1</span></pre></td></tr><tr><td data-num="123"></td><td><pre>            <span class="token number">122</span> POP_TOP</pre></td></tr><tr><td data-num="124"></td><td><pre></pre></td></tr><tr><td data-num="125"></td><td><pre> <span class="token number">21</span>         <span class="token number">124</span> LOAD_GLOBAL             <span class="token number">11</span> <span class="token punctuation">(</span>create_skribl <span class="token operator">+</span> NULL<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="126"></td><td><pre>            <span class="token number">134</span> LOAD_FAST                <span class="token number">0</span> <span class="token punctuation">(</span>skribls<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="127"></td><td><pre>            <span class="token number">136</span> LOAD_GLOBAL             <span class="token number">12</span> <span class="token punctuation">(</span>os<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="128"></td><td><pre>            <span class="token number">146</span> LOAD_ATTR               <span class="token number">14</span> <span class="token punctuation">(</span>environ<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="129"></td><td><pre>            <span class="token number">166</span> LOAD_CONST               <span class="token number">1</span> <span class="token punctuation">(</span><span class="token string">'FLAG'</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="130"></td><td><pre>            <span class="token number">168</span> BINARY_SUBSCR</pre></td></tr><tr><td data-num="131"></td><td><pre>            <span class="token number">172</span> LOAD_CONST               <span class="token number">2</span> <span class="token punctuation">(</span><span class="token string">'rene'</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="132"></td><td><pre>            <span class="token number">174</span> CALL                     <span class="token number">3</span></pre></td></tr><tr><td data-num="133"></td><td><pre>            <span class="token number">182</span> POP_TOP</pre></td></tr><tr><td data-num="134"></td><td><pre>            <span class="token number">184</span> RETURN_CONST             <span class="token number">0</span> <span class="token punctuation">(</span><span class="token boolean">None</span><span class="token punctuation">)</span></pre></td></tr></tbody></table></figure><p>这里的字节码简单手动反编译一下</p>
+<figure class="highlight python"><figcaption data-lang="python"><span>n</span></figcaption><table><tbody><tr><td data-num="1"></td><td><pre><span class="token keyword">import</span> string</pre></td></tr><tr><td data-num="2"></td><td><pre><span class="token keyword">import</span> random</pre></td></tr><tr><td data-num="3"></td><td><pre><span class="token keyword">import</span> time</pre></td></tr><tr><td data-num="4"></td><td><pre><span class="token keyword">import</span> math</pre></td></tr><tr><td data-num="5"></td><td><pre><span class="token keyword">import</span> os</pre></td></tr><tr><td data-num="6"></td><td><pre></pre></td></tr><tr><td data-num="7"></td><td><pre><span class="token keyword">def</span> <span class="token function">create_skribl</span><span class="token punctuation">(</span>skribls<span class="token punctuation">,</span> message<span class="token punctuation">,</span> author<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token builtin">str</span><span class="token punctuation">:</span></pre></td></tr><tr><td data-num="8"></td><td><pre>    <span class="token keyword">print</span> <span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f'Creating skribl </span><span class="token interpolation"><span class="token punctuation">{</span>message<span class="token punctuation">}</span></span><span class="token string">'</span></span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="9"></td><td><pre>    alphabet <span class="token operator">=</span> string<span class="token punctuation">.</span>ascii_lowercase <span class="token operator">+</span> string<span class="token punctuation">.</span>ascii_uppercase <span class="token operator">+</span> string<span class="token punctuation">.</span>digits</pre></td></tr><tr><td data-num="10"></td><td><pre>    key_list <span class="token operator">=</span> <span class="token punctuation">[</span>random<span class="token punctuation">.</span>choice<span class="token punctuation">(</span>alphabet<span class="token punctuation">)</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">40</span><span class="token punctuation">)</span><span class="token punctuation">]</span></pre></td></tr><tr><td data-num="11"></td><td><pre>    key <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span>key_list<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="12"></td><td><pre>    skribls<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">(</span>message<span class="token punctuation">,</span> author<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="13"></td><td><pre>    <span class="token keyword">return</span> key</pre></td></tr><tr><td data-num="14"></td><td><pre></pre></td></tr><tr><td data-num="15"></td><td><pre><span class="token keyword">def</span> <span class="token function">init_backend</span><span class="token punctuation">(</span>skribls<span class="token punctuation">)</span><span class="token punctuation">:</span></pre></td></tr><tr><td data-num="16"></td><td><pre>    random<span class="token punctuation">.</span>seed<span class="token punctuation">(</span>math<span class="token punctuation">.</span>floor<span class="token punctuation">(</span>time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="17"></td><td><pre>    create_skribl<span class="token punctuation">(</span>skribls<span class="token punctuation">,</span> os<span class="token punctuation">.</span>environ<span class="token punctuation">[</span><span class="token string">'FLAG'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">'rene'</span><span class="token punctuation">)</span></pre></td></tr></tbody></table></figure><p>结合前面的代码，可以看到生成的四十个随机串有一个 seed，是可以获取的（当前时间 - 网页持续时间，可以拿到这个环境的创建时间，flag 是环境创建后立刻从环境变量中提取并写入的，所以可以直接获得 key）</p>
+<p>使用 key 访问 view api 即可</p>
+<figure class="highlight python"><figcaption data-lang="python"></figcaption><table><tbody><tr><td data-num="1"></td><td><pre><span class="token keyword">import</span> string</pre></td></tr><tr><td data-num="2"></td><td><pre><span class="token keyword">import</span> random</pre></td></tr><tr><td data-num="3"></td><td><pre><span class="token keyword">import</span> time</pre></td></tr><tr><td data-num="4"></td><td><pre><span class="token keyword">import</span> math</pre></td></tr><tr><td data-num="5"></td><td><pre><span class="token keyword">import</span> os</pre></td></tr><tr><td data-num="6"></td><td><pre><span class="token keyword">import</span> re</pre></td></tr><tr><td data-num="7"></td><td><pre><span class="token keyword">import</span> requests</pre></td></tr><tr><td data-num="8"></td><td><pre>a <span class="token operator">=</span> re<span class="token punctuation">.</span>findall<span class="token punctuation">(</span><span class="token string">"duration\((\d+)"</span><span class="token punctuation">,</span>requests<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">"https://skribl.chall.pwnoh.io/"</span><span class="token punctuation">)</span><span class="token punctuation">.</span>text<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="9"></td><td><pre>b <span class="token operator">=</span> math<span class="token punctuation">.</span>floor<span class="token punctuation">(</span>time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="10"></td><td><pre>random<span class="token punctuation">.</span>seed<span class="token punctuation">(</span>math<span class="token punctuation">.</span>floor<span class="token punctuation">(</span><span class="token builtin">int</span><span class="token punctuation">(</span>a<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">-</span> b<span class="token punctuation">)</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="11"></td><td><pre>alphabet <span class="token operator">=</span> string<span class="token punctuation">.</span>ascii_lowercase <span class="token operator">+</span> string<span class="token punctuation">.</span>ascii_uppercase <span class="token operator">+</span> string<span class="token punctuation">.</span>digits</pre></td></tr><tr><td data-num="12"></td><td><pre>key_list <span class="token operator">=</span> <span class="token punctuation">[</span>random<span class="token punctuation">.</span>choice<span class="token punctuation">(</span>alphabet<span class="token punctuation">)</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">40</span><span class="token punctuation">)</span><span class="token punctuation">]</span></pre></td></tr><tr><td data-num="13"></td><td><pre>key <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span>key_list<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="14"></td><td><pre>url <span class="token operator">=</span> <span class="token string">'https://skribl.chall.pwnoh.io/view/'</span> <span class="token operator">+</span> key</pre></td></tr><tr><td data-num="15"></td><td><pre>response <span class="token operator">=</span> requests<span class="token punctuation">.</span>get<span class="token punctuation">(</span>url<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="16"></td><td><pre>lines <span class="token operator">=</span> response<span class="token punctuation">.</span>text<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">'\n'</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="17"></td><td><pre><span class="token keyword">for</span> line <span class="token keyword">in</span> lines<span class="token punctuation">:</span></pre></td></tr><tr><td data-num="18"></td><td><pre>        <span class="token keyword">if</span> <span class="token string">'bctf{'</span> <span class="token keyword">in</span> line<span class="token punctuation">:</span></pre></td></tr><tr><td data-num="19"></td><td><pre>            <span class="token keyword">print</span><span class="token punctuation">(</span>line<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="20"></td><td><pre>            <span class="token keyword">break</span></pre></td></tr><tr><td data-num="21"></td><td><pre></pre></td></tr><tr><td data-num="22"></td><td><pre><span class="token comment">#         &lt;p&gt;bctf{wHy_d0_w3_Ne3d_s0_m@ny_N0T3$_aNyW@y}&lt;/p&gt;</span></pre></td></tr></tbody></table></figure>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>Moyao
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="https://demoyao100.github.io/BuckeyeCTF2023/" title="BuckeyeCTF2023">https://demoyao100.github.io/BuckeyeCTF2023/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/re/" rel="tag"># re</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/mapleCTF2023/" rel="prev" title="mapleCTF2023">
+                  <i class="fa fa-angle-left"></i> mapleCTF2023
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/docker%E6%93%8D%E4%BD%9C%E8%AE%B0%E5%BD%95/" rel="next" title="docker操作记录">
+                  docker操作记录 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    © 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Moyao</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> &amp; <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+
+
+</body></html>

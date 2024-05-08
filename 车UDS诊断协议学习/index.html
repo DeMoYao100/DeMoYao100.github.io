@@ -1,0 +1,1142 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"demoyao100.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false,"trigger":"auto"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="# 车 UDS 诊断协议学习 # 概念 统一诊断服务（英语：Unified Diagnostic Services，简称 UDS）是车用电子的通信协议，是电子控制器（ECU）中设备诊断用的网络传输协议，对应的标准是 ISO 14229-1。 诊断工具可以连接车上所有支持统一诊断服务功能的电子控制器。车上常用的控制器局域网只用到 OSI 模型的第一层及第二层，而统一诊断服务集成了 OSI 模型的第">
+<meta property="og:type" content="article">
+<meta property="og:title" content="车UDS诊断协议学习">
+<meta property="og:url" content="https://demoyao100.github.io/%E8%BD%A6UDS%E8%AF%8A%E6%96%AD%E5%8D%8F%E8%AE%AE%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="Moyao の小屋">
+<meta property="og:description" content="# 车 UDS 诊断协议学习 # 概念 统一诊断服务（英语：Unified Diagnostic Services，简称 UDS）是车用电子的通信协议，是电子控制器（ECU）中设备诊断用的网络传输协议，对应的标准是 ISO 14229-1。 诊断工具可以连接车上所有支持统一诊断服务功能的电子控制器。车上常用的控制器局域网只用到 OSI 模型的第一层及第二层，而统一诊断服务集成了 OSI 模型的第">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://pic2.zhimg.com/80/v2-77482878fd4af8374b34d8eb1cd648f1_1440w.webp">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-6ae2618313c5487b2c7579dc09455d7b_1440w.webp">
+<meta property="og:image" content="https://pic1.zhimg.com/80/v2-349d7a784958fa581ad5230392cad4ac_1440w.webp">
+<meta property="og:image" content="https://pic3.zhimg.com/80/v2-9a1eb7e0db90bcd3beffcf395c455e1e_1440w.webp">
+<meta property="og:image" content="https://pic1.zhimg.com/80/v2-35fcf45931108493f16f71bbe0bba5e8_1440w.webp">
+<meta property="og:image" content="https://pic2.zhimg.com/80/v2-f499d2093bc10d07c17db3b576d08975_1440w.webp">
+<meta property="article:published_time" content="2024-05-07T16:40:00.000Z">
+<meta property="article:modified_time" content="2024-05-07T16:53:11.204Z">
+<meta property="article:author" content="Moyao">
+<meta property="article:tag" content="car">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic2.zhimg.com/80/v2-77482878fd4af8374b34d8eb1cd648f1_1440w.webp">
+
+
+<link rel="canonical" href="https://demoyao100.github.io/%E8%BD%A6UDS%E8%AF%8A%E6%96%AD%E5%8D%8F%E8%AE%AE%E5%AD%A6%E4%B9%A0/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://demoyao100.github.io/%E8%BD%A6UDS%E8%AF%8A%E6%96%AD%E5%8D%8F%E8%AE%AE%E5%AD%A6%E4%B9%A0/","path":"车UDS诊断协议学习/","title":"车UDS诊断协议学习"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>车UDS诊断协议学习 | Moyao の小屋</title>
+  
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-KKC145B2WB"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-KKC145B2WB","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope="" itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Moyao の小屋</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Hi,I'm Moyaoxue</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags.html" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories.html" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-about"><a href="/about.html" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80" placeholder="Searching..." spellcheck="false" type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BD%A6uds%E8%AF%8A%E6%96%AD%E5%8D%8F%E8%AE%AE%E5%AD%A6%E4%B9%A0"><span class="nav-number">1.</span> <span class="nav-text"> 车 UDS 诊断协议学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5"><span class="nav-number">1.1.</span> <span class="nav-text"> 概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AF%E8%AF%AD"><span class="nav-number">1.2.</span> <span class="nav-text"> 术语</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.3.</span> <span class="nav-text"> 通信模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E5%92%8C%E5%93%8D%E5%BA%94"><span class="nav-number">1.4.</span> <span class="nav-text"> 请求和响应</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1"><span class="nav-number">1.5.</span> <span class="nav-text"> 服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nrc-negative-response-codes"><span class="nav-number">1.6.</span> <span class="nav-text"> NRC: Negative response codes</span></a></li></ol></li></ol></div>
+        </div>
+        
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Moyao" src="/images/avatar.webp">
+  <p class="site-author-name" itemprop="name">Moyao</p>
+  <div class="site-description" itemprop="description">Write down something interesting I met<br>
+Feel free to mail me if you have something wanted to talk about, plz
+mail: &lt;moyaoxue@outlook.com&gt;
+</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">78</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags.html">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="/moyaoxue@outlook.com" title="E-Mail → moyaoxue@outlook.com" rel="noopener me"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://demoyao100.github.io/%E8%BD%A6UDS%E8%AF%8A%E6%96%AD%E5%8D%8F%E8%AE%AE%E5%AD%A6%E4%B9%A0/">
+
+    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Moyao">
+    </span>
+
+    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Moyao の小屋">
+      <meta itemprop="description" content="Write down something interesting I met<br />
+Feel free to mail me if you have something wanted to talk about, plz
+mail: <moyaoxue@outlook.com>
+">
+    </span>
+
+    <span hidden="" itemprop="post" itemscope="" itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="车UDS诊断协议学习 | Moyao の小屋">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          车UDS诊断协议学习
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-05-08 00:40:00" itemprop="dateCreated datePublished" datetime="2024-05-08T00:40:00+08:00">2024-05-08</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><span id="more"></span>
+<h1 id="车uds诊断协议学习"><a class="markdownIt-Anchor" href="#车uds诊断协议学习">#</a> 车 UDS 诊断协议学习</h1>
+<h2 id="概念"><a class="markdownIt-Anchor" href="#概念">#</a> 概念</h2>
+<p><strong>统一诊断服务</strong>（英语：<strong>Unified Diagnostic Services</strong>，简称 UDS）是车用电子的通信协议，是电子控制器（ECU）中设备诊断用的网络传输协议，对应的标准是 ISO 14229-1。</p>
+<p>诊断工具可以连接车上所有支持统一诊断服务功能的电子控制器。车上常用的控制器局域网只用到 OSI 模型的第一层及第二层，而统一诊断服务集成了 OSI 模型的第五层及第七层。服务标识符（Service ID、SID）及服务相关的参数都放在 8 个字节的消息框内。</p>
+<p>现今的车辆有配合离线诊断的诊断接口，让电脑或是诊断工具（作为测试设备）可以连接到汽车上的通信系统。因此可以发送统一诊断服务的请求到控制器，控制器必须回复（可能是正面或是负面的回复），这样可以确认个别控制单元中的故障存储器、更新控制单元的固件、和硬件进行低端的交互（例如开启或关闭特定的输出）、或是进行特定的机能，目的是了了解电子控制器的环境或是操作条件，以<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E8%A8%BA%E6%96%B7_(%E5%B7%A5%E7%A8%8B)">诊断</a>故障或是不希望出现的行为。</p>
+<h2 id="术语"><a class="markdownIt-Anchor" href="#术语">#</a> 术语</h2>
+<p><strong>Diagnostic Service （诊断服务）</strong></p>
+<p>诊断服务是介于诊断设备和 ECU 之间的一种信息交互方式。通常由诊断设备发出请求，ECU 做出回应。</p>
+<p><strong>Diagnostic Trouble Code （故障码）</strong></p>
+<p>故障码是用来标记 ECU 故障的代码，它遵循一定的规则，存储在 ECU 的非易失性存储中。（以后别人提到 DTC，不要说不知道是什么了）</p>
+<p><strong>Diagnostic Data （诊断数据）</strong></p>
+<p>诊断数据是可以被诊断设备请求的 ECU 内部数据，它包括：</p>
+<ul>
+<li>当前数据：ECU 正在运行的数据，比如车速、节气门开度，发动机转速等；</li>
+<li>存储数据：被 ECU 存储在存储器中某时刻的数据，比如 DTC；</li>
+<li>静态数据：恒定不变的 ECU 内部数据，比如 VIN 码。</li>
+</ul>
+<p><strong>Diagnostic Session （诊断会话）</strong></p>
+<p>可以理解为某种诊断模式或权限，即在不同的模式下，对不同的诊断服务的使用做了限制。</p>
+<p><strong>Diagnostic Routine （诊断例程）</strong></p>
+<p>驻留在被诊断 ECU 中的子程序，它可以被诊断设备启动和停止。比如格式化 EEPROM 的子程序。</p>
+<p><strong>Addressing Type （寻址方式）</strong></p>
+<p>寻址方式指的是诊断消息的传递方式，有两种寻址方式：</p>
+<ul>
+<li>物理寻址，即 1 对 1 通信，用于知道确切的被诊断 ECU 的地址；</li>
+<li>功能寻址，即 1 对 n 通信，或者说广播发送，用于不知道确切的被诊断的 ECU 的地址，向一组或者全体 ECU 发送请求；</li>
+</ul>
+<p><strong>Response（响应）</strong></p>
+<p>tester 请求诊断服务执行后，从 ECU 的返回结果。可以有两种结果：</p>
+<ul>
+<li>Positive Response，正响应，即诊断请求执行成功；</li>
+<li>Negative Response，负响应，即诊断请求执行失败；</li>
+</ul>
+<p><strong>Service Identifier</strong></p>
+<p>Service Identifier，诊断服务标识符，简称为 SID，一字节的无符号整数，用来指代某个诊断服务。诊断协议为每个诊断服务都分配唯一 SID，因此更方便协议的软件实现。同时，在开发过程中沟通更加方便。比如，ReadDataByIdentifier 服务是去按照 ID 去读诊断数据，直接说 22 服务会更加便捷。</p>
+<p><strong>Data Identifier</strong></p>
+<p>简称 DID，2 个字节无符号整数的 ID，用来标识 ECU 中存储的某个诊断数据单元。它的好处是当要读取某个单元的诊断数据时，只要读对应的 DID 就可以，不必知道数据的具体地址。即使当 ECU 中的数据地址发生变化时，改变 DID 和地址单元的映射关系即可，对于使用者来说 DID 屏蔽了具体实现细节，而将重点放在了数据本身。</p>
+<p><strong>Negative Response Code</strong></p>
+<p>可以简称为 NRC，或者叫负响应码，是一个字节的无符号整数。它是诊断协议为每种执行失败的诊断服务分配的失败原因代号。</p>
+<p><strong>Sub-function</strong></p>
+<p>有些诊断服务可以支持不同的诊断子服务，sub-function 就是用来定义这种子服务的，它将某一个服务细分为更为具体的服务，是一个字节的无符号整数。比如 ECU Reset 这个服务就有 0x01，0x02，0x03 等 sub-function 指代具体的 reset 方式。</p>
+<h2 id="通信模式"><a class="markdownIt-Anchor" href="#通信模式">#</a> 通信模式</h2>
+<p>事件驱动型，一问一答。</p>
+<p>类比 client-server 通信方式，诊断仪即客户端，发送 request，服务器即 ECU，收到 request 之后进行处理，然后向诊断仪回复 response。</p>
+<p>有确认服务：</p>
+<p>![Untitled](车 UDS 诊断协议学习 12f4a2023fb44b1abadd10b14d012d7c/Untitled.png)</p>
+<p>无确认服务：</p>
+<p>![Untitled](车 UDS 诊断协议学习 12f4a2023fb44b1abadd10b14d012d7c/Untitled 1.png)</p>
+<p><strong>寻址模式</strong></p>
+<ul>
+<li>物理寻址，点对点，一对一，可根据物理地址的不同进行访问，但只能访问单个节点，各个 ECU 也采用不同的 CANID 针对提问作出应答。</li>
+<li>功能寻址，广播模式，一对多，根据功能的不同进行访问，它可以访问多个 ECU 节点，各个 ECU 也采用不同的 CANID 针对提问作出应答。其 SID 对于标准帧来说，通常是 7DF。</li>
+</ul>
+<p>比如，通过诊断仪请求各控制器进入编程模式（10 02）：</p>
+<p>** 物理寻址：** 诊断仪请求 EMS 进入刷新模式 7E0 10 02 ECU 响应诊断仪进入刷新模式 7E8 50 02</p>
+<p>** 功能寻址：** 诊断仪请求所有控制器进入刷新模式 7DF 10 02EMS 应答诊断仪进入刷新模式 7E8 50 02TCU 应答诊断仪进入刷新模式 7E9 50 02MMI 应答诊断仪进入刷新模式 7EA 50 02</p>
+<h2 id="请求和响应"><a class="markdownIt-Anchor" href="#请求和响应">#</a> 请求和响应</h2>
+<p><strong>基本格式</strong></p>
+<p>归纳起来，诊断的 request 格式无非以下两种：</p>
+<p><sid> + <sub-function> + <parameter></parameter></sub-function></sid></p>
+<p><sid> + <parameter></parameter></sid></p>
+<p>即有无 sub-function 的区别。Parameter 可以是 DID，可以是输入参数，可以是自定义的值，字节数视具体要求而定。</p>
+<p><strong>有 sub-function</strong></p>
+<p>首先，了解下 sub-function 的定义方法。</p>
+<p><img src="https://pic2.zhimg.com/80/v2-77482878fd4af8374b34d8eb1cd648f1_1440w.webp" alt="https://pic2.zhimg.com/80/v2-77482878fd4af8374b34d8eb1cd648f1_1440w.webp"></p>
+<p>功能寻址的客户端请求信息</p>
+<p><img src="https://pic4.zhimg.com/80/v2-6ae2618313c5487b2c7579dc09455d7b_1440w.webp" alt="https://pic4.zhimg.com/80/v2-6ae2618313c5487b2c7579dc09455d7b_1440w.webp"></p>
+<p>物理寻址的客户端请求信息</p>
+<p>需要注意的是，Bit7 用来指示是否要抑制 Positive Response。当 Bit 7 为 1 时，对该 request 的 Positive Response 要被抑制，即不发送 Positive Response；当 Bit7 为 0 时，对该 request 的 Positive Response 不被抑制，正常发送。除了 Bit 7，Sub-function 有不同的值，具体的值和含义在协议中对每个服务的解释时都会有介绍。</p>
+<p><strong>无 sub-function</strong></p>
+<p>不带 sub-function 的服务，就带 parameter。Parameter 可以是 DID，可以是输入参数，可以是自定义的值，字节数目也是视具体要求而定。一般在协议内都会有表格，当遇到具体问题时，可查表确定。</p>
+<p><img src="https://pic1.zhimg.com/80/v2-349d7a784958fa581ad5230392cad4ac_1440w.webp" alt="https://pic1.zhimg.com/80/v2-349d7a784958fa581ad5230392cad4ac_1440w.webp"></p>
+<p>不带子功能–功能寻址的客户端请求信息</p>
+<p><img src="https://pic3.zhimg.com/80/v2-9a1eb7e0db90bcd3beffcf395c455e1e_1440w.webp" alt="https://pic3.zhimg.com/80/v2-9a1eb7e0db90bcd3beffcf395c455e1e_1440w.webp"></p>
+<p>不带子功能–物理寻址的客户端请求信息</p>
+<p><strong>5.2 Response</strong></p>
+<p>通常，response 会在服务被 request 且执行之后发送，成功的话就发 positive response，失败的话要发 negative response，但是也有例外的时候。比如，ECUreset，诊断仪要求先发送 response，然后再去执行具体的 reset，因为如果先 reset，那么 ECU 的通信模块 shut down，是无法发送出去 response 的。像这种特殊情况，协议会在描述具体服务时标注出来。</p>
+<p><strong>Positive Response</strong></p>
+<p>基本格式：</p>
+<p>&lt;SID+0x40&gt; + <sub-function> + <parameter></parameter></sub-function></p>
+<p>&lt;SID+0x40&gt; + <parameter></parameter></p>
+<p>要注意，第一个字节是由 SID 和 0x40 的和构成。这里的 Parameter 项是 optional 的，具体要看协议规定。</p>
+<p>比如，session control 这个服务：</p>
+<p>Send：02 10 01（02 中的 0 代表网络层单帧 SF，2 代表数据域有 2 个字节；10 是 SID，02 是子功能）</p>
+<p>肯定响应：</p>
+<p>Receive：02 50 01 （02 同上，10+40 表示对 SID 的肯定回复，01 是 sub-funtion）</p>
+<p>否定响应:</p>
+<p>03 7F 10 22 xx xx xx xx；（03 同上，7F 表示否定响应，10 是 SID，22 是 NRC）不论是物理寻址还是功能寻址，对于 Positive Response 来说都没有影响，只需要关注 sub-function 中的 Bit 7 suppressPosRspMsgIndicationBit 是 0 还是 1，如果为 0 即 false，那么正常发送即可，如果是 1 即 true，那么就不发送 response。如果根本没有 subfunction 呢，那么什么都不要考虑，肯定是要发送 positive response 的。</p>
+<p><img src="https://pic1.zhimg.com/80/v2-35fcf45931108493f16f71bbe0bba5e8_1440w.webp" alt="https://pic1.zhimg.com/80/v2-35fcf45931108493f16f71bbe0bba5e8_1440w.webp"></p>
+<p>安全访问的过程</p>
+<p>Negative Response</p>
+<p>基本格式:</p>
+<p>&lt;0x7F&gt; + <sid> + <nrc></nrc></sid></p>
+<p>看起来比较简单，格式比较固定，只要是 Negative Response，第一字节就是 0x7F，第二字节照抄原来的 SID，第三个字节是错误响应码，指示具体错误响应的原因，这个 NRC 可以在下文中参看。</p>
+<p>比如，session control 这个服务：</p>
+<p>Send：10 05（现在 sun-function 变为 05 了，假定系统不支持这个 sub-function）</p>
+<p>Receive：7F 10 12（7F 即指代错误响应，10 为 SID，12 是 NRC，查协议可知其指代 sub-function not supported 这个错误）</p>
+<p><strong>常用的 NRC</strong></p>
+<ul>
+<li>11：ServiceNotSupported / 服务不支持，诊断仪发送的请求消息中服务标识符无法识别或不支持；</li>
+<li>12：SubFunctionNotSupported / 不支持子服务，诊断仪发送的请求消息中子服务无法识别或不支持；</li>
+<li>13：IncorrectMessageLengthOrInvalidFormat / 不正确的消息长度或无效的格式，请求消息长度与特定服务规定的长度不匹配或者是参数格式与特定服务规定的格式不匹配；</li>
+<li>21：BusyRepeatRequest / 重复请求忙，表明 ECU 太忙而不能去执行请求。一般来说，在这种情况下，诊断仪应进行重复请求工作；</li>
+<li>22：conditionsNotCorrect / 条件不正确，表明 ECU 的状态条件不允许支持该请求；</li>
+<li>24：requestSequenceError / 请求序列错误，表明收到的是非预期的请求消息序列；</li>
+<li>25：noResponseFromSubnetComponent / 子网节点无应答，表明 ECU 收到请求，但所请求的操作无法执行；</li>
+<li>26：failurePreventsExecutionOfRequestedAction / 故障阻值请求工作执行，表明请求的动作因一故障原因而没有执行；</li>
+<li>31：requestOutOfRange / 请求超出范围，请求消息包含一个超出允许范围的参数，或者是不支持的数据标识符 / 例程标识符的访问；</li>
+<li>33：securityAccessDenied / 安全访问拒绝，诊断仪无法通过 ECU 的安全策略；</li>
+<li>35：invalidKey / 密钥无效，诊断仪发送的密钥与 ECU 内存中的密钥不匹配；</li>
+<li>36：exceedNumberOfAttempts / 超出尝试次数，诊断仪尝试获得安全访问失败次数超过了 ECU 安全策略允许的值；</li>
+<li>37：requiredTimeDelayNotExpired / 所需时间延迟未到，在 ECU 所需的请求延迟时间过去之前诊断仪又执行了一次请求；</li>
+<li>70：uploadDownloadNotAccepted / 不允许上传下载，表明试图向 ECU 内存上传 / 下载数据失败的原因是条件不允许；</li>
+<li>71：transferDataSuspended / 数据传输暂停，表明由于错误导致数据传输操作的中止；</li>
+<li>72：generalProgrammingFailure / 一般编程失败，表明在不可擦除的内存设备中进行擦除或编程时 ECU 检测到错误发生；</li>
+<li>73：wrongBlockSequenceCounter / 错误的数据块序列计数器，ECU 在数据块序列计数序列中检测到错误发生；</li>
+<li>78：requestCorrectlyReceived-ResponsePending / 正确接收请求消息 - 等待响应 表明 ECU 正确接收到请求消息，但是将执行的动作未完成且 ECU 未准备好接收其它请求；</li>
+<li>7E：subFunctionNotSupportedInActiveSession / 激活会话不支持该子服务，当前会话模式下 ECU 不支持请求的子服务；</li>
+<li>7F：serviceNotSupportedInActiveSession / 激活会话不支持该服务，当前会话模式下 ECU 不支持请求的服务；</li>
+<li>92：voltageTooHigh / 电压过高，当前电压值超过了编程允许的最大门限值；</li>
+<li>93：voltageTooLow / 电压过低，当前电压值低于了编程允许的最小门限值；</li>
+</ul>
+<p>诊断仪发送报文 “85 02” 要求 EMS 关闭故障管理 ，如果是肯定应答则 EMS 会回复 “C5 02”，表示已经关闭故障管理；如果是否定应答，EMS 会回复 “7F 85 22”，表示没有关闭故障管理，原因是条件不正确。</p>
+<p>值得一提的是，在物理寻址和功能寻址情况下，Negative Response 有所不同。</p>
+<p>在物理寻址情况下，只要是 Negative Response 就应该按照规定格式发送。而在功能寻址情况下，有一点特殊，对于 NRC 为 0x11（service not supported）、0x12（subfunction not supported）、0x31（request out of range）这三种情况，功能寻址是不会发送 response 的。</p>
+<p><img src="https://pic2.zhimg.com/80/v2-f499d2093bc10d07c17db3b576d08975_1440w.webp" alt="https://pic2.zhimg.com/80/v2-f499d2093bc10d07c17db3b576d08975_1440w.webp"></p>
+<h2 id="服务"><a class="markdownIt-Anchor" href="#服务">#</a> 服务</h2>
+<table>
+<thead>
+<tr>
+<th>功能群</th>
+<th>请求&nbsp; SID</th>
+<th>回复&nbsp; SID</th>
+<th>服务</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>诊断及通信管理</td>
+<td>0x10</td>
+<td>0x50</td>
+<td>诊断会话控制 Diagnostic Session Control</td>
+<td>UDS 会使用不同的会话（session），可以用诊断会话控制（Diagnostic Session Control）来切换。可用的服务会依照目前有效的会话而不同。在一开始，控制单元默认是在 “默认会话”（Default Session），有定义其他的会话，需要实现的会话会依照设备的种类而不同。</td>
+</tr>
+<tr>
+<td>・“程序会话”（Programming Session）可以用来上传固件到设备，并更新设备的固件。</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>・“扩展诊断会话”（Extended Diagnostic Session）可解锁特定的诊断功能，例如调整传感器等。</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>・“安全系统诊断会话”（Safety system diagnostic session）用来测试安全相关的诊断机能，例如安全气囊的测试。</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>此外，也有一些保留的会话识别符，为了汽车生产者及供应商的特殊需求而设计。</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>诊断及通信管理</td>
+<td>0x11</td>
+<td>0x51</td>
+<td>ECU 重置 ECU Reset</td>
+<td>ECU 重置的服务是要重启 ECU。依照控制单元硬件以及实现方式的不同，有以下几种不同的重置：</td>
+</tr>
+<tr>
+<td>・“硬重置” 模拟电源关闭的重置。</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>・“关闭锁匙重置” 模拟用锁匙将汽车熄火，再开启汽车的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E9%BB%9E%E7%81%AB%E9%96%8B%E9%97%9C%E3%80%82"> https://zh.wikipedia.org/wiki/ 點火開關。</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>・“软重置” 初始化特定程序单元以及存储结构。</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>也有一些汽车生产者及供应商定义的特殊数值。</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>诊断及通信管理</td>
+<td>0x27</td>
+<td>0x67</td>
+<td>安全性访问 Security Access</td>
+<td>可以用安全性检查（Security check）来启动大部分的安全关键性服务（security-critical services）。此情形下控制单元会发送 “密码种子（seed）” 到客户端（电脑或是诊断工具）。客户端再用密码种子计算密钥（key）送回控制单元，以此来解安全关键性服务</td>
+</tr>
+<tr>
+<td>诊断及通信管理</td>
+<td>0x28</td>
+<td>0x68</td>
+<td>通信控制 Communication Control</td>
+<td>此服务可以关闭控制单元发送以及接收消息的功能。</td>
+</tr>
+<tr>
+<td>诊断及通信管理</td>
+<td>0x29</td>
+<td>0x69</td>
+<td>认证 Authentication</td>
+<td>标准在 2020 年的更新版本，提供一种标准化的方式，可以提供一些安全性访问（0x27）服务无法支持的现代认证方式，包括以<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%85%AC%E9%96%8B%E9%87%91%E9%91%B0%E5%9F%BA%E7%A4%8E%E5%BB%BA%E8%A8%AD%E4%B8%BA%E5%9F%BA%E7%A1%80%E7%9A%84%E8%AE%A4%E8%AF%81%E4%BA%A4%E6%8D%A2%EF%BC%8C%E4%BB%A5%E5%8F%8A%E5%8F%8C%E5%90%91%E7%9A%84https://zh.wikipedia.org/wiki/%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81%E6%9C%BA%E5%88%B6%E3%80%82"> https://zh.wikipedia.org/wiki/ 公開金鑰基礎建設为基础的认证交换，以及双向的 https://zh.wikipedia.org/wiki/ 身份验证机制。</a></td>
+</tr>
+<tr>
+<td>诊断及通信管理</td>
+<td>0x3E</td>
+<td>0x7E</td>
+<td>测试者存在 Tester Present</td>
+<td>若客户端长时间没有交换通信资料，控制单元会自动离开目前的会话，回到 “默认会话”，也可能会进入休眠模式。而此一服务的目的就是让控制单元知道客户端仍存在。</td>
+</tr>
+<tr>
+<td>诊断及通信管理</td>
+<td>0x83</td>
+<td>0xC3</td>
+<td>访问时序参数 Access Timing Parameters</td>
+<td>在控制器及从机的通信中，需要观察一定的时间，若时间超过此限制，仍没有提交消息，就会假设连接已有问题。可以读取及修改此时间。</td>
+</tr>
+<tr>
+<td>诊断及通信管理</td>
+<td>0x84</td>
+<td>0xC4</td>
+<td>安全资料传输 Secured Data Transmission</td>
+<td></td>
+</tr>
+<tr>
+<td>诊断及通信管理</td>
+<td>0x85</td>
+<td>0xC5</td>
+<td>控制 DTC 设置 Control DTC Settings</td>
+<td>启动或关闭部分（或所有）错误的侦测。若诊断工作是在车内进行的，这个机能格外重要，因为诊断工作有可能造成部分零件的异常行为。</td>
+</tr>
+<tr>
+<td>诊断及通信管理</td>
+<td>0x86</td>
+<td>0xC6</td>
+<td>事件回复 Response On Event</td>
+<td></td>
+</tr>
+<tr>
+<td>诊断及通信管理</td>
+<td>0x87</td>
+<td>0xC7</td>
+<td>链接控制 Link Control</td>
+<td>服务链接控制是用来设置诊断访问的比特率。多半只在中间网关上实现此一机能。</td>
+</tr>
+<tr>
+<td>资料传输</td>
+<td>0x22</td>
+<td>0x62</td>
+<td>根据标识符读取资料 Read Data By Identifier</td>
+<td>透过此服务可以读取控制单元中一个或多个的资料。这些资料的种类不限，也可以有不同的长度，例如料号或是软件版本等。也可以读取像是传感器状态之类会变动的值。每一个值会对一个资料标识符（Data Identifier、简称 DID），数值从 0 到 65535。会用正常的 CAN 信号来发送特定 ECU 使用的资料。DID 资料只用在资料请求上，也可以用一些没有 ECU 使用的 DID 来发送信息，虽 ECU 不会使用，但服务工具或软件测试程序可以使用这类的信息。</td>
+</tr>
+<tr>
+<td>资料传输</td>
+<td>0x23</td>
+<td>0x63</td>
+<td>根据地址读取存储器 Read Memory By Address</td>
+<td>依给定地址读取物理内存中的值。测试工具可以用此机能来读取软件内部的行为。</td>
+</tr>
+<tr>
+<td>资料传输</td>
+<td>0x24</td>
+<td>0x64</td>
+<td>根据标识符读取缩放比例资料 Read Scaling Data By Identifier</td>
+<td></td>
+</tr>
+<tr>
+<td>资料传输</td>
+<td>0x2A</td>
+<td>0x6A</td>
+<td>周期性根据标识符读取资料 Read Data By Identifier Periodic</td>
+<td>透过此服务可以让控制单元周期性发送资料。只能发送透过 “动态定义资料标识符” 定义的标识符</td>
+</tr>
+<tr>
+<td>资料传输</td>
+<td>0x2C</td>
+<td>0x6C</td>
+<td>动态定义资料标识符 Dynamically Define Data Identifier</td>
+<td>此服务提供一个修正设备资料标识符（DID）的方式，可以重新调整资料标识符。这个通常是不同资料标识符的组合，或者单纯是所有 DID 的串接。请求资料可以依以下的原则规划配置：</td>
+</tr>
+<tr>
+<td>・原始资料标识符、位置、长度（依字节表示）、子功能字节：defineByIdentifier</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>・存储器位置、长度（依字节表示）、子功能字节：defineByMemoryAddress</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>・可以结合上述二种方式</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>资料传输</td>
+<td>0x2E</td>
+<td>0x6E</td>
+<td>根据标识符写入资料 Write Data By Identifier</td>
+<td>可以更改资料标识符中的数值，命令中除了资料标识符外，也要同时提供要修改的数值</td>
+</tr>
+<tr>
+<td>资料传输</td>
+<td>0x3D</td>
+<td>0x7D</td>
+<td>根据地址写入到存储器 Write Memory By Address</td>
+<td>“根据地址写入到存储器” 可以让外面诊断工具写信息到 ECU 里的特定地址，或特定的连续地址</td>
+</tr>
+<tr>
+<td>存储资料发送</td>
+<td>0x14</td>
+<td>0x54</td>
+<td>清除诊断信息 Clear Diagnostic Information</td>
+<td>清除已存储的诊断问题码（Diagnostic Trouble Code，简称 DTC）</td>
+</tr>
+<tr>
+<td>存储资料发送</td>
+<td>0x19</td>
+<td>0x59</td>
+<td>读取 DTC 信息 Read DTC Information</td>
+<td>DTC 是诊断问题码。每一个 DTC 对应一个控制单元的故障，会以其编码存储在错误存储器中，可以在任意时候读取。除了错误外，也可能会记录一些相关的信息，也可以一并读取。</td>
+</tr>
+<tr>
+<td>输入／输出控制</td>
+<td>0x2F</td>
+<td>0x6F</td>
+<td>根据标识符的输入／输出控制 Input Output Control By Identifier</td>
+<td>此服务可以让外部系统接口透过诊断接口控制输入／输出信号透过设置选择字节，可以设置有关请求的特殊条件，可以设置以下的值：</td>
+</tr>
+<tr>
+<td>ReturnControlToECU：设备需将信号的控制权送回</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>ResetToDefault：测试者试图重置信号，回到系统的默认值</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Freeze Current State：设备需冻结目前的信号，不允许变化</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>ShortTermAdjustment：设备需使用目前提供的信号值</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>远程启动程序</td>
+<td>0x31</td>
+<td>0x71</td>
+<td>远程控制 Routine Control</td>
+<td>此控制服务程序可以进行各种的服务，有三种不同的信息种类：</td>
+</tr>
+<tr>
+<td>・配合启始信息，可以开始服务。可以定义此信息来确认要执行各动作，或是提示服务已经完成。</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>・配合停止信息，运行中的服务可以在任何时间下中断。</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>・第三个选项是查询服务状态的信息</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>可以特别标示启始及结束的信息参数，因此可以实现每一种项目特定的服务。</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>上传／下载</td>
+<td>0x34</td>
+<td>0x74</td>
+<td>请求下载 Request Download</td>
+<td>利用 “请求下载” 服务，可以下载新的软件或是其他资料到控制单元内。需标示资料的位置以及长度，因此，控制器可以知道数据包的大小。</td>
+</tr>
+<tr>
+<td>上传／下载</td>
+<td>0x35</td>
+<td>0x75</td>
+<td>请求上传 Request Upload</td>
+<td>“请求上传” 服务和 “请求下载” 服务是类似的，此服务可以将控制单元的软件发送给测试者。也需标示资料的位置以及长度，测试者需指定数据包的大小。</td>
+</tr>
+<tr>
+<td>上传／下载</td>
+<td>0x36</td>
+<td>0x76</td>
+<td>发送资料 Transfer Data</td>
+<td>在真正发送资料时，会用到此一服务，不论是上传或是下载都是使用此一服务。发送的方向则视之前是 “请求上传” 服务或 “请求下载” 服务而不同。此一服务会用之前指定的最大数据包长度发送资料，若资料长度超过最大数据包长度，需要用数个数据包来发送，直到发送完成为止。</td>
+</tr>
+<tr>
+<td>上传／下载</td>
+<td>0x37</td>
+<td>0x77</td>
+<td>请求结束发送 Request Transfer Exit</td>
+<td>可以用此服务中止资料发送。此服务用在测试着和控制单元比较时。在执行时，控制单元可以负面回应来中止资料发送请求。若指定的资料量还没发送完，也可以用此服务中止发送。</td>
+</tr>
+<tr>
+<td>上传／下载</td>
+<td>0x38</td>
+<td>0x78</td>
+<td>请求文件发送 Request File Transfer</td>
+<td>此服务用来启始客户端到服务器的文件下载，或是服务器到客户端的文件上传。也可以提供一些文件系统的相关信息。</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>0x7F</td>
+<td>否定回应 Negative Response</td>
+<td>此回应会在服务无法进行时回复，例如不支持的资料识别符。此时会加上否定的回应码。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="nrc-negative-response-codes"><a class="markdownIt-Anchor" href="#nrc-negative-response-codes">#</a> NRC: Negative response codes</h2>
+<p>来自 ECU 的否定回应 (Negative Response) 包含 SID 0x7F 和两个有效负载字节：请求的 SID 和错误代码。</p>
+<p>错误代码 (NRC) 如下：</p>
+<table>
+<thead>
+<tr>
+<th>NRC</th>
+<th>Description</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x10</td>
+<td>General reject</td>
+<td>一般拒绝</td>
+</tr>
+<tr>
+<td>0x11</td>
+<td>Service not supported</td>
+<td>不支持的服务</td>
+</tr>
+<tr>
+<td>0x12</td>
+<td>Subfunction not supported</td>
+<td>不支持的子功能</td>
+</tr>
+<tr>
+<td>0x13</td>
+<td>Incorrect message length or invalid format</td>
+<td>消息长度不正确或格式错误</td>
+</tr>
+<tr>
+<td>0x14</td>
+<td>Response too long</td>
+<td>反应时间太长</td>
+</tr>
+<tr>
+<td>0x21</td>
+<td>Busy, repeat request</td>
+<td>忙碌 / 重复请求</td>
+</tr>
+<tr>
+<td>0x22</td>
+<td>Conditions not correct</td>
+<td>条件不正确</td>
+</tr>
+<tr>
+<td>0x24</td>
+<td>Request sequence error</td>
+<td>请求顺序错误</td>
+</tr>
+<tr>
+<td>0x25</td>
+<td>No response from subnet component</td>
+<td>子网组件无回应</td>
+</tr>
+<tr>
+<td>0x26</td>
+<td>Failure prevents execution of requested action</td>
+<td>阻止执行请求的操作失败</td>
+</tr>
+<tr>
+<td>0x31</td>
+<td>Request out of range</td>
+<td>请求超出范围</td>
+</tr>
+<tr>
+<td>0x33</td>
+<td>Security access denied</td>
+<td>安全访问被拒绝</td>
+</tr>
+<tr>
+<td>0x34</td>
+<td>Authentication failed</td>
+<td>认证失败</td>
+</tr>
+<tr>
+<td>0x35</td>
+<td>Invalid key</td>
+<td>无效的密钥</td>
+</tr>
+<tr>
+<td>0x36</td>
+<td>Exceeded number of attempts</td>
+<td>超过尝试次数</td>
+</tr>
+<tr>
+<td>0x37</td>
+<td>Required time delay not expired</td>
+<td>要求的延迟时间未到</td>
+</tr>
+<tr>
+<td>0x38</td>
+<td>Secure data transmission required</td>
+<td>需要安全的资料传输 (SID=0x84)</td>
+</tr>
+<tr>
+<td>0x39</td>
+<td>Secure data transmission not allowed</td>
+<td>不允许安全资料传输</td>
+</tr>
+<tr>
+<td>0x3A</td>
+<td>Secure data verification failed</td>
+<td>安全资料验证失败</td>
+</tr>
+<tr>
+<td>0x50</td>
+<td>Certificate validation failed, invalid time period</td>
+<td>证书验证失败，时段无效</td>
+</tr>
+<tr>
+<td>0x51</td>
+<td>Certificate validation failed, invalid signature</td>
+<td>证书验证失败，签名无效</td>
+</tr>
+<tr>
+<td>0x52</td>
+<td>Certificate validation failed, invalid chain of trust</td>
+<td>证书验证失败，信任链无效</td>
+</tr>
+<tr>
+<td>0x53</td>
+<td>Certificate validation failed, invalid type</td>
+<td>证书验证失败，类型无效</td>
+</tr>
+<tr>
+<td>0x54</td>
+<td>Certificate validation failed, invalid format</td>
+<td>证书验证失败，格式无效</td>
+</tr>
+<tr>
+<td>0x55</td>
+<td>Certificate validation failed, invalid content</td>
+<td>证书验证失败，内容无效</td>
+</tr>
+<tr>
+<td>0x56</td>
+<td>Certificate validation failed, invalid scope</td>
+<td>证书验证失败，范围无效</td>
+</tr>
+<tr>
+<td>0x57</td>
+<td>Certificate validation failed, invalid certificate</td>
+<td>证书验证失败，证书无效</td>
+</tr>
+<tr>
+<td>0x58</td>
+<td>Ownership verification failed</td>
+<td>所有权验证失败</td>
+</tr>
+<tr>
+<td>0x59</td>
+<td>Challenge calculation failed</td>
+<td>挑战计算失败</td>
+</tr>
+<tr>
+<td>0x5A</td>
+<td>Setting access right failed</td>
+<td>设置访问权限失败</td>
+</tr>
+<tr>
+<td>0x5B</td>
+<td>Session key creation/derivation failed</td>
+<td>会话密钥建立 / 派生失败</td>
+</tr>
+<tr>
+<td>0x5C</td>
+<td>Configuration data usage failed</td>
+<td>配置资料使用失败</td>
+</tr>
+<tr>
+<td>0x5D</td>
+<td>Deauthentication failed</td>
+<td>取消认证失败</td>
+</tr>
+<tr>
+<td>0x70</td>
+<td>Upload download not accepted</td>
+<td>上传下载不被接受</td>
+</tr>
+<tr>
+<td>0x71</td>
+<td>Transfer data suspended</td>
+<td>传输资料暂停</td>
+</tr>
+<tr>
+<td>0x72</td>
+<td>General programming failure</td>
+<td>一般程序设计失败</td>
+</tr>
+<tr>
+<td>0x73</td>
+<td>Wrong block sequence number</td>
+<td>错误的区块序号</td>
+</tr>
+<tr>
+<td>0x78</td>
+<td>Request correctly received, response pending</td>
+<td>请求已正确接收，回应待处理</td>
+</tr>
+<tr>
+<td>0x7E</td>
+<td>Subfunction not supported in active session</td>
+<td>当前会话中不支持子功能</td>
+</tr>
+<tr>
+<td>0x7F</td>
+<td>Service not supported in active session</td>
+<td>当前会话中不支持服务</td>
+</tr>
+<tr>
+<td>0x81</td>
+<td>RPM too high</td>
+<td>转速太高</td>
+</tr>
+<tr>
+<td>0x82</td>
+<td>RPM too low</td>
+<td>转速太低</td>
+</tr>
+<tr>
+<td>0x83</td>
+<td>Engine is running</td>
+<td>引擎正在运转</td>
+</tr>
+<tr>
+<td>0x84</td>
+<td>Engine is not running</td>
+<td>引擎未运转</td>
+</tr>
+<tr>
+<td>0x85</td>
+<td>Engine run time too low</td>
+<td>引擎运转时间太短</td>
+</tr>
+<tr>
+<td>0x86</td>
+<td>Temperature too high</td>
+<td>温度过高</td>
+</tr>
+<tr>
+<td>0x87</td>
+<td>Temperature too low</td>
+<td>温度太低</td>
+</tr>
+<tr>
+<td>0x88</td>
+<td>Vehicle speed too high</td>
+<td>车速太高</td>
+</tr>
+<tr>
+<td>0x89</td>
+<td>Vehicle speed too low</td>
+<td>车速太低</td>
+</tr>
+<tr>
+<td>0x8A</td>
+<td>Throttle/pedal too high</td>
+<td>油门 / 踏板太高</td>
+</tr>
+<tr>
+<td>0x8B</td>
+<td>Throttle/pedal too low</td>
+<td>油门 / 踏板太低</td>
+</tr>
+<tr>
+<td>0x8C</td>
+<td>Transmission range not in neutral</td>
+<td>传输范围不在空档</td>
+</tr>
+<tr>
+<td>0x8D</td>
+<td>Transmission range not in gear</td>
+<td>未挂档的传动范围</td>
+</tr>
+<tr>
+<td>0x8F</td>
+<td>Brake switch not closed</td>
+<td>刹车开关未闭合</td>
+</tr>
+<tr>
+<td>0x90</td>
+<td>Shifter lever not in park</td>
+<td>变速杆不在停车位置</td>
+</tr>
+<tr>
+<td>0x91</td>
+<td>Torque converter clutch locked</td>
+<td>变矩器离合器锁止</td>
+</tr>
+<tr>
+<td>0x92</td>
+<td>Voltage too high</td>
+<td>电压过高</td>
+</tr>
+<tr>
+<td>0x93</td>
+<td>Voltage too low</td>
+<td>电压太低</td>
+</tr>
+<tr>
+<td>0x94</td>
+<td>Resource temporary unavailable</td>
+<td>资源暂时无法使用</td>
+</tr>
+</tbody>
+</table>
+<p>参考：<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-cn/%E7%BB%9F%E4%B8%80%E8%AF%8A%E6%96%AD%E6%9C%8D%E5%8A%A1">统一诊断服务 - 维基百科，自由的百科全书 (wikipedia.org)</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/162710671">汽车 UDS：统一诊断服务概览 - 知乎 (zhihu.com)</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>Moyao
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="https://demoyao100.github.io/%E8%BD%A6UDS%E8%AF%8A%E6%96%AD%E5%8D%8F%E8%AE%AE%E5%AD%A6%E4%B9%A0/" title="车UDS诊断协议学习">https://demoyao100.github.io/车UDS诊断协议学习/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/car/" rel="tag"># car</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/%E8%BD%A6CAN%E6%80%BB%E7%BA%BF%E5%8D%8F%E8%AE%AE%E5%AD%A6%E4%B9%A0/" rel="prev" title="车CAN总线协议学习">
+                  <i class="fa fa-angle-left"></i> 车CAN总线协议学习
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    © 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Moyao</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> &amp; <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+
+
+</body></html>

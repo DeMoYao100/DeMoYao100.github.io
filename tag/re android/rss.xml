@@ -15,13 +15,13 @@ mail: &amp;lt;moyaoxue@outlook.com&amp;gt;
         <category>开发</category>
         <category>codeforces</category>
         <category>cv</category>
-        <category>docker</category>
         <category>驱动</category>
+        <category>docker</category>
         <category>electron</category>
         <category>杂文</category>
         <category>web</category>
-        <category>jail</category>
         <category>IOT</category>
+        <category>jail</category>
         <category>re Android linux</category>
         <category>web shiro</category>
         <category>re Android</category>
@@ -29,18 +29,18 @@ mail: &amp;lt;moyaoxue@outlook.com&amp;gt;
         <category>hexo</category>
         <category>car</category>
         <item>
-            <guid isPermalink="true">https://demoyao100.github.io/2024/05/03/%E4%B8%8D%E5%90%8C%E7%9A%84android-hook%E5%A7%BF%E5%8A%BF/</guid>
+            <guid isPermalink="true">https://demoyao100.github.io/%E4%B8%8D%E5%90%8C%E7%9A%84android-hook%E5%A7%BF%E5%8A%BF/</guid>
             <title>不同的android hook姿势</title>
-            <link>https://demoyao100.github.io/2024/05/03/%E4%B8%8D%E5%90%8C%E7%9A%84android-hook%E5%A7%BF%E5%8A%BF/</link>
+            <link>https://demoyao100.github.io/%E4%B8%8D%E5%90%8C%E7%9A%84android-hook%E5%A7%BF%E5%8A%BF/</link>
             <category>re Android</category>
             <pubDate>Fri, 03 May 2024 18:55:01 +0800</pubDate>
             <description><![CDATA[ &lt;p&gt;PREFACE：被拷打一排甚至没听过，之前确实一点不懂这个，爬来快速过一下&lt;/p&gt;
-&lt;p&gt;&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;&lt;/p&gt;
-&lt;h3 id=&#34;一-got表hook&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#一-got表hook&#34;&gt;#&lt;/a&gt; 一、GOT 表 HOOK&lt;/h3&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;h3 id=&#34;一-got表hook&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#一-got表hook&#34;&gt;#&lt;/a&gt; 一、GOT 表 HOOK&lt;/h3&gt;
 &lt;p&gt;参考：&lt;a href=&#34;https://zhuanlan.zhihu.com/p/269441842&#34;&gt;PLT HOOK - 知乎 (zhihu.com)&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;仅能 hook got 表中引用的函数，替换某个 SO 的外部调用，通过将外部函数调用跳转成我们的目标函数。&lt;/p&gt;
-&lt;p&gt;当需要使用一个 Native 库（.so 文件）的时候，我们需要调用 dlopen (&amp;quot;&lt;a href=&#34;http://libname.so&#34;&gt;libname.so&lt;/a&gt;&amp;quot;) 来加载这个库。在我们调用了 dlopen (&amp;quot;&lt;a href=&#34;http://libname.so&#34;&gt;libname.so&lt;/a&gt;&amp;quot;) 之后，系统首先会检查缓存中已加载的 ELF 文件列表。如果未加载则执行加载过程，如果已加载则计数加一，忽略该调用。然后系统会用从 &lt;a href=&#34;http://libname.so&#34;&gt;libname.so&lt;/a&gt; 的 dynamic 节区中读取其所依赖的库，按照相同的加载逻辑，把未在缓存中的库加入加载列表。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/2024/05/03/%E4%B8%8D%E5%90%8C%E7%9A%84android-hook%E5%A7%BF%E5%8A%BF/Untitled.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/p&gt;
+&lt;p&gt;当需要使用一个 Native 库（.so 文件）的时候，我们需要调用 dlopen (“&lt;a href=&#34;http://libname.so&#34;&gt;libname.so&lt;/a&gt;”) 来加载这个库。在我们调用了 dlopen (“&lt;a href=&#34;http://libname.so&#34;&gt;libname.so&lt;/a&gt;”) 之后，系统首先会检查缓存中已加载的 ELF 文件列表。如果未加载则执行加载过程，如果已加载则计数加一，忽略该调用。然后系统会用从 &lt;a href=&#34;http://libname.so&#34;&gt;libname.so&lt;/a&gt; 的 dynamic 节区中读取其所依赖的库，按照相同的加载逻辑，把未在缓存中的库加入加载列表。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/%E4%B8%8D%E5%90%8C%E7%9A%84android-hook%E5%A7%BF%E5%8A%BF/Untitled.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;Relocation Outputs（输出）&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -77,7 +77,7 @@ mail: &amp;lt;moyaoxue@outlook.com&amp;gt;
 &lt;/ul&gt;
 &lt;p&gt;PLT 和 GOT 记录是一一对应的，并且 GOT 表第一次解析后会包含调用函数的实际地址。既然这样，那 PLT 的意义究竟是什么呢？PLT 从某种意义上赋予我们一种懒加载的能力。当动态库首次被加载时，所有的函数地址并没有被解析。&lt;/p&gt;
 &lt;p&gt;![Untitled (1)](不同的 android-hook 姿势 / Untitled (1).png)&lt;/p&gt;
-&lt;h5 id=&#34;实现待自行探究&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#实现待自行探究&#34;&gt;#&lt;/a&gt; 实现（待自行探究）&lt;/h5&gt;
+&lt;h5 id=&#34;实现待自行探究&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#实现待自行探究&#34;&gt;#&lt;/a&gt; 实现（待自行探究）&lt;/h5&gt;
 &lt;p&gt;**（1）** 在内存中找到目标 ELF&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;方法 1：dl_iterate_phdr&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;优点：&lt;/strong&gt;&lt;/p&gt;
@@ -92,7 +92,7 @@ mail: &amp;lt;moyaoxue@outlook.com&amp;gt;
 &lt;li&gt;Android &amp;lt; 8.1（API level 27）时，不能通过 dl_iterate_phdr 遍历到 linker /linker64。（aosp 从 8.0 开始已经包含了 linker/linker64，但是大量的其他厂商的设备是从 Android 8.1 开始包含 linker/linker64 的）&lt;/li&gt;
 &lt;li&gt;部分 Android 4.x 和 Android 5.x 设备的 dl_iterate_phdr 只能返回 ELF 的 basename，而不是 pathname。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;方法 2：dlopen (&amp;quot;&lt;a href=&#34;http://libdl.so&#34;&gt;libdl.so&lt;/a&gt;&amp;quot;) 返回 linker 内部的 struct soinfo list header，自己遍历&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;方法 2：dlopen (“&lt;a href=&#34;http://libdl.so&#34;&gt;libdl.so&lt;/a&gt;”) 返回 linker 内部的 struct soinfo list header，自己遍历&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;优点：&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;能支持 Android 4.x。&lt;/li&gt;
@@ -116,7 +116,7 @@ mail: &amp;lt;moyaoxue@outlook.com&amp;gt;
 &lt;p&gt;Android 4.x：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;解析 maps，使用 “权限 r-xp” + “offset == 0” 来过滤，再检查 ELF magic header。（4.x 上 ELF 结构还是比较保守的，目前没有发现 r-xp 判定失败的情况）&lt;/li&gt;
-&lt;li&gt;也可以先使用 dlopen (&amp;quot;&lt;a href=&#34;http://libdl.so&#34;&gt;libdl.so&lt;/a&gt;&amp;quot;) 的方式，但是兼容性需要更多的测试，如果读取失败，需要回到读 maps 的方式来处理。&lt;/li&gt;
+&lt;li&gt;也可以先使用 dlopen (“&lt;a href=&#34;http://libdl.so&#34;&gt;libdl.so&lt;/a&gt;”) 的方式，但是兼容性需要更多的测试，如果读取失败，需要回到读 maps 的方式来处理。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Android &amp;gt;=5.0：&lt;/p&gt;
 &lt;ul&gt;
@@ -163,16 +163,16 @@ mail: &amp;lt;moyaoxue@outlook.com&amp;gt;
 &lt;/ol&gt;
 &lt;p&gt;** 方法 1：** 直接赋值，再使用 __builtin___clear_cache 清除目标地址的 CPU cache。&lt;/p&gt;
 &lt;p&gt;** 方法 2：** 使用 atomic 方式来赋值，比如：__atomic_store_n ((uintptr_t *) got_addr, (uintptr_t) new_func, __ATOMIC_SEQ_CST);&lt;/p&gt;
-&lt;h3 id=&#34;二-ldpreload_hook&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#二-ldpreload_hook&#34;&gt;#&lt;/a&gt; 二、LDPRELOAD_HOOK&lt;/h3&gt;
+&lt;h3 id=&#34;二-ldpreload_hook&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#二-ldpreload_hook&#34;&gt;#&lt;/a&gt; 二、LDPRELOAD_HOOK&lt;/h3&gt;
 &lt;p&gt;虚假的导入函数&lt;/p&gt;
-&lt;h3 id=&#34;三-inline-hook&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#三-inline-hook&#34;&gt;#&lt;/a&gt; 三、inline hook&lt;/h3&gt;
+&lt;h3 id=&#34;三-inline-hook&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#三-inline-hook&#34;&gt;#&lt;/a&gt; 三、inline hook&lt;/h3&gt;
 &lt;p&gt;这个在 frida 源码里面看的比较多，这里简单看一下怎么检测&lt;/p&gt;
-&lt;h5 id=&#34;检测手段&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#检测手段&#34;&gt;#&lt;/a&gt; 检测手段&lt;/h5&gt;
+&lt;h5 id=&#34;检测手段&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#检测手段&#34;&gt;#&lt;/a&gt; 检测手段&lt;/h5&gt;
 &lt;p&gt;CRC 校验：inline hook 会改函数写跳板，这样的话一个常见的思路就是对函数&lt;/p&gt;
-&lt;h3 id=&#34;四-异常-hook&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#四-异常-hook&#34;&gt;#&lt;/a&gt; 四、异常 hook&lt;/h3&gt;
-&lt;h3 id=&#34;五-依赖库篡改-hook&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#五-依赖库篡改-hook&#34;&gt;#&lt;/a&gt; 五、依赖库篡改 hook&lt;/h3&gt;
-&lt;h3 id=&#34;六-linker-hook&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#六-linker-hook&#34;&gt;#&lt;/a&gt; 六、linker hook&lt;/h3&gt;
-&lt;h3 id=&#34;七-unicor&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#七-unicor&#34;&gt;#&lt;/a&gt; 七、UNICOR&lt;/h3&gt;
+&lt;h3 id=&#34;四-异常-hook&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#四-异常-hook&#34;&gt;#&lt;/a&gt; 四、异常 hook&lt;/h3&gt;
+&lt;h3 id=&#34;五-依赖库篡改-hook&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#五-依赖库篡改-hook&#34;&gt;#&lt;/a&gt; 五、依赖库篡改 hook&lt;/h3&gt;
+&lt;h3 id=&#34;六-linker-hook&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#六-linker-hook&#34;&gt;#&lt;/a&gt; 六、linker hook&lt;/h3&gt;
+&lt;h3 id=&#34;七-unicor&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#七-unicor&#34;&gt;#&lt;/a&gt; 七、UNICOR&lt;/h3&gt;
 &lt;p&gt;&lt;a href=&#34;https://github.com/acbocai/vergil&#34;&gt;https://github.com/acbocai/vergil&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;参考：&lt;a href=&#34;https://zhuanlan.zhihu.com/p/269441842&#34;&gt;PLT HOOK - 知乎 (zhihu.com)&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;[&lt;a href=&#34;https://bbs.kanxue.com/thread-254853.htm&#34;&gt;原创] 7 种 Android Native Anti Hook 的实现思路 - Android 安全 - 看雪 - 安全社区 | 安全招聘 | kanxue.com&lt;/a&gt;&lt;/p&gt;

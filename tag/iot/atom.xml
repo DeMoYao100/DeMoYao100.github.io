@@ -9,13 +9,13 @@
     <category term="开发" />
     <category term="codeforces" />
     <category term="cv" />
-    <category term="docker" />
     <category term="驱动" />
+    <category term="docker" />
     <category term="electron" />
     <category term="杂文" />
     <category term="web" />
-    <category term="jail" />
     <category term="IOT" />
+    <category term="jail" />
     <category term="re Android linux" />
     <category term="web shiro" />
     <category term="re Android" />
@@ -23,47 +23,47 @@
     <category term="hexo" />
     <category term="car" />
     <entry>
-        <id>https://demoyao100.github.io/2023/11/14/qemu%E8%B0%83%E8%AF%95%E8%AE%B0%E5%BD%95/</id>
+        <id>https://demoyao100.github.io/qemu%E8%B0%83%E8%AF%95%E8%AE%B0%E5%BD%95/</id>
         <title>qemu调试记录</title>
-        <link rel="alternate" href="https://demoyao100.github.io/2023/11/14/qemu%E8%B0%83%E8%AF%95%E8%AE%B0%E5%BD%95/"/>
-        <content type="html">&lt;h6 id=&#34;preface记录一下&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#preface记录一下&#34;&gt;#&lt;/a&gt; PREFACE：记录一下&lt;/h6&gt;
+        <link rel="alternate" href="https://demoyao100.github.io/qemu%E8%B0%83%E8%AF%95%E8%AE%B0%E5%BD%95/"/>
+        <content type="html">&lt;h6 id=&#34;preface记录一下&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#preface记录一下&#34;&gt;#&lt;/a&gt; PREFACE：记录一下&lt;/h6&gt;
 </content>
         <category term="re" />
         <category term="IOT" />
         <updated>2023-11-14T07:27:02.000Z</updated>
     </entry>
     <entry>
-        <id>https://demoyao100.github.io/2023/08/26/%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91%E4%BB%A5%E5%8F%8A%E5%85%B6%E4%BB%96%E6%9E%B6%E6%9E%84%E9%80%86%E5%90%91%E5%88%9D%E6%8E%A2/</id>
+        <id>https://demoyao100.github.io/%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91%E4%BB%A5%E5%8F%8A%E5%85%B6%E4%BB%96%E6%9E%B6%E6%9E%84%E9%80%86%E5%90%91%E5%88%9D%E6%8E%A2/</id>
         <title>交叉编译以及其他架构逆向初探</title>
-        <link rel="alternate" href="https://demoyao100.github.io/2023/08/26/%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91%E4%BB%A5%E5%8F%8A%E5%85%B6%E4%BB%96%E6%9E%B6%E6%9E%84%E9%80%86%E5%90%91%E5%88%9D%E6%8E%A2/"/>
-        <content type="html">&lt;h6 id=&#34;preface-蓝帽杯初赛2023题目没做出来理论上能出实际上没时间就算有时间估计也不会去看那么多汇编但是既然结合0ctf2021也有一个类似折磨的pwn题虽然那个题很多种意义上说其实好很多即使我还是偏re手不过感觉还是有很多东西要学以及刚学到浅记录一下&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#preface-蓝帽杯初赛2023题目没做出来理论上能出实际上没时间就算有时间估计也不会去看那么多汇编但是既然结合0ctf2021也有一个类似折磨的pwn题虽然那个题很多种意义上说其实好很多即使我还是偏re手不过感觉还是有很多东西要学以及刚学到浅记录一下&#34;&gt;#&lt;/a&gt; preface: 蓝帽杯初赛 2023，题目没做出来，理论上能出，实际上没时间，就算有时间估计也不会去看那么多汇编，但是既然结合 0CTF2021 也有一个类似折磨的 pwn 题（虽然那个题很多种意义上说其实好很多，即使我还是偏 re 手）不过感觉还是有很多东西要学以及刚学到，浅记录一下。&lt;/h6&gt;
-&lt;p&gt;&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;&lt;/p&gt;
-&lt;h5 id=&#34;一点前置知识iot安全研究视角的交叉编译-clang裁缝店-xuanxuanblingblinggithubio&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#一点前置知识iot安全研究视角的交叉编译-clang裁缝店-xuanxuanblingblinggithubio&#34;&gt;#&lt;/a&gt; 一点前置知识：&lt;a href=&#34;https://xuanxuanblingbling.github.io/ctf/tools/2021/02/16/cross/&#34;&gt;IoT 安全研究视角的交叉编译 | Clang 裁缝店 (xuanxuanblingbling.github.io)&lt;/a&gt;&lt;/h5&gt;
-&lt;h5 id=&#34;这两片可以结合着看看后面那篇接近我的主要思路but-failed-qaq0ctf-tctf-2021-tile-clang裁缝店-xuanxuanblingblinggithubio-ctf20210703_0ctf_tctf_2021_qualstile-at-master-mephi42ctf-githubcom&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#这两片可以结合着看看后面那篇接近我的主要思路but-failed-qaq0ctf-tctf-2021-tile-clang裁缝店-xuanxuanblingblinggithubio-ctf20210703_0ctf_tctf_2021_qualstile-at-master-mephi42ctf-githubcom&#34;&gt;#&lt;/a&gt; 这两片可以结合着看看（后面那篇接近我的主要思路，but failed. QAQ）&lt;a href=&#34;https://xuanxuanblingbling.github.io/ctf/pwn/2021/07/05/tile/&#34;&gt;0CTF / TCTF 2021 tile | Clang 裁缝店 (xuanxuanblingbling.github.io)&lt;/a&gt;  |  &lt;a href=&#34;https://github.com/mephi42/ctf/tree/master/2021.07.03_0CTF_TCTF_2021_Quals/tile&#34;&gt;ctf/2021.07.03_0CTF_TCTF_2021_Quals/tile at master · mephi42/ctf (github.com)&lt;/a&gt;&lt;/h5&gt;
-&lt;h5 id=&#34;基本流程搭建qemu环境尝试gdb调试发现缺so尤其稀有架构的so挺麻烦的&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#基本流程搭建qemu环境尝试gdb调试发现缺so尤其稀有架构的so挺麻烦的&#34;&gt;#&lt;/a&gt; 基本流程：搭建 qemu 环境尝试 gdb 调试（发现缺 so，尤其稀有架构的 so 挺麻烦的）&lt;/h5&gt;
-&lt;h5 id=&#34;objdump切换架构硬看汇编结合ida识别的段猜比obj-d-的信息稍微清楚一点不过要记得&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#objdump切换架构硬看汇编结合ida识别的段猜比obj-d-的信息稍微清楚一点不过要记得&#34;&gt;#&lt;/a&gt; objdump 切换架构硬看汇编，结合 ida 识别的段猜（比 obj -D 的信息稍微清楚一点，不过要记得）&lt;/h5&gt;
-&lt;h5 id=&#34;猜测是challenge1是0x7fchallenge2异或challenge3借助map做了什么操作怀疑是换序然后简单对字符处理&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#猜测是challenge1是0x7fchallenge2异或challenge3借助map做了什么操作怀疑是换序然后简单对字符处理&#34;&gt;#&lt;/a&gt; 猜测是 &lt;code&gt;challenge1&lt;/code&gt;  是 &lt;code&gt;&amp;amp;0x7f&lt;/code&gt; ， &lt;code&gt;challenge2&lt;/code&gt;  异或， &lt;code&gt;challenge3&lt;/code&gt;  借助 map 做了什么操作，怀疑是换序然后简单对字符处理...&lt;/h5&gt;
-&lt;h6 id=&#34;还学了这么个小知识点原生的qemu不支持nx故shellcode一把梭应该就行&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#还学了这么个小知识点原生的qemu不支持nx故shellcode一把梭应该就行&#34;&gt;#&lt;/a&gt; 还学了这么个小知识点： &lt;code&gt;原生的qemu不支持NX，故shellcode一把梭应该就行&lt;/code&gt;&lt;/h6&gt;
+        <link rel="alternate" href="https://demoyao100.github.io/%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91%E4%BB%A5%E5%8F%8A%E5%85%B6%E4%BB%96%E6%9E%B6%E6%9E%84%E9%80%86%E5%90%91%E5%88%9D%E6%8E%A2/"/>
+        <content type="html">&lt;h6 id=&#34;preface-蓝帽杯初赛2023题目没做出来理论上能出实际上没时间就算有时间估计也不会去看那么多汇编但是既然结合0ctf2021也有一个类似折磨的pwn题虽然那个题很多种意义上说其实好很多即使我还是偏re手不过感觉还是有很多东西要学以及刚学到浅记录一下&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#preface-蓝帽杯初赛2023题目没做出来理论上能出实际上没时间就算有时间估计也不会去看那么多汇编但是既然结合0ctf2021也有一个类似折磨的pwn题虽然那个题很多种意义上说其实好很多即使我还是偏re手不过感觉还是有很多东西要学以及刚学到浅记录一下&#34;&gt;#&lt;/a&gt; preface: 蓝帽杯初赛 2023，题目没做出来，理论上能出，实际上没时间，就算有时间估计也不会去看那么多汇编，但是既然结合 0CTF2021 也有一个类似折磨的 pwn 题（虽然那个题很多种意义上说其实好很多，即使我还是偏 re 手）不过感觉还是有很多东西要学以及刚学到，浅记录一下。&lt;/h6&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;h5 id=&#34;一点前置知识iot安全研究视角的交叉编译-clang裁缝店-xuanxuanblingblinggithubio&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#一点前置知识iot安全研究视角的交叉编译-clang裁缝店-xuanxuanblingblinggithubio&#34;&gt;#&lt;/a&gt; 一点前置知识：&lt;a href=&#34;https://xuanxuanblingbling.github.io/ctf/tools/2021/02/16/cross/&#34;&gt;IoT 安全研究视角的交叉编译 | Clang 裁缝店 (xuanxuanblingbling.github.io)&lt;/a&gt;&lt;/h5&gt;
+&lt;h5 id=&#34;这两片可以结合着看看后面那篇接近我的主要思路but-failed-qaq0ctf-tctf-2021-tile-clang裁缝店-xuanxuanblingblinggithubio-ctf20210703_0ctf_tctf_2021_qualstile-at-master-mephi42ctf-githubcom&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#这两片可以结合着看看后面那篇接近我的主要思路but-failed-qaq0ctf-tctf-2021-tile-clang裁缝店-xuanxuanblingblinggithubio-ctf20210703_0ctf_tctf_2021_qualstile-at-master-mephi42ctf-githubcom&#34;&gt;#&lt;/a&gt; 这两片可以结合着看看（后面那篇接近我的主要思路，but failed. QAQ）&lt;a href=&#34;https://xuanxuanblingbling.github.io/ctf/pwn/2021/07/05/tile/&#34;&gt;0CTF / TCTF 2021 tile | Clang 裁缝店 (xuanxuanblingbling.github.io)&lt;/a&gt;  |  &lt;a href=&#34;https://github.com/mephi42/ctf/tree/master/2021.07.03_0CTF_TCTF_2021_Quals/tile&#34;&gt;ctf/2021.07.03_0CTF_TCTF_2021_Quals/tile at master · mephi42/ctf (github.com)&lt;/a&gt;&lt;/h5&gt;
+&lt;h5 id=&#34;基本流程搭建qemu环境尝试gdb调试发现缺so尤其稀有架构的so挺麻烦的&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#基本流程搭建qemu环境尝试gdb调试发现缺so尤其稀有架构的so挺麻烦的&#34;&gt;#&lt;/a&gt; 基本流程：搭建 qemu 环境尝试 gdb 调试（发现缺 so，尤其稀有架构的 so 挺麻烦的）&lt;/h5&gt;
+&lt;h5 id=&#34;objdump切换架构硬看汇编结合ida识别的段猜比obj-d-的信息稍微清楚一点不过要记得&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#objdump切换架构硬看汇编结合ida识别的段猜比obj-d-的信息稍微清楚一点不过要记得&#34;&gt;#&lt;/a&gt; objdump 切换架构硬看汇编，结合 ida 识别的段猜（比 obj -D 的信息稍微清楚一点，不过要记得）&lt;/h5&gt;
+&lt;h5 id=&#34;猜测是challenge1是0x7fchallenge2异或challenge3借助map做了什么操作怀疑是换序然后简单对字符处理&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#猜测是challenge1是0x7fchallenge2异或challenge3借助map做了什么操作怀疑是换序然后简单对字符处理&#34;&gt;#&lt;/a&gt; 猜测是 &lt;code&gt;challenge1&lt;/code&gt;  是 &lt;code&gt;&amp;amp;0x7f&lt;/code&gt; ， &lt;code&gt;challenge2&lt;/code&gt;  异或， &lt;code&gt;challenge3&lt;/code&gt;  借助 map 做了什么操作，怀疑是换序然后简单对字符处理…&lt;/h5&gt;
+&lt;h6 id=&#34;还学了这么个小知识点原生的qemu不支持nx故shellcode一把梭应该就行&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#还学了这么个小知识点原生的qemu不支持nx故shellcode一把梭应该就行&#34;&gt;#&lt;/a&gt; 还学了这么个小知识点： &lt;code&gt;原生的qemu不支持NX，故shellcode一把梭应该就行&lt;/code&gt;&lt;/h6&gt;
 &lt;hr&gt;
-&lt;h5 id=&#34;本体搭建过程&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#本体搭建过程&#34;&gt;#&lt;/a&gt; 本体搭建过程：&lt;/h5&gt;
-&lt;h4 id=&#34;-qemu运行过程虽然题目中是缺so的但是确实是这么个流程&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#-qemu运行过程虽然题目中是缺so的但是确实是这么个流程&#34;&gt;#&lt;/a&gt; - qemu 运行过程（虽然题目中是缺 so 的，但是确实是这么个流程）&lt;/h4&gt;
-&lt;h5 id=&#34;sudo-apt-install-git-libglib20-dev-libfdt-dev-libpixman-1-dev-zlib1g-dev&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#sudo-apt-install-git-libglib20-dev-libfdt-dev-libpixman-1-dev-zlib1g-dev&#34;&gt;#&lt;/a&gt;  &lt;code&gt;sudo apt install git libglib2.0-dev libfdt-dev libpixman-1-dev zlib1g-dev&lt;/code&gt;&lt;/h5&gt;
-&lt;h5 id=&#34;git-clone-httpsgitqemuorggitqemugit&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#git-clone-httpsgitqemuorggitqemugit&#34;&gt;#&lt;/a&gt;  &lt;code&gt;git clone https://git.qemu.org/git/qemu.git&lt;/code&gt;&lt;/h5&gt;
-&lt;h5 id=&#34;cd-qemu&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#cd-qemu&#34;&gt;#&lt;/a&gt;  &lt;code&gt;cd qemu&lt;/code&gt;&lt;/h5&gt;
-&lt;h5 id=&#34;git-checkout-v500&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#git-checkout-v500&#34;&gt;#&lt;/a&gt; git checkout v5.0.0&lt;/h5&gt;
-&lt;h5 id=&#34;configure-target-listtilegx-linux-user&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#configure-target-listtilegx-linux-user&#34;&gt;#&lt;/a&gt;  &lt;code&gt;./configure --target-list=tilegx-linux-user&lt;/code&gt;&lt;/h5&gt;
-&lt;h5 id=&#34;make&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#make&#34;&gt;#&lt;/a&gt;  &lt;code&gt;make&lt;/code&gt;&lt;/h5&gt;
-&lt;h5 id=&#34;cd-tilegx-linux-user&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#cd-tilegx-linux-user&#34;&gt;#&lt;/a&gt;  &lt;code&gt;cd tilegx-linux-user/&lt;/code&gt;&lt;/h5&gt;
-&lt;h5 id=&#34;qemu-tilegx-desktopnewfolderchall&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#qemu-tilegx-desktopnewfolderchall&#34;&gt;#&lt;/a&gt;  &lt;code&gt;./qemu-tilegx ./Desktop/newFolder/chall&lt;/code&gt;&lt;/h5&gt;
-&lt;h4 id=&#34;-objdump配置过程&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#-objdump配置过程&#34;&gt;#&lt;/a&gt; - objdump 配置过程：&lt;/h4&gt;
-&lt;h5 id=&#34;wget-httpsftpgnuorggnubinutilsbinutils-235targz&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#wget-httpsftpgnuorggnubinutilsbinutils-235targz&#34;&gt;#&lt;/a&gt;  &lt;code&gt;wget https://ftp.gnu.org/gnu/binutils/binutils-2.35.tar.gz&lt;/code&gt;&lt;/h5&gt;
-&lt;h5 id=&#34;tar-xvf-binutils-235targz&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#tar-xvf-binutils-235targz&#34;&gt;#&lt;/a&gt;  &lt;code&gt;tar xvf binutils-2.35.tar.gz&lt;/code&gt;&lt;/h5&gt;
-&lt;h5 id=&#34;cd-binutils-235&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#cd-binutils-235&#34;&gt;#&lt;/a&gt;  &lt;code&gt;cd binutils-2.35&lt;/code&gt;&lt;/h5&gt;
-&lt;h5 id=&#34;mkdir-build-cd-build&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#mkdir-build-cd-build&#34;&gt;#&lt;/a&gt;  &lt;code&gt;mkdir build &amp;amp;&amp;amp; cd build&lt;/code&gt;&lt;/h5&gt;
-&lt;h5 id=&#34;configure-targettilegx-linux-gnu&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#configure-targettilegx-linux-gnu&#34;&gt;#&lt;/a&gt;  &lt;code&gt;../configure --target=tilegx-linux-gnu&lt;/code&gt;&lt;/h5&gt;
-&lt;h5 id=&#34;make-2&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#make-2&#34;&gt;#&lt;/a&gt;  &lt;code&gt;make&lt;/code&gt;&lt;/h5&gt;
-&lt;h5 id=&#34;tilegx-linux-gnu-objdump-d-~desktopnewfolderchall-outputasm&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#tilegx-linux-gnu-objdump-d-~desktopnewfolderchall-outputasm&#34;&gt;#&lt;/a&gt;  &lt;code&gt;tilegx-linux-gnu-objdump -d ~/Desktop/newFolder/chall &amp;gt; output.asm&lt;/code&gt;&lt;/h5&gt;
-&lt;h5 id=&#34;即可获得文件的汇编&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#即可获得文件的汇编&#34;&gt;#&lt;/a&gt; 即可获得文件的汇编&lt;/h5&gt;
+&lt;h5 id=&#34;本体搭建过程&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#本体搭建过程&#34;&gt;#&lt;/a&gt; 本体搭建过程：&lt;/h5&gt;
+&lt;h4 id=&#34;-qemu运行过程虽然题目中是缺so的但是确实是这么个流程&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#-qemu运行过程虽然题目中是缺so的但是确实是这么个流程&#34;&gt;#&lt;/a&gt; - qemu 运行过程（虽然题目中是缺 so 的，但是确实是这么个流程）&lt;/h4&gt;
+&lt;h5 id=&#34;sudo-apt-install-git-libglib20-dev-libfdt-dev-libpixman-1-dev-zlib1g-dev&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#sudo-apt-install-git-libglib20-dev-libfdt-dev-libpixman-1-dev-zlib1g-dev&#34;&gt;#&lt;/a&gt;  &lt;code&gt;sudo apt install git libglib2.0-dev libfdt-dev libpixman-1-dev zlib1g-dev&lt;/code&gt;&lt;/h5&gt;
+&lt;h5 id=&#34;git-clone-httpsgitqemuorggitqemugit&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#git-clone-httpsgitqemuorggitqemugit&#34;&gt;#&lt;/a&gt;  &lt;code&gt;git clone https://git.qemu.org/git/qemu.git&lt;/code&gt;&lt;/h5&gt;
+&lt;h5 id=&#34;cd-qemu&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#cd-qemu&#34;&gt;#&lt;/a&gt;  &lt;code&gt;cd qemu&lt;/code&gt;&lt;/h5&gt;
+&lt;h5 id=&#34;git-checkout-v500&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#git-checkout-v500&#34;&gt;#&lt;/a&gt; git checkout v5.0.0&lt;/h5&gt;
+&lt;h5 id=&#34;configure-target-listtilegx-linux-user&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#configure-target-listtilegx-linux-user&#34;&gt;#&lt;/a&gt;  &lt;code&gt;./configure --target-list=tilegx-linux-user&lt;/code&gt;&lt;/h5&gt;
+&lt;h5 id=&#34;make&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#make&#34;&gt;#&lt;/a&gt;  &lt;code&gt;make&lt;/code&gt;&lt;/h5&gt;
+&lt;h5 id=&#34;cd-tilegx-linux-user&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#cd-tilegx-linux-user&#34;&gt;#&lt;/a&gt;  &lt;code&gt;cd tilegx-linux-user/&lt;/code&gt;&lt;/h5&gt;
+&lt;h5 id=&#34;qemu-tilegx-desktopnewfolderchall&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#qemu-tilegx-desktopnewfolderchall&#34;&gt;#&lt;/a&gt;  &lt;code&gt;./qemu-tilegx ./Desktop/newFolder/chall&lt;/code&gt;&lt;/h5&gt;
+&lt;h4 id=&#34;-objdump配置过程&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#-objdump配置过程&#34;&gt;#&lt;/a&gt; - objdump 配置过程：&lt;/h4&gt;
+&lt;h5 id=&#34;wget-httpsftpgnuorggnubinutilsbinutils-235targz&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#wget-httpsftpgnuorggnubinutilsbinutils-235targz&#34;&gt;#&lt;/a&gt;  &lt;code&gt;wget https://ftp.gnu.org/gnu/binutils/binutils-2.35.tar.gz&lt;/code&gt;&lt;/h5&gt;
+&lt;h5 id=&#34;tar-xvf-binutils-235targz&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#tar-xvf-binutils-235targz&#34;&gt;#&lt;/a&gt;  &lt;code&gt;tar xvf binutils-2.35.tar.gz&lt;/code&gt;&lt;/h5&gt;
+&lt;h5 id=&#34;cd-binutils-235&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#cd-binutils-235&#34;&gt;#&lt;/a&gt;  &lt;code&gt;cd binutils-2.35&lt;/code&gt;&lt;/h5&gt;
+&lt;h5 id=&#34;mkdir-build-cd-build&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#mkdir-build-cd-build&#34;&gt;#&lt;/a&gt;  &lt;code&gt;mkdir build &amp;amp;&amp;amp; cd build&lt;/code&gt;&lt;/h5&gt;
+&lt;h5 id=&#34;configure-targettilegx-linux-gnu&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#configure-targettilegx-linux-gnu&#34;&gt;#&lt;/a&gt;  &lt;code&gt;../configure --target=tilegx-linux-gnu&lt;/code&gt;&lt;/h5&gt;
+&lt;h5 id=&#34;make-2&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#make-2&#34;&gt;#&lt;/a&gt;  &lt;code&gt;make&lt;/code&gt;&lt;/h5&gt;
+&lt;h5 id=&#34;tilegx-linux-gnu-objdump-d-~desktopnewfolderchall-outputasm&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#tilegx-linux-gnu-objdump-d-~desktopnewfolderchall-outputasm&#34;&gt;#&lt;/a&gt;  &lt;code&gt;tilegx-linux-gnu-objdump -d ~/Desktop/newFolder/chall &amp;gt; output.asm&lt;/code&gt;&lt;/h5&gt;
+&lt;h5 id=&#34;即可获得文件的汇编&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#即可获得文件的汇编&#34;&gt;#&lt;/a&gt; 即可获得文件的汇编&lt;/h5&gt;
 </content>
         <category term="re" />
         <category term="IOT" />
