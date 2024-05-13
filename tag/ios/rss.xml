@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>Moyao の小屋 • Posts by &#34;ios&#34; tag</title>
+        <link>https://demoyao100.github.io</link>
+        <description>Write down something interesting I met&lt;br /&gt;
+Feel free to mail me if you have something wanted to talk about, plz
+mail: &amp;lt;moyaoxue@outlook.com&amp;gt;
+</description>
+        <language>en</language>
+        <pubDate>Sun, 12 May 2024 15:04:01 +0800</pubDate>
+        <lastBuildDate>Sun, 12 May 2024 15:04:01 +0800</lastBuildDate>
+        <category>re</category>
+        <category>Android</category>
+        <category>开发</category>
+        <category>codeforces</category>
+        <category>cv</category>
+        <category>驱动</category>
+        <category>docker</category>
+        <category>electron</category>
+        <category>杂文</category>
+        <category>web</category>
+        <category>IOT</category>
+        <category>jail</category>
+        <category>re Android linux</category>
+        <category>web shiro</category>
+        <category>re Android</category>
+        <category>python</category>
+        <category>hexo</category>
+        <category>car</category>
+        <category>ios</category>
+        <category>pentesting</category>
+        <item>
+            <guid isPermalink="true">https://demoyao100.github.io/ios%E7%A0%B8%E5%A3%B3/</guid>
+            <title>ios砸壳</title>
+            <link>https://demoyao100.github.io/ios%E7%A0%B8%E5%A3%B3/</link>
+            <category>re</category>
+            <category>ios</category>
+            <pubDate>Sun, 12 May 2024 15:04:01 +0800</pubDate>
+            <description><![CDATA[ &lt;p&gt;PREFACE：初探&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;h3 id=&#34;一-frida-ios-dump-master&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#一-frida-ios-dump-master&#34;&gt;#&lt;/a&gt; 一、frida-ios-dump-master&lt;/h3&gt;
+&lt;p&gt;越狱后 Cydia 查询 frida-server 版本（github 上没有必须这里下载），对照&lt;a href=&#34;https://github.com/frida/frida/releases?page=5%E5%AE%89%E8%A3%85frida&#34;&gt; https://github.com/frida/frida/releases?page=5 安装 frida&lt;/a&gt; frida-tools 版本&lt;/p&gt;
+&lt;p&gt;frida-ios-dump-master 砸壳：&lt;a href=&#34;https://juejin.cn/post/6844903893504098317&#34;&gt;https://juejin.cn/post/6844903893504098317&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://xhs-doc.xhscdn.com/10400250312lb8ufn3004ovqb9o?imageView2/2/w/1600&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;p&gt;砸壳成功：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://xhs-doc.xhscdn.com/10400250312lbbofl30032uglng?imageView2/2/w/1600&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;p&gt;核心二进制文件：&lt;/p&gt;
+&lt;p&gt;入口（右）：Aweme ； 核心（左）：AwemeCore&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://xhs-doc.xhscdn.com/10400250312lch9l6300e68f808?imageView2/2/w/1600&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>

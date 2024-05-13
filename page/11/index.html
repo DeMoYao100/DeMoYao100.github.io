@@ -153,13 +153,13 @@ mail: &lt;moyaoxue@outlook.com&gt;
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">78</span>
+          <span class="site-state-item-count">85</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags.html">
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">20</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -190,7 +190,7 @@ mail: &lt;moyaoxue@outlook.com&gt;
   
 
   <article itemscope="" itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://demoyao100.github.io/%E8%93%9D%E5%B8%BD2023%E5%8D%8A%E5%86%B3/">
+    <link itemprop="mainEntityOfPage" href="https://demoyao100.github.io/flare-on2023/">
 
     <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -211,7 +211,7 @@ mail: <moyaoxue@outlook.com>
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/%E8%93%9D%E5%B8%BD2023%E5%8D%8A%E5%86%B3/" class="post-title-link" itemprop="url">蓝帽2023半决</a>
+          <a href="/flare-on2023/" class="post-title-link" itemprop="url">flare-on2023</a>
         </h2>
 
         <div class="post-meta-container">
@@ -222,7 +222,7 @@ mail: <moyaoxue@outlook.com>
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2023-09-19 19:07:42" itemprop="dateCreated datePublished" datetime="2023-09-19T19:07:42+08:00">2023-09-19</time>
+      <time title="Created: 2023-10-04 18:49:56" itemprop="dateCreated datePublished" datetime="2023-10-04T18:49:56+08:00">2023-10-04</time>
     </span>
 
   
@@ -235,10 +235,137 @@ mail: <moyaoxue@outlook.com>
     
     
     <div class="post-body" itemprop="articleBody">
-          <h6 id="preface-赛中总觉得是该用z3写或者angr跑但是死活出不来结果发现就是一个矩阵乘法"><a class="markdownIt-Anchor" href="#preface-赛中总觉得是该用z3写或者angr跑但是死活出不来结果发现就是一个矩阵乘法">#</a> PREFACE: 赛中总觉得是该用 z3 写，或者 angr 跑，但是死活出不来，结果发现就是一个矩阵乘法</h6>
+          <h6 id="preface-很有含金量的题有点小难而且和平时做的差别很大稍稍有点不对感觉但是做起来能学到很多东西"><a class="markdownIt-Anchor" href="#preface-很有含金量的题有点小难而且和平时做的差别很大稍稍有点不对感觉但是做起来能学到很多东西">#</a> PREFACE: 很有含金量的题，有点小难，而且和平时做的差别很大，稍稍有点不对感觉，但是做起来能学到很多东西.</h6>
+<h6 id="ps-边记边写吧挺大强度的后面怕忘了另外这国庆怎么快没了"><a class="markdownIt-Anchor" href="#ps-边记边写吧挺大强度的后面怕忘了另外这国庆怎么快没了">#</a> ps. 边记边写吧… 挺大强度的后面怕忘了… 另外这国庆怎么快没了…</h6>
+<h3 id="x"><a class="markdownIt-Anchor" href="#x">#</a> X</h3>
+<p>dotpeek 打开直接秒： <code>glorified_captcha@flare-on.com</code>  （这 flag 格式和平时都不一样…）</p>
+<p><img src="/flare-on2023/image-20231004185236537.webp" alt="image-20231004185236537"></p>
+<h3 id="itsonfire"><a class="markdownIt-Anchor" href="#itsonfire">#</a> ItsOnFire</h3>
+<p>最好是新版 jeb 打开，会自动解析 res 资源，这里的字符串基本上都是从 res 里面提的，自己翻会很痛苦</p>
+<p>和一般的题确实差别不小，这里的 flag 逻辑和游戏本身关系并不大，翻翻可以找到这个 <code>MessageWorker</code>  有可疑的地方</p>
+<p><img src="/flare-on2023/image-20231004185529273.webp" alt="image-20231004185529273"></p>
+<p>一步步翻：</p>
+<p><img src="/flare-on2023/image-20231004185613934.webp" alt="image-20231004185613934"></p>
+<p>这里的类名混淆其实很有效，不仔细就容易看漏 555</p>
+<p>往下翻</p>
+<p><img src="/flare-on2023/image-20231004185723229.webp" alt="image-20231004185723229"></p>
+<p>找到 AES 逻辑，对图片进行解密</p>
+<p><img src="/flare-on2023/image-20231004185746882.webp" alt="image-20231004185746882"></p>
+<p>秘钥生成的逻辑：</p>
+<p><img src="/flare-on2023/image-20231004185818436.webp" alt="image-20231004185818436"></p>
+<p>iv 上面有了</p>
+<p><a target="_blank" rel="noopener" href="http://exp.py">exp.py</a>:</p>
+<figure class="highlight python"><figcaption data-lang="python"></figcaption><table><tbody><tr><td data-num="1"></td><td><pre><span class="token keyword">import</span> binascii</pre></td></tr><tr><td data-num="2"></td><td><pre><span class="token keyword">from</span> Crypto<span class="token punctuation">.</span>Cipher <span class="token keyword">import</span> AES</pre></td></tr><tr><td data-num="3"></td><td><pre><span class="token keyword">from</span> Crypto<span class="token punctuation">.</span>Util<span class="token punctuation">.</span>Padding <span class="token keyword">import</span> unpad</pre></td></tr><tr><td data-num="4"></td><td><pre><span class="token keyword">def</span> <span class="token function">compute_key</span><span class="token punctuation">(</span>base_string<span class="token punctuation">)</span><span class="token punctuation">:</span></pre></td></tr><tr><td data-num="5"></td><td><pre>    crc_val <span class="token operator">=</span> binascii<span class="token punctuation">.</span>crc32<span class="token punctuation">(</span>base_string<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="6"></td><td><pre>    key <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token builtin">str</span><span class="token punctuation">(</span>crc_val<span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">16</span><span class="token punctuation">]</span></pre></td></tr><tr><td data-num="7"></td><td><pre>    <span class="token keyword">return</span> key</pre></td></tr><tr><td data-num="8"></td><td><pre></pre></td></tr><tr><td data-num="9"></td><td><pre>a <span class="token operator">=</span> <span class="token string">'https://flare-on.com/evilc2server/report_token/report_token.php?token='</span></pre></td></tr><tr><td data-num="10"></td><td><pre>b <span class="token operator">=</span> <span class="token string">'wednesday'</span></pre></td></tr><tr><td data-num="11"></td><td><pre>key_ori <span class="token operator">=</span> a<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">:</span><span class="token number">10</span><span class="token punctuation">]</span> <span class="token operator">+</span> b<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">:</span><span class="token number">5</span><span class="token punctuation">]</span></pre></td></tr><tr><td data-num="12"></td><td><pre><span class="token keyword">def</span> <span class="token function">decrypt_aes_cbc</span><span class="token punctuation">(</span>input_filename<span class="token punctuation">,</span> output_filename<span class="token punctuation">)</span><span class="token punctuation">:</span></pre></td></tr><tr><td data-num="13"></td><td><pre>    key <span class="token operator">=</span> compute_key<span class="token punctuation">(</span><span class="token string">"s://fldne"</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="14"></td><td><pre>    iv <span class="token operator">=</span> <span class="token string">"abcdefghijklmnop"</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="15"></td><td><pre></pre></td></tr><tr><td data-num="16"></td><td><pre>    <span class="token keyword">with</span> <span class="token builtin">open</span><span class="token punctuation">(</span>input_filename<span class="token punctuation">,</span> <span class="token string">'rb'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> <span class="token builtin">file</span><span class="token punctuation">:</span></pre></td></tr><tr><td data-num="17"></td><td><pre>        encrypted_hex_data <span class="token operator">=</span> <span class="token builtin">file</span><span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token builtin">hex</span><span class="token punctuation">(</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="18"></td><td><pre>    encrypted_data <span class="token operator">=</span> <span class="token builtin">bytes</span><span class="token punctuation">.</span>fromhex<span class="token punctuation">(</span>encrypted_hex_data<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="19"></td><td><pre>    cipher <span class="token operator">=</span> AES<span class="token punctuation">.</span>new<span class="token punctuation">(</span>key<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> AES<span class="token punctuation">.</span>MODE_CBC<span class="token punctuation">,</span> iv<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="20"></td><td><pre>    decrypted_data <span class="token operator">=</span> unpad<span class="token punctuation">(</span>cipher<span class="token punctuation">.</span>decrypt<span class="token punctuation">(</span>encrypted_data<span class="token punctuation">)</span><span class="token punctuation">,</span> AES<span class="token punctuation">.</span>block_size<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="21"></td><td><pre></pre></td></tr><tr><td data-num="22"></td><td><pre>    <span class="token keyword">with</span> <span class="token builtin">open</span><span class="token punctuation">(</span>output_filename<span class="token punctuation">,</span> <span class="token string">'wb'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> <span class="token builtin">file</span><span class="token punctuation">:</span></pre></td></tr><tr><td data-num="23"></td><td><pre>        <span class="token builtin">file</span><span class="token punctuation">.</span>write<span class="token punctuation">(</span>decrypted_data<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="24"></td><td><pre></pre></td></tr><tr><td data-num="25"></td><td><pre><span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">"__main__"</span><span class="token punctuation">:</span></pre></td></tr><tr><td data-num="26"></td><td><pre>    input_filename <span class="token operator">=</span> <span class="token string">"iv.png"</span></pre></td></tr><tr><td data-num="27"></td><td><pre>    output_filename <span class="token operator">=</span> <span class="token string">"outputiv.png"</span></pre></td></tr><tr><td data-num="28"></td><td><pre>    decrypt_aes_cbc<span class="token punctuation">(</span>input_filename<span class="token punctuation">,</span> output_filename<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="29"></td><td><pre></pre></td></tr><tr><td data-num="30"></td><td><pre><span class="token comment"># YOUr3_ON_F1r3_K33P_6O1N6@flare-on.com</span></pre></td></tr></tbody></table></figure><p><img src="/flare-on2023/outputiv.webp" alt="outputiv"></p>
+<h3 id="mypassion"><a class="markdownIt-Anchor" href="#mypassion">#</a> mypassion</h3>
+<h6 id="上强度了-104基本上做了一半慢慢看"><a class="markdownIt-Anchor" href="#上强度了-104基本上做了一半慢慢看">#</a> 上强度了… 10.4: 基本上做了一半… 慢慢看…</h6>
+<p>相当长的 check 逻辑，前面的并不是 flag，也就是前面的部分需要保证成功运行过了即可（虽然听着简单，实际上很不简单）</p>
+<p><code>main函数</code> 框定了大体的框架，可以看出来输入方式以及部分输入位（这里的 check 就不是很严格，某种意义上在按暗示你前面不是 flag 了，不过确实没啥经验，前面还做了挺久）</p>
+<p><img src="/flare-on2023/image-20231004190415608.webp" alt="image-20231004190415608"></p>
+<p>这里有一位 shellcode 汇编的爆破，可以用 capstone 枚举猜一下，还算比较容易</p>
+<p>然后注册了一张表，后续都会从这张表里面调用函数</p>
+<p><img src="/flare-on2023/image-20231004195639784.webp" alt="image-20231004195639784"></p>
+<p>下来这一层，给出了 input 的整体框架： <code>***/***/***/***/***/</code>  类似这样，每层会用 <code>/</code>  切割检查其中的内容</p>
+<p><img src="/flare-on2023/image-20231004190838143.webp" alt="image-20231004190838143"></p>
+<p>然后很多 trick，直接放我目前的结论（估计不完全准确，但是能过就行）</p>
+<p><img src="/flare-on2023/image-20231004191225471.webp" alt="image-20231004191225471"></p>
+<p><img src="/flare-on2023/image-20231004191235080.webp" alt="image-20231004191235080"></p>
+<p>里面有个 tick 的函数会计时，如果运行程序太快也会触发退出…（它的 check 不仅有 exitProcess, 还有前面的重启电脑、sleep、tick 等等，也是需要注意看）</p>
+<p>继续往下，到第二个斜杠了，目前就到这样： <code>0;;**R@brUc3E/1337aaa/0/*pizza</code>  中间那个数会复制，放到后面文件名里的文件去，再往后是四进制 = 长度，0 或 1a 均可，然后 pizza 是固定的，第 0 位随机即可</p>
+<p><img src="/flare-on2023/image-20231004191911752.webp" alt="image-20231004191911752"></p>
+<p><img src="/flare-on2023/image-20231004191929255.webp" alt="image-20231004191929255"></p>
+<p>然后来了个难点，这里需要往里面填 shellcode，这里是不能硬过的，会影响下文，必须把所有 shellcode 缺失位全部填上…</p>
+<p><img src="/flare-on2023/image-20231004192218833.webp" alt="image-20231004192218833"></p>
+<p><img src="/flare-on2023/image-20231004192306788.webp" alt="image-20231004192306788"></p>
+<p>可以观察我们需要填出来的函数：（高手学长师傅看出来这里是 <code>InMemoryOrderModuleList</code> ，v4 大概是个这个函数 <code>GetExportedFunctionAddress64</code> ）</p>
+<p><img src="/flare-on2023/image-20231004192329092.webp" alt="image-20231004192329092"></p>
+<p>进到 v4，第一个汇编就是 0x65，即组成： <code>mov     rax, gs:60h</code></p>
+<h6 id="这一段晚点补有点复杂的"><a class="markdownIt-Anchor" href="#这一段晚点补有点复杂的">#</a> 这一段晚点补，有点复杂的</h6>
+<p>下一段</p>
+<p><img src="/flare-on2023/image-20231004214714348.webp" alt="image-20231004214714348"></p>
+<p>目前的 input：</p>
+<pre><code>0;;**R@brUc3E/1337pr.ost/0/*pizza/AMu$E`0R.?AZe/YPXEKCZXYIGMNOXNMXPYCXGXN/ob5cUr3/111
+</code></pre>
+<p><img src="/flare-on2023/image-20231004221540631.webp" alt="image-20231004221540631"></p>
+<p>后面小 nop 一下，就有了（虽然不知道为什么最后没 com)</p>
+<p><img src="/flare-on2023/image-20231004230518770.webp" alt="image-20231004230518770"></p>
+<pre><code>b0rn_t0_5truc7_b4by@flare-on.com
+</code></pre>
+<h6 id="总结的话就是第五个part那里的shellcode最难啥时候来补一下wp鸽"><a class="markdownIt-Anchor" href="#总结的话就是第五个part那里的shellcode最难啥时候来补一下wp鸽">#</a> 总结的话，就是第五个 part，那里的 shellcode 最难（啥时候来补一下 wp，鸽）</h6>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://demoyao100.github.io/docker%E6%93%8D%E4%BD%9C%E8%AE%B0%E5%BD%95/">
+
+    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Moyao">
+    </span>
+
+    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Moyao の小屋">
+      <meta itemprop="description" content="Write down something interesting I met<br />
+Feel free to mail me if you have something wanted to talk about, plz
+mail: <moyaoxue@outlook.com>
+">
+    </span>
+
+    <span hidden="" itemprop="post" itemscope="" itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Moyao の小屋">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/docker%E6%93%8D%E4%BD%9C%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">docker操作记录</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-10-03 09:16:11" itemprop="dateCreated datePublished" datetime="2023-10-03T09:16:11+08:00">2023-10-03</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h6 id="preface记录"><a class="markdownIt-Anchor" href="#preface记录">#</a> PREFACE：记录</h6>
           
             <div class="post-button">
-              <a class="btn" href="/%E8%93%9D%E5%B8%BD2023%E5%8D%8A%E5%86%B3/#more" rel="contents">
+              <a class="btn" href="/docker%E6%93%8D%E4%BD%9C%E8%AE%B0%E5%BD%95/#more" rel="contents">
                 Read more »
               </a>
             </div>
@@ -269,7 +396,7 @@ mail: <moyaoxue@outlook.com>
   
 
   <article itemscope="" itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://demoyao100.github.io/pickle%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">
+    <link itemprop="mainEntityOfPage" href="https://demoyao100.github.io/BuckeyeCTF2023/">
 
     <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -290,7 +417,7 @@ mail: <moyaoxue@outlook.com>
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/pickle%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" class="post-title-link" itemprop="url">pickle反序列化</a>
+          <a href="/BuckeyeCTF2023/" class="post-title-link" itemprop="url">BuckeyeCTF2023</a>
         </h2>
 
         <div class="post-meta-container">
@@ -301,7 +428,7 @@ mail: <moyaoxue@outlook.com>
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2023-09-18 14:28:10" itemprop="dateCreated datePublished" datetime="2023-09-18T14:28:10+08:00">2023-09-18</time>
+      <time title="Created: 2023-10-02 09:00:16" itemprop="dateCreated datePublished" datetime="2023-10-02T09:00:16+08:00">2023-10-02</time>
     </span>
 
   
@@ -314,10 +441,11 @@ mail: <moyaoxue@outlook.com>
     
     
     <div class="post-body" itemprop="articleBody">
-          <h6 id="preface-就是看看~"><a class="markdownIt-Anchor" href="#preface-就是看看~">#</a> PREFACE: 就是看看～</h6>
+          <h6 id="preface-和maple一个时间段的比赛似乎是大学新生赛感觉-比maple难呢"><a class="markdownIt-Anchor" href="#preface-和maple一个时间段的比赛似乎是大学新生赛感觉-比maple难呢">#</a> PREFACE: 和 maple 一个时间段的比赛，似乎是大学新生赛… 感觉 比 maple 难呢…</h6>
+<h6 id="或者换一种说法怎么大学新生赛都喜欢搞抽象呢"><a class="markdownIt-Anchor" href="#或者换一种说法怎么大学新生赛都喜欢搞抽象呢">#</a> 或者换一种说法… 怎么大学新生赛都喜欢搞抽象呢…</h6>
           
             <div class="post-button">
-              <a class="btn" href="/pickle%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/#more" rel="contents">
+              <a class="btn" href="/BuckeyeCTF2023/#more" rel="contents">
                 Read more »
               </a>
             </div>
@@ -348,7 +476,7 @@ mail: <moyaoxue@outlook.com>
   
 
   <article itemscope="" itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://demoyao100.github.io/%E9%B9%A4%E5%9F%8E2023/">
+    <link itemprop="mainEntityOfPage" href="https://demoyao100.github.io/mapleCTF2023/">
 
     <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -369,7 +497,7 @@ mail: <moyaoxue@outlook.com>
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/%E9%B9%A4%E5%9F%8E2023/" class="post-title-link" itemprop="url">鹤城2023</a>
+          <a href="/mapleCTF2023/" class="post-title-link" itemprop="url">mapleCTF2023</a>
         </h2>
 
         <div class="post-meta-container">
@@ -380,7 +508,7 @@ mail: <moyaoxue@outlook.com>
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2023-09-18 13:37:48" itemprop="dateCreated datePublished" datetime="2023-09-18T13:37:48+08:00">2023-09-18</time>
+      <time title="Created: 2023-10-01 20:18:32" itemprop="dateCreated datePublished" datetime="2023-10-01T20:18:32+08:00">2023-10-01</time>
     </span>
 
   
@@ -393,10 +521,12 @@ mail: <moyaoxue@outlook.com>
     
     
     <div class="post-body" itemprop="articleBody">
-          <h6 id="preface-没啥好说的队友带飞"><a class="markdownIt-Anchor" href="#preface-没啥好说的队友带飞">#</a> PREFACE: 没啥好说的，队友带飞</h6>
+          <h6 id="preface-maple前四个题做的挺快的还看题的队甚至小冲分了一下什"><a class="markdownIt-Anchor" href="#preface-maple前四个题做的挺快的还看题的队甚至小冲分了一下什">#</a> PREFACE: maple 前四个题做的挺快的还，看题的队甚至小冲分了一下（什）</h6>
+<h6 id="最后那个安卓确实出的有点问题怎么都搜不出来总的来说算是还好的比赛吧"><a class="markdownIt-Anchor" href="#最后那个安卓确实出的有点问题怎么都搜不出来总的来说算是还好的比赛吧">#</a> 最后那个安卓确实出的有点问题，怎么都搜不出来，总的来说算是还好的比赛吧</h6>
+<h6 id="102-算是出了不过确实看着别的师傅有点算法高手的"><a class="markdownIt-Anchor" href="#102-算是出了不过确实看着别的师傅有点算法高手的">#</a> 10.2: 算是出了，不过确实看着别的师傅有点算法高手的</h6>
           
             <div class="post-button">
-              <a class="btn" href="/%E9%B9%A4%E5%9F%8E2023/#more" rel="contents">
+              <a class="btn" href="/mapleCTF2023/#more" rel="contents">
                 Read more »
               </a>
             </div>
@@ -427,7 +557,7 @@ mail: <moyaoxue@outlook.com>
   
 
   <article itemscope="" itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://demoyao100.github.io/seccon-2023/">
+    <link itemprop="mainEntityOfPage" href="https://demoyao100.github.io/print%E5%8D%A0%E4%BD%8D%E7%AC%A6%E9%87%8D%E5%86%99%E5%88%9D%E6%8E%A2/">
 
     <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -448,7 +578,7 @@ mail: <moyaoxue@outlook.com>
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/seccon-2023/" class="post-title-link" itemprop="url">seccon 2023</a>
+          <a href="/print%E5%8D%A0%E4%BD%8D%E7%AC%A6%E9%87%8D%E5%86%99%E5%88%9D%E6%8E%A2/" class="post-title-link" itemprop="url">print占位符重写初探</a>
         </h2>
 
         <div class="post-meta-container">
@@ -459,7 +589,7 @@ mail: <moyaoxue@outlook.com>
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2023-09-18 10:24:11" itemprop="dateCreated datePublished" datetime="2023-09-18T10:24:11+08:00">2023-09-18</time>
+      <time title="Created: 2023-09-27 08:05:35" itemprop="dateCreated datePublished" datetime="2023-09-27T08:05:35+08:00">2023-09-27</time>
     </span>
 
   
@@ -472,92 +602,10 @@ mail: <moyaoxue@outlook.com>
     
     
     <div class="post-body" itemprop="articleBody">
-          <h6 id="preface-本来人说和一块看结果周末事情太多了只能自己做赛中做了俩后面只能再慢慢补题qaq"><a class="markdownIt-Anchor" href="#preface-本来人说和一块看结果周末事情太多了只能自己做赛中做了俩后面只能再慢慢补题qaq">#</a> PREFACE: 本来人说和一块看，结果周末事情太多了只能自己做，赛中做了俩，后面只能再慢慢补题 qaq.</h6>
-<h6 id="基本上算是比较少看国外赛看了一下seccon感觉确实和平时做的差距挺大的比如这个re很有些misc的感觉难度还行不算很恶心但是确实新希望最近几天能把它复现出来"><a class="markdownIt-Anchor" href="#基本上算是比较少看国外赛看了一下seccon感觉确实和平时做的差距挺大的比如这个re很有些misc的感觉难度还行不算很恶心但是确实新希望最近几天能把它复现出来">#</a> 基本上算是比较少看国外赛，看了一下 seccon 感觉确实和平时做的差距挺大的，比如这个 re 很有些 misc 的感觉，难度还行不算很恶心，但是确实新，希望最近几天能把它复现出来</h6>
-<h6 id="9-19-ok勉强算搞完了这个nim的oi还是挺恶心的"><a class="markdownIt-Anchor" href="#9-19-ok勉强算搞完了这个nim的oi还是挺恶心的">#</a> 9-19: ok 勉强算搞完了，这个 nim 的 oi 还是挺恶心的…</h6>
+          <h6 id="preface-brics题目都太高手了只有这个shellcode是也许能做的可惜没有ios设备动调不了的话并没有把握出这个题"><a class="markdownIt-Anchor" href="#preface-brics题目都太高手了只有这个shellcode是也许能做的可惜没有ios设备动调不了的话并没有把握出这个题">#</a> PREFACE: BRICS 题目都太高手了，只有这个 shellcode 是也许能做的，可惜没有 ios 设备，动调不了的话并没有把握出这个题</h6>
           
             <div class="post-button">
-              <a class="btn" href="/seccon-2023/#more" rel="contents">
-                Read more »
-              </a>
-            </div>
-          
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope="" itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://demoyao100.github.io/%E9%95%BF%E5%9F%8E%E6%9D%AF2023/">
-
-    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Moyao">
-    </span>
-
-    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Moyao の小屋">
-      <meta itemprop="description" content="Write down something interesting I met<br />
-Feel free to mail me if you have something wanted to talk about, plz
-mail: <moyaoxue@outlook.com>
-">
-    </span>
-
-    <span hidden="" itemprop="post" itemscope="" itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Moyao の小屋">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/%E9%95%BF%E5%9F%8E%E6%9D%AF2023/" class="post-title-link" itemprop="url">长城杯2023</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2023-09-13 21:43:57" itemprop="dateCreated datePublished" datetime="2023-09-13T21:43:57+08:00">2023-09-13</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h6 id="prefacere比较容易"><a class="markdownIt-Anchor" href="#prefacere比较容易">#</a> PREFACE：RE 比较容易</h6>
-<h6 id="ps-初赛猛猛做最后是第一决赛线下直接不会了赛后仨小时出了re1一小时出的re2只能说离开网络和gpt的moyaoxue一事无成"><a class="markdownIt-Anchor" href="#ps-初赛猛猛做最后是第一决赛线下直接不会了赛后仨小时出了re1一小时出的re2只能说离开网络和gpt的moyaoxue一事无成">#</a> ps. 初赛猛猛做最后是第一，决赛线下直接不会了，赛后仨小时出了 re1 一小时出的 re2，只能说离开网络和 gpt 的 moyaoxue 一事无成</h6>
-          
-            <div class="post-button">
-              <a class="btn" href="/%E9%95%BF%E5%9F%8E%E6%9D%AF2023/#more" rel="contents">
+              <a class="btn" href="/print%E5%8D%A0%E4%BD%8D%E7%AC%A6%E9%87%8D%E5%86%99%E5%88%9D%E6%8E%A2/#more" rel="contents">
                 Read more »
               </a>
             </div>
@@ -581,7 +629,7 @@ mail: <moyaoxue@outlook.com>
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/10/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">…</span><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><span class="space">…</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/12/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/10/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">…</span><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><span class="space">…</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/12/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

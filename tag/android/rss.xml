@@ -8,8 +8,8 @@ Feel free to mail me if you have something wanted to talk about, plz
 mail: &amp;lt;moyaoxue@outlook.com&amp;gt;
 </description>
         <language>en</language>
-        <pubDate>Thu, 28 Mar 2024 20:57:57 +0800</pubDate>
-        <lastBuildDate>Thu, 28 Mar 2024 20:57:57 +0800</lastBuildDate>
+        <pubDate>Fri, 03 May 2024 18:55:01 +0800</pubDate>
+        <lastBuildDate>Fri, 03 May 2024 18:55:01 +0800</lastBuildDate>
         <category>re</category>
         <category>Android</category>
         <category>开发</category>
@@ -28,6 +28,159 @@ mail: &amp;lt;moyaoxue@outlook.com&amp;gt;
         <category>python</category>
         <category>hexo</category>
         <category>car</category>
+        <category>ios</category>
+        <category>pentesting</category>
+        <item>
+            <guid isPermalink="true">https://demoyao100.github.io/%E4%B8%8D%E5%90%8C%E7%9A%84android-hook%E5%A7%BF%E5%8A%BF/</guid>
+            <title>不同的android hook姿势</title>
+            <link>https://demoyao100.github.io/%E4%B8%8D%E5%90%8C%E7%9A%84android-hook%E5%A7%BF%E5%8A%BF/</link>
+            <category>re</category>
+            <category>Android</category>
+            <pubDate>Fri, 03 May 2024 18:55:01 +0800</pubDate>
+            <description><![CDATA[ &lt;p&gt;PREFACE：被拷打一排甚至没听过，之前确实一点不懂这个，爬来快速过一下&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;h3 id=&#34;一-got表hook&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#一-got表hook&#34;&gt;#&lt;/a&gt; 一、GOT 表 HOOK&lt;/h3&gt;
+&lt;p&gt;参考：&lt;a href=&#34;https://zhuanlan.zhihu.com/p/269441842&#34;&gt;PLT HOOK - 知乎 (zhihu.com)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;仅能 hook got 表中引用的函数，替换某个 SO 的外部调用，通过将外部函数调用跳转成我们的目标函数。&lt;/p&gt;
+&lt;p&gt;当需要使用一个 Native 库（.so 文件）的时候，我们需要调用 dlopen (“&lt;a href=&#34;http://libname.so&#34;&gt;libname.so&lt;/a&gt;”) 来加载这个库。在我们调用了 dlopen (“&lt;a href=&#34;http://libname.so&#34;&gt;libname.so&lt;/a&gt;”) 之后，系统首先会检查缓存中已加载的 ELF 文件列表。如果未加载则执行加载过程，如果已加载则计数加一，忽略该调用。然后系统会用从 &lt;a href=&#34;http://libname.so&#34;&gt;libname.so&lt;/a&gt; 的 dynamic 节区中读取其所依赖的库，按照相同的加载逻辑，把未在缓存中的库加入加载列表。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/%E4%B8%8D%E5%90%8C%E7%9A%84android-hook%E5%A7%BF%E5%8A%BF/Untitled.png&#34; alt=&#34;Untitled&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Relocation Outputs（输出）&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;.got.plt - 外部函数的绝对地址。&lt;/li&gt;
+&lt;li&gt;.data，.data.rel.ro - 外部数据（包括函数指针）的绝对地址。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Relocation Tables（基本信息）&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;.rel.plt，.rela.plt 用于 “关联”.dynsym 和.got.plt。&lt;/li&gt;
+&lt;li&gt;.rel.dyn，.rela.dyn，.rel.dyn.aps2，.rela.dyn.aps2 用于 “关联”.dynsym 和.data，.data.rel.ro。&lt;/li&gt;
+&lt;li&gt;.relr.dyn 是 Android 11 新增的，仅用于 ELF 的内部相对 relocation（基地址重写）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;符号信息（.dynsym 和 .dynstr）&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;.dynstr 是 “字符串池”，保存了动态链接过程中用到的所有字符串信息，比如：函数名，全局变量名。&lt;/li&gt;
+&lt;li&gt;.dynsym 中包含了与符号关联的各种 “索引” 信息，起到 “关联” 和 “描述（符号类型 func/ifunc/object 等等）” 的作用。&lt;/li&gt;
+&lt;li&gt;.dynsym 中的符号分为 “导入符号” 和 “导出符号”。SHN_UNDEF == st_shndx 为导入符号，SHN_UNDEF != st_shndx 为导出符号。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;加载 ELF 文件：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;读 ELF 的程序头部表，把所有 PT_LOAD 的节区 mmap 到内存中。&lt;/li&gt;
+&lt;li&gt;从 “.dynamic” 中读取各信息项，计算并保存所有节区的虚拟地址，然后执行重定位操作。&lt;/li&gt;
+&lt;li&gt;最后 ELF 加载成功，引用计数加一。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;重定位：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;The Global Offset Table (GOT)&lt;/strong&gt;。简单来说就是在数据段的地址表，假定我们有一些代码段的指令引用一些地址变量，编译器会引用 GOT 表来替代直接引用绝对地址，因为绝对地址在编译期是无法知道的，只有重定位后才会得到 ，GOT 自己本身将会包含函数引用的绝对地址。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;The Procedure Linkage Table (PLT)&lt;/strong&gt;。PLT 不同于 GOT，它位于代码段，动态库的每一个外部函数都会在 PLT 中有一条记录，每一条 PLT 记录都是一小段可执行代码。 一般来说，外部代码都是在调用 PLT 表里的记录，然后 PLT 的相应记录会负责调用实际的函数。我们一般把这种设定叫作 “蹦床”（Trampoline）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;PLT 和 GOT 记录是一一对应的，并且 GOT 表第一次解析后会包含调用函数的实际地址。既然这样，那 PLT 的意义究竟是什么呢？PLT 从某种意义上赋予我们一种懒加载的能力。当动态库首次被加载时，所有的函数地址并没有被解析。&lt;/p&gt;
+&lt;p&gt;![Untitled (1)](不同的 android-hook 姿势 / Untitled (1).png)&lt;/p&gt;
+&lt;h5 id=&#34;实现待自行探究&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#实现待自行探究&#34;&gt;#&lt;/a&gt; 实现（待自行探究）&lt;/h5&gt;
+&lt;p&gt;**（1）** 在内存中找到目标 ELF&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;方法 1：dl_iterate_phdr&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;优点：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Linux 的标准 dl API，NDK 提供了支持，使用方便。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;缺点：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;arm32 中，Android version &amp;gt;= 5.0（API level 21）时 NDK 才支持。&lt;/li&gt;
+&lt;li&gt;Android 5.0 和 5.1（API level 21 和 22），dl_iterate_phdr 的实现不持 linker 全局锁，需要自己找 linker 的符号（__dl__ZL10g_dl_mutex）自己加锁。&lt;/li&gt;
+&lt;li&gt;x86 平台 Android 4.x 的 dl_iterate_phdr () 也不持锁，而且 Android 4.x 的 linker 全局锁符号未导出。&lt;/li&gt;
+&lt;li&gt;Android &amp;lt; 8.1（API level 27）时，不能通过 dl_iterate_phdr 遍历到 linker /linker64。（aosp 从 8.0 开始已经包含了 linker/linker64，但是大量的其他厂商的设备是从 Android 8.1 开始包含 linker/linker64 的）&lt;/li&gt;
+&lt;li&gt;部分 Android 4.x 和 Android 5.x 设备的 dl_iterate_phdr 只能返回 ELF 的 basename，而不是 pathname。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;方法 2：dlopen (“&lt;a href=&#34;http://libdl.so&#34;&gt;libdl.so&lt;/a&gt;”) 返回 linker 内部的 struct soinfo list header，自己遍历&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;优点：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;能支持 Android 4.x。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;缺点：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Android 4.x 的 linker 全局锁（gDlMutex）没有符号导出，直接遍历 struct soinfo list 容易挂。&lt;/li&gt;
+&lt;li&gt;有一定的兼容性风险。&lt;/li&gt;
+&lt;li&gt;部分 Android 4.x 和 Android 5.x 设备只能返回 ELF 的 basename，而不是 pathname。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;方法 3：读 maps 自己解析 （/proc/self/maps）&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;优点：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;不用考虑 Android 4.x linker 全局锁的问题。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;缺点：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;有一定的兼容性风险。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;最佳实践&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Android 4.x：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;解析 maps，使用 “权限 r-xp” + “offset == 0” 来过滤，再检查 ELF magic header。（4.x 上 ELF 结构还是比较保守的，目前没有发现 r-xp 判定失败的情况）&lt;/li&gt;
+&lt;li&gt;也可以先使用 dlopen (“&lt;a href=&#34;http://libdl.so&#34;&gt;libdl.so&lt;/a&gt;”) 的方式，但是兼容性需要更多的测试，如果读取失败，需要回到读 maps 的方式来处理。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Android &amp;gt;=5.0：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;使用 dl_iterate_phdr。&lt;/li&gt;
+&lt;li&gt;对于 5.0/5.1，自己用__dl__ZL10g_dl_mutex 加锁。&lt;/li&gt;
+&lt;li&gt;发现 ELF 名称为 basename 时，读 maps，从 maps 中查找对应的 pathname。&lt;/li&gt;
+&lt;li&gt;需要 linker/linker64 的话，&amp;lt; 8.1 时需要从 maps 中读取。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;hook 导入表，即 “调用方”。如果需要 hook 进程中对于某个函数的所有调用，这种方法是比较麻烦的，需要逐个 hook 内存中已经加载的所有 ELF，还需要监控 dlopen 和 android_dlopen_ext（以便感知到新加载的 ELF，再对它执行导入表 hook）。&lt;/li&gt;
+&lt;li&gt;hook 导出表，即修改被调用方对应函数符号的 offset 值（.dynsym 中对应表项的 st_value），使 linker 通过修改后的新 st_value 来查找对应函数符号的内存绝对地址时，实际查找到的是内存中外部 ELF 的 hook 函数的地址，这样 linker 对新加载的 ELF 执行完 relocation 操作后，新 ELF 的相应调用就自然被 hook 到了我们指定的函数。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;查找导入表符号的方法&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;当存在 SYSV hash 时，先尝试通过 SYSV hash 来查找。先后按顺序尝试查找：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;.hash -&amp;gt; .dynsym -&amp;gt; .dynstr，时间复杂度：O(x) + O(1) + O(1) .dynsym -&amp;gt; .dynstr，时间复杂度：O(n) + O(1)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;查找导出表符号的方法&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;优先使用 GNU hash，比 SYSV hash 更高效。先后按顺序尝试查找：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;.gnu.hash -&amp;gt; .dynsym -&amp;gt; .dynstr，时间复杂度：O(x) + O(1) + O(1) .hash -&amp;gt; .dynsym -&amp;gt; .dynstr，时间复杂度：O(x) + O(1) + O(1)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;查找 .got.plt 中函数地址的方法&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;逐项遍历 .rel.plt 和.rela.plt 表，用上面已经找到的符号信息去比对，对应到即找到了地址的 offset（r_offset 项）&lt;/li&gt;
+&lt;li&gt;将 r_offset 加上 ELF 的 “内存加载基地址”（load_bias）即为所得。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;查找 .data 和 .data.rel.ro 中数据地址的方法&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;与上面查找 .got.plt 的过程相同，只是改为了遍历 .rel.dyn 和 .rela.dyn，以及 .rel.dyn.aps2 和 .rela.dyn.aps2。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;修改数据（hook）&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;修改内存权限：使用 mprotect 将目标地址所在内存页改为可读可写&lt;/li&gt;
+&lt;li&gt;修改数据：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;** 方法 1：** 直接赋值，再使用 __builtin___clear_cache 清除目标地址的 CPU cache。&lt;/p&gt;
+&lt;p&gt;** 方法 2：** 使用 atomic 方式来赋值，比如：__atomic_store_n ((uintptr_t *) got_addr, (uintptr_t) new_func, __ATOMIC_SEQ_CST);&lt;/p&gt;
+&lt;h3 id=&#34;二-ldpreload_hook&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#二-ldpreload_hook&#34;&gt;#&lt;/a&gt; 二、LDPRELOAD_HOOK&lt;/h3&gt;
+&lt;p&gt;虚假的导入函数&lt;/p&gt;
+&lt;h3 id=&#34;三-inline-hook&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#三-inline-hook&#34;&gt;#&lt;/a&gt; 三、inline hook&lt;/h3&gt;
+&lt;p&gt;这个在 frida 源码里面看的比较多，这里简单看一下怎么检测&lt;/p&gt;
+&lt;h5 id=&#34;检测手段&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#检测手段&#34;&gt;#&lt;/a&gt; 检测手段&lt;/h5&gt;
+&lt;p&gt;CRC 校验：inline hook 会改函数写跳板，这样的话一个常见的思路就是对函数&lt;/p&gt;
+&lt;h3 id=&#34;四-异常-hook&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#四-异常-hook&#34;&gt;#&lt;/a&gt; 四、异常 hook&lt;/h3&gt;
+&lt;h3 id=&#34;五-依赖库篡改-hook&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#五-依赖库篡改-hook&#34;&gt;#&lt;/a&gt; 五、依赖库篡改 hook&lt;/h3&gt;
+&lt;h3 id=&#34;六-linker-hook&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#六-linker-hook&#34;&gt;#&lt;/a&gt; 六、linker hook&lt;/h3&gt;
+&lt;h3 id=&#34;七-unicor&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#七-unicor&#34;&gt;#&lt;/a&gt; 七、UNICOR&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/acbocai/vergil&#34;&gt;https://github.com/acbocai/vergil&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;参考：&lt;a href=&#34;https://zhuanlan.zhihu.com/p/269441842&#34;&gt;PLT HOOK - 知乎 (zhihu.com)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;[&lt;a href=&#34;https://bbs.kanxue.com/thread-254853.htm&#34;&gt;原创] 7 种 Android Native Anti Hook 的实现思路 - Android 安全 - 看雪 - 安全社区 | 安全招聘 | kanxue.com&lt;/a&gt;&lt;/p&gt;
+ ]]></description>
+        </item>
         <item>
             <guid isPermalink="true">https://demoyao100.github.io/ACTF-flutter%E5%A4%8D%E7%8E%B0/</guid>
             <title>ACTF flutter复现</title>

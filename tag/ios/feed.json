@@ -1,0 +1,19 @@
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "Moyao の小屋 • All posts by \"ios\" tag",
+    "description": "Write down something interesting I met<br />\nFeel free to mail me if you have something wanted to talk about, plz\nmail: &lt;moyaoxue@outlook.com&gt;\n",
+    "home_page_url": "https://demoyao100.github.io",
+    "items": [
+        {
+            "id": "https://demoyao100.github.io/ios%E7%A0%B8%E5%A3%B3/",
+            "url": "https://demoyao100.github.io/ios%E7%A0%B8%E5%A3%B3/",
+            "title": "ios砸壳",
+            "date_published": "2024-05-12T07:04:01.000Z",
+            "content_html": "<p>PREFACE：初探</p>\n<span id=\"more\"></span>\n<h3 id=\"一-frida-ios-dump-master\"><a class=\"markdownIt-Anchor\" href=\"#一-frida-ios-dump-master\">#</a> 一、frida-ios-dump-master</h3>\n<p>越狱后 Cydia 查询 frida-server 版本（github 上没有必须这里下载），对照<a href=\"https://github.com/frida/frida/releases?page=5%E5%AE%89%E8%A3%85frida\"> https://github.com/frida/frida/releases?page=5 安装 frida</a> frida-tools 版本</p>\n<p>frida-ios-dump-master 砸壳：<a href=\"https://juejin.cn/post/6844903893504098317\">https://juejin.cn/post/6844903893504098317</a></p>\n<p><img src=\"https://xhs-doc.xhscdn.com/10400250312lb8ufn3004ovqb9o?imageView2/2/w/1600\" alt=\"img\"></p>\n<p>砸壳成功：</p>\n<p><img src=\"https://xhs-doc.xhscdn.com/10400250312lbbofl30032uglng?imageView2/2/w/1600\" alt=\"img\"></p>\n<p>核心二进制文件：</p>\n<p>入口（右）：Aweme ； 核心（左）：AwemeCore</p>\n<p><img src=\"https://xhs-doc.xhscdn.com/10400250312lch9l6300e68f808?imageView2/2/w/1600\" alt=\"img\"></p>\n",
+            "tags": [
+                "re",
+                "ios"
+            ]
+        }
+    ]
+}

