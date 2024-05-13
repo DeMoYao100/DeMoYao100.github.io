@@ -9,21 +9,20 @@
     <category term="开发" />
     <category term="codeforces" />
     <category term="cv" />
-    <category term="驱动" />
     <category term="docker" />
+    <category term="驱动" />
     <category term="electron" />
+    <category term="ios" />
     <category term="杂文" />
     <category term="web" />
-    <category term="IOT" />
     <category term="jail" />
+    <category term="IOT" />
     <category term="re Android linux" />
     <category term="web shiro" />
-    <category term="re Android" />
     <category term="python" />
     <category term="hexo" />
-    <category term="car" />
-    <category term="ios" />
     <category term="pentesting" />
+    <category term="car" />
     <entry>
         <id>https://demoyao100.github.io/qemu%E8%B0%83%E8%AF%95%E8%AE%B0%E5%BD%95/</id>
         <title>qemu调试记录</title>
