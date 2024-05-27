@@ -23,6 +23,8 @@
     <category term="hexo" />
     <category term="pentesting" />
     <category term="car" />
+    <category term="wasm" />
+    <category term="tree" />
     <entry>
         <id>https://demoyao100.github.io/electron-%E6%89%93%E5%8C%85/</id>
         <title>electron 打包</title>

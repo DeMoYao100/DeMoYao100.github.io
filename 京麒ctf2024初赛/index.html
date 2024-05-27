@@ -1,0 +1,849 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"demoyao100.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false,"trigger":"auto"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="PREFACE：r1mao 师傅复健过程带着鼠鼠做的，tql； 算是第一次调 wasm，感觉挺好（？）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="京麒ctf2024初赛">
+<meta property="og:url" content="https://demoyao100.github.io/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/index.html">
+<meta property="og:site_name" content="Moyao の小屋">
+<meta property="og:description" content="PREFACE：r1mao 师傅复健过程带着鼠鼠做的，tql； 算是第一次调 wasm，感觉挺好（？）">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://demoyao100.github.io/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527103329524.png">
+<meta property="og:image" content="https://demoyao100.github.io/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527103631514.png">
+<meta property="og:image" content="https://demoyao100.github.io/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/2433096-20221224212843253-2138184082.png">
+<meta property="og:image" content="https://demoyao100.github.io/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527111010649.png">
+<meta property="og:image" content="https://demoyao100.github.io/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527114316766.png">
+<meta property="og:image" content="https://demoyao100.github.io/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527114549565.png">
+<meta property="og:image" content="https://demoyao100.github.io/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527114542798.png">
+<meta property="og:image" content="https://demoyao100.github.io/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527115425554.png">
+<meta property="og:image" content="https://demoyao100.github.io/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527115554093.png">
+<meta property="og:image" content="https://demoyao100.github.io/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527120646185.png">
+<meta property="og:image" content="https://demoyao100.github.io/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527121414644.png">
+<meta property="og:image" content="https://demoyao100.github.io/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527122315547.png">
+<meta property="og:image" content="https://demoyao100.github.io/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527122516394.png">
+<meta property="og:image" content="https://demoyao100.github.io/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527122611991.png">
+<meta property="og:image" content="https://demoyao100.github.io/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527123215824.png">
+<meta property="og:image" content="https://demoyao100.github.io/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527124531030.png">
+<meta property="og:image" content="https://demoyao100.github.io/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527124750476.png">
+<meta property="og:image" content="https://demoyao100.github.io/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527130843887.png">
+<meta property="og:image" content="https://demoyao100.github.io/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527131058774.png">
+<meta property="og:image" content="https://demoyao100.github.io/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527131143073.png">
+<meta property="og:image" content="https://demoyao100.github.io/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527124812434.png">
+<meta property="og:image" content="https://demoyao100.github.io/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527131243913.png">
+<meta property="article:published_time" content="2024-05-27T01:20:06.000Z">
+<meta property="article:modified_time" content="2024-05-27T05:43:14.223Z">
+<meta property="article:author" content="Moyao">
+<meta property="article:tag" content="re">
+<meta property="article:tag" content="wasm">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://demoyao100.github.io/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527103329524.png">
+
+
+<link rel="canonical" href="https://demoyao100.github.io/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://demoyao100.github.io/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/","path":"京麒ctf2024初赛/","title":"京麒ctf2024初赛"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>京麒ctf2024初赛 | Moyao の小屋</title>
+  
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-KKC145B2WB"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-KKC145B2WB","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope="" itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Moyao の小屋</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Hi,I'm Moyaoxue</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags.html" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories.html" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-about"><a href="/about.html" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80" placeholder="Searching..." spellcheck="false" type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E6%88%8F"><span class="nav-number">1.</span> <span class="nav-text"> 前戏</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%8D%E8%B0%83%E8%AF%95"><span class="nav-number">1.1.</span> <span class="nav-text"> 反调试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%8C%E6%BA%90%E7%AD%96%E7%95%A5"><span class="nav-number">1.2.</span> <span class="nav-text"> 同源策略</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#firefox"><span class="nav-number">1.2.1.</span> <span class="nav-text"> firefox：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#chrome"><span class="nav-number">1.2.2.</span> <span class="nav-text"> chrome</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B0%83%E8%AF%95"><span class="nav-number">1.3.</span> <span class="nav-text"> 调试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90"><span class="nav-number">1.4.</span> <span class="nav-text"> 静态分析</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A3%E9%A4%90"><span class="nav-number">2.</span> <span class="nav-text"> 正餐</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%BB%E4%BD%93%E6%B5%81%E7%A8%8B"><span class="nav-number">2.1.</span> <span class="nav-text"> 总体流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8A%A0%E5%AF%86"><span class="nav-number">2.2.</span> <span class="nav-text"> 加密</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%86%E6%96%87"><span class="nav-number">2.3.</span> <span class="nav-text"> 密文</span></a></li></ol></li></ol></div>
+        </div>
+        
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Moyao" src="/images/avatar.webp">
+  <p class="site-author-name" itemprop="name">Moyao</p>
+  <div class="site-description" itemprop="description">Write down something interesting I met<br>
+Feel free to mail me if you have something wanted to talk about, plz
+mail: &lt;moyaoxue@outlook.com&gt;
+</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">94</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags.html">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="/moyaoxue@outlook.com" title="E-Mail → moyaoxue@outlook.com" rel="noopener me"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://demoyao100.github.io/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/">
+
+    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Moyao">
+    </span>
+
+    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Moyao の小屋">
+      <meta itemprop="description" content="Write down something interesting I met<br />
+Feel free to mail me if you have something wanted to talk about, plz
+mail: <moyaoxue@outlook.com>
+">
+    </span>
+
+    <span hidden="" itemprop="post" itemscope="" itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="京麒ctf2024初赛 | Moyao の小屋">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          京麒ctf2024初赛
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-05-27 09:20:06" itemprop="dateCreated datePublished" datetime="2024-05-27T09:20:06+08:00">2024-05-27</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>PREFACE：r1mao 师傅复健过程带着鼠鼠做的，tql；</p>
+<p>算是第一次调 wasm，感觉挺好（？）</p>
+<span id="more"></span>
+<h3 id="前戏"><a class="markdownIt-Anchor" href="#前戏">#</a> 前戏</h3>
+<h4 id="反调试"><a class="markdownIt-Anchor" href="#反调试">#</a> 反调试</h4>
+<p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000012359015">突破前端反调试–阻止页面不断 debugger - 技术足迹 - SegmentFault 思否</a></p>
+<p>可以这样用条件断点直接绕</p>
+<p><img src="/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527103329524.webp" alt="image-20240527103329524"></p>
+<h4 id="同源策略"><a class="markdownIt-Anchor" href="#同源策略">#</a> 同源策略</h4>
+<p>需要关闭同源策略才能看到 wasm 附件</p>
+<h5 id="firefox"><a class="markdownIt-Anchor" href="#firefox">#</a> firefox：</h5>
+<p>在网址栏中输入”about:config“ 再搜索栏中输入 "security.fileuri.strict_origin_policy", 并设置为 "false"</p>
+<h5 id="chrome"><a class="markdownIt-Anchor" href="#chrome">#</a> chrome</h5>
+<p>快捷方式写一个：</p>
+<pre><code>"C:\Program Files\Google\Chrome\Application\chrome.exe" --allow-file-access-from-files
+</code></pre>
+<p><img src="/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527103631514.webp" alt="image-20240527103631514"></p>
+<p>这里有两个问题：</p>
+<ol>
+<li>firefox 用前面的条件断点策略没办法绕反调（未解决）</li>
+<li>chrome 同源策略不能直接从文件夹里面打开</li>
+</ol>
+<p>解决方法：</p>
+<p>chrome 里面打开 <code>python -m http.server</code> ，即可看到 wasm 文件</p>
+<h4 id="调试"><a class="markdownIt-Anchor" href="#调试">#</a> 调试</h4>
+<p>正确绕过反调以及配好浏览器，这里就可以调试了（暂时没觉得浏览器调试很不妥，先用着～）</p>
+<h4 id="静态分析"><a class="markdownIt-Anchor" href="#静态分析">#</a> 静态分析</h4>
+<p><a target="_blank" rel="noopener" href="https://github.com/nneonneo/ghidra-wasm-plugin">nneonneo/ghidra-wasm-plugin: Ghidra Wasm plugin with disassembly and decompilation support (github.com)</a></p>
+<p>ghidra 插件选择好插件的压缩包即可</p>
+<p><img src="/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/2433096-20221224212843253-2138184082.webp" alt="img"></p>
+<p>这里我们的 index.html 修改为了这样：</p>
+<figure class="highlight html"><figcaption data-lang="HTML"></figcaption><table><tbody><tr><td data-num="1"></td><td><pre><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">&gt;</span></span></pre></td></tr><tr><td data-num="2"></td><td><pre><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">&gt;</span></span></pre></td></tr><tr><td data-num="3"></td><td><pre>    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">http-equiv</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Content-Type<span class="token punctuation">"</span></span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text/html; charset=utf-8<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span></pre></td></tr><tr><td data-num="4"></td><td><pre><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">&gt;</span></span></pre></td></tr><tr><td data-num="5"></td><td><pre><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>static/wasm_exec.js<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span></pre></td></tr><tr><td data-num="6"></td><td><pre><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript"></span></span></pre></td></tr><tr><td data-num="7"></td><td><pre>    <span class="token keyword">const</span> go <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Go</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="8"></td><td><pre>    WebAssembly<span class="token punctuation">.</span><span class="token function">instantiateStreaming</span><span class="token punctuation">(</span><span class="token function">fetch</span><span class="token punctuation">(</span><span class="token string">"static/main.wasm"</span><span class="token punctuation">)</span><span class="token punctuation">,</span> go<span class="token punctuation">.</span>importObject<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="9"></td><td><pre>        <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">result</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></pre></td></tr><tr><td data-num="10"></td><td><pre>            document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">"flag"</span><span class="token punctuation">)</span><span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token string">"flag{this_1s_fake_f_l__Ag}"</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="11"></td><td><pre>            go<span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span>result<span class="token punctuation">.</span>instance<span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="12"></td><td><pre>            wasm <span class="token operator">=</span> result<span class="token punctuation">.</span>instance<span class="token punctuation">.</span>exports<span class="token punctuation">;</span></pre></td></tr><tr><td data-num="13"></td><td><pre>            memories <span class="token operator">=</span> <span class="token punctuation">[</span>wasm<span class="token punctuation">.</span>mem<span class="token punctuation">]</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="14"></td><td><pre>            <span class="token function-variable function">viewDWORD</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">addr</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span><span class="token punctuation">{</span></pre></td></tr><tr><td data-num="15"></td><td><pre>                <span class="token keyword">const</span> arr <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Uint32Array</span><span class="token punctuation">(</span>memories<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>buffer<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span>addr<span class="token punctuation">,</span> addr <span class="token operator">+</span> <span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="16"></td><td><pre>                <span class="token keyword">return</span> arr<span class="token punctuation">;</span></pre></td></tr><tr><td data-num="17"></td><td><pre>            <span class="token punctuation">}</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="18"></td><td><pre>            <span class="token function-variable function">viewChar</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">addr<span class="token punctuation">,</span> size <span class="token operator">=</span> <span class="token number">16</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span><span class="token punctuation">{</span></pre></td></tr><tr><td data-num="19"></td><td><pre>                <span class="token keyword">const</span> arr <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Uint8Array</span><span class="token punctuation">(</span>memories<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>buffer<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span>addr<span class="token punctuation">,</span> addr <span class="token operator">+</span> size<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="20"></td><td><pre>                <span class="token keyword">return</span> String<span class="token punctuation">.</span><span class="token function">fromCharCode</span><span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span> arr<span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="21"></td><td><pre>            <span class="token punctuation">}</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="22"></td><td><pre>            <span class="token function-variable function">viewHEX</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">addr<span class="token punctuation">,</span> size <span class="token operator">=</span> <span class="token number">16</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span><span class="token punctuation">{</span></pre></td></tr><tr><td data-num="23"></td><td><pre>                <span class="token keyword">const</span> arr <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Uint8Array</span><span class="token punctuation">(</span>memories<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>buffer<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span>addr<span class="token punctuation">,</span> addr <span class="token operator">+</span> size<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="24"></td><td><pre>                <span class="token keyword">return</span> <span class="token punctuation">(</span>Array<span class="token punctuation">.</span><span class="token function">from</span><span class="token punctuation">(</span>arr<span class="token punctuation">,</span> <span class="token parameter">x</span> <span class="token operator">=&gt;</span>x<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">padStart</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token string">'0'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token string">' '</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="25"></td><td><pre>            <span class="token punctuation">}</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="26"></td><td><pre>            <span class="token function-variable function">viewHexCode</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">addr<span class="token punctuation">,</span> size <span class="token operator">=</span> <span class="token number">16</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span><span class="token punctuation">{</span></pre></td></tr><tr><td data-num="27"></td><td><pre>                <span class="token keyword">const</span> arr <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Uint8Array</span><span class="token punctuation">(</span>memories<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>buffer<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span>addr<span class="token punctuation">,</span> addr <span class="token operator">+</span> size<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="28"></td><td><pre>                <span class="token keyword">return</span> <span class="token punctuation">(</span>Array<span class="token punctuation">.</span><span class="token function">from</span><span class="token punctuation">(</span>arr<span class="token punctuation">,</span> <span class="token parameter">x</span> <span class="token operator">=&gt;</span><span class="token string">'0x'</span> <span class="token operator">+</span> x<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">padStart</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token string">'0'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token string">', '</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="29"></td><td><pre>            <span class="token punctuation">}</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="30"></td><td><pre>            <span class="token function-variable function">dumpMemory</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">addr<span class="token punctuation">,</span> size <span class="token operator">=</span> <span class="token number">16</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span><span class="token punctuation">{</span></pre></td></tr><tr><td data-num="31"></td><td><pre>                <span class="token keyword">const</span> arr <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Uint8Array</span><span class="token punctuation">(</span>memories<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>buffer<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span>addr<span class="token punctuation">,</span> addr <span class="token operator">+</span> size<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="32"></td><td><pre>                <span class="token keyword">return</span> arr<span class="token punctuation">;</span></pre></td></tr><tr><td data-num="33"></td><td><pre>            <span class="token punctuation">}</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="34"></td><td><pre>            <span class="token function-variable function">viewString</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">addr<span class="token punctuation">,</span> size <span class="token operator">=</span> <span class="token number">16</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span><span class="token punctuation">{</span></pre></td></tr><tr><td data-num="35"></td><td><pre>                <span class="token keyword">const</span> arr <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Uint8Array</span><span class="token punctuation">(</span>memories<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>buffer<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span>addr<span class="token punctuation">,</span> addr <span class="token operator">+</span> size<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="36"></td><td><pre>                <span class="token keyword">let</span> max <span class="token operator">=</span> size<span class="token punctuation">;</span></pre></td></tr><tr><td data-num="37"></td><td><pre>                <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> size<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></pre></td></tr><tr><td data-num="38"></td><td><pre>                    <span class="token keyword">if</span> <span class="token punctuation">(</span>arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">===</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></pre></td></tr><tr><td data-num="39"></td><td><pre>                        max <span class="token operator">=</span> i<span class="token punctuation">;</span></pre></td></tr><tr><td data-num="40"></td><td><pre>                        <span class="token keyword">break</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="41"></td><td><pre>                    <span class="token punctuation">}</span></pre></td></tr><tr><td data-num="42"></td><td><pre>                <span class="token punctuation">}</span></pre></td></tr><tr><td data-num="43"></td><td><pre>                <span class="token keyword">return</span> String<span class="token punctuation">.</span><span class="token function">fromCharCode</span><span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span> arr<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> max<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="44"></td><td><pre>            <span class="token punctuation">}</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="45"></td><td><pre>            <span class="token function-variable function">search</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">stirng</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></pre></td></tr><tr><td data-num="46"></td><td><pre>                <span class="token keyword">const</span> m <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Uint8Array</span><span class="token punctuation">(</span>memories<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>buffer<span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="47"></td><td><pre>                <span class="token comment">// vid=35402, 9AAizQZJ</span></pre></td></tr><tr><td data-num="48"></td><td><pre>                <span class="token comment">// vid=20268, a3fMpSkB</span></pre></td></tr><tr><td data-num="49"></td><td><pre>                <span class="token keyword">const</span> k <span class="token operator">=</span> Array<span class="token punctuation">.</span><span class="token function">from</span><span class="token punctuation">(</span>stirng<span class="token punctuation">,</span> <span class="token parameter">x</span> <span class="token operator">=&gt;</span>x<span class="token punctuation">.</span><span class="token function">charCodeAt</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="50"></td><td><pre>            </pre></td></tr><tr><td data-num="51"></td><td><pre>                <span class="token keyword">const</span> <span class="token function-variable function">match</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">j</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span><span class="token punctuation">{</span></pre></td></tr><tr><td data-num="52"></td><td><pre>                    <span class="token keyword">return</span> k<span class="token punctuation">.</span><span class="token function">every</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">b<span class="token punctuation">,</span> i</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span>m<span class="token punctuation">[</span>i <span class="token operator">+</span> j<span class="token punctuation">]</span> <span class="token operator">===</span> b<span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="53"></td><td><pre>                <span class="token punctuation">}</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="54"></td><td><pre>                <span class="token keyword">const</span> max <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">min</span><span class="token punctuation">(</span><span class="token number">10_000_000</span><span class="token punctuation">,</span> m<span class="token punctuation">.</span>byteLength <span class="token operator">||</span> m<span class="token punctuation">.</span>length<span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="55"></td><td><pre>                <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> max<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></pre></td></tr><tr><td data-num="56"></td><td><pre>                    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">match</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></pre></td></tr><tr><td data-num="57"></td><td><pre>                        console<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="58"></td><td><pre>                    <span class="token punctuation">}</span></pre></td></tr><tr><td data-num="59"></td><td><pre>                <span class="token punctuation">}</span></pre></td></tr><tr><td data-num="60"></td><td><pre>                console<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">'done'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="61"></td><td><pre>            <span class="token punctuation">}</span></pre></td></tr><tr><td data-num="62"></td><td><pre>        <span class="token punctuation">}</span> <span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="63"></td><td><pre></pre></td></tr><tr><td data-num="64"></td><td><pre></pre></td></tr><tr><td data-num="65"></td><td><pre>    <span class="token keyword">function</span> <span class="token function">check_flag</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></pre></td></tr><tr><td data-num="66"></td><td><pre>        <span class="token keyword">var</span> flag <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">"flag"</span><span class="token punctuation">)</span><span class="token punctuation">.</span>value<span class="token punctuation">;</span></pre></td></tr><tr><td data-num="67"></td><td><pre>        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"你输入的 flag 是："</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="68"></td><td><pre>        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>flag<span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="69"></td><td><pre>        <span class="token comment">// document.getElementById("flag").value = "aaaflag{this_1s_fake_f_l_A__g}";</span></pre></td></tr><tr><td data-num="70"></td><td><pre>        <span class="token keyword">if</span> <span class="token punctuation">(</span>document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">"flag"</span><span class="token punctuation">)</span><span class="token punctuation">.</span>value <span class="token operator">===</span> <span class="token string">"flag{this_1s_fake_f_l__Ag}"</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></pre></td></tr><tr><td data-num="71"></td><td><pre>            console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"I have a gift for you!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="72"></td><td><pre>            <span class="token comment">// console.log(console.gift("ABCCDDEE", "AABBCCDDEE"));</span></pre></td></tr><tr><td data-num="73"></td><td><pre>            console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>console<span class="token punctuation">.</span><span class="token function">gift</span><span class="token punctuation">(</span><span class="token string">"f09f8dabf09f8daaf09f8db0f09f8daff09f8e8af09f8daaf09fa59bf09f8da9"</span><span class="token punctuation">,</span> <span class="token string">"666c61677b746869735f31735f66616b655f665f6c5f415f5f677d"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//rc4 第一个是 key，第二个是 value，都是进去 hex bytes</span></pre></td></tr><tr><td data-num="74"></td><td><pre>            <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">"恭喜你，答对了！我想你应该知道 flag 是什么了 ！"</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="75"></td><td><pre>        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span></pre></td></tr><tr><td data-num="76"></td><td><pre>            <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">"答错了，再想想吧！"</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="77"></td><td><pre>        <span class="token punctuation">}</span></pre></td></tr><tr><td data-num="78"></td><td><pre>    <span class="token punctuation">}</span></pre></td></tr><tr><td data-num="79"></td><td><pre><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span></pre></td></tr><tr><td data-num="80"></td><td><pre></pre></td></tr><tr><td data-num="81"></td><td><pre><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">&gt;</span></span></pre></td></tr><tr><td data-num="82"></td><td><pre>    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>flag<span class="token punctuation">"</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span></pre></td></tr><tr><td data-num="83"></td><td><pre>    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>btn<span class="token punctuation">"</span></span> <span class="token special-attr"><span class="token attr-name">onclick</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value javascript language-javascript"><span class="token function">check_flag</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span><span class="token punctuation">"</span></span></span> <span class="token punctuation">&gt;</span></span>Click<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">&gt;</span></span></pre></td></tr><tr><td data-num="84"></td><td><pre><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span></pre></td></tr><tr><td data-num="85"></td><td><pre><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">&gt;</span></span></pre></td></tr></tbody></table></figure><h3 id="正餐"><a class="markdownIt-Anchor" href="#正餐">#</a> 正餐</h3>
+<h4 id="总体流程"><a class="markdownIt-Anchor" href="#总体流程">#</a> 总体流程</h4>
+<p>静态看一下</p>
+<p>输入一个 fake flag 才会触发逻辑：</p>
+<p><img src="/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527111010649.webp" alt="image-20240527111010649"></p>
+<p>审一下 js</p>
+<figure class="highlight js"><figcaption data-lang="JavaScript"></figcaption><table><tbody><tr><td data-num="1"></td><td><pre><span class="token string-property property">"syscall/js.valueCall"</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">sp</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span></pre></td></tr><tr><td data-num="2"></td><td><pre>	sp <span class="token operator">&gt;&gt;&gt;=</span> <span class="token number">0</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="3"></td><td><pre>	<span class="token keyword">try</span> <span class="token punctuation">{</span></pre></td></tr><tr><td data-num="4"></td><td><pre>		<span class="token keyword">const</span> v <span class="token operator">=</span> <span class="token function">loadValue</span><span class="token punctuation">(</span>sp <span class="token operator">+</span> <span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="5"></td><td><pre>		<span class="token keyword">const</span> m <span class="token operator">=</span> Reflect<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>v<span class="token punctuation">,</span> <span class="token function">loadString</span><span class="token punctuation">(</span>sp <span class="token operator">+</span> <span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="6"></td><td><pre>		<span class="token keyword">const</span> args <span class="token operator">=</span> <span class="token function">loadSliceOfValues</span><span class="token punctuation">(</span>sp <span class="token operator">+</span> <span class="token number">32</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="7"></td><td><pre>		<span class="token keyword">const</span> result <span class="token operator">=</span> <span class="token function">Reflect</span><span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span>m<span class="token punctuation">,</span> v<span class="token punctuation">,</span> args<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 核心是这句</span></pre></td></tr><tr><td data-num="8"></td><td><pre>		sp <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_inst<span class="token punctuation">.</span>exports<span class="token punctuation">.</span><span class="token function">getsp</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&gt;&gt;&gt;</span> <span class="token number">0</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="9"></td><td><pre>		<span class="token function">storeValue</span><span class="token punctuation">(</span>sp <span class="token operator">+</span> <span class="token number">56</span><span class="token punctuation">,</span> result<span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="10"></td><td><pre>		<span class="token keyword">this</span><span class="token punctuation">.</span>mem<span class="token punctuation">.</span><span class="token function">setUint8</span><span class="token punctuation">(</span>sp <span class="token operator">+</span> <span class="token number">64</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="11"></td><td><pre>	<span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span>err<span class="token punctuation">)</span> <span class="token punctuation">{</span></pre></td></tr><tr><td data-num="12"></td><td><pre>		sp <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_inst<span class="token punctuation">.</span>exports<span class="token punctuation">.</span><span class="token function">getsp</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&gt;&gt;&gt;</span> <span class="token number">0</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="13"></td><td><pre>		<span class="token function">storeValue</span><span class="token punctuation">(</span>sp <span class="token operator">+</span> <span class="token number">56</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="14"></td><td><pre>		<span class="token keyword">this</span><span class="token punctuation">.</span>mem<span class="token punctuation">.</span><span class="token function">setUint8</span><span class="token punctuation">(</span>sp <span class="token operator">+</span> <span class="token number">64</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="15"></td><td><pre>	<span class="token punctuation">}</span></pre></td></tr><tr><td data-num="16"></td><td><pre><span class="token punctuation">}</span><span class="token punctuation">,</span></pre></td></tr></tbody></table></figure><p>这里的 <code>Reflect.apply</code>  是调用 wasm 函数的核心语句，后续对于 js 就是 hook 这里来观察函数调用的逻辑：</p>
+<p>这里 hook 观察函数调用以及传参</p>
+<figure class="highlight js"><figcaption data-lang="JavaScript"></figcaption><table><tbody><tr><td data-num="1"></td><td><pre><span class="token function">loadString</span><span class="token punctuation">(</span>sp <span class="token operator">+</span> <span class="token number">16</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">'('</span> <span class="token operator">+</span> args <span class="token operator">+</span> <span class="token string">');\n'</span><span class="token punctuation">;</span></pre></td></tr></tbody></table></figure><p>这样可以观察返回值：</p>
+<figure class="highlight js"><figcaption data-lang="JavaScript"></figcaption><table><tbody><tr><td data-num="1"></td><td><pre>console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"ret:"</span> <span class="token operator">+</span> result<span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr></tbody></table></figure><p><img src="/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527114316766.webp" alt="image-20240527114316766"></p>
+<pre><code>ƒ eval() { [native code] }
+wasm_exec.js:352 eval(setInterval(function(){debugger;}, 1000););
+
+wasm_exec.js:349 ƒ eval() { [native code] }
+wasm_exec.js:352 eval(setInterval(function(){debugger;}, 1000););
+
+wasm_exec.js:349 ƒ eval() { [native code] }
+wasm_exec.js:352 eval(setInterval(function(){debugger;}, 1000););
+
+wasm_exec.js:349 ƒ _makeFuncWrapper(id) {
+			const go = this;
+			return function () {
+				const event = { id: id, this: this, args: arguments };
+				go._pendingEvent = event;
+				go._resume();
+				return event.result;
+…
+wasm_exec.js:352 _makeFuncWrapper(1);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 _makeFuncWrapper(2);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 _makeFuncWrapper(3);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 _makeFuncWrapper(4);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 _makeFuncWrapper(5);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 _makeFuncWrapper(6);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 _makeFuncWrapper(7);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 _makeFuncWrapper(8);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 _makeFuncWrapper(9);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 _makeFuncWrapper(10);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 _makeFuncWrapper(11);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 _makeFuncWrapper(12);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 _makeFuncWrapper(13);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 _makeFuncWrapper(14);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 _makeFuncWrapper(15);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 _makeFuncWrapper(16);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 _makeFuncWrapper(17);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 _makeFuncWrapper(18);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 _makeFuncWrapper(19);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 _makeFuncWrapper(20);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 _makeFuncWrapper(21);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 _makeFuncWrapper(22);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 _makeFuncWrapper(23);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 _makeFuncWrapper(24);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 _makeFuncWrapper(25);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 _makeFuncWrapper(26);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 _makeFuncWrapper(27);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 _makeFuncWrapper(28);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 _makeFuncWrapper(29);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 _makeFuncWrapper(30);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 _makeFuncWrapper(31);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 _makeFuncWrapper(32);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 _makeFuncWrapper(33);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 _makeFuncWrapper(34);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 _makeFuncWrapper(35);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 _makeFuncWrapper(36);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 _makeFuncWrapper(37);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 _makeFuncWrapper(38);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 _makeFuncWrapper(39);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 _makeFuncWrapper(40);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 _makeFuncWrapper(41);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 _makeFuncWrapper(42);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 _makeFuncWrapper(43);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 _makeFuncWrapper(44);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 _makeFuncWrapper(45);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 _makeFuncWrapper(46);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 _makeFuncWrapper(47);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 _makeFuncWrapper(48);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 _makeFuncWrapper(49);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 _makeFuncWrapper(50);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 _makeFuncWrapper(51);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 _makeFuncWrapper(52);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 _makeFuncWrapper(53);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 _makeFuncWrapper(54);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 _makeFuncWrapper(55);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 _makeFuncWrapper(56);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 _makeFuncWrapper(57);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 _makeFuncWrapper(58);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 _makeFuncWrapper(59);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 eval(setInterval(function() { debugger; }, 1000););
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 panda(你输入的 flag 是：);
+
+wasm_exec.js:352 你输入的 flag 是：
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 eval(setInterval(function(){debugger;}, 1000););
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 😘😘❤️😘😘(flag{this_1s_fake_f_l__Ag});
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 segment🍪🥂(flag{this_1s_fake_f_l__Ag});
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 libc🍪🍹(flag{this_1s_fake_f_l__Ag});
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 glibc🎈🎂(flag{this_1s_fake_f_l__Ag});
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 malloc😅🍵(flag{this_1s_fake_f_l__Ag});
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 free🍪🎈(flag{this_1s_fake_f_l__Ag});
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 calloc🍷🎁(flag{this_1s_fake_f_l__Ag});
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 realloc🍭🍺(3ba81be59f57d55daf0ad10ff8300ddc252f299555699fbf0a75);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 free🍬🍵(3ba81be59f57d55daf0ad10ff8300ddc252f299555699fbf0a75);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 exit🍸🎁(3ba81be59f57d55daf0ad10ff8300ddc252f299555699fbf0a75);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 abort🍫🍷(3ba81be59f57d55daf0ad10ff8300ddc252f299555699fbf0a75);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 signal🍻🍻(3ba81be59f57d55daf0ad10ff8300ddc252f299555699fbf0a75);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 raise☕🍩(3ba81be59f57d55daf0ad10ff8300ddc252f299555699fbf0a75);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 setjmp🍺🍶(3ba81be59f57d55daf0ad10ff8300ddc252f299555699fbf0a75);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 longjmp🍯🍶(3ba81be59f57d55daf0ad10ff8300ddc252f299555699fbf0a75);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 sigaction🍮🍰(3ba81be59f57d55daf0ad10ff8300ddc252f299555699fbf0a75);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 sigprocmask🎈🍼(3ba81be59f57d55daf0ad10ff8300ddc252f299555699fbf0a75);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 sigpending🍻🍾(3ba81be59f57d55daf0ad10ff8300ddc252f299555699fbf0a75);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 send🍷🍺(3ba81be59f57d55daf0ad10ff8300ddc252f299555699fbf0a75);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 recv🎊🍼(3ba81be59f57d55daf0ad10ff8300ddc252f299555699fbf0a75);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 socket🍵🍭(3ba81be59f57d55daf0ad10ff8300ddc252f299555699fbf0a75);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 bind🎂🍻(3ba81be59f57d55daf0ad10ff8300ddc252f299555699fbf0a75);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 listen🍾🎁(3ba81be59f57d55daf0ad10ff8300ddc252f299555699fbf0a75);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 accept🎈🎉(3ba81be59f57d55daf0ad10ff8300ddc252f299555699fbf0a75);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 connect🎉🍵(3ba81be59f57d55daf0ad10ff8300ddc252f299555699fbf0a75);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 LoadLibrary🍶🍯(3ba81be59f57d55daf0ad10ff8300ddc252f299555699fbf0a75);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 GetProcAddress🍯🎁(3ba81be59f57d55daf0ad10ff8300ddc252f299555699fbf0a75);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 VirtualAlloc🍰🍵(10df5f7bce160be17e2d7cf7575b1688e0ded5f2efb3a707c1b1a7926eee1d40ccc856cfb3a86ecd54ceb03b841a679a57263ab7);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 VirtualFree🎈🎁(10df5f7bce160be17e2d7cf7575b1688e0ded5f2efb3a707c1b1a7926eee1d40ccc856cfb3a86ecd54ceb03b841a679a57263ab7);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 VirtualProtect😅🍹(10df5f7bce160be17e2d7cf7575b1688e0ded5f2efb3a707c1b1a7926eee1d40ccc856cfb3a86ecd54ceb03b841a679a57263ab7);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 VirtualQuery🍯🎁(10df5f7bce160be17e2d7cf7575b1688e0ded5f2efb3a707c1b1a7926eee1d40ccc856cfb3a86ecd54ceb03b841a679a57263ab7);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 CreateThread😅🍼(10df5f7bce160be17e2d7cf7575b1688e0ded5f2efb3a707c1b1a7926eee1d40ccc856cfb3a86ecd54ceb03b841a679a57263ab7);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 CreateProcess🥂🍪(10df5f7bce160be17e2d7cf7575b1688e0ded5f2efb3a707c1b1a7926eee1d40ccc856cfb3a86ecd54ceb03b841a679a57263ab7);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 GetThreadContext🎊🍻(10df5f7bce160be17e2d7cf7575b1688e0ded5f2efb3a707c1b1a7926eee1d40ccc856cfb3a86ecd54ceb03b841a679a57263ab7);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 SetThreadContext🍪🎉(10df5f7bce160be17e2d7cf7575b1688e0ded5f2efb3a707c1b1a7926eee1d40ccc856cfb3a86ecd54ceb03b841a679a57263ab7);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 ReadProcessMemory🍪🍮(10df5f7bce160be17e2d7cf7575b1688e0ded5f2efb3a707c1b1a7926eee1d40ccc856cfb3a86ecd54ceb03b841a679a57263ab7);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 mutex🎊🍶(10df5f7bce160be17e2d7cf7575b1688e0ded5f2efb3a707c1b1a7926eee1d40ccc856cfb3a86ecd54ceb03b841a679a57263ab7);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 semaphore🍭🍼(10df5f7bce160be17e2d7cf7575b1688e0ded5f2efb3a707c1b1a7926eee1d40ccc856cfb3a86ecd54ceb03b841a679a57263ab7);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 condition🍰🎉(10df5f7bce160be17e2d7cf7575b1688e0ded5f2efb3a707c1b1a7926eee1d40ccc856cfb3a86ecd54ceb03b841a679a57263ab7);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 pthread🍹🍫(10df5f7bce160be17e2d7cf7575b1688e0ded5f2efb3a707c1b1a7926eee1d40ccc856cfb3a86ecd54ceb03b841a679a57263ab7);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 fork🍻🍭(10df5f7bce160be17e2d7cf7575b1688e0ded5f2efb3a707c1b1a7926eee1d40ccc856cfb3a86ecd54ceb03b841a679a57263ab7);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 exec🍵🍾(806ce5ec9e156bed790d66949dc1949af31d9c14205f25ba6041fa9b94201469f2b0a7ef3e4cbcb660aa6535cd167f032794c25535875bad03fa96da336d3805ede3540424f81e2a8346bc3f4a4e7e978d3b697ff7d3445abe98210427ab434e1e15fe3d69679ba5);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 pipe🍺🍫(806ce5ec9e156bed790d66949dc1949af31d9c14205f25ba6041fa9b94201469f2b0a7ef3e4cbcb660aa6535cd167f032794c25535875bad03fa96da336d3805ede3540424f81e2a8346bc3f4a4e7e978d3b697ff7d3445abe98210427ab434e1e15fe3d69679ba5);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 dup🍼🍺(5aa21921dda7d9519a012f285b9b9e498f495fb521d4712b0075e47962bc2eed7fd840cba2f2ab48875fe765122d7b9f1a6ed992a07131902e4acde16fc02e1b23cc4d47ed7f65449df940601398c75fc6ddc425e1e81b678423ef284ad2a3d45b7f376d0067c820116fbb7ff9b30c9dad258352b00d7a1b4ca60ce7d4293898bc31a9131d7d7cb7efcadfe3d0e7b11f962917508987cc9b6511bb304f9a24e2c28ab4ee8bc4ccbbbaf8e3f4eb799dcca5bfdbc6943aeb4d69ad49f176fb87d56aae14de51901873d15ea0cb78ecbb66);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 dup2🍰🍮(5aa21921dda7d9519a012f285b9b9e498f495fb521d4712b0075e47962bc2eed7fd840cba2f2ab48875fe765122d7b9f1a6ed992a07131902e4acde16fc02e1b23cc4d47ed7f65449df940601398c75fc6ddc425e1e81b678423ef284ad2a3d45b7f376d0067c820116fbb7ff9b30c9dad258352b00d7a1b4ca60ce7d4293898bc31a9131d7d7cb7efcadfe3d0e7b11f962917508987cc9b6511bb304f9a24e2c28ab4ee8bc4ccbbbaf8e3f4eb799dcca5bfdbc6943aeb4d69ad49f176fb87d56aae14de51901873d15ea0cb78ecbb66);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 select☕🎉(5aa21921dda7d9519a012f285b9b9e498f495fb521d4712b0075e47962bc2eed7fd840cba2f2ab48875fe765122d7b9f1a6ed992a07131902e4acde16fc02e1b23cc4d47ed7f65449df940601398c75fc6ddc425e1e81b678423ef284ad2a3d45b7f376d0067c820116fbb7ff9b30c9dad258352b00d7a1b4ca60ce7d4293898bc31a9131d7d7cb7efcadfe3d0e7b11f962917508987cc9b6511bb304f9a24e2c28ab4ee8bc4ccbbbaf8e3f4eb799dcca5bfdbc6943aeb4d69ad49f176fb87d56aae14de51901873d15ea0cb78ecbb66);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 poll🍮🎁(5aa21921dda7d9519a012f285b9b9e498f495fb521d4712b0075e47962bc2eed7fd840cba2f2ab48875fe765122d7b9f1a6ed992a07131902e4acde16fc02e1b23cc4d47ed7f65449df940601398c75fc6ddc425e1e81b678423ef284ad2a3d45b7f376d0067c820116fbb7ff9b30c9dad258352b00d7a1b4ca60ce7d4293898bc31a9131d7d7cb7efcadfe3d0e7b11f962917508987cc9b6511bb304f9a24e2c28ab4ee8bc4ccbbbaf8e3f4eb799dcca5bfdbc6943aeb4d69ad49f176fb87d56aae14de51901873d15ea0cb78ecbb66);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 epoll🥛🎊(5aa21921dda7d9519a012f285b9b9e498f495fb521d4712b0075e47962bc2eed7fd840cba2f2ab48875fe765122d7b9f1a6ed992a07131902e4acde16fc02e1b23cc4d47ed7f65449df940601398c75fc6ddc425e1e81b678423ef284ad2a3d45b7f376d0067c820116fbb7ff9b30c9dad258352b00d7a1b4ca60ce7d4293898bc31a9131d7d7cb7efcadfe3d0e7b11f962917508987cc9b6511bb304f9a24e2c28ab4ee8bc4ccbbbaf8e3f4eb799dcca5bfdbc6943aeb4d69ad49f176fb87d56aae14de51901873d15ea0cb78ecbb66);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 kqueue🍭🍻(5aa21921dda7d9519a012f285b9b9e498f495fb521d4712b0075e47962bc2eed7fd840cba2f2ab48875fe765122d7b9f1a6ed992a07131902e4acde16fc02e1b23cc4d47ed7f65449df940601398c75fc6ddc425e1e81b678423ef284ad2a3d45b7f376d0067c820116fbb7ff9b30c9dad258352b00d7a1b4ca60ce7d4293898bc31a9131d7d7cb7efcadfe3d0e7b11f962917508987cc9b6511bb304f9a24e2c28ab4ee8bc4ccbbbaf8e3f4eb799dcca5bfdbc6943aeb4d69ad49f176fb87d56aae14de51901873d15ea0cb78ecbb66);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 sigwait🍩🎁(5aa21921dda7d9519a012f285b9b9e498f495fb521d4712b0075e47962bc2eed7fd840cba2f2ab48875fe765122d7b9f1a6ed992a07131902e4acde16fc02e1b23cc4d47ed7f65449df940601398c75fc6ddc425e1e81b678423ef284ad2a3d45b7f376d0067c820116fbb7ff9b30c9dad258352b00d7a1b4ca60ce7d4293898bc31a9131d7d7cb7efcadfe3d0e7b11f962917508987cc9b6511bb304f9a24e2c28ab4ee8bc4ccbbbaf8e3f4eb799dcca5bfdbc6943aeb4d69ad49f176fb87d56aae14de51901873d15ea0cb78ecbb66);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 jmp_buf🎂🍺(5aa21921dda7d9519a012f285b9b9e498f495fb521d4712b0075e47962bc2eed7fd840cba2f2ab48875fe765122d7b9f1a6ed992a07131902e4acde16fc02e1b23cc4d47ed7f65449df940601398c75fc6ddc425e1e81b678423ef284ad2a3d45b7f376d0067c820116fbb7ff9b30c9dad258352b00d7a1b4ca60ce7d4293898bc31a9131d7d7cb7efcadfe3d0e7b11f962917508987cc9b6511bb304f9a24e2c28ab4ee8bc4ccbbbaf8e3f4eb799dcca5bfdbc6943aeb4d69ad49f176fb87d56aae14de51901873d15ea0cb78ecbb66);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 sigjmp_buf🥂🎊(5aa21921dda7d9519a012f285b9b9e498f495fb521d4712b0075e47962bc2eed7fd840cba2f2ab48875fe765122d7b9f1a6ed992a07131902e4acde16fc02e1b23cc4d47ed7f65449df940601398c75fc6ddc425e1e81b678423ef284ad2a3d45b7f376d0067c820116fbb7ff9b30c9dad258352b00d7a1b4ca60ce7d4293898bc31a9131d7d7cb7efcadfe3d0e7b11f962917508987cc9b6511bb304f9a24e2c28ab4ee8bc4ccbbbaf8e3f4eb799dcca5bfdbc6943aeb4d69ad49f176fb87d56aae14de51901873d15ea0cb78ecbb66);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 sigsetjmp🍹🎊(5aa21921dda7d9519a012f285b9b9e498f495fb521d4712b0075e47962bc2eed7fd840cba2f2ab48875fe765122d7b9f1a6ed992a07131902e4acde16fc02e1b23cc4d47ed7f65449df940601398c75fc6ddc425e1e81b678423ef284ad2a3d45b7f376d0067c820116fbb7ff9b30c9dad258352b00d7a1b4ca60ce7d4293898bc31a9131d7d7cb7efcadfe3d0e7b11f962917508987cc9b6511bb304f9a24e2c28ab4ee8bc4ccbbbaf8e3f4eb799dcca5bfdbc6943aeb4d69ad49f176fb87d56aae14de51901873d15ea0cb78ecbb66);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 siglongjmp🍾🥛(5aa21921dda7d9519a012f285b9b9e498f495fb521d4712b0075e47962bc2eed7fd840cba2f2ab48875fe765122d7b9f1a6ed992a07131902e4acde16fc02e1b23cc4d47ed7f65449df940601398c75fc6ddc425e1e81b678423ef284ad2a3d45b7f376d0067c820116fbb7ff9b30c9dad258352b00d7a1b4ca60ce7d4293898bc31a9131d7d7cb7efcadfe3d0e7b11f962917508987cc9b6511bb304f9a24e2c28ab4ee8bc4ccbbbaf8e3f4eb799dcca5bfdbc6943aeb4d69ad49f176fb87d56aae14de51901873d15ea0cb78ecbb66);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 stacK_t🎁🍭(5aa21921dda7d9519a012f285b9b9e498f495fb521d4712b0075e47962bc2eed7fd840cba2f2ab48875fe765122d7b9f1a6ed992a07131902e4acde16fc02e1b23cc4d47ed7f65449df940601398c75fc6ddc425e1e81b678423ef284ad2a3d45b7f376d0067c820116fbb7ff9b30c9dad258352b00d7a1b4ca60ce7d4293898bc31a9131d7d7cb7efcadfe3d0e7b11f962917508987cc9b6511bb304f9a24e2c28ab4ee8bc4ccbbbaf8e3f4eb799dcca5bfdbc6943aeb4d69ad49f176fb87d56aae14de51901873d15ea0cb78ecbb66);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 ucontext_t🍫🍵(5aa21921dda7d9519a012f285b9b9e498f495fb521d4712b0075e47962bc2eed7fd840cba2f2ab48875fe765122d7b9f1a6ed992a07131902e4acde16fc02e1b23cc4d47ed7f65449df940601398c75fc6ddc425e1e81b678423ef284ad2a3d45b7f376d0067c820116fbb7ff9b30c9dad258352b00d7a1b4ca60ce7d4293898bc31a9131d7d7cb7efcadfe3d0e7b11f962917508987cc9b6511bb304f9a24e2c28ab4ee8bc4ccbbbaf8e3f4eb799dcca5bfdbc6943aeb4d69ad49f176fb87d56aae14de51901873d15ea0cb78ecbb66);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 siginfo_t🍰🍼(5aa21921dda7d9519a012f285b9b9e498f495fb521d4712b0075e47962bc2eed7fd840cba2f2ab48875fe765122d7b9f1a6ed992a07131902e4acde16fc02e1b23cc4d47ed7f65449df940601398c75fc6ddc425e1e81b678423ef284ad2a3d45b7f376d0067c820116fbb7ff9b30c9dad258352b00d7a1b4ca60ce7d4293898bc31a9131d7d7cb7efcadfe3d0e7b11f962917508987cc9b6511bb304f9a24e2c28ab4ee8bc4ccbbbaf8e3f4eb799dcca5bfdbc6943aeb4d69ad49f176fb87d56aae14de51901873d15ea0cb78ecbb66);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 btoa(5aa21921dda7d9519a012f285b9b9e498f495fb521d4712b0075e47962bc2eed7fd840cba2f2ab48875fe765122d7b9f1a6ed992a07131902e4acde16fc02e1b23cc4d47ed7f65449df940601398c75fc6ddc425e1e81b678423ef284ad2a3d45b7f376d0067c820116fbb7ff9b30c9dad258352b00d7a1b4ca60ce7d4293898bc31a9131d7d7cb7efcadfe3d0e7b11f962917508987cc9b6511bb304f9a24e2c28ab4ee8bc4ccbbbaf8e3f4eb799dcca5bfdbc6943aeb4d69ad49f176fb87d56aae14de51901873d15ea0cb78ecbb66);
+
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 panda(flag{this_1s_fake_f_l__Ag});
+
+wasm_exec.js:352 flag{this_1s_fake_f_l__Ag}
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 panda(I have a gift for you!);
+
+wasm_exec.js:352 I have a gift for you!
+wasm_exec.js:349 &lt;function&gt;
+wasm_exec.js:352 panda(45d15f24840006bd341478b36c084287e4e783cce7ddd63ef8eee9);
+
+wasm_exec.js:352 45d15f24840006bd341478b36c084287e4e783cce7ddd63ef8eee9
+</code></pre>
+<p>以及 gift 函数，测试会发现它实际上就是一个 rc4，算是暗示你加密只有 rc4</p>
+<p><img src="/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527114549565.webp" alt="image-20240527114549565" style="zoom:50%;"><img src="/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527114542798.webp" alt="image-20240527114542798" style="zoom:50%;"></p>
+<h4 id="加密"><a class="markdownIt-Anchor" href="#加密">#</a> 加密</h4>
+<p>我们会看到这样的函数，rc4，做了 ollvm，调试发现这里是核心的加密段</p>
+<p><img src="/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527115425554.webp" alt="image-20240527115425554"></p>
+<p>好在逻辑不是很复杂，可以很快定位到核心加密的 xor：</p>
+<p><img src="/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527115554093.webp" alt="image-20240527115554093"></p>
+<p>key 的话，makeslice 的地方很可疑，以及下面的 %</p>
+<p><img src="/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527120646185.webp" alt="image-20240527120646185"></p>
+<p><img src="/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527121414644.webp" alt="image-20240527121414644"></p>
+<p>可以调试看看，发现不对：</p>
+<p><img src="/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527122315547.webp" alt="image-20240527122315547"></p>
+<p>这里才是真的秘钥（可以测试出来，ollvm 跟起来还是有些难顶…）</p>
+<p><img src="/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527122516394.webp" alt="image-20240527122516394"></p>
+<p>打上条件断点：</p>
+<p><img src="/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527122611991.webp" alt="image-20240527122611991"></p>
+<p>但会发现这里触发次数太多，那我们换一个地方打：</p>
+<p><img src="/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527123215824.webp" alt="image-20240527123215824"></p>
+<p>这样就拿到了所有的 key</p>
+<h4 id="密文"><a class="markdownIt-Anchor" href="#密文">#</a> 密文</h4>
+<p>上面的测试过程都是复现时候捋出来的思路，并不是从零开始的调试</p>
+<p>实际上直接调试过一遍会看到函数调用栈，一个一个 func 走，最后一个是 main.remalloc.func1，里面调用了 main.malloc</p>
+<p><img src="/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527124531030.webp" alt="image-20240527124531030"></p>
+<p>这里如果绕过弯来，会知道 wasm 是没有 malloc 这种底层操作的，包括前面会看到其他几乎所有函数的命名，都是混淆成经典的系统函数的命名了</p>
+<p>malloc 里面有我们非常想要看到的 memequal 了：</p>
+<p><img src="/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527124750476.webp" alt="image-20240527124750476"></p>
+<p>注意这里的条件：（即我们的输入长度需要控制，他给的输入是不行的，需要修改为自己的输入）</p>
+<p><img src="/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527130843887.webp" alt="image-20240527130843887"></p>
+<p>比较的位置，观察我们的输入长度是否满足要求：</p>
+<p><img src="/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527131058774.webp" alt="image-20240527131058774"></p>
+<p>这样的 flag 是可以的</p>
+<p><img src="/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527131143073.webp" alt="image-20240527131143073"></p>
+<p>点两次进里面，它就是我们想要的 check 结构：</p>
+<p><img src="/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527124812434.webp" alt="image-20240527124812434"></p>
+<p>前面的 log 中我们会发现几次加密最后返回的是一个 base64，这里我们也可以调试找到 base64：</p>
+<p><img src="/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527131243913.webp" alt="image-20240527131243913"></p>
+<p>这里的 var1 即为密文</p>
+<p>解密脚本如下：</p>
+<p><a target="_blank" rel="noopener" href="https://cyberchef.org/#recipe=From_Base64('A-Za-z0-9%2B/%3D',true,false)RC4(%7B'option':'Hex','string':'f09f8dbef09fa59bf09f8e81f09f8da9f09f8e89f09f8dadf09fa59bf09f8dbc'%7D,'Hex','Latin1')RC4(%7B'option':'Hex','string':'f09f8dacf09f8daaf09f8dbbf09f8daef09f8dbee29895f09f9885f09f8db0'%7D,'Hex','Latin1')RC4(%7B'option':'Hex','string':'f09f8dabf09f8daaf09f8db0f09f8daff09f8e8af09f8daaf09fa59bf09f8da9'%7D,'Hex','Latin1')RC4(%7B'option':'Hex','string':'f09f8daef09f8db6f09f8dbaf09f8db9f09f8e89f09f8dacf09f8dbaf09f8daf'%7D,'Hex','Latin1')&amp;input=TldGaE1qRTVNakZrWkdFM1pEazFNVGxoTURFeVpqSTROV0k1WWpsbE5EazRaalE1TldaaU5USXhaRFEzTVRKaU1EQTNOV1UwTnprMk1tSmpNbVZsWkRkbVpEZzBNR05pWVRKbU1tRmlORGc0TnpWbVpUY3pZVEV5TW1RM1ltTTNNV0UyWldRNU9UQmhNRGMyTXpFNU5qSmxOR0ZqWkdVeU5tRmpZekppTVRFeU0yTmlOR1EwWm1WaE1tRTJNakV4T1dSbU9UUXdOakV4TXprNVl6QTFabU0yWkdSak16Y3haVEZsT0RGaU5qUTROREl6WldZeVlqUmhaRFZoTXpnME5XSTNaak0zTm1Vd01EWTNZMlF5TnpFeE5tWmlZamRrWm1ObE1EQmpPV0ZoWkRJMU9ETTFObUl3TUdFM1lURmxOR05oTmpCalpUVmtORGMxTXpnNU9XSmpNekZoT1RFMU1XUTNaRGM1WlRWbFptTmhaR1psTTJRMVlqWmlNVEZoT1RZeU9URTNOVE00T1RnM1kyTmpaRFkxTVRaaVpUWmpOR1k1WVRJMFpUQmpNamhoWWpSaU5UaGlZelJqWTJKbVltRm1PR1V6WmpWbFlqYzVPV1JqWTJFMVltWmtZbU0zT1RRellXVmlOR1EyT1dGa05EbG1NVGN6WmpFNE4yUXlObUZoWlRFMFpHRTFNVGt3TVRnM01XUXhOV1ZoTUdOaU56aGxZMkppTmpZPQ">From Base64, RC4, RC4, RC4, RC4 - CyberChef</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>Moyao
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="https://demoyao100.github.io/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/" title="京麒ctf2024初赛">https://demoyao100.github.io/京麒ctf2024初赛/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/re/" rel="tag"># re</a>
+              <a href="/tags/wasm/" rel="tag"># wasm</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/%E4%B8%8A%E6%B5%B7%E5%B8%82%E5%A4%A7%E5%AD%A6%E7%94%9F/" rel="prev" title="上海市大学生">
+                  <i class="fa fa-angle-left"></i> 上海市大学生
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    © 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Moyao</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> &amp; <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+
+
+</body></html>

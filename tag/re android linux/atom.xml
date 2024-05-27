@@ -23,6 +23,8 @@
     <category term="hexo" />
     <category term="pentesting" />
     <category term="car" />
+    <category term="wasm" />
+    <category term="tree" />
     <entry>
         <id>https://demoyao100.github.io/selinux%E5%88%9D%E6%8E%A2/</id>
         <title>selinux初探</title>

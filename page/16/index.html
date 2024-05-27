@@ -153,13 +153,13 @@ mail: &lt;moyaoxue@outlook.com&gt;
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">86</span>
+          <span class="site-state-item-count">94</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags.html">
-        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -190,7 +190,7 @@ mail: &lt;moyaoxue@outlook.com&gt;
   
 
   <article itemscope="" itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://demoyao100.github.io/VM/">
+    <link itemprop="mainEntityOfPage" href="https://demoyao100.github.io/%E5%88%9D%E6%8E%A2python-bytecode/">
 
     <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -211,7 +211,7 @@ mail: <moyaoxue@outlook.com>
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/VM/" class="post-title-link" itemprop="url">VM</a>
+          <a href="/%E5%88%9D%E6%8E%A2python-bytecode/" class="post-title-link" itemprop="url">初探python bytecode</a>
         </h2>
 
         <div class="post-meta-container">
@@ -222,7 +222,7 @@ mail: <moyaoxue@outlook.com>
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2023-03-03 09:53:02" itemprop="dateCreated datePublished" datetime="2023-03-03T09:53:02+08:00">2023-03-03</time>
+      <time title="Created: 2023-08-23 14:54:54" itemprop="dateCreated datePublished" datetime="2023-08-23T14:54:54+08:00">2023-08-23</time>
     </span>
 
   
@@ -235,11 +235,10 @@ mail: <moyaoxue@outlook.com>
     
     
     <div class="post-body" itemprop="articleBody">
-          <h4 id="preface"><a class="markdownIt-Anchor" href="#preface">#</a> preface</h4>
-<h6 id="its-quite-a-while-since-last-been-working-out-a-reverse-problems-when-came-into-a-vmgolang-problem-in-vnctf-i-spent-much-time-but-done-nothing-so-here-i-collect-some-vm-problems-and-tried-to-get-better-understand-of-the-thing"><a class="markdownIt-Anchor" href="#its-quite-a-while-since-last-been-working-out-a-reverse-problems-when-came-into-a-vmgolang-problem-in-vnctf-i-spent-much-time-but-done-nothing-so-here-i-collect-some-vm-problems-and-tried-to-get-better-understand-of-the-thing">#</a> It’s quite a while since last been working out a reverse problems. When came into a VM(golang) problem in VNCTF, I spent much time but done nothing. So here I collect some VM problems and tried to get better understand of the thing.</h6>
+          <h6 id="preface起因是wmctf的一道python题包括了修复python字节码花指令和虚拟机等考点-算是萌新初见python花花了一上午学习修了花指令反编译不了不过可以获得字节码理论上手动反汇编得到python码就没问题了-但实际上这里的字节码结构也有点问题顺便从学长那里听闻了一下下antlr这种东西-然后手动翻译的伪代码也错漏百出最后是学长写了脚本给他自动化修了得以告一段落-不过确实得回来补补python的编译结构功课了"><a class="markdownIt-Anchor" href="#preface起因是wmctf的一道python题包括了修复python字节码花指令和虚拟机等考点-算是萌新初见python花花了一上午学习修了花指令反编译不了不过可以获得字节码理论上手动反汇编得到python码就没问题了-但实际上这里的字节码结构也有点问题顺便从学长那里听闻了一下下antlr这种东西-然后手动翻译的伪代码也错漏百出最后是学长写了脚本给他自动化修了得以告一段落-不过确实得回来补补python的编译结构功课了">#</a> preface: 起因是 wmctf 的一道 python 题，包括了修复 python 字节码花指令和虚拟机等考点。算是萌新初见 python 花，花了一上午学习修了花指令，反编译不了不过可以获得字节码，理论上手动反汇编得到 python 码就没问题了。但实际上这里的字节码结构也有点问题，顺便从学长那里听闻了一下下 antlr 这种东西。然后手动翻译的伪代码也错漏百出… 最后是学长写了脚本给他自动化修了得以告一段落。不过确实得回来补补 python 的编译结构功课了。</h6>
           
             <div class="post-button">
-              <a class="btn" href="/VM/#more" rel="contents">
+              <a class="btn" href="/%E5%88%9D%E6%8E%A2python-bytecode/#more" rel="contents">
                 Read more »
               </a>
             </div>
@@ -270,7 +269,7 @@ mail: <moyaoxue@outlook.com>
   
 
   <article itemscope="" itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://demoyao100.github.io/vnctf2023/">
+    <link itemprop="mainEntityOfPage" href="https://demoyao100.github.io/%E5%88%9D%E6%8E%A2flutter/">
 
     <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -291,7 +290,7 @@ mail: <moyaoxue@outlook.com>
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/vnctf2023/" class="post-title-link" itemprop="url">vnctf2023</a>
+          <a href="/%E5%88%9D%E6%8E%A2flutter/" class="post-title-link" itemprop="url">初探flutter</a>
         </h2>
 
         <div class="post-meta-container">
@@ -302,7 +301,7 @@ mail: <moyaoxue@outlook.com>
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2023-02-27 15:14:19" itemprop="dateCreated datePublished" datetime="2023-02-27T15:14:19+08:00">2023-02-27</time>
+      <time title="Created: 2023-08-23 08:59:47" itemprop="dateCreated datePublished" datetime="2023-08-23T08:59:47+08:00">2023-08-23</time>
     </span>
 
   
@@ -315,13 +314,10 @@ mail: <moyaoxue@outlook.com>
     
     
     <div class="post-body" itemprop="articleBody">
-          <h3 id="vnctf2023-re"><a class="markdownIt-Anchor" href="#vnctf2023-re">#</a> vnctf2023 re</h3>
-<ul>
-<li><a href="#1.1">BabyAnti</a></li>
-</ul>
+          <h6 id="preface-起因是wmctf2023有个anticheat2是基于flutter开发的中间也得用到相关知识-题目是一下子被队里师傅秒了555队里师傅秒题太快哩毫无存在感属于是但是总归还是得来补补功课啥也不学还是啥也不会-虽然这会我的安卓环境还是不太彳亍容错很低当时比赛的时候就没有环境跑这个题"><a class="markdownIt-Anchor" href="#preface-起因是wmctf2023有个anticheat2是基于flutter开发的中间也得用到相关知识-题目是一下子被队里师傅秒了555队里师傅秒题太快哩毫无存在感属于是但是总归还是得来补补功课啥也不学还是啥也不会-虽然这会我的安卓环境还是不太彳亍容错很低当时比赛的时候就没有环境跑这个题">#</a> preface: 起因是 WMCTF2023 有个 anticheat2 是基于 flutter 开发的，中间也得用到相关知识。题目是一下子被队里师傅秒了（<s>555 队里师傅秒题太快哩毫无存在感属于是</s>）但是总归还是得来补补功课，啥也不学还是啥也不会。（<s>虽然这会我的安卓环境还是不太彳亍容错很低当时比赛的时候就没有环境跑这个题</s>）</h6>
           
             <div class="post-button">
-              <a class="btn" href="/vnctf2023/#more" rel="contents">
+              <a class="btn" href="/%E5%88%9D%E6%8E%A2flutter/#more" rel="contents">
                 Read more »
               </a>
             </div>
@@ -352,7 +348,7 @@ mail: <moyaoxue@outlook.com>
   
 
   <article itemscope="" itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://demoyao100.github.io/capstone/">
+    <link itemprop="mainEntityOfPage" href="https://demoyao100.github.io/hook%E6%9F%90%E8%81%8A%E5%A4%A9%E8%BD%AF%E4%BB%B6lab/">
 
     <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -373,7 +369,7 @@ mail: <moyaoxue@outlook.com>
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/capstone/" class="post-title-link" itemprop="url">capstone</a>
+          <a href="/hook%E6%9F%90%E8%81%8A%E5%A4%A9%E8%BD%AF%E4%BB%B6lab/" class="post-title-link" itemprop="url">hook某聊天软件lab</a>
         </h2>
 
         <div class="post-meta-container">
@@ -384,7 +380,7 @@ mail: <moyaoxue@outlook.com>
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2022-11-06 13:52:10" itemprop="dateCreated datePublished" datetime="2022-11-06T13:52:10+08:00">2022-11-06</time>
+      <time title="Created: 2023-08-09 17:35:45" itemprop="dateCreated datePublished" datetime="2023-08-09T17:35:45+08:00">2023-08-09</time>
     </span>
 
   
@@ -397,12 +393,10 @@ mail: <moyaoxue@outlook.com>
     
     
     <div class="post-body" itemprop="articleBody">
-          <h6 id="preface"><a class="markdownIt-Anchor" href="#preface">#</a> Preface:</h6>
-<h6 id="a-write-up-in-hnctf-use-capstone-to-solved-the-problem-maze-its-the-first-time-i-heard-of-it-so-i-am-writing-to-this-blog-for-later-review"><a class="markdownIt-Anchor" href="#a-write-up-in-hnctf-use-capstone-to-solved-the-problem-maze-its-the-first-time-i-heard-of-it-so-i-am-writing-to-this-blog-for-later-review">#</a> A write up in hnctf use  <code>capstone</code>  to solved the problem  <code>maze</code> . It’s the first time I heard of it, so I am writing to this blog for later review.</h6>
-<h5 id="most-thing-i-write-can-be-found-in-official-file"><a class="markdownIt-Anchor" href="#most-thing-i-write-can-be-found-in-official-file">#</a> Most thing I write can be found in <a target="_blank" rel="noopener" href="http://www.capstone-engine.org/lang_python.html">Official file</a>.</h5>
+          <h6 id="起因是在学安卓逆向而且自己水平太低打算练练手-恰巧某友的校内lab做了类似的东西羡慕遂打算动手尝试复现"><a class="markdownIt-Anchor" href="#起因是在学安卓逆向而且自己水平太低打算练练手-恰巧某友的校内lab做了类似的东西羡慕遂打算动手尝试复现">#</a> 起因是在学安卓逆向，而且自己水平太低，打算练练手。恰巧某友的校内 lab 做了类似的东西，羡慕，遂打算动手尝试复现</h6>
           
             <div class="post-button">
-              <a class="btn" href="/capstone/#more" rel="contents">
+              <a class="btn" href="/hook%E6%9F%90%E8%81%8A%E5%A4%A9%E8%BD%AF%E4%BB%B6lab/#more" rel="contents">
                 Read more »
               </a>
             </div>
@@ -433,7 +427,7 @@ mail: <moyaoxue@outlook.com>
   
 
   <article itemscope="" itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://demoyao100.github.io/hnctfRe/">
+    <link itemprop="mainEntityOfPage" href="https://demoyao100.github.io/junk-code-demo/">
 
     <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -454,7 +448,7 @@ mail: <moyaoxue@outlook.com>
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/hnctfRe/" class="post-title-link" itemprop="url">hnctfRe</a>
+          <a href="/junk-code-demo/" class="post-title-link" itemprop="url">junk code demo</a>
         </h2>
 
         <div class="post-meta-container">
@@ -465,7 +459,7 @@ mail: <moyaoxue@outlook.com>
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2022-11-02 21:08:02" itemprop="dateCreated datePublished" datetime="2022-11-02T21:08:02+08:00">2022-11-02</time>
+      <time title="Created: 2023-07-18 00:48:59" itemprop="dateCreated datePublished" datetime="2023-07-18T00:48:59+08:00">2023-07-18</time>
     </span>
 
   
@@ -478,10 +472,10 @@ mail: <moyaoxue@outlook.com>
     
     
     <div class="post-body" itemprop="articleBody">
-          <h6 id="some-reverse-questions-i-didnt-have-time-to-solve-or-didnt-solve-out"><a class="markdownIt-Anchor" href="#some-reverse-questions-i-didnt-have-time-to-solve-or-didnt-solve-out">#</a> Some reverse questions I didn’t have time to solve. (Or didn’t solve out…)</h6>
+          <h6 id="大概是二三月份遇到了一个题出了一个有点意思的花想着可以看看对应这种花写了个简单的源码随机加花器-不是什么高深的技术但是也顺便把ida这类线性扫描反汇编和递归下降反汇编弄清楚点以后ida抽风的时候也更清楚点为啥"><a class="markdownIt-Anchor" href="#大概是二三月份遇到了一个题出了一个有点意思的花想着可以看看对应这种花写了个简单的源码随机加花器-不是什么高深的技术但是也顺便把ida这类线性扫描反汇编和递归下降反汇编弄清楚点以后ida抽风的时候也更清楚点为啥">#</a> 大概是二三月份遇到了一个题出了一个有点意思的花，想着可以看看，对应这种花写了个简单的源码随机加花器。不是什么高深的技术，但是也顺便把 IDA 这类线性扫描反汇编和递归下降反汇编弄清楚点，<s>以后 IDA 抽风的时候也更清楚点为啥</s></h6>
           
             <div class="post-button">
-              <a class="btn" href="/hnctfRe/#more" rel="contents">
+              <a class="btn" href="/junk-code-demo/#more" rel="contents">
                 Read more »
               </a>
             </div>
@@ -512,7 +506,7 @@ mail: <moyaoxue@outlook.com>
   
 
   <article itemscope="" itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://demoyao100.github.io/pythonJail/">
+    <link itemprop="mainEntityOfPage" href="https://demoyao100.github.io/cv%E4%B8%8E%E4%B8%80%E4%BA%9Bclassify%E4%BA%8B%E9%A1%B9%E8%AE%B0%E5%BD%95/">
 
     <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -533,7 +527,7 @@ mail: <moyaoxue@outlook.com>
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/pythonJail/" class="post-title-link" itemprop="url">pythonJail</a>
+          <a href="/cv%E4%B8%8E%E4%B8%80%E4%BA%9Bclassify%E4%BA%8B%E9%A1%B9%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">cv与一些classify事项记录</a>
         </h2>
 
         <div class="post-meta-container">
@@ -544,7 +538,7 @@ mail: <moyaoxue@outlook.com>
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2022-11-01 15:48:11" itemprop="dateCreated datePublished" datetime="2022-11-01T15:48:11+08:00">2022-11-01</time>
+      <time title="Created: 2023-07-17 16:33:20" itemprop="dateCreated datePublished" datetime="2023-07-17T16:33:20+08:00">2023-07-17</time>
     </span>
 
   
@@ -557,11 +551,10 @@ mail: <moyaoxue@outlook.com>
     
     
     <div class="post-body" itemprop="articleBody">
-          <h4 id="preface"><a class="markdownIt-Anchor" href="#preface">#</a> preface</h4>
-<h6 id="thanks-to-空白crazyman-who-brough-us-so-much-excellent-ctf-exercises-though-i-didnt-work-out-many-of-them-that-is-now-the-hnctf-has-ended-i-found-some-write-up-about-the-python-jail-problemspythonjail"><a class="markdownIt-Anchor" href="#thanks-to-空白crazyman-who-brough-us-so-much-excellent-ctf-exercises-though-i-didnt-work-out-many-of-them-that-is-now-the-hnctf-has-ended-i-found-some-write-up-about-the-python-jail-problemspythonjail">#</a> Thanks to 空白 crazyman, who brough us so much excellent ctf exercises. (Though I didn’t work out many of them that is.) Now the HNCTF has ended, I found some write up  about the python jail problems<a target="_blank" rel="noopener" href="https://ctf-wiki.org/pwn/sandbox/python/python-sandbox-escape/">pythonJail</a>.</h6>
+          <h6 id="preface一些project记录慢慢学吧调参炼丹"><a class="markdownIt-Anchor" href="#preface一些project记录慢慢学吧调参炼丹">#</a> preface: 一些 project 记录，慢慢学吧调参炼丹</h6>
           
             <div class="post-button">
-              <a class="btn" href="/pythonJail/#more" rel="contents">
+              <a class="btn" href="/cv%E4%B8%8E%E4%B8%80%E4%BA%9Bclassify%E4%BA%8B%E9%A1%B9%E8%AE%B0%E5%BD%95/#more" rel="contents">
                 Read more »
               </a>
             </div>
@@ -585,7 +578,7 @@ mail: <moyaoxue@outlook.com>
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/15/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">…</span><a class="page-number" href="/page/15/">15</a><span class="page-number current">16</span><a class="page-number" href="/page/17/">17</a><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/17/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/15/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">…</span><a class="page-number" href="/page/15/">15</a><span class="page-number current">16</span><a class="page-number" href="/page/17/">17</a><span class="space">…</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/17/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

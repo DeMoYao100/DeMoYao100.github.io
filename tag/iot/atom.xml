@@ -23,6 +23,8 @@
     <category term="hexo" />
     <category term="pentesting" />
     <category term="car" />
+    <category term="wasm" />
+    <category term="tree" />
     <entry>
         <id>https://demoyao100.github.io/qemu%E8%B0%83%E8%AF%95%E8%AE%B0%E5%BD%95/</id>
         <title>qemu调试记录</title>

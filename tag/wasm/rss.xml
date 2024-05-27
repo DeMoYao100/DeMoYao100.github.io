@@ -1,0 +1,514 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>Moyao の小屋 • Posts by &#34;wasm&#34; tag</title>
+        <link>https://demoyao100.github.io</link>
+        <description>Write down something interesting I met&lt;br /&gt;
+Feel free to mail me if you have something wanted to talk about, plz
+mail: &amp;lt;moyaoxue@outlook.com&amp;gt;
+</description>
+        <language>en</language>
+        <pubDate>Mon, 27 May 2024 09:20:06 +0800</pubDate>
+        <lastBuildDate>Mon, 27 May 2024 09:20:06 +0800</lastBuildDate>
+        <category>re</category>
+        <category>Android</category>
+        <category>开发</category>
+        <category>codeforces</category>
+        <category>cv</category>
+        <category>docker</category>
+        <category>驱动</category>
+        <category>electron</category>
+        <category>ios</category>
+        <category>杂文</category>
+        <category>web</category>
+        <category>jail</category>
+        <category>IOT</category>
+        <category>re Android linux</category>
+        <category>web shiro</category>
+        <category>python</category>
+        <category>hexo</category>
+        <category>pentesting</category>
+        <category>car</category>
+        <category>wasm</category>
+        <category>tree</category>
+        <item>
+            <guid isPermalink="true">https://demoyao100.github.io/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/</guid>
+            <title>京麒ctf2024初赛</title>
+            <link>https://demoyao100.github.io/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/</link>
+            <category>re</category>
+            <category>wasm</category>
+            <pubDate>Mon, 27 May 2024 09:20:06 +0800</pubDate>
+            <description><![CDATA[ &lt;p&gt;PREFACE：r1mao 师傅复健过程带着鼠鼠做的，tql；&lt;/p&gt;
+&lt;p&gt;算是第一次调 wasm，感觉挺好（？）&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;h3 id=&#34;前戏&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#前戏&#34;&gt;#&lt;/a&gt; 前戏&lt;/h3&gt;
+&lt;h4 id=&#34;反调试&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#反调试&#34;&gt;#&lt;/a&gt; 反调试&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&#34;https://segmentfault.com/a/1190000012359015&#34;&gt;突破前端反调试–阻止页面不断 debugger - 技术足迹 - SegmentFault 思否&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;可以这样用条件断点直接绕&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527103329524.png&#34; alt=&#34;image-20240527103329524&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;同源策略&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#同源策略&#34;&gt;#&lt;/a&gt; 同源策略&lt;/h4&gt;
+&lt;p&gt;需要关闭同源策略才能看到 wasm 附件&lt;/p&gt;
+&lt;h5 id=&#34;firefox&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#firefox&#34;&gt;#&lt;/a&gt; firefox：&lt;/h5&gt;
+&lt;p&gt;在网址栏中输入”about:config“ 再搜索栏中输入 &amp;quot;security.fileuri.strict_origin_policy&amp;quot;, 并设置为 &amp;quot;false&amp;quot;&lt;/p&gt;
+&lt;h5 id=&#34;chrome&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#chrome&#34;&gt;#&lt;/a&gt; chrome&lt;/h5&gt;
+&lt;p&gt;快捷方式写一个：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;quot;C:\Program Files\Google\Chrome\Application\chrome.exe&amp;quot; --allow-file-access-from-files
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527103631514.png&#34; alt=&#34;image-20240527103631514&#34;&gt;&lt;/p&gt;
+&lt;p&gt;这里有两个问题：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;firefox 用前面的条件断点策略没办法绕反调（未解决）&lt;/li&gt;
+&lt;li&gt;chrome 同源策略不能直接从文件夹里面打开&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;解决方法：&lt;/p&gt;
+&lt;p&gt;chrome 里面打开 &lt;code&gt;python -m http.server&lt;/code&gt; ，即可看到 wasm 文件&lt;/p&gt;
+&lt;h4 id=&#34;调试&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#调试&#34;&gt;#&lt;/a&gt; 调试&lt;/h4&gt;
+&lt;p&gt;正确绕过反调以及配好浏览器，这里就可以调试了（暂时没觉得浏览器调试很不妥，先用着～）&lt;/p&gt;
+&lt;h4 id=&#34;静态分析&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#静态分析&#34;&gt;#&lt;/a&gt; 静态分析&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/nneonneo/ghidra-wasm-plugin&#34;&gt;nneonneo/ghidra-wasm-plugin: Ghidra Wasm plugin with disassembly and decompilation support (github.com)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;ghidra 插件选择好插件的压缩包即可&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/2433096-20221224212843253-2138184082.png&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;p&gt;这里我们的 index.html 修改为了这样：&lt;/p&gt;
+&lt;figure class=&#34;highlight html&#34;&gt;&lt;figcaption data-lang=&#34;HTML&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token tag&#34;&gt;&lt;span class=&#34;token tag&#34;&gt;&lt;span class=&#34;token punctuation&#34;&gt;&amp;lt;&lt;/span&gt;html&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token tag&#34;&gt;&lt;span class=&#34;token tag&#34;&gt;&lt;span class=&#34;token punctuation&#34;&gt;&amp;lt;&lt;/span&gt;head&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token tag&#34;&gt;&lt;span class=&#34;token tag&#34;&gt;&lt;span class=&#34;token punctuation&#34;&gt;&amp;lt;&lt;/span&gt;meta&lt;/span&gt; &lt;span class=&#34;token attr-name&#34;&gt;http-equiv&lt;/span&gt;&lt;span class=&#34;token attr-value&#34;&gt;&lt;span class=&#34;token punctuation attr-equals&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;&#34;&lt;/span&gt;Content-Type&lt;span class=&#34;token punctuation&#34;&gt;&#34;&lt;/span&gt;&lt;/span&gt; &lt;span class=&#34;token attr-name&#34;&gt;content&lt;/span&gt;&lt;span class=&#34;token attr-value&#34;&gt;&lt;span class=&#34;token punctuation attr-equals&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;&#34;&lt;/span&gt;text/html; charset=utf-8&lt;span class=&#34;token punctuation&#34;&gt;&#34;&lt;/span&gt;&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;/&gt;&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token tag&#34;&gt;&lt;span class=&#34;token tag&#34;&gt;&lt;span class=&#34;token punctuation&#34;&gt;&amp;lt;/&lt;/span&gt;head&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token tag&#34;&gt;&lt;span class=&#34;token tag&#34;&gt;&lt;span class=&#34;token punctuation&#34;&gt;&amp;lt;&lt;/span&gt;script&lt;/span&gt; &lt;span class=&#34;token attr-name&#34;&gt;src&lt;/span&gt;&lt;span class=&#34;token attr-value&#34;&gt;&lt;span class=&#34;token punctuation attr-equals&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;&#34;&lt;/span&gt;static/wasm_exec.js&lt;span class=&#34;token punctuation&#34;&gt;&#34;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;token script&#34;&gt;&lt;/span&gt;&lt;span class=&#34;token tag&#34;&gt;&lt;span class=&#34;token tag&#34;&gt;&lt;span class=&#34;token punctuation&#34;&gt;&amp;lt;/&lt;/span&gt;script&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token tag&#34;&gt;&lt;span class=&#34;token tag&#34;&gt;&lt;span class=&#34;token punctuation&#34;&gt;&amp;lt;&lt;/span&gt;script&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;token script&#34;&gt;&lt;span class=&#34;token language-javascript&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;7&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token keyword&#34;&gt;const&lt;/span&gt; go &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;token class-name&#34;&gt;Go&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;8&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    WebAssembly&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;instantiateStreaming&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;fetch&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;static/main.wasm&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; go&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;importObject&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;9&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;        &lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;then&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token keyword&#34;&gt;function&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token parameter&#34;&gt;result&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;10&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;            document&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;getElementById&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;flag&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;value &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;flag&amp;#123;this_1s_fake_f_l__Ag&amp;#125;&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;11&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;            go&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;run&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;result&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;instance&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;12&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;            wasm &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; result&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;instance&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;exports&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;13&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;            memories &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;wasm&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;mem&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;14&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;            &lt;span class=&#34;token function-variable function&#34;&gt;viewDWORD&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token parameter&#34;&gt;addr&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;=&gt;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;15&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;                &lt;span class=&#34;token keyword&#34;&gt;const&lt;/span&gt; arr &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;token class-name&#34;&gt;Uint32Array&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;memories&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;buffer&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;slice&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;addr&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; addr &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;16&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;16&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;                &lt;span class=&#34;token keyword&#34;&gt;return&lt;/span&gt; arr&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;17&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;            &lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;18&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;            &lt;span class=&#34;token function-variable function&#34;&gt;viewChar&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token parameter&#34;&gt;addr&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; size &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;16&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;=&gt;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;19&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;                &lt;span class=&#34;token keyword&#34;&gt;const&lt;/span&gt; arr &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;token class-name&#34;&gt;Uint8Array&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;memories&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;buffer&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;slice&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;addr&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; addr &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; size&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;20&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;                &lt;span class=&#34;token keyword&#34;&gt;return&lt;/span&gt; String&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;fromCharCode&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;apply&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token keyword&#34;&gt;null&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; arr&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;21&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;            &lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;22&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;            &lt;span class=&#34;token function-variable function&#34;&gt;viewHEX&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token parameter&#34;&gt;addr&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; size &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;16&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;=&gt;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;23&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;                &lt;span class=&#34;token keyword&#34;&gt;const&lt;/span&gt; arr &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;token class-name&#34;&gt;Uint8Array&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;memories&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;buffer&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;slice&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;addr&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; addr &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; size&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;24&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;                &lt;span class=&#34;token keyword&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;Array&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;from&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;arr&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token parameter&#34;&gt;x&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;=&gt;&lt;/span&gt;x&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;toString&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;16&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;padStart&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;0&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;join&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39; &#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;25&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;            &lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;26&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;            &lt;span class=&#34;token function-variable function&#34;&gt;viewHexCode&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token parameter&#34;&gt;addr&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; size &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;16&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;=&gt;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;27&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;                &lt;span class=&#34;token keyword&#34;&gt;const&lt;/span&gt; arr &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;token class-name&#34;&gt;Uint8Array&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;memories&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;buffer&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;slice&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;addr&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; addr &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; size&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;28&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;                &lt;span class=&#34;token keyword&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;Array&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;from&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;arr&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token parameter&#34;&gt;x&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;=&gt;&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;0x&#39;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; x&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;toString&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;16&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;padStart&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;0&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;join&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;, &#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;29&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;            &lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;30&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;            &lt;span class=&#34;token function-variable function&#34;&gt;dumpMemory&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token parameter&#34;&gt;addr&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; size &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;16&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;=&gt;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;31&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;                &lt;span class=&#34;token keyword&#34;&gt;const&lt;/span&gt; arr &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;token class-name&#34;&gt;Uint8Array&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;memories&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;buffer&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;slice&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;addr&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; addr &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; size&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;32&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;                &lt;span class=&#34;token keyword&#34;&gt;return&lt;/span&gt; arr&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;33&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;            &lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;34&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;            &lt;span class=&#34;token function-variable function&#34;&gt;viewString&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token parameter&#34;&gt;addr&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; size &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;16&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;=&gt;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;35&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;                &lt;span class=&#34;token keyword&#34;&gt;const&lt;/span&gt; arr &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;token class-name&#34;&gt;Uint8Array&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;memories&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;buffer&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;slice&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;addr&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; addr &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; size&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;36&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;                &lt;span class=&#34;token keyword&#34;&gt;let&lt;/span&gt; max &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; size&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;37&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;                &lt;span class=&#34;token keyword&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token keyword&#34;&gt;let&lt;/span&gt; i &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt; i &lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt; size&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt; i&lt;span class=&#34;token operator&#34;&gt;++&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;38&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;                    &lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;arr&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;i&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;===&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;39&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;                        max &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; i&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;40&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;                        &lt;span class=&#34;token keyword&#34;&gt;break&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;41&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;                    &lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;42&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;                &lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;43&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;                &lt;span class=&#34;token keyword&#34;&gt;return&lt;/span&gt; String&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;fromCharCode&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;apply&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token keyword&#34;&gt;null&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; arr&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;slice&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; max&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;44&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;            &lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;45&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;            &lt;span class=&#34;token function-variable function&#34;&gt;search&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;function&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token parameter&#34;&gt;stirng&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;46&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;                &lt;span class=&#34;token keyword&#34;&gt;const&lt;/span&gt; m &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;token class-name&#34;&gt;Uint8Array&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;memories&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;buffer&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;47&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;                &lt;span class=&#34;token comment&#34;&gt;// vid=35402, 9AAizQZJ&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;48&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;                &lt;span class=&#34;token comment&#34;&gt;// vid=20268, a3fMpSkB&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;49&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;                &lt;span class=&#34;token keyword&#34;&gt;const&lt;/span&gt; k &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; Array&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;from&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;stirng&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token parameter&#34;&gt;x&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;=&gt;&lt;/span&gt;x&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;charCodeAt&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;50&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;            &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;51&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;                &lt;span class=&#34;token keyword&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;token function-variable function&#34;&gt;match&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token parameter&#34;&gt;j&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;=&gt;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;52&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;                    &lt;span class=&#34;token keyword&#34;&gt;return&lt;/span&gt; k&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;every&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token parameter&#34;&gt;b&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; i&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;=&gt;&lt;/span&gt;m&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;i &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; j&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;===&lt;/span&gt; b&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;53&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;                &lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;54&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;                &lt;span class=&#34;token keyword&#34;&gt;const&lt;/span&gt; max &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; Math&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;min&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;10_000_000&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; m&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;byteLength &lt;span class=&#34;token operator&#34;&gt;||&lt;/span&gt; m&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;length&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;55&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;                &lt;span class=&#34;token keyword&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token keyword&#34;&gt;let&lt;/span&gt; i &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt; i &lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt; max&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt; i&lt;span class=&#34;token operator&#34;&gt;++&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;56&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;                    &lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;match&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;i&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;57&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;                        console&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;info&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;i&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;58&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;                    &lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;59&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;                &lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;60&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;                console&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;info&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;done&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;61&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;            &lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;62&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;        &lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;63&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;64&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;65&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token keyword&#34;&gt;function&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;check_flag&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;66&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;        &lt;span class=&#34;token keyword&#34;&gt;var&lt;/span&gt; flag &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; document&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;getElementById&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;flag&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;value&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;67&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;        console&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;log&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;你输入的 flag 是：&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;68&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;        console&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;log&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;flag&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;69&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;        &lt;span class=&#34;token comment&#34;&gt;// document.getElementById(&#34;flag&#34;).value = &#34;aaaflag&amp;#123;this_1s_fake_f_l_A__g&amp;#125;&#34;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;70&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;        &lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;document&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;getElementById&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;flag&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;value &lt;span class=&#34;token operator&#34;&gt;===&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;flag&amp;#123;this_1s_fake_f_l__Ag&amp;#125;&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;71&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;            console&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;log&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;I have a gift for you!&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;72&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;            &lt;span class=&#34;token comment&#34;&gt;// console.log(console.gift(&#34;ABCCDDEE&#34;, &#34;AABBCCDDEE&#34;));&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;73&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;            console&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;log&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;console&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;gift&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;f09f8dabf09f8daaf09f8db0f09f8daff09f8e8af09f8daaf09fa59bf09f8da9&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;666c61677b746869735f31735f66616b655f665f6c5f415f5f677d&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;token comment&#34;&gt;//rc4 第一个是 key，第二个是 value，都是进去 hex bytes&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;74&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;            &lt;span class=&#34;token function&#34;&gt;alert&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;恭喜你，答对了！我想你应该知道 flag 是什么了 ！&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;75&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;        &lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;76&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;            &lt;span class=&#34;token function&#34;&gt;alert&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;答错了，再想想吧！&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;77&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;        &lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;78&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;79&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token tag&#34;&gt;&lt;span class=&#34;token tag&#34;&gt;&lt;span class=&#34;token punctuation&#34;&gt;&amp;lt;/&lt;/span&gt;script&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;80&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;81&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token tag&#34;&gt;&lt;span class=&#34;token tag&#34;&gt;&lt;span class=&#34;token punctuation&#34;&gt;&amp;lt;&lt;/span&gt;body&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;82&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token tag&#34;&gt;&lt;span class=&#34;token tag&#34;&gt;&lt;span class=&#34;token punctuation&#34;&gt;&amp;lt;&lt;/span&gt;input&lt;/span&gt; &lt;span class=&#34;token attr-name&#34;&gt;id&lt;/span&gt;&lt;span class=&#34;token attr-value&#34;&gt;&lt;span class=&#34;token punctuation attr-equals&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;&#34;&lt;/span&gt;flag&lt;span class=&#34;token punctuation&#34;&gt;&#34;&lt;/span&gt;&lt;/span&gt; &lt;span class=&#34;token attr-name&#34;&gt;type&lt;/span&gt;&lt;span class=&#34;token attr-value&#34;&gt;&lt;span class=&#34;token punctuation attr-equals&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;&#34;&lt;/span&gt;text&lt;span class=&#34;token punctuation&#34;&gt;&#34;&lt;/span&gt;&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;/&gt;&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;83&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token tag&#34;&gt;&lt;span class=&#34;token tag&#34;&gt;&lt;span class=&#34;token punctuation&#34;&gt;&amp;lt;&lt;/span&gt;button&lt;/span&gt; &lt;span class=&#34;token attr-name&#34;&gt;id&lt;/span&gt;&lt;span class=&#34;token attr-value&#34;&gt;&lt;span class=&#34;token punctuation attr-equals&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;&#34;&lt;/span&gt;btn&lt;span class=&#34;token punctuation&#34;&gt;&#34;&lt;/span&gt;&lt;/span&gt; &lt;span class=&#34;token special-attr&#34;&gt;&lt;span class=&#34;token attr-name&#34;&gt;onclick&lt;/span&gt;&lt;span class=&#34;token attr-value&#34;&gt;&lt;span class=&#34;token punctuation attr-equals&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;&#34;&lt;/span&gt;&lt;span class=&#34;token value javascript language-javascript&#34;&gt;&lt;span class=&#34;token function&#34;&gt;check_flag&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;&#34;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;&gt;&lt;/span&gt;&lt;/span&gt;Click&lt;span class=&#34;token tag&#34;&gt;&lt;span class=&#34;token tag&#34;&gt;&lt;span class=&#34;token punctuation&#34;&gt;&amp;lt;/&lt;/span&gt;button&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;84&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token tag&#34;&gt;&lt;span class=&#34;token tag&#34;&gt;&lt;span class=&#34;token punctuation&#34;&gt;&amp;lt;/&lt;/span&gt;body&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;85&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token tag&#34;&gt;&lt;span class=&#34;token tag&#34;&gt;&lt;span class=&#34;token punctuation&#34;&gt;&amp;lt;/&lt;/span&gt;html&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;h3 id=&#34;正餐&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#正餐&#34;&gt;#&lt;/a&gt; 正餐&lt;/h3&gt;
+&lt;h4 id=&#34;总体流程&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#总体流程&#34;&gt;#&lt;/a&gt; 总体流程&lt;/h4&gt;
+&lt;p&gt;静态看一下&lt;/p&gt;
+&lt;p&gt;输入一个 fake flag 才会触发逻辑：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527111010649.png&#34; alt=&#34;image-20240527111010649&#34;&gt;&lt;/p&gt;
+&lt;p&gt;审一下 js&lt;/p&gt;
+&lt;figure class=&#34;highlight js&#34;&gt;&lt;figcaption data-lang=&#34;JavaScript&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token string-property property&#34;&gt;&#34;syscall/js.valueCall&#34;&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token parameter&#34;&gt;sp&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;=&gt;&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;	sp &lt;span class=&#34;token operator&#34;&gt;&gt;&gt;&gt;=&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;	&lt;span class=&#34;token keyword&#34;&gt;try&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;		&lt;span class=&#34;token keyword&#34;&gt;const&lt;/span&gt; v &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;loadValue&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;sp &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;		&lt;span class=&#34;token keyword&#34;&gt;const&lt;/span&gt; m &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; Reflect&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;get&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;v&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;loadString&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;sp &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;16&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;		&lt;span class=&#34;token keyword&#34;&gt;const&lt;/span&gt; args &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;loadSliceOfValues&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;sp &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;32&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;7&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;		&lt;span class=&#34;token keyword&#34;&gt;const&lt;/span&gt; result &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;Reflect&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;apply&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;m&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; v&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; args&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;  &lt;span class=&#34;token comment&#34;&gt;// 核心是这句&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;8&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;		sp &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;_inst&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;exports&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;getsp&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&gt;&gt;&gt;&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;9&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;		&lt;span class=&#34;token function&#34;&gt;storeValue&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;sp &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;56&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; result&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;10&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;		&lt;span class=&#34;token keyword&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;mem&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;setUint8&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;sp &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;64&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;11&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;	&lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;catch&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;err&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;12&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;		sp &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;_inst&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;exports&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;getsp&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&gt;&gt;&gt;&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;13&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;		&lt;span class=&#34;token function&#34;&gt;storeValue&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;sp &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;56&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; err&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;14&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;		&lt;span class=&#34;token keyword&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;mem&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;setUint8&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;sp &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;64&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;15&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;	&lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;16&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;这里的 &lt;code&gt;Reflect.apply&lt;/code&gt;  是调用 wasm 函数的核心语句，后续对于 js 就是 hook 这里来观察函数调用的逻辑：&lt;/p&gt;
+&lt;p&gt;这里 hook 观察函数调用以及传参&lt;/p&gt;
+&lt;figure class=&#34;highlight js&#34;&gt;&lt;figcaption data-lang=&#34;JavaScript&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;loadString&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;sp &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;16&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;(&#39;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; args &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;);\n&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;这样可以观察返回值：&lt;/p&gt;
+&lt;figure class=&#34;highlight js&#34;&gt;&lt;figcaption data-lang=&#34;JavaScript&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;console&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;log&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;ret:&#34;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; result&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;&lt;img src=&#34;/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527114316766.png&#34; alt=&#34;image-20240527114316766&#34;&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;ƒ eval() &amp;#123; [native code] &amp;#125;
+wasm_exec.js:352 eval(setInterval(function()&amp;#123;debugger;&amp;#125;, 1000););
+
+wasm_exec.js:349 ƒ eval() &amp;#123; [native code] &amp;#125;
+wasm_exec.js:352 eval(setInterval(function()&amp;#123;debugger;&amp;#125;, 1000););
+
+wasm_exec.js:349 ƒ eval() &amp;#123; [native code] &amp;#125;
+wasm_exec.js:352 eval(setInterval(function()&amp;#123;debugger;&amp;#125;, 1000););
+
+wasm_exec.js:349 ƒ _makeFuncWrapper(id) &amp;#123;
+			const go = this;
+			return function () &amp;#123;
+				const event = &amp;#123; id: id, this: this, args: arguments &amp;#125;;
+				go._pendingEvent = event;
+				go._resume();
+				return event.result;
+…
+wasm_exec.js:352 _makeFuncWrapper(1);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 _makeFuncWrapper(2);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 _makeFuncWrapper(3);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 _makeFuncWrapper(4);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 _makeFuncWrapper(5);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 _makeFuncWrapper(6);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 _makeFuncWrapper(7);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 _makeFuncWrapper(8);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 _makeFuncWrapper(9);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 _makeFuncWrapper(10);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 _makeFuncWrapper(11);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 _makeFuncWrapper(12);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 _makeFuncWrapper(13);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 _makeFuncWrapper(14);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 _makeFuncWrapper(15);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 _makeFuncWrapper(16);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 _makeFuncWrapper(17);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 _makeFuncWrapper(18);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 _makeFuncWrapper(19);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 _makeFuncWrapper(20);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 _makeFuncWrapper(21);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 _makeFuncWrapper(22);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 _makeFuncWrapper(23);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 _makeFuncWrapper(24);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 _makeFuncWrapper(25);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 _makeFuncWrapper(26);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 _makeFuncWrapper(27);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 _makeFuncWrapper(28);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 _makeFuncWrapper(29);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 _makeFuncWrapper(30);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 _makeFuncWrapper(31);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 _makeFuncWrapper(32);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 _makeFuncWrapper(33);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 _makeFuncWrapper(34);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 _makeFuncWrapper(35);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 _makeFuncWrapper(36);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 _makeFuncWrapper(37);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 _makeFuncWrapper(38);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 _makeFuncWrapper(39);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 _makeFuncWrapper(40);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 _makeFuncWrapper(41);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 _makeFuncWrapper(42);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 _makeFuncWrapper(43);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 _makeFuncWrapper(44);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 _makeFuncWrapper(45);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 _makeFuncWrapper(46);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 _makeFuncWrapper(47);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 _makeFuncWrapper(48);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 _makeFuncWrapper(49);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 _makeFuncWrapper(50);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 _makeFuncWrapper(51);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 _makeFuncWrapper(52);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 _makeFuncWrapper(53);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 _makeFuncWrapper(54);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 _makeFuncWrapper(55);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 _makeFuncWrapper(56);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 _makeFuncWrapper(57);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 _makeFuncWrapper(58);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 _makeFuncWrapper(59);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 eval(setInterval(function() &amp;#123; debugger; &amp;#125;, 1000););
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 panda(你输入的 flag 是：);
+
+wasm_exec.js:352 你输入的 flag 是：
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 eval(setInterval(function()&amp;#123;debugger;&amp;#125;, 1000););
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 😘😘❤️😘😘(flag&amp;#123;this_1s_fake_f_l__Ag&amp;#125;);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 segment🍪🥂(flag&amp;#123;this_1s_fake_f_l__Ag&amp;#125;);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 libc🍪🍹(flag&amp;#123;this_1s_fake_f_l__Ag&amp;#125;);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 glibc🎈🎂(flag&amp;#123;this_1s_fake_f_l__Ag&amp;#125;);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 malloc😅🍵(flag&amp;#123;this_1s_fake_f_l__Ag&amp;#125;);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 free🍪🎈(flag&amp;#123;this_1s_fake_f_l__Ag&amp;#125;);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 calloc🍷🎁(flag&amp;#123;this_1s_fake_f_l__Ag&amp;#125;);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 realloc🍭🍺(3ba81be59f57d55daf0ad10ff8300ddc252f299555699fbf0a75);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 free🍬🍵(3ba81be59f57d55daf0ad10ff8300ddc252f299555699fbf0a75);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 exit🍸🎁(3ba81be59f57d55daf0ad10ff8300ddc252f299555699fbf0a75);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 abort🍫🍷(3ba81be59f57d55daf0ad10ff8300ddc252f299555699fbf0a75);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 signal🍻🍻(3ba81be59f57d55daf0ad10ff8300ddc252f299555699fbf0a75);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 raise☕🍩(3ba81be59f57d55daf0ad10ff8300ddc252f299555699fbf0a75);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 setjmp🍺🍶(3ba81be59f57d55daf0ad10ff8300ddc252f299555699fbf0a75);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 longjmp🍯🍶(3ba81be59f57d55daf0ad10ff8300ddc252f299555699fbf0a75);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 sigaction🍮🍰(3ba81be59f57d55daf0ad10ff8300ddc252f299555699fbf0a75);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 sigprocmask🎈🍼(3ba81be59f57d55daf0ad10ff8300ddc252f299555699fbf0a75);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 sigpending🍻🍾(3ba81be59f57d55daf0ad10ff8300ddc252f299555699fbf0a75);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 send🍷🍺(3ba81be59f57d55daf0ad10ff8300ddc252f299555699fbf0a75);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 recv🎊🍼(3ba81be59f57d55daf0ad10ff8300ddc252f299555699fbf0a75);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 socket🍵🍭(3ba81be59f57d55daf0ad10ff8300ddc252f299555699fbf0a75);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 bind🎂🍻(3ba81be59f57d55daf0ad10ff8300ddc252f299555699fbf0a75);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 listen🍾🎁(3ba81be59f57d55daf0ad10ff8300ddc252f299555699fbf0a75);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 accept🎈🎉(3ba81be59f57d55daf0ad10ff8300ddc252f299555699fbf0a75);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 connect🎉🍵(3ba81be59f57d55daf0ad10ff8300ddc252f299555699fbf0a75);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 LoadLibrary🍶🍯(3ba81be59f57d55daf0ad10ff8300ddc252f299555699fbf0a75);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 GetProcAddress🍯🎁(3ba81be59f57d55daf0ad10ff8300ddc252f299555699fbf0a75);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 VirtualAlloc🍰🍵(10df5f7bce160be17e2d7cf7575b1688e0ded5f2efb3a707c1b1a7926eee1d40ccc856cfb3a86ecd54ceb03b841a679a57263ab7);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 VirtualFree🎈🎁(10df5f7bce160be17e2d7cf7575b1688e0ded5f2efb3a707c1b1a7926eee1d40ccc856cfb3a86ecd54ceb03b841a679a57263ab7);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 VirtualProtect😅🍹(10df5f7bce160be17e2d7cf7575b1688e0ded5f2efb3a707c1b1a7926eee1d40ccc856cfb3a86ecd54ceb03b841a679a57263ab7);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 VirtualQuery🍯🎁(10df5f7bce160be17e2d7cf7575b1688e0ded5f2efb3a707c1b1a7926eee1d40ccc856cfb3a86ecd54ceb03b841a679a57263ab7);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 CreateThread😅🍼(10df5f7bce160be17e2d7cf7575b1688e0ded5f2efb3a707c1b1a7926eee1d40ccc856cfb3a86ecd54ceb03b841a679a57263ab7);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 CreateProcess🥂🍪(10df5f7bce160be17e2d7cf7575b1688e0ded5f2efb3a707c1b1a7926eee1d40ccc856cfb3a86ecd54ceb03b841a679a57263ab7);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 GetThreadContext🎊🍻(10df5f7bce160be17e2d7cf7575b1688e0ded5f2efb3a707c1b1a7926eee1d40ccc856cfb3a86ecd54ceb03b841a679a57263ab7);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 SetThreadContext🍪🎉(10df5f7bce160be17e2d7cf7575b1688e0ded5f2efb3a707c1b1a7926eee1d40ccc856cfb3a86ecd54ceb03b841a679a57263ab7);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 ReadProcessMemory🍪🍮(10df5f7bce160be17e2d7cf7575b1688e0ded5f2efb3a707c1b1a7926eee1d40ccc856cfb3a86ecd54ceb03b841a679a57263ab7);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 mutex🎊🍶(10df5f7bce160be17e2d7cf7575b1688e0ded5f2efb3a707c1b1a7926eee1d40ccc856cfb3a86ecd54ceb03b841a679a57263ab7);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 semaphore🍭🍼(10df5f7bce160be17e2d7cf7575b1688e0ded5f2efb3a707c1b1a7926eee1d40ccc856cfb3a86ecd54ceb03b841a679a57263ab7);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 condition🍰🎉(10df5f7bce160be17e2d7cf7575b1688e0ded5f2efb3a707c1b1a7926eee1d40ccc856cfb3a86ecd54ceb03b841a679a57263ab7);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 pthread🍹🍫(10df5f7bce160be17e2d7cf7575b1688e0ded5f2efb3a707c1b1a7926eee1d40ccc856cfb3a86ecd54ceb03b841a679a57263ab7);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 fork🍻🍭(10df5f7bce160be17e2d7cf7575b1688e0ded5f2efb3a707c1b1a7926eee1d40ccc856cfb3a86ecd54ceb03b841a679a57263ab7);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 exec🍵🍾(806ce5ec9e156bed790d66949dc1949af31d9c14205f25ba6041fa9b94201469f2b0a7ef3e4cbcb660aa6535cd167f032794c25535875bad03fa96da336d3805ede3540424f81e2a8346bc3f4a4e7e978d3b697ff7d3445abe98210427ab434e1e15fe3d69679ba5);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 pipe🍺🍫(806ce5ec9e156bed790d66949dc1949af31d9c14205f25ba6041fa9b94201469f2b0a7ef3e4cbcb660aa6535cd167f032794c25535875bad03fa96da336d3805ede3540424f81e2a8346bc3f4a4e7e978d3b697ff7d3445abe98210427ab434e1e15fe3d69679ba5);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 dup🍼🍺(5aa21921dda7d9519a012f285b9b9e498f495fb521d4712b0075e47962bc2eed7fd840cba2f2ab48875fe765122d7b9f1a6ed992a07131902e4acde16fc02e1b23cc4d47ed7f65449df940601398c75fc6ddc425e1e81b678423ef284ad2a3d45b7f376d0067c820116fbb7ff9b30c9dad258352b00d7a1b4ca60ce7d4293898bc31a9131d7d7cb7efcadfe3d0e7b11f962917508987cc9b6511bb304f9a24e2c28ab4ee8bc4ccbbbaf8e3f4eb799dcca5bfdbc6943aeb4d69ad49f176fb87d56aae14de51901873d15ea0cb78ecbb66);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 dup2🍰🍮(5aa21921dda7d9519a012f285b9b9e498f495fb521d4712b0075e47962bc2eed7fd840cba2f2ab48875fe765122d7b9f1a6ed992a07131902e4acde16fc02e1b23cc4d47ed7f65449df940601398c75fc6ddc425e1e81b678423ef284ad2a3d45b7f376d0067c820116fbb7ff9b30c9dad258352b00d7a1b4ca60ce7d4293898bc31a9131d7d7cb7efcadfe3d0e7b11f962917508987cc9b6511bb304f9a24e2c28ab4ee8bc4ccbbbaf8e3f4eb799dcca5bfdbc6943aeb4d69ad49f176fb87d56aae14de51901873d15ea0cb78ecbb66);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 select☕🎉(5aa21921dda7d9519a012f285b9b9e498f495fb521d4712b0075e47962bc2eed7fd840cba2f2ab48875fe765122d7b9f1a6ed992a07131902e4acde16fc02e1b23cc4d47ed7f65449df940601398c75fc6ddc425e1e81b678423ef284ad2a3d45b7f376d0067c820116fbb7ff9b30c9dad258352b00d7a1b4ca60ce7d4293898bc31a9131d7d7cb7efcadfe3d0e7b11f962917508987cc9b6511bb304f9a24e2c28ab4ee8bc4ccbbbaf8e3f4eb799dcca5bfdbc6943aeb4d69ad49f176fb87d56aae14de51901873d15ea0cb78ecbb66);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 poll🍮🎁(5aa21921dda7d9519a012f285b9b9e498f495fb521d4712b0075e47962bc2eed7fd840cba2f2ab48875fe765122d7b9f1a6ed992a07131902e4acde16fc02e1b23cc4d47ed7f65449df940601398c75fc6ddc425e1e81b678423ef284ad2a3d45b7f376d0067c820116fbb7ff9b30c9dad258352b00d7a1b4ca60ce7d4293898bc31a9131d7d7cb7efcadfe3d0e7b11f962917508987cc9b6511bb304f9a24e2c28ab4ee8bc4ccbbbaf8e3f4eb799dcca5bfdbc6943aeb4d69ad49f176fb87d56aae14de51901873d15ea0cb78ecbb66);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 epoll🥛🎊(5aa21921dda7d9519a012f285b9b9e498f495fb521d4712b0075e47962bc2eed7fd840cba2f2ab48875fe765122d7b9f1a6ed992a07131902e4acde16fc02e1b23cc4d47ed7f65449df940601398c75fc6ddc425e1e81b678423ef284ad2a3d45b7f376d0067c820116fbb7ff9b30c9dad258352b00d7a1b4ca60ce7d4293898bc31a9131d7d7cb7efcadfe3d0e7b11f962917508987cc9b6511bb304f9a24e2c28ab4ee8bc4ccbbbaf8e3f4eb799dcca5bfdbc6943aeb4d69ad49f176fb87d56aae14de51901873d15ea0cb78ecbb66);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 kqueue🍭🍻(5aa21921dda7d9519a012f285b9b9e498f495fb521d4712b0075e47962bc2eed7fd840cba2f2ab48875fe765122d7b9f1a6ed992a07131902e4acde16fc02e1b23cc4d47ed7f65449df940601398c75fc6ddc425e1e81b678423ef284ad2a3d45b7f376d0067c820116fbb7ff9b30c9dad258352b00d7a1b4ca60ce7d4293898bc31a9131d7d7cb7efcadfe3d0e7b11f962917508987cc9b6511bb304f9a24e2c28ab4ee8bc4ccbbbaf8e3f4eb799dcca5bfdbc6943aeb4d69ad49f176fb87d56aae14de51901873d15ea0cb78ecbb66);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 sigwait🍩🎁(5aa21921dda7d9519a012f285b9b9e498f495fb521d4712b0075e47962bc2eed7fd840cba2f2ab48875fe765122d7b9f1a6ed992a07131902e4acde16fc02e1b23cc4d47ed7f65449df940601398c75fc6ddc425e1e81b678423ef284ad2a3d45b7f376d0067c820116fbb7ff9b30c9dad258352b00d7a1b4ca60ce7d4293898bc31a9131d7d7cb7efcadfe3d0e7b11f962917508987cc9b6511bb304f9a24e2c28ab4ee8bc4ccbbbaf8e3f4eb799dcca5bfdbc6943aeb4d69ad49f176fb87d56aae14de51901873d15ea0cb78ecbb66);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 jmp_buf🎂🍺(5aa21921dda7d9519a012f285b9b9e498f495fb521d4712b0075e47962bc2eed7fd840cba2f2ab48875fe765122d7b9f1a6ed992a07131902e4acde16fc02e1b23cc4d47ed7f65449df940601398c75fc6ddc425e1e81b678423ef284ad2a3d45b7f376d0067c820116fbb7ff9b30c9dad258352b00d7a1b4ca60ce7d4293898bc31a9131d7d7cb7efcadfe3d0e7b11f962917508987cc9b6511bb304f9a24e2c28ab4ee8bc4ccbbbaf8e3f4eb799dcca5bfdbc6943aeb4d69ad49f176fb87d56aae14de51901873d15ea0cb78ecbb66);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 sigjmp_buf🥂🎊(5aa21921dda7d9519a012f285b9b9e498f495fb521d4712b0075e47962bc2eed7fd840cba2f2ab48875fe765122d7b9f1a6ed992a07131902e4acde16fc02e1b23cc4d47ed7f65449df940601398c75fc6ddc425e1e81b678423ef284ad2a3d45b7f376d0067c820116fbb7ff9b30c9dad258352b00d7a1b4ca60ce7d4293898bc31a9131d7d7cb7efcadfe3d0e7b11f962917508987cc9b6511bb304f9a24e2c28ab4ee8bc4ccbbbaf8e3f4eb799dcca5bfdbc6943aeb4d69ad49f176fb87d56aae14de51901873d15ea0cb78ecbb66);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 sigsetjmp🍹🎊(5aa21921dda7d9519a012f285b9b9e498f495fb521d4712b0075e47962bc2eed7fd840cba2f2ab48875fe765122d7b9f1a6ed992a07131902e4acde16fc02e1b23cc4d47ed7f65449df940601398c75fc6ddc425e1e81b678423ef284ad2a3d45b7f376d0067c820116fbb7ff9b30c9dad258352b00d7a1b4ca60ce7d4293898bc31a9131d7d7cb7efcadfe3d0e7b11f962917508987cc9b6511bb304f9a24e2c28ab4ee8bc4ccbbbaf8e3f4eb799dcca5bfdbc6943aeb4d69ad49f176fb87d56aae14de51901873d15ea0cb78ecbb66);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 siglongjmp🍾🥛(5aa21921dda7d9519a012f285b9b9e498f495fb521d4712b0075e47962bc2eed7fd840cba2f2ab48875fe765122d7b9f1a6ed992a07131902e4acde16fc02e1b23cc4d47ed7f65449df940601398c75fc6ddc425e1e81b678423ef284ad2a3d45b7f376d0067c820116fbb7ff9b30c9dad258352b00d7a1b4ca60ce7d4293898bc31a9131d7d7cb7efcadfe3d0e7b11f962917508987cc9b6511bb304f9a24e2c28ab4ee8bc4ccbbbaf8e3f4eb799dcca5bfdbc6943aeb4d69ad49f176fb87d56aae14de51901873d15ea0cb78ecbb66);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 stacK_t🎁🍭(5aa21921dda7d9519a012f285b9b9e498f495fb521d4712b0075e47962bc2eed7fd840cba2f2ab48875fe765122d7b9f1a6ed992a07131902e4acde16fc02e1b23cc4d47ed7f65449df940601398c75fc6ddc425e1e81b678423ef284ad2a3d45b7f376d0067c820116fbb7ff9b30c9dad258352b00d7a1b4ca60ce7d4293898bc31a9131d7d7cb7efcadfe3d0e7b11f962917508987cc9b6511bb304f9a24e2c28ab4ee8bc4ccbbbaf8e3f4eb799dcca5bfdbc6943aeb4d69ad49f176fb87d56aae14de51901873d15ea0cb78ecbb66);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 ucontext_t🍫🍵(5aa21921dda7d9519a012f285b9b9e498f495fb521d4712b0075e47962bc2eed7fd840cba2f2ab48875fe765122d7b9f1a6ed992a07131902e4acde16fc02e1b23cc4d47ed7f65449df940601398c75fc6ddc425e1e81b678423ef284ad2a3d45b7f376d0067c820116fbb7ff9b30c9dad258352b00d7a1b4ca60ce7d4293898bc31a9131d7d7cb7efcadfe3d0e7b11f962917508987cc9b6511bb304f9a24e2c28ab4ee8bc4ccbbbaf8e3f4eb799dcca5bfdbc6943aeb4d69ad49f176fb87d56aae14de51901873d15ea0cb78ecbb66);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 siginfo_t🍰🍼(5aa21921dda7d9519a012f285b9b9e498f495fb521d4712b0075e47962bc2eed7fd840cba2f2ab48875fe765122d7b9f1a6ed992a07131902e4acde16fc02e1b23cc4d47ed7f65449df940601398c75fc6ddc425e1e81b678423ef284ad2a3d45b7f376d0067c820116fbb7ff9b30c9dad258352b00d7a1b4ca60ce7d4293898bc31a9131d7d7cb7efcadfe3d0e7b11f962917508987cc9b6511bb304f9a24e2c28ab4ee8bc4ccbbbaf8e3f4eb799dcca5bfdbc6943aeb4d69ad49f176fb87d56aae14de51901873d15ea0cb78ecbb66);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 btoa(5aa21921dda7d9519a012f285b9b9e498f495fb521d4712b0075e47962bc2eed7fd840cba2f2ab48875fe765122d7b9f1a6ed992a07131902e4acde16fc02e1b23cc4d47ed7f65449df940601398c75fc6ddc425e1e81b678423ef284ad2a3d45b7f376d0067c820116fbb7ff9b30c9dad258352b00d7a1b4ca60ce7d4293898bc31a9131d7d7cb7efcadfe3d0e7b11f962917508987cc9b6511bb304f9a24e2c28ab4ee8bc4ccbbbaf8e3f4eb799dcca5bfdbc6943aeb4d69ad49f176fb87d56aae14de51901873d15ea0cb78ecbb66);
+
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 panda(flag&amp;#123;this_1s_fake_f_l__Ag&amp;#125;);
+
+wasm_exec.js:352 flag&amp;#123;this_1s_fake_f_l__Ag&amp;#125;
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 panda(I have a gift for you!);
+
+wasm_exec.js:352 I have a gift for you!
+wasm_exec.js:349 &amp;lt;function&amp;gt;
+wasm_exec.js:352 panda(45d15f24840006bd341478b36c084287e4e783cce7ddd63ef8eee9);
+
+wasm_exec.js:352 45d15f24840006bd341478b36c084287e4e783cce7ddd63ef8eee9
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;以及 gift 函数，测试会发现它实际上就是一个 rc4，算是暗示你加密只有 rc4&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527114549565.png&#34; alt=&#34;image-20240527114549565&#34; style=&#34;zoom:50%;&#34;&gt;&lt;img src=&#34;/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527114542798.png&#34; alt=&#34;image-20240527114542798&#34; style=&#34;zoom:50%;&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;加密&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#加密&#34;&gt;#&lt;/a&gt; 加密&lt;/h4&gt;
+&lt;p&gt;我们会看到这样的函数，rc4，做了 ollvm，调试发现这里是核心的加密段&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527115425554.png&#34; alt=&#34;image-20240527115425554&#34;&gt;&lt;/p&gt;
+&lt;p&gt;好在逻辑不是很复杂，可以很快定位到核心加密的 xor：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527115554093.png&#34; alt=&#34;image-20240527115554093&#34;&gt;&lt;/p&gt;
+&lt;p&gt;key 的话，makeslice 的地方很可疑，以及下面的 %&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527120646185.png&#34; alt=&#34;image-20240527120646185&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527121414644.png&#34; alt=&#34;image-20240527121414644&#34;&gt;&lt;/p&gt;
+&lt;p&gt;可以调试看看，发现不对：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527122315547.png&#34; alt=&#34;image-20240527122315547&#34;&gt;&lt;/p&gt;
+&lt;p&gt;这里才是真的秘钥（可以测试出来，ollvm 跟起来还是有些难顶…）&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527122516394.png&#34; alt=&#34;image-20240527122516394&#34;&gt;&lt;/p&gt;
+&lt;p&gt;打上条件断点：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527122611991.png&#34; alt=&#34;image-20240527122611991&#34;&gt;&lt;/p&gt;
+&lt;p&gt;但会发现这里触发次数太多，那我们换一个地方打：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527123215824.png&#34; alt=&#34;image-20240527123215824&#34;&gt;&lt;/p&gt;
+&lt;p&gt;这样就拿到了所有的 key&lt;/p&gt;
+&lt;h4 id=&#34;密文&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#密文&#34;&gt;#&lt;/a&gt; 密文&lt;/h4&gt;
+&lt;p&gt;上面的测试过程都是复现时候捋出来的思路，并不是从零开始的调试&lt;/p&gt;
+&lt;p&gt;实际上直接调试过一遍会看到函数调用栈，一个一个 func 走，最后一个是 main.remalloc.func1，里面调用了 main.malloc&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527124531030.png&#34; alt=&#34;image-20240527124531030&#34;&gt;&lt;/p&gt;
+&lt;p&gt;这里如果绕过弯来，会知道 wasm 是没有 malloc 这种底层操作的，包括前面会看到其他几乎所有函数的命名，都是混淆成经典的系统函数的命名了&lt;/p&gt;
+&lt;p&gt;malloc 里面有我们非常想要看到的 memequal 了：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527124750476.png&#34; alt=&#34;image-20240527124750476&#34;&gt;&lt;/p&gt;
+&lt;p&gt;注意这里的条件：（即我们的输入长度需要控制，他给的输入是不行的，需要修改为自己的输入）&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527130843887.png&#34; alt=&#34;image-20240527130843887&#34;&gt;&lt;/p&gt;
+&lt;p&gt;比较的位置，观察我们的输入长度是否满足要求：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527131058774.png&#34; alt=&#34;image-20240527131058774&#34;&gt;&lt;/p&gt;
+&lt;p&gt;这样的 flag 是可以的&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527131143073.png&#34; alt=&#34;image-20240527131143073&#34;&gt;&lt;/p&gt;
+&lt;p&gt;点两次进里面，它就是我们想要的 check 结构：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527124812434.png&#34; alt=&#34;image-20240527124812434&#34;&gt;&lt;/p&gt;
+&lt;p&gt;前面的 log 中我们会发现几次加密最后返回的是一个 base64，这里我们也可以调试找到 base64：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/%E4%BA%AC%E9%BA%92ctf2024%E5%88%9D%E8%B5%9B/image-20240527131243913.png&#34; alt=&#34;image-20240527131243913&#34;&gt;&lt;/p&gt;
+&lt;p&gt;这里的 var1 即为密文&lt;/p&gt;
+&lt;p&gt;解密脚本如下：&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://cyberchef.org/#recipe=From_Base64(&#39;A-Za-z0-9%2B/%3D&#39;,true,false)RC4(%7B&#39;option&#39;:&#39;Hex&#39;,&#39;string&#39;:&#39;f09f8dbef09fa59bf09f8e81f09f8da9f09f8e89f09f8dadf09fa59bf09f8dbc&#39;%7D,&#39;Hex&#39;,&#39;Latin1&#39;)RC4(%7B&#39;option&#39;:&#39;Hex&#39;,&#39;string&#39;:&#39;f09f8dacf09f8daaf09f8dbbf09f8daef09f8dbee29895f09f9885f09f8db0&#39;%7D,&#39;Hex&#39;,&#39;Latin1&#39;)RC4(%7B&#39;option&#39;:&#39;Hex&#39;,&#39;string&#39;:&#39;f09f8dabf09f8daaf09f8db0f09f8daff09f8e8af09f8daaf09fa59bf09f8da9&#39;%7D,&#39;Hex&#39;,&#39;Latin1&#39;)RC4(%7B&#39;option&#39;:&#39;Hex&#39;,&#39;string&#39;:&#39;f09f8daef09f8db6f09f8dbaf09f8db9f09f8e89f09f8dacf09f8dbaf09f8daf&#39;%7D,&#39;Hex&#39;,&#39;Latin1&#39;)&amp;amp;input=TldGaE1qRTVNakZrWkdFM1pEazFNVGxoTURFeVpqSTROV0k1WWpsbE5EazRaalE1TldaaU5USXhaRFEzTVRKaU1EQTNOV1UwTnprMk1tSmpNbVZsWkRkbVpEZzBNR05pWVRKbU1tRmlORGc0TnpWbVpUY3pZVEV5TW1RM1ltTTNNV0UyWldRNU9UQmhNRGMyTXpFNU5qSmxOR0ZqWkdVeU5tRmpZekppTVRFeU0yTmlOR1EwWm1WaE1tRTJNakV4T1dSbU9UUXdOakV4TXprNVl6QTFabU0yWkdSak16Y3haVEZsT0RGaU5qUTROREl6WldZeVlqUmhaRFZoTXpnME5XSTNaak0zTm1Vd01EWTNZMlF5TnpFeE5tWmlZamRrWm1ObE1EQmpPV0ZoWkRJMU9ETTFObUl3TUdFM1lURmxOR05oTmpCalpUVmtORGMxTXpnNU9XSmpNekZoT1RFMU1XUTNaRGM1WlRWbFptTmhaR1psTTJRMVlqWmlNVEZoT1RZeU9URTNOVE00T1RnM1kyTmpaRFkxTVRaaVpUWmpOR1k1WVRJMFpUQmpNamhoWWpSaU5UaGlZelJqWTJKbVltRm1PR1V6WmpWbFlqYzVPV1JqWTJFMVltWmtZbU0zT1RRellXVmlOR1EyT1dGa05EbG1NVGN6WmpFNE4yUXlObUZoWlRFMFpHRTFNVGt3TVRnM01XUXhOV1ZoTUdOaU56aGxZMkppTmpZPQ&#34;&gt;From Base64, RC4, RC4, RC4, RC4 - CyberChef&lt;/a&gt;&lt;/p&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>
