@@ -9,22 +9,22 @@
     <category term="开发" />
     <category term="codeforces" />
     <category term="cv" />
-    <category term="docker" />
     <category term="驱动" />
     <category term="electron" />
+    <category term="docker" />
     <category term="ios" />
     <category term="杂文" />
-    <category term="web" />
-    <category term="jail" />
     <category term="IOT" />
+    <category term="jail" />
+    <category term="web" />
     <category term="re Android linux" />
     <category term="web shiro" />
+    <category term="wasm" />
     <category term="python" />
     <category term="hexo" />
+    <category term="tree" />
     <category term="pentesting" />
     <category term="car" />
-    <category term="wasm" />
-    <category term="tree" />
     <entry>
         <id>https://demoyao100.github.io/electron-%E6%89%93%E5%8C%85/</id>
         <title>electron 打包</title>

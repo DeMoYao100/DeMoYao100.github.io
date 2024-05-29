@@ -9,22 +9,22 @@
     <category term="开发" />
     <category term="codeforces" />
     <category term="cv" />
-    <category term="docker" />
     <category term="驱动" />
     <category term="electron" />
+    <category term="docker" />
     <category term="ios" />
     <category term="杂文" />
-    <category term="web" />
-    <category term="jail" />
     <category term="IOT" />
+    <category term="jail" />
+    <category term="web" />
     <category term="re Android linux" />
     <category term="web shiro" />
+    <category term="wasm" />
     <category term="python" />
     <category term="hexo" />
+    <category term="tree" />
     <category term="pentesting" />
     <category term="car" />
-    <category term="wasm" />
-    <category term="tree" />
     <entry>
         <id>https://demoyao100.github.io/docker%E6%93%8D%E4%BD%9C%E8%AE%B0%E5%BD%95/</id>
         <title>docker操作记录</title>
